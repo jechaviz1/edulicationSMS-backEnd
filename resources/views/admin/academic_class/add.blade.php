@@ -8,19 +8,19 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Create Academic Session</h4>
+                <h4 class="card-title">Create Academic Class</h4>
                 <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="user-create.html" class="btn btn-primary light">Super Admin List</a>
+                        <a href="{{ route('academic-class-list') }}" class="btn btn-primary light">Academic class list</a>
                     </li>
 
                 </ul>
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Add Academic Session</h5>
+                    <h5>Add Academic Class</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-academic-session' ) }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-academic-class') }}" >
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
@@ -36,42 +36,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Start Date <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="" required id="start_date" name="start_date">
-                                        <div class="invalid-feedback">
-                                            Please enter a date.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email">
-                                        <div class="invalid-feedback">
-                                            Please enter a Email.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
+                           
                         </div>
                         <div class="row">
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Description </label>
-                                    <div class="col-lg-8">
-                                        <textarea class="form-txtarea form-control" rows="8" id="description" name="description"></textarea>
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Description" required name="description">
-                                        <div class="invalid-feedback">
-                                            Please enter a Description.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                             
 
                             <div class="col-xl-4"></div>
 
@@ -91,6 +60,12 @@
     </div>
 
 </div>
+
+@section('customjs')
+ 
+ 
+
+
 <script>
     (function () {
         'use strict'
@@ -155,20 +130,26 @@
 
 
 <!-- Daterangepicker -->
-<script src="./js/plugins-init/bs-daterange-picker-init.js"></script>
+<!--<script src="./js/plugins-init/bs-daterange-picker-init.js"></script>-->
+<script src="{{ asset('admin/js/plugins-init/bs-daterange-picker-init.js')}}"></script>
+
 <!-- Clockpicker init -->
 <script src="./js/plugins-init/clock-picker-init.js"></script>
 <!-- asColorPicker init -->
 <script src="./js/plugins-init/jquery-asColorPicker.init.js"></script>
 <!-- Material color picker init -->
-<script src="./js/plugins-init/material-date-picker-init.js"></script>
+<!--<script src="./js/plugins-init/material-date-picker-init.js"></script>-->
+<script src="{{ asset('admin/js/plugins-init/material-date-picker-init.js')}}"></script>
+
 <!-- Pickdate -->
 <script src="./js/plugins-init/pickadate-init.js"></script>
 
 <script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="{{ asset('admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
 
         <!--<script src="./js/custom.js"></script>-->
 <script src="{{ asset('admin/js/custom.js')}}"></script>
 <!--<script src="./js/deznav-init.js"></script>-->
 <script src="{{ asset('admin/js/deznav-init.js')}}"></script>
+@endsection
 @stop

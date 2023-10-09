@@ -156,6 +156,16 @@ class UserController extends Controller {
                 $user->role_id = isset($data['role_id']) ? $data['role_id'] : null;
                 $user->gender = isset($data['gender']) ? $data['gender'] : 1;
                 $user->save();
+
+//                 $to      =$user->email ;// 'nobody@example.com';
+//    $subject = 'the subject';
+//    $message = 'hello';
+//    $headers = 'From: webmaster@example.com'       . "\r\n" .
+//                 'Reply-To: webmaster@example.com' . "\r\n" .
+//                 'X-Mailer: PHP/' . phpversion();
+//
+//    mail($to, $subject, $message, $headers);
+
                 return redirect()->route('user-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
                 return redirect()->route('user-list')->with('failed', 'Record not added.');

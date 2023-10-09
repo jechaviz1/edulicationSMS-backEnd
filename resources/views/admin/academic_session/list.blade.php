@@ -17,25 +17,25 @@
     <div class="card dz-card" id="accordion-four">
         <div class="card-header flex-wrap d-flex justify-content-between">
             <div>
-                <h4 class="card-title">School</h4>
+                <h4 class="card-title">Academic session</h4>
             </div>
             <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ URL::route('add-school') }}" class="btn btn-primary light">Add School</a>
+                    <a href="{{ URL::route('add-academic-session') }}" class="btn btn-primary light">Add Academic</a>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button type="button" class="btn btn-primary light btn-icon-md"><i class="fa fa-filter"></i></button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <div class="dropdown ms-auto">
-                        <a href="#" class="btn btn-primary light light light sharp " data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li class="dropdown-item"><i class="fa fa-print text-primary me-2"></i> Print</li>
-                            <li class="dropdown-item"><i class="fa fa-file-pdf text-primary me-2"></i> Generate PDF</li>
-                            <li class="dropdown-item"><i class="fa fa-file-excel text-primary me-2"></i> Export to Excel</li>
-                        </ul>
-                    </div>
-                </li>
+                <!--                <li class="nav-item" role="presentation">
+                                    <button type="button" class="btn btn-primary light btn-icon-md"><i class="fa fa-filter"></i></button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <div class="dropdown ms-auto">
+                                        <a href="#" class="btn btn-primary light light light sharp " data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li class="dropdown-item"><i class="fa fa-print text-primary me-2"></i> Print</li>
+                                            <li class="dropdown-item"><i class="fa fa-file-pdf text-primary me-2"></i> Generate PDF</li>
+                                            <li class="dropdown-item"><i class="fa fa-file-excel text-primary me-2"></i> Export to Excel</li>
+                                        </ul>
+                                    </div>
+                                </li>-->
             </ul>	
         </div>
 
@@ -47,32 +47,24 @@
                         <table id="example4" class="display table" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>Sr. no.</th>
-                                    <th>School Name</th>
-                                    <th>Email</th>
-                                    <th>Create date</th>
-                                    <th>Create by</th>
+                                    <th>Academic session name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($school))
-                                @foreach ($school as $k => $row)
+                                @if(!empty($academic_session))
+                                @foreach ($academic_session as $row)
 
                                 <tr>
-                                    <td>{{$k+1}}</td>
                                     <td>{{$row->name}}</td>
-                                    <td>{{$row->email}}</td>
-                                    <td><?php
-                                        $date = date_create($row->created_at);
-                                        echo date_format($date, "Y-m-d");
-                                        ?>
-                                    </td>
-                                    <td>{{$row->first_name}} {{$row->first_name}}</td>
+                                    <td>{{$row->start_date}}</td>
+                                    <td>{{$row->end_date}}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('edit-school',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('delete-school',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('edit-academic-session',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('delete-academic-session',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

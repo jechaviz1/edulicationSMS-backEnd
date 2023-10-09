@@ -59,7 +59,7 @@
                 Nav header start
             ***********************************-->
             <div class="nav-header">
-                <a href="{{ URL::route('dashboard') }}" class="brand-logo">
+                <a href="index.html" class="brand-logo">
                     <svg class="logo-abbr" width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path class="logo-react" d="M35.1455 0.990723H15.1455C6.86124 0.990723 0.145508 7.70645 0.145508 15.9907V35.9907C0.145508 44.275 6.86124 50.9907 15.1455 50.9907H35.1455C43.4298 50.9907 50.1455 44.275 50.1455 35.9907V15.9907C50.1455 7.70645 43.4298 0.990723 35.1455 0.990723Z" fill="white"/>
                     <path d="M15.6963 36.6899L6.64551 19.4641H11.0249C11.4921 19.4641 11.9981 19.8534 12.1928 20.048C13.7499 23.065 17.0394 29.3908 17.7401 30.5587C18.4408 31.7265 18.2267 32.4078 18.032 32.6024L15.6963 36.6899Z" fill="var(--primary)"/>
@@ -925,22 +925,6 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                 </div>
-                                <span class="nav-text">Role</span>
-                            </a>
-                            <ul aria-expanded="false">
-                                <li><a href="{{ URL::route('role-list') }}">List</a></li>
-                                <li><a href="{{ URL::route('add-role') }}">add</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-                                <div class="menu-icon">
-                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M16.007 16.2236H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M16.007 12.0371H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                </div>
                                 <span class="nav-text">School</span>
                             </a>
                             <ul aria-expanded="false">
@@ -1371,6 +1355,10 @@
 <!--<script src="./vendor/jqvmap/js/jquery.vmap.usa.js"></script>-->
         <script src="{{ asset('admin/vendor/jqvmap/js/jquery.vmap.usa.js')}}"></script>
 
+        <!--<script src="./js/custom.js"></script>-->
+        <script src="{{ asset('admin/js/custom.js')}}"></script>
+        <!--<script src="./js/deznav-init.js"></script>-->
+        <script src="{{ asset('admin/js/deznav-init.js')}}"></script>
 
         <script>
 $(document).ready(function () {

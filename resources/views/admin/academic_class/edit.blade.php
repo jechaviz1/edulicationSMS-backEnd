@@ -8,19 +8,19 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Edit School</h4>
+                <h4 class="card-title">Edit Academic Class</h4>
                 <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="user-create.html" class="btn btn-primary light">School List</a>
+                        <a href="{{ route('academic-class-list') }}" class="btn btn-primary light">Academic Class List</a>
                     </li>
 
                 </ul>
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Edit School</h5>
+                    <h5>Edit Academic Class</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-school',$school->id ) }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-academic-class',$academic_class->id ) }}" >
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
@@ -29,49 +29,18 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Name." required name="name" value="{{$school->name}}">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Name." required name="name" value="{{$academic_class->name}}">
                                         <div class="invalid-feedback">
                                             Please enter a Name.
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Address <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Address." required name="address" value="{{$school->address}}">
-                                        <div class="invalid-feedback">
-                                            Please enter a Address.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Your valid Email" required name="email" value="{{$school->email}}">
-                                        <div class="invalid-feedback">
-                                            Please enter a Email.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+
                         </div>
                         <div class="row">
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Phone No<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Phone No" required name="phone_no" value="{{$school->phone_no}}">
-                                        <div class="invalid-feedback">
-                                            Please enter a Phone No.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <div class="col-xl-4"></div>
 

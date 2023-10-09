@@ -1,4 +1,4 @@
- 
+
 <!-- Extends template page-->
 @extends('admin.layout.header')
 
@@ -63,7 +63,7 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-2">	
+                                            <div class="col-sm-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="gender" value="2">
                                                     <label class="form-check-label">
@@ -71,25 +71,23 @@
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div class="col-sm-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="gender" value="3">
+                                                    <label class="form-check-label">
+                                                        Other
+                                                    </label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </fieldset>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom03">Date of Birth <span class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="date_of_birth">Date of Birth <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" placeholder="2017-06-04" id="mdates" name="dob">
+                                            <input type="text" class="form-control" placeholder="2017-06-04" id="date_of_birth" name="date_of_birth">
                                             <div class="invalid-feedback">
                                                 Date of Birth.
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom03"> Comtact Us <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom08" placeholder="212-999-0000" required>
-                                            <div class="invalid-feedback">
-                                                Please enter a phone no.
                                             </div>
                                         </div>
                                     </div>
@@ -97,69 +95,64 @@
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">First Guardian Name <span class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="contact_no"> Contact number <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="First Guardian Name" required>
+                                            <input type="text" class="form-control" id="contact_no" placeholder="212-999-0000" required name="contact_no">
                                             <div class="invalid-feedback">
-                                                First Guardian Name
+                                                Please enter a Contact number.
                                             </div>
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Second Guardian Name <span
-                                                class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="emergency_contact_no">Emergency Contact number <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Second  Guardian Name" required>
+                                            <input type="text" class="form-control" id="emergency_contact_no" placeholder="212-999-0000" required name="emergency_contact_no">
                                             <div class="invalid-feedback">
-                                                Second  Guardian Name
+                                                Please enter a Emergency Contact number.
                                             </div>
                                         </div>
                                     </div>
+                                    <!--                                     <div class="mb-3 row">
+                                                                                                                <label class="col-lg-4 col-form-label" for="validationCustom05">Relation <span class="text-danger">*</span>
+                                                                                                                </label>
+                                                                                                                <div class="col-lg-6">
+                                                                                                                    <select class="default-select wide form-control" id="validationCustom05">
+                                                                                                                        <option  data-display="Select">Please select</option>
+                                                                                                                        <option value="1">Father</option>
+                                                                                                                        <option value="2">Mother</option>
+                                                                                                                        <option value="3">Spouse</option>
+                                                                                                                        <option value="4">Other</option>
+                                                                                                                    </select>
+                                                                                                                    <div class="invalid-feedback">
+                                                                                                                        Please select a one.
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div> -->
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">First Guardian Contact Number 
-                                            <span
-                                                class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Address <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom08" placeholder="212-999-0000" required>
+                                            <input type="text" class="form-control" id="validationCustom02" placeholder="Address" required>
                                             <div class="invalid-feedback">
-                                                First Guardian Contact Number 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom05">Relation <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <select class="default-select wide form-control" id="validationCustom05">
-                                                <option  data-display="Select">Please select</option>
-                                                <option value="1">Father</option>
-                                                <option value="2">Mother</option>
-                                                <option value="3">Spouse</option>
-                                                <option value="4">Other</option>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Please select a one.
+                                                Address
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label"><a
-                                                href="javascript:void()">Terms &amp; Conditions</a> <span
-                                                class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-8">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="validationCustom12" required>
-                                                <label class="form-check-label" for="validationCustom12">
-                                                    Agree to terms and conditions
-                                                </label>
+                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Nationality<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" id="nationality" placeholder="" required name="nationality">
+                                            <div class="invalid-feedback">
+                                                Nationality
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                     <div class="mb-3 row">
                                         <div class="col-lg-8 ms-auto">
                                             <button type="submit" class="btn btn-primary light">Submit</button>

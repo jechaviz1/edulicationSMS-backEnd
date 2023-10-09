@@ -16,21 +16,20 @@ class AcademicClassController extends Controller {
 
     public function list() {
         $data = [];
-        $data['title'] = 'School List';
-        $data['menu_active_tab'] = 'school-list';
-        $data['school'] = \App\Models\School::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
-        $data['super_admin'] = \App\Models\User::where('role_id', 1)->where('is_deleted', '0')->orderBy('id', 'DESC')->get();
+        $data['title'] = 'Academic Class List';
+        $data['menu_active_tab'] = 'academic-class-list';
+        $data['academic_class'] = \App\Models\AcademicClass::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
 
-        return view('admin.school.list')->with($data);
+        return view('admin.academic_class.list')->with($data);
     }
 
     public function add(Request $request) {
         $data = [];
-        $data['title'] = 'Add School';
-        $data['menu_active_tab'] = 'add-school';
+        $data['title'] = 'Add Academic Class';
+        $data['menu_active_tab'] = 'add-academic-class';
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
 
-        return view('admin.school.add')->with($data);
+        return view('admin.academic_class.add')->with($data);
     }
 
     public function store(Request $request) {
@@ -45,34 +44,33 @@ class AcademicClassController extends Controller {
         } else {
             $data = $request->input();
             try {
-                $school = new \App\Models\School();
-                $school->name = $data['name'];
-                $school->address = $data['address'];
-                $school->email = $data['email'];
-                $school->phone_no = $data['phone_no'];
-                $school->save();
-                return redirect()->route('school-list')->with('success', 'Record added successfully.');
+                $academic_class = new \App\Models\AcademicClass();
+                $academic_class->name = $data['name'];
+//                $academic_class->academic_session_id = isset($data['academic_session_id']) ? $data['academic_session_id'] : null;
+                $academic_class->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $academic_class->save();
+                return redirect()->route('academic-class-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
-                return redirect()->route('school-list')->with('failed', 'Record not added.');
+                return redirect()->route('academic-class-list')->with('failed', 'Record not added.');
             }
         }
     }
 
     public function edit(Request $request, $id) {
         $data = [];
-        $data['title'] = 'Edit School';
-        $data['menu_active_tab'] = 'school-list';
+        $data['title'] = 'Edit Academic Class';
+        $data['menu_active_tab'] = 'academic-class-list';
         if ($id) {
-            $school = \App\Models\School::find($id);
+            $academic_class = \App\Models\AcademicClass::find($id);
             $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
-            if ($school) {
-                $data['school'] = $school;
-                return view('admin.school.edit')->with($data);
+            if ($academic_class) {
+                $data['academic_class'] = $academic_class;
+                return view('admin.academic_class.edit')->with($data);
             } else {
-                return redirect()->route('school-list')->with('failed', 'Record not found.');
+                return redirect()->route('academic-class-list')->with('failed', 'Record not found.');
             }
         } else {
-            return redirect()->route('school-list')->with('failed', 'Record not found.');
+            return redirect()->route('academic-class-list')->with('failed', 'Record not found.');
         }
     }
 
@@ -82,33 +80,31 @@ class AcademicClassController extends Controller {
                 'name' => 'required',
             ]);
             $data = $request->input();
-            $school = \App\Models\School::find($id);
-            if ($school) {
-                $school->name = $data['name'];
-                $school->address = $data['address'];
-                $school->email = $data['email'];
-                $school->phone_no = $data['phone_no'];
-//                $school->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $school->save();
+            $academic_class = \App\Models\AcademicClass::find($id);
+            if ($academic_class) {
+                $academic_class->name = $data['name'];
+//                $academic_class->academic_session_id = $data['academic_session_id'];
+                $academic_class->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $academic_class->save();
 
-                return redirect()->route('school-list')->with('success', 'Record Updated.');
+                return redirect()->route('academic-class-list')->with('success', 'Record Updated.');
             } else {
-                return redirect()->route('school-list')->with('failed', 'Record not found.');
+                return redirect()->route('academic-class-list')->with('failed', 'Record not found.');
             }
         }
     }
 
     public function delete($id) {
         if ($id) {
-            $school = \App\Models\School::find($id);
-            if ($school) {
-                $school->is_deleted = '1';
-//                $school->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $school->save();
+            $academic_class = \App\Models\AcademicClass::find($id);
+            if ($academic_class) {
+                $academic_class->is_deleted = '1';
+//                $academic_class->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $academic_class->save();
             }
-            return redirect()->route('school-list')->with('success', 'Record deleted.');
+            return redirect()->route('academic-class-list')->with('success', 'Record deleted.');
         } else {
-            return redirect()->route('school-list')->with('failed', 'Record not found.');
+            return redirect()->route('academic-class-list')->with('failed', 'Record not found.');
         }
     }
 

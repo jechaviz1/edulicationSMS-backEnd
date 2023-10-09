@@ -50,7 +50,7 @@ class StudentController extends Controller {
 
     public function storeStudent(Request $request) {
         $rules = [
-            'first_name' => 'required|string|min:3|max:255',
+            'first_name' => 'required|string|min:1|max:255',
 //            'city_name' => 'required|string|min:3|max:255',
 //            'email' => 'required|string|email|max:255'
         ];
@@ -67,6 +67,11 @@ class StudentController extends Controller {
                 $student->middle_name = $data['middle_name'];
                 $student->last_name = $data['last_name'];
                 $student->gender = $data['gender'];
+                $student->contact_no = $data['contact_no'];
+                $student->emergency_contact_no = $data['emergency_contact_no'];
+                $student->address = $data['address'];
+                $student->nationality = $data['nationality'];
+                $student->date_of_birth = $data['date_of_birth'];
                 $student->save();
                 return redirect()->route('student-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
@@ -99,7 +104,6 @@ class StudentController extends Controller {
                 'first_name' => 'required',
                 'last_name' => 'required',
 //                'email' => 'required',
-//                'mobile_no' => 'required',
             ]);
             $student = \App\Models\Student::find($id);
             if ($student) {
@@ -107,12 +111,12 @@ class StudentController extends Controller {
                 $student->middle_name = $request->input('middle_name');
                 $student->last_name = $request->input('last_name');
                 $student->relation = $request->input('relation');
-                $student->first_guardian_name = $request->input('first_guardian_name');
-                $student->second_guardian_name = $request->input('second_guardian_name');
-                $student->first_guardian_contact_name = $request->input('first_guardian_contact_name');
-                $student->contact_number = $request->input('contact_number');
-                $student->terms_condition_check = $request->input('terms_condition_check');
-//                $student->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $student->contact_no = $request->input('contact_no');
+                $student->emergency_contact_no = $request->input('emergency_contact_no');
+                $student->address = $request->input('address');
+                $student->date_of_birth = $request->input('date_of_birth');
+                $student->nationality = $request->input('nationality');
+                $student->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $student->save();
 //                $file_name = null;
 //                $file_path = null;

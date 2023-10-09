@@ -17,24 +17,24 @@ class AcademicSessionController extends Controller {
     public function list() {
         $data = [];
         $data['title'] = 'Academic Session List';
-        $data['menu_active_tab'] = 'academic-sessions-list';
-        $data['academic-sessions'] = \App\Models\AcademicSession::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
-
-        return view('admin.academic_sessions.list')->with($data);
+        $data['menu_active_tab'] = 'academic-session-list';
+        $data['academic_session'] = \App\Models\AcademicSession::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
+//dd($data['academic_session'] );
+        return view('admin.academic_session.list')->with($data);
     }
 
     public function add(Request $request) {
         $data = [];
         $data['title'] = 'Add Academic Session';
-        $data['menu_active_tab'] = 'add-academic-sessions';
+        $data['menu_active_tab'] = 'add-academic-session';
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
 
-        return view('admin.academic_sessions.add')->with($data);
+        return view('admin.academic_session.add')->with($data);
     }
 
     public function store(Request $request) {
         $rules = [
-            'name' => 'required|string|min:3|max:255',
+            'name' => 'required|min:1|max:255',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -44,15 +44,15 @@ class AcademicSessionController extends Controller {
         } else {
             $data = $request->input();
             try {
-                $academic_sessions = new \App\Models\AcademicSession();
-                $academic_sessions->name = $data['name'];
-                $academic_sessions->address = $data['address'];
-                $academic_sessions->email = $data['email'];
-                $academic_sessions->phone_no = $data['phone_no'];
-                $academic_sessions->save();
-                return redirect()->route('academic-sessions-list')->with('success', 'Record added successfully.');
+                $academic_session = new \App\Models\AcademicSession();
+                $academic_session->name = $data['name'];
+                $academic_session->start_date = $data['start_date'];
+                $academic_session->end_date = $data['end_date'];
+                $academic_session->description = $data['description'];
+                $academic_session->save();
+                return redirect()->route('academic-session-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
-                return redirect()->route('academic-sessions-list')->with('failed', 'Record not added.');
+                return redirect()->route('academic-session-list')->with('failed', 'Record not added.');
             }
         }
     }
@@ -60,18 +60,18 @@ class AcademicSessionController extends Controller {
     public function edit(Request $request, $id) {
         $data = [];
         $data['title'] = 'Edit Academic Session';
-        $data['menu_active_tab'] = 'academic-sessions-list';
+        $data['menu_active_tab'] = 'academic-session-list';
         if ($id) {
-            $academic_sessions = \App\Models\AcademicSession::find($id);
+            $academic_session = \App\Models\AcademicSession::find($id);
             $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
-            if ($academic_sessions) {
-                $data['academic_sessions'] = $academic_sessions;
-                return view('admin.academic_sessions.edit')->with($data);
+            if ($academic_session) {
+                $data['academic_session'] = $academic_session;
+                return view('admin.academic_session.edit')->with($data);
             } else {
-                return redirect()->route('academic-sessions-list')->with('failed', 'Record not found.');
+                return redirect()->route('academic-session-list')->with('failed', 'Record not found.');
             }
         } else {
-            return redirect()->route('academic-sessions-list')->with('failed', 'Record not found.');
+            return redirect()->route('academic-session-list')->with('failed', 'Record not found.');
         }
     }
 
@@ -81,33 +81,33 @@ class AcademicSessionController extends Controller {
                 'name' => 'required',
             ]);
             $data = $request->input();
-            $academic_sessions = \App\Models\AcademicSession::find($id);
-            if ($academic_sessions) {
-                $academic_sessions->name = $data['name'];
-                $academic_sessions->address = $data['address'];
-                $academic_sessions->email = $data['email'];
-                $academic_sessions->phone_no = $data['phone_no'];
-//                $academic_sessions->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $academic_sessions->save();
+            $academic_session = \App\Models\AcademicSession::find($id);
+            if ($academic_session) {
+                $academic_session->name = $data['name'];
+                $academic_session->start_date = $data['start_date'];
+                $academic_session->end_date = $data['end_date'];
+                $academic_session->description = $data['description'];
+                $academic_session->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $academic_session->save();
 
-                return redirect()->route('academic-sessions-list')->with('success', 'Record Updated.');
+                return redirect()->route('academic-session-list')->with('success', 'Record Updated.');
             } else {
-                return redirect()->route('academic-sessions-list')->with('failed', 'Record not found.');
+                return redirect()->route('academic-session-list')->with('failed', 'Record not found.');
             }
         }
     }
 
     public function delete($id) {
         if ($id) {
-            $academic_sessions = \App\Models\AcademicSession::find($id);
-            if ($academic_sessions) {
-                $academic_sessions->is_deleted = '1';
-//                $academic_sessions->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $academic_sessions->save();
+            $academic_session = \App\Models\AcademicSession::find($id);
+            if ($academic_session) {
+                $academic_session->is_deleted = '1';
+                $academic_session->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $academic_session->save();
             }
-            return redirect()->route('academic-sessions-list')->with('success', 'Record deleted.');
+            return redirect()->route('academic-session-list')->with('success', 'Record deleted.');
         } else {
-            return redirect()->route('academic-sessions-list')->with('failed', 'Record not found.');
+            return redirect()->route('academic-session-list')->with('failed', 'Record not found.');
         }
     }
 

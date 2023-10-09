@@ -40,16 +40,16 @@
                     </ul>
                     <ul class="post-pos">
                         <li>
-                            <span class="card__info__stats">Father's Name	: </span>
+                            <span class="card__info__stats">Father's Name: </span>
                             <span>{{$row->middle_name}}</span>
                         </li>
                         <li>
-                            <span class="card__info__stats">Mother's Name	: </span>
+                            <span class="card__info__stats">Mother's Name: </span>
                             <span>{{$row->mother_name}}</span>
                         </li>
                         <li>
                             <span class="card__info__stats">Contact Us: </span>
-                            <span>{{$row->contact_number}}</span>
+                            <span>{{$row->contact_no}}</span>
                         </li>
 
                     </ul>

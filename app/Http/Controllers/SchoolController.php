@@ -18,7 +18,12 @@ class SchoolController extends Controller {
         $data = [];
         $data['title'] = 'School List';
         $data['menu_active_tab'] = 'school-list';
-        $data['school'] = \App\Models\School::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
+        $data['school'] = \App\Models\School::select('school.id', 'school.name', 'school.address', 'school.email', 'school.phone_no', 'school.created_by_id', 'school.created_at', 'users.first_name', 'users.last_name')
+                ->leftJoin('users', 'school.created_by_id', '=', 'users.id')
+                ->where('school.is_deleted', '0')
+                ->orderBy('school.id', 'DESC')
+                ->get();
+
         $data['super_admin'] = \App\Models\User::where('role_id', 1)->where('is_deleted', '0')->orderBy('id', 'DESC')->get();
 
         return view('admin.school.list')->with($data);
@@ -35,7 +40,7 @@ class SchoolController extends Controller {
 
     public function storeSchool(Request $request) {
         $rules = [
-            'name' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:1|max:255',
         ];
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
@@ -50,6 +55,7 @@ class SchoolController extends Controller {
                 $school->address = $data['address'];
                 $school->email = $data['email'];
                 $school->phone_no = $data['phone_no'];
+                $school->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $school->save();
                 return redirect()->route('school-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
