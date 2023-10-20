@@ -91,5 +91,58 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-role/{id}', [RoleController::class, 'update'])->name('update-role');
         Route::get('/delete-role/{id}', [RoleController::class, 'delete'])->name('delete-role');
         // END - role
+        // START - Employee
+        Route::get('/add-employee', [EmployeeController::class, 'addEmployee'])->name('add-employee');
+        Route::post('/store-employee', [EmployeeController::class, 'storeEmployee'])->name('store-employee');
+        Route::get('/employee-list', [EmployeeController::class, 'employeeList'])->name('employee-list');
+        Route::get('/edit-employee/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
+        Route::post('/update-employee/{id}', [EmployeeController::class, 'updateEmployee'])->name('update-employee');
+        Route::get('/delete-employee/{id}', [EmployeeController::class, 'deleteEmployee'])->name('delete-employee');
+        //END - Employee 
+
+        // START - Department
+        Route::get('/add-department', [DepartmentController::class, 'addDepartment'])->name('add-department');
+        Route::post('/store-department', [DepartmentController::class, 'storeDepartment'])->name('store-department');
+        Route::get('/department-list', [DepartmentController::class, 'departmentList'])->name('department-list');
+        Route::get('/edit-department/{id}', [DepartmentController::class, 'editDepartment'])->name('edit-department');
+        Route::post('/update-department/{id}', [DepartmentController::class, 'updateDepartment'])->name('update-department');
+        Route::get('/delete-department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('delete-department');
+        //END - Department
+
+        // START - Designation
+        Route::get('/add-designation', [DesignationController::class, 'addDesignation'])->name('add-designation');
+        Route::post('/store-designation', [DesignationController::class, 'storeDesignation'])->name('store-designation');
+        Route::get('/designation-list', [DesignationController::class, 'designationList'])->name('designation-list');
+        Route::get('/edit-designation/{id}', [DesignationController::class, 'editDesignation'])->name('edit-designation');
+        Route::post('/update-designation/{id}', [DesignationController::class, 'updateDesignation'])->name('update-designation');
+        Route::get('/delete-designation/{id}', [DesignationController::class, 'deleteDesignation'])->name('delete-designation');
+        //END - Designation
+
+        // START - Attendance
+        Route::get('/add-attendance', [AttendanceController::class, 'addAttendance'])->name('add-attendance');
+        Route::post('/store-attendance', [AttendanceController::class, 'storeAttendance'])->name('store-attendance');
+        Route::get('/attendance-list', [AttendanceController::class, 'attendanceList'])->name('attendance-list');
+        Route::get('/edit-attendance/{id}', [AttendanceController::class, 'editAttendance'])->name('edit-attendance');
+        Route::post('/update-attendance/{id}', [AttendanceController::class, 'updateAttendance'])->name('update-attendance');
+        Route::get('/delete-attendance/{id}', [AttendanceController::class, 'deleteAttendance'])->name('delete-attendance');
+        //END - Attendance 
+
+        // START - AttendanceType
+        Route::get('/add-attendancetype', [AttendanceTypeController::class, 'addAttendanceType'])->name('add-attendancetype');
+        Route::post('/store-attendancetype', [AttendanceTypeController::class, 'storeAttendanceType'])->name('store-attendancetype');
+        Route::get('/attendancetype-list', [AttendanceTypeController::class, 'AttendanceTypeList'])->name('attendancetype-list');
+        Route::get('/edit-attendancetype/{id}', [AttendanceTypeController::class, 'editAttendanceType'])->name('edit-attendancetype');
+        Route::post('/update-attendancetype/{id}', [AttendanceTypeController::class, 'updateAttendanceType'])->name('update-attendancetype');
+        Route::get('/delete-attendancetype/{id}', [AttendanceTypeController::class, 'deleteAttendanceType'])->name('delete-attendancetype');
+        //END - AttendanceType 
+
+        // START - EmployeeCategory
+        Route::get('/add-employeecategory', [EmployeeCategoryController::class, 'addEmployeeCategory'])->name('add-employeecategory');
+        Route::post('/store-employeecategory', [EmployeeCategoryController::class, 'storeEmployeeCategory'])->name('store-employeecategory');
+         Route::get('/employeecategory-list', [EmployeeCategoryController::class, 'employeecategoryList'])->name('employeecategory-list');
+         Route::get('/edit-employeecategory/{id}', [EmployeeCategoryController::class, 'editEmployeeCategory'])->name('edit-employeecategory');
+         Route::post('/update-employeecategory/{id}', [EmployeeCategoryController::class, 'updateEmployeeCategory'])->name('update-employeecategory');
+         Route::get('/delete-employeecategory/{id}', [EmployeeCategoryController::class, 'deleteEmployeeCategory'])->name('delete-employeecategory');
+        //END - EmployeeCategory 
     });
 });
