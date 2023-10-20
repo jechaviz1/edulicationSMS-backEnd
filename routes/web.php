@@ -7,6 +7,12 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\AcademicSessionController;
 use App\Http\Controllers\AcademicClassController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AttendanceTypeController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
+use App\Http\Controllers\EmployeeCategoryController;
+use App\Http\Controllers\EmployeeController;
 
 /*
   |--------------------------------------------------------------------------
