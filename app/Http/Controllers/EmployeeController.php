@@ -31,8 +31,21 @@ class EmployeeController extends Controller
         $data['menu_active_tab'] = 'add-employee';
         $data['department'] = Department::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
         $data['designation'] = Designation::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
+        $latestemp = Employee::latest()->first();
 
-        return view('admin.employee.add')->with($data);
+        if ($latestemp) {
+            $code = ++$latestemp->employee_code;
+            //dd($code);
+           // $latestemp->employee_code = 'emp' . str_pad($code, 3, '0', STR_PAD_LEFT);
+           $latestemp->employee_code = $code;
+           $employee_code= $latestemp->employee_code;
+           
+        } else {
+            $latestemp->employee_code = 'emp001';
+            
+        }
+        
+        return view('admin.employee.add',compact('data', 'employee_code'));
     }
     public function storeEmployee(Request $request) {
         //dd($request);
@@ -42,17 +55,18 @@ class EmployeeController extends Controller
             'joining_date' => 'required|date'         
         ];
         $validator = Validator::make($request->all(), $rules);
-
+//dd($request->all());
         if ($validator->fails()) {
+            //dd("fail");
             return redirect('insert')
                             ->withInput()
                             ->withErrors($validator);
         } else {
-            // $data = $request->input();
-         
+            $data = $request->input();
+         //dd($data);
             try {
                 $data = new Employee();
-        
+            //dd($data);
                         if ($request->file("image") && $request->file('image')->isValid()) {
 
                             $image = $request->file("image");
@@ -75,7 +89,7 @@ class EmployeeController extends Controller
                         $data->contact_number = $request->input('contact_number');
                         $data->email = $request->input('email');
                         $data->address = $request->input('address');
-                        $data->employee_code = $request->input('employee_code');
+                         $data->employee_code = $request->input('employee_code');
                         $data->joining_date = $request->input('joining_date');
                         $data->salary = $request->input('salary');
                         $data->employee_status = $request->input('employee_status');

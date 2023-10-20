@@ -133,12 +133,10 @@
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Employee Code<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Employee Code<span class="text-danger"></span></label>
                                         <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="validationCustom02"  required name="employee_code" value=EMP001>
-                                            <div class="invalid-feedback">
-                                                Employee Code
-                                            </div>
+                                        <input type="text" class="form-control" id="validationCustom02"   name="employee_code" value="{{ $employee_code }}" readonly>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -148,8 +146,8 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="default-select wide form-control" id="validationCustom05" name="department_id">
-                                            @if(!empty($department))
-                                            @foreach ($department as $row)
+                                            @if(!empty($data['department']))
+                                            @foreach ($data['department'] as $row)
                                             <option value="{{$row->id}}">{{$row->department_name}}</option>
                                             @endforeach
                                             @endif
@@ -175,8 +173,8 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="default-select wide form-control" id="validationCustom05" name="designation_id">
-                                            @if(!empty($designation))
-                                            @foreach ($designation as $row)
+                                            @if(!empty($data['designation']))
+                                            @foreach ($data['designation'] as $row)
                                             <option value="{{$row->id}}">{{$row->designation_name}}</option>
                                             @endforeach
                                             @endif

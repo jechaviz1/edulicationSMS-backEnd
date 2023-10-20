@@ -1,4 +1,4 @@
-
+ 
 <!-- Extends template page-->
 @extends('admin.layout.header')
 
@@ -18,16 +18,42 @@
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Mark Attendance</h5>
-
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-attendance') }}" >
+                    <h5>Add Attendance</h5>
+                    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-attendance' ) }}" >
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
-                            <div class="mb-3 row">
-                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Designation <span class="text-danger">*</span>
+                                <div class="mb-3 row">
+                                <label class="col-lg-3 col-form-label" for="validationCustom05"> Department <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
+                                        <select class="default-select wide form-control" id="validationCustom05" name="department_id">
+                                            @if(!empty($department))
+                                            @foreach ($department as $row)
+                                            <option value="{{$row->id}}">{{$row->department_name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a one.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                <label class="col-lg-3 col-form-label" for="validationCustom05"> Designation <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-9">
                                         <select class="default-select wide form-control" id="validationCustom05" name="designation_id">
                                             @if(!empty($designation))
                                             @foreach ($designation as $row)
@@ -40,67 +66,86 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom03">Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom03" placeholder="Valid Attendance Name." required name="name">
+                                <label class="col-lg-3 col-form-label" for="attendancedate">Select a date:</label>
+                                <div class="col-lg-9">
+                                <input type="date" class="form-control" id="attendancedate" name="date_of_attendance"
+                                    value="2023-10-20"
+                                    min="2023-01-01" max="2023-12-31">
+                                </div>
+</div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                <label class="col-lg-3 col-form-label" for="validationCustom05"> Employee <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-9">
+                                    <select class="default-select wide form-control" id="validationCustom05" name="employee_id">
+                                            @if(!empty($employee))
+                                            @foreach ($employee as $row)
+                                            <option value="{{$row->id}}">{{$row->first_name}}&nbsp;{{$row->last_name}}&nbsp; - {{$row->employee_code}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
                                         <div class="invalid-feedback">
-                                            Please enter an Attendance Name.
+                                            Please select a one.
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
-                            <div class="row">
-                        
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Description </label>
-                                    <div class="col-lg-8">
-                                        <textarea class="form-txtarea form-control" rows="8" id="description" name="description" required ></textarea>
+                                <label class="col-lg-3 col-form-label" for="validationCustom05"> Attendance Type <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        <select class="default-select wide form-control" id="validationCustom05" name="attendance_type_id">
+                                            @if(!empty($attendancetype))
+                                            @foreach ($attendancetype as $row)
+                                            <option value="{{$row->id}}">{{$row->type}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
                                         <div class="invalid-feedback">
-                                            Please enter a Description.
+                                            Please select a one.
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        
-                        
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom05">Status<span class="text-danger">*</span></label>
-                                    <!-- <div class="col-lg-1">
-                                    <input type="checkbox" class="form-control" id="validationCustom05" name="is_active"> Is Active<br><br>
-                                        
+                                <label class="col-lg-3 col-form-label" for="validationCustom05"> Employee Category <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-9">
+                                        <select class="default-select wide form-control" id="validationCustom05" name="employee_category_id">
+                                            @if(!empty($employeecategory))
+                                            @foreach ($employeecategory as $row)
+                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
                                         <div class="invalid-feedback">
-                                            Please enter an Attendance Name.
+                                            Please select a one.
                                         </div>
-                                    </div> -->
-                                    <div class="col-lg-6">
-                                    <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="1" id="flexCheckIndeterminate" name="is_active">
-  <label class="form-check-label" for="flexCheckIndeterminate">
-    Is Active
-  </label>
-</div>
-</div>
+                                    </div>
                                 </div>
-                                
                             </div>
-                            
-                        </div>
-                        <div class="row">
-
+                         
                             <div class="col-xl-4">
-                                
-
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Remarks </label>
+                                    <div class="col-lg-9">
+                                        <textarea class="form-txtarea form-control" rows="6" id="remarks" name="remarks" required ></textarea>
+                                        <div class="invalid-feedback">
+                                            Please enter a Remarks.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                             
-
-
+                            
                             <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">
@@ -117,18 +162,12 @@
     </div>
 
 </div>
-
-@section('customjs')
-
-
-
-
 <script>
     (function () {
         'use strict'
 
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.querySelectorAll('.needs-validation');
+        var forms = document.querySelectorAll('.needs-validation')
 
         // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
@@ -139,8 +178,8 @@
                             event.stopPropagation()
                         }
 
-                        form.classList.add('was-validated');
-                    }, false);
+                        form.classList.add('was-validated')
+                    }, false)
                 })
     })()
 
@@ -164,49 +203,5 @@
         $('article').eq(i).addClass('on');
     });
 </script>
-<!-- Daterangepicker -->
-<!-- momment js is must -->
-<!--<script src="./vendor/moment/moment.min.js"></script>-->
-<script src="{{ asset('admin/vendor/moment/moment.min.js')}}"></script>
-<!--<script src="./vendor/bootstrap-daterangepicker/daterangepicker.js"></script>-->
-<script src="{{ asset('admin/vendor/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
-<!-- clockpicker -->
-<script src="./vendor/clockpicker/js/bootstrap-clockpicker.min.js"></script>
-<!-- asColorPicker -->
-<script src="./vendor/jquery-asColor/jquery-asColor.min.js"></script>
-<script src="./vendor/jquery-asGradient/jquery-asGradient.min.js"></script>
-<script src="./vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js"></script>
-<!-- Material color picker -->
-<script src="./vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-<!-- pickdate -->
-<!--<script src="./vendor/pickadate/picker.js"></script>-->
-<script src="{{ asset('admin/vendor/pickadate/picker.js')}}"></script>
-<script src="./vendor/pickadate/picker.time.js"></script>
-<!--<script src="./vendor/pickadate/picker.date.js"></script>-->
-<script src="{{ asset('admin/vendor/pickadate/picker.date.js')}}"></script>
 
-
-<!-- Daterangepicker -->
-<!--<script src="./js/plugins-init/bs-daterange-picker-init.js"></script>-->
-<script src="{{ asset('admin/js/plugins-init/bs-daterange-picker-init.js')}}"></script>
-
-<!-- Clockpicker init -->
-<script src="./js/plugins-init/clock-picker-init.js"></script>
-<!-- asColorPicker init -->
-<script src="./js/plugins-init/jquery-asColorPicker.init.js"></script>
-<!-- Material color picker init -->
-<!--<script src="./js/plugins-init/material-date-picker-init.js"></script>-->
-<script src="{{ asset('admin/js/plugins-init/material-date-picker-init.js')}}"></script>
-
-<!-- Pickdate -->
-<script src="./js/plugins-init/pickadate-init.js"></script>
-
-<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="{{ asset('admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
-
-        <!--<script src="./js/custom.js"></script>-->
-<script src="{{ asset('admin/js/custom.js')}}"></script>
-<!--<script src="./js/deznav-init.js"></script>-->
-<script src="{{ asset('admin/js/deznav-init.js')}}"></script>
-@endsection
 @stop

@@ -128,6 +128,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/add-attendance', [AttendanceController::class, 'addAttendance'])->name('add-attendance');
         Route::post('/store-attendance', [AttendanceController::class, 'storeAttendance'])->name('store-attendance');
         Route::get('/attendance-list', [AttendanceController::class, 'attendanceList'])->name('attendance-list');
+        Route::post('/attendance-list', [AttendanceController::class, 'filterAttendance'])->name('attendance-list');
         Route::get('/edit-attendance/{id}', [AttendanceController::class, 'editAttendance'])->name('edit-attendance');
         Route::post('/update-attendance/{id}', [AttendanceController::class, 'updateAttendance'])->name('update-attendance');
         Route::get('/delete-attendance/{id}', [AttendanceController::class, 'deleteAttendance'])->name('delete-attendance');
