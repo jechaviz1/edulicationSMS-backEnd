@@ -39,9 +39,10 @@ class SchoolController extends Controller {
     }
 
     public function storeSchool(Request $request) {
-        $rules = [
+        $this->validate($request, [
             'name' => 'required|string|min:1|max:255',
-        ];
+            'email' => 'required|string|email|max:255|unique:school,email',
+        ]);
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect('insert')
@@ -86,6 +87,7 @@ class SchoolController extends Controller {
         if ($id) {
             $request->validate([
                 'name' => 'required',
+                'email' => 'required|string|email|max:255|unique:school,email,' . $id
             ]);
             $data = $request->input();
             $school = \App\Models\School::find($id);

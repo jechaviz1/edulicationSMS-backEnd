@@ -33,25 +33,18 @@ class RoleController extends Controller {
     }
 
     public function store(Request $request) {
-        $rules = [
-            'name' => 'required',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-            $data = $request->input();
-            try {
-                $role = new \App\Models\Role();
-                $role->name = $data['name'];
-                $role->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $role->save();
-                return redirect()->route('role-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
-                return redirect()->route('role-list')->with('failed', 'Record not added.');
-            }
+        $this->validate($request, [
+            'name' => 'required|unique:roles,name'
+        ]);
+        $data = $request->input();
+        try {
+            $role = new \App\Models\Role();
+            $role->name = $data['name'];
+            $role->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+            $role->save();
+            return redirect()->route('role-list')->with('success', 'Record added successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('role-list')->with('failed', 'Record not added.');
         }
     }
 
@@ -75,8 +68,8 @@ class RoleController extends Controller {
 
     public function update(Request $request, $id) {
         if ($id) {
-            $request->validate([
-                'name' => 'required',
+            $this->validate($request, [
+                'name' => 'required|unique:roles,name,' . $id,
             ]);
             $data = $request->input();
             $role = \App\Models\Role::find($id);

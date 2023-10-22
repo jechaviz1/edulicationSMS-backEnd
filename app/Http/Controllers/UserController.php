@@ -134,28 +134,24 @@ class UserController extends Controller {
     }
 
     public function storeUser(Request $request) {
-        $rules = [
-            'first_name' => 'required|string|min:1|max:255',
-//            'city_name' => 'required|string|min:1|max:255',
-//            'email' => 'required|string|email|max:255'
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-            $data = $request->input();
-            try {
-                $user = new \App\Models\User();
-                $user->first_name = isset($data['first_name']) ? $data['first_name'] : null;
-                $user->middle_name = isset($data['middle_name']) ? $data['middle_name'] : null;
-                $user->last_name = isset($data['last_name']) ? $data['last_name'] : null;
-                $user->email = isset($data['email']) ? $data['email'] : null;
-                $user->username = isset($data['username']) ? $data['username'] : null;
-                $user->role_id = isset($data['role_id']) ? $data['role_id'] : null;
-                $user->gender = isset($data['gender']) ? $data['gender'] : 1;
-                $user->save();
+
+        $this->validate($request, [
+            'first_name' => 'required|string|min:4|max:255',
+            'city_name' => 'required|string|min:4|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email'
+        ]);
+
+        $data = $request->input();
+        try {
+            $user = new \App\Models\User();
+            $user->first_name = isset($data['first_name']) ? $data['first_name'] : null;
+            $user->middle_name = isset($data['middle_name']) ? $data['middle_name'] : null;
+            $user->last_name = isset($data['last_name']) ? $data['last_name'] : null;
+            $user->email = isset($data['email']) ? $data['email'] : null;
+            $user->username = isset($data['username']) ? $data['username'] : null;
+            $user->role_id = isset($data['role_id']) ? $data['role_id'] : null;
+            $user->gender = isset($data['gender']) ? $data['gender'] : 1;
+            $user->save();
 
 //                 $to      =$user->email ;// 'nobody@example.com';
 //    $subject = 'the subject';
@@ -166,10 +162,9 @@ class UserController extends Controller {
 //
 //    mail($to, $subject, $message, $headers);
 
-                return redirect()->route('user-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
-                return redirect()->route('user-list')->with('failed', 'Record not added.');
-            }
+            return redirect()->route('user-list')->with('success', 'Record added successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('user-list')->with('failed', 'Record not added.');
         }
     }
 
@@ -210,19 +205,18 @@ class UserController extends Controller {
                 $user->role_id = isset($data['role_id']) ? $data['role_id'] : null;
                 $user->gender = isset($data['gender']) ? $data['gender'] : 1;
                 //profile_image
-//                $file_name = null;
-//                $file_path = null;
-//                if ($request->file()) {
-//                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
-//                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
-//                }
-//                $user->mobile_no = $request->input('mobile_no');
-//                if ($file_name != null) {
-//                    $user->profile_image = $file_name;
-//                }
-//                if ($file_path != null) {
-//                    $user->profile_image_path = $file_path;
-//                }
+                $file_name = null;
+                $file_path = null;
+                if ($request->file()) {
+                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
+                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
+                }
+                if ($file_name != null) {
+                    $user->profile_image = $file_name;
+                }
+                if ($file_path != null) {
+                    $user->profile_image_path = $file_path;
+                }
 //                $user->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $user->save();
             }
@@ -255,7 +249,8 @@ class UserController extends Controller {
             $user = User::where('id', \Auth::id())->first();
             if ($user) {
                 $data['user'] = $user;
-                return view('admin.edit-user-profile')->with($data);
+                $data['user_role'] = Role::where('id', $user->role_id)->first();
+                return view('admin.edit_user_profile')->with($data);
             } else {
                 return redirect()->route('dashboard')->with('failed', "Record not found");
             }
@@ -270,7 +265,7 @@ class UserController extends Controller {
                 'first_name' => 'required',
 //                'last_name' => 'required',
                 'email' => 'required',
-                'mobile_no' => 'required',
+//                'mobile_no' => 'required',
             ]);
             $user = User::find(\Auth::id());
             if ($user) {
@@ -287,7 +282,7 @@ class UserController extends Controller {
                 $user->last_name = $request->input('last_name');
                 $user->username = $request->input('username');
                 $user->email = $request->input('email');
-                $user->mobile_no = $request->input('mobile_no');
+//                $user->mobile_no = $request->input('mobile_no');
 
                 if ($file_name != null) {
                     $user->profile_image = $file_name;
@@ -592,31 +587,27 @@ class UserController extends Controller {
     }
 
     public function storeSuperAdmin(Request $request) {
-        $rules = [
+        $this->validate($request, [
             'first_name' => 'required|string|min:1|max:255',
-            'last_name' => 'required|string|min:1|max:255',
-            'email' => 'required|string|email|max:255'
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->route('super-admin-list')->withInput()
-                            ->withErrors($validator);
-        } else {
-            $data = $request->input();
-            try {
-                $user = new \App\Models\User();
-                $user->first_name = isset($data['first_name']) ? $data['first_name'] : null;
-                $user->last_name = isset($data['last_name']) ? $data['last_name'] : null;
-                $user->email = isset($data['email']) ? $data['email'] : null;
-                $user->username = isset($data['username']) ? $data['username'] : null;
-                $user->role_id = 1;
-                $user->gender = isset($data['gender']) ? $data['gender'] : 1;
-                $user->password = isset($data['password']) ? Hash($data['password']) : null;
-                $user->save();
-                return redirect()->route('super-admin-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
-                return redirect()->route('super-admin-list')->with('failed', 'Record not added.');
-            }
+            'city_name' => 'required|string|min:1|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'username' => 'required|string|max:255|unique:users,username'
+        ]);
+
+        $data = $request->input();
+        try {
+            $user = new \App\Models\User();
+            $user->first_name = isset($data['first_name']) ? $data['first_name'] : null;
+            $user->last_name = isset($data['last_name']) ? $data['last_name'] : null;
+            $user->email = isset($data['email']) ? $data['email'] : null;
+            $user->username = isset($data['username']) ? $data['username'] : null;
+            $user->role_id = 1;
+            $user->gender = isset($data['gender']) ? $data['gender'] : 1;
+            $user->password = isset($data['password']) ? Hash($data['password']) : null;
+            $user->save();
+            return redirect()->route('super-admin-list')->with('success', 'Record added successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('super-admin-list')->with('failed', 'Record not added.');
         }
     }
 
@@ -660,6 +651,47 @@ class UserController extends Controller {
                 $user->save();
             }
             return redirect()->route('super-admin-list')->with('success', 'Record deleted.');
+        } else {
+            return redirect()->route('super-admin-list')->with('failed', 'Record not found.');
+        }
+    }
+
+    public function updateSuperAdmin(Request $request, $id) {
+
+        if ($id) {
+            $request->validate([
+                'first_name' => 'required|string|min:1|max:255',
+                'last_name' => 'required|string|min:1|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+                'username' => 'required|string|max:255|unique:users,username,' . $id,
+            ]);
+            $data = $request->input();
+            $user = User::find($id);
+            if ($user) {
+                $user->first_name = isset($data['first_name']) ? $data['first_name'] : null;
+                $user->middle_name = isset($data['middle_name']) ? $data['middle_name'] : null;
+                $user->last_name = isset($data['last_name']) ? $data['last_name'] : null;
+                $user->email = isset($data['email']) ? $data['email'] : null;
+                $user->username = isset($data['username']) ? $data['username'] : null;
+                $user->gender = isset($data['gender']) ? $data['gender'] : 1;
+                //profile_image
+//                $file_name = null;
+//                $file_path = null;
+//                if ($request->file()) {
+//                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
+//                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
+//                }
+//                $user->mobile_no = $request->input('mobile_no');
+//                if ($file_name != null) {
+//                    $user->profile_image = $file_name;
+//                }
+//                if ($file_path != null) {
+//                    $user->profile_image_path = $file_path;
+//                }
+//                $user->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                $user->save();
+            }
+            return redirect()->route('super-admin-list')->with('success', 'Record Updated.');
         } else {
             return redirect()->route('super-admin-list')->with('failed', 'Record not found.');
         }

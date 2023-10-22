@@ -117,24 +117,21 @@ class StudentController extends Controller {
                 $student->date_of_birth = $request->input('date_of_birth');
                 $student->nationality = $request->input('nationality');
                 $student->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+
+                $file_name = null;
+                $file_path = null;
+
+                if ($request->file()) {
+                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
+                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
+                }
+                if ($file_name != null) {
+                    $student->profile_image = $file_name;
+                }
+                if ($file_path != null) {
+                    $student->profile_image_path = $file_path;
+                }
                 $student->save();
-//                $file_name = null;
-//                $file_path = null;
-//                if ($request->file()) {
-//                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
-//                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
-//                }
-//                $user->role_id = $request->input('role_id');
-//                $user->username = $request->input('username');
-//                $user->email = $request->input('email');
-//                $user->mobile_no = $request->input('mobile_no');
-//                $user->status = $request->input('status');
-//                if ($file_name != null) {
-//                    $user->profile_image = $file_name;
-//                }
-//                if ($file_path != null) {
-//                    $user->profile_image_path = $file_path;
-//                }
             }
             return redirect()->route('student-list')->with('success', 'Record Updated.');
         } else {
