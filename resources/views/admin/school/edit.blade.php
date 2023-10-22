@@ -11,7 +11,7 @@
                 <h4 class="card-title">Edit School</h4>
                 <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="user-create.html" class="btn btn-primary light">School List</a>
+                        <a href="{{ route('school-list') }}" class="btn btn-primary light">School List</a>
                     </li>
 
                 </ul>
@@ -33,6 +33,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Name.
                                         </div>
+                                        @if($errors->has('name'))
+                                        <div class="error">{{ $errors->first('name') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -44,6 +47,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Address.
                                         </div>
+                                        @if($errors->has('address'))
+                                        <div class="error">{{ $errors->first('address') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -55,6 +61,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
+                                        @if($errors->has('email'))
+                                        <div class="error">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -69,6 +78,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Phone No.
                                         </div>
+                                        @if($errors->has('phone_no'))
+                                        <div class="error">{{ $errors->first('phone_no') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

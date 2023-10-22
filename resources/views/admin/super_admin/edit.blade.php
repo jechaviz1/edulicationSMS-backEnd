@@ -20,19 +20,36 @@
                 <div class="form-validation">
                     <h5>Edit User</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-user',$user->id ) }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-super-admin',$user->id ) }}" >
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">First Name <span
-                                            class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">First Name <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid First Name.." required name="first_name" value="{{$user->first_name}}">
                                         <div class="invalid-feedback">
                                             Please enter a First Name.
                                         </div>
+                                        @if($errors->has('first_name'))
+                                        <div class="error">{{ $errors->first('first_name') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Last Name.." required name="last_name" value="{{$user->last_name}}">
+                                        <div class="invalid-feedback">
+                                            Please enter a Last Name.
+                                        </div>
+                                        @if($errors->has('last_name'))
+                                        <div class="error">{{ $errors->first('last_name') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -45,6 +62,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
+                                        @if($errors->has('email'))
+                                        <div class="error">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -59,28 +79,13 @@
                                         <div class="invalid-feedback">
                                             Please enter a Username.
                                         </div>
+                                        @if($errors->has('username'))
+                                        <div class="error">{{ $errors->first('username') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom05">Role <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <select class="default-select wide form-control" id="validationCustom05" name="role_id">
-                                            <!--                                            <option >Please select</option>-->
-                                            @if(!empty($role))
-                                            @foreach ($role as $row)
-                                            <option value="{{$row->id}}" {{ $row->id == $user->role_id ? 'selected' : '' }}  >{{$row->name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a one.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <div class="row">

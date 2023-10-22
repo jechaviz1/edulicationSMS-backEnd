@@ -4,23 +4,27 @@
 
 <!-- Specify content -->
 @section('content')
+@if ($message = Session::get('success'))
+<div class="alert alert-primary alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+    </button>
+    <strong>Success!</strong> {{ $message }}
+</div>
+@endif
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Create Super Admin</h4>
-                <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a href="{{ route('super-admin-list') }}" class="btn btn-primary light">Super Admin List</a>
-                    </li>
+                <h4 class="card-title"><?php echo (isset($title)) ? $title : ''; ?></h4>
 
-                </ul>
             </div>
+
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Add Super Admin</h5>
+                    <h5><?php echo (isset($title)) ? $title : ''; ?></h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-super-admin' ) }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-user-profile',$user->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
@@ -29,27 +33,10 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid First Name." required name="first_name">
+                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid First Name.." required name="first_name" value="{{$user->first_name}}">
                                         <div class="invalid-feedback">
                                             Please enter a First Name.
                                         </div>
-                                        @if($errors->has('first_name'))
-                                        <div class="error">{{ $errors->first('first_name') }}</div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Last Name." required name="last_name">
-                                        <div class="invalid-feedback">
-                                            Please enter a Last Name.
-                                        </div>
-                                        @if($errors->has('last_name'))
-                                        <div class="error">{{ $errors->first('last_name') }}</div>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -58,13 +45,10 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email">
+                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email" value="{{$user->email}}">
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
-                                        @if($errors->has('email'))
-                                        <div class="error">{{ $errors->first('email') }}</div>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -75,13 +59,19 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Username" required name="username">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Username" required name="username" value="{{$user->username}}">
                                         <div class="invalid-feedback">
                                             Please enter a Username.
                                         </div>
-                                        @if($errors->has('username'))
-                                        <div class="error">{{ $errors->first('username') }}</div>
-                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom05">Role <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <label class=" col-form-label" for="validationCustom05">{{$user_role->name}} </label> 
                                     </div>
                                 </div>
                             </div>
@@ -109,34 +99,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4"></div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom05">Profile Image </label>
+                                    <div class="col-lg-8">
+                                        <input name="profile_image" id="profile_image" type="file" class="form-control" data-error="Valid Image is required."  >
 
-                            <!--                            <div class="col-xl-4">
-                                                            <div class="mb-3 row">
-                                                                <label class="col-lg-3 col-form-label" for="validationCustom02">password <span
-                                                                        class="text-danger">*</span>
-                                                                </label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="password" class="form-control" id="validationCustom02"  placeholder="password" required>
-                                                                    <div class="invalid-feedback">
-                                                                        password
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
-                            <!--                            <div class="col-xl-4">
-                                                            <div class="mb-3 row">
-                                                                <label class="col-lg-3 col-form-label" for="validationCustom02">Confirm Password <span
-                                                                        class="text-danger">*</span>
-                                                                </label>
-                                                                <div class="col-lg-8">
-                                                                    <input type="password" class="form-control" id="validationCustom02"  placeholder="Confirm Password" required>
-                                                                    <div class="invalid-feedback">
-                                                                        Confirm Password
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>-->
+                                        @if($user->profile_image_path)
+                                        <a target="_blank" href="{{ getStoragePath() . $user->profile_image_path }}" class="btn-link text-primary">Profile Image</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">
@@ -146,6 +122,7 @@
                             </div>
                         </div>
                     </form>
+
 
                 </div>
             </div>

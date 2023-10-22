@@ -4,6 +4,16 @@
 
 <!-- Specify content -->
 @section('content')
+
+
+@if ($message = Session::get('success'))
+<div class="alert alert-primary alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+    </button>
+    <strong>Success!</strong> {{ $message }}
+</div>
+@endif
+
 <div class="row">
     @if(!empty($student))
     @foreach ($student as $row)
@@ -13,7 +23,15 @@
             <div class="card-body">
                 <div class="card-use-box">
                     <div class="crd-bx-img">
+
+                        @if($row->profile_image_path!=null)
+                        @if($row->profile_image_path)
+                        <a target="_blank" href="{{ getStoragePath() . $row->profile_image_path }}" class="btn-link text-primary">Profile Image</a>
+                        <img src="{{ getStoragePath() . $row->profile_image_path }}" class="rounded-circle" alt="" style="width: 100px; height: 100px;">
+                        @endif
+                        @else
                         <img src="images/profile/friends/f1.jpg" class="rounded-circle" alt="">
+                        @endif
                         <div class="active"></div>
                     </div>
                     <div class="card__text">

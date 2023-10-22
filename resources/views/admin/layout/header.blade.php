@@ -16,7 +16,7 @@
         <!-- PAGE TITLE HERE -->
         <title>W3Admin - Modern-Admin-Dashboard</title>
         <!-- FAVICONS ICON -->
-        <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/favicon.png') }}">
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
 
 
@@ -33,6 +33,8 @@
 
         <!--<link href="./css/style.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/css/style.css') }}" rel="stylesheet" />
+        <link href="{{ URL::asset('/admin/css/toastr/toastr.min.css') }}" rel="stylesheet" />
+        <link href="{{ URL::asset('/admin/css/admin_style.css') }}" rel="stylesheet" />
 
     </head>
 
@@ -308,7 +310,7 @@
                                     <div>
                                         <h6 class="mb-1">Chat with Khelesh</h6>
                                         <p class="mb-0 text-success">Online</p>
-                                    </div>							
+                                    </div>
                                     <div class="dropdown">
                                         <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
                                         <ul class="dropdown-menu dropdown-menu-end">
@@ -785,13 +787,17 @@
                                         <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <div class="header-info2 d-flex align-items-center">
                                                 <div class="header-media">
-                                                    <img src="images/user.jpg" class="avatar avatar-lg" alt="">
+                                                    @if(Session::has('profile_image_path'))
+                                                    <img class="avatar avatar-lg" src="{{ getStoragePath() . Session::get('profile_image_path') }}" alt="img">
+                                                    @else
+                                                    <img src="images/user.jpg" class="avatar avatar-lg" alt="img">
+                                                    @endif
                                                 </div>
                                                 <div class="header-info">
                                                     @if(Session::has('first_name'))
                                                     <h6>{{Session::get('first_name')}} {{Session::get('last_name')}}</h6>
                                                     <p>{{Session::get('email')}} </p>
-                                                    @endif 
+                                                    @endif
                                                 </div>
 
                                             </div>
@@ -799,24 +805,30 @@
                                         <div class=" profile-box">
                                             <div class="products">
                                                 <div class="border-img">
-                                                    <img src="images/user.jpg" class="avatar " alt="">
-                                                </div>	
+                                                    <!--<img src="images/user.jpg" class="avatar " alt="">-->
+                                                    @if(Session::has('profile_image_path'))
+                                                    <img class="iavatar" src="{{ getStoragePath() . Session::get('profile_image_path') }}" alt="img">
+                                                    @else
+                                                    <img class="iavatar" src="{{ getStoragePath() .  'admin/images/avatar/1.png' }}" alt="img">
+                                                    @endif
+
+                                                </div>
                                                 <div class="ms-3">
                                                     @if(Session::has('first_name'))
                                                     <h6 class="mb-0">{{Session::get('first_name')}} {{Session::get('last_name')}}</h6>
                                                     <span class="d-block mb-1">{{Session::get('email')}}</span>
                                                     <span class="badge border-0 rounded">{{Session::get('role_name')}}</span>
-                                                    @endif 
-                                                </div>	
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="account-setting">
-                                                <!--                                                <a href="app-profile-2.html" class="ai-icon">
-                                                                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path d="M16.6666 17.5V15.8333C16.6666 14.9493 16.3154 14.1014 15.6903 13.4763C15.0652 12.8512 14.2173 12.5 13.3333 12.5H6.66658C5.78253 12.5 4.93468 12.8512 4.30956 13.4763C3.68444 14.1014 3.33325 14.9493 3.33325 15.8333V17.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                                                    <path d="M10.0001 9.16667C11.841 9.16667 13.3334 7.67428 13.3334 5.83333C13.3334 3.99238 11.841 2.5 10.0001 2.5C8.15913 2.5 6.66675 3.99238 6.66675 5.83333C6.66675 7.67428 8.15913 9.16667 10.0001 9.16667Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                                                    </svg>
-                                                                                                    <span class="ms-2">Account Settings</span>
-                                                                                                </a>-->
+                                                <a href="{{ route('edit-user-profile') }}" class="ai-icon">
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16.6666 17.5V15.8333C16.6666 14.9493 16.3154 14.1014 15.6903 13.4763C15.0652 12.8512 14.2173 12.5 13.3333 12.5H6.66658C5.78253 12.5 4.93468 12.8512 4.30956 13.4763C3.68444 14.1014 3.33325 14.9493 3.33325 15.8333V17.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M10.0001 9.16667C11.841 9.16667 13.3334 7.67428 13.3334 5.83333C13.3334 3.99238 11.841 2.5 10.0001 2.5C8.15913 2.5 6.66675 3.99238 6.66675 5.83333C6.66675 7.67428 8.15913 9.16667 10.0001 9.16667Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    <span class="ms-2">Profile Settings</span>
+                                                </a>
                                                 <!--                                                <a href="app-profile-1.html" class="ai-icon ">
                                                                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                                     <path d="M3.33341 3.33301H16.6667C17.5834 3.33301 18.3334 4.08301 18.3334 4.99967V14.9997C18.3334 15.9163 17.5834 16.6663 16.6667 16.6663H3.33341C2.41675 16.6663 1.66675 15.9163 1.66675 14.9997V4.99967C1.66675 4.08301 2.41675 3.33301 3.33341 3.33301Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -836,7 +848,7 @@
                                                     <div class="dz-layout">
                                                         <i class="fas fa-sun sun"></i>
                                                         <i class="fas fa-moon moon"></i>
-                                                    </div>	
+                                                    </div>
                                                 </div>
                                                 <a href="{{ route('logout') }}" class="ai-icon">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -845,7 +857,7 @@
                                                     <path d="M17.5 10H7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                     </svg>
                                                     <span class="ms-2">Logout </span>
-                                                </a>											
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -873,8 +885,8 @@
                                                             <path d="M3.29077 9L12.2908 2L21.2908 9V20C21.2908 20.5304 21.0801 21.0391 20.705 21.4142C20.3299 21.7893 19.8212 22 19.2908 22H5.29077C4.76034 22 4.25163 21.7893 3.87656 21.4142C3.50149 21.0391 3.29077 20.5304 3.29077 20V9Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path d="M9.29077 22V12H15.2908V22" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
-                                                        </div>	
+
+                                                        </div>
                                                         <span class="nav-text">Dashboard</span>
                                                     </a>
                                                     <ul aria-expanded="false">
@@ -893,7 +905,7 @@
                                     <path d="M3.29077 9L12.2908 2L21.2908 9V20C21.2908 20.5304 21.0801 21.0391 20.705 21.4142C20.3299 21.7893 19.8212 22 19.2908 22H5.29077C4.76034 22 4.25163 21.7893 3.87656 21.4142C3.50149 21.0391 3.29077 20.5304 3.29077 20V9Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     <path d="M9.29077 22V12H15.2908V22" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </div>	
+                                </div>
                                 <span class="nav-text">Dashboard</span>
                             </a>
                         </li>
@@ -948,7 +960,7 @@
                                 <li><a href="{{ URL::route('add-school') }}">add</a></li>
                             </ul>
                         </li>
-                        @endif 
+                        @endif
 
                         @if(Session::has('role_id') && Session::get('role_id') != 1)
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -968,7 +980,7 @@
                                 <li><a href="{{ URL::route('add-student') }}">Add Student</a></li>
                             </ul>
                         </li>
-                        @endif 
+                        @endif
                         @if(Session::has('role_id') && Session::get('role_id') != 1)
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                                 <div class="menu-icon">
@@ -1018,7 +1030,7 @@
                                 <li><a href="{{ URL::route('add-academic-class') }}">Add Class</a></li>
                             </ul>
                         </li>
-                        @endif 
+                        @endif
                         @if(Session::has('role_id') && Session::get('role_id') != 1)
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                                 <div class="menu-icon">
@@ -1042,8 +1054,8 @@
                                 <li><a href="{{ URL::route('add-attendance') }}">Attendance</a></li>
                             </ul>
                         </li>
-                        
-                        @endif 
+
+                        @endif
                         <!--                        <li><a href="contacts.html" class="" aria-expanded="false">
                                                                             <div class="menu-icon">
                                                                                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1054,7 +1066,7 @@
                                                                                 <path d="M8.36292 2C8.36292 2.74048 8.9754 3.34076 9.73093 3.34076H10.7874C11.953 3.34492 12.8972 4.27026 12.9025 5.41266V6.08771" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7191 21.9623C13.7139 22.0132 10.7638 22.0111 7.86352 21.9623C4.64427 21.9623 2.29077 19.666 2.29077 16.5109V11.8614C2.29077 8.70627 4.64427 6.41005 7.86352 6.41005C10.7797 6.3602 13.7319 6.36123 16.7191 6.41005C19.9383 6.41005 22.2908 8.70731 22.2908 11.8614V16.5109C22.2908 19.666 19.9383 21.9623 16.7191 21.9623Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                                                 </svg>
-                                                                            </div>	
+                                                                            </div>
                                                                             <span class="nav-text">Contacts</span>
                                                                         </a>
                                                                     </li>-->
@@ -1066,7 +1078,7 @@
                                                             <path d="M14.2882 15.3585H8.88818" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path d="M12.2432 11.606H8.88721" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
+
                                                         </div>
                                                         <span class="nav-text">Blog</span>
                                                     </a>
@@ -1086,12 +1098,12 @@
                                                         <span class="nav-text">Student</span>
                                                     </a>-->
                         <!--      <ul aria-expanded="false">
-                                <li class="mini-dashboard">Register</li> 
+                                <li class="mini-dashboard">Register</li>
                                <li><a href=" href="./chat.html">Student List</a></li>
                                <li><a href="./chat.html">Register</a></li>
                                                                                             <li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">Users Manager</a>
                                                                    <ul aria-expanded="false">
-                               
+
                                                                        <li><a href="./app-profile-1.html">Profile 1</a></li>
                                                                        <li><a href="./app-profile-2.html">Profile 2</a></li>
                                                                        <li><a href="./edit-profile.html">Edit Profile</a></li>
@@ -1125,9 +1137,9 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5687 13.8887C18.2435 13.8887 18.8098 14.4455 18.7066 15.1118C18.1013 19.0318 14.7456 21.9423 10.6982 21.9423C6.22029 21.9423 2.59082 18.3129 2.59082 13.836C2.59082 10.1476 5.39293 6.71181 8.54766 5.93497C9.22556 5.7676 9.92029 6.24445 9.92029 6.94234C9.92029 11.6708 10.0792 12.8939 10.9771 13.5592C11.875 14.2244 12.9308 13.8887 17.5687 13.8887Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M21.9834 9.95121C22.0371 6.91331 18.3055 2.01647 13.7581 2.10068C13.4045 2.107 13.1213 2.40173 13.1055 2.75437C12.9908 5.25226 13.1455 8.4891 13.2318 9.95647C13.2581 10.4133 13.6171 10.7723 14.0729 10.7986C15.5813 10.8849 18.936 11.0028 21.3981 10.6302C21.7329 10.5796 21.9781 10.2891 21.9834 9.95121Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
-                        
-                                                        </div>	
+
+
+                                                        </div>
                                                         <span class="nav-text">Charts</span>
                                                     </a>
                                                     <ul aria-expanded="false">
@@ -1155,7 +1167,7 @@
                                                         <li><a href="./ui-badge.html">Badge</a></li>
                                                         <li><a href="./ui-button.html">Button</a></li>
                                                         <li><a href="./ui-modal.html">Modal</a></li>
-                                                        <li class="extra-menu-li">		
+                                                        <li class="extra-menu-li">
                                                             <ul id="collapseExample" class="pt-0 extra-menu-links extra-menu-area">
                                                                 <li><a href="./ui-button-group.html">Button Group</a></li>
                                                                 <li><a href="./ui-list-group.html">List Group</a></li>
@@ -1173,7 +1185,7 @@
                                                                 <span class="show-more">Show More + </span>
                                                                 <span class="show-less">Show Less - </span>
                                                             </a>
-                                                        </li> 
+                                                        </li>
                                                     </ul>
                                                 </li>-->
                         <!--                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -1182,8 +1194,8 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M21.7097 15.732C21.7097 19.31 19.6006 21.419 16.0226 21.419H8.24065C4.65365 21.419 2.54065 19.31 2.54065 15.732V7.932C2.54065 4.359 3.85465 2.25 7.43365 2.25H9.43365C10.1516 2.251 10.8276 2.588 11.2576 3.163L12.1706 4.377C12.6026 4.951 13.2786 5.289 13.9966 5.29H16.8266C20.4136 5.29 21.7376 7.116 21.7376 10.767L21.7097 15.732Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path d="M7.77173 14.4629H16.5067" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
-                                                        </div>	
+
+                                                        </div>
                                                         <span class="nav-text">Plugins</span>
                                                     </a>
                                                     <ul aria-expanded="false">
@@ -1205,8 +1217,8 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M3.29077 17.5C3.29077 14.8748 3.31888 14 6.79077 14C10.2627 14 10.2908 14.8748 10.2908 17.5C10.2908 20.1252 10.3018 21 6.79077 21C3.2797 21 3.29077 20.1252 3.29077 17.5Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M14.2908 17.5C14.2908 14.8748 14.3189 14 17.7908 14C21.2627 14 21.2908 14.8748 21.2908 17.5C21.2908 20.1252 21.3018 21 17.7908 21C14.2797 21 14.2908 20.1252 14.2908 17.5Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
-                                                        </div>	
+
+                                                        </div>
                                                         <span class="nav-text">Widget</span>
                                                     </a>
                                                 </li>-->
@@ -1218,8 +1230,8 @@
                                                             <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                                                        </div>	
-                        
+                                                        </div>
+
                                                         <span class="nav-text">Forms</span>
                                                     </a>
                                                     <ul aria-expanded="false">
@@ -1239,7 +1251,7 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M9.01706 6.84625C9.01706 5.5506 7.9589 4.5 6.65392 4.5C5.34893 4.5 4.29077 5.5506 4.29077 6.84625C4.29077 8.14191 5.34893 9.19251 6.65392 9.19251C7.9589 9.19251 9.01706 8.14191 9.01706 6.84625Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M20.2907 16.5533C20.2907 15.2576 19.2334 14.207 17.9284 14.207C16.6226 14.207 15.5645 15.2576 15.5645 16.5533C15.5645 17.8489 16.6226 18.8995 17.9284 18.8995C19.2334 18.8995 20.2907 17.8489 20.2907 16.5533Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
+
                                                         </div>
                                                         <span class="nav-text">Table</span>
                                                     </a>
@@ -1255,7 +1267,7 @@
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M18.148 20.417C20.021 20.417 21.54 18.899 21.541 17.026V17.024V14.324C20.304 14.324 19.302 13.322 19.301 12.085C19.301 10.849 20.303 9.846 21.54 9.846H21.541V7.146C21.543 5.272 20.026 3.752 18.153 3.75H18.147H6.43502C4.56102 3.75 3.04202 5.268 3.04102 7.142V7.143V9.933C4.23502 9.891 5.23602 10.825 5.27802 12.019C5.27902 12.041 5.28002 12.063 5.28002 12.085C5.28102 13.32 4.28202 14.322 3.04702 14.324H3.04102V17.024C3.04002 18.897 4.55902 20.417 6.43202 20.417H6.43302H18.148Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.6621 9.06303L13.2781 10.31C13.3381 10.432 13.4541 10.517 13.5891 10.537L14.9661 10.738C15.3071 10.788 15.4421 11.206 15.1961 11.445L14.2001 12.415C14.1021 12.51 14.0581 12.647 14.0801 12.782L14.3151 14.152C14.3731 14.491 14.0181 14.749 13.7141 14.589L12.4831 13.942C12.3621 13.878 12.2181 13.878 12.0971 13.942L10.8671 14.589C10.5621 14.749 10.2071 14.491 10.2651 14.152L10.5001 12.782C10.5231 12.647 10.4781 12.51 10.3801 12.415L9.38511 11.445C9.13911 11.206 9.27411 10.788 9.61411 10.738L10.9911 10.537C11.1261 10.517 11.2431 10.432 11.3031 10.31L11.9181 9.06303C12.0701 8.75503 12.5101 8.75503 12.6621 9.06303Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                                             </svg>
-                        
+
                                                         </div>
                                                         <span class="nav-text">Pages</span>
                                                     </a>
@@ -1396,7 +1408,7 @@
 <!--<script src="./vendor/jqvmap/js/jquery.vmap.usa.js"></script>-->
         <script src="{{ asset('admin/vendor/jqvmap/js/jquery.vmap.usa.js')}}"></script>
 
-
+        <script type="text/javascript" src="{{ asset('admin/js/toastr/toastr.min.js')}}  "></script>
         <script>
 $(document).ready(function () {
     $(".nav-item .open-cal").click(function () {

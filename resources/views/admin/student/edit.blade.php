@@ -18,7 +18,7 @@
                     <input type="radio" id="tab2" name="tab">
                     <label for="tab2"> Existing Student</label>
                     <article>
-                        <form class="needs-validation" novalidate  method="POST" action="{{ route('update-student', $student->id ) }}" >
+                        <form class="needs-validation" novalidate  method="POST" action="{{ route('update-student', $student->id ) }}" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-xl-6">
@@ -152,7 +152,15 @@
                                         </div>
                                     </div>
 
-
+                                    <div class="mb-3 row">
+                                        <label for="formFile" class="col-lg-4 col-form-label">Image</label>
+                                        <div class="col-lg-6">
+                                            <input class="form-control" type="file" id="formFile" name="profile_image">
+                                            @if($student->profile_image_path)
+                                            <a target="_blank" href="{{ getStoragePath() . $student->profile_image_path }}" class="btn-link text-primary">Profile Image</a>
+                                            @endif
+                                        </div>
+                                    </div>
 
                                     <div class="mb-3 row">
                                         <div class="col-lg-8 ms-auto">

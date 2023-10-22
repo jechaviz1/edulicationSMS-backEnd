@@ -21,7 +21,7 @@
             </div>
             <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ URL::route('add-user') }}" class="btn btn-primary light">Add User</a>
+                    <a href="{{ URL::route('add-super-admin') }}" class="btn btn-primary light">Add Super Admin</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button type="button" class="btn btn-primary light btn-icon-md"><i class="fa fa-filter"></i></button>

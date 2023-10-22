@@ -33,6 +33,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a First Name.
                                         </div>
+                                        @if($errors->has('first_name'))
+                                        <div class="error">{{ $errors->first('first_name') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -45,6 +48,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
+                                        @if($errors->has('email'))
+                                        <div class="error">{{ $errors->first('email') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -59,6 +65,9 @@
                                         <div class="invalid-feedback">
                                             Please enter a Username.
                                         </div>
+                                        @if($errors->has('username'))
+                                        <div class="error">{{ $errors->first('username') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -77,6 +86,9 @@
                                         <div class="invalid-feedback">
                                             Please select a one.
                                         </div>
+                                        @if($errors->has('role_id'))
+                                        <div class="error">{{ $errors->first('role_id') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -105,32 +117,32 @@
                             </div>
                             <div class="col-xl-4"></div>
 
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">password <span
-                                            class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input type="password" class="form-control" id="validationCustom02"  placeholder="password" required>
-                                        <div class="invalid-feedback">
-                                            password
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Confirm Password <span
-                                            class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input type="password" class="form-control" id="validationCustom02"  placeholder="Confirm Password" required>
-                                        <div class="invalid-feedback">
-                                            Confirm Password
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!--                            <div class="col-xl-4">
+                                                            <div class="mb-3 row">
+                                                                <label class="col-lg-3 col-form-label" for="validationCustom02">password <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="password" class="form-control" id="validationCustom02"  placeholder="password" required>
+                                                                    <div class="invalid-feedback">
+                                                                        password
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                            <!--                            <div class="col-xl-4">
+                                                            <div class="mb-3 row">
+                                                                <label class="col-lg-3 col-form-label" for="validationCustom02">Confirm Password <span
+                                                                        class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-lg-8">
+                                                                    <input type="password" class="form-control" id="validationCustom02"  placeholder="Confirm Password" required>
+                                                                    <div class="invalid-feedback">
+                                                                        Confirm Password
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
                             <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">

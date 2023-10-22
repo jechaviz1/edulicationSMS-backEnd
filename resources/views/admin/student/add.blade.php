@@ -89,6 +89,9 @@
                                             <div class="invalid-feedback">
                                                 Date of Birth.
                                             </div>
+                                               @if($errors->has('date_of_birth'))
+                                        <div class="error">{{ $errors->first('date_of_birth') }}</div>
+                                        @endif
                                         </div>
                                     </div>
 
@@ -102,6 +105,9 @@
                                             <div class="invalid-feedback">
                                                 Please enter a Contact number.
                                             </div>
+                                              @if($errors->has('contact_no'))
+                                        <div class="error">{{ $errors->first('contact_no') }}</div>
+                                        @endif
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
@@ -134,10 +140,13 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Address <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02" placeholder="Address" required>
+                                            <input type="text" class="form-control" id="validationCustom02" placeholder="Address" required name="address">
                                             <div class="invalid-feedback">
                                                 Address
                                             </div>
+                                             @if($errors->has('address'))
+                                        <div class="error">{{ $errors->first('address') }}</div>
+                                        @endif
                                         </div>
                                     </div>
 
@@ -148,6 +157,9 @@
                                             <div class="invalid-feedback">
                                                 Nationality
                                             </div>
+                                             @if($errors->has('nationality'))
+                                        <div class="error">{{ $errors->first('nationality') }}</div>
+                                        @endif
                                         </div>
                                     </div>
 
