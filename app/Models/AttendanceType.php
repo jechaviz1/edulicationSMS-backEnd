@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AttendanceType extends Model
 {
     use HasFactory;
-    protected $table = 'attendancetype';
+    protected $table = 'attendance_type';
     protected $fillable = [
         'type', 'name','description',];
 }

@@ -9,6 +9,7 @@ use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmployeeCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AttendanceController extends Controller
 {
@@ -30,22 +31,17 @@ class AttendanceController extends Controller
     {
         $designation = $request->input('designation_id');
         $department = $request->input('department_id');
-        $date = $request->input('date_of_attendance');
+        $selectedMonth = $request->input('attendancemonth');
         $category = $request->input('employee_category_id');
-
-        $employees = Employee::where('designation_id', $designation)
-            ->where('department_id', $department)
+        //dd($request->all());
+        $employees = Attendance::join('employee','employee.id','=','attendance.employee_id')
+            ->where('attendance.designation_id',$designation)
+            ->where('attendance.department_id',$department)
+            ->where('attendance.employee_category_id',$category)
+            ->whereMonth('attendance.date_of_attendance',Carbon::parse($selectedMonth)->month)
             ->get();
+            return response()->json($employees);
 
-            $employeecategory = EmployeeCategory::where('id', $category)
-            ->whereIn('department_id', $department)
-            ->get();
-
-        $attendances = Attendance::where('date_of_attendance', $date)
-            ->whereIn('employee_id', $employees->pluck('id')->toArray())
-            ->get();
-
-        return view('attendance.partial_view', compact('attendances'));
     }
     public function addAttendance(Request $request) {
         $data = [];
