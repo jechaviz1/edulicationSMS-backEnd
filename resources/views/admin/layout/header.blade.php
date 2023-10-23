@@ -1052,6 +1052,8 @@
                                 <li><a href="{{ URL::route('add-designation') }}">Designation</a></li>
                                 <li><a href="{{ URL::route('add-attendancetype') }}">AttendanceType</a></li>
                                 <li><a href="{{ URL::route('add-attendance') }}">Attendance</a></li>
+                                <li><a href="{{ URL::route('add-leavetype') }}">LeaveType</a></li>
+                                <li><a href="{{ URL::route('add-leaverequest') }}">LeaveRequest</a></li>
                             </ul>
                         </li>
 

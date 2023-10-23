@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LeaveRequestController;
+use App\Http\Controllers\LeaveTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
@@ -149,5 +151,23 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-employeecategory/{id}', [EmployeeCategoryController::class, 'updateEmployeeCategory'])->name('update-employeecategory');
         Route::get('/delete-employeecategory/{id}', [EmployeeCategoryController::class, 'deleteEmployeeCategory'])->name('delete-employeecategory');
         //END - EmployeeCategory 
+
+         // START - LeaveType
+         Route::get('/add-leavetype', [LeaveTypeController::class, 'addLeaveType'])->name('add-leavetype');
+         Route::post('/store-leavetype', [LeaveTypeController::class, 'storeLeaveType'])->name('store-leavetype');
+          Route::get('/leavetype-list', [LeaveTypeController::class, 'leavetypeList'])->name('leavetype-list');
+          Route::get('/edit-leavetype/{id}', [LeaveTypeController::class, 'editLeaveType'])->name('edit-leavetype');
+          Route::post('/update-leavetype/{id}', [LeaveTypeController::class, 'updateLeaveType'])->name('update-leavetype');
+          Route::get('/delete-leavetype/{id}', [LeaveTypeController::class, 'deleteLeaveType'])->name('delete-leavetype');
+         //END - LeaveType 
+ 
+          // START - LeaveRequest
+          Route::get('/add-leaverequest', [LeaveRequestController::class, 'addLeaveRequest'])->name('add-leaverequest');
+          Route::post('/store-leaverequest', [LeaveRequestController::class, 'storeLeaveRequest'])->name('store-leaverequest');
+           Route::get('/leaverequest-list', [LeaveRequestController::class, 'leaverequestList'])->name('leaverequest-list');
+           Route::get('/edit-leaverequest/{id}', [LeaveRequestController::class, 'editLeaveRequest'])->name('edit-leaverequest');
+           Route::post('/update-leaverequest/{id}', [LeaveRequestController::class, 'updateLeaveRequest'])->name('update-leaverequest');
+           Route::get('/delete-leaverequest/{id}', [LeaveRequestController::class, 'deleteLeaveRequest'])->name('delete-leaverequest');
+          //END - LeaveRequest 
     });
 });
