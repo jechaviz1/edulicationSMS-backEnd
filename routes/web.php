@@ -13,6 +13,8 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EmployeeCategoryController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\SubjectController;
 
 /*
   |--------------------------------------------------------------------------
@@ -91,6 +93,22 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit-academic-class/{id}', [AcademicClassController::class, 'edit'])->name('edit-academic-class');
         Route::post('/update-academic-class/{id}', [AcademicClassController::class, 'update'])->name('update-academic-class');
         Route::get('/delete-academic-class/{id}', [AcademicClassController::class, 'delete'])->name('delete-academic-class');
+        // END - Academic class
+        // START - Teacher
+        Route::get('/add-teacher', [TeacherController::class, 'add'])->name('add-teacher');
+        Route::post('/store-teacher', [TeacherController::class, 'store'])->name('store-teacher');
+        Route::get('/teacher-list', [TeacherController::class, 'list'])->name('teacher-list');
+        Route::get('/edit-teacher/{id}', [TeacherController::class, 'edit'])->name('edit-teacher');
+        Route::post('/update-teacher/{id}', [TeacherController::class, 'update'])->name('update-teacher');
+        Route::get('/delete-teacher/{id}', [TeacherController::class, 'delete'])->name('delete-teacher');
+        // END - Teacher
+        // START - subject
+        Route::get('/add-subject', [SubjectController::class, 'add'])->name('add-subject');
+        Route::post('/store-subject', [SubjectController::class, 'store'])->name('store-subject');
+        Route::get('/subject-list', [SubjectController::class, 'list'])->name('subject-list');
+        Route::get('/edit-subject/{id}', [SubjectController::class, 'edit'])->name('edit-subject');
+        Route::post('/update-subject/{id}', [SubjectController::class, 'update'])->name('update-subject');
+        Route::get('/delete-subject/{id}', [SubjectController::class, 'delete'])->name('delete-subject');
         // END - Academic class
         // START - role
         Route::get('/add-role', [RoleController::class, 'add'])->name('add-role');

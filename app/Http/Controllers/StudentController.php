@@ -49,34 +49,27 @@ class StudentController extends Controller {
     }
 
     public function storeStudent(Request $request) {
-        $rules = [
+        $this->validate($request, [
             'first_name' => 'required|string|min:1|max:255',
 //            'city_name' => 'required|string|min:3|max:255',
 //            'email' => 'required|string|email|max:255'
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-            $data = $request->input();
-            try {
-                $student = new \App\Models\Student();
-                $student->first_name = $data['first_name'];
-                $student->middle_name = $data['middle_name'];
-                $student->last_name = $data['last_name'];
-                $student->gender = $data['gender'];
-                $student->contact_no = $data['contact_no'];
-                $student->emergency_contact_no = $data['emergency_contact_no'];
-                $student->address = $data['address'];
-                $student->nationality = $data['nationality'];
-                $student->date_of_birth = $data['date_of_birth'];
-                $student->save();
-                return redirect()->route('student-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
-                return redirect()->route('student-list')->with('failed', 'Record not added.');
-            }
+        ]);
+        $data = $request->input();
+        try {
+            $student = new \App\Models\Student();
+            $student->first_name = $data['first_name'];
+            $student->middle_name = $data['middle_name'];
+            $student->last_name = $data['last_name'];
+            $student->gender = $data['gender'];
+            $student->contact_no = $data['contact_no'];
+            $student->emergency_contact_no = $data['emergency_contact_no'];
+            $student->address = $data['address'];
+            $student->nationality = $data['nationality'];
+            $student->date_of_birth = $data['date_of_birth'];
+            $student->save();
+            return redirect()->route('student-list')->with('success', 'Record added successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('student-list')->with('failed', 'Record not added.');
         }
     }
 

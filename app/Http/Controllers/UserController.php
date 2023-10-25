@@ -152,7 +152,7 @@ class UserController extends Controller {
             $user->role_id = isset($data['role_id']) ? $data['role_id'] : null;
             $user->gender = isset($data['gender']) ? $data['gender'] : 1;
             $user->save();
-
+            $this->sendRegisterLinkEmail($user->email);
 //                 $to      =$user->email ;// 'nobody@example.com';
 //    $subject = 'the subject';
 //    $message = 'hello';
@@ -587,9 +587,9 @@ class UserController extends Controller {
     }
 
     public function storeSuperAdmin(Request $request) {
+
         $this->validate($request, [
             'first_name' => 'required|string|min:1|max:255',
-            'city_name' => 'required|string|min:1|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'username' => 'required|string|max:255|unique:users,username'
         ]);
@@ -605,6 +605,9 @@ class UserController extends Controller {
             $user->gender = isset($data['gender']) ? $data['gender'] : 1;
             $user->password = isset($data['password']) ? Hash($data['password']) : null;
             $user->save();
+
+            $this->sendRegisterLinkEmail($user->email);
+
             return redirect()->route('super-admin-list')->with('success', 'Record added successfully.');
         } catch (Exception $e) {
             return redirect()->route('super-admin-list')->with('failed', 'Record not added.');
@@ -695,6 +698,30 @@ class UserController extends Controller {
         } else {
             return redirect()->route('super-admin-list')->with('failed', 'Record not found.');
         }
+    }
+
+    public function sendRegisterLinkEmail($to) {
+        if ($to) {
+            $subject = "Register User Email";
+            $encode_to = base64_encode($to);
+            $message = "<b>Register User Email</b>";
+            $message .= "<br>";
+            $message .= "http://edulication.nalandagroup.org/api/verify-email/" . $encode_to;
+            $message .= "<br>";
+            $message .= "Please click on link and set password ";
+
+            $header = "From:edulication@edulication.com \r\n";
+            //  $header .= "Cc:afgh@somedomain.com \r\n";
+            $header .= "MIME-Version: 1.0\r\n";
+            $header .= "Content-type: text/html\r\n";
+
+            $retval = mail($to, $subject, $message, $header);
+        }
+        //  if( $retval == true ) {
+        //     echo "Message sent successfully...";
+        //  }else {
+        //     echo "Message could not be sent...";
+        //  }
     }
 
 }
