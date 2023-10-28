@@ -43,25 +43,18 @@ class SchoolController extends Controller {
             'name' => 'required|string|min:1|max:255',
             'email' => 'required|string|email|max:255|unique:school,email',
         ]);
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-            $data = $request->input();
-            try {
-                $school = new \App\Models\School();
-                $school->name = $data['name'];
-                $school->address = $data['address'];
-                $school->email = $data['email'];
-                $school->phone_no = $data['phone_no'];
-                $school->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $school->save();
-                return redirect()->route('school-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
-                return redirect()->route('school-list')->with('failed', 'Record not added.');
-            }
+        $data = $request->input();
+        try {
+            $school = new \App\Models\School();
+            $school->name = $data['name'];
+            $school->address = $data['address'];
+            $school->email = $data['email'];
+            $school->phone_no = $data['phone_no'];
+            $school->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+            $school->save();
+            return redirect()->route('school-list')->with('success', 'Record added successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('school-list')->with('failed', 'Record not added.');
         }
     }
 
