@@ -17,11 +17,11 @@
     <div class="card dz-card" id="accordion-four">
         <div class="card-header flex-wrap d-flex justify-content-between">
             <div>
-                <h4 class="card-title">Attendace Types</h4>
+                <h4 class="card-title">Leave Allocation</h4>
             </div>
             <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ URL::route('add-attendancetype') }}" class="btn btn-primary light">Add Attendance Type</a>
+                    <a href="{{ URL::route('add-leaveallocation') }}" class="btn btn-primary light">Add Leave Allocation</a>
                 </li>
                
             </ul>	
@@ -35,30 +35,28 @@
                         <table id="example4" class="display table" style="min-width: 845px">
                             <thead>
                                 <tr>
-                                    <th>Attendace type</th>
-                                    <th>Attendance Name</th>
-                                    
-                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>Period</th>
+                                    <th>Leave Allotted</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($attendancetype))
-                                @foreach ($attendancetype as $row)
+                                @if(!empty($leaveallocation))
+                                @foreach ($leaveallocation as $row)
 
                                 <tr>
-                                    <td>{{$row->type}}</td>
-                                    <td>{{$row->name}}</td>
-                                    
-                                    @if($row->is_active =='1')
-                                    <td><span class="badge badge-sm light badge-success">Active</span></td>
-                                  @else
-                                    <td><span class="badge badge-sm light badge-danger">InActive</span></td>
-                                    @endif
+                                   
+                                    <td>{{$row->first_name}} {{$row->last_name}} ({{$row->employee_code}})</td>
+                                    <td>{{$row->designation_name}}</td>
+                                    <td>{{$row->start_date}} to {{$row->end_date}}</td>
+                                    <td>{{$row->leave_allotted}}
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('edit-attendancetype',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('delete-attendancetype',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('leaveallocation-detail',$row->id) }}" class="btn btn-success light shadow btn-xs sharp me-1"><i class="fa fa-arrow-right"></i></a>
+                                            <a href="{{ route('edit-leaveallocation',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('delete-leaveallocation',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

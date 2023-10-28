@@ -7,19 +7,19 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Edit Leave Request</h4>
+                <h4 class="card-title">Edit Leave Allocation</h4>
                 <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="{{ route('leaverequest-list') }}" class="btn btn-primary light">Leave Request List</a>
+                        <a href="{{ route('leaveallocation-list') }}" class="btn btn-primary light">Leave Allocation</a>
                     </li>
 
                 </ul>
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Edit Leave Request</h5>
+                    <h5>Edit Leave Allocation</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-leaverequest',$leaverequest->id) }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('update-leaveallocation',$leaveallocation->id) }}" >
                         @csrf
                         <strong><h4>{{$employee->first_name}}  {{$employee->last_name}} ( {{$employee->employee_code}} )</h4></strong> 
                         <div class="row">
@@ -33,7 +33,7 @@
                                                     <!--                                            <option >Please select</option>-->
                                                     @if(!empty($leavetype))
                                                     @foreach ($leavetype as $row)
-                                                    <option value="{{$row->id}}" {{ $row->id == $leaverequest->leave_type_id ? 'selected' : '' }}  >{{$row->name}}</option>
+                                                    <option value="{{$row->id}}" {{ $row->id == $leaveallocation->leave_type_id ? 'selected' : '' }}  >{{$row->name}}</option>
                                                     @endforeach
                                                     @endif
                                                 </select>
@@ -49,7 +49,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="row-lg-9">
-                                        <input type="date" class="form-control" id="validationCustom02" placeholder="start_date" required name="start_date" value="{{$leaverequest->start_date}}">
+                                        <input type="date" class="form-control" id="validationCustom02" placeholder="start_date" required name="start_date" value="{{$leaveallocation->start_date}}">
                                         <div class="invalid-feedback">
                                             Please enter Start Date.
                                         </div>
@@ -62,22 +62,32 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="row-lg-9">
-                                        <input type="date" class="form-control" id="validationCustom02" placeholder="end_date" required name="end_date" value="{{$leaverequest->end_date}}">
+                                        <input type="date" class="form-control" id="validationCustom02" placeholder="end_date" required name="end_date" value="{{$leaveallocation->end_date}}">
                                         <div class="invalid-feedback">
                                             Please enter End Date.
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        
+                            <div class="col-xl-3">
+                                <div class="mb-3 row">
+                                    <label class="row-lg-3 col-form-label" for="leaveallotted">Leave Alloted </label>
+                                    <div class="row-lg-9">
+                                    <input type="text" class="form-control" id="leave_allotted" name="leave_allotted"  value="{{$leaveallocation->leave_allotted}}">
+                                        <div class="invalid-feedback">
+                                            Please enter a Leave Allotted.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     
                             <div class="col-xl-3">
                                 <div class="mb-3 row">
-                                    <label class="row-lg-3 col-form-label" for="reason">Reason </label>
+                                    <label class="row-lg-3 col-form-label" for="description">Description </label>
                                     <div class="row-lg-9">
-                                    <input type="text" class="form-control" id="reason" name="reason" required value="{{$leaverequest->reason}}">
+                                    <input type="text" class="form-control" id="description" name="description"  value="{{$leaveallocation->description}}">
                                         <div class="invalid-feedback">
-                                            Please enter a Reason.
+                                            Please enter a Description.
                                         </div>
                                     </div>
                                 </div>

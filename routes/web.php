@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeaveAllocationController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/student-list', [StudentController::class, 'studentList'])->name('student-list');
         Route::get('/edit-student/{id}', [StudentController::class, 'editStudent'])->name('edit-student');
         Route::post('/update-student/{id}', [StudentController::class, 'updateStudent'])->name('update-student');
+        Route::get('/generate-nat-file', [StudentController::class, 'generateNatFile'])->name('generate-nat-file');
 
         // START - Academic Session
         Route::get('/add-academic-session', [AcademicSessionController::class, 'add'])->name('add-academic-session');
@@ -118,6 +120,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-department/{id}', [DepartmentController::class, 'updateDepartment'])->name('update-department');
         Route::get('/delete-department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('delete-department');
         //END - Department
+        
         // START - Designation
         Route::get('/add-designation', [DesignationController::class, 'addDesignation'])->name('add-designation');
         Route::post('/store-designation', [DesignationController::class, 'storeDesignation'])->name('store-designation');
@@ -126,15 +129,18 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-designation/{id}', [DesignationController::class, 'updateDesignation'])->name('update-designation');
         Route::get('/delete-designation/{id}', [DesignationController::class, 'deleteDesignation'])->name('delete-designation');
         //END - Designation
+
         // START - Attendance
         Route::get('/add-attendance', [AttendanceController::class, 'addAttendance'])->name('add-attendance');
         Route::post('/store-attendance', [AttendanceController::class, 'storeAttendance'])->name('store-attendance');
         Route::get('/attendance-list', [AttendanceController::class, 'attendanceList'])->name('attendance-list');
-        Route::post('/attendance-list', [AttendanceController::class, 'filterAttendance'])->name('attendance-list');
+        Route::post('/attendance-get', [AttendanceController::class, 'filterAttendance'])->name('attendance-get');
         Route::get('/edit-attendance/{id}', [AttendanceController::class, 'editAttendance'])->name('edit-attendance');
         Route::post('/update-attendance/{id}', [AttendanceController::class, 'updateAttendance'])->name('update-attendance');
         Route::get('/delete-attendance/{id}', [AttendanceController::class, 'deleteAttendance'])->name('delete-attendance');
+        
         //END - Attendance 
+
         // START - AttendanceType
         Route::get('/add-attendancetype', [AttendanceTypeController::class, 'addAttendanceType'])->name('add-attendancetype');
         Route::post('/store-attendancetype', [AttendanceTypeController::class, 'storeAttendanceType'])->name('store-attendancetype');
@@ -168,6 +174,18 @@ Route::group(['prefix' => 'admin'], function () {
            Route::get('/edit-leaverequest/{id}', [LeaveRequestController::class, 'editLeaveRequest'])->name('edit-leaverequest');
            Route::post('/update-leaverequest/{id}', [LeaveRequestController::class, 'updateLeaveRequest'])->name('update-leaverequest');
            Route::get('/delete-leaverequest/{id}', [LeaveRequestController::class, 'deleteLeaveRequest'])->name('delete-leaverequest');
+           Route::get('/leaverequest-detail/{id}', [LeaveRequestController::class, 'leaverequestDetail'])->name('leaverequest-detail');
+           Route::post('/add-leaverequest-detail', [LeaveRequestController::class, 'AddleaverequestDetail'])->name('add-leaverequest-detail');
           //END - LeaveRequest 
+
+          // START - LeaveAllocation
+          Route::get('/add-leaveallocation', [LeaveAllocationController::class, 'addLeaveAllocation'])->name('add-leaveallocation');
+          Route::post('/store-leaveallocation', [LeaveAllocationController::class, 'storeLeaveAllocation'])->name('store-leaveallocation');
+           Route::get('/leaveallocation-list', [LeaveAllocationController::class, 'leaveallocationList'])->name('leaveallocation-list');
+           Route::get('/edit-leaveallocation/{id}', [LeaveAllocationController::class, 'editLeaveAllocation'])->name('edit-leaveallocation');
+           Route::post('/update-leaveallocation/{id}', [LeaveAllocationController::class, 'updateLeaveAllocation'])->name('update-leaveallocation');
+           Route::get('/delete-leaveallocation/{id}', [LeaveAllocationController::class, 'deleteLeaveAllocation'])->name('delete-leaveallocation');
+        //    Route::get('/leaveallocation-detail/{id}', [LeaveAllocationController::class, 'leaveallocationDetail'])->name('leaveallocation-detail');
+          //END - LeaveAllocation 
     });
 });

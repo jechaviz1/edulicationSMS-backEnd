@@ -49,16 +49,18 @@
                             </div>
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                  
-                                    <div class="col-lg-6">
-                                        <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="1" id="flexCheckIndeterminate" name="is_active">
-                                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                                    Is Active?
-                                                </label>
-                                        </div>
-                                    </div>
-                                </div>   
+                                   
+                                      <label class="col-lg-3 col-form-label" for="validationCustom03">Status <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="is_active" value="1" id="statusCheckbox" {{ old('is_active') == 1 ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="statusCheckbox">
+                                                        Active
+                                                    </label>
+                                                </div>
+                                            </div>
+                                   
+                                </div>
                             </div>
                             <div class="row">
                         

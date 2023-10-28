@@ -19,13 +19,14 @@
                 <div class="form-validation">
                     <h5>Filter Attendance</h5>
                     
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('attendance-list') }}" >
+                    <form class="needs-validation" novalidate method="POST" action="/admin/attendance-list" >
                         @csrf
                         <div class="row">
                             <div class="col-xl-3">
                                 <div class="mb-3 row">
                                 <label class="row-lg-3 row-form-label" for="department_id"> Department <span class="text-danger">*</span>
                                     </label>
+                                    
                                     <div class="col-lg-8">
                                         <select class="default-select wide form-control" id="department_id" name="department_id">
                                             @if(!empty($department))
@@ -95,7 +96,7 @@
                             <div class="col-xl-12">
                                 <div class="mb-3 row">
                                     <div class="col-lg-1 ms-auto">
-                                        <button type="submit" id="filterButton" class="btn btn-primary light">Filter</button>
+                                        <button type="submit" id="filterButton" name="filterButton" class="btn btn-primary light">Filter</button>
                                     </div>
                                 </div>
                             </div>
@@ -108,44 +109,73 @@
     </div>
 
 </div>
-<table>
-        <thead>
-            <tr>
-                <th>Employee Name</th>
-                <th>Date of Attendance</th>
-            </tr>
-        </thead>
-        <tbody id="attendanceTable">
-            <!-- Attendance data will be dynamically added here -->
-        </tbody>
-    </table>
+<div id="filtered-data">
+        <!-- Display filtered data here -->
+    </div>
+    <style>
+        .employee-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.employee-table th, .employee-table td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.employee-table th {
+    background-color: #f2f2f2;
+}
+
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
-    $.ajax({
-        url: "{{ route('attendance-list') }}",
-        type: "POST",
-        data: {
-            _token: '{{ csrf_token() }}',
-            designation_id: designation_id,
-            department_id: department_id,
-            attendancemonth: attendancemonth,
-            employee_category_id: employee_category_id
-        },
-        success: function(response) {
-            $('#attendanceTable').empty(); // Clear the tbody first
-            $.each(response, function(index, employee) {
-                var newRow = '<tr>' +
-                                '<td>' + employee.employee_id + '</td>' +
-                                '<td>' + employee.attendance_type_id + '</td>' +
-                                // Add other relevant cells here
-                            '</tr>';
-                $('#attendanceTable').append(newRow);
-            });
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
+    
+$(document).ready(function () {
+        $("#filterButton").click(function (e) {
+            e.preventDefault();
+            var department_id = $('#department_id').val();
+            var designation_id = $('#designation_id').val();
+            var attendancemonth = $('#attendancemonth').val();
+            var employee_category_id = $('#employee_category_id').val();
+           
+            $.ajax({
+                url: "{{ route('attendance-get') }}",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    department_id: department_id,
+                    designation_id: designation_id,
+                    attendancemonth: attendancemonth,
+                    employee_category_id: employee_category_id,
+                },
+                success: function (data) {
+                    var employees = data.employees;
+                    // var month = data.selectedMonth;
+                    
+                    $('#filtered-data').empty();
+
+        // Example: Generate HTML based on the 'employees' data
+        var htmlContent = '<table class="employee-table"><tbody> <th> Employee  </th>  <th> Employee Category </th> <th> Date of attendance </th>';
+        employees.forEach(function(employee) {
+            
+            htmlContent += '<tr><td>' + employee.first_name + ' ' + employee.last_name + ' (' +  employee.employee_code + ') ' + '</td><td>' + employee.name + '</td><td>' + employee.date_of_attendance +'</td></tr>';
+            // Adjust the properties based on your actual data structure
+        });
+        htmlContent += '</tbody></table>';
+
+        // Append the generated HTML to the #filtered-data element
+        $('#filtered-data').html(htmlContent);
+               
+            },
+        error: function(data) {
+            console.log("error");
         }
     });
+});
+});
 </script>
 
 

@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmployeeCategory;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -33,16 +34,30 @@ class AttendanceController extends Controller
         $department = $request->input('department_id');
         $selectedMonth = $request->input('attendancemonth');
         $category = $request->input('employee_category_id');
-        //dd($request->all());
-        $employees = Attendance::join('employee','employee.id','=','attendance.employee_id')
-            ->where('attendance.designation_id',$designation)
-            ->where('attendance.department_id',$department)
-            ->where('attendance.employee_category_id',$category)
-            ->whereMonth('attendance.date_of_attendance',Carbon::parse($selectedMonth)->month)
+       
+        try{
+        
+        $data['employees'] = Attendance::join('employee','employee.id','=','attendance.employee_id')
+       ->join('employee_category','employee_category.id','=','attendance.employee_category_id')
+            ->where('attendance.designation_id', $designation)
+            ->where('attendance.department_id', $department)
+            ->where('attendance.employee_category_id', $category)
+            ->whereMonth('attendance.date_of_attendance', Carbon::parse($selectedMonth)->month)
             ->get();
-            return response()->json($employees);
-
+        //    foreach( $employees as $employee ){
+        // print_r($employee);   
+        // }
+   // echo json_encode($employees);
+        // Assuming you want to return the $employees data as JSON
+      return response()->json($data);
+        }
+        catch(Exception $e){
+        {
+            return $e;
+        }
     }
+}
+
     public function addAttendance(Request $request) {
         $data = [];
         $data['title'] = 'Add Attendance';
@@ -62,8 +77,8 @@ class AttendanceController extends Controller
             'employee_id' => 'required|exists:employee,id',
             'department_id' => 'required|exists:department,id',
             'designation_id' => 'required|exists:designation,id',
-            'attendance_type_id' => 'required|exists:attendancetype,id',
-            'employee_category_id' => 'required|exists:employeecategory,id',
+            'attendance_type_id' => 'required|exists:attendance_type,id',
+            'employee_category_id' => 'required|exists:employee_category,id',
             
         ]);
    

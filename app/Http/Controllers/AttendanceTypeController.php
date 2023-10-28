@@ -46,12 +46,12 @@ class AttendanceTypeController extends Controller
          
             try {
                 $data = new AttendanceType();
-                $isActive = $request->has('is_active') ? 1 : 0;
+               
                     //dd($isActive);
                         $data->type = $request->input('type');
                         $data->name = $request->input('name');
                         $data->description = $request->input('description');
-                        $data->is_active = $isActive;
+                        $data->is_active = $request->input('is_active');
                         
                         //dd($data);
                         $data->save();

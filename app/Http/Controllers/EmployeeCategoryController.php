@@ -15,9 +15,9 @@ class EmployeeCategoryController extends Controller
         $data = [];
         $data['title'] = 'Employee Category List';
         $data['menu_active_tab'] = 'employee-category-list';
-        $data['employeecategory'] = EmployeeCategory::join('designation','designation.id','=','employeecategory.employee_designation_id')
+        $data['employeecategory'] = EmployeeCategory::join('designation','designation.id','=','employee_category.employee_designation_id')
         ->orderBy('id', 'DESC')
-        ->get(['employeecategory.*','designation.designation_name']);
+        ->get(['employee_category.*','designation.designation_name']);
  
            // dd($data);
         return view('admin.employee_category.list')->with($data);

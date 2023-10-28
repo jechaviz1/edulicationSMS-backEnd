@@ -1054,6 +1054,7 @@
                                 <li><a href="{{ URL::route('add-attendance') }}">Attendance</a></li>
                                 <li><a href="{{ URL::route('add-leavetype') }}">LeaveType</a></li>
                                 <li><a href="{{ URL::route('add-leaverequest') }}">LeaveRequest</a></li>
+                                <li><a href="{{ URL::route('add-leaveallocation') }}">LeaveAllocation</a></li>
                             </ul>
                         </li>
 

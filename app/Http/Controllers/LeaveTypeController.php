@@ -45,7 +45,7 @@ class LeaveTypeController extends Controller
             try {
                 $data = new LeaveType();
                 //dd($data);
-                $isActive = $request->has('is_active') ? 1 : 0;
+                $isActive = $request->input('is_active');
                         $data->name = $request->input('name');
                         $data->alias = $request->input('alias');
                         $data->description = $request->input('description');

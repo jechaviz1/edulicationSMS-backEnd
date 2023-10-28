@@ -20,15 +20,39 @@
                 <div class="form-validation">
                     <h5>Add Leave Request</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-leaverequest') }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-leaverequest') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
+                            
+                        <!-- <input type="checkbox" id="isEmployee" name="isEmployee"> Apply Leave for Other Employee
+                            <br><br> -->
+                            <div class="col-xl-4">
+                                <!-- <div class="mb-3 row" id="employeeDropdown" style="display:none"> -->
+                                    <div class ="mb-3 row">
+                                    <label class="row-lg-4 col-form-label" for="employee_id">Employee Name <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="row-lg-8" >
+                                        <select class="default-select wide form-control" id="employee_id" name="employee_id">
+                                        <option value="">Select Employee</option>
+                                            @if(!empty($employee))
+                                            @foreach ($employee as $row)
+                                            <option value="{{$row->id}}">{{$row->first_name}}&nbsp;{{$row->last_name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a one.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Leave Type <span class="text-danger">*</span>
+                                    <label class="row-lg-4 col-form-label" for="leave_type_id">Leave Type <span class="text-danger">*</span>
                                     </label>
-                                    <div class="col-lg-8">
-                                        <select class="default-select wide form-control" id="validationCustom05" name="leave_type_id">
+                                    <div class="row-lg-8" >
+                                        <select class="default-select wide form-control" id="leave_type_id" name="leave_type_id">
+                                        
                                             @if(!empty($leavetype))
                                             @foreach ($leavetype as $row)
                                             <option value="{{$row->id}}">{{$row->name}}</option>
@@ -41,48 +65,82 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                            <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom03">Alias <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom03" placeholder="Alias." required name="alias">
-                                        <div class="invalid-feedback">
-                                            Please enter an Alias for Leave.
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                  
                                     <div class="col-lg-6">
-                                        <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="1" id="flexCheckIndeterminate" name="is_active">
-                                                <label class="form-check-label" for="flexCheckIndeterminate">
-                                                    Is Active?
-                                                </label>
+                                        <label class="row-lg-3 col-form-label" for="validationCustom03">Start Date <span class="text-danger">*</span></label>
+                                        <div class="row-lg-6">
+                                            <input type="date" class="form-control" id="validationCustom03" placeholder="startdate" required name="start_date">
+                                            <div class="invalid-feedback">
+                                                Please enter an Start Date
+                                            </div>
                                         </div>
                                     </div>
                                 </div>   
                             </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <div class="col-lg-6">
+                                        <label class="row-lg-3 col-form-label" for="validationCustom03">End Date <span class="text-danger">*</span></label>
+                                        <div class="row-lg-6">
+                                            <input type="date" class="form-control" id="validationCustom03" placeholder="enddate" required name="end_date">
+                                            <div class="invalid-feedback">
+                                                Please enter an End Date
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <div class="col-lg-6">
+                                      <label class="row-lg-3 col-form-label" for="validationCustom03">Status <span class="text-danger">*</span></label>
+                                            <div class="row-lg-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="status" value="1" id="statusCheckbox" {{ old('status') == 1 ? 'checked' : '' }}>
+                                                    <label class="form-check-label" for="statusCheckbox">
+                                                        Active
+                                                    </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                             <div class="row">
                         
                             <div class="col-xl-12">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-12 col-form-label" for="validationCustom02">Description </label>
-                                    <div class="col-lg-12">
-                                        <textarea class="form-txtarea form-control" rows="3" id="description" name="description" required ></textarea>
+                                <div class="col-lg-6">
+                                    <label class="row-lg-12 col-form-label" for="validationCustom02">Reason </label>
+                                    <div class="row-lg-12">
+                                        <textarea class="form-txtarea form-control" rows="3" id="reason" name="reason" required ></textarea>
                                         <div class="invalid-feedback">
-                                            Please enter a Description.
+                                            Please enter a Reason.
                                         </div>
                                     </div>
                                 </div>
+                                </div>
                             </div>
-                        
-                        
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="mb-3 row">
+                                <div class="col-lg-6">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label class="col-lg-3 col-form-label" for="leave_document" class="control-label col-sm-3">Upload File <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                            <input type="file" class= "form-control" name="leave_document" accept=".pdf,.doc,.docx">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
+                                </div>
                             
-                            
+</div>
                         </div>
                         <div class="row">
 
@@ -113,7 +171,18 @@
 @section('customjs')
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script>
+        $(document).ready(function() {
+            $('#isEmployee').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#employeeDropdown').show();
+                } else {
+                    $('#employeeDropdown').hide();
+                }
+            });
+        });
+    </script> -->
 
 <script>
     (function () {

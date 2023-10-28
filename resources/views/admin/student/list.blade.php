@@ -14,12 +14,15 @@
 </div>
 @endif
 
+<a href="{{ route('generate-nat-file') }}" class="btn btn-primary light light">Donwload .NAT File</a>
+
 <div class="row">
     @if(!empty($student))
     @foreach ($student as $row)
 
     <div class="col-xl-3 col-lg-4 col-sm-6 contect-card">
         <div class="card">
+       
             <div class="card-body">
                 <div class="card-use-box">
                     <div class="crd-bx-img">

@@ -8,76 +8,99 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Create Attendace Type</h4>
+                <h4 class="card-title">Create Leave Allocation</h4>
                 <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="{{ route('attendancetype-list') }}" class="btn btn-primary light">Attendance Type list</a>
+                        <a href="{{ route('leaveallocation-list') }}" class="btn btn-primary light">Leave Allocation list</a>
                     </li>
 
                 </ul>
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Add Attendance Type</h5>
+                    <h5>Add Leave Allocation</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-attendancetype') }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-leaveallocation') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Type <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Valid Attendance Type." required name="type">
+                                <div class="mb-3 row" id="employeeDropdown" >
+                                    <label class="row-lg-4 col-form-label" for="employee_id">Employee Name <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="row-lg-8" >
+                                        <select class="default-select wide form-control" id="employee_id" name="employee_id">
+                                        
+                                            @if(!empty($employee))
+                                            @foreach ($employee as $row)
+                                            <option value="{{$row->id}}">{{$row->first_name}}&nbsp;{{$row->last_name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
                                         <div class="invalid-feedback">
-                                            Please enter an Attendance Type.
+                                            Please select a one.
                                         </div>
                                     </div>
                                 </div>
-                                
                             </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom03">Name <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom03" placeholder="Valid Attendance Name." required name="name">
-                                        <div class="invalid-feedback">
-                                            Please enter an Attendance Name.
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
+                       
+                        </div>
                             <div class="row">
-                        
-                            <div class="col-xl-4">
+                            <div class="col-xl-6">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Description </label>
-                                    <div class="col-lg-8">
-                                        <textarea class="form-txtarea form-control" rows="8" id="description" name="description" required ></textarea>
+                                    <div class="col-lg-6">
+                                        <label class="row-lg-3 col-form-label" for="validationCustom03">Start Date <span class="text-danger">*</span></label>
+                                        <div class="row-lg-6">
+                                            <input type="date" class="form-control" id="validationCustom03" placeholder="startdate" required name="start_date">
+                                            <div class="invalid-feedback">
+                                                Please enter an Start Date
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="mb-3 row">
+                                    <div class="col-lg-6">
+                                        <label class="row-lg-3 col-form-label" for="validationCustom03">End Date <span class="text-danger">*</span></label>
+                                        <div class="row-lg-6">
+                                            <input type="date" class="form-control" id="validationCustom03" placeholder="enddate" required name="end_date">
+                                            <div class="invalid-feedback">
+                                                Please enter an End Date
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+</div>
+                            <div class="row">
+                            <!-- <div class="col-xl-6">
+                                <div class="mb-3 row">
+                                <div class="col-lg-6">
+                                    <label class="row-lg-6 col-form-label" for="validationCustom02">Leave Alloted </label>
+                                    <div class="row-lg-6">
+                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Leave Alloted" required name="leave_alloted">
+                                        <div class="invalid-feedback">
+                                            Please enter a alloted leave.
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div> -->
+                            <div class="col-xl-6">
+                                <div class="mb-3 row">
+                                <div class="col-lg-6">
+                                    <label class="row-lg-6 col-form-label" for="validationCustom02">Description </label>
+                                    <div class="row-lg-8">
+                                        <textarea class="form-txtarea form-control" rows="2"  id="description" name="description" required ></textarea>
                                         <div class="invalid-feedback">
                                             Please enter a Description.
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        
-                        
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <div class="col-lg-6">
-                                      <label class="row-lg-3 col-form-label" for="validationCustom03">Status <span class="text-danger">*</span></label>
-                                            <div class="row-lg-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="is_active" value="1" id="statusCheckbox" {{ old('is_active') == 1 ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="statusCheckbox">
-                                                        Active
-                                                    </label>
-                                                </div>
-                                            </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                       
                         <div class="row">
 
                             <div class="col-xl-4">
@@ -87,9 +110,9 @@
                             
 
 
-                            <div class="col-xl-6">
+                            <div class="col-xl-12">
                                 <div class="mb-3 row">
-                                    <div class="col-lg-8 ms-auto">
+                                    <div class="col-lg-2 ms-auto">
                                         <button type="submit" class="btn btn-primary light">Submit</button>
                                     </div>
                                 </div>
@@ -107,7 +130,18 @@
 @section('customjs')
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#isEmployee').click(function() {
+                if ($(this).is(':checked')) {
+                    $('#employeeDropdown').show();
+                } else {
+                    $('#employeeDropdown').hide();
+                }
+            });
+        });
+    </script>
 
 <script>
     (function () {

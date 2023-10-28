@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Services\NatFileGenerator;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -153,6 +155,18 @@ class StudentController extends Controller {
         } else {
             return redirect()->route('user-list')->with('failed', 'Record not found.');
         }
+    }
+
+    public function generateNatFile(NatFileGenerator $natFileGenerator)
+    {
+        // Fetch student data from the database or any other source
+        $studentData = Student::all(); // Replace with your own logic to fetch student data
+
+        // Generate the .nat file
+        $filePath = $natFileGenerator->generateNatFile($studentData);
+
+        // Provide the file as a downloadable response
+        return response()->download(storage_path('app/' . $filePath))->deleteFileAfterSend(true);
     }
 
 }
