@@ -20,15 +20,12 @@ class LeaveRequestController extends Controller
         $data = [];
         $data['title'] = 'Leave request List';
         $data['menu_active_tab'] = 'leaverequest-list';
-      // $data['leaverequest'] = LeaveRequest::orderBy('id', 'DESC')->get();
-    //    $employeeIds = $data['leaverequest']->pluck('employee_id');
-    //    dd($employeeIds);
-    //    $data['employee'] = Employee::where('id',$employeeIds)->get();
-    //    dd($data);
+      
         $data['leaverequest'] = LeaveRequest::join('employee', 'employee.id', '=', 'leave_request.employee_id')
     ->join('designation', 'designation.id', '=', 'employee.designation_id')
     ->join('leave_type', 'leave_type.id', '=', 'leave_request.leave_type_id')
     ->join('users', 'users.id', '=', 'leave_request.requester_user_id')
+    ->where('leave_request.is_deleted', '0')->where('leave_request.status', '!=', '2')
     ->get(['leave_request.*','employee.id as empid','employee.first_name','employee.last_name','leave_type.name','designation.designation_name','users.username']);
   // dd($data);
             return view('admin.leave_request.list')->with($data);
@@ -70,15 +67,9 @@ class LeaveRequestController extends Controller
                 $documentPath = $request->file('leave_document')->store('documents');
                 //dd($documentPath);
                 $data = new LeaveRequest();
-                //dd($data);
-                        // if(!empty($request->input('employee_id')))
-                        // {
+              
                             $data->employee_id = $request->input('employee_id');
-                        // }
-                        // else
-                        // {
-                        //     $data->employee_id = null;
-                        // }
+                      
                         
                         $data->leave_type_id = $request->input('leave_type_id');
                         $data->start_date = $request->input('start_date');

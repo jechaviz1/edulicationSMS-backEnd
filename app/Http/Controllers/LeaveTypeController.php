@@ -14,7 +14,7 @@ class LeaveTypeController extends Controller
         $data = [];
         $data['title'] = 'Leave type List';
         $data['menu_active_tab'] = 'leavetype-list';
-        $data['leavetype'] = LeaveType::orderBy('id', 'DESC')->get();
+        $data['leavetype'] = LeaveType::where('is_deleted', '0')->where('is_active', '!=', '2')->orderBy('id', 'DESC')->get();
 
         return view('admin.leave_type.list')->with($data);
     }

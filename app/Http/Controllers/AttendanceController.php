@@ -67,7 +67,7 @@ class AttendanceController extends Controller
         $data['employee'] = Employee::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
         $data['employeecategory'] = EmployeeCategory::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
         $data['attendancetype'] = AttendanceType::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
-//dd($data['employee']);
+//dd($data['employeecategory']);
         return view('admin.attendance.add')->with($data);
     }
     public function storeAttendance(Request $request) {

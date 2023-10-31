@@ -54,7 +54,7 @@
                                     <td>{{$row->leave_allotted}}
                                     <td>
                                         <div class="d-flex">
-                                        <a href="{{ route('leaveallocation-detail',$row->id) }}" class="btn btn-success light shadow btn-xs sharp me-1"><i class="fa fa-arrow-right"></i></a>
+                                   
                                             <a href="{{ route('edit-leaveallocation',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('delete-leaveallocation',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                         </div>
