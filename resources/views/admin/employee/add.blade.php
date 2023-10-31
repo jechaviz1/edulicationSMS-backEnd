@@ -26,7 +26,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom01">Date of Joining <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="validationCustom01" name="joining_date" value="{{ old('name') }}" required>
+                                            <input type="date" class="form-control" placeholder="YYYY-MM-DD" id="validationCustom01" name="joining_date" value="{{ old('joining_date') }}" required>
                                            
                                             <div class="invalid-feedback">
                                             Please enter a valid Date of Joining in the format YYYY-MM-DD.
@@ -81,7 +81,7 @@
                                         <label class="col-lg-4 col-form-label" for="birthdate">Date of Birth <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" placeholder="2017-06-04" id="birthdate" name="birthdate">
+                                            <input type="date" class="form-control" placeholder="2017-06-04" id="birthdate" name="birthdate" required>
                                             <div class="invalid-feedback">
                                                 Date of Birth.
                                             </div>
@@ -132,14 +132,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Employee Code<span class="text-danger"></span></label>
-                                        <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="validationCustom02"   name="employee_code" value="{{ $employee_code }}" readonly>
-                                           
-                                        </div>
-                                    </div>
-                                </div>
+                                 </div>
                                 <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <label class="col-lg-4 col-form-label" for="validationCustom05"> Department <span class="text-danger">*</span>
