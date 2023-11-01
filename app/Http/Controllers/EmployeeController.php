@@ -54,8 +54,9 @@ class EmployeeController extends Controller
             try {
         $data = new Employee(); 
         $latestemp = Employee::latest()->first(); // Retrieve the latest employee
+        
         $latestEmployeeCode = $latestemp ? $latestemp->employee_code : 0; // Retrieve the latest employee code
-
+        //dd($latestEmployeeCode);
         $value = (int) substr($latestEmployeeCode, 3) + 1; // Extract the numerical value and increment it
 
         $employeeCode = 'emp' . str_pad($value, 3, '0', STR_PAD_LEFT); // Generate the new employee code
