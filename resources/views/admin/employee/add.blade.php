@@ -8,15 +8,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Registration (2023-2024) Form Validation  <span>Total 4 result found - showing records from 1 to 4</span></h4>
+                <h4 class="card-title">New Staff</span></h4>
             </div>
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Add New Registration</h5>
-                    <input type="radio" id="tab1" name="tab" checked>
-                    <label for="tab1"> New Employee</label>
-                    <input type="radio" id="tab2" name="tab">
-                    <label for="tab2"> Existing Employee</label>
+                    
                     <article>
                         <form class="needs-validation" novalidate  method="POST" action="{{ route('store-employee') }}" enctype="multipart/form-data" >
                             @csrf
@@ -48,7 +45,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <fieldset class="mb-3">
+                                    <fieldset class="mb-3 ">
                                         <div class="row">
                                             <label class="col-form-label col-sm-3 pt-0">Gender</label>
                                             <div class="col-sm-2">
@@ -87,8 +84,49 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="validationCustom05">Role<span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select class="default-select wide form-control" id="validationCustom05" name="role_id">
+                                            @if(!empty($data['role']))
+                                                @foreach ($data['role'] as $row)
+                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a one.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="validationCustom05"> Department <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select class="default-select wide form-control" id="validationCustom05" name="department_id">
+                                                @if(!empty($data['department']))
+                                                @foreach ($data['department'] as $row)
+                                                <option value="{{$row->id}}">{{$row->department_name}}</option>
+                                                @endforeach
+                                                @endif
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a one.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Salary<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="salary" required name="salary" >
+                                            <div class="invalid-feedback">
+                                                Enter a Salary.
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                
                                 <div class="col-xl-6">
                                     <div class="mb-3 row">
                                         <label class="col-lg-4 col-form-label" for="contact_number"> Contact number <span class="text-danger">*</span>
@@ -131,52 +169,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                 </div>
-                                <div class="col-xl-6">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-4 col-form-label" for="validationCustom05"> Department <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="default-select wide form-control" id="validationCustom05" name="department_id">
-                                            @if(!empty($data['department']))
-                                            @foreach ($data['department'] as $row)
-                                            <option value="{{$row->id}}">{{$row->department_name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a one.
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Salary<span class="text-danger">*</span></label>
-                                        <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="salary" required name="salary" >
-                                            <div class="invalid-feedback">
-                                                Enter a Salary.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                <div class="mb-3 row">
-                                <label class="col-lg-4 col-form-label" for="validationCustom05"> Designation <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="default-select wide form-control" id="validationCustom05" name="designation_id">
-                                            @if(!empty($data['designation']))
-                                            @foreach ($data['designation'] as $row)
-                                            <option value="{{$row->id}}">{{$row->designation_name}}</option>
-                                            @endforeach
-                                            @endif
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a one.
-                                        </div>
-                                    </div>
-                                </div>
+                                    
                                 <div class="mb-3 row">
                                     <label class="col-lg-4 col-form-label" for="validationCustom05">Employee Status <span class="text-danger">*</span>
                                     </label>
@@ -185,6 +178,20 @@
                                             <option value="Contract">Contract</option>
                                             <option value="Permanent">Permanent</option>
                                             <option value="Temporary">Temporary</option>
+                                           
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a one.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Work Shift <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <select class="default-select wide form-control" id="validationCustom05" name="work_shift">
+                                            <option value="1">Full-Time</option>
+                                            <option value="2">Part-Time</option>
                                             <!-- @if(!empty($role))
                                             @foreach ($role as $row)
                                             <option value="{{$row->id}}">{{$row->name}}</option>
@@ -195,13 +202,35 @@
                                             Please select a one.
                                         </div>
                                     </div>
+                                
+
                                 </div>
-                                    <div class="mb-3 row">
-                                            <div class="col-lg-8 ms-auto">
-                                                <button type="submit" class="btn btn-primary light">Submit</button>
+                                <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="validationCustom05"> Designation <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <select class="default-select wide form-control" id="validationCustom05" name="designation_id">
+                                                    @if(!empty($data['designation']))
+                                                    @foreach ($data['designation'] as $row)
+                                                    <option value="{{$row->id}}">{{$row->designation_name}}</option>
+                                                    @endforeach
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a one.
+                                                </div>
                                             </div>
-                                    </div>
-                                <div>
+                                        </div>
+                               
+                                        
+                                        <div class="col-xl-12">
+                                            <div class="mb-3 row">
+                                                    <div class="col-lg-12 ms-auto">
+                                                        <button type="submit" class="btn btn-primary light">Submit</button>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                
                             </div>
                         </form>
                     </article>

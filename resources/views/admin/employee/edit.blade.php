@@ -8,15 +8,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Registration (2023-2024) Form Validation  <span>Total 4 result found - showing records from 1 to 4</span></h4>
+                <h4 class="card-title">Update</span></h4>
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Add New Registration</h5>
-                    <input type="radio" id="tab1" name="tab" checked>
-                    <label for="tab1"> New Employee</label>
-                    <input type="radio" id="tab2" name="tab">
-                    <label for="tab2"> Existing Employee</label>
+                    <h5>Edit Staff Details</h5>
+                   
                     <article>
                         <form class="needs-validation" novalidate  method="POST" action="{{ route('update-employee', $employee->id ) }}" enctype="multipart/form-data" >
                             @csrf
@@ -125,13 +122,16 @@
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Profile Photo<span class="text-danger">*</span></label>
-                                        <div class="col-lg-6">
-                                        <input type="file" class="form-control" id="validationCustom02"  required name="image">
-                                            <div class="invalid-feedback">
-                                                Profile Photo
-                                            </div>
-                                        </div>
+                                    <label for="profile_photo">{{ __('field_photo') }}: <span>{{ __('image_size', ['height' => 300, 'width' => 300]) }}</span></label>
+                                <input type="file" class="form-control" name="profile_photo" id="profile_photo" value="{{ old('profile_photo') }}">
+
+                                <div class="invalid-feedback">
+                                  {{ __('required_field') }} {{ __('field_photo') }}
+                                </div>
+                                
+                                @if(is_file($employee->profile_photo))
+                                    <img src="{{ asset($employee->profile_photo) }}" class="img-fluid" style="max-width: 80px; max-height: 80px;" onerror="this.src='{{ asset('dashboard/images/user/avatar-2.jpg') }}';">
+                                @endif
                                     </div>
                                     <div class="mb-3 row">
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Employee Code<span class="text-danger"></span></label>
@@ -170,6 +170,23 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="mb-3 row">
+                                            <label class="col-lg-4 col-form-label" for="validationCustom05">Role <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <select class="default-select wide form-control" id="validationCustom05" name="role_id">
+                                                    <!--                                            <option >Please select</option>-->
+                                                    @if(!empty($role))
+                                                    @foreach ($role as $row)
+                                                    <option value="{{$row->id}}" {{ $row->id == $employee->role_id ? 'selected' : '' }}  >{{$row->name}}</option>
+                                                    @endforeach
+                                                    @endif
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a one.
+                                                </div>
+                                            </div>
+                                        </div>
                                 </div>
                                 
                                 <div class="col-xl-6">
@@ -209,6 +226,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="mb-3 row">
+                                            <label class="col-lg-4 col-form-label" for="validationCustom05">Work Shift <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <select class="default-select wide form-control" id="validationCustom05" name="work_shift">
+                                                    <!--                                            <option >Please select</option>-->
+                                                    <option value="1" @if ($employee->work_shift == '1') selected @endif>Full-Time</option>
+                                                    <option value="2" @if ($employee->work_shift == '2') selected @endif>Part-Time</option>
+                                        
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a one.
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     <div class="mb-3 row">
                                         <div class="col-lg-8 ms-auto">

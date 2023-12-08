@@ -4,13 +4,153 @@
 
 <!-- Specify content -->
 @section('content')
+<div class="col-lg-12">
+											<div class="card dz-card" id="buttons-with-icon">
+												<div class="card-header flex-wrap d-flex justify-content-between border-0 ">
+													<div>
+														<h4 class="card-title">Staff List</h4>
+													</div>
+												
+												</div>
+												<div class="tab-content" id="myTabContent-1">
+													<div class="tab-pane fade show active" id="Buttons-Icon" role="tabpanel" aria-labelledby="home-tab-1">
+														<div class="card-body pt-0">
+														<a href="{{ URL::route('add-employee') }}" class="btn btn-primary light"><i class="fa-solid fa-plus"></i> Add New</a>
+															<button type="button" class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+															<button type="button" class="btn btn-success"><i class="fa fa-download color-warning me-2"></i> Import</button>
+														</div>
+													</div>
+													
+												</div>	
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="card-body">
+															<div class="form-validation">
+																<form class="needs-validation" novalidate method="get" action="{{ route('employee-list') }}">
+																	<div class="row">
+																		
+																			<div class="col-lg-2">
+																				<label class="row-lg-4 col-form-label" for="validationCustom05">Department
+																					<span class="text-danger">*</span>
+																				</label>
+																				<div class="row-lg-12">
+																					<div class="dropdown bootstrap-select default-select wide form-control">
+																						<select class="default-select wide form-control" id="department" name="department" tabindex="null">
+																						<option value="">{{ __('all') }}</option>
+																							@foreach( $departments as $department )
+																							<option value="{{ $department->id }}" @if( $selected_department == $department->id) selected @endif>{{ $department->department_name }}</option>
+																							@endforeach
+																						</select>
+																						
+																						<div class="invalid-feedback">
+																							Please select a one.
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-lg-2">
+																				<label class="row-lg-4 col-form-label" for="validationCustom05">Designation
+																					<span class="text-danger">*</span>
+																				</label>
+																				<div class="row-lg-12">
+																					<div class="dropdown bootstrap-select default-select wide form-control">
+																						<select class="default-select wide form-control" id="desgnation" name="designation" tabindex="null">
+																						<option value="">{{ __('all') }}</option>
+																							@foreach( $designations as $designation )
+																							<option value="{{ $designation->id }}" @if( $selected_designation == $designation->id) selected @endif>{{ $designation->designation_name }}</option>
+																							@endforeach
+																						</select>
+																						
+																						<div class="invalid-feedback">
+																							Please select a one.
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-lg-2">
+																				<label class="row-lg-4 col-form-label" for="validationCustom05">Role
+																					<span class="text-danger">*</span>
+																				</label>
+																				<div class="row-lg-12">
+																					<div class="dropdown bootstrap-select default-select wide form-control">
+																						<select class="default-select wide form-control" id="validationCustom05" tabindex="null">
+																						<option value="">{{ __('all') }}</option>
+																							@foreach( $role as $role )
+																							<option value="{{ $role->id }}" @if( $selected_role == $role->id) selected @endif>{{ $role->name }}</option>
+																							@endforeach
+																						</select>
+																						
+																						<div class="invalid-feedback">
+																							Please select a one.
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-lg-2">
+																				<label class="row-lg-4 col-form-label" for="validationCustom05">Employee Type
+																					<span class="text-danger">*</span>
+																				</label>
+																				<div class="row-lg-12">
+																					<div class="dropdown bootstrap-select default-select wide form-control">
+																						<select class="default-select wide form-control" id="contract_type" name="contract_type" tabindex="null">
+																						<option value="">{{ __('all') }}</option>
+																						<option value="contract" {{ $selected_contract == 'contract' ? 'selected' : '' }}>Contract</option>
+																						<option value="permanent" {{ $selected_contract == 'permanent' ? 'selected' : '' }}>Permanent</option>
+																						<option value="temporary" {{ $selected_contract == 'temporary' ? 'selected' : '' }}>Temporary</option>
+																						</select>
+																						
+																						<div class="invalid-feedback">
+																							Please select a one.
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="col-lg-2">
+																				<label class="row-lg-4 col-form-label" for="work_shift">Work Shift
+																					<span class="text-danger">*</span>
+																				</label>
+																				<div class="row-lg-12">
+																					<div class="dropdown bootstrap-select default-select wide form-control">
+																						<select class="default-select wide form-control" id="work_shift" name="work_shift" tabindex="null">
+																						
+																						<option value="">{{ __('all') }}</option>
+																						<option value="1" {{ $selected_contract == '1' ? 'selected' : '' }}>Full-Time</option>
+																						<option value="2" {{ $selected_contract == '2' ? 'selected' : '' }}>Part-Time</option>
+																					
+																						</select>
+																						
+																						<div class="invalid-feedback">
+																							Please select a one.
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																			
+																		
+																			
+																			
+																			<div class="col-lg-2 pt-4">
+																				
+																				<div class="col-lg-8 ms-auto">
+																					<button type="submit" class="btn btn-primary light"><i class="fas fa-search"></i>  Search</button>
+																				</div>
+																			</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>	
+											</div>
+										</div>
+										<!-- /Column  -->
 <div class="col-xl-12">
     <div class="card dz-card" id="accordion-four">
-        <div class="card-header flex-wrap d-flex justify-content-between">
-            <div>
+        <!-- <div class="card-header flex-wrap d-flex justify-content-between"> -->
+            <!-- <div>
                 <h4 class="card-title">Employee</h4>
-            </div>
-            <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
+            </div> -->
+            <!-- <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a href="{{ URL::route('add-employee') }}" class="btn btn-primary light">Add Employee </a>
                 </li>
@@ -27,8 +167,8 @@
                         </ul>
                     </div>
                 </li>
-            </ul>	
-        </div>
+            </ul>	 -->
+        <!-- </div> -->
 
         <!-- /tab-content -->	
         <div class="tab-content" id="myTabContent-3">
@@ -38,13 +178,13 @@
                         <table id="example4" class="display table" style="min-width: 845px">
                             <thead>
                                 <tr>
+									<th>Employee Code</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Employee Code</th>
-                                    <th>Employee Status</th>
-                                    <th>Joining date</th>
+                                    <th>Photo</th>
                                     <th>Department</th>
                                     <th>Designation</th>
+									<th>Employee Status</th>
+									<th>Role</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -53,14 +193,18 @@
                                 @foreach ($employee as $row)
 
                                 <tr>
+								
+									<td>{{$row->employee_code}}</td>
                                     <td>{{$row->first_name}} {{$row->last_name}}</td>
-                                    <td>{{$row->email}}</td>
-                                    <td>{{$row->employee_code}}</td>
+                                    <td><img src="{{asset($row->profile_photo) }}" class="avatar avatar-sm me-3" alt="xd"></td>
+									<td>{{ $row->department->department_name ?? '' }}</td>
+                                    <td>{{ $row->designation->designation_name ?? '' }}</td>
+									
                                     <!-- <td><span class="badge badge-sm  badge-info light">{{$row->em}}</span></td> -->
-                                    <td><span class="badge badge-sm light badge-success">{{$row->employee_status}}</span></td>
-                                    <td>{{$row->joining_date}}</td>
-                                    <td>{{$row->department_name}}</td>
-                                    <td>{{$row->designation_name}}</td>
+                                   
+                                   
+									<td><span class="badge badge-sm light badge-success">{{$row->employee_status}}</span></td>
+                                    <td>{{ $row->roles->name ?? '' }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('edit-employee',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>

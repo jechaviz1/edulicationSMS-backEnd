@@ -1073,20 +1073,52 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                 </div>
-                                <span class="nav-text">Employee</span>
+                                <span class="nav-text">Human Resources</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="{{ URL::route('employee-list') }}">Employee List</a></li>
+                                <li><a href="{{ URL::route('employee-list') }}">Staff List</a></li>
                                 <!--<li><a href="{{ URL::route('student-list') }}">Student List</a></li>-->
-                                <li><a href="{{ URL::route('add-employee') }}">Add Employee</a></li>
-                                <li><a href="{{ URL::route('add-employeecategory') }}">Employee Category</a></li>
-                                <li><a href="{{ URL::route('add-department') }}">Department</a></li>
+                                <li><a href="{{ URL::route('add-employeecategory') }}">Staff Category</a></li>
+                                <li><a href="{{ URL::route('add-attendance') }}">Staff Attendance</a></li>
+                                <li><a href="{{ URL::route('add-attendancetype') }}">Attendance Types</a></li>
+                                <li><a href="{{ URL::route('add-leaveallocation') }}">Leave Manages</a></li>
+                                <li><a href="{{ URL::route('add-leaverequest') }}">Apply Leaves</a></li>
+                                <li><a href="{{ URL::route('add-leavetype') }}">Leave Types</a></li>
                                 <li><a href="{{ URL::route('add-designation') }}">Designation</a></li>
-                                <li><a href="{{ URL::route('add-attendancetype') }}">AttendanceType</a></li>
-                                <li><a href="{{ URL::route('add-attendance') }}">Attendance</a></li>
-                                <li><a href="{{ URL::route('add-leavetype') }}">LeaveType</a></li>
-                                <li><a href="{{ URL::route('add-leaverequest') }}">LeaveRequest</a></li>
-                                <li><a href="{{ URL::route('add-leaveallocation') }}">LeaveAllocation</a></li>
+                                <li><a href="{{ URL::route('add-department') }}">Department</a></li>
+                                
+                                 <li>
+                                     <a href="#" class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                                <span class="nav-text">Settings</span>
+                                    </a>
+                                    <ul class="pcoded-submenu" style="display: block;" >
+                                         <li class=""><a href="#" class="">Tax Settings</a></li>
+                                        <li class=""><a href="#" class="">Pay Slip Setting</a></li>
+                                     </ul>
+                                </li>
+                                
+                                
+                                
+                            </ul>
+                        </li>
+
+                        @endif
+                        @if(Session::has('role_id') && Session::get('role_id') != 1)
+                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                <div class="menu-icon">
+                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.007 16.2236H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16.007 12.0371H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span class="nav-text">Examinations</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ URL::route('examtype-list') }}">Exam Types</a></li>
+                                <li><a href="{{ URL::route('grade-list') }}">Grading System</a></li>
+                                
                             </ul>
                         </li>
 

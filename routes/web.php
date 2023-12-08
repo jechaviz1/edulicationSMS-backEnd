@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\ExamTypeController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LeaveAllocationController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Models\Grade;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
@@ -205,5 +208,24 @@ Route::group(['prefix' => 'admin'], function () {
            Route::get('/delete-leaveallocation/{id}', [LeaveAllocationController::class, 'deleteLeaveAllocation'])->name('delete-leaveallocation');
         //    Route::get('/leaveallocation-detail/{id}', [LeaveAllocationController::class, 'leaveallocationDetail'])->name('leaveallocation-detail');
           //END - LeaveAllocation 
+
+
+           // START - Exams
+           Route::get('/add-examtypes', [ExamTypeController::class, 'addExamType'])->name('add-examtypes');
+           Route::post('/store-examtypes', [ExamTypeController::class, 'storeExamType'])->name('store-examtypes');
+            Route::get('/examtype-list', [ExamTypeController::class, 'examtypeList'])->name('examtype-list');
+            Route::get('/edit-examtype/{id}', [ExamTypeController::class, 'editExamType'])->name('edit-examtype');
+            Route::post('/update-examtype/{id}', [ExamTypeController::class, 'updateExamType'])->name('update-examtype');
+            Route::get('/delete-examtype/{id}', [ExamTypeController::class, 'deleteExamType'])->name('delete-examtype');
+           //END - Exams 
+
+           // START - Grade
+           Route::get('/add-grade', [GradeController::class, 'addGrade'])->name('add-grade');
+           Route::post('/store-grade', [GradeController::class, 'storeGrade'])->name('store-grade');
+            Route::get('/grade-list', [GradeController::class, 'gradeList'])->name('grade-list');
+            Route::get('/edit-grade/{id}', [GradeController::class, 'editGrade'])->name('edit-grade');
+            Route::post('/update-grade/{id}', [GradeController::class, 'updateGrade'])->name('update-grade');
+            Route::get('/delete-grade/{id}', [GradeController::class, 'deleteGrade'])->name('delete-grade');
+           //END - Grade 
     });
 });
