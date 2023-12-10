@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ExamTypeController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LeaveAllocationController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\SessionController;
 use App\Models\Grade;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -227,5 +231,43 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update-grade/{id}', [GradeController::class, 'updateGrade'])->name('update-grade');
             Route::get('/delete-grade/{id}', [GradeController::class, 'deleteGrade'])->name('delete-grade');
            //END - Grade 
+
+           // START - Faculty
+           Route::get('/add-faculty', [FacultyController::class, 'addFaculty'])->name('add-faculty');
+           Route::post('/store-faculty', [FacultyController::class, 'storeFaculty'])->name('store-faculty');
+            Route::get('/faculty-list', [FacultyController::class, 'facultyList'])->name('faculty-list');
+            Route::get('/edit-faculty/{id}', [FacultyController::class, 'editFaculty'])->name('edit-faculty');
+            Route::post('/update-faculty/{id}', [FacultyController::class, 'updateFaculty'])->name('update-faculty');
+            Route::get('/delete-faculty/{id}', [FacultyController::class, 'deleteFaculty'])->name('delete-faculty');
+           //END - Faculty
+
+           // START - Program
+           Route::get('/add-program', [ProgramController::class, 'addProgram'])->name('add-program');
+           Route::post('/store-program', [ProgramController::class, 'storePRogram'])->name('store-program');
+            Route::get('/program-list', [ProgramController::class, 'programList'])->name('program-list');
+            Route::get('/edit-program/{id}', [ProgramController::class, 'editProgram'])->name('edit-program');
+            Route::post('/update-program/{id}', [ProgramController::class, 'updateProgram'])->name('update-program');
+            Route::get('/delete-program/{id}', [ProgramController::class, 'deleteProgram'])->name('delete-program');
+           //END - Program
+
+
+           // START - Batch
+           Route::get('/add-batch', [BatchController::class, 'addBatch'])->name('add-batch');
+           Route::post('/store-batch', [BatchController::class, 'storeBatch'])->name('store-batch');
+            Route::get('/batch-list', [BatchController::class, 'batchList'])->name('batch-list');
+            Route::get('/edit-batch/{id}', [BatchController::class, 'editBatch'])->name('edit-batch');
+            Route::post('/update-batch/{id}', [BatchController::class, 'updateBatch'])->name('update-batch');
+            Route::get('/delete-batch/{id}', [BatchController::class, 'deleteBatch'])->name('delete-batch');
+           //END - Batch
+
+           // START - Session
+           Route::get('/add-session', [SessionController::class, 'addSession'])->name('add-session');
+           Route::get('/session-list-current/{id}', 'SessionController@current')->name('session-list.current');
+           Route::post('/store-session', [SessionController::class, 'storeSession'])->name('store-session');
+            Route::get('/session-list', [SessionController::class, 'SessionList'])->name('session-list');
+            Route::get('/edit-session/{id}', [SessionController::class, 'editSession'])->name('edit-session');
+            Route::post('/update-session/{id}', [SessionController::class, 'updateSession'])->name('update-session');
+            Route::get('/delete-session/{id}', [SessionController::class, 'deleteSession'])->name('delete-session');
+           //END - Session
     });
 });
