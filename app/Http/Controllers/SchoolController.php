@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +53,11 @@ class SchoolController extends Controller {
             $school->phone_no = $data['phone_no'];
             $school->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
             $school->save();
+
+           // dd($school);
+              // Send registration link to the provided email
+              $this->sendRegistrationLink($school);
+
             return redirect()->route('school-list')->with('success', 'Record added successfully.');
         } catch (Exception $e) {
             return redirect()->route('school-list')->with('failed', 'Record not added.');
@@ -101,16 +107,30 @@ class SchoolController extends Controller {
 
     public function deleteSchool($id) {
         if ($id) {
-            $school = \App\Models\School::find($id);
+            $school = School::find($id);
             if ($school) {
                 $school->is_deleted = '1';
 //                $school->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $school->save();
+
+              
             }
             return redirect()->route('school-list')->with('success', 'Record deleted.');
         } else {
             return redirect()->route('school-list')->with('failed', 'Record not found.');
         }
+    }
+
+     private function sendRegistrationLink(School $school)
+    {
+        // Customize the email content as needed
+        $data = [
+            'school_name' => $school->name,
+            
+            'registration_link' => 'https://en.wikipedia.org/wiki/India',
+        ];
+       // dd($school->name);
+        Mail::to($school->email)->send(new \App\Mail\RegistrationLinkMail($data));
     }
 
 }
