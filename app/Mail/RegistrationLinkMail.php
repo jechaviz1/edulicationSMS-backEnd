@@ -28,7 +28,7 @@ class RegistrationLinkMail extends Mailable
     public function build()
     {
         return $this->view('emails.registration_link')
-                    ->subject('Registration Link for Your School');
+                    ->subject('Welcome To Edulication - Your Account Is Ready');
     }
 
     

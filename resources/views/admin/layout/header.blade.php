@@ -1080,7 +1080,7 @@
                                 <li><a href="program-list">Programs</a></li>
                                 <li><a href="batch-list">Batches</a></li>
                                 <li><a href="session-list">Sessions</a></li>
-                                <li><a href="#">Semesters</a></li>
+                                <li><a href="semester-list">Semesters</a></li>
                                 <li><a href="#">Sections</a></li>
                                 <li><a href="#">Class Rooms</a></li>
                                 <li><a href="#">Courses</a></li>

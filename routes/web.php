@@ -8,6 +8,7 @@ use App\Http\Controllers\LeaveAllocationController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SessionController;
 use App\Models\Grade;
 use Illuminate\Support\Facades\Route;
@@ -269,5 +270,15 @@ Route::group(['prefix' => 'admin'], function () {
             Route::post('/update-session/{id}', [SessionController::class, 'updateSession'])->name('update-session');
             Route::get('/delete-session/{id}', [SessionController::class, 'deleteSession'])->name('delete-session');
            //END - Session
+
+            // START - Semester
+            Route::get('/add-semester', [SemesterController::class, 'addSemester'])->name('add-semester');
+           // Route::get('/semester-list-current/{id}', 'SessionController@current')->name('session-list.current');
+            Route::post('/store-semester', [SemesterController::class, 'storeSemester'])->name('store-semester');
+             Route::get('/semester-list', [SemesterController::class, 'semesterList'])->name('semester-list');
+             Route::get('/edit-semester/{id}', [SemesterController::class, 'editSemester'])->name('edit-semester');
+             Route::post('/update-semester/{id}', [SemesterController::class, 'updateSemester'])->name('update-semester');
+             Route::get('/delete-semester/{id}', [SemesterController::class, 'deleteSemester'])->name('delete-semester');
+            //END - Semester
     });
 });
