@@ -1042,8 +1042,8 @@
                                 <span class="nav-text">Subject</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="{{ URL::route('subject-list') }}">Subject </a></li>
-                                <li><a href="{{ URL::route('add-subject') }}">Add Subject</a></li>
+                                <li><a href="#">Subject </a></li>
+                                <li><a href="#">Add Subject</a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -1081,9 +1081,9 @@
                                 <li><a href="batch-list">Batches</a></li>
                                 <li><a href="session-list">Sessions</a></li>
                                 <li><a href="semester-list">Semesters</a></li>
-                                <li><a href="#">Sections</a></li>
-                                <li><a href="#">Class Rooms</a></li>
-                                <li><a href="#">Courses</a></li>
+                                <li><a href="section-list">Sections</a></li>
+                                <li><a href="classroom-list">Class Rooms</a></li>
+                                <li><a href="subject-list">Subjects</a></li>
                                 <li><a href="#">Enroll Courses</a></li>
                                 <li><a href="#">Class Routines</a></li>
                                 <li><a href="#">Exam Routines</a></li>

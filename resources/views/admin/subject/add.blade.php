@@ -37,8 +37,89 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="code">Code <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="code" placeholder="Your valid Code." required name="code">
+                                        <div class="invalid-feedback">
+                                            Please enter a Code.
+                                        </div>
+                                        @if($errors->has('code'))
+                                        <div class="error">{{ $errors->first('code') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="credit_hour">Credit Hours <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="credit_hour" placeholder="Your valid Credit Hours." required name="credit_hour">
+                                        <div class="invalid-feedback">
+                                            Please enter a credit hour.
+                                        </div>
+                                        @if($errors->has('credit_hour'))
+                                        <div class="error">{{ $errors->first('credit_hour') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="subject_type">Subject Type <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                    <select class="form-control" name="subject_type" id="subject_type" required>
+                                        <option value="">Select</option>
+                                        <option value="1" @if( old('subject_type') == 1 ) selected @endif>Compulsory</option>
+                                        <option value="0" @if( old('subject_type') == 0 && old('subject_type') != null ) selected @endif>Optional</option>
+                                    </select>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                    Select Subject type
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="class_type">Class Type <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                    <select class="form-control" name="class_type" id="class_type" required>
+                                        <option value="">{{ __('select') }}</option>
+                                        <option value="1" @if( old('class_type') == 1 ) selected @endif>Theory</option>
+                                        <option value="2" @if( old('class_type') == 2 ) selected @endif>Practical</option>
+                                        <option value="3" @if( old('class_type') == 3 ) selected @endif>Both</option>
+                                    </select>
+                                    </div>
+                                    <div class="invalid-feedback">
+                                    Select Class type
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="form-group col-md-12"></div>
+
+                        @foreach($faculties as $index => $faculty)
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <span class="badge badge-primary">{{ $faculty->title }}</span><br/>
+
+                                    @foreach($faculty->programs->where('status', 1)->sortBy('title') as $key => $program)
+                                    <br/>
+                                    <div class="checkbox d-inline">
+                                        <input type="checkbox" name="programs[]" id="program-{{ $key }}-{{ $index }}" value="{{ $program->id }}" @if( old('programs[]') == $program->id ) checked @endif>
+                                        <label for="program-{{ $key }}-{{ $index }}" class="cr">{{ $program->title }}</label>
+                                    </div>
+                                    @endforeach
+
+                                    <div class="invalid-feedback">
+                                    {{ __('required_field') }} {{ __('field_program') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
                         <div class="row">
 
                             <div class="col-xl-4"></div>

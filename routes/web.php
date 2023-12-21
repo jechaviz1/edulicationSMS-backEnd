@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ExamTypeController;
 use App\Http\Controllers\GradeController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\LeaveAllocationController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SessionController;
 use App\Models\Grade;
@@ -280,5 +283,43 @@ Route::group(['prefix' => 'admin'], function () {
              Route::post('/update-semester/{id}', [SemesterController::class, 'updateSemester'])->name('update-semester');
              Route::get('/delete-semester/{id}', [SemesterController::class, 'deleteSemester'])->name('delete-semester');
             //END - Semester
+
+               // START - Semester
+               Route::get('/add-semester', [SemesterController::class, 'addSemester'])->name('add-semester');
+               // Route::get('/semester-list-current/{id}', 'SessionController@current')->name('session-list.current');
+                Route::post('/store-semester', [SemesterController::class, 'storeSemester'])->name('store-semester');
+                 Route::get('/semester-list', [SemesterController::class, 'semesterList'])->name('semester-list');
+                 Route::get('/edit-semester/{id}', [SemesterController::class, 'editSemester'])->name('edit-semester');
+                 Route::post('/update-semester/{id}', [SemesterController::class, 'updateSemester'])->name('update-semester');
+                 Route::get('/delete-semester/{id}', [SemesterController::class, 'deleteSemester'])->name('delete-semester');
+                //END - Semester
+
+
+                 // START - Section
+                 Route::get('/add-section', [SectionController::class, 'addSection'])->name('add-section');
+                 Route::post('/store-section', [SectionController::class, 'storeSection'])->name('store-section');
+                 Route::get('/section-list', [SectionController::class, 'sectionList'])->name('section-list');
+                 Route::get('/edit-section/{id}', [SectionController::class, 'editSection'])->name('edit-section');
+                 Route::post('/update-section/{id}', [SectionController::class, 'updateSection'])->name('update-section');
+                 Route::get('/delete-section/{id}', [SectionController::class, 'deleteSection'])->name('delete-section');
+                //END - Section
+
+                // START - Classroom
+                Route::get('/add-classroom', [ClassRoomController::class, 'addClassroom'])->name('add-classroom');
+                Route::post('/store-classroom', [ClassRoomController::class, 'storeClassroom'])->name('store-classroom');
+                Route::get('/classroom-list', [ClassRoomController::class, 'classroomList'])->name('classroom-list');
+                Route::get('/edit-classroom/{id}', [ClassRoomController::class, 'editClassroom'])->name('edit-classroom');
+                Route::post('/update-classroom/{id}', [ClassRoomController::class, 'updateClassroom'])->name('update-classroom');
+                Route::get('/delete-classroom/{id}', [ClassRoomController::class, 'deleteClassroom'])->name('delete-classroom');
+               //END - Classroom
+
+               // START - Courses
+              //  Route::get('/add-course', [CourseController::class, 'addCourse'])->name('add-course');
+              //  Route::post('/store-course', [CourseController::class, 'storeCourse'])->name('store-course');
+              //  Route::get('/course-list', [CourseController::class, 'courseList'])->name('course-list');
+              //  Route::get('/edit-course/{id}', [CourseController::class, 'editCourse'])->name('edit-course');
+              //  Route::post('/update-course/{id}', [CourseController::class, 'updateCourse'])->name('update-course');
+              //  Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete-course');
+              //END - Courses
     });
 });
