@@ -205,15 +205,15 @@
                                         </td>
                                         <td>
                                             @if( $row->status == 1 )
-                                            <span class="badge badge-pill badge-success">{{ __('status_active') }}</span>
+                                            <span class="badge badge-pill badge-success">Active</span>
                                             @else
-                                            <span class="badge badge-pill badge-danger">{{ __('status_inactive') }}</span>
+                                            <span class="badge badge-pill badge-danger">Inactive</span>
                                             @endif
                                         </td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('edit-employee',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('delete-employee',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('edit-subject',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('delete-subject',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

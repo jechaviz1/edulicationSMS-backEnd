@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ClassRoomController;
+use App\Http\Controllers\ClassRoutineController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EnrollSubjectController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ExamTypeController;
+use App\Http\Controllers\FilterController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LeaveAllocationController;
 use App\Http\Controllers\LeaveRequestController;
@@ -117,6 +120,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-teacher/{id}', [TeacherController::class, 'update'])->name('update-teacher');
         Route::get('/delete-teacher/{id}', [TeacherController::class, 'delete'])->name('delete-teacher');
         // END - Teacher
+
         // START - subject
         Route::get('/add-subject', [SubjectController::class, 'add'])->name('add-subject');
         Route::post('/store-subject', [SubjectController::class, 'store'])->name('store-subject');
@@ -124,7 +128,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit-subject/{id}', [SubjectController::class, 'edit'])->name('edit-subject');
         Route::post('/update-subject/{id}', [SubjectController::class, 'update'])->name('update-subject');
         Route::get('/delete-subject/{id}', [SubjectController::class, 'delete'])->name('delete-subject');
-        // END - Academic class
+        // END - subject
+
         // START - role
         Route::get('/add-role', [RoleController::class, 'add'])->name('add-role');
         Route::post('/store-role', [RoleController::class, 'store'])->name('store-role');
@@ -321,5 +326,37 @@ Route::group(['prefix' => 'admin'], function () {
               //  Route::post('/update-course/{id}', [CourseController::class, 'updateCourse'])->name('update-course');
               //  Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete-course');
               //END - Courses
+
+
+            // START - enrollsubject
+        Route::get('/add-enrollsubject', [EnrollSubjectController::class, 'addEnrollsubject'])->name('add-enrollsubject');
+        Route::post('/store-enrollsubject', [EnrollSubjectController::class, 'storeEnrollsubject'])->name('store-enrollsubject');
+        Route::get('/enrollsubject-list', [EnrollSubjectController::class, 'enrollsubjectList'])->name('enrollsubject-list');
+        Route::get('/edit-enrollsubject/{id}', [EnrollSubjectController::class, 'editEnrollsubject'])->name('edit-enrollsubject');
+        Route::post('/update-enrollsubject/{id}', [EnrollSubjectController::class, 'updateEnrollsubject'])->name('update-enrollsubject');
+        Route::get('/delete-enrollsubject/{id}', [EnrollSubjectController::class, 'deleteEnrollsubject'])->name('delete-enrollsubject');
+        // END - enrollsubject
+
+         // START - classroutine
+         Route::get('/add-classroutine', [ClassRoutineController::class, 'addClassRoutine'])->name('add-classroutine');
+         Route::post('/store-classroutine', [ClassRoutineController::class, 'storeClassRoutine'])->name('store-classroutine');
+         Route::get('/classroutine-list', [ClassRoutineController::class, 'classroutineList'])->name('classroutine-list');
+         Route::get('/edit-classroutine/{id}', [ClassRoutineController::class, 'editClassRoutine'])->name('edit-classroutine');
+         Route::post('/update-classroutine/{id}', [ClassRoutineController::class, 'updateClassRoutine'])->name('update-classroutine');
+         Route::get('/delete-classroutine/{id}', [ClassRoutineController::class, 'deleteClassRoutine'])->name('delete-classroutine');
+         // END - classroutine
+ 
+
+
+        //start-FilterController
+        Route::post('filter-batch', [FilterController::class, 'filterBatch'])->name('filter-batch');
+        Route::post('filter-program', [FilterController::class, 'filterProgram'])->name('filter-program');
+        Route::post('filter-session', [FilterController::class, 'filterSession'])->name('filter-session');
+        Route::post('filter-semester', [FilterController::class, 'filterSemester'])->name('filter-semester');
+        Route::post('filter-section', [FilterController::class, 'filterSection'])->name('filter-section');
+        Route::post('filter-subject', [FilterController::class, 'filterSubject'])->name('filter-subject');
+        Route::post('filter-enroll-subject', [FilterController::class, 'filterEnrollSubject'])->name('filter-enroll-subject');
+        //End-FilterController
     });
+
 });
