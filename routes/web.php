@@ -32,6 +32,15 @@ use App\Http\Controllers\EmployeeCategoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\FeesCategoryController;
+use App\Http\Controllers\FeesDiscountController;
+use App\Http\Controllers\FeesFineController;
+use App\Http\Controllers\FeesReceiptController;
+use App\Http\Controllers\FeesMasterController;
+use App\Http\Controllers\FeesStudentController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\StatusTypeController;
+use App\Http\Controllers\StudentIdCardSettingController;
 
 /*
   |--------------------------------------------------------------------------
@@ -357,6 +366,76 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('filter-subject', [FilterController::class, 'filterSubject'])->name('filter-subject');
         Route::post('filter-enroll-subject', [FilterController::class, 'filterEnrollSubject'])->name('filter-enroll-subject');
         //End-FilterController
+
+               // START - Fees Type
+               Route::get('/add-fees-category', [FeesCategoryController::class, 'add'])->name('add-fees-category');
+               Route::post('/store-fees-type', [FeesCategoryController::class, 'store'])->name('store-fees-type');
+               Route::get('/fees-categoris-list', [FeesCategoryController::class, 'list'])->name('fees-categoris-list');
+               Route::get('/edit-fees-type/{id}', [FeesCategoryController::class, 'edit'])->name('edit-fees-type');
+               Route::post('/update-fees-type/{id}', [FeesCategoryController::class, 'update'])->name('update-fees-type');
+               Route::get('/delete-fees-type/{id}', [FeesCategoryController::class, 'delete'])->name('delete-fees-type');
+               // END - Fees Type
+                  
+               // START - Fees Discount
+               Route::get('/add-fees-discount', [FeesDiscountController::class, 'add'])->name('add-fees-discount');
+               Route::post('/store-fees-discount', [FeesDiscountController::class, 'store'])->name('store-fees-discount');
+               Route::get('/fees-discount-list', [FeesDiscountController::class, 'list'])->name('fees-discount-list');
+               Route::get('/edit-fees-discount/{id}', [FeesDiscountController::class, 'edit'])->name('edit-fees-discount');
+               Route::post('/update-fees-discount/{id}', [FeesDiscountController::class, 'update'])->name('update-fees-discount');
+               Route::get('/delete-fees-discount/{id}', [FeesDiscountController::class, 'delete'])->name('delete-fees-discount');
+               // END - Fees Discount
+               
+               
+              // START - Fees Fines
+               Route::get('/add-fees-fine', [FeesFineController::class, 'add'])->name('add-fees-fine');
+               Route::post('/store-fees-fine', [FeesFineController::class, 'store'])->name('store-fees-fine');
+               Route::get('/fees-fine-list', [FeesFineController::class, 'list'])->name('fees-fine-list');
+               Route::get('/edit-fees-fine/{id}', [FeesFineController::class, 'edit'])->name('edit-fees-fine');
+               Route::post('/update-fees-fine/{id}', [FeesFineController::class, 'update'])->name('update-fees-fine');
+               Route::get('/delete-fees-fine/{id}', [FeesFineController::class, 'delete'])->name('delete-fees-fine');
+               // END - Fees Fines
+               
+              // START - fees-receipt
+               Route::get('/add-fees-receipt', [FeesReceiptController::class, 'index'])->name('add-fees-receipt');
+               Route::post('/store-fees-receipt', [FeesReceiptController::class, 'store'])->name('store-fees-receipt');
+               // END - fees-receipt
+
+              // START - fees-master
+              Route::get('/list-fees-master', [FeesMasterController::class, 'index'])->name('list-fees-master');
+              Route::get('/add-fees-master', [FeesMasterController::class, 'add'])->name('add-fees-master');
+              Route::post('/store-fees-master', [FeesMasterController::class, 'store'])->name('store-fees-master');
+              // END - fees-master
+          
+              // fees - student
+                Route::get('/fees-student', [FeesStudentController::class, 'index'])->name('fees-student');
+                Route::get('/fees-student-quick-assign', [FeesStudentController::class, 'quickAssign'])->name('fees-student-quick-assign');
+                Route::post('/fees-student-quick-assign', [FeesStudentController::class, 'quickAssignStore'])->name('fees-student-quick-assign-store');
+                Route::get('/fees-student-quick-received', [FeesStudentController::class, 'quickReceived'])->name('fees-student-quick-received');
+                Route::post('/fees-student-quick-received', [FeesStudentController::class, 'quickReceivedStore'])->name('fees-student-quick-received-store');
+                Route::get('/fees-student-report', [FeesStudentController::class, 'report'])->name('fees-student-report');
+                Route::get('fees-student-print/{id}', [FeesStudentController::class, 'print'])->name('fees-student-print');
+                Route::post('fees-student-unpay/{id}', [FeesStudentController::class, 'unpay'])->name('fees-student-unpay');
+                Route::post('fees-student-pay', [FeesStudentController::class, 'pay'])->name('fees-student-pay');
+                Route::post('fees-student-cancel/{id}', [FeesStudentController::class, 'cancel'])->name('fees-student-cancel');
+                
+                // setting 
+                Route::get('/setting', [SettingController::class, 'index'])->name('setting');
+                Route::post('/store-setting', [SettingController::class, 'store'])->name('store-setting');
+
+              // START - status Type
+               Route::get('/add-status-type', [StatusTypeController::class, 'add'])->name('add-status-type');
+               Route::post('/store-status-type', [StatusTypeController::class, 'store'])->name('store-status-type');
+               Route::get('/status-type-list', [StatusTypeController::class, 'list'])->name('status-type-list');
+               Route::get('/edit-status-type/{id}', [StatusTypeController::class, 'edit'])->name('edit-status-type');
+               Route::post('/update-status-type/{id}', [StatusTypeController::class, 'update'])->name('update-status-type');
+               Route::get('/delete-status-type/{id}', [StatusTypeController::class, 'delete'])->name('delete-status-type');
+               // END - status Type
+                 
+                // START - student-id-card
+               Route::get('/id-card-setting', [StudentIdCardSettingController::class, 'index'])->name('id-card-setting');
+               Route::post('/store-id-card-setting', [StudentIdCardSettingController::class, 'store'])->name('store-id-card-setting');
+               // END - student-id-card
+
     });
 
 });

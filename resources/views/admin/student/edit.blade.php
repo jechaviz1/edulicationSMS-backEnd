@@ -91,6 +91,32 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="student_id">Student Id <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control" name="student_id" id="student_id" value="{{$student->student_id}}" required>
+                                            <div class="invalid-feedback">please enter student id.</div>
+                                               
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="emergency_contact_no">Student Status (Select Multiple) <span class="text-danger"></span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <select class="form-control select2" name="statuses[]" id="status" multiple>
+                                                
+                                                @foreach($statuses as $status)
+                                                <option value="{{ $status->id }}" @foreach($student->statuses as $stat) {{ $stat->id == $status->id ? 'selected' : '' }} @endforeach>{{ $status->title }}</option>
+                                                @endforeach
+                                                
+                                               
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select student status.
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                 </div>
@@ -161,6 +187,39 @@
                                             @endif
                                         </div>
                                     </div>
+                                    
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Marital Status<span class="text-danger"></span></label>
+                                        <div class="col-lg-6">
+                                            @if($marital_status)
+                                         <select class="form-control" name="marital_status" id="marital_status">
+                                                <option value="">{{ __('select') }}</option>
+                                                @foreach($marital_status as $row)
+                                                <option value="{{$row->id}}" @if($row->id == $student->marital_status)selected @endif>{{$row->title }}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Marital Status
+                                            </div>
+                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Blood Group<span class="text-danger"></span></label>
+                                        <div class="col-lg-6">
+                                            @if($blood_group)
+                                         <select class="form-control" name="blood_group" id="blood_group">
+                                                <option value="">{{ __('select') }}</option>
+                                                @foreach($blood_group as $row)
+                                                <option value="{{$row->id}}" @if($row->id == $student->blood_group)selected @endif>{{$row->title }}</option>
+                                                 @endforeach
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Blood Group
+                                            </div>
+                                             @endif
+                                        </div>
+                                    </div>
 
                                     <div class="mb-3 row">
                                         <div class="col-lg-8 ms-auto">
@@ -181,6 +240,35 @@
     </div>
 
 </div>
+
+
+<style>
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+        background-color: #a0cf1a;
+        color: white;
+    }
+</style>
+
+
+@section('customjs')
+<!--select2 js-->
+
+<script src="{{ asset('admin/vendor/select2/js/select2.full.min.js')}}"></script>
+ <script type="text/javascript">
+        
+        $(document).ready(function() {
+            // [ Single Select ] start
+            $(".select2").select2();
+
+            // [ Multi Select ] start
+            $(".select2-multiple").select2({
+                placeholder: "select multiple"
+            });
+        });
+
+</script>
+
+
 <script>
     (function () {
         'use strict'
@@ -223,4 +311,6 @@
     });
 </script>
 
+
+@endsection
 @stop

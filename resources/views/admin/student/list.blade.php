@@ -72,6 +72,27 @@
                             <span class="card__info__stats">Contact Us: </span>
                             <span>{{$row->contact_no}}</span>
                         </li>
+                        <li>
+                            <span class="card__info__stats">Student Id: </span>
+                            <span>{{$row->student_id}}</span>
+                        </li>
+                        <li>
+                            <span class="card__info__stats">Marital Status: </span>
+                            @if($row->marital_status && $marital_status)
+                              @foreach($marital_status as $row1)
+                                @if($row1->id == $row->marital_status) <span>{{$row1->title}}</span> @endif
+                              @endforeach
+                            @endif
+                            
+                        </li>
+                        <li>
+                            <span class="card__info__stats">Blood Group: </span>
+                            @if($row->blood_group && $blood_group)
+                              @foreach($blood_group as $row1)
+                               @if($row1->id == $row->blood_group) <span>{{$row1->title}}</span> @endif
+                              @endforeach
+                            @endif
+                        </li>
 
                     </ul>
                     <div>

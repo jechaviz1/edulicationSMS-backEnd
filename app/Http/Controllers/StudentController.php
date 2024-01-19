@@ -13,6 +13,8 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Mail;
+use DB;
+use App\Models\StatusType;
 
 class StudentController extends Controller {
 
@@ -37,6 +39,9 @@ class StudentController extends Controller {
         $data['title'] = 'Register Student List';
         $data['menu_active_tab'] = 'user-list';
         $data['student'] = \App\Models\Student::orderBy('id', 'DESC')->get();
+        $data['blood_group'] = DB::table('blood_group')->get();
+        $data['marital_status'] = DB::table('marital_status')->get();
+        $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
 
         return view('admin.student.list')->with($data);
     }
@@ -45,6 +50,9 @@ class StudentController extends Controller {
         $data = [];
         $data['title'] = 'Add User';
         $data['menu_active_tab'] = 'add-user';
+        $data['blood_group'] = DB::table('blood_group')->get();
+        $data['marital_status'] = DB::table('marital_status')->get();
+        $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
 
         return view('admin.student.add')->with($data);
@@ -54,7 +62,8 @@ class StudentController extends Controller {
         $this->validate($request, [
             'first_name' => 'required|string|min:1|max:255',
 //            'city_name' => 'required|string|min:3|max:255',
-//            'email' => 'required|string|email|max:255'
+//            'email' => 'required|string|email|max:255',
+              'student_id' => 'required|unique:students,student_id',
         ]);
         $data = $request->input();
         try {
@@ -68,7 +77,14 @@ class StudentController extends Controller {
             $student->address = $data['address'];
             $student->nationality = $data['nationality'];
             $student->date_of_birth = $data['date_of_birth'];
+            $student->student_id = $request->student_id;
+            $student->marital_status = $request->marital_status;
+            $student->blood_group = $request->blood_group;
             $student->save();
+            
+            // Attach Status
+            $student->statuses()->attach($request->statuses);
+            
             return redirect()->route('student-list')->with('success', 'Record added successfully.');
         } catch (Exception $e) {
             return redirect()->route('student-list')->with('failed', 'Record not added.');
@@ -82,6 +98,11 @@ class StudentController extends Controller {
         if ($id) {
             $student = \App\Models\Student::find($id);
             $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
+            
+            $data['blood_group'] = DB::table('blood_group')->get();
+            $data['marital_status'] = DB::table('marital_status')->get();
+            $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
+            
             if ($student) {
                 $data['student'] = $student;
                 return view('admin.student.edit')->with($data);
@@ -99,6 +120,7 @@ class StudentController extends Controller {
                 'first_name' => 'required',
                 'last_name' => 'required',
 //                'email' => 'required',
+                'student_id' => 'required'
             ]);
             $student = \App\Models\Student::find($id);
             if ($student) {
@@ -112,6 +134,10 @@ class StudentController extends Controller {
                 $student->date_of_birth = $request->input('date_of_birth');
                 $student->nationality = $request->input('nationality');
                 $student->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                
+                $student->student_id = $request->student_id;
+                $student->marital_status = $request->marital_status;
+                $student->blood_group = $request->blood_group;
 
                 $file_name = null;
                 $file_path = null;
@@ -127,6 +153,10 @@ class StudentController extends Controller {
                     $student->profile_image_path = $file_path;
                 }
                 $student->save();
+                
+            // Update Status
+            $student->statuses()->sync($request->statuses);
+            
             }
             return redirect()->route('student-list')->with('success', 'Record Updated.');
         } else {

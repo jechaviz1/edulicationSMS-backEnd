@@ -35,6 +35,7 @@
         <link href="{{ URL::asset('/admin/css/style.css') }}" rel="stylesheet" />
         <link href="{{ URL::asset('/admin/css/toastr/toastr.min.css') }}" rel="stylesheet" />
         <link href="{{ URL::asset('/admin/css/admin_style.css') }}" rel="stylesheet" />
+        <link href="{{ URL::asset('/admin/vendor/select2/css/select2.min.css') }}" rel="stylesheet" />
 
     </head>
 
@@ -991,6 +992,64 @@
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
                                 </div>
+                                <span class="nav-text">Fees Collections</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                    <span class="nav-text">Student Fees</span>
+                                </a>
+                                <ul aria-expanded="false" class="sub-menu">
+                                    <li><a href="{{ URL::route('fees-student') }}">Fees Due</a></li>
+                                    <li><a href="{{ URL::route('fees-student-quick-assign') }}">Quick Assign</a></li>
+                                    <li><a href="{{ URL::route('fees-student-quick-received') }}">Quick Received</a></li>
+                                    <li><a href="{{ URL::route('fees-student-report') }}">Fees Reports</a></li>
+                                </ul>
+                                </li>
+                                <li><a href="{{ URL::route('list-fees-master') }}">Fees Master</a></li>
+                                <li><a href="{{ URL::route('fees-categoris-list') }}">Fees Types</a></li>
+                                <li><a href="{{ URL::route('fees-discount-list') }}">Fees Discounts</a></li>
+                                <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                    <span class="nav-text">Settings</span>
+                                </a>
+                                <ul aria-expanded="false" class="sub-menu">
+                                    <li><a href="{{ URL::route('fees-fine-list') }}">Fees Fines</a></li>
+                                    <li><a href="{{ URL::route('add-fees-receipt') }}">Receipt Setting</a></li>
+                                </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                <div class="menu-icon">
+                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.007 16.2236H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16.007 12.0371H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span class="nav-text">Admission</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ URL::route('status-type-list') }}">Status Type</a></li>
+                                <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                    <span class="nav-text">Settings</span>
+                                    </a>
+                                    <ul aria-expanded="false" class="sub-menu">
+                                        <li><a href="{{ URL::route('id-card-setting') }}">ID Card Setting</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                <div class="menu-icon">
+                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.007 16.2236H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16.007 12.0371H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
                                 <span class="nav-text">User</span>
                             </a>
                             <ul aria-expanded="false">
@@ -1160,6 +1219,24 @@
                             <ul aria-expanded="false">
                                 <li><a href="{{ URL::route('examtype-list') }}">Exam Types</a></li>
                                 <li><a href="{{ URL::route('grade-list') }}">Grading System</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                <div class="menu-icon">
+                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.007 16.2236H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16.007 12.0371H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span class="nav-text">Settings</span>
+                            </a>
+                            <ul aria-expanded="false">
+
+                                <li><a href="{{ URL::route('setting') }}">General</a></li>
+                                <li><a href="#">Roles and Permissions</a></li>
                                 
                             </ul>
                         </li>
