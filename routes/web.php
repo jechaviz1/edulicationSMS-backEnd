@@ -41,6 +41,9 @@ use App\Http\Controllers\FeesStudentController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StatusTypeController;
 use App\Http\Controllers\StudentIdCardSettingController;
+use App\Http\Controllers\ContentTypeController;
+use App\Http\Controllers\ContentController;
+use App\Http\Controllers\AssignmentController;
 
 /*
   |--------------------------------------------------------------------------
@@ -436,6 +439,29 @@ Route::group(['prefix' => 'admin'], function () {
                Route::post('/store-id-card-setting', [StudentIdCardSettingController::class, 'store'])->name('store-id-card-setting');
                // END - student-id-card
 
+        // START - Content Type
+        Route::get('/content-type-list', [ContentTypeController::class, 'list'])->name('content-type-list');
+        Route::get('/add-content-type', [ContentTypeController::class, 'add'])->name('add-content-type');
+        Route::post('/store-content-type', [ContentTypeController::class, 'store'])->name('store-content-type');
+        Route::get('/edit-content-type/{id}', [ContentTypeController::class, 'edit'])->name('edit-content-type');
+        Route::post('/update-content-type/{id}', [ContentTypeController::class, 'update'])->name('update-content-type');
+        Route::get('/delete-content-type/{id}', [ContentTypeController::class, 'delete'])->name('delete-content-type');
+        // END - Content Type
+        // START - Content
+        Route::get('/content-list', [ContentController::class, 'list'])->name('content-list');
+        Route::get('/add-content', [ContentController::class, 'add'])->name('add-content');
+        Route::post('/store-content', [ContentController::class, 'store'])->name('store-content');
+        Route::get('/edit-content/{id}', [ContentController::class, 'edit'])->name('edit-content');
+        Route::post('/update-content/{id}', [ContentController::class, 'update'])->name('update-content');
+        Route::get('/delete-content/{id}', [ContentController::class, 'delete'])->name('delete-content');
+        // END - Content
+        // START - assignment
+        Route::get('/assignment-list', [AssignmentController::class, 'list'])->name('assignment-list');
+        Route::get('/add-assignment', [AssignmentController::class, 'add'])->name('add-assignment');
+        Route::post('/store-assignment', [AssignmentController::class, 'store'])->name('store-assignment');
+        Route::get('/edit-assignment/{id}', [AssignmentController::class, 'edit'])->name('edit-assignment');
+        Route::post('/update-assignment/{id}', [AssignmentController::class, 'update'])->name('update-assignment');
+        Route::get('/delete-assignment/{id}', [AssignmentController::class, 'delete'])->name('delete-assignment');
+        // END - assignment
     });
-
 });
