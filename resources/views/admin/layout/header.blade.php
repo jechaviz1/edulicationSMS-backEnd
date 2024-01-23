@@ -1595,15 +1595,139 @@
         <script src="{{ asset('admin/vendor/jqvmap/js/jquery.vmap.usa.js')}}"></script>
 
         <script type="text/javascript" src="{{ asset('admin/js/toastr/toastr.min.js')}}  "></script>
-        <script>
-$(document).ready(function () {
-    $(".nav-item .open-cal").click(function () {
-        $(".calendar-warpper").toggleClass("active");
-    });
-});
-        </script>
 
-        @yield('customjs')
+        <script src="{{ asset('admin/vendor/datatables/js/datatables.min.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".nav-item .open-cal").click(function () {
+            $(".calendar-warpper").toggleClass("active");
+        });
+    });
+</script>
+
+<!--data table-->
+        
+<script type="text/javascript">
+        'use strict';
+        $(document).ready(function() {
+
+            // [ HTML5-Export ] start
+            $('#example4').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        text: '<i class="fas fa-copy"></i>',
+                        footer: true,
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: '<i class="fas fa-file-excel"></i>',
+                        footer: true,
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        text: '<i class="fas fa-file"></i>',
+                        footer: true,
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: '<i class="fas fa-file-pdf"></i>',
+                        footer: true,
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fas fa-print"></i>',
+                        autoPrint: true,
+                        // title: '',
+                        footer: true,
+                        exportOptions: {
+                            columns: ':not(:last-child)',
+                        },
+                        customize: function ( win ) {
+                            $(win.document.body)
+                                .css( 'font-size', '10pt' )
+                                /*.prepend(
+                                    '<img src="http://datatables.net/media/images/logo-fade.png" style="position:absolute; top:0; left:0;" />'
+                                );*/
+         
+                            $(win.document.body).find( 'table' )
+                                .addClass( 'compact' )
+                                .css( 'font-size', 'inherit' );
+
+                            $(win.document.body).find( 'caption' )
+                                .css( 'font-size', '10px' );
+
+                            $(win.document.body).find('h1')
+                                .css({"text-align": "center", "font-size": "16pt"});
+                        }
+                    }
+                   
+                ],
+                language: {
+        			paginate: {
+        				next: '<i class="fa-solid fa-angle-right"></i>',
+        				previous: '<i class="fa-solid fa-angle-left"></i>' 
+        			}
+        			
+        		},
+            });
+        });
+</script>
+
+        
+        
+
+@yield('customjs')
+        
+<style>
+    .pagination .paginate_button.page-item a {
+        width: fit-content;
+        height: fit-content;
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        margin-top: 3px;
+    }
+    .pagination .paginate_button.page-item.active a {
+        width: 23px;
+        height: 23px;
+        font-weight: 900;
+        margin-top: 0;
+        border-radius: 4px;
+    }
+    li.paginate_button.page-item.active {
+        min-width: fit-content;
+        padding: 0;
+        margin: 0;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: transparent;
+        border: none;
+    }
+    .btn-group > .btn:not(:last-child):not(.dropdown-toggle), .btn-group > .btn.dropdown-toggle-split:first-child, .btn-group > .btn-group:not(:last-child) > .btn, .btn.btn-secondary.buttons-print {
+        background: white;
+        color: #a0cf1a;
+        font-size: 16px;
+        border: 1px solid #a0cf1a;
+    }
+    div#example4_filter {
+        margin-right: 10px;
+    }
+</style>
 
     </body>
 </html>

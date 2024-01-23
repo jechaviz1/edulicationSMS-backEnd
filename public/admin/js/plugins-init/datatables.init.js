@@ -467,7 +467,7 @@ let dataSet = [
 	// dataTable9
 		
 	// table row
-	var table = $('#dataTable1, #dataTable2, #dataTable3, #dataTable4,  #example3, #example4').DataTable({
+	var table = $('#dataTable1, #dataTable2, #dataTable3, #dataTable4,  #example3').DataTable({
 		language: {
 			paginate: {
 			  next: '<i class="fa-solid fa-angle-right"></i>',
