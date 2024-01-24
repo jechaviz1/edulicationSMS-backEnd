@@ -3,6 +3,7 @@
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\ClassRoomController;
 use App\Http\Controllers\ClassRoutineController;
+use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollSubjectController;
 use App\Http\Controllers\FacultyController;
@@ -344,7 +345,19 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/edit-classroutine/{id}', [ClassRoutineController::class, 'editClassRoutine'])->name('edit-classroutine');
          Route::post('/update-classroutine/{id}', [ClassRoutineController::class, 'updateClassRoutine'])->name('update-classroutine');
          Route::get('/delete-classroutine/{id}', [ClassRoutineController::class, 'deleteClassRoutine'])->name('delete-classroutine');
+         Route::get('/class-routine-teacher', [ClassRoutineController::class, 'teacher'])->name('class-routine.teacher');
+         Route::post('/class_routine/print', [ClassRoutineController::class, 'print'])->name('class-routine.print');
+        
          // END - classroutine
+
+          // START - coursecategory
+          Route::get('/add-coursecategory', [CourseCategoryController::class, 'addCourseCategory'])->name('add-coursecategory');
+          Route::post('/store-coursecategory', [CourseCategoryController::class, 'storeCourseCategory'])->name('store-coursecategory');
+          Route::get('/coursecategory-list', [CourseCategoryController::class, 'coursecategoryList'])->name('coursecategory-list');
+          Route::get('/edit-coursecategory/{id}', [CourseCategoryController::class, 'editCourseCategory'])->name('edit-coursecategory');
+          Route::post('/update-coursecategory/{id}', [CourseCategoryController::class, 'updateCourseCategory'])->name('update-coursecategory');
+          Route::get('/delete-coursecategory/{id}', [CourseCategoryController::class, 'deleteCourseCategory'])->name('delete-coursecategory');
+          // END - coursecategory
  
 
 

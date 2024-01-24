@@ -1086,6 +1086,7 @@
                                 <li><a href="subject-list">Subjects</a></li>
                                 <li><a href="enrollsubject-list">Enroll Courses</a></li>
                                 <li><a href="classroutine-list">Class Routines</a></li>
+                                <li><a href="coursecategory-list">Course Category</a></li>
                                 <li><a href="#">Exam Routines</a></li>
                                 <li><a href="#">Teacher Routines</a></li>
                                 

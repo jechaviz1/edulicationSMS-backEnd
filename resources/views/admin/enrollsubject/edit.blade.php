@@ -9,6 +9,7 @@
         {{ session('error') }}
     </div>
 @endif
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="row">
     <div class="col-lg-12">
         <div class="card">

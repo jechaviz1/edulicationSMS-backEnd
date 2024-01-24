@@ -10,12 +10,12 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'code', 'credit_hour', 'subject_type', 'class_type', 'total_marks', 'passing_marks', 'description', 'status',
+        'language_id', 'title', 'slug', 'faculty', 'semesters', 'credits', 'courses', 'duration', 'fee', 'description', 'attach', 'status',
     ];
 
-    public function programs()
+    public function language()
     {
-        return $this->belongsToMany(Program::class, 'program_subject', 'subject_id', 'program_id');
+        return $this->belongsTo(Language::class, 'language_id');
     }
 
 }

@@ -16,5 +16,10 @@ class Subject extends Model {
     {
         return $this->belongsToMany(Program::class, 'program_subject', 'subject_id', 'program_id');
     }
+
+    public function subjectEnrolls()
+    {
+        return $this->belongsToMany(EnrollSubject::class, 'enroll_subject_subject', 'subject_id', 'enroll_subject_id');
+    }
     use HasFactory;
 }
