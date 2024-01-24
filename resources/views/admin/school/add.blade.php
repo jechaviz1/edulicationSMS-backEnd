@@ -1,4 +1,4 @@
- 
+
 <!-- Extends template page-->
 @extends('admin.layout.header')
 
@@ -20,16 +20,15 @@
                 <div class="form-validation">
                     <h5>Add School</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-school' ) }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-school') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Name <span
-                                            class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Name <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Name." required name="name">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Name." required name="name" />
                                         <div class="invalid-feedback">
                                             Please enter a Name.
                                         </div>
@@ -84,9 +83,213 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom05">logo</label>
+                                    <div class="col-lg-8">
+                                        <input name="logo" id="logo" type="file" class="form-control" data-error="Valid Image is required."  />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Note</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Note" name="note" />
+                                        <div class="invalid-feedback">
+                                            Please enter a Note.
+                                        </div>
+                                        @if($errors->has('note'))
+                                        <div class="error">{{ $errors->first('note') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <h2 class=" col-form-label">Contact Person 1</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">First Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="First Name." name="first_name_1" />
+                                        <div class="invalid-feedback">Please enter a First Name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Last Name." name="last_name_1" />
+                                        <div class="invalid-feedback">Please enter a Last Name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_1" />
+                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
+                                    <div class="col-lg-8">
+                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_1" />
+                                        <div class="invalid-feedback">Please enter a Email.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Phone no</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_1" />
+                                        <div class="invalid-feedback">Please enter a Phone no.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <div class="col-xl-4"></div>
-
+                        <hr />
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <h2 class=" col-form-label">Contact Person 2</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">First Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="First Name." name="first_name_2">
+                                        <div class="invalid-feedback">Please enter a First Name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Last Name." name="last_name_2">
+                                        <div class="invalid-feedback">Please enter a Last Name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_2">
+                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
+                                    <div class="col-lg-8">
+                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_2">
+                                        <div class="invalid-feedback">Please enter a Email.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Phone no</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_2">
+                                        <div class="invalid-feedback">Please enter a Phone no.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <h2 class=" col-form-label">Contact Person 2</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">First Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="First Name." name="first_name_3">
+                                        <div class="invalid-feedback">Please enter a First Name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Last Name." name="last_name_3">
+                                        <div class="invalid-feedback">Please enter a Last Name.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_3">
+                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
+                                    <div class="col-lg-8">
+                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_3">
+                                        <div class="invalid-feedback">Please enter a Email.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Phone no</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_3">
+                                        <div class="invalid-feedback">Please enter a Phone no.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">

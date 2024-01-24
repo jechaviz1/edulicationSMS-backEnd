@@ -1,0 +1,68 @@
+
+ 
+
+CREATE TABLE `assignment` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `faculty_id` int(11) DEFAULT NULL,
+  `total_marks` int(11) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_by_id` int(11) DEFAULT NULL,
+  `modified_by_id` int(11) DEFAULT NULL,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+);
+ALTER TABLE `assignment`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `assignment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+-- --------------------------------------------------------
+
+  
+CREATE TABLE `content_type` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
+  `created_by_id` int(11) DEFAULT NULL,
+  `modified_by_id` int(11) DEFAULT NULL,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+);
+ALTER TABLE `content_type`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `content_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+ 
+-- --------------------------------------------------------
+
+
+CREATE TABLE `content` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `content_type` int(11) DEFAULT NULL,
+  `faculty_id` int(11) DEFAULT NULL,
+  `source_url` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
+  `created_by_id` int(11) DEFAULT NULL,
+  `modified_by_id` int(11) DEFAULT NULL,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+);
+ALTER TABLE `content`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `content`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+  
+  
+-- --------------------------------------------------------
