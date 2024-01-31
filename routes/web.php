@@ -6,14 +6,20 @@ use App\Http\Controllers\ClassRoutineController;
 use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollSubjectController;
+use App\Http\Controllers\ExamAttendanceController;
+use App\Http\Controllers\ExamRoutineController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\ExamTypeController;
 use App\Http\Controllers\FilterController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LeaveAllocationController;
+use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\LeaveManagementController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\ResultContributionController;
+use App\Http\Controllers\RoutineSettingController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SemesterController;
 use App\Http\Controllers\SessionController;
@@ -213,6 +219,26 @@ Route::group(['prefix' => 'admin'], function () {
           Route::post('/update-leavetype/{id}', [LeaveTypeController::class, 'updateLeaveType'])->name('update-leavetype');
           Route::get('/delete-leavetype/{id}', [LeaveTypeController::class, 'deleteLeaveType'])->name('delete-leavetype');
          //END - LeaveType 
+
+
+           // START - StaffLeave
+           Route::get('/add-staffleave', [LeaveController::class, 'add'])->name('add-staffleave');
+           Route::post('/store-staffleave', [LeaveController::class, 'store'])->name('store-staffleave');
+            Route::get('/staffleave-list', [LeaveController::class, 'List'])->name('staffleave-list');
+            Route::get('/edit-staffleave/{id}', [LeaveController::class, 'edit'])->name('edit-staffleave');
+            Route::post('/update-staffleave/{id}', [LeaveController::class, 'update'])->name('update-staffleave');
+            Route::get('/delete-staffleave/{id}', [LeaveController::class, 'delete'])->name('delete-staffleave');
+           //END - StaffLeave 
+
+                // START - LeaveManage
+                Route::get('/add-leavemanage', [LeaveManagementController::class, 'add'])->name('add-leavemanage');
+                Route::post('/store-leavemanage', [LeaveManagementController::class, 'store'])->name('store-leavemanage');
+                 Route::get('/leavemanage-list', [LeaveManagementController::class, 'List'])->name('leavemanage-list');
+                 Route::get('/edit-leavemanage/{id}', [LeaveManagementController::class, 'edit'])->name('edit-leavemanage');
+                 Route::post('/update-leavemanage/{id}', [LeaveManagementController::class, 'update'])->name('update-leavemanage');
+                 Route::get('/delete-leavemanage/{id}', [LeaveManagementController::class, 'delete'])->name('delete-leavemanage');
+                 Route::post('/leavemanage-status/{id}', [LeaveManagementController::class, 'status'])->name('leavemanage-status');
+                //END - LeaveManage 
  
           // START - LeaveRequest
           Route::get('/add-leaverequest', [LeaveRequestController::class, 'addLeaveRequest'])->name('add-leaverequest');
@@ -359,8 +385,22 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/delete-classroutine/{id}', [ClassRoutineController::class, 'deleteClassRoutine'])->name('delete-classroutine');
          Route::get('/class-routine-teacher', [ClassRoutineController::class, 'teacher'])->name('class-routine.teacher');
          Route::post('/class_routine/print', [ClassRoutineController::class, 'print'])->name('class-routine.print');
-        
+         Route::get('/routine-setting/class', [RoutineSettingController::class, 'class'])->name('routine-setting.class');
+         Route::get('/routine-setting/exam', [RoutineSettingController::class, 'exam'])->name('routine-setting.exam');
+         Route::post('/routine-setting/store', [RoutineSettingController::class, 'store'])->name('routine-setting.store');
+     
          // END - classroutine
+
+
+         // START - examroutine
+         Route::get('/add-examroutine', [ExamRoutineController::class, 'addExamRoutine'])->name('add-examroutine');
+         Route::post('/store-examroutine', [ExamRoutineController::class, 'storeExamRoutine'])->name('store-examroutine');
+         Route::get('/examroutine-list', [ExamRoutineController::class, 'examroutineList'])->name('examroutine-list');
+         Route::get('/edit-examroutine/{id}', [ExamRoutineController::class, 'editExamRoutine'])->name('edit-examroutine');
+         Route::post('/update-examroutine/{id}', [ExamRoutineController::class, 'updateExamRoutine'])->name('update-examroutine');
+         Route::get('/delete-examroutine/{id}', [ExamRoutineController::class, 'deleteExamRoutine'])->name('delete-examroutine');
+         Route::post('/exam_routine/print', [ExamRoutineController::class, 'print'])->name('exam-routine.print');   
+         // END - examroutine
 
           // START - coursecategory
           Route::get('/add-coursecategory', [CourseCategoryController::class, 'addCourseCategory'])->name('add-coursecategory');
@@ -460,6 +500,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-content-type/{id}', [ContentTypeController::class, 'update'])->name('update-content-type');
         Route::get('/delete-content-type/{id}', [ContentTypeController::class, 'delete'])->name('delete-content-type');
         // END - Content Type
+
         // START - Content
         Route::get('/content-list', [ContentController::class, 'list'])->name('content-list');
         Route::get('/add-content', [ContentController::class, 'add'])->name('add-content');
@@ -468,6 +509,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-content/{id}', [ContentController::class, 'update'])->name('update-content');
         Route::get('/delete-content/{id}', [ContentController::class, 'delete'])->name('delete-content');
         // END - Content
+
         // START - assignment
         Route::get('/assignment-list', [AssignmentController::class, 'list'])->name('assignment-list');
         Route::get('/add-assignment', [AssignmentController::class, 'add'])->name('add-assignment');
@@ -476,5 +518,27 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/update-assignment/{id}', [AssignmentController::class, 'update'])->name('update-assignment');
         Route::get('/delete-assignment/{id}', [AssignmentController::class, 'delete'])->name('delete-assignment');
         // END - assignment
+
+        //START-ResultContribution
+         
+         Route::get('/resultcontribution-list', [ResultContributionController::class, 'list'])->name('resultcontribution-list');
+         Route::get('/add-resultcontribution', [ResultContributionController::class, 'add'])->name('add-resultcontribution');
+         Route::post('/store-resultcontribution', [ResultContributionController::class, 'store'])->name('store-resultcontribution');
+         Route::get('/edit-resultcontribution/{id}', [ResultContributionController::class, 'edit'])->name('edit-resultcontribution');
+         Route::post('/update-resultcontribution/{id}', [ResultContributionController::class, 'update'])->name('update-resultcontribution');
+         Route::get('/delete-resultcontribution/{id}', [ResultContributionController::class, 'delete'])->name('delete-resultcontribution');
+         
+        //END-ResultContribution
+
+         //START-ExamAttendance
+         
+         Route::get('/examattendance-list', [ExamAttendanceController::class, 'list'])->name('examattendance-list');
+         Route::get('/add-examattendance', [ExamAttendanceController::class, 'add'])->name('add-examattendance');
+         Route::post('/store-examattendance', [ExamAttendanceController::class, 'store'])->name('store-examattendance');
+         Route::get('/edit-examattendance/{id}', [ExamAttendanceController::class, 'edit'])->name('edit-examattendance');
+         Route::post('/update-examattendance/{id}', [ExamAttendanceController::class, 'update'])->name('update-examattendance');
+         Route::get('/delete-examattendance/{id}', [ExamAttendanceController::class, 'delete'])->name('delete-examattendance');
+         
+        //END-ExamAttendance
     });
 });

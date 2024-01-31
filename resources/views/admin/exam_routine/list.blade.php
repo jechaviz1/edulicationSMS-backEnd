@@ -1,37 +1,68 @@
+
+ 
 <!-- Extends template page-->
 @extends('admin.layout.header')
 
 <!-- Specify content -->
 @section('content')
-
-<!-- Start Content-->
+<style>
+  .class-time
+  {
+    clear: both;
+    color: #000;
+    padding: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: #CFF95A;
+    box-shadow: 0 10px 18px 0 rgba(69, 90, 100, 0.08);
+  }
+</style>
+@if ($message = Session::get('success'))
+<div class="alert alert-primary alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+    </button>
+    <strong>Success!</strong> {{ $message }}
+</div>
+@endif
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<div class="main-body">
-    <div class="page-wrapper">
-        <!-- [ Main Content ] start -->
-        <div class="row">
-            <!-- [ Card ] start -->
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Add / Edit Class Routine</h5>
-                    </div>
-           
-                    <div class="tab-content" id="myTabContent-1">
+<div class="col-lg-12">
+		<div class="card dz-card" id="buttons-with-icon">
+												<div class="card-header flex-wrap d-flex justify-content-between border-0 ">
+													<div>
+														<h4 class="card-title">Exam Routine List</h4>
+													</div>
+												
+												</div>
+												<div class="tab-content" id="myTabContent-1">
 													<div class="tab-pane fade show active" id="Buttons-Icon" role="tabpanel" aria-labelledby="home-tab-1">
-														<div class="card-body pt-0 mt-2">
-                                                        <a href="{{ URL::route('classroutine-list') }}" class="btn btn-primary light"><i class="fas fa-arrow-left"></i> back</a>
-                                                        <a href="{{ URL::route('add-classroutine') }}" class="btn btn-secondary"><i class="fas fa-sync-alt"></i> refresh</a>
+														<div class="card-body pt-0">
+														<a href="{{ URL::route('add-examroutine') }}" class="btn btn-primary light"><i class="fa-solid fa-plus"></i> Add/Edit</a>
+                                                        <a href="{{ URL::route('examroutine-list') }}" class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i> Refresh</a>
+                            
+
+                                  <button type="button" class="btn btn-dark" onclick="document.getElementById('print-routine').submit()">
+                                      <i class="fas fa-print"></i> Print
+                                  </button>
+
+                                  <form id="print-routine" target="_blank" method="post" action="{{ URL::route('exam-routine.print') }}" hidden>
+                                      @csrf
+                                      <input type="hidden" name="program" value="{{ $selected_program }}">
+                                      <input type="hidden" name="session" value="{{ $selected_session }}">
+                                      <input type="hidden" name="semester" value="{{ $selected_semester }}">
+                                      <input type="hidden" name="section" value="{{ $selected_section }}">
+                                      <input type="hidden" name="type" value="{{ $selected_type }}">
+                                  </form>
+                                 
 															
 														</div>
 													</div>
 													
-											</div>
-                         <div class="row">
+												</div>	
+												<div class="row">
 													<div class="col-lg-12">
 														<div class="card-body">
 															<div class="form-validation">
-																<form class="needs-validation" novalidate method="get" action="{{ route('add-classroutine') }}">
+																<form class="needs-validation" novalidate method="get" action="{{ route('examroutine-list') }}">
                                     <div class="row">
                                         <div class="col-xl-3">
                                             <div class="mb-3 row">
@@ -39,7 +70,7 @@
                                               <label class="row-lg-6 col-form-label" for="faculty">faculty<span class="text-danger">*</span></label>
                                                     <div class="row-lg-8">
                                                         <select class="form-control faculty" name="faculty" id="faculty" required>
-                                                            <option value="">{{ __('select') }}</option>
+                                                            <option value="">Select</option>
                                                             @if(isset($faculties))
                                                             @foreach( $faculties->sortBy('title') as $faculty )
                                                             <option value="{{ $faculty->id }}" @if( $selected_faculty == $faculty->id) selected @endif>{{ $faculty->title }}</option>
@@ -62,7 +93,7 @@
                                                 <label class="row-lg-6 col-form-label" for="program">Program<span class="text-danger">*</span></label>
                                                     <div class="row-lg-8">
                                                         <select class="form-control program" name="program" id="program" required>
-                                                            <option value="">{{ __('select') }}</option>
+                                                            <option value="">Select</option>
                                                             @if(isset($programs))
                                                             @foreach( $programs->sortBy('title') as $program )
                                                             <option value="{{ $program->id }}" @if( $selected_program == $program->id) selected @endif>{{ $program->title }}</option>
@@ -86,7 +117,7 @@
 
                                               <div class="row-lg-8">
                                                         <select class="form-control session" name="session" id="session" required>
-                                                              <option value="">{{ __('select') }}</option>
+                                                              <option value="">Select</option>
                                                               @if(isset($sessions))
                                                               @foreach( $sessions->sortByDesc('id') as $session )
                                                               <option value="{{ $session->id }}" @if( $selected_session == $session->id) selected @endif>{{ $session->title }}</option>
@@ -111,7 +142,7 @@
 
                                                         <div class="row-lg-8">
                                                                 <select class="form-control semester" name="semester" id="semester" required>
-                                                                    <option value="">{{ __('select') }}</option>
+                                                                    <option value="">Select</option>
                                                                     @if(isset($semesters))
                                                                     @foreach( $semesters->sortBy('id') as $semester )
                                                                     <option value="{{ $semester->id }}" @if( $selected_semester == $semester->id) selected @endif>{{ $semester->title }}</option>
@@ -146,6 +177,24 @@
                                               </div>
                                           </div>
                                       </div>
+                                      <div class="col-xl-3">
+                                        <div class="mb-3 row">
+                                            <label class="row-lg-3 col-form-label" for="type">Type
+                                            </label>
+                                              <div class="row-lg-8">
+                                                <select class="form-control type" name="type" id="type" required>
+                                                    <option value="">Select</option>
+                                                    @foreach( $types as $type )
+                                                    <option value="{{ $type->id }}" @if( $selected_type == $type->id) selected @endif>{{ $type->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Select Type
+                                                </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                           
                            
                             
                                 
@@ -162,101 +211,80 @@
 															</div>
 														</div>
 													</div>
-												</div>
-                </div>
-            </div>
-            @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @elseif(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @elseif(session('delete'))
-    <div class="alert alert-danger">
-        {{ session('delete') }}
-    </div>
-    else
-    <div class="alert alert-success">
-        {{ session('update') }}
-    </div>
-@endif
-            <div class="col-sm-12">
+												</div>	
+              <div class="col-sm-12">
                 <div class="card">
-                    @isset($rows)
-                    @php
-                    $weekdays = array('1', '2', '3', '4', '5', '6', '7');
-                    @endphp
-                    <ul class="nav nav-pills mb-3 card-block mt-2" style="margin-left:20px"id="myTab" role="tablist">
-
-                        @foreach($weekdays as $weekday)
-                        <li class="nav-item">
-                            <a class="nav-link @if($weekday == 1) active @endif text-uppercase" id="day{{ $weekday }}-tab" data-bs-toggle="tab" href="#day{{ $weekday }}" role="tab" aria-controls="day{{ $weekday }}" aria-selected="true">
-                                @if( $weekday == 1 )
-                                     Saturday
-                                @elseif( $weekday == 2 )
-                                     Sunday
-                                @elseif( $weekday == 3 )
-                                     Monday
-                                @elseif( $weekday == 4 )
-                                     Tuesday
-                                @elseif( $weekday == 5 )
-                                     Wednesday
-                                @elseif( $weekday == 6 )
-                                     Thursday
-                                @elseif( $weekday == 7 )
-                                     Friday
-                                @endif
-                            </a>
-                        </li>
-                        @endforeach
-
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-
-                        @foreach($weekdays as $weekday)
-                        <div class="tab-pane fade @if($weekday == 1) show active @endif" id="day{{ $weekday }}" role="tabpanel" aria-labelledby="day{{ $weekday }}-tab">
-                            <div class="card-body pt-0">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                    <form class="needs-validation" novalidate action="{{ route('store-classroutine') }}" method="post" id="fields" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="text" name="program" value="{{ $selected_program }}" hidden>
-                                    <input type="text" name="session" value="{{ $selected_session }}" hidden>
-                                    <input type="text" name="semester" value="{{ $selected_semester }}" hidden>
-                                    <input type="text" name="section" value="{{ $selected_section }}" hidden>
-                                    <input type="text" name="day" value="{{ $weekday }}" hidden>
-                                    
-                                    @forelse($rows->where('day', $weekday) as $row)
-                                        @include('admin.class_routine.edit')
-                                    @empty
-                                        @include('admin.class_routine.form_field')
-                                    @endforelse
-                                    <div id="newField-tab-{{ $weekday }}" class="clearfix"></div>
-                                    <div class="card-block mt-2 mb-1">
-                                        <button id="addField" type="button" class="btn btn-success" data-bs-tab="tab-{{ $weekday }}"><i class="fas fa-plus"></i> Add New</button>
-                                    </div>
-                                    <div class="card-footer text-right">
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
-                                    </div>
-                                    </form>
-                                    </div>
-                                </div>
-                            </div>
+                    @if(isset($rows))
+                    <div class="card-block">
+                        <!-- [ Data table ] start -->
+                        <div class="table-responsive">
+                            <table id="basic-table" class="display table nowrap table-striped table-hover" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Sr. No</th>
+                                        <th>{{ ('Subject') }}</th>
+                                        <th>{{ ('Teacher') }}</th>
+                                        <th>{{ ('Room') }}</th>
+                                        <th>{{ ('Date') }}</th>
+                                        <th>{{ ('Start_time') }}</th>
+                                        <th>{{ ('End_time') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($rows as $key => $row)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $row->subject->code ?? '' }} - {{ $row->subject->title ?? '' }}</td>
+                                        <td>
+                                            @foreach($row->users as $teacher)
+                                            {{ $teacher->staff_id }} - {{ $teacher->first_name }} {{ $teacher->last_name }}@if($loop->last) @else , @endif<br/>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach($row->rooms as $room)
+                                            {{ $room->title }}@if($loop->last) @else , @endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @if(isset($setting->date_format))
+                                            {{ date($setting->date_format, strtotime($row->date)) }}
+                                            @else
+                                            {{ date("Y-m-d", strtotime($row->date)) }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(isset($setting->time_format))
+                                            {{ date($setting->time_format, strtotime($row->start_time)) }}
+                                            @else
+                                            {{ date("h:i A", strtotime($row->start_time)) }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if(isset($setting->time_format))
+                                            {{ date($setting->time_format, strtotime($row->end_time)) }}
+                                            @else
+                                            {{ date("h:i A", strtotime($row->end_time)) }}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                        @endforeach
+                        <!-- [ Data table ] end -->
+                    </div>
+                    @endif
 
                     </div>
-                    @endisset
-                </div>
             </div>
-            <!-- [ Card ] end -->
         </div>
         <!-- [ Main Content ] end -->
     </div>
 </div>
 <!-- End Content-->
+
+
+                                        
 <script src="https://code.jquery.com/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -312,7 +340,7 @@
         success:function(response){
             // var jsonData=JSON.parse(response);
             $('option', session).remove();
-            $('.session').append('<option value="">Select</option>');
+            $('.session').append('<option value="">{{ __("select") }}</option>');
             $.each(response, function(){
               $('<option/>', {
                 'value': this.id,
@@ -333,7 +361,7 @@
         success:function(response){
             // var jsonData=JSON.parse(response);
             $('option', semester).remove();
-            $('.semester').append('<option value="">Select</option>');
+            $('.semester').append('<option value="">{{ __("select") }}</option>');
             $.each(response, function(){
               $('<option/>', {
                 'value': this.id,
@@ -364,7 +392,7 @@
         success:function(response){
             // var jsonData=JSON.parse(response);
             $('option', section).remove();
-            $('.section').append('<option value="">Select</option>');
+            $('.section').append('<option value="">{{ __("select") }}</option>');
             $.each(response, function(){
               $('<option/>', {
                 'value': this.id,
@@ -375,54 +403,5 @@
 
       });
     });
-</script>
-
-<script type="text/javascript">
-    (function ($) {
-        "use strict";
-        // add Field
-        $(document).on('click', '#addField', function () {
-            var tab = $(this).attr('data-bs-tab');
-            var html = '';
-            html += '<hr/>';
-            html += '<div id="inputFormField" class="card-block">';
-            html += '<div class="row">';
-            html += '<div class="form-group col-md-2"><label for="subject">Subject<span>*</span></label><select class="form-control select2" name="subject[]" id="subject" required><option value="">Select</option> @isset($subjects) @foreach( $subjects as $subject ) <option value="{{ $subject->id }}">{{ $subject->code }} - {{ $subject->title }}</option> @endforeach @endisset </select> <div class="invalid-feedback"> {{ __('required_field') }} {{ __('field_subject') }}</div></div>';
-            html += '<div class="form-group col-md-2"><label for="teacher">Teacher <span>*</span></label> <select class="form-control select2" name="teacher[]" id="teacher"><option value="">Select</option> @isset($teachers) @foreach( $teachers as $teacher ) <option value="{{ $teacher->id }}">{{ $teacher->staff_id }} - {{ $teacher->first_name }} {{ $teacher->last_name }}</option> @endforeach @endisset </select> <div class="invalid-feedback"> {{ __('required_field') }} {{ __('field_teacher') }} </div> </div>';
-            html += '<div class="form-group col-md-2"> <label for="room">Room No <span>*</span></label> <select class="form-control select2" name="room[]" id="room" required> <option value="">Select</option> @isset($rooms) @foreach( $rooms as $room ) <option value="{{ $room->id }}">{{ $room->title }}</option> @endforeach @endisset </select> <div class="invalid-feedback"> {{ __('required_field') }} {{ __('field_room') }} {{ __('field_no') }} </div> </div>';
-            html += '<div class="form-group col-md-2"> <label for="start_time">Time From <span>*</span></label><input type="time" class="form-control time" name="start_time[]" id="start_time" required><div class="invalid-feedback"> </div></div>';
-            html += '<div class="form-group col-md-2"> <label for="end_time">Time To <span>*</span></label> <input type="time" class="form-control time" name="end_time[]" id="end_time" required> <div class="invalid-feedback"> {{ __('required_field') }} {{ __('field_time') }} {{ __('field_to') }} </div> </div>';
-            html += '<div class="form-group col-md-2"><button id="removeField" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Remove</button></div>';
-            html += '</div>';
-
-            $('#newField-'+tab).append(html);
-
-            // Time Picker
-            $('.time').bootstrapMaterialDatePicker({
-                date: false,
-                shortTime: true,
-                format: 'HH:mm'
-            });
-        });
-
-        // remove Field
-        $(document).on('click', '#removeField', function () {
-            $(this).closest('#inputFormField').remove();
-
-            // Time Picker
-            $('.time').bootstrapMaterialDatePicker({
-                date: false,
-                shortTime: true,
-                format: 'HH:mm'
-            });
-        });
-    }(jQuery));
-
-
-    // Delete Routine
-    function deleteRoutine(id) {
-        $("#deleteRoutine-"+id).hide();
-        $("#delete_routine-"+id).attr("checked", "checked");
-    }
 </script>
 @endsection

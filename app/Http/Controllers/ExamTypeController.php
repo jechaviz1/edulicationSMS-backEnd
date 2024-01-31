@@ -14,9 +14,9 @@ class ExamTypeController extends Controller
         $data = [];
         $data['title'] = 'Exam type List';
         $data['menu_active_tab'] = 'examtype-list';
-        $data['examtype'] = ExamType::where('is_deleted', '0')->where('status', '!=', '2')->orderBy('id', 'DESC')->get();
+        $data['rows'] = ExamType::orderBy('contribution', 'desc')->get();
 
-        return view('admin.examinations.list')->with($data);
+        return view('admin.exam_type.list')->with($data);
     }
 
 
@@ -24,55 +24,44 @@ class ExamTypeController extends Controller
         $data = [];
         $data['title'] = 'Add exam type';
         $data['menu_active_tab'] = 'add-examtype';
-        return view('admin.examinations.add')->with($data);
+        return view('admin.exam_type.add')->with($data);
     }
 
     public function storeExamType(Request $request) {
-        //dd($request->all());
-        $rules = [
-            'title' => 'required|string|min:1|max:255',
-            'marks' => 'required|string|min:1|max:255',   
+         // Field Validation
+         $request->validate([
+            'title' => 'required|max:191|unique:exam_types,title',
+            'marks' => 'required|numeric',
+            // 'contribution' => 'required|numeric',
+        ]);
+            try{
+                // Insert Data
+                $examType = new ExamType;
+                $examType->title = $request->title;
+                $examType->marks = $request->marks;
+                // $examType->contribution = $request->contribution;
+                $examType->description = $request->description;
+                $examType->save();
 
-        ];
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-        dd($validator);
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-            // $data = $request->input();
-         
-            try {
-                $data = new ExamType();
-                //dd($data);
-               
-                        $data->title = $request->input('title');
-                        $data->marks = $request->input('marks');
-                        $data->contribution = $request->input('contribution');
-                        $data->status = $request->input('status');
-                        //dd($data);
-                        $data->save();
-                        //dd("success");
                 return redirect()->route('examtype-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
+            }
+            catch (Exception $e) {
                //dd($e);
                 return redirect()->route('examtype-list')->with('failed', 'Record not added.');
             }
         }
-    }
+    
     public function editExamType(Request $request, $id) {
         $data = [];
         $data['title'] = 'Edit Exam Type';
         $data['menu_active_tab'] = 'examtype-list';
         if ($id) {
             $examtype = ExamType::find($id);
-            $data['examtype'] = ExamType::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
+            $data['examtype'] = ExamType::where('status', '1')->orderBy('contribution', 'desc')->get();
             if ($examtype) {
                 $data['examtype'] = $examtype;
                 
-                return view('admin.examinations.edit')->with($data);
+                return view('admin.exam_type.edit')->with($data);
             } else {
                 return redirect()->route('examtype-list')->with('failed', 'Record not found.');
             }
@@ -84,40 +73,27 @@ class ExamTypeController extends Controller
         
         if ($id) {
             
-            $request->validate([
-                'title' => 'required',
-                'marks' => 'required',
+           // Field Validation
+        $request->validate([
+            'title' => 'required|max:191|unique:exam_types,title,'.$id,
+            'marks' => 'required|numeric',
+            // 'contribution' => 'required|numeric',
+        ]);
 
-            ]);
            
             $data = $request->input();
-            //dd($data);
             $examtype = ExamType::find($id);
-
-          //  dd($designation);
              if ($examtype) {
-                
-              $examtype->title = isset($data['title']) ? $data['title'] : null;
-              $examtype->marks = isset($data['marks']) ? $data['marks'] : null;
-            //dd($request->status);
-                // if($request->status==1)
-                //     {
-                //         $status=1;
-                //     }
-                //     else
-                //     {
-                        
-                //         $status=2;
-                //     }
-               //dd($status);
-                $examtype->contribution = isset($data['contribution']) ? $data['contribution'] : 1;
-                $status = $request->input('status') == 1 ? 1 : 2;
-                $examtype->status = $status;
-                //DB::table('exam_type')->where('id',$id)->update(array('title'=> $request->input('title'),'marks'=> $request->input('marks'),'contribution'=> $request->input('contribution'),'status'=> $status));
-                $examtype->update();
-           //dd($status);
+            // Update Data
+                $data->title = $request->title;
+                $data->marks = $request->marks;
+                // $examType->contribution = $request->contribution;
+                $data->description = $request->description;
+                $data->status = $request->status;
+                $data->save();
+          
             }
-            //dd('success');
+           
             return redirect()->route('examtype-list')->with('success', 'Record Updated.');
         
     }

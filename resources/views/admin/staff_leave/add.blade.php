@@ -8,78 +8,120 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Create Exam Type</h4>
+                <h4 class="card-title">Apply Leave</h4>
                 <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a href="{{ route('examtype-list') }}" class="btn btn-primary light">Exam Type list</a>
+                        <a href="{{ route('staffleave-list') }}" class="btn btn-primary light">Staff Leave List</a>
                     </li>
 
                 </ul>
             </div>
             <div class="card-body">
                 <div class="form-validation">
-                    <h5>Add Exam Type</h5>
+                    <h5>Add Staff Leave</h5>
 
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-examtypes') }}" >
+                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-staffleave') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-xl-4">
+                            <div class="col-xl-6">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Title <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Title" required name="title">
+                                    <label class="row-lg-3 col-form-label" for="apply_date">Apply Date <span class="text-danger">*</span></label>
+                                    <div class="row-lg-8">
+                                        <input type="date" class="form-control"  name="apply_date" id="apply_date" value="{{ date('Y-m-d') }}" readonly required>
                                         <div class="invalid-feedback">
-                                            Please enter an Exam Type Title.
+                                            Please Select Apply Date.
                                         </div>
                                     </div>
                                 </div>
                                 
                             </div>
-                            <div class="col-xl-4">
+
+                            <div class="col-xl-6">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom03">Marks <span class="text-danger">*</span></label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom03" placeholder="Marks" required name="marks">
+                                    <label class="row-lg-3 col-form-label" for="type">Leave Type <span class="text-danger">*</span></label>
+                                    <div class="row-lg-8">
+                                    <select class="form-control" name="type" id="type" required>
+                                        <option value="">Select</option>
+                                        @foreach( $types as $type )
+                                        <option value="{{ $type->id }}" @if(old('type') == $type->id) selected @endif>{{ $type->title }}</option>
+                                        @endforeach
+                                    </select>
                                         <div class="invalid-feedback">
-                                            Please enter an Marks.
+                                            Please Select Apply Date.
                                         </div>
                                     </div>
                                 </div>
                                 
                             </div>
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                   
-                                      <label class="col-lg-3 col-form-label" for="statusCheckbox">Status <span class="text-danger">*</span></label>
-                                            <div class="col-lg-8">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="status" value="1" id="statusCheckbox" {{ old('status') == 1 ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="statusCheckbox">
-                                                        Active
-                                                    </label>
-                                                </div>
-                                            </div>
-                                   
-                                </div>
-                            </div>
+                            
+                           
                             <div class="row">
-                        
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Contribution </label>
-                                    <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="validationCustom02" placeholder="Contribution" required name="contribution">
-                                        <div class="invalid-feedback">
-                                            Please enter an Contribution.
+    <div class="col-xl-12">
+        <div class="mb-3 row">
+            <div class="col-lg-4">
+                <label class="row-lg-3 col-form-label" for="from_date">Start Date <span class="text-danger">*</span></label>
+                <div class="row-lg-8">
+                    <input type="date" class="form-control date" name="from_date" id="from_date" value="{{ old('from_date') }}" required>
+                    <div class="invalid-feedback">
+                        Please Select Start Date.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <label class="row-lg-3 col-form-label" for="pay_type">Pay Type<span class="text-danger">*</span></label>
+                <div class="row-lg-8">
+                    <select class="form-control" name="pay_type" id="pay_type" required>
+                        <option value="">Select</option>
+                        <option value="1" @if(old('pay_type') == 1) selected @endif>Paid Leave</option>
+                        <option value="2" @if(old('pay_type') == 2) selected @endif>Unpaid Leave</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please Select Pay Type.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <label class="row-lg-3 col-form-label" for="to_date">End Date <span class="text-danger">*</span></label>
+                <div class="row-lg-8">
+                    <input type="date" class="form-control date" name="to_date" id="to_date" value="{{ old('to_date') }}" required>
+                    <div class="invalid-feedback">
+                        Please Select End Date.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="mb-3 row">
+                                            <label class="row-lg-3 col-form-label" for="reason">Reason <span class="text-danger">*</span></label>
+                                            <div class="row-lg-8">
+                                            <textarea class="form-control" name="reason" id="reason">{{ old('reason') }}</textarea>
+
+                                                
+                                                <div class="invalid-feedback">
+                                                    Please Enter Reason.
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        
-                        
-                            
-                            
-                        </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="mb-3 row">
+                                            <label class="row-lg-3 col-form-label" for="attach">Attach <span class="text-danger">*</span></label>
+                                            <div class="row-lg-8">
+                                            <input type="file" class="form-control" name="attach" id="attach" value="{{ old('attach') }}">
+
+                                                
+                                                <div class="invalid-feedback">
+                                                    Please Enter Reason.
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
                         <div class="row">
 
                             <div class="col-xl-4">

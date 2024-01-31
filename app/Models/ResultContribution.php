@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExamType extends Model
+class ResultContribution extends Model
 {
     use HasFactory;
-
-    protected $table = 'exam_types';
     protected $fillable = [
-        'title', 'marks','contribution','status'];
+        'attendances', 'assignments', 'activities', 'status',
+    ];
 }

@@ -60,7 +60,7 @@
                                 <tr>
                                     <td>{{$k+1}}</td>
                                     <td>{{$row->title}}</td>
-                                    <td>{{$row->status == '1' ? 'Active' : 'Inactive';}}</td>
+                                    <td>{{$row->status == '1' ? 'Active' : 'Inactive'}}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('edit-content',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>

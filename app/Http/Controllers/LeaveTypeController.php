@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LeaveType;
 use Exception;
 use Illuminate\Http\Request;
-use Validator;
+use Str;
 
 class LeaveTypeController extends Controller
 {
@@ -14,7 +14,7 @@ class LeaveTypeController extends Controller
         $data = [];
         $data['title'] = 'Leave type List';
         $data['menu_active_tab'] = 'leavetype-list';
-        $data['leavetype'] = LeaveType::where('is_deleted', '0')->where('is_active', '!=', '2')->orderBy('id', 'DESC')->get();
+        $data['rows'] = LeaveType::where('is_deleted','0')->orderBy('title', 'asc')->get();
 
         return view('admin.leave_type.list')->with($data);
     }
@@ -26,39 +26,29 @@ class LeaveTypeController extends Controller
         return view('admin.leave_type.add')->with($data);
     }
     public function storeLeaveType(Request $request) {
-        //dd($request->all());
-        $rules = [
-            'name' => 'required|string|min:1|max:255',
-            'alias' => 'required|string|min:1|max:255',   
-
-        ];
-        $validator = Validator::make($request->all(), $rules);
-
-        if ($validator->fails()) {
-        dd($validator);
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-            // $data = $request->input();
-         
+        
+       // Field Validation
+       $request->validate([
+        'title' => 'required|max:191|unique:leave_types,title',
+        ]);
+      
+      
             try {
-                $data = new LeaveType();
-                //dd($data);
-                $isActive = $request->input('is_active');
-                        $data->name = $request->input('name');
-                        $data->alias = $request->input('alias');
-                        $data->description = $request->input('description');
-                        $data->is_active = $isActive;
-                        //dd($data);
-                        $data->save();
-                        //dd("success");
+                 // Insert Data
+                $leaveType = new LeaveType;
+                $leaveType->title = $request->title;
+                $leaveType->slug = Str::slug($request->title, '-');
+                $leaveType->limit = $request->limit ?? 0;
+                $leaveType->description = $request->description;
+               
+                $leaveType->save();
+
                 return redirect()->route('leavetype-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
-               // dd($e);
+               //dd($e);
                 return redirect()->route('leavetype-list')->with('failed', 'Record not added.');
             }
-        }
+        
     }
     public function editLeaveType(Request $request, $id) {
         $data = [];
@@ -82,28 +72,25 @@ class LeaveTypeController extends Controller
         
         if ($id) {
             
-            $request->validate([
-                'name' => 'required',
-                'alias' => 'required',
+            // Field Validation
+        $request->validate([
+            'title' => 'required|max:191|unique:leave_types,title,'.$id,
+        ]);
 
-            ]);
            
-            $data = $request->input();
-            //dd($data);
-            $leavetype = LeaveType::find($id);
+        $data = $request->input();
+        $leavetype = LeaveType::find($id);
 
           //  dd($designation);
-            if ($leavetype) {
-                
-                $leavetype->name = isset($data['name']) ? $data['name'] : null;
-                $leavetype->alias = isset($data['alias']) ? $data['alias'] : null;
-                $leavetype->is_active = $request->has('is_active');
-                $leavetype->description = isset($data['description']) ? $data['description'] : 1;
-
-                $leavetype->save();
-                
-            }
-            //dd('success');
+          if ($leavetype) {
+            $leavetype->title = $data['title'];
+            $leavetype->slug = Str::slug($data['title'], '-');
+            $leavetype->limit = $data['limit'] ?? 0;
+            $leavetype->description = isset($data['description']) ? $data['description'] : null;
+            $leavetype->status = $data['status'];
+            $leavetype->save();
+        }
+        
             return redirect()->route('leavetype-list')->with('success', 'Record Updated.');
         } else {
            // dd('fail');

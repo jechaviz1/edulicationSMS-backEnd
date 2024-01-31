@@ -10,9 +10,11 @@ use App\Models\PrintSetting;
 use App\Models\Program;
 use App\Models\Section;
 use App\Models\Semester;
+use App\Models\Subject;
+use App\Models\Teacher;
+use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Session;
 use DB;
 
 class ExamRoutineController extends Controller
@@ -24,9 +26,6 @@ class ExamRoutineController extends Controller
      */
     public function __construct()
     {
-        
-        $this->view = 'admin.exam-routine';
-        $this->path = 'exam-routine';
         $this->access = 'exam-routine';
     }
 
@@ -35,13 +34,11 @@ class ExamRoutineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        //
-       
-        $data['view'] = $this->view;
-        $data['path'] = $this->path;
+    public function examroutineList(Request $request) {
+        $data = [];
         $data['access'] = $this->access;
+        $data['title'] = 'ClassRoutine List';
+        $data['menu_active_tab'] = 'classroutine-list';
 
         
         if(!empty($request->faculty) || $request->faculty != null){
@@ -143,7 +140,7 @@ class ExamRoutineController extends Controller
         }
 
 
-        return view($this->view.'.index', $data);
+        return view('admin.exam_routine.list')->with($data);
     }
 
     /**
@@ -151,14 +148,11 @@ class ExamRoutineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
-    {
-        //
-        $data['title'] = $this->title;
-        $data['route'] = $this->route;
-        $data['view'] = $this->view;
-        $data['access'] = $this->access;
-
+    public function addExamRoutine(Request $request) {
+    
+        $data = [];
+        $data['title'] = 'Add Exam Routine';
+        $data['menu_active_tab'] = 'examroutine-list';
 
         if(!empty($request->faculty) || $request->faculty != null){
             $data['selected_faculty'] = $faculty = $request->faculty;
@@ -229,9 +223,12 @@ class ExamRoutineController extends Controller
             $routine = [];
             foreach($data['rows'] as $row){
                 $routine[] = $row->subject_id;
+               
             }
+            
 
             $subjects = Subject::where('status', 1)->whereNotIn('id', $routine);
+            
 
             $subjects->with('subjectEnrolls')->whereHas('subjectEnrolls', function ($query) use ($program, $semester, $section){
                 $query->where('program_id', $program);
@@ -280,14 +277,12 @@ class ExamRoutineController extends Controller
         $data['types'] = ExamType::where('status', '1')->orderBy('title', 'asc')->get();
         $data['rooms'] = ClassRoom::where('status', '1')->orderBy('title', 'asc')->get();
 
-        $teachers = User::where('status', '1');
-        $teachers->with('roles')->whereHas('roles', function ($query){
-            $query->where('slug', 'teacher');
-        });
-        $data['teachers'] = $teachers->orderBy('staff_id', 'asc')->get();
+        $teachers = Teacher::where('status', '1');
+      
+        $data['teachers'] = $teachers->orderBy('id', 'asc')->get();
 
 
-        return view($this->view.'.create', $data);
+        return view('admin.exam_routine.add')->with($data);
     }
 
     /**
@@ -296,8 +291,8 @@ class ExamRoutineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function storeExamRoutine(Request $request) {
+
         // Field Validation
         $request->validate([
             'session' => 'required',
@@ -335,17 +330,33 @@ class ExamRoutineController extends Controller
         DB::commit();
 
 
-        Toastr::success(__('msg_updated_successfully'), __('msg_success'));
+        session()->flash('add', ('msg added successfully'));
 
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function editExamRoutine(Request $request, $id) {
+        $data = [];
+        $data['title'] = 'Edit Exam Routine';
+        $data['menu_active_tab'] = 'ExamRoutine-list';
+        if ($id) {
+            $examroutine = ExamRoutine::find($id);
+           
+
+            $data['examroutine'] = ExamRoutine::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
+           
+            if ($examroutine) {
+                $data['examroutine'] = $examroutine;
+                
+                
+                return view('admin.exam_routine.edit')->with($data);
+            } else {
+                return redirect()->route('examroutine-list')->with('failed', 'Record not found.');
+            }
+        } else {
+            return redirect()->route('examroutine-list')->with('failed', 'Record not found.');
+        }
+    }
   
     public function update(Request $request, $id)
     {
@@ -381,46 +392,29 @@ class ExamRoutineController extends Controller
         DB::commit();
 
 
-        Toastr::success(__('msg_updated_successfully'), __('msg_success'));
+        session()->flash('update', ('msg updated successfully'));
 
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        DB::beginTransaction();
-        $examRoutine = ExamRoutine::findOrFail($id);
-
-        // Detach
-        $examRoutine->users()->detach();
-        $examRoutine->rooms()->detach();
-
-        // Delete Data
-        $examRoutine->delete();
-        DB::commit();
-
-        Toastr::success(__('msg_deleted_successfully'), __('msg_success'));
-
-        return redirect()->back();
+   
+    public function deleteExamRoutine($id) {
+        if ($id) {
+            $examroutine = ExamRoutine::find($id);
+            if ($examroutine) {
+                $examroutine->is_deleted = '1';
+                
+                $examroutine->save();
+            }
+            return redirect()->route('examroutine-list')->with('success', 'Record deleted.');
+        } else {
+            return redirect()->route('examroutine-list')->with('failed', 'Record not found.');
+        }
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function print(Request $request)
     {
-        //
-        $data['title'] = $this->title;
-        $data['route'] = $this->route;
-        $data['view'] = $this->view;
         $data['path'] = 'print-setting';
 
         
@@ -451,7 +445,7 @@ class ExamRoutineController extends Controller
                             ->orderBy('start_time', 'asc')->get();   
         }
 
-        return view($this->view.'.print', $data);
+        return view('admin.exam_routine.print')->with($data);
     }
 }
 

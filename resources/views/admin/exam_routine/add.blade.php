@@ -14,24 +14,24 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Add / Edit Class Routine</h5>
+                        <h5>Add / Edit Exam Routine</h5>
                     </div>
            
                     <div class="tab-content" id="myTabContent-1">
 													<div class="tab-pane fade show active" id="Buttons-Icon" role="tabpanel" aria-labelledby="home-tab-1">
 														<div class="card-body pt-0 mt-2">
-                                                        <a href="{{ URL::route('classroutine-list') }}" class="btn btn-primary light"><i class="fas fa-arrow-left"></i> back</a>
-                                                        <a href="{{ URL::route('add-classroutine') }}" class="btn btn-secondary"><i class="fas fa-sync-alt"></i> refresh</a>
+                                                        <a href="{{ URL::route('examroutine-list') }}" class="btn btn-primary light"><i class="fas fa-arrow-left"></i> back</a>
+                                                        <a href="{{ URL::route('add-examroutine') }}" class="btn btn-secondary"><i class="fas fa-sync-alt"></i> refresh</a>
 															
 														</div>
 													</div>
 													
-											</div>
-                         <div class="row">
+												</div>
+                                                <div class="row">
 													<div class="col-lg-12">
 														<div class="card-body">
 															<div class="form-validation">
-																<form class="needs-validation" novalidate method="get" action="{{ route('add-classroutine') }}">
+																<form class="needs-validation" novalidate method="get" action="{{ route('add-examroutine') }}">
                                     <div class="row">
                                         <div class="col-xl-3">
                                             <div class="mb-3 row">
@@ -145,11 +145,24 @@
                                                 </div>
                                               </div>
                                           </div>
+                                      </div>	
+                                      <div class="col-xl-3">
+                                        <div class="mb-3 row">
+                                            <label class="row-lg-3 col-form-label" for="type">Type
+                                            </label>
+                                              <div class="row-lg-8">
+                                                <select class="form-control type" name="type" id="type" required>
+                                                        <option value="">Select</option>
+                                                        @foreach( $types as $type )
+                                                        <option value="{{ $type->id }}" @if( $selected_type == $type->id) selected @endif>{{ $type->title }}</option>
+                                                        @endforeach
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Select Type
+                                                </div>
+                                              </div>
+                                          </div>
                                       </div>
-                           
-                            
-                                
-																			
 																			<div class="col-lg-2 pt-4">
 																				
 																				<div class="col-lg-8 ms-auto">
@@ -165,91 +178,71 @@
 												</div>
                 </div>
             </div>
-            @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @elseif(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @elseif(session('delete'))
-    <div class="alert alert-danger">
-        {{ session('delete') }}
-    </div>
-    else
-    <div class="alert alert-success">
-        {{ session('update') }}
-    </div>
-@endif
             <div class="col-sm-12">
                 <div class="card">
                     @isset($rows)
-                    @php
-                    $weekdays = array('1', '2', '3', '4', '5', '6', '7');
-                    @endphp
-                    <ul class="nav nav-pills mb-3 card-block mt-2" style="margin-left:20px"id="myTab" role="tablist">
+                    <div class="card-block">
+                        
+                        @isset($rows)
+                        @foreach($rows as $row)
 
-                        @foreach($weekdays as $weekday)
-                        <li class="nav-item">
-                            <a class="nav-link @if($weekday == 1) active @endif text-uppercase" id="day{{ $weekday }}-tab" data-bs-toggle="tab" href="#day{{ $weekday }}" role="tab" aria-controls="day{{ $weekday }}" aria-selected="true">
-                                @if( $weekday == 1 )
-                                     Saturday
-                                @elseif( $weekday == 2 )
-                                     Sunday
-                                @elseif( $weekday == 3 )
-                                     Monday
-                                @elseif( $weekday == 4 )
-                                     Tuesday
-                                @elseif( $weekday == 5 )
-                                     Wednesday
-                                @elseif( $weekday == 6 )
-                                     Thursday
-                                @elseif( $weekday == 7 )
-                                     Friday
-                                @endif
-                            </a>
-                        </li>
-                        @endforeach
+                        <form class="needs-validation mt-5" novalidate action="{{ route('update-examroutine', $row->id) }}" method="post" id="fields" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                            <div class="row">
 
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
+                                @include('admin.exam_routine.form_edit')
 
-                        @foreach($weekdays as $weekday)
-                        <div class="tab-pane fade @if($weekday == 1) show active @endif" id="day{{ $weekday }}" role="tabpanel" aria-labelledby="day{{ $weekday }}-tab">
-                            <div class="card-body pt-0">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                    <form class="needs-validation" novalidate action="{{ route('store-classroutine') }}" method="post" id="fields" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="text" name="program" value="{{ $selected_program }}" hidden>
-                                    <input type="text" name="session" value="{{ $selected_session }}" hidden>
-                                    <input type="text" name="semester" value="{{ $selected_semester }}" hidden>
-                                    <input type="text" name="section" value="{{ $selected_section }}" hidden>
-                                    <input type="text" name="day" value="{{ $weekday }}" hidden>
-                                    
-                                    @forelse($rows->where('day', $weekday) as $row)
-                                        @include('admin.class_routine.edit')
-                                    @empty
-                                        @include('admin.class_routine.form_field')
-                                    @endforelse
-                                    <div id="newField-tab-{{ $weekday }}" class="clearfix"></div>
-                                    <div class="card-block mt-2 mb-1">
-                                        <button id="addField" type="button" class="btn btn-success" data-bs-tab="tab-{{ $weekday }}"><i class="fas fa-plus"></i> Add New</button>
-                                    </div>
-                                    <div class="card-footer text-right">
-                                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
-                                    </div>
-                                    </form>
-                                    </div>
+                                <input type="text" name="program" value="{{ $selected_program }}" hidden>
+                                <input type="text" name="session" value="{{ $selected_session }}" hidden>
+                                <input type="text" name="semester" value="{{ $selected_semester }}" hidden>
+                                <input type="text" name="section" value="{{ $selected_section }}" hidden>
+                                <input type="text" name="type" value="{{ $selected_type }}" hidden>
+
+                                <div class="form-group col-6 col-md-3">
+                                    <button type="submit" class="btn btn-success btn-filter"><i class="fas fa-check"></i> Update</button>
                                 </div>
+
+                                
+                                <div class="form-group col-6 col-md-3">
+                                    <button type="button" class="btn btn-danger btn-filter" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $row->id }}">
+                                        <i class="fas fa-trash-alt"></i> Remove
+                                    </button>
+                                </div>
+                              
+
+                            </div>
+                        </form>
+
+                        
+                        <!-- Include Delete modal -->
+                        @include('admin.exam_routine.delete')
+                        
+                        @endforeach
+                        @endisset
+
+                        <form action="{{ route('store-examroutine') }}" class="needs-validation mt-5 btn-submit" novalidate method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row">
+                            
+                            @include('admin.exam_routine.form_field')
+
+                            <input type="text" name="program" value="{{ $selected_program }}" hidden>
+                            <input type="text" name="session" value="{{ $selected_session }}" hidden>
+                            <input type="text" name="semester" value="{{ $selected_semester }}" hidden>
+                            <input type="text" name="section" value="{{ $selected_section }}" hidden>
+                            <input type="text" name="type" value="{{ $selected_type }}" hidden>
+
+                            <div class="form-group col-md-3">
+                                <button type="submit" class="btn btn-success btn-filter"><i class="fas fa-check"></i> Save</button>
                             </div>
                         </div>
-                        @endforeach
-
-                    </div>
-                    @endisset
+                        </form>
+                   </div>
+                   @endisset
                 </div>
+                
             </div>
             <!-- [ Card ] end -->
         </div>

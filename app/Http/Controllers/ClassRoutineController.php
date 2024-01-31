@@ -364,6 +364,19 @@ class ClassRoutineController extends Controller
             return redirect()->back();
     }
 
+    public function deleteClassRoutine($id) {
+        if ($id) {
+            $classroutine = ClassRoutine::find($id);
+            if ($classroutine) {
+                $classroutine->is_deleted = '1';
+                
+                $classroutine->save();
+            }
+            return redirect()->route('classroutine-list')->with('success', 'Record deleted.');
+        } else {
+            return redirect()->route('classroutine-list')->with('failed', 'Record not found.');
+        }
+    }
     public function teacher(Request $request)
     {
        
