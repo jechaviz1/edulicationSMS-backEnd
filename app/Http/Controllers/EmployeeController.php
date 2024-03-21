@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Str;
+use App\Models\WorkShiftType;
 
 class EmployeeController extends Controller
 {
@@ -49,8 +50,8 @@ class EmployeeController extends Controller
             $data['selected_contract'] = '0';
         }
 
-        if(!empty($request->shift) || $request->shift != null){
-            $data['selected_shift'] = $shift = $request->shift;
+        if(!empty($request->work_shift) || $request->work_shift != null){
+            $data['selected_shift'] = $shift = $request->work_shift;
         }
         else{
             $data['selected_shift'] = '0';
@@ -81,7 +82,7 @@ class EmployeeController extends Controller
         if(!empty($request->contract_type)){
             $emp->where('employee_status', $contract_type);
         }
-        if(!empty($request->shift)){
+        if(!empty($request->work_shift)){
             $emp->where('work_shift', $shift);
         }
 
@@ -92,6 +93,7 @@ class EmployeeController extends Controller
         $data['designations'] = Designation::where('is_deleted', '0')
         ->orderBy('designation_name', 'asc')->get();
         $data['role'] = Role::orderBy('name', 'asc')->get();
+        $data['work_shift_type'] = WorkShiftType::where('is_deleted', '0')->get();
 
         return view('admin.employee.list')->with($data);
     }
@@ -102,7 +104,8 @@ class EmployeeController extends Controller
         $data['department'] = Department::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
         $data['designation'] = Designation::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
         $data['role'] = Role::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
-        
+        $data['work_shift_type'] = WorkShiftType::where('is_deleted', '0')->get();
+        // dd($data['work_shift_type']);
         
         return view('admin.employee.add',compact('data'));
     }
@@ -185,6 +188,7 @@ class EmployeeController extends Controller
             $data['department'] = Department::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
             $data['designation'] = Designation::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
             $data['role'] = Role::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
+            $data['work_shift_type'] = WorkShiftType::where('is_deleted', '0')->get();
             if ($employee) {
                 $data['employee'] = $employee;
                 return view('admin.employee.edit')->with($data);

@@ -190,8 +190,13 @@
                                     </label>
                                     <div class="col-lg-6">
                                         <select class="default-select wide form-control" id="validationCustom05" name="work_shift">
-                                            <option value="1">Full-Time</option>
-                                            <option value="2">Part-Time</option>
+                                            <!--<option value="1">Full-Time</option>-->
+                                            <!--<option value="2">Part-Time</option>-->
+                                                @if(!empty($data['work_shift_type']))
+                                                @foreach ($data['work_shift_type'] as $row)
+                                                <option value="{{$row->id}}">{{$row->title}}</option>
+                                                @endforeach
+                                                @endif
                                             <!-- @if(!empty($role))
                                             @foreach ($role as $row)
                                             <option value="{{$row->id}}">{{$row->name}}</option>

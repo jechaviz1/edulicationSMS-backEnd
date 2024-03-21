@@ -51,6 +51,19 @@ use App\Http\Controllers\StudentIdCardSettingController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\WorkShiftTypeController;
+use App\Http\Controllers\StaffAttendanceController;
+use App\Http\Controllers\StaffHourlyAttendanceController;
+use App\Http\Controllers\StaffNoteController;
+use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\TaxSettingController;
+use App\Http\Controllers\PaySlipSettingController;
+use App\Http\Controllers\IncomeCategoryController;
+use App\Http\Controllers\ExpenseCategoryController;
+use App\Http\Controllers\CourseCategoryController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\RegionController;
+use App\Http\Controllers\CityTownController;
 
 /*
   |--------------------------------------------------------------------------
@@ -540,5 +553,123 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/delete-examattendance/{id}', [ExamAttendanceController::class, 'delete'])->name('delete-examattendance');
          
         //END-ExamAttendance
+
+         // START - work shift Type
+         Route::get('/add-work-shift-type', [WorkShiftTypeController::class, 'add'])->name('add-work-shift-type');
+         Route::post('/store-work-shift-type', [WorkShiftTypeController::class, 'store'])->name('store-work-shift-type');
+         Route::get('/work-shift-type-list', [WorkShiftTypeController::class, 'list'])->name('work-shift-type-list');
+         Route::get('/edit-work-shift-type/{id}', [WorkShiftTypeController::class, 'edit'])->name('edit-work-shift-type');
+         Route::post('/update-work-shift-type/{id}', [WorkShiftTypeController::class, 'update'])->name('update-work-shift-type');
+         Route::get('/delete-work-shift-type/{id}', [WorkShiftTypeController::class, 'delete'])->name('delete-work-shift-type');
+         // END - work shift Type
+         
+         // START - attendance type
+         Route::get('/staff-daily-attendance', [StaffAttendanceController::class, 'index'])->name('staff-daily-attendance');
+         Route::post('/staff-daily-attendance-store', [StaffAttendanceController::class, 'store'])->name('staff-daily-attendance-store');
+         Route::get('/staff-daily-attendance-report', [StaffAttendanceController::class, 'report'])->name('staff-daily-attendance-report');
+         
+         Route::get('/staff-hourly-attendance', [StaffHourlyAttendanceController::class, 'index'])->name('staff-hourly-attendance');
+         
+         //End - attendance type
+         
+         // START - Staff Note
+         Route::get('/add-staff-note', [StaffNoteController::class, 'add'])->name('add-staff-note');
+         Route::post('/store-staff-note', [StaffNoteController::class, 'store'])->name('store-staff-note');
+         Route::get('/staff-note-list', [StaffNoteController::class, 'list'])->name('staff-note-list');
+         Route::get('/edit-staff-note/{id}', [StaffNoteController::class, 'edit'])->name('edit-staff-note');
+         Route::post('/update-staff-note/{id}', [StaffNoteController::class, 'update'])->name('update-staff-note');
+         Route::get('/delete-staff-note/{id}', [StaffNoteController::class, 'delete'])->name('delete-staff-note');
+         // END - Staff Note
+         
+          // START - Payroll
+         Route::get('/payroll', [PayrollController::class, 'index'])->name('payroll');
+         Route::get('/payroll_generate/{id}/{month}/{year}', [PayrollController::class, 'generate'])->name('payroll_generate');
+         Route::post('/payroll_generete_store', [PayrollController::class, 'store'])->name('payroll_generete_store');
+         Route::post('/payroll_pay/{id}', [PayrollController::class, 'pay'])->name('payroll_pay');
+         Route::get('/payroll_print/{id}', [PayrollController::class, 'print'])->name('payroll_print');
+         Route::post('/payroll_unpay/{id}', [PayrollController::class, 'unpay'])->name('payroll_unpay');
+         Route::get('/payroll_report', [PayrollController::class, 'report'])->name('payroll_report');
+       
+         //End - Payroll
+
+         
+          // START - Tax Setting
+         Route::get('/add-tax-setting', [TaxSettingController::class, 'add'])->name('add-tax-setting');
+         Route::post('/store-tax-setting', [TaxSettingController::class, 'store'])->name('store-tax-setting');
+         Route::get('/tax-setting-list', [TaxSettingController::class, 'list'])->name('tax-setting-list');
+         Route::get('/edit-tax-setting/{id}', [TaxSettingController::class, 'edit'])->name('edit-tax-setting');
+         Route::post('/update-tax-setting/{id}', [TaxSettingController::class, 'update'])->name('update-tax-setting');
+         Route::get('/delete-tax-setting/{id}', [TaxSettingController::class, 'delete'])->name('delete-tax-setting');
+         // END - Tax Setting
+         
+          // START - pay slip setting
+         Route::get('/add-pay-slip-setting', [PaySlipSettingController::class, 'index'])->name('add-pay-slip-setting');
+         Route::post('/store-pay-slip-setting', [PaySlipSettingController::class, 'store'])->name('store-pay-slip-setting');
+         // END - pay slip setting
+         
+          // START - Income Categories
+         Route::get('/add_income_category', [IncomeCategoryController::class, 'add'])->name('add_income_category');
+         Route::post('/store_income_category', [IncomeCategoryController::class, 'store'])->name('store_income_category');
+         Route::get('/income_categoris', [IncomeCategoryController::class, 'list'])->name('income_categoris');
+         Route::get('/edit_income_category/{id}', [IncomeCategoryController::class, 'edit'])->name('edit_income_category');
+         Route::post('/update_income_category/{id}', [IncomeCategoryController::class, 'update'])->name('update_income_category');
+         Route::get('/delete_income_category/{id}', [IncomeCategoryController::class, 'delete'])->name('delete_income_category');
+         // END - Income Categories
+         
+         // START - Expense Category
+         Route::get('/add_expense_category', [ExpenseCategoryController::class, 'add'])->name('add_expense_category');
+         Route::post('/store_expense_category', [ExpenseCategoryController::class, 'store'])->name('store_expense_category');
+         Route::get('/expense_categoris', [ExpenseCategoryController::class, 'list'])->name('expense_categoris');
+         Route::get('/edit_expense_category/{id}', [ExpenseCategoryController::class, 'edit'])->name('edit_expense_category');
+         Route::post('/update_expense_category/{id}', [ExpenseCategoryController::class, 'update'])->name('update_expense_category');
+         Route::get('/delete_expense_category/{id}', [ExpenseCategoryController::class, 'delete'])->name('delete_expense_category');
+         // END - Expense Category
+  
+        // START - coursecategory
+        Route::get('/add-coursecategory', [CourseCategoryController::class, 'addCourseCategory'])->name('add-coursecategory');
+        Route::post('/store-coursecategory', [CourseCategoryController::class, 'storeCourseCategory'])->name('store-coursecategory');
+        Route::get('/coursecategory-list', [CourseCategoryController::class, 'coursecategoryList'])->name('coursecategory-list');
+        Route::get('/edit-coursecategory/{id}', [CourseCategoryController::class, 'editCourseCategory'])->name('edit-coursecategory');
+        Route::post('/update-coursecategory/{id}', [CourseCategoryController::class, 'updateCourseCategory'])->name('update-coursecategory');
+        Route::get('/delete-coursecategory/{id}', [CourseCategoryController::class, 'deleteCourseCategory'])->name('delete-coursecategory');
+        // END - coursecategory
+        
+       // START - course
+        Route::get('/add-course', [CourseController::class, 'add'])->name('add-course');
+        Route::post('/store-course', [CourseController::class, 'store'])->name('store-course');
+        Route::get('/course-list', [CourseController::class, 'list'])->name('course-list');
+        Route::get('/edit-course/{id}', [CourseController::class, 'edit'])->name('edit-course');
+        Route::post('/update-course/{id}', [CourseController::class, 'update'])->name('update-course');
+        Route::get('/delete-course/{id}', [CourseController::class, 'delete'])->name('delete-course');
+        Route::get('/change-course-status/{id}/{status}', [CourseController::class, 'changestatus'])->name('change-course-status');
+        Route::post('/store-avetmisscode', [CourseController::class, 'avetmisscodestore'])->name('store-avetmisscode');
+        
+        Route::post('/store-unit', [CourseController::class, 'storeunit'])->name('store-unit');
+        Route::post('/update-unit/{id}', [CourseController::class, 'updateunit'])->name('update-unit');
+        Route::get('/delete-unit/{id}', [CourseController::class, 'deleteunit'])->name('delete-unit');
+        Route::get('/change-unit-status/{id}/{status}', [CourseController::class, 'changeunitstatus'])->name('change-unit-status');
+        // END - course
+        
+         // START - Region
+         
+         Route::get('/add-ragion', [RegionController::class, 'add'])->name('add-ragion');
+         Route::post('/store-ragion', [RegionController::class, 'store'])->name('store-ragion');
+         Route::get('/ragion-list', [RegionController::class, 'list'])->name('ragion-list');
+         Route::get('/edit-ragion/{id}', [RegionController::class, 'edit'])->name('edit-ragion');
+         Route::post('/update-ragion/{id}', [RegionController::class, 'update'])->name('update-ragion');
+         Route::get('/delete-ragion/{id}', [RegionController::class, 'delete'])->name('delete-ragion');
+         
+         // END - Region
+         
+         // START - City Town
+         Route::get('/add-city-town', [CityTownController::class, 'add'])->name('add-city-town');
+         Route::post('/store-city-town', [CityTownController::class, 'store'])->name('store-city-town');
+         Route::get('/city-town-list', [CityTownController::class, 'list'])->name('city-town-list');
+         Route::get('/edit-city-town/{id}', [CityTownController::class, 'edit'])->name('edit-city-town');
+         Route::post('/update-city-town/{id}', [CityTownController::class, 'update'])->name('update-city-town');
+         Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
+         Route::get('/change-citytown-status/{id}/{status}', [CityTownController::class, 'changestatus'])->name('change-citytown-status');
+         // END - City Town
+  
     });
 });

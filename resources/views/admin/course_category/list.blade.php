@@ -35,6 +35,7 @@
                         <table id="example4" class="display table" style="min-width: 845px">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Category name</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -42,9 +43,10 @@
                             </thead>
                             <tbody>
                                 @if(!empty($rows))
-                                @foreach ($rows as $row)
+                                @foreach ($rows as $key=>$row)
 
                                 <tr>
+                                    <td>{{$key+1}}</td>
                                     <td>{{$row->name}}</td>
                                     <td>  @if( $row->status == 1 )
                                             <span class="badge badge-pill badge-success">Active</span>

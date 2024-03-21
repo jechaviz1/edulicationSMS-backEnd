@@ -29,5 +29,21 @@ class Employee extends Model
     {
         return $this->belongsTo('App\Models\Role', 'role_id');
     }
+        public function workShift()
+    {
+        return $this->belongsTo('App\Models\WorkShiftType', 'work_shift', 'id');
+    }
+        public function classes()
+    {
+        return $this->hasMany('App\Models\ClassRoutine', 'teacher_id', 'id');
+    }
+    public function notes()
+    {
+        return $this->morphMany('App\Models\StaffNote', 'noteable');
+    }
     
+    public function transactions()
+    {
+        return $this->morphMany(Transaction::class, 'transactionable');
+    }
 }

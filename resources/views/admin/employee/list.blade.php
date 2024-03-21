@@ -114,8 +114,11 @@
 																						<select class="default-select wide form-control" id="work_shift" name="work_shift" tabindex="null">
 																						
 																						<option value="">{{ __('all') }}</option>
-																						<option value="1" {{ $selected_contract == '1' ? 'selected' : '' }}>Full-Time</option>
-																						<option value="2" {{ $selected_contract == '2' ? 'selected' : '' }}>Part-Time</option>
+																						<!--<option value="1" {{ $selected_shift == '1' ? 'selected' : '' }}>Full-Time</option>-->
+																						<!--<option value="2" {{ $selected_shift == '2' ? 'selected' : '' }}>Part-Time</option>-->
+																						@foreach( $work_shift_type as $row )
+																							<option value="{{ $row->id }}" @if( $selected_shift == $row->id) selected @endif>{{ $row->title }}</option>
+																						@endforeach
 																					
 																						</select>
 																						

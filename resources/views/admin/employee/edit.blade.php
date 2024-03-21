@@ -232,8 +232,14 @@
                                             <div class="col-lg-6">
                                                 <select class="default-select wide form-control" id="validationCustom05" name="work_shift">
                                                     <!--                                            <option >Please select</option>-->
-                                                    <option value="1" @if ($employee->work_shift == '1') selected @endif>Full-Time</option>
-                                                    <option value="2" @if ($employee->work_shift == '2') selected @endif>Part-Time</option>
+                                                    <!--<option value="1" @if ($employee->work_shift == '1') selected @endif>Full-Time</option>-->
+                                                    <!--<option value="2" @if ($employee->work_shift == '2') selected @endif>Part-Time</option>-->
+                                                    
+                                                    @if(!empty($work_shift_type))
+                                                    @foreach ($work_shift_type as $row)
+                                                    <option value="{{$row->id}}" {{ $row->id == $employee->work_shift ? 'selected' : '' }}  >{{$row->title}}</option>
+                                                    @endforeach
+                                                    @endif
                                         
                                                 </select>
                                                 <div class="invalid-feedback">

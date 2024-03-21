@@ -42,7 +42,7 @@
                                                 class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-8">
-                                            <select class="form-control" name="status" id="status">
+                                            <select class="default-select wide form-control" name="status" id="status">
                                                 <option value="1" @if( $fees_category->status == 1 ) selected @endif>Active</option>
                                                 <option value="0" @if( $fees_category->status == 0 ) selected @endif>Inactive</option>
                                             </select>

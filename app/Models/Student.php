@@ -19,7 +19,7 @@ class Student extends Model {
         return $this->belongsToMany(StatusType::class, 'status_type_student', 'student_id', 'status_type_id');
     }
     
-        public function transactions()
+    public function transactions()
     {
         return $this->morphMany(Transaction::class, 'transactionable');
     }

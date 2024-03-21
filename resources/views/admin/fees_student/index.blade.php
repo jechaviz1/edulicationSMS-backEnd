@@ -319,7 +319,7 @@
                                             </button>
                                             <!-- Include Pay modal -->
                                                  @include($view.'.pay')
-                                       					<button type="button" class="btn btn-primary light mb-2" data-bs-toggle="modal" data-bs-target="#basicModal">Basic modal</button>
+                                       					<!--<button type="button" class="btn btn-primary light mb-2" data-bs-toggle="modal" data-bs-target="#basicModal">Basic modal</button>-->
                                        				
                                        				
                                        				

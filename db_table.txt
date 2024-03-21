@@ -66,3 +66,801 @@ ALTER TABLE `content`
   
   
 -- --------------------------------------------------------
+
+CREATE TABLE `department` (
+  `id` int(11) NOT NULL,
+  `department_name` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-----------------------------------------------------------
+
+CREATE TABLE `designation` (
+  `id` int(11) NOT NULL,
+  `designation_name` varchar(255) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+---------------------------------------------------------
+
+CREATE TABLE `employee` (
+  `id` int(11) NOT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `gender` tinyint(2) DEFAULT 1,
+  `birthdate` date DEFAULT NULL,
+  `contact_number` bigint(20) DEFAULT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `profile_photo` text DEFAULT NULL,
+  `employee_code` varchar(255) DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `work_shift` enum('1','2') NOT NULL DEFAULT '1',
+  `salary` int(11) DEFAULT NULL,
+  `salary_type` int(11) DEFAULT 1 COMMENT '	1 Fixed & 2 Hourly',
+  `contract_type` int(11) NOT NULL DEFAULT 1 COMMENT '	1 Full Time & 2 Part Time',
+  `employee_status` varchar(255) DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL,
+  `designation_id` int(11) DEFAULT NULL,
+  `role_id` int(10) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0 Inactive, 1 Active',
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-------------------------------------------------------------------
+
+CREATE TABLE `fees` (
+  `id` bigint(20) NOT NULL,
+  `student_enroll_id` bigint(20) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `fee_amount` double(10,2) DEFAULT NULL,
+  `fine_amount` double(10,2) DEFAULT NULL,
+  `discount_amount` double(10,2) DEFAULT NULL,
+  `paid_amount` double(10,2) DEFAULT NULL,
+  `assign_date` date DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `pay_date` date DEFAULT NULL,
+  `payment_method` int(10) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `status` int(10) DEFAULT 0 COMMENT '0 Unpaid, 1 Paid',
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `fees_categories` (
+  `id` int(11) NOT NULL,
+  `title` varchar(250) DEFAULT NULL,
+  `slug` varchar(250) DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(10) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-------------------------------------------------------------------
+
+CREATE TABLE `fees_category_fees_discount` (
+  `fees_discount_id` int(11) NOT NULL,
+  `fees_category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `fees_category_fees_fine` (
+  `fees_fine_id` int(10) DEFAULT NULL,
+  `fees_category_id` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+----------------------------------------------------------------
+
+CREATE TABLE `fees_discounts` (
+  `id` int(10) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `type` int(11) NOT NULL DEFAULT 1 COMMENT '1 Fixed & 2 Percentange',
+  `status` tinyint(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+---------------------------------------------------------------
+
+CREATE TABLE `fees_discount_status_type` (
+  `fees_discount_id` int(11) UNSIGNED NOT NULL,
+  `status_type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--------------------------------------------------------------
+
+CREATE TABLE `fees_fines` (
+  `id` int(11) NOT NULL,
+  `start_day` int(11) DEFAULT NULL,
+  `end_day` int(11) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `type` int(10) DEFAULT 1 COMMENT '1 Fixed, 2 Percentage	',
+  `status` tinyint(10) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `fees_masters` (
+  `id` bigint(20) NOT NULL,
+  `category_id` int(10) DEFAULT NULL,
+  `faculty_id` int(10) DEFAULT NULL,
+  `program_id` int(10) DEFAULT NULL,
+  `session_id` int(10) DEFAULT NULL,
+  `semester_id` int(10) DEFAULT NULL,
+  `section_id` int(10) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `assign_date` date DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `status` tinyint(10) DEFAULT 1,
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `type` int(11) DEFAULT 1 COMMENT '	1 Fixed, 2 Per Credit',
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-----------------------------------------------------------------
+
+CREATE TABLE `fees_master_student_enroll` (
+  `fees_master_id` bigint(20) NOT NULL,
+  `student_enroll_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+
+----------------------------------------------------------------
+
+CREATE TABLE `fees_receipt` (
+  `id` int(10) NOT NULL,
+  `slug` varchar(200) DEFAULT NULL,
+  `title` text DEFAULT NULL,
+  `header_left` text DEFAULT NULL,
+  `header_center` text DEFAULT NULL,
+  `header_right` text DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `footer_left` text DEFAULT NULL,
+  `footer_center` text DEFAULT NULL,
+  `footer_right` text DEFAULT NULL,
+  `logo_left` text DEFAULT NULL,
+  `logo_right` text DEFAULT NULL,
+  `background` text DEFAULT NULL,
+  `width` varchar(150) DEFAULT 'auto',
+  `height` varchar(150) DEFAULT 'auto',
+  `student_photo` tinyint(4) DEFAULT NULL,
+  `barcode` tinyint(4) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+
+-----------------------------------------------------------------
+
+CREATE TABLE `id_card_settings` (
+  `id` int(10) NOT NULL,
+  `slug` varchar(192) DEFAULT NULL,
+  `title` varchar(192) DEFAULT NULL,
+  `subtitle` varchar(192) DEFAULT NULL,
+  `logo` text DEFAULT NULL,
+  `background` text DEFAULT NULL,
+  `website_url` varchar(192) DEFAULT NULL,
+  `validity` varchar(192) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `student_photo` tinyint(1) DEFAULT 0,
+  `signature` tinyint(1) DEFAULT 0,
+  `barcode` tinyint(1) DEFAULT 0,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `leaves` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `type_id` int(10) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `review_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `apply_date` date NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `reason` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attach` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pay_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 Paid & 2 Unpaid',
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0 Pending, 1 Approved and 2 Rejected',
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--------------------------------------------------------------------
+
+CREATE TABLE `marital_status` (
+  `id` int(10) NOT NULL,
+  `title` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `notes` (
+  `id` bigint(20) NOT NULL,
+  `noteable_type` varchar(191) DEFAULT NULL,
+  `noteable_id` bigint(20) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `attach` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `payrolls` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `basic_salary` double(10,2) DEFAULT 0.00,
+  `salary_type` int(11) DEFAULT 1 COMMENT '1 Fixed & 2 Hourly	',
+  `total_earning` double(10,2) DEFAULT NULL,
+  `total_allowance` double(10,2) DEFAULT 0.00,
+  `bonus` double(10,2) DEFAULT 0.00,
+  `gross_salary` double(10,2) DEFAULT NULL,
+  `total_deduction` double(10,2) DEFAULT NULL,
+  `tax` double(10,2) DEFAULT 0.00,
+  `net_salary` double(10,2) DEFAULT NULL,
+  `salary_month` date DEFAULT NULL,
+  `pay_date` date DEFAULT NULL,
+  `payment_method` int(11) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `status` int(11) DEFAULT 0 COMMENT '0 Unpaid, 1 Paid	',
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-------------------------------------------------------------------
+
+CREATE TABLE `payroll_details` (
+  `id` bigint(20) NOT NULL,
+  `payroll_id` bigint(20) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT 0.00,
+  `status` int(11) DEFAULT 1 COMMENT '0 Deduction, 1 Allowance',
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `print_settings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `title` text DEFAULT NULL,
+  `header_left` text DEFAULT NULL,
+  `header_center` text DEFAULT NULL,
+  `header_right` text DEFAULT NULL,
+  `body` longtext DEFAULT NULL,
+  `footer_left` text DEFAULT NULL,
+  `footer_center` text DEFAULT NULL,
+  `footer_right` text DEFAULT NULL,
+  `logo_left` text DEFAULT NULL,
+  `logo_right` text DEFAULT NULL,
+  `background` text DEFAULT NULL,
+  `width` varchar(191) NOT NULL DEFAULT 'auto',
+  `height` varchar(191) NOT NULL DEFAULT 'auto',
+  `student_photo` tinyint(1) NOT NULL DEFAULT 0,
+  `barcode` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+
+-------------------------------------------------------------------
+
+CREATE TABLE `settings` (
+  `id` int(10) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `academy_code` varchar(200) DEFAULT NULL,
+  `meta_title` varchar(200) DEFAULT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `logo_path` text DEFAULT NULL,
+  `favicon_path` text DEFAULT NULL,
+  `phone` varchar(191) DEFAULT NULL,
+  `email` varchar(191) DEFAULT NULL,
+  `fax` varchar(191) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `language` varchar(191) DEFAULT NULL,
+  `date_format` varchar(191) DEFAULT NULL,
+  `time_format` varchar(191) DEFAULT NULL,
+  `week_start` varchar(191) DEFAULT NULL,
+  `time_zone` varchar(191) DEFAULT NULL,
+  `currency` varchar(191) DEFAULT NULL,
+  `currency_symbol` varchar(191) DEFAULT NULL,
+  `decimal_place` int(10) DEFAULT 2,
+  `copyright_text` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-------------------------------------------------------------------
+
+CREATE TABLE `staff_attendances` (
+  `id` bigint(20) NOT NULL,
+  `employ_id` bigint(20) DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `attendance` int(11) DEFAULT 0 COMMENT '1 Present, 2 Absent, 3 Leave, 4 Holiday',
+  `note` text DEFAULT NULL,
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `status_types` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `slug` varchar(200) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-----------------------------------------------------------------
+
+CREATE TABLE `status_type_student` (
+  `student_id` bigint(20) DEFAULT NULL,
+  `status_type_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `students` (
+  `id` int(11) NOT NULL,
+  `student_id` varchar(191) DEFAULT NULL,
+  `first_name` varchar(255) DEFAULT NULL,
+  `middle_name` varchar(255) DEFAULT NULL,
+  `last_name` varchar(255) DEFAULT NULL,
+  `gender` int(11) DEFAULT NULL,
+  `relation` int(11) DEFAULT NULL,
+  `contact_no` varchar(255) DEFAULT NULL,
+  `emergency_contact_no` varchar(255) DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `nationality` varchar(255) DEFAULT NULL,
+  `first_guardian_name` varchar(255) DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `modified_by_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT 1 COMMENT '0 Inactive, 1 Active, 2 Passed Out, 3 Transfer Out',
+  `marital_status` int(10) DEFAULT NULL,
+  `blood_group` int(10) DEFAULT NULL,
+  `is_deleted` enum('0','1') DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `tax_settings` (
+  `id` int(11) NOT NULL,
+  `min_amount` decimal(10,2) DEFAULT NULL,
+  `max_amount` decimal(10,2) DEFAULT NULL,
+  `percentange` decimal(10,2) DEFAULT NULL,
+  `max_no_taxable_amount` decimal(10,2) DEFAULT 0.00,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `transactions` (
+  `id` bigint(20) NOT NULL,
+  `transactionable_id` bigint(20) DEFAULT NULL,
+  `transactionable_type` varchar(199) DEFAULT NULL,
+  `transaction_id` varchar(199) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `type` int(10) DEFAULT NULL COMMENT '1 Creadit & 2 Debit',
+  `created_by` bigint(20) DEFAULT NULL,
+  `updated_by` bigint(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-----------------------------------------------------------------
+
+CREATE TABLE `work_shift_types` (
+  `id` int(10) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `slug` varchar(200) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+----------------------------------------------------------------
+
+CREATE TABLE `blood_group` (
+  `id` int(10) NOT NULL,
+  `title` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+----------------------------------------------------------------
+
+CREATE TABLE `attendance_type` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `is_active` enum('0','1','2','') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>active,2=>inactive',
+  `description` longtext DEFAULT NULL,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-------------------------------------------------------------------------
+
+CREATE TABLE `avetmiss_code` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `course_code` varchar(200) DEFAULT NULL,
+  `state_course_code` varchar(50) DEFAULT NULL,
+  `reporting_state` varchar(200) DEFAULT NULL,
+  `nominal_hours` varchar(20) DEFAULT NULL,
+  `recognition_identifier` varchar(200) DEFAULT NULL,
+  `qualification_category` varchar(300) DEFAULT NULL,
+  `anzscod_id` varchar(200) DEFAULT NULL,
+  `vet_flag` varchar(20) DEFAULT NULL,
+  `field_of_education` varchar(300) DEFAULT NULL,
+  `associated_course_identifier` varchar(300) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--------------------------------------------------------------------------------
+
+CREATE TABLE `city_town` (
+  `id` int(11) NOT NULL,
+  `city_name` varchar(200) DEFAULT NULL,
+  `state` varchar(150) DEFAULT NULL,
+  `ragion_id` int(11) DEFAULT NULL,
+  `status` varchar(10) DEFAULT '1' COMMENT 'active-1, inactive-0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+----------------------------------------------------------------------------------
+
+CREATE TABLE `course` (
+  `id` int(11) NOT NULL,
+  `code` varchar(100) DEFAULT NULL,
+  `name` varchar(300) DEFAULT NULL,
+  `course_category_id` int(11) DEFAULT NULL,
+  `default_course_cost` varchar(50) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `comments` text DEFAULT NULL,
+  `follow_up_enquiry` int(11) DEFAULT NULL,
+  `delivery_method` varchar(300) DEFAULT NULL,
+  `required_no_of_unit` varchar(10) DEFAULT NULL,
+  `core_unit` varchar(10) DEFAULT NULL,
+  `color` varchar(50) DEFAULT NULL,
+  `reporting_this_course` int(11) DEFAULT 0,
+  `tga_package` int(11) DEFAULT 0,
+  `status` int(11) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+
+--------------------------------------------------------------------
+
+CREATE TABLE `course_categories` (
+  `id` int(10) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0=>inactive, 1=>active',
+  `description` text DEFAULT NULL,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>delete',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-------------------------------------------------------------------
+CREATE TABLE `expense_categories` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `slug` varchar(200) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+----------------------------------------------------------------
+
+CREATE TABLE `income_categories` (
+  `id` int(11) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `slug` varchar(200) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `leave_allocation` (
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `leave_allotted` int(11) DEFAULT NULL,
+  `leave_type_id` int(11) DEFAULT NULL,
+  `description` text NOT NULL,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>Default,1=>active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--------------------------------------------------------------------
+
+CREATE TABLE `leave_type` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `alias` varchar(255) DEFAULT NULL,
+  `description` longtext NOT NULL,
+  `is_active` enum('0','1','2','') NOT NULL DEFAULT '0' COMMENT '0=>Default,1=>active,2=>inactive',
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>Default,1=>active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-------------------------------------------------------------------
+
+CREATE TABLE `marital_status` (
+  `id` int(10) NOT NULL,
+  `title` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `programs` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `faculty_id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shortcode` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `registration` tinyint(1) NOT NULL DEFAULT 1,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+---------------------------------------------------------------
+
+CREATE TABLE `program_class_room` (
+  `program_id` int(10) UNSIGNED NOT NULL,
+  `class_room_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--------------------------------------------------------------------
+
+CREATE TABLE `program_semester` (
+  `program_id` int(10) UNSIGNED NOT NULL,
+  `semester_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+---------------------------------------------------------------------
+
+CREATE TABLE `program_semester_sections` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `program_id` int(10) UNSIGNED NOT NULL,
+  `semester_id` int(10) UNSIGNED NOT NULL,
+  `section_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-------------------------------------------------------------------
+
+CREATE TABLE `region` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+---------------------------------------------------------------
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) DEFAULT NULL,
+  `is_default` enum('0','1') NOT NULL DEFAULT '0',
+  `created_by_id` int(11) DEFAULT NULL,
+  `modified_by_id` int(11) DEFAULT NULL,
+  `is_deleted` enum('0','1') DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+------------------------------------------------------------------
+
+CREATE TABLE `sections` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `seat` int(11) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--------------------------------------------------------------
+
+CREATE TABLE `semesters` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `year` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--------------------------------------------------------------
+
+CREATE TABLE `sessions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `current` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=>notcurrent,1=>current',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=>inactive,1=>active',
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+---------------------------------------------------------------
+
+CREATE TABLE `staff_hourly_attendances` (
+  `id` bigint(20) NOT NULL,
+  `employ_id` bigint(20) DEFAULT NULL,
+  `subject_id` bigint(20) DEFAULT NULL,
+  `session_id` int(10) DEFAULT NULL,
+  `program_id` int(10) DEFAULT NULL,
+  `semester_id` int(10) DEFAULT NULL,
+  `section_id` int(10) DEFAULT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `attendance` int(11) DEFAULT 0 COMMENT '1 Present, 2 Absent, 3 Leave, 4 Holiday',
+  `note` text DEFAULT NULL,
+  `created_by` int(10) DEFAULT NULL,
+  `updated_by` int(10) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------------
+CREATE TABLE `student_enrolls` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `program_id` int(10) UNSIGNED DEFAULT NULL,
+  `session_id` int(10) UNSIGNED DEFAULT NULL,
+  `semester_id` int(10) UNSIGNED DEFAULT NULL,
+  `section_id` int(10) UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) DEFAULT 1,
+  `created_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `updated_by` bigint(20) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--------------------------------------------------------------------
+
+CREATE TABLE `student_enroll_subject` (
+  `subject_id` int(11) DEFAULT NULL,
+  `student_enroll_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--------------------------------------------------------------------
+
+CREATE TABLE `subject` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `credit_hour` int(11) NOT NULL,
+  `subject_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '0 Optional & 1 Compulsory',
+  `class_type` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 Theory, 2 Practical & 3 Both',
+  `total_marks` decimal(5,2) DEFAULT NULL,
+  `passing_marks` decimal(5,2) DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `is_deleted` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=>default,1=>deleted',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-----------------------------------------------------------------
+
+CREATE TABLE `unit_of_competency` (
+  `id` int(11) NOT NULL,
+  `course_id` int(11) DEFAULT NULL,
+  `code` varchar(200) DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `field_of_education` varchar(250) DEFAULT NULL,
+  `nominal_hours` varchar(50) DEFAULT NULL,
+  `vet` varchar(20) DEFAULT NULL COMMENT '0=> no, 1=>yes',
+  `competency_flag` varchar(20) DEFAULT NULL COMMENT '0=>competency, 1=>module',
+  `type` varchar(10) DEFAULT NULL COMMENT '0=>core, 1=>elective',
+  `status` int(5) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_deleted` varchar(5) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
