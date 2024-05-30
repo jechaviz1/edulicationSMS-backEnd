@@ -59,6 +59,7 @@ class StudentController extends Controller {
     }
 
     public function storeStudent(Request $request) {
+        // dd($request);
         $this->validate($request, [
             'first_name' => 'required|string|min:1|max:255',
 //            'city_name' => 'required|string|min:3|max:255',
@@ -134,14 +135,11 @@ class StudentController extends Controller {
                 $student->date_of_birth = $request->input('date_of_birth');
                 $student->nationality = $request->input('nationality');
                 $student->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                
                 $student->student_id = $request->student_id;
                 $student->marital_status = $request->marital_status;
                 $student->blood_group = $request->blood_group;
-
                 $file_name = null;
                 $file_path = null;
-
                 if ($request->file()) {
                     $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
                     $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
@@ -153,10 +151,8 @@ class StudentController extends Controller {
                     $student->profile_image_path = $file_path;
                 }
                 $student->save();
-                
             // Update Status
             $student->statuses()->sync($request->statuses);
-            
             }
             return redirect()->route('student-list')->with('success', 'Record Updated.');
         } else {

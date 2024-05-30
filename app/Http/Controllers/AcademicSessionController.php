@@ -19,7 +19,6 @@ class AcademicSessionController extends Controller {
         $data['title'] = 'Academic Session List';
         $data['menu_active_tab'] = 'academic-session-list';
         $data['academic_session'] = \App\Models\AcademicSession::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
-//dd($data['academic_session'] );
         return view('admin.academic_session.list')->with($data);
     }
 

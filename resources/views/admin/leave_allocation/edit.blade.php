@@ -143,7 +143,6 @@
                     .addClass('on');
         }
     });
-
     $('[name=tab]').on('change', function () {
         var p = $(this).prop('checked');
 
@@ -154,5 +153,4 @@
         $('article').eq(i).addClass('on');
     });
 </script>
-
 @stop

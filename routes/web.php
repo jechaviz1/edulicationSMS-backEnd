@@ -60,8 +60,8 @@ use App\Http\Controllers\TaxSettingController;
 use App\Http\Controllers\PaySlipSettingController;
 use App\Http\Controllers\IncomeCategoryController;
 use App\Http\Controllers\ExpenseCategoryController;
-use App\Http\Controllers\CourseCategoryController;
-use App\Http\Controllers\CourseController;
+// use App\Http\Controllers\CourseCategoryController;
+// use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CityTownController;
 
@@ -378,8 +378,6 @@ Route::group(['prefix' => 'admin'], function () {
               //  Route::post('/update-course/{id}', [CourseController::class, 'updateCourse'])->name('update-course');
               //  Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete-course');
               //END - Courses
-
-
             // START - enrollsubject
         Route::get('/add-enrollsubject', [EnrollSubjectController::class, 'addEnrollsubject'])->name('add-enrollsubject');
         Route::post('/store-enrollsubject', [EnrollSubjectController::class, 'storeEnrollsubject'])->name('store-enrollsubject');
@@ -401,10 +399,7 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/routine-setting/class', [RoutineSettingController::class, 'class'])->name('routine-setting.class');
          Route::get('/routine-setting/exam', [RoutineSettingController::class, 'exam'])->name('routine-setting.exam');
          Route::post('/routine-setting/store', [RoutineSettingController::class, 'store'])->name('routine-setting.store');
-     
          // END - classroutine
-
-
          // START - examroutine
          Route::get('/add-examroutine', [ExamRoutineController::class, 'addExamRoutine'])->name('add-examroutine');
          Route::post('/store-examroutine', [ExamRoutineController::class, 'storeExamRoutine'])->name('store-examroutine');
@@ -414,7 +409,6 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/delete-examroutine/{id}', [ExamRoutineController::class, 'deleteExamRoutine'])->name('delete-examroutine');
          Route::post('/exam_routine/print', [ExamRoutineController::class, 'print'])->name('exam-routine.print');   
          // END - examroutine
-
           // START - coursecategory
           Route::get('/add-coursecategory', [CourseCategoryController::class, 'addCourseCategory'])->name('add-coursecategory');
           Route::post('/store-coursecategory', [CourseCategoryController::class, 'storeCourseCategory'])->name('store-coursecategory');
@@ -423,9 +417,6 @@ Route::group(['prefix' => 'admin'], function () {
           Route::post('/update-coursecategory/{id}', [CourseCategoryController::class, 'updateCourseCategory'])->name('update-coursecategory');
           Route::get('/delete-coursecategory/{id}', [CourseCategoryController::class, 'deleteCourseCategory'])->name('delete-coursecategory');
           // END - coursecategory
- 
-
-
         //start-FilterController
         Route::post('filter-batch', [FilterController::class, 'filterBatch'])->name('filter-batch');
         Route::post('filter-program', [FilterController::class, 'filterProgram'])->name('filter-program');
@@ -658,9 +649,7 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/edit-ragion/{id}', [RegionController::class, 'edit'])->name('edit-ragion');
          Route::post('/update-ragion/{id}', [RegionController::class, 'update'])->name('update-ragion');
          Route::get('/delete-ragion/{id}', [RegionController::class, 'delete'])->name('delete-ragion');
-         
          // END - Region
-         
          // START - City Town
          Route::get('/add-city-town', [CityTownController::class, 'add'])->name('add-city-town');
          Route::post('/store-city-town', [CityTownController::class, 'store'])->name('store-city-town');
@@ -670,6 +659,66 @@ Route::group(['prefix' => 'admin'], function () {
          Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
          Route::get('/change-citytown-status/{id}/{status}', [CityTownController::class, 'changestatus'])->name('change-citytown-status');
          // END - City Town
-  
+         // START - Event Courses 
+         Route::get('/events/courses',[App\Http\Controllers\Event\CourseController::class, 'index'])->name('event.courses');
+         Route::post('/events/couser/store',[App\Http\Controllers\Event\CourseController::class, 'store'])->name('event.courses.store');
+         Route::get('/events/couser/{id}', [App\Http\Controllers\Event\CourseController::class, 'destroy'])->name('event.courses.destroy');
+         Route::get('/events/cousers', [App\Http\Controllers\Event\CourseController::class, 'status'])->name('event-courses-status');
+         Route::get('/events/archive', [App\Http\Controllers\Event\CourseController::class, 'archive'])->name('event.courses.archive');
+         //  Route::get('/city-town-list', [CityTownController::class, 'list'])->name('city-town-list');
+        //  Route::get('/edit-city-town/{id}', [CityTownController::class, 'edit'])->name('edit-city-town');
+        //  Route::post('/update-city-town/{id}', [CityTownController::class, 'update'])->name('update-city-town');
+        //  Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
+        //  Route::get('/change-citytown-status/{id}/{status}', [CityTownController::class, 'changestatus'])->name('change-citytown-status');
+         // END - Event Courses 
+          // START - Event calender 
+          Route::get('/events/calender',[App\Http\Controllers\CalenderController::class, 'index'])->name('event.calender');
+          Route::get('/events/calender/session',[App\Http\Controllers\CalenderController::class, 'index_session'])->name('event.calender.session');
+          Route::get('/api/calender/find',[App\Http\Controllers\CalenderController::class, 'find_data'])->name('course.find');
+          
+          // END -  Event calender 
+          // START - Event Room calender 
+          Route::get('/events/room/calender',[App\Http\Controllers\RoomController::class, 'index'])->name('event.room.calender');
+          // END - Room Calender
+            // START - Event Sessions 
+            Route::get('/events/sesssions',[App\Http\Controllers\SessionsController::class, 'index'])->name('event.session.index');
+            // END - Sessions
+             // START - Event Trainers 
+             Route::get('/events/trainers',[App\Http\Controllers\TrainersController::class, 'index'])->name('event.trainers.index');
+             // END - Event Trainers
+                // START - Event Archive 
+                // Route::get('/events/archieve',[App\Http\Controllers\ArchiveController::class, 'index'])->name('event.archive.index');
+                // END - Event Archive
+                  // START - People 
+                  Route::get('/people/find',[App\Http\Controllers\PeopleController::class, 'index'])->name('people.find.index');
+                  Route::post('/people/find/column',[App\Http\Controllers\PeopleController::class, 'index'])->name('people.column');
+                            Route::get('/people/delete/{id}', [App\Http\Controllers\PeopleController::class, 'delete'])->name('people.delete');
+                            Route::post('/people/store',[App\Http\Controllers\PeopleController::class, 'store'])->name('people.store');
+                            Route::post('api/people/store',[App\Http\Controllers\PeopleController::class, 'store'])->name('api.people.store');
+                            Route::post('/bulk_sms_filter_form',[App\Http\Controllers\PeopleController::class, 'sms_filter'])->name('bulk_sms_filter_form');
+                            Route::get('/people/profile/{id}',[App\Http\Controllers\PeopleController::class, 'profile'])->name('people.profile');
+                            Route::post('/people/profileupdate/{id}',[App\Http\Controllers\PeopleController::class, 'profileUpdate'])->name('people.update');
+                            Route::delete('/people/profileupdate/{id}', [App\Http\Controllers\PeopleController::class, 'delete'])->name('people.destroy');
+                            // END - Event Trainers
+                            // START - Lerner Record 
+                            Route::get('/people/active/learns',[App\Http\Controllers\LearnerRecord::class, 'index'])->name('people.active.learners.index');
+                  Route::get('/people/enquirySearch',[App\Http\Controllers\LearnerRecord::class, 'enquiry'])->name('people.enquiry.index');
+                  // START - People 
+                  // START - Lerner Record 
+                  Route::get('/people/enrolmentSearch',[App\Http\Controllers\EnrollmentController::class, 'index'])->name('people.enrollment.search');
+                  Route::get('/people/enquirySearch',[App\Http\Controllers\LearnerRecord::class, 'enquiry'])->name('people.enquiry.index');
+                  // START - Bulk Enrolment 
+                  Route::get('/people/bulkenrolment',[App\Http\Controllers\EnrollmentController::class, 'bulk'])->name('people.bulk.enrolment');
+                    // START - People 
+                    Route::get('/company/avetmissSetting',[App\Http\Controllers\CompanyController::class, 'avetmisssetting'])->name('company.avetmissSetting');
+                    Route::post('/widgetFunctions/saveAvetmiss',[App\Http\Controllers\CompanyController::class, 'saveAvetmiss'])->name('company.saveAvetmiss');
+                    //START - Certificate
+                    Route::get('/company/certificate',[App\Http\Controllers\CompanyController::class, 'certificate'])->name('company.certificate');
+                    Route::post('/company/certificate/template',[App\Http\Controllers\CompanyController::class, 'template'])->name('certificate.template');
+                    Route::get('/company/certificate/template/{id}',[App\Http\Controllers\CompanyController::class, 'templateEdit'])->name('certificate.template.edit');
+                    Route::put('/company/certificate/template/{id}', [App\Http\Controllers\CompanyController::class, 'template_update'])->name('certificate.template.update');
+                    Route::post('/company/certificate/template/background', [App\Http\Controllers\CompanyController::class, 'background'])->name('certificate.template.background');
+
+                  
     });
 });

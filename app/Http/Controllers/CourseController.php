@@ -26,12 +26,10 @@ class CourseController extends Controller
         $data['title'] = 'Course List';
         $data['menu_active_tab'] = 'course-list';
         $data['view'] = 'admin.course';
-       
             $data['rows'] = Course::orderBy('id', 'desc')->where('is_deleted', '0')->get();
             $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
             $data['user'] = User::where('is_deleted', '0')->get();
-
-        return view('admin.course.list')->with($data);
+        return view('admin.course.list')->with($data); 
     }
 
 

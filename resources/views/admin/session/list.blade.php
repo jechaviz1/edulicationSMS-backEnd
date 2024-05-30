@@ -26,7 +26,6 @@
                
             </ul>	
         </div>
-
         <!-- /tab-content -->	
         <div class="tab-content" id="myTabContent-3">
             <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel" aria-labelledby="home-tab-3">
@@ -83,10 +82,7 @@
                                         </div>
                                     </td>
                                 </tr>
-
                                 @endforeach
-                               
-
                             </tbody>
                         </table>
                     </div>
@@ -95,16 +91,13 @@
 
         </div>
         <!-- /tab-content -->	
-
     </div>
 </div>
 <script>
     (function () {
         'use strict'
-
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
-
         // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
                 .forEach(function (form) {
@@ -118,17 +111,14 @@
                     }, false)
                 })
     })()
-
-
     $('[name=tab]').each(function (i, d) {
         var p = $(this).prop('checked');
-//   console.log(p);
+        //   console.log(p);
         if (p) {
             $('article').eq(i)
                     .addClass('on');
         }
     });
-
     $('[name=tab]').on('change', function () {
         var p = $(this).prop('checked');
 
@@ -139,5 +129,4 @@
         $('article').eq(i).addClass('on');
     });
 </script>
-
 @stop
