@@ -48,10 +48,31 @@ class CompanyController extends Controller
      }
 
    }
-   public function certificate(){
+   public function certificate(Request $request){
       try {
-        $template = Template::get();
-         return view('admin.company.certificate');
+
+        $certificateId = $request->query('makeDefault');
+        if($certificateId != null){
+            $certificate = Template::find($certificateId);
+            if ($certificate) {
+                // Set the certificate as default (example logic)
+                $certificate->is_default = true;
+                $certificate->save();
+
+                // Optionally, unset other certificates as default
+                Template::where('id', '!=', $certificateId)->update(['is_default' => false]);
+
+                // Return a success response
+                return view('admin.company.certificate',compact('templates'));
+            } else {
+                return view('admin.company.certificate',compact('templates'));
+
+            }
+        }else{
+            $templates = Template::get();
+            return view('admin.company.certificate',compact('templates'));
+        }
+      
      } catch (\Exception $e) {
          Log::error('Error rendering AVETMISS setting view: ' . $e->getMessage());
  
@@ -124,5 +145,9 @@ class CompanyController extends Controller
                  $background->added_by = $request->added_by;
                  $background->save();
 
+        }
+
+        public function clone(Request $request){
+                dd($request);   
         }
     }
