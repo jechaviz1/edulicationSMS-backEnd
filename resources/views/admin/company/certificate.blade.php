@@ -43,12 +43,17 @@
                             </thead>
                             <tbody>
                             @foreach ($templates as $template)
+                            {{-- @dd($template) --}}
                             <tr>
                                 <th scope="row">{{ $template->newCertificateName  }}</th>
                                 <td> @if($template->is_default != 0) Yes @else <a href="?makeDefault={{$template->id}}">Make Default</a> @endif</td>
-                                <td>{{ $template->default }}<td>
                                 <td>{{ $template->default }}</td>
-                                <td><a href="{{ route('certificate.copy',$template->id)}}"><i class="fa fa-clone"></i></a></td>
+                                <td>{{ $template->default }}</td>
+                                <td>
+                                    <a href="{{ route('certificate.copy',$template->id)}}"><i class="fa fa-clone"></i></a>
+                                    <a href="{{ route('certificate.template.edit',$template->id)}}"><i class="fa fa-pencil"></i></a>
+                                    <a href="{{ route('certificate.template.destroy',$template->id)}}"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                             @endforeach 
                             </tbody>

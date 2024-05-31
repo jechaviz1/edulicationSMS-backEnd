@@ -716,6 +716,7 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::get('/company/certificate',[App\Http\Controllers\CompanyController::class, 'certificate'])->name('company.certificate');
                     Route::post('/company/certificate/template',[App\Http\Controllers\CompanyController::class, 'template'])->name('certificate.template');
                     Route::get('/company/certificate/template/{id}',[App\Http\Controllers\CompanyController::class, 'templateEdit'])->name('certificate.template.edit');
+                    Route::get('/company/certificate/template/destroy/{id}',[App\Http\Controllers\CompanyController::class, 'templatedestroy'])->name('certificate.template.destroy');
                     Route::put('/company/certificate/template/{id}', [App\Http\Controllers\CompanyController::class, 'template_update'])->name('certificate.template.update');
                     Route::post('/company/certificate/template/background', [App\Http\Controllers\CompanyController::class, 'background'])->name('certificate.template.background');
                     Route::get('certificate/copy/{id}',[App\Http\Controllers\CompanyController::class,'clone'])->name('certificate.copy');
