@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Avetmiss;
 use App\Models\Template;
+use App\Models\CompanyDocument;
 use App\Models\BackgroundTemplate;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ImageController;
@@ -105,10 +106,12 @@ class CompanyController extends Controller
    public function templateEdit($id){
     try {
         $template = Template::where('id', $id)->first();
+        $backgroundTemplate = BackgroundTemplate::where('templates_id',$template->id)->get();
+        // dd($backgroundTemplate);
         if (!$template) {
             throw new \Exception('Template not found');
         }
-        return view('admin.company.certificateEdit', compact('template'));
+        return view('admin.company.certificateEdit', compact('template','backgroundTemplate'));
     } catch (\Exception $e) {
         // Handle the exception, log it or display an error message
         return redirect()->back()->with('error', $e->getMessage());
@@ -181,9 +184,9 @@ class CompanyController extends Controller
                 $background->added_by = $request->added_by;
                 $background->save();
     
-                return redirect()->route('background-template.index')->with('success', 'Background template created successfully.');
+                return redirect()->route('company.certificate')->with('error', 'Invalid certificate ID.');
             } catch (Exception $e) {
-                return redirect()->route('background-template.index')->with('error', 'An error occurred while creating the background template.');
+                return redirect()->route('company.certificate')->with('error', 'Invalid certificate ID.');
             }
 
         }
@@ -233,6 +236,70 @@ class CompanyController extends Controller
                     } catch (Exception $e) {
                         return redirect()->route('company.certificate')->with('error', 'An error occurred while deleting the template.');
                     }
-
         }
+
+        public function companyDoc(Request $request){
+            try {
+                $infos = CompanyDocument::where('type','info')->get();
+                $email = CompanyDocument::where('type','email')->get();
+                return view('admin.company.document',compact('infos','email'));
+            } catch (Exception $e) {
+                // Handle the error and redirect back with an error message
+                return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
+            }
+        }
+
+        public function uploadFile(Request $request)
+        { 
+            $request->validate([
+                'file' => 'required|file|max:20480', // Max size: 20MB
+            ]);
+            // dd($request);
+            $documents = new CompanyDocument;
+            if ($request->hasFile('file')) {
+                $file = $request->file('file');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file = $file->move(public_path('document'), $filename);
+                $imageName = 'document/' . $filename;
+                $documents->file_name = $imageName;
+                }
+        $documents->document_name = $request->document_name;
+        $documents->type = $request->type;
+        $documents->save();
+        return back()->with('error', 'Failed to upload file');
+        }
+        
+        public function documentdelete($id){
+            try {
+                    $template = CompanyDocument::find($id);
+                    if ($template) {
+                        $template->delete();
+                        // dd($template);
+                        return redirect()->route('company.document')->with('success', 'Template deleted successfully.');
+                    } else {
+                        return redirect()->route('company.document')->with('error', 'Template not found.');
+                    }
+                
+            } catch (Exception $e) {
+                return redirect()->route('company.document')->with('error', 'An error occurred while deleting the template.');
+            }
+            }
+            public function competencyReport(){
+                try {
+                    $infos = CompanyDocument::where('type','info')->get();
+                    $email = CompanyDocument::where('type','email')->get();
+                    return view('admin.company.competencyReport',compact('infos','email'));
+                } catch (Exception $e) {
+                    // Handle the error and redirect back with an error message
+                    return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
+                }
+            }
+
+            public function competencyReportEdit(Request $request){
+                                // dd($request);
+               return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
+            }
+            public function companysettings(){
+                
+            }
     }

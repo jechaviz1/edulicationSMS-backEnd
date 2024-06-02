@@ -720,6 +720,17 @@ Route::group(['prefix' => 'admin'], function () {
                     Route::put('/company/certificate/template/{id}', [App\Http\Controllers\CompanyController::class, 'template_update'])->name('certificate.template.update');
                     Route::post('/company/certificate/template/background', [App\Http\Controllers\CompanyController::class, 'background'])->name('certificate.template.background');
                     Route::get('certificate/copy/{id}',[App\Http\Controllers\CompanyController::class,'clone'])->name('certificate.copy');
-                  
+                  //start company
+                  Route::get('/company/companydoc',[App\Http\Controllers\CompanyController::class, 'companyDoc'])->name('company.document');
+                  Route::get('/company/info/upload',[App\Http\Controllers\CompanyController::class, 'infoUpload'])->name('document.infopak.upload');
+                  Route::post('/upload-file', [App\Http\Controllers\CompanyController::class, 'uploadFile'])->name('document.upload.file');
+                  Route::get('/company/certificate/documrnt/destroy/{id}',[App\Http\Controllers\CompanyController::class, 'documentdelete'])->name('document.upload.delete');
+                //Start Competency Report
+                Route::get('/competencyReport',[App\Http\Controllers\CompanyController::class, 'competencyReport'])->name('company.competency.report');
+                Route::post('/competencyReport/edit',[App\Http\Controllers\CompanyController::class, 'competencyReportEdit'])->name('competency.report.background');
+                //Start Company Setting //
+                Route::get('/companysettings',[App\Http\Controllers\CompanyController::class, 'companysettings'])->name('company.company.setting');
+
+
     });
 });

@@ -597,32 +597,12 @@
                     </div>
                 </div>
             </div>
-            <!--**********************************
-        Chat box End
-    ***********************************-->
-
-
-
-
-            <!--**********************************
-                Header start
-            ***********************************-->
             <div class="header">
                 <div class="header-content">
                     <nav class="navbar navbar-expand">
                         <div class="collapse navbar-collapse justify-content-between">
                             <div class="header-left">
-                                <!--                                <form>
-                                                                    <div class="input-group search-area">
-                                                                        <span class="input-group-text"><a href="javascript:void(0)">
-                                                                                <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <circle cx="10.7861" cy="11.2859" r="8.23951" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                                <path d="M16.5168 17.4443L19.7472 20.6663" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                                                </svg>
-                                                                            </a></span>
-                                                                        <input type="text" class="form-control" placeholder="Search">
-                                                                    </div>
-                                                                </form>	-->
+                              
                             </div>
                             <ul class="navbar-nav header-right">
                                 <!--                                <li class="nav-item dropdown notification_dropdown">
@@ -883,13 +863,6 @@
                 </div>
             </div>
 
-            <!--**********************************
-                Header end ti-comment-alt
-            ***********************************-->
-
-            <!--**********************************
-                        Sidebar start
-                    ***********************************-->
             <div class="deznav">
                 <div class="deznav-scroll">
                     <ul class="metismenu" id="menu">
@@ -1105,9 +1078,9 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ URL::route('company.avetmissSetting') }}">AVETMISS</a></li>
                         <li><a href="{{ URL::route('company.certificate') }}">Certificate Templates</a></li>
-                        <li><a href="{{ URL::route('people.enquiry.index') }}">Company Documents
+                        <li><a href="{{ URL::route('company.document') }}">Company Documents
                         </a></li>
-                        <li><a href="{{ URL::route('people.enrollment.search') }}">Competency Report
+                        <li><a href="{{ URL::route('company.competency.report') }}">Competency Report
                         </a></li>
                         <li><a href="{{ URL::route('people.bulk.enrolment') }}">Company Settings
                         </a></li>
