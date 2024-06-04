@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Avetmiss;
 use App\Models\Template;
+use App\Models\State;
 use App\Models\CompanyDocument;
 use App\Models\BackgroundTemplate;
 use Illuminate\Support\Facades\Log;
@@ -299,7 +300,38 @@ class CompanyController extends Controller
                                 // dd($request);
                return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
             }
+
+
             public function companysettings(){
-                
+                try {
+                    $infos = CompanyDocument::where('type','info')->get();
+                    return view('admin.company.companySetting');
+                } catch (Exception $e) {
+                    // Handle the error and redirect back with an error message
+                    return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
+                }
+            }
+
+            public function CQR(){
+                try {
+                    $states = State::get();
+                    $infos = CompanyDocument::where('type','info')->get();
+                    return view('admin.cqr.report',compact('states'));
+                } catch (Exception $e) {
+                    // Handle the error and redirect back with an error message
+                    return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
+                }
+            }
+
+           
+
+            public function CQRreporthistory(){
+                try {
+                    $infos = CompanyDocument::where('type','info')->get();
+                    return view('admin.cqr.report-history');
+                } catch (Exception $e) {
+                    // Handle the error and redirect back with an error message
+                    return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
+                }
             }
     }

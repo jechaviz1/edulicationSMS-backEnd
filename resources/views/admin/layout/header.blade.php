@@ -1078,18 +1078,11 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ URL::route('company.avetmissSetting') }}">AVETMISS</a></li>
                         <li><a href="{{ URL::route('company.certificate') }}">Certificate Templates</a></li>
-                        <li><a href="{{ URL::route('company.document') }}">Company Documents
-                        </a></li>
-                        <li><a href="{{ URL::route('company.competency.report') }}">Competency Report
-                        </a></li>
-                        <li><a href="{{ URL::route('people.bulk.enrolment') }}">Company Settings
-                        </a></li>
-                        <li><a href="{{ URL::route('people.bulk.enrolment') }}">CQR Report
-                        </a></li>
-                        <li><a href="{{ URL::route('people.bulk.enrolment') }}">Data Export
-
-                        </a></li>
-                        {{-- <li><a href="{{ URL::route('event.archive.index') }}">Archive</a></li> --}}
+                        <li><a href="{{ URL::route('company.document') }}">Company Documents</a></li>
+                        <li><a href="{{ URL::route('company.competency.report') }}">Competency Report</a></li>
+                        <li><a href="{{ URL::route('company.company.setting') }}">Company Settings</a></li>
+                        <li><a href="{{ URL::route('company.CQR') }}">CQR Report</a></li>
+                        <li><a href="{{ URL::route('dataExport') }}">Data Export</a></li>
                     </ul>
                 </li>
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">

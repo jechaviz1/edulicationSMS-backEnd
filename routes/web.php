@@ -730,6 +730,10 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/competencyReport/edit',[App\Http\Controllers\CompanyController::class, 'competencyReportEdit'])->name('competency.report.background');
                 //Start Company Setting //
                 Route::get('/companysettings',[App\Http\Controllers\CompanyController::class, 'companysettings'])->name('company.company.setting');
+                Route::get('/CQRreport',[App\Http\Controllers\CompanyController::class, 'CQR'])->name('company.CQR');
+                Route::post('/CQRreport/store',[App\Http\Controllers\CQRreportController::class, 'store'])->name('company.CQR.store');
+                Route::get('/CQRreporthistory',[App\Http\Controllers\CQRreportController::class, 'index'])->name('company.CQR.index');
+                Route::get('/exportXML',[App\Http\Controllers\ExportController::class, 'dataExporter'])->name('dataExport');
 
 
     });
