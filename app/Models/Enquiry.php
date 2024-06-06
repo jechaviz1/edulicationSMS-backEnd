@@ -10,7 +10,7 @@ class Enquiry extends Model
     use HasFactory;
 
     protected $fillable = [
-        'reference_id', 'source_id', 'program_id', 'course_id', 'name', 'father_name', 'phone', 'email', 'address', 'purpose', 'note', 'date', 'follow_up_date', 'assigned', 'number_of_students', 'status', 'created_by', 'updated_by',
+        'reference_id', 'source_id', 'program_id', 'course_id', '0.', 'father_name', 'phone', 'email', 'address', 'purpose', 'note', 'date', 'follow_up_date', 'assigned', 'number_of_students', 'status', 'created_by', 'updated_by',
     ];
 
     // public function reference()

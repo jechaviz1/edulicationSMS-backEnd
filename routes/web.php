@@ -730,11 +730,16 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::post('/competencyReport/edit',[App\Http\Controllers\CompanyController::class, 'competencyReportEdit'])->name('competency.report.background');
                 //Start Company Setting //
                 Route::get('/companysettings',[App\Http\Controllers\CompanyController::class, 'companysettings'])->name('company.company.setting');
+               //Start CQR Report
                 Route::get('/CQRreport',[App\Http\Controllers\CompanyController::class, 'CQR'])->name('company.CQR');
                 Route::post('/CQRreport/store',[App\Http\Controllers\CQRreportController::class, 'store'])->name('company.CQR.store');
                 Route::get('/CQRreporthistory',[App\Http\Controllers\CQRreportController::class, 'index'])->name('company.CQR.index');
-                Route::get('/exportXML',[App\Http\Controllers\ExportController::class, 'dataExporter'])->name('dataExport');
+               //Start Data Export
+                Route::get('/exportXML',[App\Http\Controllers\ExportController::class, 'exportToXml'])->name('dataExport');
+                Route::get('/export/xml-file',[App\Http\Controllers\ExportController::class, 'exportToXml'])->name('export.xml');
+                Route::get('/export/xls-file',[App\Http\Controllers\ExportController::class, 'exportToXls'])->name('export.xls');
+              //start ASQA
+              Route::get('/exportASQA',[App\Http\Controllers\ExportController::class, 'exportASQA'])->name('dataExport');
 
-
-    });
+              });
 });
