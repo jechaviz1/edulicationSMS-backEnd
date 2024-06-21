@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\State;
 use App\Models\Schedule ;
 use App\Models\Enquiry ;
 use Illuminate\Http\Request;
@@ -631,6 +632,96 @@ class ExportController extends Controller
         } catch (\Exception $e) {
             // Optionally, display an error message or take other actions
             echo "An error occurred while creating the record: " . $e->getMessage();
+        }
+    }
+
+    public function ExportStore(Request $request){
+            // dd($request,"Nat");
+            if($request->excelVersion == "excelVersion"){
+
+            }else{
+
+            }
+    }
+
+    public function ExportNAT(){
+        try {
+            $states = State::where('is_deleted','0')->get();
+            // dd($states);
+            return view('admin.export.NAT',compact('states'));
+        } catch (\Exception $e) {
+            // Optionally, display an error message or take other actions
+            echo "An error occurred while creating the record: " . $e->getMessage();
+        }
+    }
+    public function exportNATGenerator(Request $request){
+        if($request->excelVersion == "excelVersion"){
+            $students = Student::where('is_deleted',"0")->get();
+        // Set headers for download
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="NAT00120File.xls"');
+        header('Cache-Control: max-age=0');
+        // Output Excel header
+        echo <<<EOF
+        <!DOCTYPE html>
+        <html xmlns:x="urn:schemas-microsoft-com:office:excel">
+        <head>
+        <meta http-equiv="Content-type" content="text/html;charset=utf-8"/>
+        </head>
+        <body>
+        <table border="1">
+        <tr>
+        <td>TrngOrgIdentifier</td>
+        <td>LocationId</td>
+        <td>RTOStudentId</td>
+        <td>Student FirstName</td>
+        <td>Student LastName</td>
+        <td>UnitofCompetencyId</td>
+        <td>NatCourseCode</td>
+        <td>ActStartDate</td>
+        <td>ActEndDate</td>
+        <td>DeliveryModeID</td>
+        <td>OutcomeID</td>
+        <td>FundSrc</td>
+        <td>CommencingProgramID</td>
+        <td>TrainingContractID</td>
+        <td>ClientIDApprenticeships</td>
+        <td>StudyReasonID</td>
+        <td>VetInSchoolFlag</td>
+        <td>SpecificFundingID</td>
+        <td>SchoolTypeId</td>
+        <td>OutcomeIDTra</td>
+        <td>FundSrcState</td>
+        <td>ClientTuitionFee</td>
+        <td>FeeExemptionID</td>
+        <td>PurchasingContractID</td>
+        <td>PurchasingContractScheduleID</td>
+        <td>HoursAttend</td>
+        <td>AssociatedCourseID</td>
+        <td>ScheduledHours</td>
+        <td>PreDominantDeliveryMode</td>
+        </tr>
+        EOF;
+        // Output data rows
+        foreach ($students as $student) {
+            echo "<tr><td>{$student->id}</td>
+            <td>{$student->LocationId}</td>
+            <td>{$student->RTOStudentId}</td>
+            <td>{$student->firstName}</td>
+            <td>{$student->lastName}</td>
+            <td>{$student->RTOStudentId}</td>
+            <td>{$student->RTOStudentId}</td>
+            </tr>";
+        }
+        // Output Excel footer
+        echo <<<EOF
+    </table>
+    </body>
+    </html>
+    EOF;
+
+        }else{
+
         }
     }
 }

@@ -41,7 +41,8 @@
 
          <!-- asColorpicker -->
          <link href="{{ URL::asset('/admin/vendor/jquery-asColorPicker/css/asColorPicker.min.css') }}" rel="stylesheet">
-            
+         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
         <style>
             .nav-header img {
@@ -1083,7 +1084,12 @@
                         <li><a href="{{ URL::route('company.company.setting') }}">Company Settings</a></li>
                         <li><a href="{{ URL::route('company.CQR') }}">CQR Report</a></li>
                         <li><a href="{{ URL::route('dataExport') }}">Data Export</a></li>
-                    </ul>
+                        <li><a href="{{ URL::route('exportASQA') }}">Export ASQA</a></li>
+                        <li><a href="{{ URL::route('exportNAT') }}">Export NAT Files</a></li>
+                        <li><a href="{{ URL::route('dataExport') }}">Process Automation</a></li>
+                        <li><a href="{{ URL::route('dataExport') }}">Survey Setting</a></li>
+                        <li><a href="{{ URL::route('dataExport') }}">User Managment</a></li>
+                    </ul> 
                 </li>
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                                 <div class="menu-icon">
@@ -1236,7 +1242,7 @@
                                 <li><a href="faculty-list">Faculties</a></li>
                                 <li><a href="program-list">Programs</a></li>
                                 <li><a href="batch-list">Batches</a></li>
-                                <li><a href="session-list">Sessions</a></li>
+                                <li><a href="session-list">Sessions</a></li>    
                                 <li><a href="semester-list">Semesters</a></li>
                                 <li><a href="section-list">Sections</a></li>
                                 <li><a href="classroom-list">Class Rooms</a></li>
@@ -1246,7 +1252,6 @@
                                 <li><a href="coursecategory-list">Course Category</a></li>
                                 <li><a href="#">Exam Routines</a></li>
                                 <li><a href="#">Teacher Routines</a></li>
-                                
                                  <li>
                                      <a href="#" class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                                                 <span class="nav-text">Settings</span>
@@ -1256,12 +1261,8 @@
                                         <li class=""><a href="#" class="">Exam Routine</a></li>
                                      </ul>
                                 </li>
-                                
-                                
-                                
                             </ul>
                         </li>
-
                         @endif
                         @if(Session::has('role_id') && Session::get('role_id') != 1)
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -1336,9 +1337,7 @@
                                 
                             </ul>
                         </li>
-                        
                          @endif
-                        
                          @if(Session::has('role_id') && Session::get('role_id') != 1)
                         <li>
                             <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -1356,7 +1355,7 @@
                                 <li><a href="{{ URL::route('content-type-list') }}">Content Type</a></li>
                                                           <li><a href="{{ URL::route('content-list') }}">Content</a></li>
                                                             <li><a href="{{ URL::route('assignment-list') }}">Assignment</a></li>
-  </ul>
+                                                        </ul>
                         </li>
                         
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -1584,7 +1583,7 @@
                                                         <li><a href="table-datatable-basic.html">Datatable</a></li>
                                                     </ul>
                                                 </li>-->
-                        <!--                        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                        <!-- <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                                                         <div class="menu-icon">
                                                             <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M18.148 20.417C20.021 20.417 21.54 18.899 21.541 17.026V17.024V14.324C20.304 14.324 19.302 13.322 19.301 12.085C19.301 10.849 20.303 9.846 21.54 9.846H21.541V7.146C21.543 5.272 20.026 3.752 18.153 3.75H18.147H6.43502C4.56102 3.75 3.04202 5.268 3.04102 7.142V7.143V9.933C4.23502 9.891 5.23602 10.825 5.27802 12.019C5.27902 12.041 5.28002 12.063 5.28002 12.085C5.28102 13.32 4.28202 14.322 3.04702 14.324H3.04102V17.024C3.04002 18.897 4.55902 20.417 6.43202 20.417H6.43302H18.148Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1740,6 +1739,8 @@
     <script src="{{ asset('admin/vendor/jquery-asGradient/jquery-asGradient.min.js')}}"></script>
     <script src="{{ asset('admin/vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js')}}"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $(".nav-item .open-cal").click(function () {
@@ -1831,12 +1832,12 @@
             });
         });
 </script>
-
-        
-        
-
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
 @yield('customjs')
-        
 <style>
     .pagination .paginate_button.page-item a {
         width: fit-content;
@@ -1872,7 +1873,6 @@
         margin-right: 10px;
     }
 </style>
-
 @push('scripts')
 
     </body>
