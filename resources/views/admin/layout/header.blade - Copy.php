@@ -116,7 +116,7 @@
                                         <li class="active dz-chat-user">
                                             <div class="d-flex bd-highlight">
                                                 <div class="img_cont">
-                                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt="">
+                                                    <img src="{{ asset('admin/images/avatar/1.jpg') }}" class="rounded-circle user_img" alt="">
                                                     <span class="online_icon"></span>
                                                 </div>
                                                 <div class="user_info">

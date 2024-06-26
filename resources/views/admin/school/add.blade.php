@@ -1,7 +1,5 @@
-
 <!-- Extends template page-->
 @extends('admin.layout.header')
-
 <!-- Specify content -->
 @section('content')
 <div class="row">

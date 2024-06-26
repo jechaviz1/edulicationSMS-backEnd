@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
+use ZipArchive;
+use File;
 class ExportController extends Controller
 {
     public function dataExporter()
@@ -655,6 +656,7 @@ class ExportController extends Controller
         }
     }
     public function exportNATGenerator(Request $request){
+       
         if($request->excelVersion == "excelVersion"){
             $students = Student::where('is_deleted',"0")->get();
         // Set headers for download
@@ -704,24 +706,176 @@ class ExportController extends Controller
         EOF;
         // Output data rows
         foreach ($students as $student) {
+           
             echo "<tr><td>{$student->id}</td>
             <td>{$student->LocationId}</td>
             <td>{$student->RTOStudentId}</td>
             <td>{$student->firstName}</td>
-            <td>{$student->lastName}</td>
-            <td>{$student->RTOStudentId}</td>
-            <td>{$student->RTOStudentId}</td>
+            <td>{$student->lastname}</td>
+            <td>{$student->unitDetails}</td>
+            <td>{$student->nat_code}</td>
+            <td>{$student->Act_Start_Date}</td>
+            <td>{$student->Act_End_Date}</td>
+            <td>{$student->delivery_mode}</td>
+            <td>{$student->out_come_id}</td>
+            <td>{$student->fund_src}</td>
+            <td>{$student->CommencingProgramID}</td>
+            <td>{$student->TrainingContractID}</td>
+            <td>{$student->ClientIDApprenticeships}</td>
+            <td>{$student->StudyReasonID}</td>
+            <td>{$student->VetInSchoolFlag}</td>
+            <td>{$student->SpecificFundingID}</td>
+            <td>{$student->SchoolTypeId}</td>
+            <td>{$student->OutcomeIDTra}</td>
+            <td>{$student->FundSrcState}</td>
+            <td>{$student->ClientTuitionFee}</td>
+            <td>{$student->FeeExemptionID}</td>
+            <td>{$student->PurchasingContractID}</td>
+            <td>{$student->PurchasingContractScheduleID}</td>
+            <td>{$student->HoursAttend}</td>
+            <td>{$student->AssociatedCourseID}</td>
+            <td>{$student->ScheduledHours}</td>
+            <td>{$student->PreDominantDeliveryMode}</td>
             </tr>";
         }
         // Output Excel footer
         echo <<<EOF
-    </table>
-    </body>
-    </html>
-    EOF;
+            </table>
+            </body>
+            </html>
+            EOF;
+                }else{
+                    // dd($request);
+                    // Content of the text file
+                    if($request->NAT00010){
+                        $content = "45665     AUSTRALIAN INSTITUTE OF FINANCE TRAINING PTY LTD                                                    9116/55 Alice Street South                                                                            Wiley Park                                        219501Kiron,Kabir                                                 +61410611173                            info@aift.com.au                                                                ";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00010.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
 
-        }else{
+                    if($request->NAT00020){
+                        $content = "";
+                    // Path to the root directory (public directory)
+                    $filePath = public_path('files/'.$request->NAT00020.'.txt');
+                    // Create and save the text file
+                    File::put($filePath, $content);
+                    }
+                    
+                    if($request->NAT00030){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00030.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00060){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00060.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00080){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00080.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00085){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00085.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00090){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00090.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00100){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00100.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00120){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00120.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00130){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00130.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00010A){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00010A.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    if($request->NAT00030A){
+                        $content = "";
+                        // Path to the root directory (public directory)
+                        $filePath = public_path('files/'.$request->NAT00030A.'.txt');
+                        // Create and save the text file
+                        File::put($filePath, $content);
+                    }
+                    $tempDir = public_path('files');
+                    $allFilesAndDirectories = File::allFiles($tempDir);
+                    foreach ($allFilesAndDirectories as $file) {
+                        $paths[] = $file->getPathname();
+                    }
+                    $files = $paths;
+                    $year = date("Y");
+                    $month = date("m");
+                    $day = date("d");
+                    $zipFileName = 'zip/'.$year.$month.$day.date('His').'.zip';
+                    $zip = new ZipArchive();
 
+        if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) {
+            // Add files to the ZIP file
+            foreach ($files as $file) {
+                if (file_exists($file)) {
+                    $zip->addFile($file, basename($file));
+                } else {
+                    return response()->json(['error' => "File <$file> does not exist."], 404);
+                }
+            }
+            // Close the ZIP file
+            $zip->close();
+        } else {
+            return response()->json(['error' => "Cannot create <$zipFileName>"], 500);
+        }
+                }
+    }
+    public function courseLoad(Request $request){
+        $query = $request->input('q'); // Get the search term from the request
+        $results = Course::where('name', 'LIKE', '%' . $query . '%')
+            ->take(10)
+            ->get(['id', 'name']);
+    
+        return response()->json(['items' => $results]);
+    }
+    public function company(){
+        try {
+
+            return view('admin.user.list');
+        } catch (\Exception $e) {
+            // Optionally, display an error message or take other actions
+            echo "An error occurred while creating the record: " . $e->getMessage();
         }
     }
 }

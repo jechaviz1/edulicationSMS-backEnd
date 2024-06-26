@@ -713,13 +713,33 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/export/xls-file', [App\Http\Controllers\ExportController::class, 'exportToXls'])->name('export.xls');
     //start ASQA
     Route::get('/exportASQA', [App\Http\Controllers\ExportController::class, 'exportASQA'])->name('exportASQA');
-    Route::post('/export/ASQA', [App\Http\Controllers\ExportController::class, 'ExportStore'])->name('exportNat');
+    Route::post('/export/ASQA', [App\Http\Controllers\ExportController::class, 'ExportStore'])->name('exportASQA.export');
     //Start NAT Files
     Route::get('/process/exportavetmissNew', [App\Http\Controllers\ExportController::class, 'ExportNAT'])->name('exportNAT');
     Route::post('/process/nat/generator', [App\Http\Controllers\ExportController::class, 'exportNATGenerator'])->name('nat.generator');
+    Route::get('/api/courseload', [App\Http\Controllers\ExportController::class,'courseLoad'])->name('course.load');
     //Start Survey Setting
     Route::get('/survey/settings', [App\Http\Controllers\ExportController::class, 'exportavetmissNew'])->name('exportavetmissNew');
     //Start User Management
     Route::get('/company/company', [App\Http\Controllers\ExportController::class, 'company'])->name('company');
+  // Report
+  //Courser Complation
+  Route::get('/report/courseCompletion', [App\Http\Controllers\ReportController::class, 'courseCompletion'])->name('course.complation');
+  // COURSE UTILISATION
+  Route::get('/report/courseUtilisation', [App\Http\Controllers\ReportController::class, 'courseUtilisation'])->name('course.utilisation');
+  //DUPLICATED ENROLMENTS
+  Route::get('/report/duplicateEnrolment', [App\Http\Controllers\ReportController::class, 'duplicateEnrolment'])->name('duplicate.enrolment');
+  // DUPLICATED PERSONS
+  Route::get('/report/duplicatePerson', [App\Http\Controllers\ReportController::class, 'duplicatePerson'])->name('duplicate.person');
+  // Invoices and Payments
+  Route::get('/report/unpaidInvoices', [App\Http\Controllers\ReportController::class, 'unpaidInvoices'])->name('invoice.payment');
+  //  POSSIBLE MATCHES
+  Route::get('/report/possibleMatch', [App\Http\Controllers\ReportController::class, 'possibleMatch'])->name('possible.dublicates');  
+  //  SMS USAGE
+  Route::get('/report/smsUsage', [App\Http\Controllers\ReportController::class, 'smsUsage'])->name('sms.usage');  
+  // STORAGE DETAILS
+  Route::get('/report/storagedetails', [App\Http\Controllers\ReportController::class, 'storagedetails'])->name('storage.details');  
+  // TRAINER COMPETENCIES
+  Route::get('/report/trainerCompetency', [App\Http\Controllers\ReportController::class, 'trainerCompetency'])->name('trainer.competencies');  
   });
 });

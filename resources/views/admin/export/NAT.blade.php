@@ -354,7 +354,7 @@
                                                         id="searchValue1" value=""
                                                         style="width: 180px; height: 35px; display: none;">
                                                     <input type="text" name="searchValueName1" id="searchValueName1"
-                                                        value="" class="input_text1"
+                                                        value="" class="input_text1 mt-2"
                                                         style="width: 180px; height: 35px; display: block;"
                                                         autocomplete="off" fdprocessedid="8mz22">
                                                     <div id="tagbox-lkup" style="display: none;">
@@ -378,15 +378,15 @@
                                                         style="width:180px; height:35px; display:none;">
                                                     <!---new input text boxes for city-->
                                                     <input type="text" name="searchCity" id="searchCity"
-                                                        value="" class="input_text1"
+                                                        value="" class="input_text1 mt-3"
                                                         style="width:180px; height:35px; display:none;">
 
                                                 </div>
                                             </td>
 
                                             <td style="width:auto;">
-                                                <button type="submit" class="btn btn-primary"
-                                                    fdprocessedid="6838l">Go</button>
+                                                {{-- <button type="submit" class="btn btn-primary"
+                                                    fdprocessedid="6838l">Go</button> --}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -473,13 +473,311 @@
                 </div>
             </div>
         </div>
-        <script>
-            function checkAll_8_0() {
-                jQuery('.reportType_8_0').attr('checked', 'checked');
-            }
-
-            function uncheckAll_8_0() {
-                jQuery('.reportType_8_0').removeAttr('checked');
-            }
-        </script>
     @stop
+    @push('scripts')
+    <script>
+        function startSearchBy(){     
+        document.getElementById('searchValue1').style.display="none";
+        document.getElementById('searchValueRef1').style.display="none";
+        document.getElementById('courseList').style.display="none";        
+        document.getElementById('scheduleList').style.display="none";   
+        document.getElementById('searchValueName1').style.display="none"; 
+          
+            document.getElementById('searchValueName1').value='';       
+            document.getElementById('searchValueName1').style.display="block";
+            jQuery('#tagbox2').tagdragon({'field':'searchValueName1','url':'../widgetFunctions/loadCoursesCode.php','max':'10'});
+           
+    }
+  
+    function changeSearchBy(){
+        //alert(document.getElementById('searchBy1').value);    
+        document.getElementById('searchValue1').value='';
+        document.getElementById('searchValueName1').value='';
+        document.getElementById('searchValueRef1').value='';
+        //new text box for group name
+        document.getElementById('searchValueGroup').value='';
+        //new text box for city
+        document.getElementById('searchCity').value='';
+        
+        document.getElementById('searchValue1').style.display="none";
+        document.getElementById('searchValueName1').style.display="none";
+        document.getElementById('searchValueRef1').style.display="none";
+        //new text box for group name
+        document.getElementById('searchValueGroup').style.display="none";
+        //new text box for city
+        document.getElementById('searchCity').style.display="none";
+        document.getElementById('courseList').style.display="none";   
+        document.getElementById('scheduleList').style.display="none";
+        
+        
+        switch(document.getElementById('searchBy1').value)
+        {
+            case 'course':
+                document.getElementById('searchValueName1').style.display="block";            
+                
+            break;
+            case 'client':
+                document.getElementById('searchValue1').style.display="block";          
+                jQuery('#tagbox2').tagdragon({'field':'searchValue1','url':'../widgetFunctions/loadPeople.php','max':'10'});
+            break;
+            case 'specificUnit':            
+                document.getElementById('searchValueRef1').style.display="block";            
+                jQuery('#tagbox2').tagdragon({'field':'searchValueRef1','url':'../widgetFunctions/loadCourseUnitsCode.php','max':'10'});
+            break;
+            case 'event':
+                document.getElementById('courseList').style.display="block";         
+                document.getElementById('scheduleList').style.display="block"; 
+            break;
+            case 'clientGroupName':
+                document.getElementById('searchValueGroup').style.display="block";
+                jQuery('#tagbox2').tagdragon({'field':'searchValueGroup','url':'../widgetFunctions/loadClientGroupName.php','max':'10'}); 
+            break;
+            case 'city':
+                document.getElementById('searchCity').style.display="block";
+                jQuery('#tagbox2').tagdragon({'field':'searchCity','url':'../widgetFunctions/loadCities.php','max':'10'}); 
+            break;        
+        }     
+    }
+  
+    function loadScheduleList(){
+        var courseId = document.getElementById("courseList").value;       
+        var url = '../widgetFunctions/loadScheduleList.php';
+        var rand = Math.random(9999);
+        var pars ='rand='+rand+"&studentId=";    
+        if(courseId!="")
+            pars += '&courseId='+courseId;
+  
+            jQuery.ajax({
+                type: 'POST',
+                url: url,
+                data: pars,
+                dataType: 'json',
+                success: function(response, textStatus, jqXHR) {
+                  var newData = response;
+  
+                  var showInfo = eval(newData);
+                  document.getElementById("scheduleList").innerHTML = "";                            
+                  for(var i = 0; i<showInfo.length; i++){
+                      if(showInfo[i]['courseTypeId']==1)
+                          var varItem = new Option(showInfo[i][0]+", "
+                                                  +showInfo[i][2]+", "
+                                                  +(showInfo[i][5]-showInfo[i][7])
+                                                  +" vacancies, "
+                                                  +showInfo[i]['courseinitial'], showInfo[i][6]);  
+                      else
+                          var varItem = new Option(showInfo[i][0]+", "
+                                                  +showInfo[i][3]+" to "
+                                                  +showInfo[i][4]+", "
+                                                  +(showInfo[i][5]-showInfo[i][7])
+                                                  +" vacancies, "+showInfo[i]['courseinitial'], showInfo[i][6]);  
+                      document.getElementById("scheduleList").options.add(varItem);
+                      
+                  }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    alert("Error while resetting the password " + errorThrown);
+                }
+            });
+            
+        // var myAjax = new Ajax.Request( url, {method: 'post', parameters: pars, onComplete: function(originalRequest)
+        // {
+        //     var newData = originalRequest.responseText;
+  
+        //     var showInfo = eval(newData);
+        //     document.getElementById("scheduleList").innerHTML = "";                            
+        //     for(var i = 0; i<showInfo.length; i++){
+        //         if(showInfo[i]['courseTypeId']==1)
+        //             var varItem = new Option(showInfo[i][0]+", "
+        //                                     +showInfo[i][2]+", "
+        //                                     +(showInfo[i][5]-showInfo[i][7])
+        //                                     +" vacancies, "
+        //                                     +showInfo[i]['courseinitial'], showInfo[i][6]);  
+        //         else
+        //             var varItem = new Option(showInfo[i][0]+", "
+        //                                     +showInfo[i][3]+" to "
+        //                                     +showInfo[i][4]+", "
+        //                                     +(showInfo[i][5]-showInfo[i][7])
+        //                                     +" vacancies, "+showInfo[i]['courseinitial'], showInfo[i][6]);  
+        //         document.getElementById("scheduleList").options.add(varItem);
+                
+        //     }
+        // }} );
+    }
+  
+    function selectOption(option){
+      if(document.getElementById('rtype').value==''){
+        var select = document.getElementById("searchBy1");
+        if(option=="inclusion"){
+          if(select.options.length < 6){
+          select.options[select.options.length] = new Option('Client Group Name', 'clientGroupName');
+          select.options[select.options.length] = new Option('City', 'city'); 
+          } 
+        }else{
+          if(select.options.length > 4){
+            var oOption = select.options[5];
+            select.removeChild(oOption);
+            var oOption2 = select.options[4];
+            select.removeChild(oOption2);
+          }
+        }
+      }
+    }
+  
+    function openInclusionsExclusionsForm(){
+        jQuery("#dialog_saveinclusionsexclusions_form").dialog({
+            title: 'Name this inclusion/exclusion',
+            width: 435,
+            height: 380,
+            modal: true
+        });    
+    }
+  
+    function closeInclusionsExclusionsForm(){
+      jQuery("#dialog_saveinclusionsexclusions_form").dialog("destroy"); 
+    }
+  
+    function saveInclusionsExclusions(){
+      //alert("");
+      var title = document.getElementById("inclusionexclusionTitle").value;
+      var radioLength = document.getElementsByName("ReportType").length;
+      var type = '';
+      for(var i = 0; i < radioLength; i++) {
+        if(document.getElementsByName("ReportType")[i].checked) {
+          var type = document.getElementsByName("ReportType")[i].value;
+        }
+      }
+      
+      var url = '../widgetFunctions/saveInclusionsExclusions.php';
+      var rand = Math.random(9999);
+      var pars = 'rand='+rand;
+      pars += '&companyId=379';
+      pars += '&type='+type;
+      pars += '&title='+title;
+      pars += '&course='+arguments[0];
+      pars += '&event='+arguments[1];
+      pars += '&people='+arguments[2];
+      pars += '&unit='+arguments[3];
+      pars += '&clientgroupname='+arguments[4];
+      pars += '&city='+arguments[5];
+
+      jQuery.ajax({
+              type: 'POST',
+              url: url,
+              data: pars,
+              dataType: 'html',
+              success: function(response, textStatus, jqXHR) {
+              if(response=="Success"){
+                  alert("The "+type+" has been saved successfully.");
+                  location.href='manageexclusioninclusion.php';
+                }else{
+                  alert("Error! The "+type+" could not be saved.");
+                  return false;
+                }
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                      alert("Error" + errorThrown);
+                  }
+              });
+    }
+  
+    function removeSeries(){
+      var url = "../function/removeSavedInclusionsExclusions.php";
+      var Id = arguments[0];
+      var companyId = '379';
+      var rand = Math.random(9999);
+  
+      var pars = 'Id='+Id+'&companyId='+companyId+'&rand='+rand;
+      //alert(pars);
+      if(confirm("Are you sure you want to delete this saved inclusion/exclusion?" )){
+  
+        jQuery.ajax({
+              type: 'POST',
+              url: url,
+              data: pars,
+              dataType: 'html',
+              success: function(response, textStatus, jqXHR) {
+          location.href='manageexclusioninclusion.php';	
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                      alert("Error" + errorThrown);
+                  }
+              });
+      }
+    }
+  
+    jQuery(function(){
+        startSearchBy();       
+        jQuery('#reports_tab').tabs({selected:1});
+    });
+  
+    jQuery("#savedExcList").DataTable({
+                  "columnDefs": [
+                      {"orderable": false, "targets": [8]},
+                  ],
+                  "searching": false,
+                  "lengthMenu": [10, 20, 50]
+              });
+  
+    jQuery("#createSeriesList").DataTable({
+                  "columnDefs": [
+                      {"orderable": false, "targets": [3]},
+                  ],
+                  "searching": false,
+                  "lengthMenu": [10, 20, 50]
+              });
+          </script>
+          <script>
+        $(document).ready(function(){
+    function performSearch() {
+        // Get the search input value
+        var query = $('#searchInput').val();
+        // Get the selected value
+        var searchBy = $('#searchBy1').val();
+
+        // Make sure the input is not empty
+        if(query.length > 0){
+            $.ajax({
+                url: '/api/courseload', // URL to send the request to
+                method: 'GET', // HTTP method to use for the request
+                data: { 
+                    q: query,
+                    searchBy: searchBy // Include the selected value in the request
+                },
+                success: function(response){
+                    // Handle the response here
+                    var results = response.items; // Assuming response.items contains the search results
+                    var html = '';
+
+                    // Loop through the results and build the HTML
+                    results.forEach(function(item){
+                        html += '<p>' + item.name + '</p>';
+                    });
+
+                    // Insert the results into the #results div
+                    $('#results').html(html);
+                },
+                error: function(xhr, status, error){
+                    // Handle errors here
+                    console.log(error);
+                }
+            });
+        } else {
+            // Clear the results if the input is empty
+            $('#results').html('');
+        }
+    }
+
+    // Handle the click event on the search button
+    $('#searchButton').on('click', function(){
+        performSearch();
+    });
+        
+    // Optionally, you can also trigger the search on pressing Enter in the input field
+    $('#searchInput').on('keypress', function(e){
+        if(e.which == 13) { // Enter key pressed
+            performSearch();
+        }
+    });
+});
+          </script>
+    @endpush
