@@ -11,7 +11,9 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Mail;
+use App\Models\Module;
 use App\Models\Course;
+use App\Models\State;
 use App\Models\CourseCategory;
 use App\Models\AvetmissCode;
 use App\Models\UnitCompetency;
@@ -26,9 +28,10 @@ class CourseController extends Controller
         $data['title'] = 'Course List';
         $data['menu_active_tab'] = 'course-list';
         $data['view'] = 'admin.course';
-            $data['rows'] = Course::orderBy('id', 'desc')->where('is_deleted', '0')->get();
+            $data['rows'] = Course::orderBy('id', 'desc')->get();
             $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
             $data['user'] = User::where('is_deleted', '0')->get();
+            // dd($data);
         return view('admin.course.list')->with($data); 
     }
 
@@ -138,11 +141,13 @@ class CourseController extends Controller
                     $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
                     $data['user'] = User::where('is_deleted', '0')->get();
                     $data['avetmiss_code'] = AvetmissCode::where('course_id', $id)->first();
-                    $data['unit_core_active'] = UnitCompetency::where('course_id', $id)->where('type', 'core')->where('status', '1')->where('is_deleted', '0')->get();
-                    $data['unit_elective_active'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', '1')->where('is_deleted', '0')->get();
-                    $data['unit_core_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'core')->where('status', '0')->where('is_deleted', '0')->get();
-                    $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', '0')->where('is_deleted', '0')->get();
-                    
+                    $data['unit_core_active'] = UnitCompetency::where('course_id', $id)->where('type','core')->where('status', 'A')->get();
+                    $data['unit_elective_active'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'A')->get();
+                    $data['unit_core_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'core')->where('status', 'A')->get();
+                    $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'A')->get();
+                    $data['states'] = State::where('is_deleted', '0')->get();
+                    $data["modules"] = Module::where('course_id',$course->id)->paginate(8);
+                    // dd($data);  
                     return view('admin.course.edit')->with($data);
                 } else {
                     return redirect()->route('course-list')->with('failed', 'Record not found.');
@@ -320,21 +325,15 @@ class CourseController extends Controller
     }
     
     public function storeunit(Request $request) {
-
-
         // Field Validation
         $request->validate([
             'code' => 'required',
             'nominal_hour' => 'required',
         ]);
-       
          // Insert Data
             try {
-                
-  
             //   dd($request);
                 $unit_of_compentency = new UnitCompetency;
-                
                 $unit_of_compentency->course_id = $request->course_id;
                 $unit_of_compentency->code = $request->code;
                 $unit_of_compentency->name = $request->name;
@@ -345,8 +344,6 @@ class CourseController extends Controller
                 $unit_of_compentency->type = $request->type;
 
                 $unit_of_compentency->save();
-        
-                
                 return redirect()->route('course-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
                // dd($e);
@@ -411,5 +408,18 @@ class CourseController extends Controller
             return redirect()->route('course-list')->with('failed', 'Record not found.');
         }
     }
-    
+
+    public function module(Request $request){
+        dd($request);
+        $module = new Module;
+        $module->course_id  = $request->moduleId;
+        $module->title  = $request->moduleName;
+        $module->save();
+        return response()->json(['response' => "0"]);
+    }
+
+    public function moduleSearch($id){
+        $modules = Module::where('course_id',$id)->get();
+        return response()->json(['response' => $modules]);
+    }
 }

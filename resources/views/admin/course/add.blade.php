@@ -67,7 +67,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Default Course Cost ($) <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Default Course Cost" name="cost">
+                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Default Course Cost" name="cost" value="0">
                                             <div class="invalid-feedback">
                                                 Please enter a Course cost.
                                             </div>

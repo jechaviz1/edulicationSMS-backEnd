@@ -60,6 +60,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- @dd($rows) --}}
                                 @if(!empty($rows))
                                 @foreach ($rows as $k=> $row)
 

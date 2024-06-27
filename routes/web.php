@@ -607,6 +607,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-course/{id}', [CourseController::class, 'delete'])->name('delete-course');
     Route::get('/change-course-status/{id}/{status}', [CourseController::class, 'changestatus'])->name('change-course-status');
     Route::post('/store-avetmisscode', [CourseController::class, 'avetmisscodestore'])->name('store-avetmisscode');
+    Route::post('/module/add', [CourseController::class, 'module'])->name('module.add');
+    Route::post('/module/edit', [CourseController::class, 'module'])->name('module.edit');
 
     Route::post('/store-unit', [CourseController::class, 'storeunit'])->name('store-unit');
     Route::post('/update-unit/{id}', [CourseController::class, 'updateunit'])->name('update-unit');
@@ -658,7 +660,7 @@ Route::group(['prefix' => 'admin'], function () {
     // END - Sessions
     // START - Event Trainers 
     Route::get('/events/trainers', [App\Http\Controllers\TrainersController::class, 'index'])->name('event.trainers.index');
-    // END - Event Trainers
+    // END - Event Trainerscourse-list
     // START - Event Archive 
     // Route::get('/events/archieve',[App\Http\Controllers\ArchiveController::class, 'index'])->name('event.archive.index');
     // END - Event Archive
