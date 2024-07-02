@@ -35,13 +35,11 @@ class CityTownController extends Controller {
         $data['menu_active_tab'] = 'add-city-town';
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
         $data['ragions'] = Region::where('is_deleted','0')->orderBy('name', 'asc')->get();
-        
 
         return view('admin.citytown.add')->with($data);
     }
 
     public function store(Request $request) {
-        
         
         $rules = [
             'city_name' => 'required',
@@ -51,18 +49,18 @@ class CityTownController extends Controller {
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
+            ->withInput()
+            ->withErrors($validator);
         } else {
             $data = $request->input();
-            
             try {
                 $citytown = new CityTown();
                 $citytown->city_name = $request->city_name;
                 $citytown->ragion_id = $request->ragion_id;
                 $citytown->state = $request->state;
+                $citytown->is_deleted = "0";
                 $citytown->save();
-                
+                // dd($citytown);
                 return redirect()->route('city-town-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
                 return redirect()->route('city-town-list')->with('failed', 'Record not added.');
@@ -93,7 +91,6 @@ class CityTownController extends Controller {
     }
 
     public function update(Request $request, $id) {
-        
         if ($id) {
             $request->validate([
                'city_name' => 'required',
@@ -102,15 +99,11 @@ class CityTownController extends Controller {
             ]);
             $data = $request->input();
             $citytown = CityTown::find($id);
-            
             if ($citytown) {
-                
                 $citytown->city_name = $request->city_name;
                 $citytown->ragion_id = $request->ragion_id;
                 $citytown->state = $request->state;
                 $citytown->save();
-                
-
                 return redirect()->route('city-town-list')->with('success', 'Record Updated.');
             } else {
                 return redirect()->route('city-town-list')->with('failed', 'Record not found.');

@@ -19,7 +19,7 @@ class TeacherController extends Controller {
         $data['title'] = 'Teacher List';
         $data['menu_active_tab'] = 'teacher-list';
         $data['teacher'] = Teacher::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
-
+        // dd($data);
         return view('admin.teacher.list')->with($data);
     }
 
@@ -34,27 +34,29 @@ class TeacherController extends Controller {
     }
 
     public function store(Request $request) {
-
         $data = $request->input();
         try {
             $teacher = new \App\Models\Teacher();
             $teacher->first_name = $data['first_name'];
             $teacher->last_name = $data['last_name'];
+            $teacher->birth = $data['birth'];
+            $teacher->commenceDate = $data['commenceDate'];
+            $teacher->email1 = $data['email1'];
+            $teacher->email2 = $data['email2'];
+            $teacher->email3 = $data['email3'];
+            $teacher->address1 = $data['address1'];
+            $teacher->address2 = $data['address2'];
+            $teacher->suburb = $data['suburb'];
+            $teacher->state = $data['state'];
+            $teacher->postcode = $data['postcode'];
+            $teacher->country = $data['country'];
+            $teacher->phone1 = $data['phone1'];
+            $teacher->phone2 = $data['phone2'];
+            $teacher->days = $data['days'];
+            $teacher->additionalId = $data['additionalId'];
+            $teacher->is_deleted = "0";
             $teacher->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
             $teacher->save();
-            if (isset($teacher->id)) {
-                $teacher_id = $teacher->id;
-                if (isset($request->subject_id)) {
-                    $subject_id = $request->subject_id;
-                    foreach ($subject_id as $key => $row) {
-                        $teacher_subject = new \App\Models\TeacherSubject();
-                        $teacher_subject->teacher_id = $teacher_id;
-                        $teacher_subject->subject_id = $row;
-                        $teacher_subject->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                        $teacher_subject->save();
-                    }
-                }
-            }
             return redirect()->route('teacher-list')->with('success', 'Record added successfully.');
         } catch (Exception $e) {
             return redirect()->route('teacher-list')->with('failed', 'Record not added.');
@@ -90,7 +92,22 @@ class TeacherController extends Controller {
             $teacher = \App\Models\Teacher::find($id);
             if ($teacher) {
                 $teacher->first_name = $data['first_name'];
-                $teacher->last_name = $data['last_name'];
+            $teacher->last_name = $data['last_name'];
+            $teacher->birth = $data['birth'];
+            $teacher->commenceDate = $data['commenceDate'];
+            $teacher->email1 = $data['email1'];
+            $teacher->email2 = $data['email2'];
+            $teacher->email3 = $data['email3'];
+            $teacher->address1 = $data['address1'];
+            $teacher->address2 = $data['address2'];
+            $teacher->suburb = $data['suburb'];
+            $teacher->state = $data['state'];
+            $teacher->postcode = $data['postcode'];
+            $teacher->country = $data['country'];
+            $teacher->phone1 = $data['phone1'];
+            $teacher->phone2 = $data['phone2'];
+            $teacher->days = $data['days'];
+            $teacher->additionalId = $data['additionalId'];
                 $teacher->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $teacher->save();
                 if ($id) {

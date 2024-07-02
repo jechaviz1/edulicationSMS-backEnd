@@ -17,6 +17,8 @@ use App\Models\State;
 use App\Models\CourseCategory;
 use App\Models\AvetmissCode;
 use App\Models\UnitCompetency;
+use App\Models\DefaultSession;
+use App\Models\Teacher;
 
 
 
@@ -35,7 +37,6 @@ class CourseController extends Controller
         return view('admin.course.list')->with($data); 
     }
 
-
     public function add(Request $request) {
         $data = [];
         $data['title'] = 'Add Course';
@@ -47,14 +48,11 @@ class CourseController extends Controller
     }
 
     public function store(Request $request) {
-
-
         // Field Validation
         $request->validate([
             'course_code' => 'required',
             'name' => 'required',
         ]);
-       
          // Insert Data
             try {
                 
@@ -132,11 +130,9 @@ class CourseController extends Controller
             $data['title'] = 'Edit Course';
             $data['menu_active_tab'] = 'edit-course';
             $data['view'] = 'admin.course';
-            
             if ($id) {
                 $course = Course::find($id);
                 if ($course) {
-                    
                     $data['course'] = $course;
                     $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
                     $data['user'] = User::where('is_deleted', '0')->get();
@@ -147,6 +143,9 @@ class CourseController extends Controller
                     $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'A')->get();
                     $data['states'] = State::where('is_deleted', '0')->get();
                     $data["modules"] = Module::where('course_id',$course->id)->paginate(8);
+                    $data["default_session"] = DefaultSession::where('course_id',$course->id)->paginate(7);
+                    $data['teacher'] = Teacher::where('is_deleted', '0')->get();
+
                     // dd($data);  
                     return view('admin.course.edit')->with($data);
                 } else {
@@ -410,16 +409,45 @@ class CourseController extends Controller
     }
 
     public function module(Request $request){
-        dd($request);
-        $module = new Module;
-        $module->course_id  = $request->moduleId;
-        $module->title  = $request->moduleName;
-        $module->save();
-        return response()->json(['response' => "0"]);
+        
+        if($request->moduleId == null){
+            $module = new Module;
+            $module->course_id  = $request->courseId;
+            $module->title  = $request->moduleName;
+            $module->save();
+            return response()->json(['response' => "0"]);     
+        }else{
+            $module  = Module::where('id',$request->moduleId)->first();
+            $module->title = $request->moduleName;
+            $module->save();
+            return response()->json(['response' => "0"]);  
+        }
+       
     }
 
     public function moduleSearch($id){
         $modules = Module::where('course_id',$id)->get();
         return response()->json(['response' => $modules]);
+    }
+
+    public function moduleDelete(Request $request){
+        $module  = Module::where('id',$request->moduleId)->first();
+        $module->delete();
+        return response()->json(['response' => "0"]); 
+    }
+    public function saveCourseCity(Request $request){
+            // dd($request);
+                $default_session = new DefaultSession;
+                $default_session->dftCity = $request->dftCity;
+                $default_session->dftTrainer = $request->dftTrainer;
+                $default_session->dftstarttime = $request->dftstarttime;
+                $default_session->dftendtime = $request->dftendtime;
+                $default_session->course_id = $request->courseId;
+                $default_session->dftAssessor = $request->dftAssessor;
+                $default_session->save();
+                return response()->json(['response' => "0"]); 
+    }
+    public function courseTrainer(Request $request){
+                dd($request);
     }
 }

@@ -87,16 +87,13 @@ Route::get('/', [UserController::class, 'login'])->name('');
 
 Route::group(['prefix' => 'admin'], function () {
 
-  // login
-  Route::get('/login', [UserController::class, 'login'])->name('login');
-  Route::post('/login-post', [UserController::class, 'loginPost'])->name('login-post');
-  Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
-  Route::group(['middleware' => ['auth']], function () {
-
+    // login
+    Route::get('/login', [UserController::class, 'login'])->name('login');
+    Route::post('/login-post', [UserController::class, 'loginPost'])->name('login-post');
+    Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    Route::group(['middleware' => ['auth']], function () {
     Route::get('/edit-user-profile', [UserController::class, 'editUserProfile'])->name('edit-user-profile');
     Route::post('/edit-user-profile', [UserController::class, 'updateUserProfile'])->name('update-user-profile');
-
     // START - user
     Route::get('/add-super-admin', [UserController::class, 'addSuperAdmin'])->name('add-super-admin');
     Route::post('/store-super-admin', [UserController::class, 'storeSuperAdmin'])->name('store-super-admin');
@@ -118,7 +115,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-user/{id}', [UserController::class, 'editUser'])->name('edit-user');
     Route::post('/update-user/{id}', [UserController::class, 'updateUser'])->name('update-user');
     Route::get('/delete-user/{id}', [UserController::class, 'deleteUser'])->name('delete-user');
-
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::get('/register-student', [StudentController::class, 'registerStudent'])->name('register-student');
     Route::get('/add-student', [StudentController::class, 'addStudent'])->name('add-student');
@@ -127,7 +123,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-student/{id}', [StudentController::class, 'editStudent'])->name('edit-student');
     Route::post('/update-student/{id}', [StudentController::class, 'updateStudent'])->name('update-student');
     Route::get('/generate-nat-file', [StudentController::class, 'generateNatFile'])->name('generate-nat-file');
-
     // START - Academic Session
     Route::get('/add-academic-session', [AcademicSessionController::class, 'add'])->name('add-academic-session');
     Route::post('/store-academic-session', [AcademicSessionController::class, 'store'])->name('store-academic-session');
@@ -152,7 +147,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-teacher/{id}', [TeacherController::class, 'update'])->name('update-teacher');
     Route::get('/delete-teacher/{id}', [TeacherController::class, 'delete'])->name('delete-teacher');
     // END - Teacher
-
     // START - subject
     Route::get('/add-subject', [SubjectController::class, 'add'])->name('add-subject');
     Route::post('/store-subject', [SubjectController::class, 'store'])->name('store-subject');
@@ -161,7 +155,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-subject/{id}', [SubjectController::class, 'update'])->name('update-subject');
     Route::get('/delete-subject/{id}', [SubjectController::class, 'delete'])->name('delete-subject');
     // END - subject
-
     // START - role
     Route::get('/add-role', [RoleController::class, 'add'])->name('add-role');
     Route::post('/store-role', [RoleController::class, 'store'])->name('store-role');
@@ -186,7 +179,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-department/{id}', [DepartmentController::class, 'updateDepartment'])->name('update-department');
     Route::get('/delete-department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('delete-department');
     //END - Department
-
     // START - Designation
     Route::get('/add-designation', [DesignationController::class, 'addDesignation'])->name('add-designation');
     Route::post('/store-designation', [DesignationController::class, 'storeDesignation'])->name('store-designation');
@@ -195,7 +187,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-designation/{id}', [DesignationController::class, 'updateDesignation'])->name('update-designation');
     Route::get('/delete-designation/{id}', [DesignationController::class, 'deleteDesignation'])->name('delete-designation');
     //END - Designation
-
     // START - Attendance
     Route::get('/add-attendance', [AttendanceController::class, 'addAttendance'])->name('add-attendance');
     Route::post('/store-attendance', [AttendanceController::class, 'storeAttendance'])->name('store-attendance');
@@ -204,9 +195,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-attendance/{id}', [AttendanceController::class, 'editAttendance'])->name('edit-attendance');
     Route::post('/update-attendance/{id}', [AttendanceController::class, 'updateAttendance'])->name('update-attendance');
     Route::get('/delete-attendance/{id}', [AttendanceController::class, 'deleteAttendance'])->name('delete-attendance');
-
     //END - Attendance 
-
     // START - AttendanceType
     Route::get('/add-attendancetype', [AttendanceTypeController::class, 'addAttendanceType'])->name('add-attendancetype');
     Route::post('/store-attendancetype', [AttendanceTypeController::class, 'storeAttendanceType'])->name('store-attendancetype');
@@ -223,7 +212,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-employeecategory/{id}', [EmployeeCategoryController::class, 'updateEmployeeCategory'])->name('update-employeecategory');
     Route::get('/delete-employeecategory/{id}', [EmployeeCategoryController::class, 'deleteEmployeeCategory'])->name('delete-employeecategory');
     //END - EmployeeCategory 
-
     // START - LeaveType
     Route::get('/add-leavetype', [LeaveTypeController::class, 'addLeaveType'])->name('add-leavetype');
     Route::post('/store-leavetype', [LeaveTypeController::class, 'storeLeaveType'])->name('store-leavetype');
@@ -232,8 +220,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-leavetype/{id}', [LeaveTypeController::class, 'updateLeaveType'])->name('update-leavetype');
     Route::get('/delete-leavetype/{id}', [LeaveTypeController::class, 'deleteLeaveType'])->name('delete-leavetype');
     //END - LeaveType 
-
-
     // START - StaffLeave
     Route::get('/add-staffleave', [LeaveController::class, 'add'])->name('add-staffleave');
     Route::post('/store-staffleave', [LeaveController::class, 'store'])->name('store-staffleave');
@@ -242,7 +228,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-staffleave/{id}', [LeaveController::class, 'update'])->name('update-staffleave');
     Route::get('/delete-staffleave/{id}', [LeaveController::class, 'delete'])->name('delete-staffleave');
     //END - StaffLeave 
-
     // START - LeaveManage
     Route::get('/add-leavemanage', [LeaveManagementController::class, 'add'])->name('add-leavemanage');
     Route::post('/store-leavemanage', [LeaveManagementController::class, 'store'])->name('store-leavemanage');
@@ -252,7 +237,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-leavemanage/{id}', [LeaveManagementController::class, 'delete'])->name('delete-leavemanage');
     Route::post('/leavemanage-status/{id}', [LeaveManagementController::class, 'status'])->name('leavemanage-status');
     //END - LeaveManage 
-
     // START - LeaveRequest
     Route::get('/add-leaverequest', [LeaveRequestController::class, 'addLeaveRequest'])->name('add-leaverequest');
     Route::post('/store-leaverequest', [LeaveRequestController::class, 'storeLeaveRequest'])->name('store-leaverequest');
@@ -263,7 +247,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/leaverequest-detail/{id}', [LeaveRequestController::class, 'leaverequestDetail'])->name('leaverequest-detail');
     Route::post('/add-leaverequest-detail', [LeaveRequestController::class, 'AddleaverequestDetail'])->name('add-leaverequest-detail');
     //END - LeaveRequest 
-
     // START - LeaveAllocation
     Route::get('/add-leaveallocation', [LeaveAllocationController::class, 'addLeaveAllocation'])->name('add-leaveallocation');
     Route::post('/store-leaveallocation', [LeaveAllocationController::class, 'storeLeaveAllocation'])->name('store-leaveallocation');
@@ -273,8 +256,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-leaveallocation/{id}', [LeaveAllocationController::class, 'deleteLeaveAllocation'])->name('delete-leaveallocation');
     //    Route::get('/leaveallocation-detail/{id}', [LeaveAllocationController::class, 'leaveallocationDetail'])->name('leaveallocation-detail');
     //END - LeaveAllocation 
-
-
     // START - Exams
     Route::get('/add-examtypes', [ExamTypeController::class, 'addExamType'])->name('add-examtypes');
     Route::post('/store-examtypes', [ExamTypeController::class, 'storeExamType'])->name('store-examtypes');
@@ -283,7 +264,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-examtype/{id}', [ExamTypeController::class, 'updateExamType'])->name('update-examtype');
     Route::get('/delete-examtype/{id}', [ExamTypeController::class, 'deleteExamType'])->name('delete-examtype');
     //END - Exams 
-
     // START - Grade
     Route::get('/add-grade', [GradeController::class, 'addGrade'])->name('add-grade');
     Route::post('/store-grade', [GradeController::class, 'storeGrade'])->name('store-grade');
@@ -292,7 +272,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-grade/{id}', [GradeController::class, 'updateGrade'])->name('update-grade');
     Route::get('/delete-grade/{id}', [GradeController::class, 'deleteGrade'])->name('delete-grade');
     //END - Grade 
-
     // START - Faculty
     Route::get('/add-faculty', [FacultyController::class, 'addFaculty'])->name('add-faculty');
     Route::post('/store-faculty', [FacultyController::class, 'storeFaculty'])->name('store-faculty');
@@ -301,7 +280,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-faculty/{id}', [FacultyController::class, 'updateFaculty'])->name('update-faculty');
     Route::get('/delete-faculty/{id}', [FacultyController::class, 'deleteFaculty'])->name('delete-faculty');
     //END - Faculty
-
     // START - Program
     Route::get('/add-program', [ProgramController::class, 'addProgram'])->name('add-program');
     Route::post('/store-program', [ProgramController::class, 'storePRogram'])->name('store-program');
@@ -310,8 +288,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-program/{id}', [ProgramController::class, 'updateProgram'])->name('update-program');
     Route::get('/delete-program/{id}', [ProgramController::class, 'deleteProgram'])->name('delete-program');
     //END - Program
-
-
     // START - Batch
     Route::get('/add-batch', [BatchController::class, 'addBatch'])->name('add-batch');
     Route::post('/store-batch', [BatchController::class, 'storeBatch'])->name('store-batch');
@@ -320,7 +296,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-batch/{id}', [BatchController::class, 'updateBatch'])->name('update-batch');
     Route::get('/delete-batch/{id}', [BatchController::class, 'deleteBatch'])->name('delete-batch');
     //END - Batch
-
     // START - Session
     Route::get('/add-session', [SessionController::class, 'addSession'])->name('add-session');
     Route::get('/session-list-current/{id}', 'SessionController@current')->name('session-list.current');
@@ -330,7 +305,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-session/{id}', [SessionController::class, 'updateSession'])->name('update-session');
     Route::get('/delete-session/{id}', [SessionController::class, 'deleteSession'])->name('delete-session');
     //END - Session
-
     // START - Semester
     Route::get('/add-semester', [SemesterController::class, 'addSemester'])->name('add-semester');
     // Route::get('/semester-list-current/{id}', 'SessionController@current')->name('session-list.current');
@@ -340,7 +314,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-semester/{id}', [SemesterController::class, 'updateSemester'])->name('update-semester');
     Route::get('/delete-semester/{id}', [SemesterController::class, 'deleteSemester'])->name('delete-semester');
     //END - Semester
-
     // START - Semester
     Route::get('/add-semester', [SemesterController::class, 'addSemester'])->name('add-semester');
     // Route::get('/semester-list-current/{id}', 'SessionController@current')->name('session-list.current');
@@ -350,8 +323,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-semester/{id}', [SemesterController::class, 'updateSemester'])->name('update-semester');
     Route::get('/delete-semester/{id}', [SemesterController::class, 'deleteSemester'])->name('delete-semester');
     //END - Semester
-
-
     // START - Section
     Route::get('/add-section', [SectionController::class, 'addSection'])->name('add-section');
     Route::post('/store-section', [SectionController::class, 'storeSection'])->name('store-section');
@@ -426,7 +397,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('filter-subject', [FilterController::class, 'filterSubject'])->name('filter-subject');
     Route::post('filter-enroll-subject', [FilterController::class, 'filterEnrollSubject'])->name('filter-enroll-subject');
     //End-FilterController
-
     // START - Fees Type
     Route::get('/add-fees-category', [FeesCategoryController::class, 'add'])->name('add-fees-category');
     Route::post('/store-fees-type', [FeesCategoryController::class, 'store'])->name('store-fees-type');
@@ -435,7 +405,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-fees-type/{id}', [FeesCategoryController::class, 'update'])->name('update-fees-type');
     Route::get('/delete-fees-type/{id}', [FeesCategoryController::class, 'delete'])->name('delete-fees-type');
     // END - Fees Type
-
     // START - Fees Discount
     Route::get('/add-fees-discount', [FeesDiscountController::class, 'add'])->name('add-fees-discount');
     Route::post('/store-fees-discount', [FeesDiscountController::class, 'store'])->name('store-fees-discount');
@@ -444,8 +413,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-fees-discount/{id}', [FeesDiscountController::class, 'update'])->name('update-fees-discount');
     Route::get('/delete-fees-discount/{id}', [FeesDiscountController::class, 'delete'])->name('delete-fees-discount');
     // END - Fees Discount
-
-
     // START - Fees Fines
     Route::get('/add-fees-fine', [FeesFineController::class, 'add'])->name('add-fees-fine');
     Route::post('/store-fees-fine', [FeesFineController::class, 'store'])->name('store-fees-fine');
@@ -454,12 +421,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-fees-fine/{id}', [FeesFineController::class, 'update'])->name('update-fees-fine');
     Route::get('/delete-fees-fine/{id}', [FeesFineController::class, 'delete'])->name('delete-fees-fine');
     // END - Fees Fines
-
     // START - fees-receipt
     Route::get('/add-fees-receipt', [FeesReceiptController::class, 'index'])->name('add-fees-receipt');
     Route::post('/store-fees-receipt', [FeesReceiptController::class, 'store'])->name('store-fees-receipt');
     // END - fees-receipt
-
     // START - fees-master
     Route::get('/list-fees-master', [FeesMasterController::class, 'index'])->name('list-fees-master');
     Route::get('/add-fees-master', [FeesMasterController::class, 'add'])->name('add-fees-master');
@@ -607,17 +572,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-course/{id}', [CourseController::class, 'delete'])->name('delete-course');
     Route::get('/change-course-status/{id}/{status}', [CourseController::class, 'changestatus'])->name('change-course-status');
     Route::post('/store-avetmisscode', [CourseController::class, 'avetmisscodestore'])->name('store-avetmisscode');
+    Route::post('/saveCourseCity', [CourseController::class, 'saveCourseCity'])->name('saveCourseCity');
+    Route::post('/course/trainer', [CourseController::class, 'courseTrainer'])->name('course.trainer');
+    //Module
     Route::post('/module/add', [CourseController::class, 'module'])->name('module.add');
-    Route::post('/module/edit', [CourseController::class, 'module'])->name('module.edit');
-
+    Route::post('/module/edit', [CourseController::class, 'moduleEdit'])->name('module.edit');
+    Route::post('/module/delete', [CourseController::class, 'MODULEDELETE'])->name('module.delete');
     Route::post('/store-unit', [CourseController::class, 'storeunit'])->name('store-unit');
     Route::post('/update-unit/{id}', [CourseController::class, 'updateunit'])->name('update-unit');
     Route::get('/delete-unit/{id}', [CourseController::class, 'deleteunit'])->name('delete-unit');
     Route::get('/change-unit-status/{id}/{status}', [CourseController::class, 'changeunitstatus'])->name('change-unit-status');
     // END - course
-
     // START - Region
-
     Route::get('/add-ragion', [RegionController::class, 'add'])->name('add-ragion');
     Route::post('/store-ragion', [RegionController::class, 'store'])->name('store-ragion');
     Route::get('/ragion-list', [RegionController::class, 'list'])->name('ragion-list');
@@ -743,5 +709,8 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/report/storagedetails', [App\Http\Controllers\ReportController::class, 'storagedetails'])->name('storage.details');  
   // TRAINER COMPETENCIES
   Route::get('/report/trainerCompetency', [App\Http\Controllers\ReportController::class, 'trainerCompetency'])->name('trainer.competencies');  
+ // Other Api City
+  Route::get('/api/city/list', [App\Http\Controllers\ApiController::class, 'cityget'])->name('api.city.list');  
+  Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');  
   });
 });

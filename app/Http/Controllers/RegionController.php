@@ -14,8 +14,6 @@ class RegionController extends Controller
         $data = [];
         $data['title'] = 'Ragion List';
         $data['menu_active_tab'] = 'ragion_list';
-       
-       
         $data['rows'] = Region::where('is_deleted','0')->orderBy('name', 'asc')->get();
         //dd($data['rows']);
         return view('admin.ragion.list')->with($data);
@@ -28,10 +26,8 @@ class RegionController extends Controller
         return view('admin.ragion.add')->with($data);
     }
     public function store(Request $request) {
-        //dd($request);
         $rules = [
              'name' => 'required|string|max:255',
-               
         ];
         
         $validator = Validator::make($request->all(), $rules);
@@ -42,17 +38,16 @@ class RegionController extends Controller
                             ->withErrors($validator);
         } else {
              $data = $request->input();
-         
-            try {
-                
-                $data = new Region();
-        
-                $data->name = $request->name;
-                $data->save();
-                        
+             
+             try {
+                 $data = new Region();
+                 $data->name = $request->name;
+                 $data->is_deleted = "0";
+                 $data->save();
+                 
                 return redirect()->route('ragion-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
-               // dd($e);
+               dd($e);
                 return redirect()->route('ragion-list')->with('failed', 'Record not added.');
             }
         }

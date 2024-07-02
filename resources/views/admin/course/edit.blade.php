@@ -18,7 +18,7 @@
 
                  <div class="card-body">
 
-                     <div class="tab-content" >
+                     <div class="tab-content">
                          <div class="tab-pane fade show active" id="DefaultTab" role="tabpanel" aria-labelledby="home-tab">
                              <div class="card-body pt-0">
                                  <!-- Nav tabs -->
@@ -38,26 +38,28 @@
                                                  Competency</a>
                                          </li>
                                          <li class="nav-item">
-                                            <a class="nav-link active" data-bs-toggle="tab" href="#info_pak">infoPAK</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#modules">Modules</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#defaults">Defaults</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#trainers">Trainers</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#assessors">Assessors</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#enrolment_confirm">Enrolment Confirm</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-bs-toggle="tab" href="#certificate_email"> Certificate & Email</a>
-                                        </li>
+                                             <a class="nav-link active" data-bs-toggle="tab" href="#info_pak">infoPAK</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" data-bs-toggle="tab" href="#modules">Modules</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" data-bs-toggle="tab" href="#defaults">Defaults</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" data-bs-toggle="tab" href="#trainers">Trainers</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" data-bs-toggle="tab" href="#assessors">Assessors</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" data-bs-toggle="tab" href="#enrolment_confirm">Enrolment
+                                                 Confirm</a>
+                                         </li>
+                                         <li class="nav-item">
+                                             <a class="nav-link" data-bs-toggle="tab" href="#certificate_email"> Certificate
+                                                 & Email</a>
+                                         </li>
                                      </ul>
                                      <div class="tab-content">
                                          <div class="tab-pane fade " id="course_info" role="tabpanel">
@@ -946,149 +948,249 @@
                                          </div>
                                          {{-- Start infoPAK --}}
                                          <div class="tab-pane fade" id="info_pak">
-                                            <h6 class="mt-2">Email Content</h6>
-                                            <form action="" method="POST" name="info_paks">
-                                                @csrf
-                                                @method('POST')
-                                                <div class="row mb-3">
-                                                    <label for="subject" class="col-sm-2 col-form-label">Subject</label>
-                                                    <div class="col-sm-10">
-                                                      <input type="text" class="form-control" id="subject" value="">
-                                                    </div>
-                                                  </div>
-                                                  <div class="row mb-3">
-                                                    <label for="subject" class="col-sm-2 col-form-label">Note</label>
-                                                    <div class="col-sm-10">
+                                             <h6 class="mt-2">Email Content</h6>
+                                             <form action="" method="POST" name="info_paks">
+                                                 @csrf
+                                                 @method('POST')
+                                                 <div class="row mb-3">
+                                                     <label for="subject" class="col-sm-2 col-form-label">Subject</label>
+                                                     <div class="col-sm-10">
+                                                         <input type="text" class="form-control" id="subject"
+                                                             value="">
+                                                     </div>
+                                                 </div>
+                                                 <div class="row mb-3">
+                                                     <label for="subject" class="col-sm-2 col-form-label">Note</label>
+                                                     <div class="col-sm-10">
 
-                                                        <textarea class="form-control texteditor" name="body" id="body" rows="4">{{ isset($row->body)?$row->body:'' }}</textarea>
-                                                    </div>
-                                                  </div>
-                                                </form>
-                                                  <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <p>
-                                                            Select which Company Documents are to be included in the InfoPak Email
-                                                        </p>
-                                                    </div>
-                                                  </div>
-                                                  <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <table id="example_new" class="display table" style="min-width: 845px">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Document Name</th>
-                                                                    <th>File Name</th>
-                                                                    <th>Select</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($unit_core_active as $k => $row)
-                                                                    <tr>
-                                                                        <td>{{ $row->code }}</td>
-                                                                        <td>{{ $row->name }}</td>
-                                                                        <td>{{ $row->field_of_education }}</td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                  </div>
-                                                  <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <p>Attach Course Specific Documents to be included in the InfoPak Email
-                                                        </p>
-                                                        <table id="example_new" class="display table" style="min-width: 845px">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Document Name</th>
-                                                                    <th>File Name</th>
-                                                                    <th>Select</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @foreach ($unit_core_active as $k => $row)
-                                                                    <tr>
-                                                                        <td>{{ $row->code }}</td>
-                                                                        <td>{{ $row->name }}</td>
-                                                                        <td>{{ $row->field_of_education }}</td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                        <form action=""  method="post">
-                                                            @csrf()
-                                                            @method("post")
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <div style="">
-                                                                    Upload Document: <input type="file" name="infoPakFile" id="infoPakFile" style="" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <div style="">
-                                                                    Document Name: <input class="form-control" type="text" name="documentName" id="documentName" style="" maxlength="50" fdprocessedid="x4bhl">
-                                                                    <input type="hidden" name="courseId" id="courseId" value="2565"></div>
-                                                            </div>
-                                                            <div class="col-sm-4 d-flex align-items-center">
-                                                                <input type="submit" class="btn btn-primary" value="Upload" fdprocessedid="0qoxp">&nbsp;&nbsp;
-                                                            </div>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                  </div>
-                                                  <div class="row">
-                                                    <div class="col-sm-12 text-center">
-                                                        <button class="btn btn-primary mt-3" type="submit" id="info_paks">Save</button>
-                                                    </div>
-                                                  </div>
+                                                         <textarea class="form-control texteditor" name="body" id="body" rows="4">{{ isset($row->body) ? $row->body : '' }}</textarea>
+                                                     </div>
+                                                 </div>
+                                             </form>
+                                             <div class="row">
+                                                 <div class="col-sm-12">
+                                                     <p>
+                                                         Select which Company Documents are to be included in the InfoPak
+                                                         Email
+                                                     </p>
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12">
+                                                     <table id="example_new" class="display table"
+                                                         style="min-width: 845px">
+                                                         <thead>
+                                                             <tr>
+                                                                 <th>Document Name</th>
+                                                                 <th>File Name</th>
+                                                                 <th>Select</th>
+                                                             </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                             @foreach ($unit_core_active as $k => $row)
+                                                                 <tr>
+                                                                     <td>{{ $row->code }}</td>
+                                                                     <td>{{ $row->name }}</td>
+                                                                     <td>{{ $row->field_of_education }}</td>
+                                                                 </tr>
+                                                             @endforeach
+                                                         </tbody>
+                                                     </table>
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12">
+                                                     <p>Attach Course Specific Documents to be included in the InfoPak Email
+                                                     </p>
+                                                     <table id="example_new" class="display table"
+                                                         style="min-width: 845px">
+                                                         <thead>
+                                                             <tr>
+                                                                 <th>Document Name</th>
+                                                                 <th>File Name</th>
+                                                                 <th>Select</th>
+                                                             </tr>
+                                                         </thead>
+                                                         <tbody>
+                                                             @foreach ($unit_core_active as $k => $row)
+                                                                 <tr>
+                                                                     <td>{{ $row->code }}</td>
+                                                                     <td>{{ $row->name }}</td>
+                                                                     <td>{{ $row->field_of_education }}</td>
+                                                                 </tr>
+                                                             @endforeach
+                                                         </tbody>
+                                                     </table>
+                                                     <form action="" method="post">
+                                                         @csrf()
+                                                         @method('post')
+                                                         <div class="row">
+                                                             <div class="col-sm-4">
+                                                                 <div style="">
+                                                                     Upload Document: <input type="file"
+                                                                         name="infoPakFile" id="infoPakFile"
+                                                                         style="" class="form-control">
+                                                                 </div>
+                                                             </div>
+                                                             <div class="col-sm-4">
+                                                                 <div style="">
+                                                                     Document Name: <input class="form-control"
+                                                                         type="text" name="documentName"
+                                                                         id="documentName" style="" maxlength="50"
+                                                                         fdprocessedid="x4bhl">
+                                                                     <input type="hidden" name="courseId" id="courseId"
+                                                                         value="2565">
+                                                                 </div>
+                                                             </div>
+                                                             <div class="col-sm-4 d-flex align-items-center">
+                                                                 <input type="submit" class="btn btn-primary"
+                                                                     value="Upload" fdprocessedid="0qoxp">&nbsp;&nbsp;
+                                                             </div>
+                                                         </div>
+                                                     </form>
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12 text-center">
+                                                     <button class="btn btn-primary mt-3" type="submit"
+                                                         id="info_paks">Save</button>
+                                                 </div>
+                                             </div>
                                          </div>
                                          {{-- End infoPAK --}}
                                          {{-- Start Modules --}}
                                          <div class="tab-pane fade show active" id="modules">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    @if($modules != null)
-                                                    <table width="70%" class="table" cellspacing="4" cellpadding="0" border="0" align="center">
-                                                        <thead>
-                                                            <tr>
-                                                                <th align="center">Module Name</th>
-                                                                <th align="center"></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="add_the_data">
-                                                            @foreach ($modules as $module)
-                                                            <tr>
-                                                                <td align="left"><div id="pName1050">{{ $module->title }}</div></td>
-                                                                <td align="right">
-                                                                    <i class="fa fa-pencil text-info fa-2x mr-2" onclick="addModuleBtn_Click('{{ $module->id }}', jQuery('#pName1050').html());">
-                                                                    </i>
-                                                                    <i class="fa fa-trash text-danger fa-2x" onclick="deleteModuleBtn_Click('{{ $module->id }}');">
-                                                                    </i>
-                                                                </td>
-                                                            </tr>
-                                                            @endforeach
-                                                            
-                                                        </tbody>
-                                                    </table>
-                                                    {!! $modules->render() !!}
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12 text-center py-3" id="addModulePanel">
-                                                    <button type="button" class="btn btn-primary mt-3" name="addModuleBtn" id="addModuleBtn" onclick="addModuleBtn_Click({{$course->id }});">Add Module</button>
-                                                </div>
-                                            </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12">
+                                                     @if ($modules != null)
+                                                         <table width="70%" class="table" cellspacing="4"
+                                                             cellpadding="0" border="0" align="center">
+                                                             <thead>
+                                                                 <tr>
+                                                                     <th align="center">Module Name</th>
+                                                                     <th align="center"></th>
+                                                                 </tr>
+                                                             </thead>
+                                                             <tbody id="add_the_data">
+                                                                 @foreach ($modules as $module)
+                                                                     <tr>
+                                                                         <td align="left">
+                                                                             <div id="pName1050">{{ $module->title }}
+                                                                             </div>
+                                                                         </td>
+                                                                         <td align="right">
+                                                                             <i class="fa fa-pencil text-info fa-2x mr-2"
+                                                                                 onclick="addModuleBtn_Click('{{ $module->id }}', jQuery('#pName1050').html());">
+                                                                             </i>
+                                                                             <i class="fa fa-trash text-danger fa-2x"
+                                                                                 onclick="deleteModuleBtn_Click('{{ $module->id }}');">
+                                                                             </i>
+                                                                         </td>
+                                                                     </tr>
+                                                                 @endforeach
+
+                                                             </tbody>
+                                                         </table>
+                                                         {!! $modules->render() !!}
+                                                     @endif
+                                                 </div>
+                                             </div>
+                                             <div class="row">
+                                                 <div class="col-sm-12 text-center py-3" id="addModulePanel">
+                                                     <button type="button" class="btn btn-primary mt-3"
+                                                         name="addModuleBtn" id="addModuleBtn"
+                                                         onclick="addModuleBtn_Click();">Add Module</button>
+                                                 </div>
+                                             </div>
                                          </div>
                                          {{-- End Modules --}}
                                          {{-- Start Defaults --}}
                                          <div class="tab-pane fade" id="defaults">
+                                             <div class="mt-3">
+                                                 <h5>Default Session Fields <small>(used when creating course
+                                                         events)</small></h5>
+                                             </div>
+                                             <table width="80%" class="table" cellspacing="4" cellpadding="0"
+                                                 border="0" align="center">
+                                                 <thead>
+                                                     <tr>
+                                                         <th align="center">Id</th>
+                                                         <th align="center">City Name</th>
+                                                         <th align="center">Default Trainer</th>
+                                                         <th align="center">Default Assessor</th>
+                                                         <th align="center">Session Start Time</th>
+                                                         <th align="center">Session End Time</th>
+                                                         <th align="center">Action</th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                     @foreach ($default_session as $session)
+                                                         {{-- @dd($session) --}}
+                                                         <tr>
+                                                             <td align="left" id="701cityName">{{ $session->id }}</td>
+                                                             <td align="left">{{ $session->city->city_name }}</td>
+                                                             <td align="left">{{ $session->teacher->first_name }}
+                                                                 {{ $session->teacher->last_name }}</td>
+                                                             <td align="left">{{ $session->teacher->first_name }}
+                                                                 {{ $session->teacher->last_name }}</td>
+                                                             <td align="left">{{ $session->dftstarttime }}</td>
+                                                             <td align="left">{{ $session->dftendtime }}</td>
+                                                             <td align="right">
+                                                                 <i class="fa fa-pencil text-info fa-2x mr-2"
+                                                                     href="#"
+                                                                     onclick="addCityBtn_Click('701', '1519', 'new', '01:00:am', '03:00:pm', '921', '921');">
 
+                                                                 </i>
+                                                                 <i class="fa fa-trash text-danger fa-2x" href="#"
+                                                                     style="text-decoration:none; color:#2C7FBA; cursor:pointer"
+                                                                     onclick="deleteCityBtn_Click('701');"></i>
+                                                             </td>
+                                                         </tr>
+                                                     @endforeach
+                                                 </tbody>
+                                             </table>
+                                             {!! $default_session->render() !!}
+                                             <br>
+                                             <div class="row">
+                                                 <div class="col-10" id="addCityPanel"><button type="button"
+                                                         class="btn btn-primary" name="addCityBtn" id="addCityBtn"
+                                                         onclick="addCityBtn_Click();">Add More Defaults</button></div>
+                                             </div>
                                          </div>
                                          {{-- End Defaults --}}
                                          {{-- Start Trainers --}}
                                          <div class="tab-pane fade" id="trainers">
-
+                                             <div align="center" id="trainercompetency_2565" class="mt-5">
+                                                 <form name="edit_competency_frm" id="edit_competency_frm" method="post"
+                                                     action="{{ route('course.trainer')}}">
+                                                     @csrf
+                                                     @method('POST')
+                                                     <input type="hidden" name="courseId" id="courseId" value="{{ $course->id }}">
+                                                     <table style="width:250px;" cellpadding="0" cellspacing="0">
+                                                         <tbody>
+                                                            @foreach ($teacher as $ter )
+                                                            <tr style="height: 20px;">
+                                                                <td align="left" style="padding-left:5px;"
+                                                                    width="200"><label for="competency_921">domadiya,
+                                                                        kuldip</label></td>
+                                                                <td><input type="checkbox" class="custom-checkbox"
+                                                                        name="competency_921" id="competency_921"
+                                                                        checked=""></td>
+                                                            </tr>
+                                                            @endforeach
+                                                             <tr style="height:15px;">
+                                                                 <td colspan="2"></td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td colspan="2" align="center">
+                                                                     <button type="submit" class="btn btn-primary"
+                                                                         fdprocessedid="0kt6rb">Save</button>
+                                                                 </td>
+                                                             </tr>
+                                                         </tbody>
+                                                     </table>
+                                                 </form>
+                                             </div>
                                          </div>
                                          {{-- End Trainers --}}
                                          {{-- Start Assessors --}}
@@ -1110,17 +1212,11 @@
                                  </div>
                              </div>
                          </div>
-
                      </div>
-
-
                  </div>
              </div>
          </div>
-
      </div>
-
-
      <style>
          .select2-container--default .select2-results__option--highlighted[aria-selected] {
              background-color: #a0cf1a;
@@ -1145,14 +1241,15 @@
          .modal-backdrop {
              display: none;
          }
-         .w-5{
-            width: 50px;
-         } 
-         .h-5{
-            height: 50px;
+
+         .w-5 {
+             width: 50px;
+         }
+
+         .h-5 {
+             height: 50px;
          }
      </style>
-
  @section('customjs')
      <script>
          (function() {
@@ -1195,10 +1292,7 @@
          });
      </script>
      <!--select2 js-->
-
      <script src="{{ asset('admin/vendor/select2/js/select2.full.min.js') }}"></script>
-
-
      <script type="text/javascript">
          (function($) {
              "use strict"
@@ -1214,114 +1308,461 @@
      </script>
 
      <script>
-        function addModuleBtn_Click(moduleId, moduleName) {
-            console.log("hello")
-            jQuery("#addModulePanel").html("");
-            var htmlData = "<div style='height:30px;width:800px' align='center'>" 
-                            + "<div style='width:100px;float:left;margin-top:5px'>Module Name:</div><div style='float:left'>" 
-                            + "<input type='text' class='form-control' name='moduleName' id='moduleName' style='width:200px;' maxlength='20' tabindex='1'/>" 
-                            + "<input type='hidden' name='moduleId' id='moduleId'/></div>" 
-                            + "<div style='width:100px; float:left'>&nbsp;</div>" 
-                            + "<div style='float:left'><button type='button' class='btn btn-primary' onclick='saveNewModule();'>Save</button>&nbsp;&nbsp;&nbsp;" 
-                            + "<button type='button' class='btn btn-primary' onclick='cancelAddModule();'>Cancel</button>" 
-                            + "</div></div>";
-            
-            jQuery("#addModulePanel").html(htmlData);
-            jQuery("#moduleId").val(moduleId);
-            jQuery("#moduleName").val(moduleName);
-            jQuery("#moduleName").focus();
-        }
-        
-        function deleteModuleBtn_Click(moduleId){
-            if(confirm("Are you sure you want to delete the module?")) {
-                var url = "{{ route('module.add') }}";
-    
-                var courseId = "2565";
-    
-                jQuery.ajax({
-                    url: url,
-                    data: {'moduleId': moduleId},
-                    dataType:'json',
-                    type: 'POST',
-                    success: function(response) {
-                        if (response == "0") {
-                            jQuery("#tabs-modules-"+courseId).load("../manage/manageModule.php?courseId="+courseId);
-                        } else {
-                            alert("Error while deleting module.");
-                        }
-                    }
-                });
-            }
-        }
-        
-        function cancelAddModule(){
-            var htmlData = "<button type='button' class='btn btn-primary' name='addModuleBtn' id='addModuleBtn' onclick='addModuleBtn_Click();'>Add Module</button>";
-            jQuery("#addModulePanel").html(htmlData); 
-        }
-        
-        function saveNewModule(){
-            var message = "";
-            
-            if(jQuery("#moduleName").val() == "") 
-                message += "* Module Name\n";
-    
-            if(message != ""){
-                alert("Please fill in the following field(s):\n\n" + message);
-                return false;
-            } else {
-                var moduleName = jQuery("#moduleName").val();
-                var courseId = "";
-                if(jQuery("#moduleId").val() != "") {
-                    var moduleId = 	jQuery("#moduleId").val();
-                } else {
-                    var moduleId = "";
-                }
-                var url = "{{ route('module.add') }}";
-                jQuery.ajax({
-                    url: url,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {"_token": "{{ csrf_token() }}",'courseId': courseId, 'moduleId': moduleId, 'moduleName': moduleName},
-                    success: function(response) {
-                        if (response.response == "0") {
-                            location.reload();
-                        } else {
-                            alert("Error while saving module.");
-                        }
-                    }
-                });
-            }
-        }
-        
-        function getElementsByClassName(classname, node){   
-            if(!node) 
-                node = document.getElementsByTagName("body")[0];
-            var a = [];
-            var re = new RegExp('\\b' + classname + '\\b');
-            var els = node.getElementsByTagName("*");
-            for(var i=0,j=els.length; i<j; i++){
-                if(re.test(els[i].className)){
-                    a.push(els[i]);	
-                }
-            }
-            return a;
-        }
-    </script>
-    <script>
-        $('#myTab a').click(function(e) {
-            console.log("hello")
-        e.preventDefault();
-        $(this).tab('active');
-        console.log($(this).tab('active'))
-        });
-        // store the currently selected tab in the hash value
-        $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
-        var id = $(e.target).attr("href").substr(1);
-        window.location.hash = id;
-        });
-        // on load of the page: switch to the currently selected tab
-        var hash = window.location.hash;
-        $('#myTab a[href="' + hash + '"]').tab('active');
-    </script>
+         function addModuleBtn_Click(moduleId, moduleName) {
+             jQuery("#addModulePanel").html("");
+             var htmlData = "<div style='height:30px;width:800px' align='center'>" +
+                 "<div style='width:100px;float:left;margin-top:5px'>Module Name:</div><div style='float:left'>" +
+                 "<input type='text' class='form-control' name='moduleName' id='moduleName' style='width:200px;' maxlength='20' tabindex='1'/>" +
+                 "<input type='hidden' name='moduleId' id='moduleId'/></div>" +
+                 "<div style='width:100px; float:left'>&nbsp;</div>" +
+                 "<div style='float:left'><button type='button' class='btn btn-primary' onclick='saveNewModule();'>Save</button>&nbsp;&nbsp;&nbsp;" +
+                 "<button type='button' class='btn btn-primary' onclick='cancelAddModule();'>Cancel</button>" +
+                 "</div></div>";
+             jQuery("#addModulePanel").html(htmlData);
+             jQuery("#moduleId").val(moduleId);
+             jQuery("#moduleName").val(moduleName);
+             jQuery("#moduleName").focus();
+         }
+
+         function deleteModuleBtn_Click(moduleId) {
+             if (confirm("Are you sure you want to delete the module?")) {
+                 var url = "{{ route('module.delete') }}";
+                 var courseId = "";
+                 jQuery.ajax({
+                     url: url,
+                     data: {
+                         "_token": "{{ csrf_token() }}",
+                         'moduleId': moduleId
+                     },
+                     dataType: 'json',
+                     type: 'POST',
+                     success: function(response) {
+                         if (response.response == "0") {
+                             location.reload();
+                         } else {
+                             alert("Error while deleting module.");
+                         }
+                     }
+                 });
+             }
+         }
+
+         function cancelAddModule() {
+             var htmlData =
+                 "<button type='button' class='btn btn-primary' name='addModuleBtn' id='addModuleBtn' onclick='addModuleBtn_Click();'>Add Module</button>";
+             jQuery("#addModulePanel").html(htmlData);
+         }
+
+         function saveNewModule() {
+             var message = "";
+             if (jQuery("#moduleName").val() == "")
+                 message += "* Module Name\n";
+             if (message != "") {
+                 alert("Please fill in the following field(s):\n\n" + message);
+                 return false;
+             } else {
+                 var moduleName = jQuery("#moduleName").val();
+                 var courseId = "{{ $course->id }}";
+                 if (jQuery("#moduleId").val() != "") {
+                     var moduleId = jQuery("#moduleId").val();
+                 } else {
+                     var moduleId = jQuery("#moduleId").val();
+                 }
+                 var url = "{{ route('module.add') }}";
+                 jQuery.ajax({
+                     url: url,
+                     type: 'POST',
+                     dataType: 'json',
+                     data: {
+                         "_token": "{{ csrf_token() }}",
+                         'courseId': courseId,
+                         'moduleId': moduleId,
+                         'moduleName': moduleName
+                     },
+                     success: function(response) {
+                         if (response.response == "0") {
+                             location.reload();
+                         } else {
+                             alert("Error while saving module.");
+                         }
+                     }
+                 });
+             }
+         }
+
+         function getElementsByClassName(classname, node) {
+             if (!node)
+                 node = document.getElementsByTagName("body")[0];
+             var a = [];
+             var re = new RegExp('\\b' + classname + '\\b');
+             var els = node.getElementsByTagName("*");
+             for (var i = 0, j = els.length; i < j; i++) {
+                 if (re.test(els[i].className)) {
+                     a.push(els[i]);
+                 }
+             }
+             return a;
+         }
+     </script>
+     <script>
+         $('#myTab a').click(function(e) {
+             console.log("hello")
+             e.preventDefault();
+             $(this).tab('active');
+             console.log($(this).tab('active'))
+         });
+         // store the currently selected tab in the hash value
+         $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
+             var id = $(e.target).attr("href").substr(1);
+             window.location.hash = id;
+         });
+         // on load of the page: switch to the currently selected tab
+         var hash = window.location.hash;
+         $('#myTab a[href="' + hash + '"]').tab('active');
+     </script>
+     {{-- //add Defaults --}}
+     <script>
+         var pTable;
+
+         function addCityBtn_Click() {
+             var htmlData = "";
+
+             htmlData = `<form>
+            <div class="form-group row">
+                <label for="dftCity" class="col-sm-4 col-form-label">Defaults for City</label>
+                <div class="col-sm-8">
+                    <select name='dftCity' id='dftCity' class='form-control'></select>
+                    <input type='hidden' name='courseCityId' id='courseCityId'/>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="dftTrainer" class="col-sm-4 col-form-label">Default Trainer</label>
+                <div class="col-sm-8">
+                    <select name='dftTrainer' id='dftTrainer' class='form-control'></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="dftAssessor" class="col-sm-4 col-form-label">Default Assessor</label>
+                <div class="col-sm-8">
+                    <select name='dftAssessor' id='dftAssessor' class='form-control'></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="" class="col-sm-4 col-form-label">Session Start Time</label>
+                <div class="col-sm-8">
+                    <select name='dftstarthour' id='dftstarthour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftstartmin' id='dftstartmin' class='form-control' style='width:30%;display:inline'></select> <select style='width:32%;display:inline' id='dftstartampm' class='form-control' name='dftstartampm'><option value='am'>am</option><option value='pm'>pm</option></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="" class="col-sm-4 col-form-label">Session End Time</label>
+                <div class="col-sm-8">
+                    <select name='dftendhour' id='dftendhour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftendmin' id='dftendmin' class='form-control' style='width:30%;display:inline'></select> 
+                    <select style='width:32%;display:inline' id='dftendampm' class='form-control' name='dftendampm'><option value='am'>am</option><option value='pm'>pm</option></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <button type='button' class='btn btn-primary' onclick='saveNewCourseCity();'>Save</button>
+                       <button type='button' class='btn btn-secondary' onclick='cancelAddCity();'>Cancel</button>
+                </div>
+            </div>
+            </form>`;
+
+             jQuery("#dftstarthour").append(newOption);
+             jQuery("#addCityPanel").html(htmlData);
+             // City Start Add //
+             jQuery.ajax({
+                 url: "{{ route('api.city.list') }}",
+                 type: 'GET',
+                 dataType: 'json',
+                 success: function(response) {
+                     var options = '';
+                     response.forEach(function(city) {
+
+                         options += '<option value="' + city.id + '">' + city.city_name + '</option>';
+                     });
+                     console.log(response)
+                     jQuery("#dftCity").append(options);
+                 }
+             });
+             //City End Add  //
+             //Teacher Start Add //
+             jQuery.ajax({
+                 url: "{{ route('api.teacher.list') }}",
+                 type: 'GET',
+                 dataType: 'json',
+                 success: function(response) {
+                     var options = '';
+                     response.forEach(function(teacher) {
+                         console.log(teacher)
+                         options += '<option value="' + teacher.id + '">' + teacher.first_name + " " +
+                             teacher.last_name + '</option>';
+                     });
+
+                     jQuery("#dftTrainer").append(options);
+                     jQuery("#dftAssessor").append(options);
+                 }
+             });
+             //Teacher End Add  //
+             for (var i = 1; i <= 12; i++) {
+                 var h = i;
+                 if (i < 10) h = '0' + h;
+                 var newOption = new Option(h, h);
+                 var newOption1 = new Option(h, h);
+                 jQuery("#dftstarthour").append(newOption);
+                 jQuery("#dftendhour").append(newOption1);
+                 if (arguments.length == 7) {
+                     if (startTimeArray[0] == h)
+                         newOption.selected = true;
+                     if (endTimeArray[0] == h)
+                         newOption1.selected = true;
+                 }
+             }
+
+             for (var i = 0; i < 60; i = i + 5) {
+                 var h = i;
+                 if (i < 10) h = '0' + h;
+                 var newOption = new Option(h, h);
+                 var newOption1 = new Option(h, h);
+                 jQuery("#dftstartmin").append(newOption);
+                 jQuery("#dftendmin").append(newOption1);
+                 if (arguments.length == 7) {
+                     if (startTimeArray[1] == h)
+                         newOption.selected = true;
+                     if (endTimeArray[1] == h)
+                         newOption1.selected = true;
+                 }
+             }
+
+             if (startTimeArray[2] == "am") {
+                 jQuery("#dftstartampm").val("am");
+             } else {
+                 jQuery("#dftstartampm").val("pm");
+             }
+             if (endTimeArray[2] == "am") {
+                 jQuery("#dftendampm").val("am");
+             } else {
+                 jQuery("#dftendampm").val("pm");
+             }
+
+         }
+
+         // function deleteCityBtn_Click(courseCityId){
+         //     if(confirm("Are you sure you want to delete this course default?")){
+         //         var url = '../widgetFunctions/deleteCourseCity.php';
+
+         //         var courseId = 2565;
+
+         //         jQuery.ajax({
+         //             url: url,
+         //             type:'POST',
+         //             data: {'courseCityId': courseCityId},
+         //             dataType: 'json',
+         //             success: function(response) {
+         //                 if(response == "0") {
+         //                     jQuery("#tabs-defaults-"+courseId).load("../manage/manageCourseCities.php?courseId="+courseId);
+         //                 } else {
+         //                     alert("Error while deleting course default city.");
+         //                 }
+         //             }
+         //         });
+         //     }
+         // }
+
+         function cancelAddCity() {
+             jQuery("#addCityPanel").html(
+                 "<button type='button' class='btn btn-primary' name='addCityBtn' id='addCityBtn' onclick='addCityBtn_Click();'>Add More Defaults</button>"
+             );
+         }
+
+         function saveNewCourseCity() {
+             var message = "";
+             if (jQuery("#dftCity").val() == "")
+                 message += "* City Name\n";
+             if (jQuery("#dftTrainer").val() == "")
+                 message += "* Default Trainer\n";
+
+             if (message != "") {
+                 alert("Please fill in the following field(s):\n\n" + message);
+                 return false;
+             } else if (Date.parse('01/01/2011 ' + jQuery("#dftstarthour").val() + ':' + jQuery("#dftstartmin").val() + ' ' +
+                     jQuery("#dftstartampm").val()) > Date.parse('01/01/2011 ' + jQuery("#dftendhour").val() + ':' + jQuery(
+                     "#dftendmin").val() + ' ' + jQuery("#dftendampm").val())) {
+                 alert("Session End Time should be not earlier than session Start Time.");
+                 return false;
+
+             } else if (Date.parse('01/01/2011 ' + jQuery("#dftstarthour").val() + ':' + jQuery("#dftstartmin").val() + ' ' +
+                     jQuery("#dftstartampm").val()) - Date.parse('01/01/2011 ' + jQuery("#dftendhour").val() + ':' + jQuery(
+                     "#dftendmin").val() + ' ' + jQuery("#dftendampm").val()) == 0) {
+                 alert("Session End Time should be not earlier than session Start Time.");
+                 return false;
+             } else {
+                 var dftCity = jQuery("#dftCity").val();
+                 var dftTrainer = jQuery("#dftTrainer").val();
+                 var dftAssessor = jQuery("#dftAssessor").val();
+                 var dftstarttime = jQuery("#dftstarthour").val() + ":" + jQuery("#dftstartmin").val() + " " + jQuery(
+                     "#dftstartampm").val();
+                 var dftendtime = jQuery("#dftendhour").val() + ":" + jQuery("#dftendmin").val() + " " + jQuery(
+                     "#dftendampm").val();
+
+                 courseId = "{{ $course->id }}";
+                 if (jQuery("#courseCityId").val() != "") {
+                     var courseCityId = jQuery("#courseCityId").val();
+                 } else {
+                     var courseCityId = "";
+                 }
+
+                 jQuery.ajax({
+                     url: "{{ route('saveCourseCity') }}",
+                     type: 'POST',
+                     data: {
+                         "_token": "{{ csrf_token() }}",
+                         'dftCity': dftCity,
+                         'dftTrainer': dftTrainer,
+                         'dftstarttime': dftstarttime,
+                         'dftendtime': dftendtime,
+                         'courseId': courseId,
+                         'courseCityId': courseCityId,
+                         'dftAssessor': dftAssessor
+                     },
+                     dataType: 'json',
+                     success: function(response) {
+                         if (response.response == "0") {
+                             location.reload();
+                         } else {
+                             alert("Error while saving course defaults.");
+                         }
+                     }
+                 });
+             }
+         }
+
+         function getElementsByClassName(classname, node) {
+             if (!node)
+                 node = document.getElementsByTagName("body")[0];
+             var a = [];
+             var re = new RegExp('\\b' + classname + '\\b');
+             var els = node.getElementsByTagName("*");
+             for (var i = 0, j = els.length; i < j; i++) {
+                 if (re.test(els[i].className)) {
+                     a.push(els[i]);
+                 }
+             }
+             return a;
+         }
+
+
+         jQuery('#addPaymentPlan').click(function() {
+             jQuery('#addPaymentPlan').hide();
+             jQuery('#addPlan').show();
+         })
+
+         jQuery('#cancelPlan').click(function() {
+             jQuery('#addPaymentPlan').show();
+             jQuery('#addPlan').hide();
+         })
+
+         pTable = jQuery("#thePlans").DataTable({
+             "ajax": {
+                 url: "../widgetFunctions/getPaymentPlans.php",
+                 data: {
+                     'courseId': 2565
+                 },
+                 type: "POST"
+             },
+             "columns": [{
+                     "orderable": false,
+                     "data": "0"
+                 },
+                 {
+                     "orderable": false,
+                     "data": "1"
+                 },
+                 {
+                     "orderable": false,
+                     "data": "2"
+                 },
+                 {
+                     "orderable": false,
+                     "data": "3",
+                     className: "right"
+                 },
+             ],
+             "language": {
+                 "zeroRecords": "No plans to list"
+             },
+             "searching": false,
+             "stateSave": true,
+             "paging": false,
+             "retrieve": true,
+             "info": false
+         });
+
+         // jQuery('#addPlan').submit(function(e){
+         //     e.preventDefault();
+         //     var data = jQuery("#addPlan").serialize();
+         //     jQuery.ajax({
+         //         url: '../widgetFunctions/savePaymentPlan.php',
+         //         data: data,
+         //         type: 'POST',
+         //         dataType: 'json',
+         //         success: function(response, textStatus, jqXHR) {
+         //             if(response == '0') {
+         //                 pTable.ajax.reload();	
+         //                 jQuery('#addPlan').trigger("reset");
+         //                 jQuery('#addPlan').hide();
+         //                 jQuery('#addPaymentPlan').show();
+         //             } else {
+
+         //             }
+         //         },
+         //         error: function(xhr, textStatus, errorThrown){
+
+         //         }
+         //     });
+         // })
+
+         // function deletePlan(id){
+         //     jQuery.ajax({
+         //         url: '../widgetFunctions/deletePaymentPlan.php',
+         //         data: {'id': id},
+         //         type: 'POST',
+         //         dataType: 'json',
+         //         success: function(response, textStatus, jqXHR) {
+         //             if(response == '0') {
+         //                 pTable.ajax.reload();	
+         //             } else {
+
+         //             }
+         //         },
+         //         error: function(xhr, textStatus, errorThrown){
+
+         //         }
+         //     });
+         // }
+
+         // function editPlan(id){
+         //     jQuery.ajax({
+         //         url: '../widgetFunctions/getPaymentPlan.php',
+         //         data: {'id': id},
+         //         type: 'POST',
+         //         dataType: 'json',
+         //         success: function(response, textStatus, jqXHR) {
+         //             jQuery('#addPaymentPlan').hide();
+         //             jQuery('#addPlan').show();
+         //             jQuery('#planId').val(response.planId);
+         //             jQuery('#courseId').val(response.courseId);
+         //             jQuery('#planName').val(response.planName);
+         //             jQuery('#planInstalments').val(response.instalments);
+         //             jQuery('#planFrequency').val(response.frequency);
+         //             console.log(response);
+         //         },
+         //         error: function(xhr, textStatus, errorThrown){
+
+         //         }
+         //     });
+         // }
+     </script>
  @endsection
 @stop
