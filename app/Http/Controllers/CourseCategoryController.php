@@ -49,9 +49,7 @@ class CourseCategoryController extends Controller
                
                         $data->name = $request->input('name');
                         $data->description = $request->input('description');
-  
                         
-                       // dd($data);
                         $data->save();
                         //dd("success");
                 return redirect()->route('coursecategory-list')->with('success', 'Record added successfully.');

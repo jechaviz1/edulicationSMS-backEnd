@@ -33,7 +33,6 @@ return new class extends Migration
             $table->string('days')->nullable();
             $table->string('additionalId')->nullable();
             $table->string('created_by_id')->nullable();
-            $table->string('additionalId')->nullable();
             $table->string('is_deleted')->nullable();
             $table->timestamps();
         });

@@ -631,8 +631,6 @@
                                                          </div>
                                                      </div>
                                                  </form>
-
-
                                              </div>
                                          </div>
                                          <div class="tab-pane fade" id="units_of_competency">
@@ -1059,7 +1057,7 @@
                                          </div>
                                          {{-- End infoPAK --}}
                                          {{-- Start Modules --}}
-                                         <div class="tab-pane fade show active" id="modules">
+                                         <div class="tab-pane fade" id="modules">
                                              <div class="row">
                                                  <div class="col-sm-12">
                                                      @if ($modules != null)
@@ -1162,22 +1160,24 @@
                                          <div class="tab-pane fade" id="trainers">
                                              <div align="center" id="trainercompetency_2565" class="mt-5">
                                                  <form name="edit_competency_frm" id="edit_competency_frm" method="post"
-                                                     action="{{ route('course.trainer')}}">
+                                                     action="{{ route('course.trainer') }}">
                                                      @csrf
                                                      @method('POST')
-                                                     <input type="hidden" name="courseId" id="courseId" value="{{ $course->id }}">
+                                                     <input type="hidden" name="courseId" id="courseId"
+                                                         value="{{ $course->id }}">
                                                      <table style="width:250px;" cellpadding="0" cellspacing="0">
                                                          <tbody>
-                                                            @foreach ($teacher as $ter )
-                                                            <tr style="height: 20px;">
-                                                                <td align="left" style="padding-left:5px;"
-                                                                    width="200"><label for="competency_921">domadiya,
-                                                                        kuldip</label></td>
-                                                                <td><input type="checkbox" class="custom-checkbox"
-                                                                        name="competency_921" id="competency_921"
-                                                                        checked=""></td>
-                                                            </tr>
-                                                            @endforeach
+                                                             @foreach ($teacher as $ter)
+                                                                 <tr style="height: 20px;">
+                                                                     <td align="left" style="padding-left:5px;"
+                                                                         width="200"><label
+                                                                             for="competency_921">{{ $ter->first_name }},
+                                                                             {{ $ter->last_name }}</label></td>
+                                                                     <td><input type="checkbox" class="custom-checkbox"
+                                                                             name="competency_921" id="competency_921"
+                                                                             checked=""></td>
+                                                                 </tr>
+                                                             @endforeach
                                                              <tr style="height:15px;">
                                                                  <td colspan="2"></td>
                                                              </tr>
@@ -1195,17 +1195,140 @@
                                          {{-- End Trainers --}}
                                          {{-- Start Assessors --}}
                                          <div class="tab-pane fade" id="assessors">
-
+                                             <form name="edit_competency_frm" id="edit_competency_frm" method="post"
+                                                 action="{{ route('course.trainer') }}">
+                                                 @csrf
+                                                 @method('POST')
+                                                 <input type="hidden" name="courseId" id="courseId"
+                                                     value="{{ $course->id }}">
+                                                 <table style="width:250px;" cellpadding="0" cellspacing="0">
+                                                     <tbody>
+                                                         @foreach ($teacher as $ter)
+                                                             <tr style="height: 20px;">
+                                                                 <td align="left" style="padding-left:5px;"
+                                                                     width="200"><label for="competency_921">domadiya,
+                                                                         kuldip</label></td>
+                                                                 <td><input type="checkbox" class="custom-checkbox"
+                                                                         name="competency_921" id="competency_921"
+                                                                         checked=""></td>
+                                                             </tr>
+                                                         @endforeach
+                                                         <tr style="height:15px;">
+                                                             <td colspan="2"></td>
+                                                         </tr>
+                                                         <tr>
+                                                             <td colspan="2" align="center">
+                                                                 <button type="submit" class="btn btn-primary"
+                                                                     fdprocessedid="0kt6rb">Save</button>
+                                                             </td>
+                                                         </tr>
+                                                     </tbody>
+                                                 </table>
+                                             </form>
                                          </div>
                                          {{-- End Assessors --}}
                                          {{-- Start Enrolment Confirm --}}
-                                         <div class="tab-pane fade" id="enrolment_confirm">
-
+                                         <div class="tab-pane fade show active" id="enrolment_confirm">
+                                             <h5>Email Content</h5>
+                                             <form action="{{ route('course.document.email') }}" method="post" >
+                                                @csrf
+                                                
+                                                @method('POST')
+                                                <div class="form-group row">
+                                                 <label for="subject" class="col-sm-1 col-form-label">Subject</label>
+                                                 <div class="col-sm-11">
+                                                     <input type="hidden" name="courId" id="courId" value="{{ $course->id}}">
+                                                     <input type="text" class="form-control" name="subject"
+                                                         id="subject" maxlength="50"
+                                                         value="Training Reservation: {course}" fdprocessedid="0jdacb">
+                                                 </div>
+                                             </div>
+                                             <div class="form-group row mt-3">
+                                                 <label for="subject" class="col-sm-1 col-form-label">Subject</label>
+                                                 <div class="col-sm-11">
+                                                     <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
+                                                 </div>
+                                             </div>
+                                             <p class="mt-5">Attach Course Specific Documents to be included in the
+                                                 Enrolment Confirmation Email</p>
+                                             <table class="table" width="90%" border="0" cellpadding="0"
+                                                 cellspacing="0">
+                                                 <thead>
+                                                     <tr>
+                                                         <th style="width:40%">Document Name</th>
+                                                         <th style="width:40%">File Name</th>
+                                                         <th style="width:20%">Uploaded By</th>
+                                                         <th style="width:20%">Action</th>
+                                                         <th></th>
+                                                     </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                     @foreach ($course_documents as $document)
+                                                         <tr>
+                                                             <th style="width:40%">{{ $document->document_name }}</th>
+                                                             <th style="width:40%">{{ $document->file_name }}</th>
+                                                             <th style="width:20%">{{ $document->created_at }}</th>
+                                                             <th> <a href="{{ route('document.course.delete', $document->id) }}"
+                                                                     onclick="return confirm('Are you sure?')"
+                                                                     class="btn btn-danger shadow btn-xs sharp"><i
+                                                                    class="fa fa-trash"></i></a></th>
+                                                         </tr>
+                                                     @endforeach
+                                                 </tbody>
+                                             </table>
+                                            </form>
+                                             <form action="{{ route('submit.course.document') }}"
+                                                 enctype="multipart/form-data" method="post">
+                                                 @csrf
+                                                 @method('POST')
+                                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                                 <div class="drop-zone">
+                                                     <span class="drop-zone__prompt">Drop file here or click to
+                                                         upload</span>
+                                                     <input type="file" name="myFile" class="drop-zone__input">
+                                                 </div>
+                                                 <button type="submit"
+                                                     class="btn btn-primary mt-3 d-flex justify-content-center">Upload</button>
+                                                 <p class="mt-3">Select which Company Documents are to be included in the
+                                                     Enrolment Confirmation Email</p>
+                                                 <table class="table" width="80%" border="0" cellpadding="0"
+                                                     cellspacing="0">
+                                                     <thead>
+                                                         <tr>
+                                                             <th style="width:40%">Document Name</th>
+                                                             <th style="width:40%">File Name</th>
+                                                             <th style="width:20%; text-align:center;">Select</th>
+                                                         </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                        @foreach ($email_document as $email)
+                                                        <tr style="height:20px;">
+                                                            <td align="left">{{ $email->document_name }}</td>
+                                                            <td align="left"><a
+                                                                    href="{{ asset($email->file_name) }}"
+                                                                    target="_blank">{{ asset($email->file_name) }}</a></td>
+                                                            <td align="center"><input type="checkbox" name="com_chk[]"
+                                                                    value="{{ $email->id }}" checked=""></td>
+                                                        </tr>
+                                                        @endforeach
+                                                     </tbody>
+                                                 </table>
+                                                 <div class="row">
+                                                    <div class="col-sm-12 d-flex justify-content-center">
+                                                        <button  class="btn btn-primary">Save</button>
+                                                    </div>
+                                                 </div>
+                                             </form>
                                          </div>
                                          {{-- End Enrolment Confirm  --}}
                                          {{-- Start Certificate & Email --}}
                                          <div class="tab-pane fade" id="certificate_email">
-
+                                             <div class="row">
+                                                <div class="col-sm-12">
+                                                    <label for="certificate" class="font-weight-bold">Set Course Certificate</label>
+                                                     
+                                                </div>
+                                             </div>
                                          </div>
                                          {{-- End Certificate & Email --}}
                                      </div>
@@ -1248,6 +1371,54 @@
 
          .h-5 {
              height: 50px;
+         }
+
+         .drop-zone {
+             max-width: 100%;
+             height: 200px;
+             padding: 25px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             text-align: center;
+             font-family: "Quicksand", sans-serif;
+             font-weight: 500;
+             font-size: 20px;
+             cursor: pointer;
+             color: #cccccc;
+             border: 1px dashed #a0cf1a;
+             border-radius: 10px;
+         }
+
+         .drop-zone--over {
+             border-style: solid;
+         }
+
+         .drop-zone__input {
+             display: none;
+         }
+
+         .drop-zone__thumb {
+             width: 100%;
+             height: 100%;
+             border-radius: 10px;
+             overflow: hidden;
+             background-color: #cccccc;
+             background-size: cover;
+             position: relative;
+         }
+
+         .drop-zone__thumb::after {
+             content: attr(data-label);
+             position: absolute;
+             bottom: 0;
+             left: 0;
+             width: 100%;
+             padding: 5px 0;
+             color: #ffffff;
+             background: rgba(0, 0, 0, 0.75);
+             font-size: 14px;
+             text-align: center;
          }
      </style>
  @section('customjs')
@@ -1545,30 +1716,7 @@
              } else {
                  jQuery("#dftendampm").val("pm");
              }
-
          }
-
-         // function deleteCityBtn_Click(courseCityId){
-         //     if(confirm("Are you sure you want to delete this course default?")){
-         //         var url = '../widgetFunctions/deleteCourseCity.php';
-
-         //         var courseId = 2565;
-
-         //         jQuery.ajax({
-         //             url: url,
-         //             type:'POST',
-         //             data: {'courseCityId': courseCityId},
-         //             dataType: 'json',
-         //             success: function(response) {
-         //                 if(response == "0") {
-         //                     jQuery("#tabs-defaults-"+courseId).load("../manage/manageCourseCities.php?courseId="+courseId);
-         //                 } else {
-         //                     alert("Error while deleting course default city.");
-         //                 }
-         //             }
-         //         });
-         //     }
-         // }
 
          function cancelAddCity() {
              jQuery("#addCityPanel").html(
@@ -1699,70 +1847,82 @@
              "info": false
          });
 
-         // jQuery('#addPlan').submit(function(e){
-         //     e.preventDefault();
-         //     var data = jQuery("#addPlan").serialize();
-         //     jQuery.ajax({
-         //         url: '../widgetFunctions/savePaymentPlan.php',
-         //         data: data,
-         //         type: 'POST',
-         //         dataType: 'json',
-         //         success: function(response, textStatus, jqXHR) {
-         //             if(response == '0') {
-         //                 pTable.ajax.reload();	
-         //                 jQuery('#addPlan').trigger("reset");
-         //                 jQuery('#addPlan').hide();
-         //                 jQuery('#addPaymentPlan').show();
-         //             } else {
+         document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+             const dropZoneElement = inputElement.closest(".drop-zone");
 
-         //             }
-         //         },
-         //         error: function(xhr, textStatus, errorThrown){
+             dropZoneElement.addEventListener("click", (e) => {
+                 inputElement.click();
+             });
 
-         //         }
-         //     });
-         // })
+             inputElement.addEventListener("change", (e) => {
+                 if (inputElement.files.length) {
+                     updateThumbnail(dropZoneElement, inputElement.files[0]);
+                 }
+             });
 
-         // function deletePlan(id){
-         //     jQuery.ajax({
-         //         url: '../widgetFunctions/deletePaymentPlan.php',
-         //         data: {'id': id},
-         //         type: 'POST',
-         //         dataType: 'json',
-         //         success: function(response, textStatus, jqXHR) {
-         //             if(response == '0') {
-         //                 pTable.ajax.reload();	
-         //             } else {
+             dropZoneElement.addEventListener("dragover", (e) => {
+                 e.preventDefault();
+                 dropZoneElement.classList.add("drop-zone--over");
+             });
 
-         //             }
-         //         },
-         //         error: function(xhr, textStatus, errorThrown){
+             ["dragleave", "dragend"].forEach((type) => {
+                 dropZoneElement.addEventListener(type, (e) => {
+                     dropZoneElement.classList.remove("drop-zone--over");
+                 });
+             });
 
-         //         }
-         //     });
-         // }
+             dropZoneElement.addEventListener("drop", (e) => {
+                 e.preventDefault();
 
-         // function editPlan(id){
-         //     jQuery.ajax({
-         //         url: '../widgetFunctions/getPaymentPlan.php',
-         //         data: {'id': id},
-         //         type: 'POST',
-         //         dataType: 'json',
-         //         success: function(response, textStatus, jqXHR) {
-         //             jQuery('#addPaymentPlan').hide();
-         //             jQuery('#addPlan').show();
-         //             jQuery('#planId').val(response.planId);
-         //             jQuery('#courseId').val(response.courseId);
-         //             jQuery('#planName').val(response.planName);
-         //             jQuery('#planInstalments').val(response.instalments);
-         //             jQuery('#planFrequency').val(response.frequency);
-         //             console.log(response);
-         //         },
-         //         error: function(xhr, textStatus, errorThrown){
+                 if (e.dataTransfer.files.length) {
+                     inputElement.files = e.dataTransfer.files;
+                     updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                 }
 
-         //         }
-         //     });
-         // }
+                 dropZoneElement.classList.remove("drop-zone--over");
+             });
+         });
+
+         /**
+          * Updates the thumbnail on a drop zone element.
+          *
+          * @param {HTMLElement} dropZoneElement
+          * @param {File} file
+          */
+         function updateThumbnail(dropZoneElement, file) {
+             let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+             // First time - remove the prompt
+             if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                 dropZoneElement.querySelector(".drop-zone__prompt").remove();
+             }
+
+             // First time - there is no thumbnail element, so lets create it
+             if (!thumbnailElement) {
+                 thumbnailElement = document.createElement("div");
+                 thumbnailElement.classList.add("drop-zone__thumb");
+                 dropZoneElement.appendChild(thumbnailElement);
+             }
+
+             thumbnailElement.dataset.label = file.name;
+
+             // Show thumbnail for image files
+             if (file.type.startsWith("image/")) {
+                 const reader = new FileReader();
+
+                 reader.readAsDataURL(file);
+                 reader.onload = () => {
+                     thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+                 };
+             } else {
+                 thumbnailElement.style.backgroundImage = null;
+             }
+         }
      </script>
+     {{-- <script>
+          function documentclick(){
+                console.log("hello")
+         }
+     </script> --}}
  @endsection
 @stop

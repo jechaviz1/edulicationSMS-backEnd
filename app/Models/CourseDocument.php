@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseCategory extends Model
+class CourseDocument extends Model
 {
     use HasFactory;
-    protected $table = 'course_categories';
     protected $fillable = [
-        'name', 'description' ,'status',
-    ];
-
+        'id','course_id','document_name','file_name','path'
+      ];
+  
 }

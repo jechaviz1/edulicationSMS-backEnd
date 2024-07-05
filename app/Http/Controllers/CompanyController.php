@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Avetmiss;
 use App\Models\Template;
 use App\Models\State;
+use App\Models\EmailCourseStore;
 use App\Models\CompanyDocument;
 use App\Models\BackgroundTemplate;
 use Illuminate\Support\Facades\Log;
@@ -242,6 +243,7 @@ class CompanyController extends Controller
         public function companyDoc(Request $request){
             try {
                 $infos = CompanyDocument::where('type','info')->get();
+                // dd($infos);
                 $email = CompanyDocument::where('type','email')->get();
                 return view('admin.company.document',compact('infos','email'));
             } catch (Exception $e) {
@@ -333,5 +335,16 @@ class CompanyController extends Controller
                     // Handle the error and redirect back with an error message
                     return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
                 }
+            }
+            public function courseEmail(Request $request){
+                                // dd($request->com_chk);
+                      $courseDocument = new EmailCourseStore;
+                      $courseDocument->course_id = $request->courId;
+                      $courseDocument->subject = $request->subject;
+                      $courseDocument->note = $request->note;
+                      $courseDocument->com_chk = json_encode($request->com_chk);
+                      $courseDocument->save();
+                return redirect()->back()->with('success', 'Document delete successfully!');
+
             }
     }

@@ -19,7 +19,8 @@ use App\Models\AvetmissCode;
 use App\Models\UnitCompetency;
 use App\Models\DefaultSession;
 use App\Models\Teacher;
-
+use App\Models\CourseDocument;
+use App\Models\CompanyDocument;
 
 
 class CourseController extends Controller
@@ -55,7 +56,7 @@ class CourseController extends Controller
         ]);
          // Insert Data
             try {
-                
+                // dd($request);
                 if(isset($request->delivery_method_self) && isset($request->delivery_method_public) && isset($request->delivery_method_private)){
                     $delivery[] = $request->delivery_method_self;
                     $delivery[] = $request->delivery_method_public.'-'.$request->public_session_options;
@@ -119,7 +120,7 @@ class CourseController extends Controller
         
                 
                 return redirect()->route('course-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                // dd($e);
                 return redirect()->route('course-list')->with('failed', 'Record not added.');
             }
@@ -145,7 +146,8 @@ class CourseController extends Controller
                     $data["modules"] = Module::where('course_id',$course->id)->paginate(8);
                     $data["default_session"] = DefaultSession::where('course_id',$course->id)->paginate(7);
                     $data['teacher'] = Teacher::where('is_deleted', '0')->get();
-
+                    $data['course_documents'] = CourseDocument::get();
+                    $data['email_document'] = CompanyDocument::where('type','email')->get();
                     // dd($data);  
                     return view('admin.course.edit')->with($data);
                 } else {
@@ -344,7 +346,7 @@ class CourseController extends Controller
 
                 $unit_of_compentency->save();
                 return redirect()->route('course-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                // dd($e);
                 return redirect()->route('course-list')->with('failed', 'Record not added.');
             }
@@ -448,6 +450,42 @@ class CourseController extends Controller
                 return response()->json(['response' => "0"]); 
     }
     public function courseTrainer(Request $request){
-                dd($request);
+                // dd($request);
+    }
+    public function courseDocument(Request $request){
+        dd($request);
+        try {
+            $courseDocument = new CourseDocument;
+            // Store the uploaded file in the 'public/documents' directory
+            if ($request->hasFile('myFile')) {
+                $file = $request->file('myFile');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $courseDocument->document_name = $file->getClientOriginalName();
+                $courseDocument->file_name = $file->getClientOriginalName();
+                $file->move(public_path('course_document'), $filename); // Move the file to 'public/documents'
+                
+                // Generate the file URL
+                $fileUrl = asset('course_document/' . $filename);
+                
+                // return response()->json(['message' => 'Document uploaded successfully', 'url' => $fileUrl]);
+            }
+            $courseDocument->course_id = $request->course_id;
+            $courseDocument->path = $fileUrl;
+            $courseDocument->save();
+            return redirect()->back()->with('success', 'Document uploaded successfully!');
+        } catch (\Exception $e) {
+            // Handle any other exceptions
+            return response()->json(['message' => 'An error occurred while uploading the document', 'error' => $e->getMessage()], 500);
+        }
+    }
+    public function courseDocumentDelete($id){
+            // dd($id);
+            if ($id) {
+                $course = CourseDocument::find($id);
+                $course->delete();
+                return redirect()->back()->with('success', 'Document delete successfully!');
+            } else {
+                return redirect()->route('course-list')->with('failed', 'Record not found.');
+            }
     }
 }

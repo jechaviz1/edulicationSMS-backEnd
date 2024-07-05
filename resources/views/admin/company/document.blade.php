@@ -51,7 +51,7 @@
                         </thead>
                         <tbody>
                             {{-- @dd($documents) --}}
-                            @foreach ($infoscompetencyReport as $companyDoc)
+                            @foreach ($infos as $companyDoc)
                             @php
                             $formattedDate = Carbon::parse($companyDoc->created_at)->format(
                                 'd/m/Y',
@@ -112,7 +112,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                            {{-- @dd($documents) --}}
                             @foreach ($email as $companyDoc)
                             @php
                             $formattedDate = Carbon::parse($companyDoc->created_at)->format(

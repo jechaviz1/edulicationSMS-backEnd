@@ -294,7 +294,6 @@
                                                                 <div class="invalid-feedback">
                                                                     Please enter a Nominal Hours.
                                                                 </div>
-                    
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 row">

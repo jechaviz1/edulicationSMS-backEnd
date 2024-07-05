@@ -574,6 +574,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/store-avetmisscode', [CourseController::class, 'avetmisscodestore'])->name('store-avetmisscode');
     Route::post('/saveCourseCity', [CourseController::class, 'saveCourseCity'])->name('saveCourseCity');
     Route::post('/course/trainer', [CourseController::class, 'courseTrainer'])->name('course.trainer');
+    Route::post('/course/document', [CourseController::class, 'courseDocument'])->name('submit.course.document');
+    Route::get('/course/document/{id}', [CourseController::class, 'courseDocumentDelete'])->name('document.course.delete');
     //Module
     Route::post('/module/add', [CourseController::class, 'module'])->name('module.add');
     Route::post('/module/edit', [CourseController::class, 'moduleEdit'])->name('module.edit');
@@ -661,6 +663,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('/company/certificate/template/{id}', [App\Http\Controllers\CompanyController::class, 'template_update'])->name('certificate.template.update');
     Route::post('/company/certificate/template/background', [App\Http\Controllers\CompanyController::class, 'background'])->name('certificate.template.background');
     Route::get('certificate/copy/{id}', [App\Http\Controllers\CompanyController::class, 'clone'])->name('certificate.copy');
+    Route::post('course/document/email', [App\Http\Controllers\CompanyController::class, 'courseEmail'])->name('course.document.email');
     //start company
     Route::get('/company/companydoc', [App\Http\Controllers\CompanyController::class, 'companyDoc'])->name('company.document');
     Route::get('/company/info/upload', [App\Http\Controllers\CompanyController::class, 'infoUpload'])->name('document.infopak.upload');

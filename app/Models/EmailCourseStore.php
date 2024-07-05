@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CourseCategory extends Model
+class EmailCourseStore extends Model
 {
     use HasFactory;
-    protected $table = 'course_categories';
     protected $fillable = [
-        'name', 'description' ,'status',
-    ];
-
+        'id','course_id','subject','note','com_chk'
+      ];
 }
