@@ -48,10 +48,10 @@
                                 <tr>
                                     <td>{{$key+1}}</td>
                                     <td>{{$row->name}}</td>
-                                    <td>  @if( $row->status == 1 )
+                                    <td>  @if( $row->status == "A")
                                             <span class="badge badge-pill badge-success">Active</span>
                                             @else
-                                            <span class="badge badge-pill badge-danger">InActive</span>
+                                            <span class="badge badge-pill badge-danger">In Active</span>
                                             @endif</td>
                                   
                                     <td>
@@ -76,6 +76,11 @@
 
     </div>
 </div>
+<style>
+    .modal-backdrop{
+        display: none;
+    }
+</style>
 <script>
     (function () {
         'use strict'

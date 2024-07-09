@@ -18,7 +18,6 @@
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Edit Category</h5>
-
                     <form class="needs-validation" novalidate method="POST" action="{{ route('update-coursecategory',$coursecategory->id) }}" >
                         @csrf
                         <div class="row">
@@ -35,8 +34,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
                         </div>
                         <div class="row">
                         <div class="col-xl-6">

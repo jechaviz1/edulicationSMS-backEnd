@@ -45,7 +45,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                    <textarea class="form-txtarea form-control" rows="8" id="description" name="description" required ></textarea>
+                                    <textarea class="form-txtarea form-control" rows="8" id="description" name="description" ></textarea>
                                         <div class="invalid-feedback">
                                             Please enter a Description.
                                         </div>
@@ -53,6 +53,22 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                 <div class="mb-3 row">
+                                 <label class="col-lg-3 col-form-label" for="status">Status<span class="text-danger">*</span>
+                                </label>
+               
+                            <div class="col-lg-6">
+                                <select class="form-control" name="status" id="status">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">   
                             <div class="col-xl-6">
                                 <div class="mb-3 row">

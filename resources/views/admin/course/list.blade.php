@@ -1,10 +1,7 @@
-
 <!-- Extends template page-->
 @extends('admin.layout.header')
-
 <!-- Specify content -->
 @section('content')
-
 @if ($message = Session::get('success'))
 <div class="alert alert-primary alert-dismissible fade show">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -12,7 +9,6 @@
     <strong>Success!</strong> {{ $message }}
 </div>
 @endif
-
 <div class="col-xl-12">
     <div class="card dz-card" id="accordion-four">
         <div class="card-header flex-wrap d-flex justify-content-between">
@@ -23,22 +19,8 @@
                 <li class="nav-item" role="presentation">
                     <a href="{{ URL::route('add-course') }}" class="btn btn-primary light">Create Courses</a>
                 </li>
-                <!--                <li class="nav-item" role="presentation">
-                                    <button type="button" class="btn btn-primary light btn-icon-md"><i class="fa fa-filter"></i></button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <div class="dropdown ms-auto">
-                                        <a href="#" class="btn btn-primary light light light sharp " data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li class="dropdown-item"><i class="fa fa-print text-primary me-2"></i> Print</li>
-                                            <li class="dropdown-item"><i class="fa fa-file-pdf text-primary me-2"></i> Generate PDF</li>
-                                            <li class="dropdown-item"><i class="fa fa-file-excel text-primary me-2"></i> Export to Excel</li>
-                                        </ul>
-                                    </div>
-                                </li>-->
             </ul>
         </div>
-
         <!-- /tab-content -->
         <div class="tab-content" id="myTabContent-3">
             <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel" aria-labelledby="home-tab-3">
@@ -60,14 +42,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @dd($rows) --}}
                                 @if(!empty($rows))
                                 @foreach ($rows as $k=> $row)
-
                                 <tr>
                                     <td>{{$row->id}}</td>
                                     <td>
-                                        <a class="" data-bs-toggle="modal" data-bs-target="#showModal-{{ $row->id }}">{{$row->name}}</a>
+                                        <a href="#" class="" data-bs-toggle="modal" data-bs-target="#showModal-{{ $row->id }}">{{$row->name}}</a>
                                         @include($view.'.view')
                                     </td>
                                     <td>{{$row->code}}</td>
@@ -116,7 +96,7 @@
                                             @if($row->status == '1')
                                               <a href="{{ route('change-course-status',[$row->id,$row->status=0]) }}" onclick="return confirm('Are you sure you want to deactive this course?')" class=""><i title="Deactivate Course" class="fa fa-toggle-on fa-2x text-success" aria-hidden="true"></i></a>
                                             @else
-                                             <a href="{{ route('change-course-status',[$row->id,$row->status=1]) }}" onclick="return confirm('Are you sure you want to active this course?')" class=""><i title="Activate Course" class="fa fa-toggle-off fa-2x text-success" aria-hidden="true"></i></a>
+                                             <a href="{{ route('change-course-status',[$row->id,$row->status=1]) }}" onclick="return confirm('Are you sure you want to active this course?')" class="" @if($row->status=1) checked @endif><i title="Activate Course" class="fa fa-toggle-off fa-2x text-success" aria-hidden="true"></i></a>
                                             @endif
                                         </div>
                                     </td>
@@ -193,11 +173,9 @@
         border-radius: 6px;
     }
 </style>
-
-
-
-
-
-
-
+<style>
+    .modal-backdrop{
+        display: none;
+    }
+</style>
 @stop

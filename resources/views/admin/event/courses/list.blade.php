@@ -30,14 +30,14 @@
                         <div class="d-flex">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="url"
-                                    value="https://www.example.com/page1" id="flexRadioDefault1" checked>
+                                    value="{{ route('event.courses') }}" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Courses
                                 </label>
                             </div>
                             <div class="form-check ms-3">
                                 <input class="form-check-input" type="radio" name="url"
-                                    value="https://www.example.com/page2" id="flexRadioDefault2">
+                                    value="{{ route('event.session.index') }}" id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     Sessions
                                 </label>
@@ -135,17 +135,15 @@
                                 <tbody>
                                     @if (!empty($rows))
                                         @foreach ($rows as $k => $row)
-                                            {{-- @dd($row) --}}
                                             <tr>
                                                 <td>
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#course_edit"
-                                                        onclick="openCourseDialog({{ $row->id }})"
+                                                    <a href="{{route('event.course.update',$row->id) }}"
+
                                                         style="width: 26px;height: 20px;line-height: 2px;width: 20px;text-align: center;padding: 0;">
                                                         +
-                                                    </button>
+                                                    </a>
                                                     @foreach ($courses as $course)
-                                                        @if ($course->id == $row->course_name)
+                                                    @if ($course->id == $row->course_type)
                                                             {{ $course->name }}
                                                         @endif
                                                     @endforeach
@@ -232,9 +230,8 @@
         </div>
     </div>
     {{-- //Modal Create Start --}}
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" style="min-height: 458px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalToggleLabel">Create Event</h5>
@@ -243,7 +240,7 @@
                 <div class="modal-body p-3">
                     <form class="needs-validation" method="POST" id="course" novalidate>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="course_type" id="selfpaced"
                                         value="1" checked>
@@ -260,11 +257,11 @@
                                     <label class="form-check-label" for="private_sessions">Private Sessions</label>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-4 mt-2" id="reporting_state">
                                 <label class="form-check-label" for="reporting_state">Reporting State</label>
+                               {{-- @dd($states) --}}
                                 <select class="form-select" name="reporting_state" aria-label="Default select example"
                                     id="reporting_state" required>
                                     <option value="" selected>Select State</option>
@@ -294,14 +291,18 @@
                                 <label class="form-check-label" for="trainers">Trainers</label>
                                 <select class="form-select" name="trainers" aria-label="Default select example"
                                     id="trainers" required>
-                                    <option value="">Select Trainers</option>
+                                    @foreach ($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-6 mt-2" id="assessors">
                                 <label class="form-check-label" for="assessors">Assessors</label>
                                 <select class="form-select" name="assessors" aria-label="Default select example"
                                     id="assessors">
-                                    <option value="" selected>Select Assessors</option>
+                                    @foreach ($teachers as $teacher)
+                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -511,7 +512,7 @@
     <!-- Modal -->
     <div class="modal fade" id="course_edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog float-end me-5 modal-xxl modal-dialog-centered">
+        <div class="modal-dialog float-end me-5 modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Course - <span id="course_name_1"></span></h5>
@@ -541,7 +542,7 @@
                         <div class="tab-pane fade show active" id="nav-enrolments" role="tabpanel"
                             aria-labelledby="nav-home-tab">
                             <div class="mt-3">
-                                <div class="btn-group" role="group" aria-label="Basic example">
+                                <div class="" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-primary ms-2">Email all learners</button>
                                     <button type="button" class="btn btn-primary ms-2">SMS all learners</button>
                                     <button type="button" class="btn btn-primary ms-2">Send Survey</button>
@@ -1137,6 +1138,10 @@
         });
     </script>
     <style>
+        .modal-dialog-scrollable .modal-content {
+            max-height: 76%;
+            overflow: hidden;
+        }
         span.custom_inactive {
             background: #f44236;
             color: #fff;
@@ -1197,6 +1202,19 @@
     height: 40px;
     padding: 0;
     }
+    .btn {
+    display: inline-block;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25;
+    transition: all 0.2s ease-in-out;
+}
     </style>
     <script>
 

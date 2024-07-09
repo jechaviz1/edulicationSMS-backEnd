@@ -59,7 +59,7 @@
                         @endphp
                             <tr>
                                 <th>{{ $companyDoc->document_name }}</th>
-                                <td>{{ $companyDoc->file_name }}</td>
+                                <td><a href="{{ asset($companyDoc->file_name)}}" target="_blank">{{ $companyDoc->file_name }}</a></td>
                                 <td>{{ $formattedDate }}</td>
                                 <td>
                                     <a href="{{ route('document.upload.delete',$companyDoc->id)}}"><i class="fa fa-trash"></i></a>
@@ -120,7 +120,7 @@
                             @endphp
                             <tr>
                                 <th>{{ $companyDoc->document_name }}</th>
-                                <td>{{ $companyDoc->file_name }}</td>
+                                <td><a href="{{ asset($companyDoc->file_name)}}" target="_blank">{{ $companyDoc->file_name }}</a></td>
                                 <td>{{ $formattedDate }}</td>
                                 <td>
                                     <a href="{{ route('document.upload.delete',$companyDoc->id)}}"><i class="fa fa-trash"></i></a>

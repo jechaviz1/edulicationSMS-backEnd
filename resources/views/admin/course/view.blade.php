@@ -1,12 +1,12 @@
     <!-- Show modal content -->
     <div id="showModal-{{ $row->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="myModalLabel">View Course</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="overflow: scroll;">
                     <!-- Details View Start -->
                     <!--<h4><mark class="text-primary">View:</mark> {{ $row->title }}</h4>-->
                     <hr/>

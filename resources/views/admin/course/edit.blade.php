@@ -15,9 +15,7 @@
 
                      </ul>
                  </div>
-
                  <div class="card-body">
-
                      <div class="tab-content">
                          <div class="tab-pane fade show active" id="DefaultTab" role="tabpanel" aria-labelledby="home-tab">
                              <div class="card-body pt-0">
@@ -798,7 +796,6 @@
                                                          <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive
                                                              Core Units</p>
                                                      </div>
-
                                                  </div>
                                                  <table id="example_new" class="display table" style="min-width: 845px">
                                                      <thead>
@@ -832,7 +829,6 @@
                                                                      @else
                                                                          Module
                                                                      @endif
-
                                                                  </td>
                                                                  <td>
                                                                      <div class="d-flex">
@@ -945,7 +941,7 @@
                                              </div>
                                          </div>
                                          {{-- Start infoPAK --}}
-                                         <div class="tab-pane fade" id="info_pak">
+                                         <div class="tab-pane fade p-4" id="info_pak">
                                              <h6 class="mt-2">Email Content</h6>
                                              <form action="" method="POST" name="info_paks">
                                                  @csrf
@@ -985,11 +981,12 @@
                                                              </tr>
                                                          </thead>
                                                          <tbody>
-                                                             @foreach ($unit_core_active as $k => $row)
+                                                             @foreach ($info_document as $k => $row)
+                                                             {{-- @dd($row) --}}
                                                                  <tr>
-                                                                     <td>{{ $row->code }}</td>
-                                                                     <td>{{ $row->name }}</td>
-                                                                     <td>{{ $row->field_of_education }}</td>
+                                                                     <td>{{ $row->document_name }}</td>
+                                                                     <td><a href="{{ asset($row->file_name)}}" target="_blank">{{ $row->file_name }}</a> {{ $row->created_at }}</td>
+                                                                     <td> <input type="checkbox" name="" id=""></td>
                                                                  </tr>
                                                              @endforeach
                                                          </tbody>
@@ -1009,19 +1006,13 @@
                                                                  <th>Select</th>
                                                              </tr>
                                                          </thead>
-                                                         <tbody>
-                                                             @foreach ($unit_core_active as $k => $row)
-                                                                 <tr>
-                                                                     <td>{{ $row->code }}</td>
-                                                                     <td>{{ $row->name }}</td>
-                                                                     <td>{{ $row->field_of_education }}</td>
-                                                                 </tr>
-                                                             @endforeach
+                                                         <tbody id="document_email_upload">
+                                                         
                                                          </tbody>
                                                      </table>
-                                                     <form action="" method="post">
+                                                     {{-- <form action="" method="post">
                                                          @csrf()
-                                                         @method('post')
+                                                         @method('post') --}}
                                                          <div class="row">
                                                              <div class="col-sm-4">
                                                                  <div style="">
@@ -1041,11 +1032,10 @@
                                                                  </div>
                                                              </div>
                                                              <div class="col-sm-4 d-flex align-items-center">
-                                                                 <input type="submit" class="btn btn-primary"
-                                                                     value="Upload" fdprocessedid="0qoxp">&nbsp;&nbsp;
+                                                                 <input type="submit" class="btn btn-primary" value="Upload" fdprocessedid="0qoxp" onclick="uploadDocument()">
                                                              </div>
                                                          </div>
-                                                     </form>
+                                                     {{-- </form> --}}
                                                  </div>
                                              </div>
                                              <div class="row">
@@ -1057,7 +1047,7 @@
                                          </div>
                                          {{-- End infoPAK --}}
                                          {{-- Start Modules --}}
-                                         <div class="tab-pane fade" id="modules">
+                                         <div class="tab-pane fade p-4" id="modules">
                                              <div class="row">
                                                  <div class="col-sm-12">
                                                      @if ($modules != null)
@@ -1103,7 +1093,7 @@
                                          </div>
                                          {{-- End Modules --}}
                                          {{-- Start Defaults --}}
-                                         <div class="tab-pane fade" id="defaults">
+                                         <div class="tab-pane fade p-4" id="defaults">
                                              <div class="mt-3">
                                                  <h5>Default Session Fields <small>(used when creating course
                                                          events)</small></h5>
@@ -1157,7 +1147,7 @@
                                          </div>
                                          {{-- End Defaults --}}
                                          {{-- Start Trainers --}}
-                                         <div class="tab-pane fade" id="trainers">
+                                         <div class="tab-pane fade p-4" id="trainers">
                                              <div align="center" id="trainercompetency_2565" class="mt-5">
                                                  <form name="edit_competency_frm" id="edit_competency_frm" method="post"
                                                      action="{{ route('course.trainer') }}">
@@ -1194,7 +1184,7 @@
                                          </div>
                                          {{-- End Trainers --}}
                                          {{-- Start Assessors --}}
-                                         <div class="tab-pane fade" id="assessors">
+                                         <div class="tab-pane fade p-4" id="assessors">
                                              <form name="edit_competency_frm" id="edit_competency_frm" method="post"
                                                  action="{{ route('course.trainer') }}">
                                                  @csrf
@@ -1228,67 +1218,66 @@
                                          </div>
                                          {{-- End Assessors --}}
                                          {{-- Start Enrolment Confirm --}}
-                                         <div class="tab-pane fade show active" id="enrolment_confirm">
+                                         <div class="tab-pane fade p-4" id="enrolment_confirm">
                                              <h5>Email Content</h5>
-                                             <form action="{{ route('course.document.email') }}" method="post" >
-                                                @csrf
-                                                
-                                                @method('POST')
-                                                <div class="form-group row">
-                                                 <label for="subject" class="col-sm-1 col-form-label">Subject</label>
-                                                 <div class="col-sm-11">
-                                                     <input type="hidden" name="courId" id="courId" value="{{ $course->id}}">
-                                                     <input type="text" class="form-control" name="subject"
-                                                         id="subject" maxlength="50"
-                                                         value="Training Reservation: {course}" fdprocessedid="0jdacb">
-                                                 </div>
-                                             </div>
-                                             <div class="form-group row mt-3">
-                                                 <label for="subject" class="col-sm-1 col-form-label">Subject</label>
-                                                 <div class="col-sm-11">
-                                                     <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
-                                                 </div>
-                                             </div>
-                                             <p class="mt-5">Attach Course Specific Documents to be included in the
-                                                 Enrolment Confirmation Email</p>
-                                             <table class="table" width="90%" border="0" cellpadding="0"
-                                                 cellspacing="0">
-                                                 <thead>
-                                                     <tr>
-                                                         <th style="width:40%">Document Name</th>
-                                                         <th style="width:40%">File Name</th>
-                                                         <th style="width:20%">Uploaded By</th>
-                                                         <th style="width:20%">Action</th>
-                                                         <th></th>
-                                                     </tr>
-                                                 </thead>
-                                                 <tbody>
-                                                     @foreach ($course_documents as $document)
-                                                         <tr>
-                                                             <th style="width:40%">{{ $document->document_name }}</th>
-                                                             <th style="width:40%">{{ $document->file_name }}</th>
-                                                             <th style="width:20%">{{ $document->created_at }}</th>
-                                                             <th> <a href="{{ route('document.course.delete', $document->id) }}"
-                                                                     onclick="return confirm('Are you sure?')"
-                                                                     class="btn btn-danger shadow btn-xs sharp"><i
-                                                                    class="fa fa-trash"></i></a></th>
-                                                         </tr>
-                                                     @endforeach
-                                                 </tbody>
-                                             </table>
-                                            </form>
-                                             <form action="{{ route('submit.course.document') }}"
-                                                 enctype="multipart/form-data" method="post">
+                                             <form action="{{ route('course.document.email') }}" method="post">
                                                  @csrf
                                                  @method('POST')
+                                                 <div class="form-group row">
+                                                     <label for="subject" class="col-sm-1 col-form-label">Subject</label>
+                                                     <div class="col-sm-11">
+                                                         <input type="hidden" name="courId" id="courId"
+                                                             value="{{ $course->id }}">
+                                                         <input type="text" class="form-control" name="subject"
+                                                             id="subject" maxlength="50"
+                                                             value="Training Reservation: {course}"
+                                                             fdprocessedid="0jdacb">
+                                                     </div>
+                                                 </div>
+                                                 <div class="form-group row mt-3">
+                                                     <label for="subject" class="col-sm-1 col-form-label">Subject</label>
+                                                     <div class="col-sm-11">
+                                                         <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
+                                                     </div>
+                                                 </div>
+                                                 <p class="mt-5">Attach Course Specific Documents to be included in the
+                                                     Enrolment Confirmation Email</p>
+                                                 <table class="table" width="90%" border="0" cellpadding="0"
+                                                     cellspacing="0">
+                                                     <thead>
+                                                         <tr>
+                                                             <th style="width:40%">Document Name</th>
+                                                             <th style="width:40%">File Name</th>
+                                                             <th style="width:20%">Uploaded By</th>
+                                                             <th style="width:20%">Action</th>
+                                                             <th></th>
+                                                         </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                         @foreach ($course_documents as $document)
+                                                             <tr>
+                                                                 <th style="width:40%">{{ $document->document_name }}
+                                                                 </th>
+                                                                 <th style="width:40%">{{ $document->file_name }}</th>
+                                                                 <th style="width:20%">{{ $document->created_at }}</th>
+                                                                 <th> <a href="{{ route('document.course.delete', $document->id) }}"
+                                                                         onclick="return confirm('Are you sure?')"
+                                                                         class="btn btn-danger shadow btn-xs sharp"><i
+                                                                             class="fa fa-trash"></i></a></th>
+                                                             </tr>
+                                                         @endforeach
+                                                     </tbody>
+                                                 </table>
                                                  <input type="hidden" name="course_id" value="{{ $course->id }}">
                                                  <div class="drop-zone">
                                                      <span class="drop-zone__prompt">Drop file here or click to
                                                          upload</span>
-                                                     <input type="file" name="myFile" class="drop-zone__input">
+                                                     <input type="file" name="myFile" class="drop-zone__input"
+                                                         id="myFile">
                                                  </div>
                                                  <button type="submit"
-                                                     class="btn btn-primary mt-3 d-flex justify-content-center">Upload</button>
+                                                     class="btn btn-primary mt-3 d-flex justify-content-center"
+                                                     onclick='documentclick({{ $course->id }});'>Upload</button>
                                                  <p class="mt-3">Select which Company Documents are to be included in the
                                                      Enrolment Confirmation Email</p>
                                                  <table class="table" width="80%" border="0" cellpadding="0"
@@ -1301,34 +1290,53 @@
                                                          </tr>
                                                      </thead>
                                                      <tbody>
-                                                        @foreach ($email_document as $email)
-                                                        <tr style="height:20px;">
-                                                            <td align="left">{{ $email->document_name }}</td>
-                                                            <td align="left"><a
-                                                                    href="{{ asset($email->file_name) }}"
-                                                                    target="_blank">{{ asset($email->file_name) }}</a></td>
-                                                            <td align="center"><input type="checkbox" name="com_chk[]"
-                                                                    value="{{ $email->id }}" checked=""></td>
-                                                        </tr>
-                                                        @endforeach
+                                                         @foreach ($email_document as $email)
+                                                             <tr style="height:20px;">
+                                                                 <td align="left">{{ $email->document_name }}</td>
+                                                                 <td align="left"><a
+                                                                         href="{{ asset($email->file_name) }}"
+                                                                         target="_blank">{{ asset($email->file_name) }}</a>
+                                                                 </td>
+                                                                 <td align="center"><input type="checkbox"
+                                                                         name="com_chk[]" value="{{ $email->id }}"
+                                                                         checked=""></td>
+                                                             </tr>
+                                                         @endforeach
                                                      </tbody>
                                                  </table>
                                                  <div class="row">
-                                                    <div class="col-sm-12 d-flex justify-content-center">
-                                                        <button  class="btn btn-primary">Save</button>
-                                                    </div>
+                                                     <div class="col-sm-12 d-flex justify-content-center">
+                                                         <button class="btn btn-primary">Save</button>
+                                                     </div>
                                                  </div>
                                              </form>
                                          </div>
                                          {{-- End Enrolment Confirm  --}}
                                          {{-- Start Certificate & Email --}}
-                                         <div class="tab-pane fade" id="certificate_email">
-                                             <div class="row">
-                                                <div class="col-sm-12">
-                                                    <label for="certificate" class="font-weight-bold">Set Course Certificate</label>
-                                                     
-                                                </div>
+                                         <div class="tab-pane fade p-4" id="certificate_email">
+                                             <form action="{{ route('courses.certificate.email')}}" method="post">
+                                                @csrf
+                                                @method('POST')
+                                            <div class="row">
+                                                 <div class="col-sm-12">
+                                                     <label for="certificate" class="font-weight-bold">Set Course
+                                                         Certificate</label>
+                                                     <select name="certificate" id="certificate" class="form-control"
+                                                         onchange="loadCertificateEmailContent(this.options[this.options.selectedIndex].value);" >
+                                                         @foreach ($certificates as $certificate)
+                                                         <option value="{{$certificate->id}}">{{ $certificate->newCertificateName }}</option>
+                                                         @endforeach
+                                                     </select>
+                                                     <h5 class="mt-3">Email Content</h5>
+                                                     <input type="text" class="form-control" value="Course Completion Certificate: {course}" name="subject">
+                                                 </div>
+                                                 <label for="certificate" class="font-weight-bold mt-3">Note</label>
+                                                 <textarea class="form-control" name="note" id="note" cols="30" rows="10">
+
+                                                 </textarea>
                                              </div>
+                                             <button type="submit" class="btn btn-primary mt-3">Save</button>
+                                            </form>
                                          </div>
                                          {{-- End Certificate & Email --}}
                                      </div>
@@ -1919,10 +1927,63 @@
              }
          }
      </script>
-     {{-- <script>
-          function documentclick(){
-                console.log("hello")
+     <script>
+         function documentclick(id) {
+             // var image = jQuery("#dftCity").val();
+             var fileInput = jQuery("#myFile")[0];
+             console.log(fileInput);
+             var formData = new FormData();
+
+             formData.append("_token", "{{ csrf_token() }}");
+             formData.append("myFile", fileInput.files[0]);
+
+             jQuery.ajax({
+                 url: "{{ route('submit.course.document') }}",
+                 type: 'POST',
+                 data: formData,
+                 contentType: false,
+                 processData: false,
+                 dataType: 'json',
+                 success: function(response) {
+                     if (response.response == "0") {
+                         location.reload();
+                     } else {
+                         alert("Error while saving course defaults.");
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     console.error(xhr.responseText);
+                 }
+             });
          }
-     </script> --}}
+
+         function uploadDocument() {
+             var fileInput = jQuery("#infoPakFile")[0];
+             var fileInput = jQuery("#documentName").val();
+             console.log(fileInput);
+             var formData = new FormData();
+             formData.append("_token", "{{ csrf_token() }}");
+             formData.append("myFile", fileInput.files[0]);
+             formData.append("myFile", fileInput.files[0]);
+             jQuery.ajax({
+                 url: "{{ route('submit.course.document.email') }}",
+                 type: 'POST',
+                 data: formData,
+                 contentType: false,
+                 processData: false,
+                 dataType: 'json',
+                 success: function(response) {
+                     if (response.response == "0") {
+                         location.reload();
+                     } else {
+                         alert("Error while saving course defaults.");
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     console.error(xhr.responseText);
+                 }
+             });
+         }
+     </script>
  @endsection
 @stop

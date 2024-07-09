@@ -608,9 +608,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/events/couser/{id}', [App\Http\Controllers\Event\CourseController::class, 'destroy'])->name('event.courses.destroy');
     Route::get('/events/cousers', [App\Http\Controllers\Event\CourseController::class, 'status'])->name('event-courses-status');
     Route::get('/events/archive', [App\Http\Controllers\Event\CourseController::class, 'archive'])->name('event.courses.archive');
+    Route::get('/events/course/{id}', [App\Http\Controllers\Event\CourseController::class, 'course_event'])->name('event.course.update');
+    Route::post('/course/event/note', [App\Http\Controllers\Event\CourseController::class, 'course_note'])->name('course.event.note');
+    Route::post('/course/event/note/edit', [App\Http\Controllers\Event\CourseController::class, 'edit_course'])->name('event.note.course.edit');
+    Route::post('/course/event/note/delete', [App\Http\Controllers\Event\CourseController::class, 'delete_course'])->name('event.note.course.delete');
     //  Route::get('/city-town-list', [CityTownController::class, 'list'])->name('city-town-list');
     //  Route::get('/edit-city-town/{id}', [CityTownController::class, 'edit'])->name('edit-city-town');
-    //  Route::post('/update-city-town/{id}', [CityTownController::class, 'update'])->name('update-city-town');
     //  Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
     //  Route::get('/change-citytown-status/{id}/{status}', [CityTownController::class, 'changestatus'])->name('change-citytown-status');
     // END - Event Courses 
@@ -664,6 +667,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/company/certificate/template/background', [App\Http\Controllers\CompanyController::class, 'background'])->name('certificate.template.background');
     Route::get('certificate/copy/{id}', [App\Http\Controllers\CompanyController::class, 'clone'])->name('certificate.copy');
     Route::post('course/document/email', [App\Http\Controllers\CompanyController::class, 'courseEmail'])->name('course.document.email');
+    Route::post('course/certificate/email', [App\Http\Controllers\CompanyController::class, 'courseCertificate'])->name('courses.certificate.email');
+    Route::post('course/certificate/document/email', [App\Http\Controllers\CompanyController::class, 'courseCertificateDocument'])->name('submit.course.document.email');
     //start company
     Route::get('/company/companydoc', [App\Http\Controllers\CompanyController::class, 'companyDoc'])->name('company.document');
     Route::get('/company/info/upload', [App\Http\Controllers\CompanyController::class, 'infoUpload'])->name('document.infopak.upload');
