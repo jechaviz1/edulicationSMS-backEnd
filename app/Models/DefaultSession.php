@@ -21,7 +21,7 @@ class DefaultSession extends Model
     ];
     public function city()
     {
-        return $this->belongsTo(CityTown::class, 'dftCity','id');
+        return $this->belongsTo(city::class, 'dftCity','id');
     }
     public function teacher()
     {

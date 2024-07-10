@@ -18,5 +18,16 @@ class Course extends Model
     {
         return $this->belongsTo(Language::class, 'language_id');
     }
-
+    public function courseEmailContent()
+    {
+        return $this->hasOne(CourseEmailContent::class, 'course_id');
+    }
+    public function trainers()
+    {
+        return $this->belongsToMany(Teacher::class, 'course_teacher', 'course_id', 'teacher_id');
+    }
+    public function assessors()
+    {
+        return $this->belongsToMany(Teacher::class, 'course_assessor', 'course_id', 'teacher_id');
+    }
 }

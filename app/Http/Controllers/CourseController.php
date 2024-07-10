@@ -23,7 +23,7 @@ use App\Models\CourseDocument;
 use App\Models\CompanyDocument;
 use App\Models\InfoPakSpecific;
 use App\Models\Template;
-
+use App\Models\CourseEmailContent;
 class CourseController extends Controller
 {
     //
@@ -443,20 +443,35 @@ class CourseController extends Controller
         return response()->json(['response' => "0"]); 
     }
     public function saveCourseCity(Request $request){
-            // dd($request);
                 $default_session = new DefaultSession;
+                $default_session->course_id = $request->courseId;
                 $default_session->dftCity = $request->dftCity;
                 $default_session->dftTrainer = $request->dftTrainer;
-                $default_session->dftstarttime = $request->dftstarttime;
-                $default_session->dftendtime = $request->dftendtime;
-                $default_session->course_id = $request->courseId;
                 $default_session->dftAssessor = $request->dftAssessor;
+                $default_session->dftstarthour = $request->dftstarthour;
+                $default_session->dftstartmin = $request->dftstartmin;
+                $default_session->dftstartampm = $request->dftstartampm;
+                $default_session->dftendhour = $request->dftendhour;
+                $default_session->dftendmin = $request->dftendmin;
+                $default_session->dftendampm = $request->dftendampm;
                 $default_session->save();
                 return response()->json(['response' => "0"]); 
     }
     public function courseTrainer(Request $request){
-                // dd($request);
+            //    dd($request);
+               $course = Course::find(1); // Find the course with ID 1
+                    // Sync the trainers (attach new ones and detach the ones not in the array)
+            $course->trainers()->sync($request->teacher);
+            return redirect()->back()->with('success', 'Document data Saved successfully!');
     }
+
+    public function assessor(Request $request){
+        //    dd($request);
+           $course = Course::find(1); // Find the course with ID 1
+                // Sync the trainers (attach new ones and detach the ones not in the array)
+        $course->assessors()->sync($request->teacher);
+        return redirect()->back()->with('success', 'Document data Saved successfully!');
+}
     public function courseDocument(Request $request){
         try {
             $courseDocument = new CourseDocument;
@@ -467,10 +482,8 @@ class CourseController extends Controller
                 $courseDocument->document_name = $file->getClientOriginalName();
                 $courseDocument->file_name = $file->getClientOriginalName();
                 $file->move(public_path('course_document'), $filename); // Move the file to 'public/documents'
-                
                 // Generate the file URL
                 $fileUrl = asset('course_document/' . $filename);
-                
                 // return response()->json(['message' => 'Document uploaded successfully', 'url' => $fileUrl]);
             }
             $courseDocument->course_id = $request->course_id;
@@ -502,7 +515,22 @@ class CourseController extends Controller
         }
         }
         public function emailcontent(Request $request){
-            dd($request);
-
+            
+            $course_email_content = CourseEmailContent::where('course_id',$request->courseId)->first();
+            if($course_email_content){
+                $course_email_content->course_id = $request->courseId;
+                $course_email_content->subject = $request->subject;
+                $course_email_content->body = $request->body;
+                $course_email_content->select_document = json_encode($request->select,true);
+                $course_email_content->save();
+            }else{
+                $emailContent = new CourseEmailContent;
+                $emailContent->course_id = $request->courseId;
+                $emailContent->subject = $request->subject;
+                $emailContent->body = $request->body;
+                $emailContent->select_document = json_encode($request->select,true);
+                $emailContent->save();
+            }
+            return redirect()->back()->with('success', 'Document data Saved successfully!');
         }
 }

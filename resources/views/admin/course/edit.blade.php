@@ -936,8 +936,8 @@
                                                              </tr>
                                                          @endforeach
 
-                                                     </tbody>
-                                                 </table>
+                                                        </tbody>
+                                                    </table>
                                              </div>
                                          </div>
                                          {{-- Start infoPAK --}}
@@ -947,16 +947,16 @@
                                                  @csrf
                                                  @method('POST')
                                                  <div class="row mb-3">
+                                                     <input type="hidden" name="courseId" id="courseId" value="{{ $course->id }}">
                                                      <label for="subject" class="col-sm-2 col-form-label">Subject</label>
                                                      <div class="col-sm-10">
-                                                         <input type="text" class="form-control" id="subject"
-                                                             value="">
+                                                         <input type="text" class="form-control" id="subject" name="subject" value="{{ $course->courseEmailContent->subject }}">
                                                      </div>
                                                  </div>
                                                  <div class="row mb-3">
                                                      <label for="subject" class="col-sm-2 col-form-label">Note</label>
                                                      <div class="col-sm-10">
-                                                         <textarea class="form-control texteditor" name="body" id="body" rows="4">{{ isset($row->body) ? $row->body : '' }}</textarea>
+                                                         <textarea class="form-control texteditor" name="body" id="body" rows="4">{{ isset($course->courseEmailContent->body) ? $course->courseEmailContent->body : '' }}</textarea>
                                                      </div>
                                                  </div>
                                              <div class="row">
@@ -979,11 +979,14 @@
                                                              </tr>
                                                          </thead>
                                                          <tbody>
+                                                            @php
+                                                            $emailscourse = json_decode($course->courseEmailContent->select_document,true);
+                                                            @endphp
                                                              @foreach ($info_document as $k => $row)
                                                                  <tr>
                                                                      <td>{{ $row->document_name }}</td>
                                                                      <td><a href="{{ asset($row->file_name)}}" target="_blank">{{ $row->file_name }}</a> {{ $row->created_at }}</td>
-                                                                     <td> <input type="checkbox" name="" id=""></td>
+                                                                     <td> <input type="checkbox" name="select[]" id="{{ $row->id }}" value="{{$row->id}}" @foreach ($emailscourse as $row_email) @if($row_email == $row->id) checked @endif @endforeach></td>
                                                                  </tr>
                                                              @endforeach
                                                          </tbody>
@@ -1027,7 +1030,6 @@
                                                                          type="text" name="documentName"
                                                                          id="documentName" style="" maxlength="50"
                                                                          fdprocessedid="x4bhl">
-                                                                     <input type="hidden" name="courseId" id="courseId" value="{{ $course->id }}">
                                                                  </div>
                                                              </div>
                                                              <div class="col-sm-4 d-flex align-items-center">
@@ -1062,14 +1064,13 @@
                                                                  @foreach ($modules as $module)
                                                                      <tr>
                                                                          <td align="left">
-                                                                             <div id="pName1050">{{ $module->title }}
-                                                                             </div>
+                                                                             <div id="jio_{{$module->id}}">{{ $module->title }}</div>
                                                                          </td>
                                                                          <td align="right">
                                                                              <i class="fa fa-pencil text-info fa-2x mr-2"
-                                                                                 onclick="addModuleBtn_Click('{{ $module->id }}', jQuery('#pName1050').html());">
+                                                                                 onclick="addModuleBtn_Click('{{ $module->id }}', jQuery('#jio_{{$module->id}}').html());">
                                                                              </i>
-                                                                             <i class="fa fa-trash text-danger fa-2x"
+                                                                             <i class="fa fa-trash text-danger fa-2x ms-3"
                                                                                  onclick="deleteModuleBtn_Click('{{ $module->id }}');">
                                                                              </i>
                                                                          </td>
@@ -1112,21 +1113,19 @@
                                                  </thead>
                                                  <tbody>
                                                      @foreach ($default_session as $session)
-                                                         {{-- @dd($session) --}}
                                                          <tr>
                                                              <td align="left" id="701cityName">{{ $session->id }}</td>
-                                                             <td align="left">{{ $session->city->city_name }}</td>
+                                                             <td align="left">{{ $session->city->name }}</td>
                                                              <td align="left">{{ $session->teacher->first_name }}
                                                                  {{ $session->teacher->last_name }}</td>
                                                              <td align="left">{{ $session->teacher->first_name }}
                                                                  {{ $session->teacher->last_name }}</td>
-                                                             <td align="left">{{ $session->dftstarttime }}</td>
-                                                             <td align="left">{{ $session->dftendtime }}</td>
+                                                             <td align="left">{{ $session->dftstarthour }}:{{ $session->dftstartmin }} {{ $session->dftstartampm }}</td>
+                                                             <td align="left">{{ $session->dftendhour }}:{{ $session->dftendmin }} {{ $session->dftendampm }}</td>
                                                              <td align="right">
                                                                  <i class="fa fa-pencil text-info fa-2x mr-2"
                                                                      href="#"
-                                                                     onclick="addCityBtn_Click('701', '1519', 'new', '01:00:am', '03:00:pm', '921', '921');">
-
+                                                                     onclick="editCityBtn_Click('{{$session->id}}');">
                                                                  </i>
                                                                  <i class="fa fa-trash text-danger fa-2x" href="#"
                                                                      style="text-decoration:none; color:#2C7FBA; cursor:pointer"
@@ -1146,6 +1145,7 @@
                                          </div>
                                          {{-- End Defaults --}}
                                          {{-- Start Trainers --}}
+                                        
                                          <div class="tab-pane fade p-4" id="trainers">
                                              <div align="center" id="trainercompetency_2565" class="mt-5">
                                                  <form name="edit_competency_frm" id="edit_competency_frm" method="post"
@@ -1156,15 +1156,15 @@
                                                          value="{{ $course->id }}">
                                                      <table style="width:250px;" cellpadding="0" cellspacing="0">
                                                          <tbody>
-                                                             @foreach ($teacher as $ter)
+                                                             @foreach ($teacher as $key => $ter)
                                                                  <tr style="height: 20px;">
                                                                      <td align="left" style="padding-left:5px;"
                                                                          width="200"><label
                                                                              for="competency_921">{{ $ter->first_name }},
                                                                              {{ $ter->last_name }}</label></td>
                                                                      <td><input type="checkbox" class="custom-checkbox"
-                                                                             name="competency_921" id="competency_921"
-                                                                             checked=""></td>
+                                                                             name="teacher[]" id="teacher" value="{{$ter->id}}"
+                                                                             @foreach ($course->trainers as $traines) @if($ter->id == $traines->id) checked @endif @endforeach></td>
                                                                  </tr>
                                                              @endforeach
                                                              <tr style="height:15px;">
@@ -1185,23 +1185,24 @@
                                          {{-- Start Assessors --}}
                                          <div class="tab-pane fade p-4" id="assessors">
                                              <form name="edit_competency_frm" id="edit_competency_frm" method="post"
-                                                 action="{{ route('course.trainer') }}">
+                                                 action="{{ route('course.assessors') }}">
                                                  @csrf
                                                  @method('POST')
                                                  <input type="hidden" name="courseId" id="courseId"
                                                      value="{{ $course->id }}">
                                                  <table style="width:250px;" cellpadding="0" cellspacing="0">
                                                      <tbody>
-                                                         @foreach ($teacher as $ter)
-                                                             <tr style="height: 20px;">
-                                                                 <td align="left" style="padding-left:5px;"
-                                                                     width="200"><label for="competency_921">domadiya,
-                                                                         kuldip</label></td>
-                                                                 <td><input type="checkbox" class="custom-checkbox"
-                                                                         name="competency_921" id="competency_921"
-                                                                         checked=""></td>
-                                                             </tr>
-                                                         @endforeach
+                                                        @foreach ($teacher as $key => $ter)
+                                                        <tr style="height: 20px;">
+                                                            <td align="left" style="padding-left:5px;"
+                                                                width="200"><label
+                                                                    for="competency_921">{{ $ter->first_name }},
+                                                                    {{ $ter->last_name }}</label></td>
+                                                            <td><input type="checkbox" class="custom-checkbox"
+                                                                    name="teacher[]" id="teacher" value="{{$ter->id}}"
+                                                                    @foreach ($course->assessors as $traines) @if($ter->id == $traines->id) checked @endif @endforeach></td>
+                                                        </tr>
+                                                    @endforeach
                                                          <tr style="height:15px;">
                                                              <td colspan="2"></td>
                                                          </tr>
@@ -1488,6 +1489,7 @@
 
      <script>
          function addModuleBtn_Click(moduleId, moduleName) {
+            console.log(moduleName)
              jQuery("#addModulePanel").html("");
              var htmlData = "<div style='height:30px;width:800px' align='center'>" +
                  "<div style='width:100px;float:left;margin-top:5px'>Module Name:</div><div style='float:left'>" +
@@ -1605,13 +1607,11 @@
 
          function addCityBtn_Click() {
              var htmlData = "";
-
              htmlData = `<form>
             <div class="form-group row">
                 <label for="dftCity" class="col-sm-4 col-form-label">Defaults for City</label>
                 <div class="col-sm-8">
                     <select name='dftCity' id='dftCity' class='form-control'></select>
-                    <input type='hidden' name='courseCityId' id='courseCityId'/>
                 </div>
             </div>
             <div class="form-group row mt-3">
@@ -1656,12 +1656,13 @@
                  type: 'GET',
                  dataType: 'json',
                  success: function(response) {
+                    // console.log(response)
                      var options = '';
                      response.forEach(function(city) {
 
-                         options += '<option value="' + city.id + '">' + city.city_name + '</option>';
+                         options += '<option value="' + city.id + '">' + city.name + '</option>';
                      });
-                     console.log(response)
+                    //  console.log(response)
                      jQuery("#dftCity").append(options);
                  }
              });
@@ -1674,7 +1675,7 @@
                  success: function(response) {
                      var options = '';
                      response.forEach(function(teacher) {
-                         console.log(teacher)
+                        //  console.log(teacher)
                          options += '<option value="' + teacher.id + '">' + teacher.first_name + " " +
                              teacher.last_name + '</option>';
                      });
@@ -1724,6 +1725,11 @@
              } else {
                  jQuery("#dftendampm").val("pm");
              }
+
+
+
+
+
          }
 
          function cancelAddCity() {
@@ -1733,6 +1739,7 @@
          }
 
          function saveNewCourseCity() {
+            console.log("hello")
              var message = "";
              if (jQuery("#dftCity").val() == "")
                  message += "* City Name\n";
@@ -1754,15 +1761,16 @@
                  alert("Session End Time should be not earlier than session Start Time.");
                  return false;
              } else {
-                 var dftCity = jQuery("#dftCity").val();
+                var dftCity = jQuery("#dftCity").val();
                  var dftTrainer = jQuery("#dftTrainer").val();
                  var dftAssessor = jQuery("#dftAssessor").val();
-                 var dftstarttime = jQuery("#dftstarthour").val() + ":" + jQuery("#dftstartmin").val() + " " + jQuery(
-                     "#dftstartampm").val();
-                 var dftendtime = jQuery("#dftendhour").val() + ":" + jQuery("#dftendmin").val() + " " + jQuery(
-                     "#dftendampm").val();
-
-                 courseId = "{{ $course->id }}";
+                 var dftstarthour = jQuery("#dftstarthour").val() 
+                 var dftstartmin = jQuery("#dftstartmin").val() 
+                 var dftstartampm = jQuery("#dftstartampm").val();
+                 var dftendhour = jQuery("#dftendhour").val() 
+                 var dftendmin =jQuery("#dftendmin").val() 
+                 var dftendampm = jQuery("#dftendampm").val();
+                 var courseId = "{{ $course->id }}";
                  if (jQuery("#courseCityId").val() != "") {
                      var courseCityId = jQuery("#courseCityId").val();
                  } else {
@@ -1774,13 +1782,16 @@
                      type: 'POST',
                      data: {
                          "_token": "{{ csrf_token() }}",
+                         'courseId': courseId,
                          'dftCity': dftCity,
                          'dftTrainer': dftTrainer,
-                         'dftstarttime': dftstarttime,
-                         'dftendtime': dftendtime,
-                         'courseId': courseId,
-                         'courseCityId': courseCityId,
-                         'dftAssessor': dftAssessor
+                         'dftAssessor': dftAssessor,
+                         'dftstarthour': dftstarthour,
+                         'dftstartmin': dftstartmin,
+                         'dftstartampm': dftstartampm,
+                         'dftendhour': dftendhour,
+                         'dftendmin': dftendmin,
+                         'dftendampm': dftendampm,
                      },
                      dataType: 'json',
                      success: function(response) {
@@ -1984,6 +1995,228 @@
                  }
              });
          }
+     </script>
+     <script>
+          function editCityBtn_Click(id) {
+             //City End Add  //
+             var htmlData = "";
+             htmlData = `<form>
+            <div class="form-group row">
+                <label for="dftCity" class="col-sm-4 col-form-label">Defaults for City</label>
+                <div class="col-sm-8">
+                    <select name='dftCity' id='dftCity' class='form-control'></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="dftTrainer" class="col-sm-4 col-form-label">Default Trainer</label>
+                <div class="col-sm-8">
+                    <select name='dftTrainer' id='dftTrainer' class='form-control'></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="dftAssessor" class="col-sm-4 col-form-label">Default Assessor</label>
+                <div class="col-sm-8">
+                    <select name='dftAssessor' id='dftAssessor' class='form-control'></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="" class="col-sm-4 col-form-label">Session Start Time</label>
+                <div class="col-sm-8">
+                    <select name='dftstarthour' id='dftstarthour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftstartmin' id='dftstartmin' class='form-control' style='width:30%;display:inline'></select> <select style='width:32%;display:inline' id='dftstartampm' class='form-control' name='dftstartampm'><option value='am'>am</option><option value='pm'>pm</option></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="" class="col-sm-4 col-form-label">Session End Time</label>
+                <div class="col-sm-8">
+                    <select name='dftendhour' id='dftendhour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftendmin' id='dftendmin' class='form-control' style='width:30%;display:inline'></select> 
+                    <select style='width:32%;display:inline' id='dftendampm' class='form-control' name='dftendampm'><option value='am'>am</option><option value='pm'>pm</option></select>
+                </div>
+            </div>
+            <div class="form-group row mt-3">
+                <label for="" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-8">
+                    <button type='button' class='btn btn-primary' onclick='saveeditCourseCity(`+id+`);'>Save</button>
+                       <button type='button' class='btn btn-secondary' onclick='cancelAddCity();'>Cancel</button>
+                </div>
+            </div>
+            </form>`;
+
+             jQuery("#dftstarthour").append(newOption);
+             jQuery("#addCityPanel").html(htmlData);
+             // City Start Add //
+             jQuery.ajax({
+                 url: "{{ route('api.city.list') }}",
+                 type: 'GET',
+                 dataType: 'json',
+                 success: function(response) {
+                    // console.log(response)
+                     var options = '';
+                     response.forEach(function(city) {
+
+                         options += '<option value="' + city.id + '">' + city.name + '</option>';
+                     });
+                    //  console.log(response)
+                     jQuery("#dftCity").append(options);
+                 }
+             });
+             //City End Add  //
+             //Teacher Start Add //
+             jQuery.ajax({
+                 url: "{{ route('api.teacher.list') }}",
+                 type: 'GET',
+                 dataType: 'json',
+                 success: function(response) {
+                     var options = '';
+                     response.forEach(function(teacher) {
+                         console.log(teacher)
+                         options += '<option value="' + teacher.id + '">' + teacher.first_name + " " +
+                             teacher.last_name + '</option>';
+                     });
+                     jQuery("#dftTrainer").append(options);
+                     jQuery("#dftAssessor").append(options);
+                 }
+             });
+             var startTimeArray = "";
+             var endTimeArray  = "";
+             //Teacher End Add  //
+             for (var i = 1; i <= 12; i++) {
+                 var h = i;
+                 if (i < 10) h = '0' + h;
+                 var newOption = new Option(h, h);
+                 var newOption1 = new Option(h, h);
+                 jQuery("#dftstarthour").append(newOption);
+                 jQuery("#dftendhour").append(newOption1);
+                 if (arguments.length == 7) {
+                     if (startTimeArray[0] == h)
+                         newOption.selected = true;
+                     if (endTimeArray[0] == h)
+                         newOption1.selected = true;
+                 }
+             }
+
+             for (var i = 0; i < 60; i = i + 5) {
+                 var h = i;
+                 if (i < 10) h = '0' + h;
+                 var newOption = new Option(h, h);
+                 var newOption1 = new Option(h, h);
+                 jQuery("#dftstartmin").append(newOption);
+                 jQuery("#dftendmin").append(newOption1);
+                 if (arguments.length == 7) {
+                     if (startTimeArray[1] == h)
+                         newOption.selected = true;
+                     if (endTimeArray[1] == h)
+                         newOption1.selected = true;
+                 }
+             }
+
+             if (startTimeArray[2] == "am") {
+                 jQuery("#dftstartampm").val("am");
+             } else {
+                 jQuery("#dftstartampm").val("pm");
+             }
+             if (endTimeArray[2] == "am") {
+                 jQuery("#dftendampm").val("am");
+             } else {
+                 jQuery("#dftendampm").val("pm");
+             }
+
+             jQuery.ajax({
+                url: "{{ route('api.edit.default') }}", // Ensure this URL correctly resolves the route
+                type: 'GET',
+                data: { id: id }, // Send the 'id' parameter with the request
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response)
+                    if(response.dftCity) {
+                    jQuery("#dftCity").val(response.dftCity);
+                    }
+                if(response.dftTrainer) {
+                    jQuery("#dftTrainer").val(response.dftTrainer);
+                }
+                if(response.dftAssessor) {
+                    jQuery("#dftAssessor").val(response.dftAssessor);
+                }
+                if(response.dftendhour) {
+                    jQuery("#dftstarthour").val(response.dftstarthour);
+                    jQuery("#dftstartmin").val(response.dftstartmin);
+                    jQuery("#dftstartampm").val(response.dftstartampm);
+                }
+                if(response.dftendhour){
+                    jQuery("#dftendhour").val(response.dftendhour);
+                    jQuery("#dftendmin").val(response.dftendmin);
+                    jQuery("#dftendampm").val(response.dftendampm);
+                }
+                },
+                error: function(xhr, status, error) {
+                    console.error(`Error: ${status} - ${error}`);
+                    // Handle the error case here
+                }
+            });
+         
+        
+        
+        
+        
+        }
+
+
+         function saveeditCourseCity(id) {
+            console.log(id)
+            // jQuery.ajax({
+            //     url: "{{ route('api.edit.default.update') }}", // Ensure this URL correctly resolves the route
+            //     type: 'POST',
+            //     data: { id: id }, // Send the 'id' parameter with the request
+            //     dataType: 'json',
+            //     success: function(response) {
+            //         console.log(response)
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error(`Error: ${status} - ${error}`);
+            //         // Handle the error case here
+            //     }
+            // });
+
+            var city = jQuery("#dftCity").val();
+            var trainer = jQuery("#dftTrainer").val();
+            var assessor = jQuery("#dftAssessor").val();
+            var dftstarthour = jQuery("#dftstarthour").val();
+            var dftstartmin = jQuery("#dftstartmin").val();
+            var dftstartampm = jQuery("#dftstartampm").val();
+            var dftendhour = jQuery("#dftendhour").val();
+            var dftendmin = jQuery("#dftendmin").val();
+            var dftendampm = jQuery("#dftendampm").val();
+            var formData = new FormData();
+             formData.append("_token", "{{ csrf_token() }}");
+             formData.append("id", id);
+             formData.append("city_id", city);
+             formData.append("trainer", trainer);
+             formData.append("assessor", assessor);
+             formData.append("dftstarthour", dftstarthour);
+             formData.append("dftstartmin", dftstartmin);
+             formData.append("dftstartampm", dftstartampm);
+             formData.append("dftendhour", dftendhour);
+             formData.append("dftendmin", dftendmin);
+             formData.append("dftendampm", dftendampm);
+             jQuery.ajax({
+                 url: "{{ route('api.edit.default.update') }}",
+                 type: 'POST',
+                 data: formData,
+                 contentType: false,
+                 processData: false,
+                 dataType: 'json',
+                 success: function(response) {
+                     if (response.response == "0") {
+                         location.reload();
+                     } else {
+                         alert("Error while saving course defaults.");
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     console.error(xhr.responseText);
+                 }
+             });
+         }
+
      </script>
  @endsection
 @stop

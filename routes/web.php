@@ -574,6 +574,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/store-avetmisscode', [CourseController::class, 'avetmisscodestore'])->name('store-avetmisscode');
     Route::post('/saveCourseCity', [CourseController::class, 'saveCourseCity'])->name('saveCourseCity');
     Route::post('/course/trainer', [CourseController::class, 'courseTrainer'])->name('course.trainer');
+    Route::post('/course/assessor', [CourseController::class, 'assessor'])->name('course.assessors');
     Route::post('/course/document', [CourseController::class, 'courseDocument'])->name('submit.course.document');
     Route::get('/course/document/{id}', [CourseController::class, 'courseDocumentDelete'])->name('document.course.delete');
     //Module
@@ -723,5 +724,7 @@ Route::group(['prefix' => 'admin'], function () {
  // Other Api City
   Route::get('/api/city/list', [App\Http\Controllers\ApiController::class, 'cityget'])->name('api.city.list');  
   Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');  
+  Route::get('/api/edit/default', [App\Http\Controllers\ApiController::class,'default_get'])->name('api.edit.default');  
+  Route::post('/api/edit/default/update', [App\Http\Controllers\ApiController::class,'default_update'])->name('api.edit.default.update');  
   });
 });

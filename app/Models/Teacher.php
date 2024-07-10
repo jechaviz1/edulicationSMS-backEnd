@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model {
-
+    
+    use HasFactory;
     // protected $table = 'teacher';
     protected $fillable = [
         'id',
@@ -28,6 +29,12 @@ class Teacher extends Model {
         'days',
         'additionalId',
     ];
-
-    use HasFactory;
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_teacher', 'teacher_id', 'course_id');
+    }
+    public function coursesAssessor()
+    {
+        return $this->belongsToMany(Course::class, 'course_assessor', 'teacher_id', 'course_id');
+    }
 }
