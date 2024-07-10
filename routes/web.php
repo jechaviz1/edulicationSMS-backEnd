@@ -669,6 +669,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('course/document/email', [App\Http\Controllers\CompanyController::class, 'courseEmail'])->name('course.document.email');
     Route::post('course/certificate/email', [App\Http\Controllers\CompanyController::class, 'courseCertificate'])->name('courses.certificate.email');
     Route::post('course/certificate/document/email', [App\Http\Controllers\CompanyController::class, 'courseCertificateDocument'])->name('submit.course.document.email');
+    Route::get('course/certificate/document/destroy/{id}', [App\Http\Controllers\CourseController::class, 'documentdelete'])->name('document.course.upload.delete');
+    Route::post('course/edit/infopak/submit', [App\Http\Controllers\CourseController::class, 'emailcontent'])->name('create.infopak.submit');
+    
     //start company
     Route::get('/company/companydoc', [App\Http\Controllers\CompanyController::class, 'companyDoc'])->name('company.document');
     Route::get('/company/info/upload', [App\Http\Controllers\CompanyController::class, 'infoUpload'])->name('document.infopak.upload');

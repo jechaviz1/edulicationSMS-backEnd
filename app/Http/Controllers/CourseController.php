@@ -152,7 +152,7 @@ class CourseController extends Controller
                     $data['info_document'] = CompanyDocument::where('type','email')->get();
                     // dd($data['email_document']);
                     $data['certificates'] = Template::get();
-                    // $data['info_document'] = InfoPakSpecific::get();
+                    $data['infopak_document'] = InfoPakSpecific::get();
                     // dd($data);  
                     return view('admin.course.edit')->with($data);
                 } else {
@@ -492,4 +492,17 @@ class CourseController extends Controller
                 return redirect()->route('course-list')->with('failed', 'Record not found.');
             }
     }
+    public function documentdelete($id){
+         if ($id) {
+            $course = InfoPakSpecific::find($id);
+            $course->delete();
+            return redirect()->back()->with('success', 'Document delete successfully!');
+        } else {
+            return redirect()->route('course-list')->with('failed', 'Record not found.');
+        }
+        }
+        public function emailcontent(Request $request){
+            dd($request);
+
+        }
 }

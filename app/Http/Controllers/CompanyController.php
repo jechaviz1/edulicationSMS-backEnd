@@ -8,6 +8,7 @@ use App\Models\Template;
 use App\Models\State;
 use App\Models\EmailCourseStore;
 use App\Models\CompanyDocument;
+use App\Models\InfoPakSpecific;
 use App\Models\BackgroundTemplate;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ImageController;
@@ -325,8 +326,6 @@ class CompanyController extends Controller
                 }
             }
 
-           
-
             public function CQRreporthistory(){
                 try {
                     $infos = CompanyDocument::where('type','info')->get();
@@ -346,5 +345,24 @@ class CompanyController extends Controller
                       $courseDocument->save();
                 return redirect()->back()->with('success', 'Document delete successfully!');
 
+            }
+            public function courseCertificateDocument(Request $request){
+                // dd($request);
+                $request->validate([
+                    'myFile' => 'required|file|max:20480', // Max size: 20MB
+                ]);
+                // dd($request);
+                $documents = new InfoPakSpecific;
+                if ($request->hasFile('myFile')) {
+                    $file = $request->file('myFile');
+                    $filename = time() . '_' . $file->getClientOriginalName();
+                    $file = $file->move(public_path('infopakdocument'), $filename);
+                    $imageName = 'infopakdocument/' . $filename;
+                    $documents->path = $imageName;
+                }
+            $documents->documentname = $request->name;
+            $documents->filename = $filename;
+            $documents->save();
+            return response()->json(['response' => "0"]);  
             }
     }

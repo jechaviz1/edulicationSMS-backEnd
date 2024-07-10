@@ -943,7 +943,7 @@
                                          {{-- Start infoPAK --}}
                                          <div class="tab-pane fade p-4" id="info_pak">
                                              <h6 class="mt-2">Email Content</h6>
-                                             <form action="" method="POST" name="info_paks">
+                                             <form action="{{ route('create.infopak.submit')}}" method="POST" name="info_paks">
                                                  @csrf
                                                  @method('POST')
                                                  <div class="row mb-3">
@@ -956,11 +956,9 @@
                                                  <div class="row mb-3">
                                                      <label for="subject" class="col-sm-2 col-form-label">Note</label>
                                                      <div class="col-sm-10">
-
                                                          <textarea class="form-control texteditor" name="body" id="body" rows="4">{{ isset($row->body) ? $row->body : '' }}</textarea>
                                                      </div>
                                                  </div>
-                                             </form>
                                              <div class="row">
                                                  <div class="col-sm-12">
                                                      <p>
@@ -1006,12 +1004,15 @@
                                                              </tr>
                                                          </thead>
                                                          <tbody id="document_email_upload">
-                                                         
+                                                            @foreach ($infopak_document as $k => $row)
+                                                            <tr>
+                                                                <td>{{ $row->documentname }}</td>
+                                                                <td><a href="{{ asset($row->path)}}" target="_blank">{{ $row->filename }}</a> {{ $row->created_at }}</td>
+                                                                <td> <a href="{{ route('document.course.upload.delete',$row->id)}}" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a></td>
+                                                            </tr>
+                                                        @endforeach
                                                          </tbody>
                                                      </table>
-                                                     {{-- <form action="" method="post">
-                                                         @csrf()
-                                                         @method('post') --}}
                                                          <div class="row">
                                                              <div class="col-sm-4">
                                                                  <div style="">
@@ -1026,15 +1027,13 @@
                                                                          type="text" name="documentName"
                                                                          id="documentName" style="" maxlength="50"
                                                                          fdprocessedid="x4bhl">
-                                                                     <input type="hidden" name="courseId" id="courseId"
-                                                                         value="2565">
+                                                                     <input type="hidden" name="courseId" id="courseId" value="{{ $course->id }}">
                                                                  </div>
                                                              </div>
                                                              <div class="col-sm-4 d-flex align-items-center">
                                                                  <input type="submit" class="btn btn-primary" value="Upload" fdprocessedid="0qoxp" onclick="uploadDocument()">
                                                              </div>
                                                          </div>
-                                                     {{-- </form> --}}
                                                  </div>
                                              </div>
                                              <div class="row">
@@ -1043,6 +1042,7 @@
                                                          id="info_paks">Save</button>
                                                  </div>
                                              </div>
+                                            </form>
                                          </div>
                                          {{-- End infoPAK --}}
                                          {{-- Start Modules --}}
@@ -1959,12 +1959,12 @@
 
          function uploadDocument() {
              var fileInput = jQuery("#infoPakFile")[0];
-             var fileInput = jQuery("#documentName").val();
+             var name = jQuery("#documentName").val();
              console.log(fileInput);
              var formData = new FormData();
              formData.append("_token", "{{ csrf_token() }}");
              formData.append("myFile", fileInput.files[0]);
-             formData.append("myFile", fileInput.files[0]);
+             formData.append("name", name);
              jQuery.ajax({
                  url: "{{ route('submit.course.document.email') }}",
                  type: 'POST',
