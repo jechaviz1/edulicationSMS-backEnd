@@ -1290,6 +1290,7 @@
                                                      </thead>
                                                      <tbody>
                                                          @foreach ($email_document as $email)
+                                                         {{-- @dd($email) --}}
                                                              <tr style="height:20px;">
                                                                  <td align="left">{{ $email->document_name }}</td>
                                                                  <td align="left"><a
