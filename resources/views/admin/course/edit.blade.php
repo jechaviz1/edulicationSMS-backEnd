@@ -982,7 +982,6 @@
                                                          </thead>
                                                          <tbody>
                                                              @foreach ($info_document as $k => $row)
-                                                             {{-- @dd($row) --}}
                                                                  <tr>
                                                                      <td>{{ $row->document_name }}</td>
                                                                      <td><a href="{{ asset($row->file_name)}}" target="_blank">{{ $row->file_name }}</a> {{ $row->created_at }}</td>

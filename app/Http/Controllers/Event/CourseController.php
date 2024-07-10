@@ -24,7 +24,6 @@ class CourseController extends Controller
         $users = User::get();
         $cities = City::get();
         $states = State::get();
-        // dd($courseCategory);
         $data = [];
         $data['title'] = 'Event';
         $data['menu_active_tab'] = 'event';
@@ -56,20 +55,9 @@ class CourseController extends Controller
         // Field Validation
         $request->validate([
             'course_type' => 'required',
-            // 'reportingState' => 'required',
-            // 'month' => 'required',
-            // 'spyear' => 'required',
-            // 'course_quota' => 'required',
-            // 'city' => 'required',
-            // 'location' => 'required',
-            // 'requirement' => 'required',
-            // 'units' => 'required',
-            // 'modeId' => 'required',
-            // 'preModeId' => 'required',
         ]);
 
        try{
-            //   dd($request);
                 $events = new Event;
                 $events->course_type = $request->course_type;
                 $events->reporting_state = $request->reporting_state;
