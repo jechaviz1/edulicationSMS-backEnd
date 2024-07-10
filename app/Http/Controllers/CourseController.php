@@ -22,6 +22,7 @@ use App\Models\Teacher;
 use App\Models\CourseDocument;
 use App\Models\CompanyDocument;
 use App\Models\InfoPakSpecific;
+use App\Models\Template;
 
 class CourseController extends Controller
 {
@@ -148,7 +149,7 @@ class CourseController extends Controller
                     $data['teacher'] = Teacher::where('is_deleted', '0')->get();
                     $data['course_documents'] = CourseDocument::get();
                     $data['email_document'] = CompanyDocument::where('type','email')->get();
-                    $data['certificates'] = CompanyDocument::where('type','email')->get();
+                    $data['certificates'] = Template::get();
                     $data['info_document'] = InfoPakSpecific::get();
                     // dd($data);  
                     return view('admin.course.edit')->with($data);
