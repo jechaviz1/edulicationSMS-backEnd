@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\User;
 use App\Models\State;
 use App\Models\City;
+use App\Models\Teacher;
 use App\Models\CourseCategory;
 class CourseController extends Controller
 {
@@ -20,17 +21,17 @@ class CourseController extends Controller
     public function index()
     {
         $courseCategory = CourseCategory::get();
-        $courses = Course::get();
+        $courses = Course::where('self_paced_sessions','!=',null)->with('trainers')->get();
         $users = User::get();
         $cities = City::get();
         $states = State::get();
+        $teachers = Teacher::get();
         $data = [];
         $data['title'] = 'Event';
         $data['menu_active_tab'] = 'event';
         $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
         $rows = Event::paginate(10);
-        // dd($rows);
-        return view('admin.event.courses.list',compact('courseCategory','courses','users','rows','states','cities'))->with($data);
+        return view('admin.event.courses.list',compact('courseCategory','courses','users','rows','states','cities','teachers'))->with($data);
     }
 
     /**

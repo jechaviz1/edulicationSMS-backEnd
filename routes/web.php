@@ -726,5 +726,8 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');  
   Route::get('/api/edit/default', [App\Http\Controllers\ApiController::class,'default_get'])->name('api.edit.default');  
   Route::post('/api/edit/default/update', [App\Http\Controllers\ApiController::class,'default_update'])->name('api.edit.default.update');  
+  Route::get('/api/course/sessios/list', [App\Http\Controllers\ApiController::class,'sessions_course'])->name('api.course.sessions.list');  
+  Route::get('/api/course/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_trainer'])->name('api.course.trainer.get');  
+  Route::get('/api/course/assessor/list', [App\Http\Controllers\ApiController::class,'sessions_assessor'])->name('api.course.assessor.get');  
   });
 });

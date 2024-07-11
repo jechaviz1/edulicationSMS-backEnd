@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\City;
 use App\Models\Teacher;
 use App\Models\DefaultSession;
+use App\Models\Course;
 use App\Http\Resources\UserResource;
 
 class ApiController extends Controller
@@ -37,5 +38,32 @@ class ApiController extends Controller
             $defaultsessions->dftendampm = $request->dftendampm;
             $defaultsessions->save();
             return response()->json(['response' => "0"]); 
+    }
+    public function sessions_course(Request $request){
+        $id = $request->query('scheduleId');
+        if($id == "Self Paced"){
+            $courses = Course::where('self_paced_sessions','!=',null)->with('trainers')->get();
+            return response()->json(['courses' => $courses]); 
+        }
+        if($id == "Public Sessions"){
+            $courses = Course::where('public_sessions','!=',null)->with('trainers')->get();
+            return response()->json(['courses' => $courses]); 
+        }
+        if($id == "Private Sessions"){
+            $courses = Course::where('private_sessions','!=',null)->with('trainers')->get();
+            return response()->json(['courses' => $courses]); 
+        }
+    }
+    public function sessions_trainer(Request $request){
+            // dd($request);
+            $id = $request->query('course_id');
+            $courses = Course::find($id);
+            return response()->json(['courses' => $courses->trainers]); 
+    }
+    public function sessions_assessor(Request $request){
+        // dd($request);
+        $id = $request->query('course_id');
+        $courses = Course::find($id);
+        return response()->json(['courses' => $courses->assessors]); 
     }
 }

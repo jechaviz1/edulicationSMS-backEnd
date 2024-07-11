@@ -699,10 +699,6 @@
 </style>
 
 @section('customjs')
- 
- 
-
-
 <script>
     (function () {
         'use strict'

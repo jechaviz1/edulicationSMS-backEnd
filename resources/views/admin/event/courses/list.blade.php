@@ -234,7 +234,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" style="min-height: 458px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel">Create Event</h5>
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Create Event - Course(<span id="courses"></span>)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-3">
@@ -270,10 +270,11 @@
                                     @endforeach
                                 </select>
                             </div>
+                            {{-- @dd() --}}
                             <div class="col-4 mt-2" id="course_name">
                                 <label class="form-check-label" for="course_name">Course Name</label>
                                 <select class="form-select" name="course_name" aria-label="Default select example"
-                                    id="course_name" required>
+                                    id="course_names" required>
                                     <option value="" selected>Select Course</option>
                                     @foreach ($courses as $course)
                                         <option value="{{ $course->id }}">{{ $course->name }}</option>
@@ -290,19 +291,15 @@
                             <div class=" col-6 mt-2" id="trainers">
                                 <label class="form-check-label" for="trainers">Trainers</label>
                                 <select class="form-select" name="trainers" aria-label="Default select example"
-                                    id="trainers" required>
-                                    @foreach ($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
-                                    @endforeach
+                                    id="trainers_info" required>
+                                    <option value="">Selected Trainer</option>
                                 </select>
                             </div>
                             <div class="col-6 mt-2" id="assessors">
                                 <label class="form-check-label" for="assessors">Assessors</label>
-                                <select class="form-select" name="assessors" aria-label="Default select example"
-                                    id="assessors">
-                                    @foreach ($teachers as $teacher)
-                                    <option value="{{ $teacher->id }}">{{ $teacher->first_name }} {{ $teacher->last_name }}</option>
-                                    @endforeach
+                                <select class="form-select" name="assessors_info" aria-label="Default select example"
+                                    id="assessors_info">
+                                    <option value="">Selected Accessor</option>
                                 </select>
                             </div>
                         </div>
@@ -439,8 +436,14 @@
                         <div class="row">
                             <div class="col-6 mt-2" id="city_1">
                                 <label class="form-check-label" for="city">City</label>
-                                <input type="text" class="form-control" name="city" id="city" value="1"
-                                    placeholder="Title" required>
+                                {{-- <input type="text" class="form-control" name="city" id="city" value="1"
+                                    placeholder="Title" required> --}}
+                                    <select class="form-select" name="city" aria-label="Default select example" id="city">
+                                    <option value="">Selected City</option>
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-6 mt-2" id="location_1">
                                 <label class="form-check-label" for="location">Location</label>
@@ -923,8 +926,7 @@
                                     </div>
                                     <div class="col-4 form-group">
                                         <input name="coursequota34643" class="form-control" id="coursequota34643"
-                                            type="text" value="1000" style="width:18vw;" overflow:auto;=""
-                                            vertical-align:middle;"="">
+                                            type="text" value="1000" style="width:18vw;" overflow:auto;="">
                                     </div>
                                     <div class="col-2 mt-2 form-group">
                                         <label>Status</label>
@@ -1099,12 +1101,95 @@
     {{-- Modal Edit End --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        $(document).ready(function(){
+            $('[name=course_type]').on('change', function() {
+                $("#course_names").empty();
+               
+           var method =  $(this).val();
+           if($(this).val() == 1){
+            var type = "Self Paced";
+           }else if($(this).val() == 2){
+            var type = "Public Sessions";
+           }else{
+            var type ="Private Sessions";
+           }
+           $("#course_names").append($("<option>Selected Courses</option>"));
+           $.ajax({
+                    url: "{{ route('api.course.sessions.list') }}",
+                    type: 'GET',
+                    data: {
+                        scheduleId: type
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        $.each(response.courses, function(index, option){
+                    // Create new option element
+                    var newOption = $("<option></option>").val(option.id).text(option.name);
+                    // Append the new option to the select box
+                    $("#course_names").append(newOption);
+                });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+            });
+            $('#course_names').on('change', function() {
+                var course_id = $('#course_names').val();
+                $("#trainers_info").empty();
+                $("#assessors_info").empty();
+                //Trainer Get
+                $.ajax({
+                    url: "{{ route('api.course.trainer.get') }}",
+                    type: 'GET',
+                    data: {
+                        course_id: course_id
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        $("#trainers_info").append($("<option>Selected Trainer</option>"));
+                        $.each(response.courses, function(index, option){
+                    // Create new option element
+                    var newOption = $("<option></option>").val(option.id).text(option.first_name + " " + option.last_name);
+                    // Append the new option to the select box
+                    $("#trainers_info").append(newOption);
+                });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+                //Assessors Start Get
+                $.ajax({
+                    url: "{{ route('api.course.assessor.get') }}",
+                    type: 'GET',
+                    data: {
+                        course_id: course_id
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        console.log(response)
+                        $("#assessors_info").append($("<option>Selected Assessor</option>"));
+                        $.each(response.courses, function(index, option){
+                    // Create new option element
+                    var newOption = $("<option></option>").val(option.id).text(option.first_name + " " + option.last_name);
+                    // Append the new option to the select box
+                    $("#assessors_info").append(newOption);
+                });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+                 //Assessors End Get
+            });     
+        });
+    </script>
+    <script>
         (function() {
             'use strict'
-
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')
-
             // Loop over them and prevent submission
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
@@ -1113,7 +1198,6 @@
                             event.preventDefault()
                             event.stopPropagation()
                         }
-
                         form.classList.add('was-validated')
                     }, false)
                 });
@@ -1317,11 +1401,9 @@
                     success: function(response) {
                         console.log(response.course.name)
                         $('#course_name_1').append(response.course.name)
-                        // <span id="course_name"></span>
-                        // Handle the successful response here
+                      
                         if (response.success == true) { // Check for the correct key and value
-                            // $('#exampleModalToggle').modal('hide');
-                            // location.reload();
+                          
                         }
                     },
                     error: function(xhr, status, error) {

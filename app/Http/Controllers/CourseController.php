@@ -164,7 +164,6 @@ class CourseController extends Controller
     }
 
     public function update(Request $request, $id) {
-        
         if ($id) {
             $request->validate([
                 'course_code' => 'required',
@@ -219,7 +218,22 @@ class CourseController extends Controller
                 else{
                     $tga_package = '0';
                 }
-                
+                $course->self_paced_sessions = null;
+                $course->public_sessions = null;
+                $course->private_sessions = null;
+
+                if($request->delivery_method_self == "Self Paced"){
+                     $course->self_paced_sessions = "1";
+                }
+
+                if($request->delivery_method_public == "Public Sessions"){
+                    $course->public_sessions = $request->public_session_options;
+                }
+
+                if($request->delivery_method_private == "Private Sessions"){
+                    $course->private_sessions = $request->private_session_options;
+                }
+
                 $course->code = $request->course_code;
                 $course->name = $request->name;
                 $course->course_category_id = $request->course_category;
