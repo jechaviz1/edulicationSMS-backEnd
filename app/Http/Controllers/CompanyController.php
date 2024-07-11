@@ -10,6 +10,7 @@ use App\Models\EmailCourseStore;
 use App\Models\CompanyDocument;
 use App\Models\InfoPakSpecific;
 use App\Models\BackgroundTemplate;
+use App\Models\courseEmail;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ImageController;
 use Exception;
@@ -372,5 +373,26 @@ class CompanyController extends Controller
             $documents->filename = $filename;
             $documents->save();
             return response()->json(['response' => "0"]); 
+            }
+            public function courseCertificate(Request $request){
+                // dd($request);
+                $courses_op = courseEmail::where('course_id',$request->course_id)->first();
+                if($courses_op != null){
+                    $courses_op->certificate_id = $request->certificate;
+                    $courses_op->subject = $request->subject;
+                    $courses_op->body = $request->note;
+                    // $courses_op->com_chk = json_encode($request->com_chk);
+                    $courses_op->save();
+                }else{
+                    $courseDocument = new courseEmail;
+                    $courseDocument->course_id = $request->course_id;
+                    $courseDocument->certificate_id = $request->certificate;
+                    $courseDocument->subject = $request->subject;
+                    $courseDocument->body = $request->note;
+                    // $courseDocument->com_chk = json_encode($request->com_chk);
+                    $courseDocument->save();
+                    }
+                         
+                    return redirect()->back()->with('success', 'Document delete successfully!');
             }
     }

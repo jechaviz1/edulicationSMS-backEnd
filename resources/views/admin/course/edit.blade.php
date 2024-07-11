@@ -1321,6 +1321,7 @@
                                              <form action="{{ route('courses.certificate.email')}}" method="post">
                                                 @csrf
                                                 @method('POST')
+                                                <input type="hidden" name="course_id" value="{{$course->id}}">
                                             <div class="row">
                                                  <div class="col-sm-12">
                                                      <label for="certificate" class="font-weight-bold">Set Course
@@ -1328,15 +1329,15 @@
                                                      <select name="certificate" id="certificate" class="form-control"
                                                          onchange="loadCertificateEmailContent(this.options[this.options.selectedIndex].value);" >
                                                          @foreach ($certificates as $certificate)
-                                                         <option value="{{$certificate->id}}">{{ $certificate->newCertificateName }}</option>
+                                                         <option value="{{$certificate->id}}" @if($course->coursecertificateemail->certificate_id == $certificate->id) selected @endif>{{ $certificate->newCertificateName }}</option>
                                                          @endforeach
                                                      </select>
                                                      <h5 class="mt-3">Email Content</h5>
-                                                     <input type="text" class="form-control" value="Course Completion Certificate: {course}" name="subject">
+                                                     <input type="text" class="form-control" value="{{$course->coursecertificateemail->subject}}" name="subject">
                                                  </div>
                                                  <label for="certificate" class="font-weight-bold mt-3">Note</label>
                                                  <textarea class="form-control" name="note" id="note" cols="30" rows="10">
-
+                                                    {{ $course->coursecertificateemail->body }}
                                                  </textarea>
                                              </div>
                                              <button type="submit" class="btn btn-primary mt-3">Save</button>

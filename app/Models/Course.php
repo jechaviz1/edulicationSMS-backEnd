@@ -34,4 +34,8 @@ class Course extends Model
     {
         return $this->hasOne(EmailCourseStore::class, 'course_id');
     }
+    public function coursecertificateemail()
+    {
+        return $this->hasOne(courseEmail::class, 'course_id');
+    }
 }
