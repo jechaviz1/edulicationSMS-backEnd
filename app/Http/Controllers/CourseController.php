@@ -147,7 +147,7 @@ class CourseController extends Controller
                     $data["modules"] = Module::where('course_id',$course->id)->paginate(8);
                     $data["default_session"] = DefaultSession::where('course_id',$course->id)->paginate(7);
                     $data['teacher'] = Teacher::where('is_deleted', '0')->get();
-                    $data['course_documents'] = CourseDocument::get();
+                    $data['course_documents'] = CourseDocument::where('course_id',$id)->get();
                     $data['email_document'] = CompanyDocument::where('type','email')->get();
                     $data['info_document'] = CompanyDocument::where('type','email')->get();
                     // dd($data['email_document']);
@@ -481,15 +481,15 @@ class CourseController extends Controller
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $courseDocument->document_name = $file->getClientOriginalName();
                 $courseDocument->file_name = $file->getClientOriginalName();
-                $file->move(public_path('course_document'), $filename); // Move the file to 'public/documents'
+                $file->move(public_path('course_document'), $filename);
                 // Generate the file URL
                 $fileUrl = asset('course_document/' . $filename);
-                // return response()->json(['message' => 'Document uploaded successfully', 'url' => $fileUrl]);
             }
             $courseDocument->course_id = $request->course_id;
+            $courseDocument->document_name = $filename;
             $courseDocument->path = $fileUrl;
             $courseDocument->save();
-            return redirect()->back()->with('success', 'Document uploaded successfully!');
+            return response()->json(['response' => "0"]); 
         } catch (\Exception $e) {
             // Handle any other exceptions
             return response()->json(['message' => 'An error occurred while uploading the document', 'error' => $e->getMessage()], 500);

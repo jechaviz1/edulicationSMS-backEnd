@@ -950,7 +950,7 @@
                                                      <input type="hidden" name="courseId" id="courseId" value="{{ $course->id }}">
                                                      <label for="subject" class="col-sm-2 col-form-label">Subject</label>
                                                      <div class="col-sm-10">
-                                                         <input type="text" class="form-control" id="subject" name="subject" value="{{ $course->courseEmailContent->subject }}">
+                                                         <input type="text" class="form-control" id="subject" name="subject" value="{{ isset($course->courseEmailContent->subject) ? $course->courseEmailContent->subject : '' }}">
                                                      </div>
                                                  </div>
                                                  <div class="row mb-3">
@@ -980,13 +980,19 @@
                                                          </thead>
                                                          <tbody>
                                                             @php
-                                                            $emailscourse = json_decode($course->courseEmailContent->select_document,true);
+                                                            $emailscourse = json_decode(optional($course->courseEmailContent)->select_document, true);
                                                             @endphp
                                                              @foreach ($info_document as $k => $row)
                                                                  <tr>
                                                                      <td>{{ $row->document_name }}</td>
                                                                      <td><a href="{{ asset($row->file_name)}}" target="_blank">{{ $row->file_name }}</a> {{ $row->created_at }}</td>
-                                                                     <td> <input type="checkbox" name="select[]" id="{{ $row->id }}" value="{{$row->id}}" @foreach ($emailscourse as $row_email) @if($row_email == $row->id) checked @endif @endforeach></td>
+                                                                     <td>
+                                                                        <input type="checkbox" name="select[]" id="{{ $row->id }}" value="{{ $row->id }}"
+                                                                        @if($emailscourse != null)
+                                                                            @foreach ($emailscourse as $row_email)
+                                                                                @if ($row_email == $row->id) checked @endif
+                                                                            @endforeach @endif>
+                                                                    </td>
                                                                  </tr>
                                                              @endforeach
                                                          </tbody>
@@ -1230,18 +1236,17 @@
                                                              value="{{ $course->id }}">
                                                          <input type="text" class="form-control" name="subject"
                                                              id="subject" maxlength="50"
-                                                             value="Training Reservation: {course}"
+                                                             value="{{ $course->courseenrolment->subject}}"
                                                              fdprocessedid="0jdacb">
                                                      </div>
                                                  </div>
                                                  <div class="form-group row mt-3">
                                                      <label for="subject" class="col-sm-1 col-form-label">Subject</label>
                                                      <div class="col-sm-11">
-                                                         <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
+                                                         <textarea class="form-control" name="note" id="" cols="30" rows="10">{{ $course->courseenrolment->note}}</textarea>
                                                      </div>
                                                  </div>
-                                                 <p class="mt-5">Attach Course Specific Documents to be included in the
-                                                     Enrolment Confirmation Email</p>
+                                                 <p class="mt-5">Attach Course Specific Documents to be included in the Enrolment Confirmation Email</p>
                                                  <table class="table" width="90%" border="0" cellpadding="0"
                                                      cellspacing="0">
                                                      <thead>
@@ -1256,14 +1261,13 @@
                                                      <tbody>
                                                          @foreach ($course_documents as $document)
                                                              <tr>
-                                                                 <th style="width:40%">{{ $document->document_name }}
+                                                                 <th style="width:40%"> {{ $document->document_name }}
                                                                  </th>
-                                                                 <th style="width:40%">{{ $document->file_name }}</th>
+                                                                 <th style="width:40%"> <a href="{{ asset($document->path)}}" target="_blank">{{ $document->file_name  }}</a></th>
                                                                  <th style="width:20%">{{ $document->created_at }}</th>
                                                                  <th> <a href="{{ route('document.course.delete', $document->id) }}"
                                                                          onclick="return confirm('Are you sure?')"
-                                                                         class="btn btn-danger shadow btn-xs sharp"><i
-                                                                             class="fa fa-trash"></i></a></th>
+                                                                         class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a></th>
                                                              </tr>
                                                          @endforeach
                                                      </tbody>
@@ -1272,8 +1276,8 @@
                                                  <div class="drop-zone">
                                                      <span class="drop-zone__prompt">Drop file here or click to
                                                          upload</span>
-                                                     <input type="file" name="myFile" class="drop-zone__input"
-                                                         id="myFile">
+                                                         <input type="hidden" name="course_id" class="" id="course_id" value="{{ $course->id }}">
+                                                         <input type="file" name="myFile" class="drop-zone__input" id="myFile">
                                                  </div>
                                                  <button type="submit"
                                                      class="btn btn-primary mt-3 d-flex justify-content-center"
@@ -1291,7 +1295,6 @@
                                                      </thead>
                                                      <tbody>
                                                          @foreach ($email_document as $email)
-                                                         {{-- @dd($email) --}}
                                                              <tr style="height:20px;">
                                                                  <td align="left">{{ $email->document_name }}</td>
                                                                  <td align="left"><a
@@ -1725,11 +1728,6 @@
              } else {
                  jQuery("#dftendampm").val("pm");
              }
-
-
-
-
-
          }
 
          function cancelAddCity() {
@@ -1940,14 +1938,16 @@
      </script>
      <script>
          function documentclick(id) {
-             // var image = jQuery("#dftCity").val();
+             event.preventDefault(); 
+            console.log(id)
+             var image = jQuery("#dftCity").val();
              var fileInput = jQuery("#myFile")[0];
+             var couser_id = jQuery("#course_id").val();
              console.log(fileInput);
              var formData = new FormData();
-
              formData.append("_token", "{{ csrf_token() }}");
              formData.append("myFile", fileInput.files[0]);
-
+             formData.append("course_id",couser_id);
              jQuery.ajax({
                  url: "{{ route('submit.course.document') }}",
                  type: 'POST',
@@ -1956,6 +1956,7 @@
                  processData: false,
                  dataType: 'json',
                  success: function(response) {
+                 console.log(response)
                      if (response.response == "0") {
                          location.reload();
                      } else {
@@ -2153,28 +2154,23 @@
                 }
             });
          
-        
-        
-        
-        
         }
-
 
          function saveeditCourseCity(id) {
             console.log(id)
-            // jQuery.ajax({
-            //     url: "{{ route('api.edit.default.update') }}", // Ensure this URL correctly resolves the route
-            //     type: 'POST',
-            //     data: { id: id }, // Send the 'id' parameter with the request
-            //     dataType: 'json',
-            //     success: function(response) {
-            //         console.log(response)
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.error(`Error: ${status} - ${error}`);
-            //         // Handle the error case here
-            //     }
-            // });
+            jQuery.ajax({
+                url: "{{ route('api.edit.default.update') }}", // Ensure this URL correctly resolves the route
+                type: 'POST',
+                data: { id: id }, // Send the 'id' parameter with the request
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response)
+                },
+                error: function(xhr, status, error) {
+                    console.error(`Error: ${status} - ${error}`);
+                    // Handle the error case here
+                }
+            });
 
             var city = jQuery("#dftCity").val();
             var trainer = jQuery("#dftTrainer").val();

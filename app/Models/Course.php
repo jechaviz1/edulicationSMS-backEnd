@@ -30,4 +30,8 @@ class Course extends Model
     {
         return $this->belongsToMany(Teacher::class, 'course_assessor', 'course_id', 'teacher_id');
     }
+    public function courseenrolment()
+    {
+        return $this->hasOne(EmailCourseStore::class, 'course_id');
+    }
 }

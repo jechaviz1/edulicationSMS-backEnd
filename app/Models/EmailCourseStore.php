@@ -11,4 +11,8 @@ class EmailCourseStore extends Model
     protected $fillable = [
         'id','course_id','subject','note','com_chk'
       ];
+      public function course()
+      {
+          return $this->belongsTo(Course::class, 'course_id');
+      }
 }

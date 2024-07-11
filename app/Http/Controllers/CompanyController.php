@@ -335,23 +335,31 @@ class CompanyController extends Controller
                     return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
                 }
             }
-            public function courseEmail(Request $request){
-                                // dd($request->com_chk);
-                      $courseDocument = new EmailCourseStore;
-                      $courseDocument->course_id = $request->courId;
-                      $courseDocument->subject = $request->subject;
-                      $courseDocument->note = $request->note;
-                      $courseDocument->com_chk = json_encode($request->com_chk);
-                      $courseDocument->save();
-                return redirect()->back()->with('success', 'Document delete successfully!');
 
-            }
-            public function courseCertificateDocument(Request $request){
+            public function courseEmail(Request $request){
                 // dd($request);
+                $courses_op = EmailCourseStore::where('course_id',$request->courId)->first();
+                if($courses_op != null){
+                    $courses_op->subject = $request->subject;
+                    $courses_op->note = $request->note;
+                    $courses_op->com_chk = json_encode($request->com_chk);
+                    $courses_op->save();
+                }else{
+                    $courseDocument = new EmailCourseStore;
+                    $courseDocument->course_id = $request->courId;
+                    $courseDocument->subject = $request->subject;
+                    $courseDocument->note = $request->note;
+                    $courseDocument->com_chk = json_encode($request->com_chk);
+                    $courseDocument->save();
+                }
+                     
+                return redirect()->back()->with('success', 'Document delete successfully!');
+            }
+
+            public function courseCertificateDocument(Request $request){
                 $request->validate([
                     'myFile' => 'required|file|max:20480', // Max size: 20MB
                 ]);
-                // dd($request);
                 $documents = new InfoPakSpecific;
                 if ($request->hasFile('myFile')) {
                     $file = $request->file('myFile');
@@ -363,6 +371,6 @@ class CompanyController extends Controller
             $documents->documentname = $request->name;
             $documents->filename = $filename;
             $documents->save();
-            return response()->json(['response' => "0"]);  
+            return response()->json(['response' => "0"]); 
             }
     }
