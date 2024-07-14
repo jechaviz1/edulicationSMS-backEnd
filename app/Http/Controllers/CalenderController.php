@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Event;
 use App\Models\Course;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class CalenderController extends Controller
@@ -34,8 +35,8 @@ class CalenderController extends Controller
             $calendar[] = ['date' => $currentDate->copy()];
             $currentDate->addDay();
         }
-      
-        return view('admin.event.scheduleCalender.list', compact('calendar','prevMonth','next'));
+        $sessions = Session::all();
+        return view('admin.event.scheduleCalender.list', compact('calendar','prevMonth','next','sessions'));
         // return view('admin.event.calender.list');
     }
 
@@ -97,7 +98,7 @@ class CalenderController extends Controller
                     'message' => 'Record added successfully.',
                     'sucess' => "true"
                 ]);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                // dd($e);
                 // return redirect()->route('course-list')->with('failed', 'Record not added.');
             }

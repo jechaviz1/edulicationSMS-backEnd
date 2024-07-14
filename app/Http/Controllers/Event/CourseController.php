@@ -59,7 +59,7 @@ class CourseController extends Controller
             'course_type' => 'required',
         ]);
 
-       try{
+    //    try{
                 $events = new Event;
                 $events->course_type = $request->course_type;
                 $events->reporting_state = $request->reporting_state;
@@ -78,36 +78,35 @@ class CourseController extends Controller
                 $events->delevery_mode = $request->modeId;
                 $events->predominant_delivery_mode = $request->preModeId;
                 $events->save();
-
-                    if($request->sessions != null){
-                        foreach($request->sessions as $sessions){
-                           $sessions = new Session;
-                            $sessions->title =$request->moduleName;
-                            $sessions->course_id =$request->course_name;
-                            $sessions->teacher_id =$sessions->trainer;
-                            $sessions->assessor_id =$sessions->assessor;
-                            $sessions->event_id =$events->id;
-                            $sessions->location =$request->location;
-                            $sessions->rooms =$request->room;
-                            $sessions->start_date =$sessions->startDate;
-                            $sessions->dftstarthour =$sessions->starthour;
-                            $sessions->dftstartmin =$sessions->startminute;
-                            $sessions->dftstartampm =$sessions->startampm;
-                            $sessions->end_date =$sessions->endDate;
-                            $sessions->dftendhour =$sessions->endhour;
-                            $sessions->dftendmin =$sessions->endminute;
-                            $sessions->dftendampm =$sessions->endampm;
-                            $sessions->save();
+                if($request->sessions != null){
+                    foreach($request->sessions as $sessions){
+                        $session = new Session;
+                        $session->title = $request->moduleName;
+                        $session->course_id = $request->course_name;
+                        $session->teacher_id = $sessions["'trainer'"];
+                        $session->assessor_id = $sessions["'assessor'"];
+                        $session->event_id = $events->id;
+                        $session->location = $sessions["'location'"];
+                        $session->rooms = $sessions["'room'"];
+                        $session->start_date = $sessions["'startDate'"];
+                            $session->dftstarthour = $sessions["'starthour'"];
+                            $session->dftstartmin = $sessions["'startminute'"];
+                            $session->dftstartampm = $sessions["'startampm'"];
+                            $session->end_date = $sessions["'endDate'"];
+                            $session->dftendhour = $sessions["'endhour'"];
+                            $session->dftendmin = $sessions["'endminute'"];
+                            $session->dftendampm = $sessions["'endampm'"];
+                            $session->save();
                         }
                     }
                 return response()->json([
                     'message' => 'Record added successfully.',
                     'sucess' => "true"
                 ]);
-            } catch (\Exception $e) {
-               // dd($e);
-                // return redirect()->route('course-list')->with('failed', 'Record not added.');
-            }
+            // } catch (\Exception $e) {
+            //    // dd($e);
+            //     // return redirect()->route('course-list')->with('failed', 'Record not added.');
+            // }
     }
 
     /**
@@ -185,5 +184,7 @@ class CourseController extends Controller
         $course->Save();
         return redirect()->route('event.courses');
     }
-
+    public function course_event($id){
+        dd($id);
+    }
 }

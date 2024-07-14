@@ -730,5 +730,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/api/course/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_trainer'])->name('api.course.trainer.get');  
   Route::get('/api/course/assessor/list', [App\Http\Controllers\ApiController::class,'sessions_assessor'])->name('api.course.assessor.get');  
   Route::get('/api/course/get/single', [App\Http\Controllers\ApiController::class,'course_single'])->name('api.course.get');  
-  });
+  Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');  
+ 
+});
 });

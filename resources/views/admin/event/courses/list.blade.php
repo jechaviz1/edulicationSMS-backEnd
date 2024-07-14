@@ -1106,7 +1106,6 @@
                 $("#course_names").empty();
                 $('#connect_public').empty();
                 var method = $(this).val();
-                console.log(method)
                 if ($(this).val() == 1) {
                     var type = "Self Paced";
                 } else if ($(this).val() == 2) {
@@ -1135,8 +1134,9 @@
                         console.error(error);
                     }
                 });
-
-                if (method == 2) {
+                   
+                if (method == 2 || method == 3) {
+                    console.log(2)
                     var html = "";
                     html += `<div class="form-group form-inline mb-4" id="choice">
                             <div class="form-check form-check-inline">
@@ -1170,7 +1170,7 @@
                         html += `<div class="mb-4 row" style="font-weight: bold; display: none;" id="multi">
                             <div class="col-4">
                                 <label>Start Date:</label>
-                                <input type="text" class="form-control my-1  wwb-datepicker" id="mDate">
+                                <input type="date" class="form-control my-1  wwb-datepicker" id="mDate">
                                 <label id="lSessions" style="display: inline-block;">Number of Sessions:</label>
                                 <input type="number" class="form-control my-1" id="mSessions" style="display: block;">
                                 <label style="display: none;" id="lEndDate">End Date:</label>
@@ -1236,7 +1236,6 @@
                     <option value="45">45</option>
                     <option value="50">50</option>
                     <option value="55">55</option>
-                    
                                                 </select> 
 											<select name="mstartampm" id="mstartampm" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
 														<option value="am">am</option>
@@ -1248,7 +1247,6 @@
                                         <label>End Time:</label>
                                         <div style="float:left; width:150px">
                                             <select id="mEndHour" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
-                                                    
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -1312,10 +1310,10 @@
                                 <tbody id="course_table_sessions">
                                   <tr>
                                     <th scope="row"><input type="text" class="form-control" name="sessions[0]['moduleName']" id="moduleName0" value="" style="width:100px;height: 35px;" ></th>
-                                    <td><select class="form-control" name="sessions[0]['trainer']" id="trainer0" style="width:150px">
+                                    <td><select class="form-control trainers_sessions_multiple" name="sessions[0]['trainer']" id="trainer0" style="width:150px">
                                <option value="">Select Trainer</option>
                                 </select></td>
-                                    <td><select class="form-control" name="sessions[0]['assessor']" id="assessor0" style="width:150px">
+                                    <td><select class="form-control assessor_sessions_multiple" name="sessions[0]['assessor']" id="assessor0" style="width:150px">
                                           <option value="">Select Assessor</option>
                                 </select></td>
                                     <td><select class="form-control" name="sessions[0]['location']" id="location0" style="width:120px;" onchange="reloadRoom(this.value, 0);">
@@ -1414,7 +1412,7 @@
                 $("#trainers_info").empty();
                 $("#assessors_info").empty();
                 //course sessions
-                if(course_type == 2){
+                if(course_type == 2 || course_type == 3){
                     $.ajax({
                     url: "{{ route('api.course.get') }}",
                     type: 'GET',
@@ -1423,10 +1421,16 @@
                     }, // Pass the scheduleId as a query parameter
                     success: function(response){
                         console.log(response.courses.public_sessions)
-                       if(course_type == 2){
+                       if(course_type == 2 || course_type == 3){
                                 if(response.courses.public_sessions == "Single Session" && response.courses.public_sessions != null){
                                     $('#connect_public #choice').css('display','none');
                                     $('#connect_public #single').css('display','none');   
+                                    $('#connect_public #level2').css('display','none');   
+                                }
+                                if(response.courses.public_sessions == "Multiple Sessions" && response.courses.public_sessions != null){
+                                    $('#connect_public #choice').css('display','block');
+                                    $('#connect_public #single').css('display','block');   
+                                    // $('#connect_public #level2').css('display','block');   
                                 }
                        }
                     },
@@ -1485,34 +1489,25 @@
             });
         });
 
-        function sessionAdd(id){
-           console.log(id)
-           if(id == 2){
-            $('#level2').css('display', 'flex');
-            $("#single").css('display','none');
-            $("#table_sessions").css('display','none');
-            $("#multi").css('display','flex');
-           }else{
-            $('#level2').css('display', 'none');
-            $("#single").css('display','flex');
-            $("#table_sessions").css('display','block');
-            $("#multi").css('display','none');
-           }
-        }
-        var number = 1; // Declare number outside the function
 
-function addSession() {
-    var html = `<tr id="row${number}">
-        <th scope="row"><input type="text" class="form-control" name="moduleName${number}" id="moduleName${number}" value="" style="width:100px;height: 35px;"></th>
-        <td><select class="form-control" name="trainer${number}" id="trainer${number}" style="width:150px" fdprocessedid="asfqbp">
-        </select></td>
-        <td><select class="form-control" name="assessor${number}" id="assessor${number}" style="width:150px" fdprocessedid="po86js">
-        </select></td>
-        <td><select class="form-control" name="location${number}" id="location${number}" style="width:120px;" onchange="reloadRoom(this.value, ${number});" ></select></td>
-        <td><select class="form-control" name="room${number}" id="room${number}" style="width:130px;"></select></td>
-        <td><input class="form-control wwb-datepicker hasDatepicker" type="text" name="startDate${number}" id="startDate${number}" style="width:110px;height: 35px;" ></td> 
+        function addSessions(){
+            var html = `<tr id="row${number}">
+        <th scope="row"><input type="text" class="form-control" name="sessions[${number}]['moduleName']" id="moduleName${number}" value="" style="width:100px;height: 35px;"></th>
+        <td><select class="form-control trainers_sessions_multiple" name="sessions[${number}]['trainer']" id="trainer${number}" style="width:150px">
+            <option value="">Select Trainer</option>
+            </select></td>
+        <td><select class="form-control assessor_sessions_multiple" name="sessions[${number}]['assessor']" id="assessor${number}" style="width:150px" fdprocessedid="po86js">
+            <option value="">Select Assessor</option>
+            </select></td>
+        <td><select class="form-control" name="sessions[${number}]['location']" id="location${number}" style="width:120px;" onchange="reloadRoom(this.value, ${number});" >
+             <option value="">Select Location</option>
+             </select></td>
+        <td><select class="form-control" name="sessions[${number}]['room']" id="room${number}" style="width:130px;">
+               <option value="">Select Room</option>
+            </select></td>
+        <td><input class="form-control wwb-datepicker hasDatepicker" type="date" name="sessions[${number}]['startDate']" id="startDate${number}" style="width:110px;height: 35px;" ></td> 
         <td><div style="float:left; width:150px">
-            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="starthour${number}" id="starthour${number}">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['starthour']" id="starthour${number}">
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -1526,7 +1521,7 @@ function addSession() {
                 <option value="11">11</option>
                 <option value="12">12</option>
             </select> <span>:</span> 
-            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="startminute${number}" id="startminute${number}">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['startminute']" id="startminute${number}">
                 <option value="00">00</option>
                 <option value="05">05</option>
                 <option value="10">10</option>
@@ -1540,14 +1535,14 @@ function addSession() {
                 <option value="50">50</option>
                 <option value="55">55</option>
             </select>
-            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="startampm${number}" id="startampm${number}">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['startampm']" id="startampm${number}">
                 <option value="am">am</option>
                 <option value="pm">pm</option>
             </select>
         </div></td> 
-        <td><input class="form-control wwb-datepicker hasDatepicker" type="text" name="endDate${number}" id="endDate${number}" style="width:110px;height: 35px;"></td> 
+        <td><input class="form-control wwb-datepicker hasDatepicker" type="date" name="sessions[${number}]['endDate']" id="endDate${number}" style="width:110px;height: 35px;"></td> 
         <td><div style="float:left; width:150px">
-            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="endhour${number}" id="endhour${number}">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['endhour']" id="endhour${number}">
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -1561,7 +1556,7 @@ function addSession() {
                 <option value="11">11</option>
                 <option value="12">12</option>
             </select> <span>:</span> 
-            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="endminute${number}" id="endminute${number}">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['endminute']" id="endminute${number}">
                 <option value="00">00</option>
                 <option value="05">05</option>
                 <option value="10">10</option>
@@ -1575,7 +1570,7 @@ function addSession() {
                 <option value="50">50</option>
                 <option value="55">55</option>
             </select>
-            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="endampm${number}" id="endampm${number}">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['endampm']" id="endampm${number}">
                 <option value="am">am</option>
                 <option value="pm">pm</option>
             </select>
@@ -1585,6 +1580,179 @@ function addSession() {
     </tr>`;
     number++; // Increment number after appending the new session
     $('#course_table_sessions').append(html);
+    $('.trainers_sessions_multiple').empty();
+    // $('.assessor_sessions_multiple').empty();
+                //Assessors Start Get
+                $.ajax({
+                    url: "{{ route('api.course.trainer.list') }}",
+                    type: 'GET',
+                    data: {
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        console.log(response.trainer)
+                        $(".trainers_sessions_multiple").append($("<option>Selected Trainer</option>"));
+                        $.each(response.trainer, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.first_name + " " + option.last_name);
+                            // Append the new option to the select box
+                            $(".trainers_sessions_multiple").append(newOption);
+                        });
+                        $.each(response.trainer, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.first_name + " " + option.last_name);
+                            // Append the new option to the select box
+                            $(".assessor_sessions_multiple").append(newOption);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+
+        }
+
+        function sessionAdd(id){
+        
+           if(id == 2){
+            $('#level2').css('display', 'flex');
+            $("#single").css('display','none');
+            $("#table_sessions").css('display','blovk');
+            $("#multi").css('display','flex');
+           }else{
+            $('#level2').css('display', 'none');
+            $("#single").css('display','flex');
+            $("#table_sessions").css('display','block');
+            $("#multi").css('display','none');
+           }
+        }
+        var number = 1; // Declare number outside the function
+    function addSession() {
+      var number_section =  $('#mSessions').val();
+      console.log(number_section);
+    var html = `<tr id="row${number}">
+        <th scope="row"><input type="text" class="form-control" name="sessions[${number}]['moduleName']" id="moduleName${number}" value="" style="width:100px;height: 35px;"></th>
+        <td><select class="form-control trainers_sessions_multiple" name="sessions[${number}]['trainer']" id="trainer${number}" style="width:150px">
+            <option value="">Select Trainer</option>
+            </select></td>
+        <td><select class="form-control assessor_sessions_multiple" name="sessions[${number}]['assessor']" id="assessor${number}" style="width:150px" fdprocessedid="po86js">
+            <option value="">Select Assessor</option>
+            </select></td>
+        <td><select class="form-control" name="sessions[${number}]['location']" id="location${number}" style="width:120px;" onchange="reloadRoom(this.value, ${number});" >
+             <option value="">Select Location</option>
+             </select></td>
+        <td><select class="form-control" name="sessions[${number}]['room']" id="room${number}" style="width:130px;">
+               <option value="">Select Room</option>
+            </select></td>
+        <td><input class="form-control wwb-datepicker hasDatepicker" type="date" name="sessions[${number}]['startDate']" id="startDate${number}" style="width:110px;height: 35px;" ></td> 
+        <td><div style="float:left; width:150px">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['starthour']" id="starthour${number}">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select> <span>:</span> 
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['startminute']" id="startminute${number}">
+                <option value="00">00</option>
+                <option value="05">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['startampm']" id="startampm${number}">
+                <option value="am">am</option>
+                <option value="pm">pm</option>
+            </select>
+        </div></td> 
+        <td><input class="form-control wwb-datepicker hasDatepicker" type="date" name="sessions[${number}]['endDate']" id="endDate${number}" style="width:110px;height: 35px;"></td> 
+        <td><div style="float:left; width:150px">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['endhour']" id="endhour${number}">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select> <span>:</span> 
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['endminute']" id="endminute${number}">
+                <option value="00">00</option>
+                <option value="05">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[${number}]['endampm']" id="endampm${number}">
+                <option value="am">am</option>
+                <option value="pm">pm</option>
+            </select>
+        </div></td> 
+                <td><button type="button" class="btn btn-danger" onclick="deleteRow(${number})">Delete</button></td>
+
+    </tr>`;
+    number++; // Increment number after appending the new session
+    $('#course_table_sessions').append(html);
+    $('.trainers_sessions_multiple').empty();
+    // $('.assessor_sessions_multiple').empty();
+                //Assessors Start Get
+                $.ajax({
+                    url: "{{ route('api.course.trainer.list') }}",
+                    type: 'GET',
+                    data: {
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        console.log(response.trainer)
+                        $(".trainers_sessions_multiple").append($("<option>Selected Trainer</option>"));
+                        $.each(response.trainer, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.first_name + " " + option.last_name);
+                            // Append the new option to the select box
+                            $(".trainers_sessions_multiple").append(newOption);
+                        });
+                        $.each(response.trainer, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.first_name + " " + option.last_name);
+                            // Append the new option to the select box
+                            $(".assessor_sessions_multiple").append(newOption);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+
 }
 function deleteRow(rowNumber) {
     $('#row' + rowNumber).remove(); // Remove the row with the given ID

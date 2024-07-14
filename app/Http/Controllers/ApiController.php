@@ -54,12 +54,14 @@ class ApiController extends Controller
             return response()->json(['courses' => $courses]); 
         }
     }
+
     public function sessions_trainer(Request $request){
             // dd($request);
             $id = $request->query('course_id');
             $courses = Course::find($id);
             return response()->json(['courses' => $courses->trainers]); 
     }
+
     public function sessions_assessor(Request $request){
         // dd($request);
         $id = $request->query('course_id');
@@ -70,5 +72,10 @@ class ApiController extends Controller
         $id = $request->query('course_id');
         $courses = Course::find($id);
         return response()->json(['courses' => $courses]); 
+    }
+    public function sessions_course_trainer_list(){
+        $trainers = Teacher::get();
+        return response()->json(['trainer' => $trainers]); 
+
     }
 }
