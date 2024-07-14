@@ -453,7 +453,6 @@
                                                             @else
                                                             Module
                                                             @endif
-                                                            
                                                         </td>
                                                         <td>
                                                             <div class="d-flex">
@@ -473,9 +472,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
                                         <!--elective -->
-                                        
                                         <div class="table-responsive mt-4">
                                             <div class="row bg-primary text-white">
                                                 <div class="col-md-6">
@@ -500,7 +497,6 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($unit_elective_active as $k=> $row)
-                                                    
                                                     <tr>
                                                         <td>{{$row->code}}</td>
                                                         <td>{{$row->name}}</td>
@@ -519,7 +515,6 @@
                                                             @else
                                                             Module
                                                             @endif
-                                                            
                                                         </td>
                                                         <td>
                                                             <div class="d-flex">
@@ -545,7 +540,6 @@
                                                 <div class="col-md-6">
                                                     <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive Core Units</p>
                                                 </div>
-                                        
                                             </div>
                                             <table id="example_new" class="display table" style="min-width: 845px">
                                                 <thead>
@@ -561,7 +555,6 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($unit_core_inactive as $k=> $row)
-                                                    
                                                     <tr>
                                                         <td>{{$row->code}}</td>
                                                         <td>{{$row->name}}</td>
@@ -606,7 +599,6 @@
                                                 <div class="col-md-6">
                                                     <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive Elective Units</p>
                                                 </div>
-                                            
                                             </div>
                                             <table id="example_new" class="display table" style="min-width: 845px">
                                                 <thead>
@@ -622,7 +614,6 @@
                                                 </thead>
                                                 <tbody>
                                                     @foreach ($unit_elective_inactive as $k=> $row)
-                                                    
                                                     <tr>
                                                         <td>{{$row->code}}</td>
                                                         <td>{{$row->name}}</td>
@@ -641,7 +632,6 @@
                                                             @else
                                                             Module
                                                             @endif
-                                                            
                                                         </td>
                                                         <td>
                                                             <div class="d-flex">
@@ -657,21 +647,15 @@
                                                         </td>
                                                     </tr>
                                                     @endforeach
-                                                   
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
     								</div>
-  
     							</div>
     						</div>
     					</div>
     				</div>
-    
     			</div>
-                    
-                
             </div>
         </div>
     </div>

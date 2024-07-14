@@ -66,4 +66,9 @@ class ApiController extends Controller
         $courses = Course::find($id);
         return response()->json(['courses' => $courses->assessors]); 
     }
+    public function course_single(Request $request){
+        $id = $request->query('course_id');
+        $courses = Course::find($id);
+        return response()->json(['courses' => $courses]); 
+    }
 }

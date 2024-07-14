@@ -10,7 +10,7 @@ class Session extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'start_date', 'end_date', 'current', 'status',
+        'id', 'title', 'course_id', 'assessor_id','event_id','location', 'rooms','start_date','dftstarthour','dftstartmin','dftstartampm','end_date','dftendhour','dftendmin','dftendampm',
     ];
 
     public function programs()

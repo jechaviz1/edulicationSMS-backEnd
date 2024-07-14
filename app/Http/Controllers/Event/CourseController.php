@@ -11,6 +11,7 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\Teacher;
 use App\Models\CourseCategory;
+use App\Models\Session;
 class CourseController extends Controller
 {
     /**
@@ -52,7 +53,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+      
         // Field Validation
         $request->validate([
             'course_type' => 'required',
@@ -77,13 +78,33 @@ class CourseController extends Controller
                 $events->delevery_mode = $request->modeId;
                 $events->predominant_delivery_mode = $request->preModeId;
                 $events->save();
-                        
 
+                    if($request->sessions != null){
+                        foreach($request->sessions as $sessions){
+                           $sessions = new Session;
+                            $sessions->title =$request->moduleName;
+                            $sessions->course_id =$request->course_name;
+                            $sessions->teacher_id =$sessions->trainer;
+                            $sessions->assessor_id =$sessions->assessor;
+                            $sessions->event_id =$events->id;
+                            $sessions->location =$request->location;
+                            $sessions->rooms =$request->room;
+                            $sessions->start_date =$sessions->startDate;
+                            $sessions->dftstarthour =$sessions->starthour;
+                            $sessions->dftstartmin =$sessions->startminute;
+                            $sessions->dftstartampm =$sessions->startampm;
+                            $sessions->end_date =$sessions->endDate;
+                            $sessions->dftendhour =$sessions->endhour;
+                            $sessions->dftendmin =$sessions->endminute;
+                            $sessions->dftendampm =$sessions->endampm;
+                            $sessions->save();
+                        }
+                    }
                 return response()->json([
                     'message' => 'Record added successfully.',
                     'sucess' => "true"
                 ]);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                // dd($e);
                 // return redirect()->route('course-list')->with('failed', 'Record not added.');
             }

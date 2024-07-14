@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('course_id');
             $table->unsignedBigInteger('certificate_id');
+            
             $table->string('subject')->nullable();
             $table->text('body')->nullable();
             $table->timestamps();

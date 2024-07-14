@@ -1235,15 +1235,13 @@
                                                          <input type="hidden" name="courId" id="courId"
                                                              value="{{ $course->id }}">
                                                          <input type="text" class="form-control" name="subject"
-                                                             id="subject" maxlength="50"
-                                                             value="{{ $course->courseenrolment->subject}}"
-                                                             fdprocessedid="0jdacb">
+                                                             id="subject" maxlength="50" value="{{ $course->courseenrolment->subject ?? '' }}" >
                                                      </div>
                                                  </div>
                                                  <div class="form-group row mt-3">
                                                      <label for="subject" class="col-sm-1 col-form-label">Subject</label>
                                                      <div class="col-sm-11">
-                                                         <textarea class="form-control" name="note" id="" cols="30" rows="10">{{ $course->courseenrolment->note}}</textarea>
+                                                         <textarea class="form-control" name="note" id="" cols="30" rows="10">{{ $course->courseenrolment->note ?? '' }}</textarea>
                                                      </div>
                                                  </div>
                                                  <p class="mt-5">Attach Course Specific Documents to be included in the Enrolment Confirmation Email</p>
@@ -1329,15 +1327,18 @@
                                                      <select name="certificate" id="certificate" class="form-control"
                                                          onchange="loadCertificateEmailContent(this.options[this.options.selectedIndex].value);" >
                                                          @foreach ($certificates as $certificate)
-                                                         <option value="{{$certificate->id}}" @if($course->coursecertificateemail->certificate_id == $certificate->id) selected @endif>{{ $certificate->newCertificateName }}</option>
+                                                         <option value="{{$certificate->id}}" 
+                                                            @if(isset($course->coursecertificateemail) && $course->coursecertificateemail->certificate_id == $certificate->id) selected @endif>
+                                                            {{ $certificate->newCertificateName }}
+                                                        </option>
                                                          @endforeach
                                                      </select>
                                                      <h5 class="mt-3">Email Content</h5>
-                                                     <input type="text" class="form-control" value="{{$course->coursecertificateemail->subject}}" name="subject">
+                                                     <input type="text" class="form-control" value="{{ $course->coursecertificateemail->subject ?? '' }}" name="subject">
                                                  </div>
                                                  <label for="certificate" class="font-weight-bold mt-3">Note</label>
                                                  <textarea class="form-control" name="note" id="note" cols="30" rows="10">
-                                                    {{ $course->coursecertificateemail->body }}
+                                                  {{ $course->coursecertificateemail->body ?? '' }}
                                                  </textarea>
                                              </div>
                                              <button type="submit" class="btn btn-primary mt-3">Save</button>

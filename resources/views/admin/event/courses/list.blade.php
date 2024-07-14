@@ -239,7 +239,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-3">
-                    <form class="needs-validation" method="POST" id="course" novalidate>
+                    <form class="needs-validation" action="{}" method="POST" id="course" novalidate>
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-check form-check-inline">
@@ -494,7 +494,7 @@
                         <div id="connect_public">
 
                         </div>
-
+                        
                         <div class="row mt-4">
                             <div class="col-4">
                                 <button type="submit" class="btn btn-primary mb-3">Save</button>
@@ -879,12 +879,9 @@
                                     </div>
                                     <div class="col-4 form-group">
                                         <div id="testtrainer" style="float:left; width:300px;">
-                                            <select name="trainer0" id="trainer0" size="1" style="width:18vw;"
-                                                class="form-control">
+                                            <select name="trainer0" id="trainer0" size="1" style="width:18vw;" class="form-control">
                                                 <option value="0"></option>
                                             </select>
-
-
                                         </div>
                                         <div
                                             style="float:left; padding-left:11vw;width:6vw;padding-top:10px;padding-bottom:10px;">
@@ -895,7 +892,6 @@
                                                 trainers
                                             </button>&nbsp;&nbsp;
                                         </div>
-
                                     </div>
                                     <div class="col-2 mt-2 form-group">
                                         <label>Assessors</label>
@@ -907,7 +903,6 @@
                                                     <select name="assessor0" id="assessor0" size="1"
                                                         style="width:12vw;" class="form-control">
                                                         <option value="0"></option>
-                                                        <option value="899">trainer1 training</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -943,7 +938,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="row"><!--//WWB-1184-->
                                     <div class="col-2 mt-1 form-group">
                                         <label>Course cost (per enrolment)</label>
@@ -1143,7 +1137,6 @@
                 });
 
                 if (method == 2) {
-                    console.log("hello2")
                     var html = "";
                     html += `<div class="form-group form-inline mb-4" id="choice">
                             <div class="form-check form-check-inline">
@@ -1205,21 +1198,18 @@
                             <div class="col-4">
                                 <label>Trainer:</label>
                                 <select id="mTrainer" class="form-control my-1">
-                                <option value="921">kuldip domadiya</option><option value="923">rahul patyel</option><option value="899">trainer1 training</option>
                                 </select> 
                                 <label>Location:</label>
                                 <select id="mLocation" class="form-control my-1" onchange="reloadRoom(this.value, 0);">
                                 </select> 
                                 <label>Room:</label>
                                 <select id="mRoom" class="form-control my-1">
-                                    
                                 </select>
                                 <div class="row"> 
                                     <div class="col">
                                         <label>Start Time:</label>
                                         <div style="float:left; width:150px">
                                             <select id="mStartHour" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
-												
                     <option value="01">01</option>
                     <option value="02">02</option>
                     <option value="03">03</option>
@@ -1232,10 +1222,8 @@
                     <option value="10">10</option>
                     <option value="11">11</option>
                     <option value="12">12</option>
-                
 											</select>
                                             <select id="mStartMinute" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
-                                                
                     <option value="00">00</option>
                     <option value="05">05</option>
                     <option value="10">10</option>
@@ -1306,13 +1294,149 @@
                                 </select> 
 							</div>
                         </div>`;
+                        html += `<div id="table_sessions" style="display: block">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Session Name</th>
+                                    <th scope="col">Trainer</th>
+                                    <th scope="col">Assessor</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">Room</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">Start Time</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">End Time</th>
+                                  </tr>
+                                </thead>
+                                <tbody id="course_table_sessions">
+                                  <tr>
+                                    <th scope="row"><input type="text" class="form-control" name="sessions[0]['moduleName']" id="moduleName0" value="" style="width:100px;height: 35px;" ></th>
+                                    <td><select class="form-control" name="sessions[0]['trainer']" id="trainer0" style="width:150px">
+                               <option value="">Select Trainer</option>
+                                </select></td>
+                                    <td><select class="form-control" name="sessions[0]['assessor']" id="assessor0" style="width:150px">
+                                          <option value="">Select Assessor</option>
+                                </select></td>
+                                    <td><select class="form-control" name="sessions[0]['location']" id="location0" style="width:120px;" onchange="reloadRoom(this.value, 0);">
+                                        <option value="">Select Location</option></select></td>
+                                  <td><select class="form-control" name="sessions[0]['room']" id="room0" style="width:130px;" fdprocessedid="j60kt1">
+                                    <option value="">Select Rooms</option>
+                                    </select></td>
+                                  <td><input class="form-control" type="date" name="sessions[0]['startDate']" id="startDate0" style="width:110px;height: 35px;"></td> 
+                                  <td><div style="float:left; width:150px">
+                                    <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[0]['starthour']" id="starthour0">
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                                    </select> <span>:</span> 
+                                    <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[0]['startminute']" id="startminute0">
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                
+                                    </select>
+                                    <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[0]['startampm']" id="startampm0" fdprocessedid="ck8d4">
+                                        
+                        <option value="am">am</option>
+                        <option value="pm">pm</option>
+                
+                                    </select>
+                                </div></td> 
+                                  <td><input class="form-control wwb-datepicker hasDatepicker" type="date" name="sessions[0]['endDate']" id="endDate0" style="width:110px;height: 35px;" fdprocessedid="efjro"></td> 
+                                  <td><div style="float:left; width:150px">
+                                    <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[0]['endhour']" id="endhour0" fdprocessedid="f5fm8a">
+                                        
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                
+                                    </select> <span>:</span> 
+                                    <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[0]['endminute']" id="endminute0" fdprocessedid="3kqlu">
+                                    
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                                    </select>
+                                    <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="sessions[0]['endampm']" id="endampm0">
+                        <option value="am">am</option>
+                        <option value="pm">pm</option>
+                
+                                    </select>
+                                </div></td> 
+                                <td></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>`;
                     $('#connect_public').append(html);
                 }
             });
             $('#course_names').on('change', function() {
+               var course_type = $('[name=course_type]:checked').val();
                 var course_id = $('#course_names').val();
                 $("#trainers_info").empty();
                 $("#assessors_info").empty();
+                //course sessions
+                if(course_type == 2){
+                    $.ajax({
+                    url: "{{ route('api.course.get') }}",
+                    type: 'GET',
+                    data: {
+                        course_id: course_id
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response){
+                        console.log(response.courses.public_sessions)
+                       if(course_type == 2){
+                                if(response.courses.public_sessions == "Single Session" && response.courses.public_sessions != null){
+                                    $('#connect_public #choice').css('display','none');
+                                    $('#connect_public #single').css('display','none');   
+                                }
+                       }
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+                }
+               
                 //Trainer Get
                 $.ajax({
                     url: "{{ route('api.course.trainer.get') }}",
@@ -1321,7 +1445,7 @@
                         course_id: course_id
                     }, // Pass the scheduleId as a query parameter
                     success: function(response) {
-                        $("#trainers_info").append($("<option>Selected Trainer</option>"));
+                        console.log(response)
                         $.each(response.courses, function(index, option) {
                             // Create new option element
                             var newOption = $("<option></option>").val(option.id).text(
@@ -1366,18 +1490,105 @@
            if(id == 2){
             $('#level2').css('display', 'flex');
             $("#single").css('display','none');
+            $("#table_sessions").css('display','none');
             $("#multi").css('display','flex');
            }else{
             $('#level2').css('display', 'none');
             $("#single").css('display','flex');
+            $("#table_sessions").css('display','block');
             $("#multi").css('display','none');
            }
         }
-        function addSession(){
-            var html = ``;
-            html += ``;
-        }
+        var number = 1; // Declare number outside the function
 
+function addSession() {
+    var html = `<tr id="row${number}">
+        <th scope="row"><input type="text" class="form-control" name="moduleName${number}" id="moduleName${number}" value="" style="width:100px;height: 35px;"></th>
+        <td><select class="form-control" name="trainer${number}" id="trainer${number}" style="width:150px" fdprocessedid="asfqbp">
+        </select></td>
+        <td><select class="form-control" name="assessor${number}" id="assessor${number}" style="width:150px" fdprocessedid="po86js">
+        </select></td>
+        <td><select class="form-control" name="location${number}" id="location${number}" style="width:120px;" onchange="reloadRoom(this.value, ${number});" ></select></td>
+        <td><select class="form-control" name="room${number}" id="room${number}" style="width:130px;"></select></td>
+        <td><input class="form-control wwb-datepicker hasDatepicker" type="text" name="startDate${number}" id="startDate${number}" style="width:110px;height: 35px;" ></td> 
+        <td><div style="float:left; width:150px">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="starthour${number}" id="starthour${number}">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select> <span>:</span> 
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="startminute${number}" id="startminute${number}">
+                <option value="00">00</option>
+                <option value="05">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="startampm${number}" id="startampm${number}">
+                <option value="am">am</option>
+                <option value="pm">pm</option>
+            </select>
+        </div></td> 
+        <td><input class="form-control wwb-datepicker hasDatepicker" type="text" name="endDate${number}" id="endDate${number}" style="width:110px;height: 35px;"></td> 
+        <td><div style="float:left; width:150px">
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="endhour${number}" id="endhour${number}">
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select> <span>:</span> 
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="endminute${number}" id="endminute${number}">
+                <option value="00">00</option>
+                <option value="05">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+            </select>
+            <select style="width:45px;padding:0 !important;display:inline-block;" class="form-control" name="endampm${number}" id="endampm${number}">
+                <option value="am">am</option>
+                <option value="pm">pm</option>
+            </select>
+        </div></td> 
+                <td><button type="button" class="btn btn-danger" onclick="deleteRow(${number})">Delete</button></td>
+
+    </tr>`;
+    number++; // Increment number after appending the new session
+    $('#course_table_sessions').append(html);
+}
+function deleteRow(rowNumber) {
+    $('#row' + rowNumber).remove(); // Remove the row with the given ID
+}
     </script>
     <script>
         (function() {
@@ -1629,6 +1840,26 @@
                 var formData = new FormData(this);
                 formData.append('_token', csrfToken);
                 console.log(formData); // Add CSRF token here
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
                 // Send the AJAX request
                 $.ajax({
                     url: "{{ route('event.courses.store') }}",
@@ -1640,7 +1871,7 @@
                         // Handle the successful response here
                         if (response.sucess == "true") {
                             $('#exampleModalToggle').modal('hide');
-                            location.reload();
+                            // location.reload();
                         }
                     },
                     error: function(xhr, status, error) {
