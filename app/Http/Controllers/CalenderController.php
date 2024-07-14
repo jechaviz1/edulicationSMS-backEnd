@@ -200,8 +200,8 @@ class CalenderController extends Controller
             $calendar[] = ['date' => $currentDate->copy()];
             $currentDate->addDay();
         }
-      
-        return view('admin.event.sectionCalender.list', compact('calendar','prevMonth'));
+        $sessions = Session::all();
+        return view('admin.event.sectionCalender.list', compact('calendar','prevMonth','sessions'));
     }
 
     public function find_data(Request $request){
