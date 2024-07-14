@@ -137,13 +137,12 @@
                                         @foreach ($rows as $k => $row)
                                             <tr>
                                                 <td>
-                                                    <a href="{{route('event.course.update',$row->id) }}"
-
+                                                    <a href="{{ route('event.course.update', $row->id) }}"
                                                         style="width: 26px;height: 20px;line-height: 2px;width: 20px;text-align: center;padding: 0;">
                                                         +
                                                     </a>
                                                     @foreach ($courses as $course)
-                                                    @if ($course->id == $row->course_type)
+                                                        @if ($course->id == $row->course_type)
                                                             {{ $course->name }}
                                                         @endif
                                                     @endforeach
@@ -230,11 +229,13 @@
         </div>
     </div>
     {{-- //Modal Create Start --}}
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" style="min-height: 458px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalToggleLabel">Create Event - Course(<span id="courses"></span>)</h5>
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Create Event - Course(<span
+                            id="courses"></span>)</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-3">
@@ -261,7 +262,6 @@
                         <div class="row">
                             <div class="col-4 mt-2" id="reporting_state">
                                 <label class="form-check-label" for="reporting_state">Reporting State</label>
-                               {{-- @dd($states) --}}
                                 <select class="form-select" name="reporting_state" aria-label="Default select example"
                                     id="reporting_state" required>
                                     <option value="" selected>Select State</option>
@@ -270,7 +270,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- @dd() --}}
                             <div class="col-4 mt-2" id="course_name">
                                 <label class="form-check-label" for="course_name">Course Name</label>
                                 <select class="form-select" name="course_name" aria-label="Default select example"
@@ -438,9 +437,10 @@
                                 <label class="form-check-label" for="city">City</label>
                                 {{-- <input type="text" class="form-control" name="city" id="city" value="1"
                                     placeholder="Title" required> --}}
-                                    <select class="form-select" name="city" aria-label="Default select example" id="city">
+                                <select class="form-select" name="city" aria-label="Default select example"
+                                    id="city">
                                     <option value="">Selected City</option>
-                                    @foreach($cities as $city)
+                                    @foreach ($cities as $city)
                                         <option value="{{ $city->id }}">{{ $city->name }}</option>
                                     @endforeach
                                 </select>
@@ -491,6 +491,10 @@
                                 </select>
                             </div>
                         </div>
+                        <div id="connect_public">
+
+                        </div>
+
                         <div class="row mt-4">
                             <div class="col-4">
                                 <button type="submit" class="btn btn-primary mb-3">Save</button>
@@ -1032,18 +1036,16 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!--//WWB-220 End-->
+
                                 <div class="row form-group text-center">
                                     <div class="col-12">
-                                        <button class="btn btn-primary" type="button"
-                                            onclick="">Save</button>
+                                        <button class="btn btn-primary" type="button" onclick="">Save</button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="nav-syrvey-setting" role="tabpanel"
                             aria-labelledby="nav-contact-tab">
-
                         </div>
                         <div class="tab-pane fade" id="nav-opportunities" role="tabpanel"
                             aria-labelledby="nav-contact-tab">
@@ -1056,9 +1058,9 @@
                                     <button class="btn btn-primary m-2" disabled=""
                                         title="To unlock this feature, please upgrade to a Non-Free License">Email all
                                         opportunities</button>
-                                        <button id="openModalBtn" class="btn btn-primary">SMS all opportunities</button>
-                                        {{-- <button type="button" class="btn btn-primary m-2" onclick="createModal()">  SMS all opportunities </button> --}}
-                                    </div>
+                                    <button id="openModalBtn" class="btn btn-primary">SMS all opportunities</button>
+                                    {{-- <button type="button" class="btn btn-primary m-2" onclick="createModal()">  SMS all opportunities </button> --}}
+                                </div>
                                 <table class="table table-striped" id="scheduletable">
                                     <thead>
                                         <tr>
@@ -1077,62 +1079,235 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-                                 <!-- Modal opportunities Start-->
-                                 <div id="sms_opportunities">
+                                <!-- Modal opportunities Start-->
+                                <div id="sms_opportunities">
                                     <!-- Modal content -->
                                     <div class="modal-content">
-                                        <button class="close btn " style="font-size: 20px;position: absolute;right: 0;top: 0;"><span style="font-size: 50px;">&times;</span></button>
+                                        <button class="close btn "
+                                            style="font-size: 20px;position: absolute;right: 0;top: 0;"><span
+                                                style="font-size: 50px;">&times;</span></button>
                                         <h5>Send SMS</h5>
-                                        <div style="padding:0px 0px 10px 20px;"><b>Note: </b>Sending one SMS message will cost you $0.09 (AUD, GST Excl).
+                                        <div style="padding:0px 0px 10px 20px;"><b>Note: </b>Sending one SMS message will
+                                            cost you $0.09 (AUD, GST Excl).
                                         </div>
                                         <textarea name="sms_Content" id="sms_Content" style="width:600px;height:200px;"></textarea>
-                                        <button type="button" id="submit-sms" class="btn btn-primary mt-4" style="width: 200px;">Send</button>
+                                        <button type="button" id="submit-sms" class="btn btn-primary mt-4"
+                                            style="width: 200px;">Send</button>
                                     </div>
-                                  </div>
-                            <!-- Modal opportunities End-->
+                                </div>
+                                <!-- Modal opportunities End-->
                             </div>
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
-    </div>  
+    </div>
     {{-- Modal Edit End --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('[name=course_type]').on('change', function() {
                 $("#course_names").empty();
-               
-           var method =  $(this).val();
-           if($(this).val() == 1){
-            var type = "Self Paced";
-           }else if($(this).val() == 2){
-            var type = "Public Sessions";
-           }else{
-            var type ="Private Sessions";
-           }
-           $("#course_names").append($("<option>Selected Courses</option>"));
-           $.ajax({
+                $('#connect_public').empty();
+                var method = $(this).val();
+                console.log(method)
+                if ($(this).val() == 1) {
+                    var type = "Self Paced";
+                } else if ($(this).val() == 2) {
+                    var type = "Public Sessions";
+                } else {
+                    var type = "Private Sessions";
+                }
+                $("#course_names").append($("<option>Selected Courses</option>"));
+                $.ajax({
                     url: "{{ route('api.course.sessions.list') }}",
                     type: 'GET',
                     data: {
                         scheduleId: type
                     }, // Pass the scheduleId as a query parameter
                     success: function(response) {
-                        $.each(response.courses, function(index, option){
-                    // Create new option element
-                    var newOption = $("<option></option>").val(option.id).text(option.name);
-                    // Append the new option to the select box
-                    $("#course_names").append(newOption);
-                });
+                        $.each(response.courses, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.name);
+                            // Append the new option to the select box
+                            $("#course_names").append(newOption);
+                        });
                     },
                     error: function(xhr, status, error) {
                         // Handle errors here
                         console.error(error);
                     }
                 });
+
+                if (method == 2) {
+                    console.log("hello2")
+                    var html = "";
+                    html += `<div class="form-group form-inline mb-4" id="choice">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="level1" id="session1" value="1" checked="" onclick="sessionAdd(1);">
+                                <label class="form-check-label" for="inlineRadio1">Add single session</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="level1" id="session2" value="2" onclick="sessionAdd(2);">
+                                <label class="form-check-label" for="inlineRadio2">Add multiple sessions</label>
+                            </div>
+                        </div>`;
+                    html += `<div class="form-group form-inline mb-4" id="level2" style="display: none;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="level2" id="numberSessions" value="1" checked="" onclick="toggle(1);">
+                                    <label class="form-check-label" for="inlineRadio1">User start date and number of sessions</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="level2" id="startEndDate" value="2" onclick="toggle(2);">
+                                    <label class="form-check-label" for="inlineRadio2">Use start and end dates</label>
+                                </div>
+                            </div>`;
+                        html += `<div class="form-inline mb-4" style="font-weight: bold; display: flex;" id="single">
+                            <label>Frequency:</label>
+                            <select name="courseFre" class="form-control mx-2" id="courseFre" fdprocessedid="oa5sd6">
+                                <option value="Daily">Daily</option>
+                                <option value="Weekly">Weekly</option><option value="Fortnightly">Fortnightly</option>
+                                <option value="Monthly">Monthly</option>
+                            </select>
+                            <button class="btn btn-primary" type="button" style="cursor:pointer;" onclick="addSession();" fdprocessedid="898nt">Add Session</button>
+                        </div>`;
+                        html += `<div class="mb-4 row" style="font-weight: bold; display: none;" id="multi">
+                            <div class="col-4">
+                                <label>Start Date:</label>
+                                <input type="text" class="form-control my-1  wwb-datepicker" id="mDate">
+                                <label id="lSessions" style="display: inline-block;">Number of Sessions:</label>
+                                <input type="number" class="form-control my-1" id="mSessions" style="display: block;">
+                                <label style="display: none;" id="lEndDate">End Date:</label>
+                                <input type="text" class="form-control my-1 wwb-datepicker" id="mEndDate" style="display: none;">
+                                <label>Session Frequency:</label>
+                                <select id="mFrequency" class="form-control my-1">
+                                    <option value="Daily">Daily</option>
+                                    <option value="Weekly">Weekly</option><option value="Fortnightly">Fortnightly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                                <label>Session Length:</label>
+                                <select id="mLength" class="form-control my-1">
+                                    <option value="1">1 Day</option>
+                                    <option value="2">2 Days</option>
+                                    <option value="3">3 Days</option>
+                                    <option value="4">4 Days</option>
+                                    <option value="5">5 Days</option>
+                                </select>
+                                <div class="form-group form-inline mb-4">
+                                    <input type="checkbox" class="mr-2" id="weekends" onclick="incWeekends();">
+                                    <label>Include Weekends</label>
+                                </div>
+                                <button class="btn btn-primary mt-1" type="button" onclick="addSessions();">Add Sessions</button>
+                            </div>
+                            <div class="col-4">
+                                <label>Trainer:</label>
+                                <select id="mTrainer" class="form-control my-1">
+                                <option value="921">kuldip domadiya</option><option value="923">rahul patyel</option><option value="899">trainer1 training</option>
+                                </select> 
+                                <label>Location:</label>
+                                <select id="mLocation" class="form-control my-1" onchange="reloadRoom(this.value, 0);">
+                                </select> 
+                                <label>Room:</label>
+                                <select id="mRoom" class="form-control my-1">
+                                    
+                                </select>
+                                <div class="row"> 
+                                    <div class="col">
+                                        <label>Start Time:</label>
+                                        <div style="float:left; width:150px">
+                                            <select id="mStartHour" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
+												
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                
+											</select>
+                                            <select id="mStartMinute" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
+                                                
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    
+                                                </select> 
+											<select name="mstartampm" id="mstartampm" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
+														<option value="am">am</option>
+														<option value="pm">pm</option>
+												</select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label>End Time:</label>
+                                        <div style="float:left; width:150px">
+                                            <select id="mEndHour" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
+                                                    
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                
+                                                </select>
+                                            <select id="mEndMinute" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
+                                                
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option>
+                    
+                                                </select>
+											<select name="mendampm" id="mendampm" style="width:45px;padding:0 !important;display:inline-block;" class="form-control">
+														<option value="am">am</option>
+														<option value="pm">pm</option>
+												</select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="col-4">
+                                <label>Assessor:</label>
+                                <select id="mAssessor" class="form-control my-1">
+                                <option value="921">kuldip domadiya</option><option value="923">rahul patyel</option><option value="899">trainer1 training</option>
+                                </select> 
+							</div>
+                        </div>`;
+                    $('#connect_public').append(html);
+                }
             });
             $('#course_names').on('change', function() {
                 var course_id = $('#course_names').val();
@@ -1147,12 +1322,12 @@
                     }, // Pass the scheduleId as a query parameter
                     success: function(response) {
                         $("#trainers_info").append($("<option>Selected Trainer</option>"));
-                        $.each(response.courses, function(index, option){
-                    // Create new option element
-                    var newOption = $("<option></option>").val(option.id).text(option.first_name + " " + option.last_name);
-                    // Append the new option to the select box
-                    $("#trainers_info").append(newOption);
-                });
+                        $.each(response.courses, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.first_name + " " + option.last_name);
+                            $("#trainers_info").append(newOption);
+                        });
                     },
                     error: function(xhr, status, error) {
                         // Handle errors here
@@ -1169,21 +1344,40 @@
                     success: function(response) {
                         console.log(response)
                         $("#assessors_info").append($("<option>Selected Assessor</option>"));
-                        $.each(response.courses, function(index, option){
-                    // Create new option element
-                    var newOption = $("<option></option>").val(option.id).text(option.first_name + " " + option.last_name);
-                    // Append the new option to the select box
-                    $("#assessors_info").append(newOption);
-                });
+                        $.each(response.courses, function(index, option) {
+                            // Create new option element
+                            var newOption = $("<option></option>").val(option.id).text(
+                                option.first_name + " " + option.last_name);
+                            // Append the new option to the select box
+                            $("#assessors_info").append(newOption);
+                        });
                     },
                     error: function(xhr, status, error) {
                         // Handle errors here
                         console.error(error);
                     }
                 });
-                 //Assessors End Get
-            });     
+                //Assessors End Get
+            });
         });
+
+        function sessionAdd(id){
+           console.log(id)
+           if(id == 2){
+            $('#level2').css('display', 'flex');
+            $("#single").css('display','none');
+            $("#multi").css('display','flex');
+           }else{
+            $('#level2').css('display', 'none');
+            $("#single").css('display','flex');
+            $("#multi").css('display','none');
+           }
+        }
+        function addSession(){
+            var html = ``;
+            html += ``;
+        }
+
     </script>
     <script>
         (function() {
@@ -1226,6 +1420,7 @@
             max-height: 76%;
             overflow: hidden;
         }
+
         span.custom_inactive {
             background: #f44236;
             color: #fff;
@@ -1261,53 +1456,64 @@
         #uploadBox tr {
             margin: 10px 0;
         }
-         /* Modal Styling */
-    #sms_opportunities {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    }
 
-    #sms_opportunities .modal-content {
-      background-color: #fefefe;
-      margin: 15% auto; /* 15% from the top and centered */
-      padding: 20px;
-      border: 1px solid #888;
-      width: 35%; /* Could be more or less, depending on screen size */
-    }
-    .close{
-        width: 40px;
-    height: 40px;
-    padding: 0;
-    }
-    .btn {
-    display: inline-block;
-    font-weight: normal;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    line-height: 1.25;
-    transition: all 0.2s ease-in-out;
-}
+        /* Modal Styling */
+        #sms_opportunities {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        #sms_opportunities .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 35%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        .close {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            font-weight: normal;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            line-height: 1.25;
+            transition: all 0.2s ease-in-out;
+        }
     </style>
     <script>
-
-            $(document).ready(function() {
-                var modal = $("#sms_opportunities");
+        $(document).ready(function() {
+            var modal = $("#sms_opportunities");
             // Get the button that opens the modal
             var btn = $("#openModalBtn");
             // Get the <span> element that closes the modal
-                var span = modal.find(".close");
+            var span = modal.find(".close");
             // When the user clicks on the button, open the modal
             btn.click(function() {
                 modal.css("display", "block");
@@ -1319,10 +1525,10 @@
             });
             $(window).click(function(event) {
                 if (event.target == modal[0]) {
-                modal.css("display", "none");
+                    modal.css("display", "none");
                 }
             });
-            });
+        });
 
         function createUploadBox(uploadBox) {
             var oTable = document.getElementById(uploadBox);
@@ -1401,9 +1607,9 @@
                     success: function(response) {
                         console.log(response.course.name)
                         $('#course_name_1').append(response.course.name)
-                      
+
                         if (response.success == true) { // Check for the correct key and value
-                          
+
                         }
                     },
                     error: function(xhr, status, error) {
