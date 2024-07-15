@@ -321,7 +321,7 @@
                                 </textarea>
                                 <div class="mt-3">
                                   <button class="btn btn-primary" type="submit">Save</button>
-                                  <button class="btn btn-primary">Preview</button>
+                                  <a href="{{ route('certificate.preview',$template_data->id)}}" class="btn btn-primary" id="preview">Preview</a>
                                 </div>
                             </form>
                             </div>
@@ -399,4 +399,9 @@
                         <script type="text/javascript"></script>
                     @stop
                     @push('scripts')
+                    <script>
+                        function preview(){
+
+                        }
+                    </script>
                     @endpush

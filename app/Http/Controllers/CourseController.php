@@ -11,6 +11,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Mail;
+use PDF;
 use App\Models\Module;
 use App\Models\Course;
 use App\Models\State;
@@ -580,5 +581,15 @@ class CourseController extends Controller
         $template->save();
         // dd($template);
         return redirect()->back()->with('success', 'Document data Saved successfully!');
+    }
+    public function certifiacate_preview($id){
+        $certificate = Template::find($id);
+        $certificateBackground = BackgroundTemplate::where('templates_id',$certificate->id)->where('select','1')->first();
+     
+         // Generate the PDF
+         $pdf = PDF::loadView('admin.certificate.pdf', compact('certificate','certificateBackground'));
+ 
+         // Return the PDF for download or display
+         return $pdf->stream('admin.certificate.pdf');
     }
 }

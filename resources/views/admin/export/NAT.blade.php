@@ -725,6 +725,14 @@
                   "searching": false,
                   "lengthMenu": [10, 20, 50]
               });
+              function checkAll_8_0() {
+        jQuery('.reportType_8_0').attr('checked','checked');
+    }
+
+    function uncheckAll_8_0() {
+        jQuery('.reportType_8_0').removeAttr('checked');
+    }
+    
           </script>
           <script>
         $(document).ready(function(){

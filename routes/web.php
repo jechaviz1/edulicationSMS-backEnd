@@ -677,7 +677,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('course/document/email/update', [App\Http\Controllers\CourseController::class, 'template_update'])->name('document.certificate.template.update');
     Route::post('course/associated/update', [App\Http\Controllers\CourseController::class, 'associated_update'])->name('course.associated.update');
     Route::post('course/text/editor/body', [App\Http\Controllers\CourseController::class, 'text_editor'])->name('document.text.editor.body');
-    
+    Route::get('/certificate/preview/{id}', [App\Http\Controllers\CourseController::class, 'certifiacate_preview'])->name('certificate.preview');
+
     //start company
     Route::get('/company/companydoc', [App\Http\Controllers\CompanyController::class, 'companyDoc'])->name('company.document');
     Route::get('/company/info/upload', [App\Http\Controllers\CompanyController::class, 'infoUpload'])->name('document.infopak.upload');
