@@ -229,6 +229,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                               
                                                 @foreach ($backgroundTemplate as $template)
                                                     @php
                                                         $formattedDate = Carbon::parse($template->created_at)->format(
@@ -239,7 +240,7 @@
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="template" id="template">
+                                                                    name="template" id="template" checked>
                                                             </div>
                                                         </td>
                                                         <td>{{ $template->name }}</td>

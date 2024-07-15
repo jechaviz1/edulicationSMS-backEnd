@@ -25,7 +25,7 @@
             <div class="card-block p-3">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <form action="{{ route('company.saveAvetmiss') }}" method="POST">
+                        <form action="{{ route('company.saveAvetmiss') }}" method="POST" enctype="multipart/form-data">
                             @csrf()
                             @method('POST')
                             <div class="row g-3 align-items-center">
@@ -35,12 +35,10 @@
                                 <div class="col-auto">
                                     <select name="contact" id="contact" class="form-control input_text_1"
                                         style="height:40px; width:230px;" fdprocessedid="hnxqgh">
-
-                                        <option value="-1">Not Set</option>
-                                        <option value="1523" selected="">Kabir Kiron</option>
-                                        <option value="1522">Kabir H Kiron</option>
-                                        <option value="1555">newtest newtest</option>
-                                        <option value="1521">Weworkbook Support</option>
+                                        <option value="0">Not Set</option>
+                                       @foreach ($users as $user)
+                                        <option value="{{ $user->id}}">{{$user->first_name }} {{ $user->last_name }}</option>
+                                       @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -48,17 +46,6 @@
                                 <div class="col-auto">
                                     <label for="inputPassword6" class="col-form-label">Email Address</label>
                                 </div>
-                                {{-- <div class="col-auto">
-                                    <select name="contact" id="contact" class="form-control input_text_1"
-                                        style="height:40px; width:230px;" fdprocessedid="hnxqgh">
-
-                                        <option value="-1">Not Set</option>
-                                        <option value="1523" selected="">Kabir Kiron</option>
-                                        <option value="1522">Kabir H Kiron</option>
-                                        <option value="1555">newtest newtest</option>
-                                        <option value="1521">Weworkbook Support</option>
-                                    </select>
-                                </div> --}}
                             </div>
                             <div class="row g-3 align-items-center">
                                 <div class="col-auto">

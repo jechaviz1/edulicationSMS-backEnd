@@ -678,6 +678,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/company/info/upload', [App\Http\Controllers\CompanyController::class, 'infoUpload'])->name('document.infopak.upload');
     Route::post('/upload-file', [App\Http\Controllers\CompanyController::class, 'uploadFile'])->name('document.upload.file');
     Route::get('/company/certificate/documrnt/destroy/{id}', [App\Http\Controllers\CompanyController::class, 'documentdelete'])->name('document.upload.delete');
+    Route::get('/company/certificate/documrnt/edit/{id}', [App\Http\Controllers\CompanyController::class, 'documentEdit'])->name('document.upload.edit');
+    Route::post('/company/certificate/documrnt/update', [App\Http\Controllers\CompanyController::class, 'document_update'])->name('document.upload.update');
     //Start Competency Report
     Route::get('/competencyReport', [App\Http\Controllers\CompanyController::class, 'competencyReport'])->name('company.competency.report');
     Route::post('/competencyReport/edit', [App\Http\Controllers\CompanyController::class, 'competencyReportEdit'])->name('competency.report.background');

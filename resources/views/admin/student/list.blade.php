@@ -87,11 +87,7 @@
                         </li>
                         <li>
                             <span class="card__info__stats">Blood Group: </span>
-                            {{-- @if($row->blood_group && $blood_group)
-                              @foreach($blood_group as $row1)
-                               @if($row1->id == $row->blood_group) <span>{{$row1->title}}</span> @endif
-                              @endforeach
-                            @endif --}}
+                           
                         </li>
 
                     </ul>

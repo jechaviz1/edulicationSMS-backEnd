@@ -11,6 +11,7 @@ use App\Models\CompanyDocument;
 use App\Models\InfoPakSpecific;
 use App\Models\BackgroundTemplate;
 use App\Models\courseEmail;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ImageController;
 use Exception;
@@ -18,8 +19,9 @@ class CompanyController extends Controller
 {
    public function avetmisssetting(){
     try {
+        $users = User::get();
         // Return the view
-        return view('admin.company.avetmisssetting');
+        return view('admin.company.avetmisssetting',compact('users'));
     } catch (Exception $e) {
         // Handle the error and redirect back with an error message
         return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
@@ -111,7 +113,7 @@ class CompanyController extends Controller
     try {
         $template = Template::where('id', $id)->first();
         $backgroundTemplate = BackgroundTemplate::where('templates_id',$template->id)->get();
-        // dd($backgroundTemplate);
+        dd($backgroundTemplate);
         if (!$template) {
             throw new \Exception('Template not found');
         }
@@ -171,8 +173,8 @@ class CompanyController extends Controller
         }
 
         public function background(Request $request){
-           
             try {
+                // dd($request);
                 $background = new BackgroundTemplate;
                 $myimage = "null";
     
@@ -187,6 +189,7 @@ class CompanyController extends Controller
                 $background->dpi = $request->dpi;
                 $background->added_by = $request->added_by;
                 $background->save();
+                // dd($background);
     
                 return redirect()->route('company.certificate')->with('error', 'Invalid certificate ID.');
             } catch (Exception $e) {
@@ -289,6 +292,14 @@ class CompanyController extends Controller
                 return redirect()->route('company.document')->with('error', 'An error occurred while deleting the template.');
             }
             }
+            public function documentEdit($id){
+                try {
+                        $template = CompanyDocument::find($id);
+                        return view('admin.company.document.edit',compact('template','id'));
+                } catch (Exception $e) {
+                    return redirect()->route('company.document')->with('error', 'An error occurred while deleting the template.');
+                }
+                }
             public function competencyReport(){
                 try {
                     $infos = CompanyDocument::where('type','info')->get();
@@ -394,5 +405,23 @@ class CompanyController extends Controller
                     }
                          
                     return redirect()->back()->with('success', 'Document delete successfully!');
+            }
+            public function document_update(Request $request){
+                $document_info = CompanyDocument::find($request->template_id);
+                // dd($document_info,$request);
+                    // $request->validate([
+                    //     'file' => 'required|file|max:20480', // Max size: 20MB
+                    // ]);
+                   
+                    if ($request->hasFile('file')) {
+                        $file = $request->file('file');
+                        $filename = time() . '_' . $file->getClientOriginalName();
+                        $file = $file->move(public_path('document'), $filename);
+                        $imageName = 'document/' . $filename;
+                        $document_info->file_name = $imageName;
+                        }
+                $document_info->document_name = $request->document_name;
+                $document_info->save();
+                return redirect()->back()->with('success', 'Document Update successfully!');
             }
     }

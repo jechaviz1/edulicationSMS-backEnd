@@ -63,7 +63,7 @@
                                 <td>{{ $formattedDate }}</td>
                                 <td>
                                     <a href="{{ route('document.upload.delete',$companyDoc->id)}}"><i class="fa fa-trash"></i></a>
-
+                                    <a href="{{ route('document.upload.edit',$companyDoc->id)}}"><i class="fa fa-edit"></i></a>
                                 </td>
                               </tr>
                             @endforeach
@@ -124,6 +124,7 @@
                                 <td>{{ $formattedDate }}</td>
                                 <td>
                                     <a href="{{ route('document.upload.delete',$companyDoc->id)}}"><i class="fa fa-trash"></i></a>
+                                    <a href="{{ route('document.upload.edit',$companyDoc->id)}}"><i class="fa fa-edit"></i></a>
                                 </td>
                               </tr>
                             @endforeach
