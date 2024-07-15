@@ -23,6 +23,7 @@ use App\Models\CourseDocument;
 use App\Models\CompanyDocument;
 use App\Models\InfoPakSpecific;
 use App\Models\Template;
+use App\Models\BackgroundTemplate;
 use App\Models\CourseEmailContent;
 class CourseController extends Controller
 {
@@ -545,6 +546,14 @@ class CourseController extends Controller
                 $emailContent->select_document = json_encode($request->select,true);
                 $emailContent->save();
             }
+            return redirect()->back()->with('success', 'Document data Saved successfully!');
+        }
+
+        public function document_template(Request $request){
+            $document =  BackgroundTemplate::where('id',$request->template)->first();
+            $background_docu = BackgroundTemplate::where('templates_id',$document->templates_id)->where('id', '!=', $document->id)->update(['select' => null]);
+            $document->select = 1;
+            $document->save();
             return redirect()->back()->with('success', 'Document data Saved successfully!');
         }
 }

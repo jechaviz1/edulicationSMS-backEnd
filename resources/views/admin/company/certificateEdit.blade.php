@@ -215,8 +215,11 @@
                                 </button>
                                 <p class="mt-2">Choose the Background Template which will be used in the generation of
                                     this Certificate Template</p>
-                                <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        <form action="{{ route('update.background.template')}}" method="post" >
+                                            @csrf()
+                                            @method('POST')
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -229,7 +232,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                               
                                                 @foreach ($backgroundTemplate as $template)
                                                     @php
                                                         $formattedDate = Carbon::parse($template->created_at)->format(
@@ -240,7 +242,7 @@
                                                         <td>
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="template" id="template" checked>
+                                                                    name="template" id="tatemple" value="{{$template->id}}" @if($template->select == '1') checked @endif>
                                                             </div>
                                                         </td>
                                                         <td>{{ $template->name }}</td>
@@ -255,11 +257,13 @@
                                                                 target="_blank">Edit</a>
                                                         </td>
                                                     </tr>
+                                                        
                                                 @endforeach
-
-
+                                                   
                                             </tbody>
                                         </table>
+                                        <button class="btn btn-primary" type="submit">Save</button>
+                                    </form>
                                     </div>
                                 </div>
                                 <!-- Modal -->
@@ -310,7 +314,6 @@
                                   <button class="btn btn-primary">Save</button>
                                   <button class="btn btn-primary">Preview</button>
                                 </div>
-                            
                             </div>
                         </div>
                         <!-- Modal -->

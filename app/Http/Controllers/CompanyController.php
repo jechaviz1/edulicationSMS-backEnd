@@ -113,7 +113,7 @@ class CompanyController extends Controller
     try {
         $template = Template::where('id', $id)->first();
         $backgroundTemplate = BackgroundTemplate::where('templates_id',$template->id)->get();
-        dd($backgroundTemplate);
+        // dd($backgroundTemplate);
         if (!$template) {
             throw new \Exception('Template not found');
         }
