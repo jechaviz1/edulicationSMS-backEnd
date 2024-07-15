@@ -106,9 +106,9 @@
                                         <div class="col-lg-6">
                                             <select class="form-control select2" name="statuses[]" id="status" multiple>
                                                 
-                                                @foreach($statuses as $status)
+                                                {{-- @foreach($statuses as $status)
                                                 <option value="{{ $status->id }}" @foreach($student->statuses as $stat) {{ $stat->id == $status->id ? 'selected' : '' }} @endforeach>{{ $status->title }}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                                 
                                                
                                             </select>
@@ -191,7 +191,7 @@
                                     <div class="mb-3 row">
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Marital Status<span class="text-danger"></span></label>
                                         <div class="col-lg-6">
-                                            @if($marital_status)
+                                            {{-- @if($marital_status)
                                          <select class="form-control" name="marital_status" id="marital_status">
                                                 <option value="">{{ __('select') }}</option>
                                                 @foreach($marital_status as $row)
@@ -201,13 +201,13 @@
                                             <div class="invalid-feedback">
                                                 Marital Status
                                             </div>
-                                             @endif
+                                             @endif --}}
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Blood Group<span class="text-danger"></span></label>
                                         <div class="col-lg-6">
-                                            @if($blood_group)
+                                            {{-- @if($blood_group)
                                          <select class="form-control" name="blood_group" id="blood_group">
                                                 <option value="">{{ __('select') }}</option>
                                                 @foreach($blood_group as $row)
@@ -217,7 +217,7 @@
                                             <div class="invalid-feedback">
                                                 Blood Group
                                             </div>
-                                             @endif
+                                             @endif --}}
                                         </div>
                                     </div>
 

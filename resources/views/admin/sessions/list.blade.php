@@ -9,6 +9,11 @@
     <strong>Success!</strong> {{ $message }}
 </div>
 @endif
+@php
+    use Carbon\Carbon;
+    use App\Models\Event;
+    use App\Models\City;
+@endphp
 <div class="col-xl-12 events">
     <div class="card dz-card" id="accordion-four">
         <div class="card-header">
@@ -84,14 +89,14 @@
                             @else
                         <div class="row mt-4">
                             <div class="col-sm-3">
-                                <a href="{{ route('event.room.calender', ['date' => $prev]) }} " class="btn btn-primary mb-2 float-end">Last Week</a>
+                                <a href="{{ route('event.session.index', ['date' => $prev]) }} " class="btn btn-primary mb-2 float-end">Last Week</a>
                             </div>
                             <div class="col-sm-6">
                                 {{-- <input type="month" id="date" name="start" min="2000-03" value="{{ $calendar[0]['date']->format('Y-m') }}" class="form-control"/> --}}
                                 <input type="date" class="form-control" id="date" name="date" value="{{ $weekDays[0]->format('Y-m-d') }}">
                             </div>
                             <div class="col-sm-3">
-                                <a href="{{ route('event.room.calender', ['date' => $next]) }} " class="btn btn-primary mb-2">Next Week</a>
+                                <a href="{{ route('event.session.index', ['date' => $next]) }} " class="btn btn-primary mb-2">Next Week</a>
                             </div>
                         </div>
                         @endif
@@ -112,17 +117,60 @@
                                     <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
                                         {!! $day['date']->format('D') . '<br>' . $day['date']->format('d') . '<br>' . $day['date']->format('M')!!}
                                     </td>
-                                        {{-- <td>{{ $day['date']->format('d M') }}</td> --}}
+                               
                                     @endforeach
                                 </tr>
-                                <tr class="text-center py-2">
-                                    @foreach ($calendar as $day)
-                                    <td class="text-center py-3" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55p0x;background:#A0CF1A;color:#fff;">
-                                        {{-- {!! $day['date']->format('D') . '<br>' . $day['date']->format('d') . '<br>' . $day['date']->format('M')!!} --}}
-                                    </td>
-                                        {{-- <td>{{ $day['date']->format('d M') }}</td> --}}
-                                    @endforeach
-                                </tr>
+                        @foreach ($sessions as $session)
+                                @php
+                                // Convert session start and end dates to Carbon instances
+                                $startDate = \Carbon\Carbon::parse($session->start_date);
+                                $endDate = \Carbon\Carbon::parse($session->end_date);
+                                
+                                // Calculate the number of days the session spans
+                                $daysSpan = $startDate->diffInDays($endDate) + 1;
+                                
+                                // Prepare an array to keep track of the days covered by the session
+                                $coveredDays = [];
+                                for ($i = 0; $i < $daysSpan; $i++) {
+                                    $coveredDays[] = $startDate->copy()->addDays($i)->toDateString();
+                                }
+                            @endphp
+                        
+                        <tr class="text-center py-2">
+                            @foreach ($calendar as $day)
+                                @php
+                                    $currentDay = \Carbon\Carbon::parse($day['date']);
+                                    $cellContent = '';
+                                    $colspan = 1;
+                                    $event = Event::find($session->event_id);
+                                    $city = city::find($event->city);
+                                    if (in_array($currentDay->toDateString(), $coveredDays)) {
+                                        if ($currentDay->isSameDay($startDate)) {
+                                        
+                                            $cellContent .=  $city->name . '<br>';
+                                          $cellContent .= $session->title . '<br>';
+                                          $cellContent .=  $session->course->name . '<br>';
+                                          if($event->course_type == "2"){
+                                              $cellContent .= "Public". '<br>';
+                                          }
+                                          if($event->course_type == "3"){
+                                              $cellContent .= "Private". '<br>';
+                                          }
+                                          
+                                            $colspan = $daysSpan;
+                                        } else {
+                                            // Skip rendering cells for covered days
+                                            continue;
+                                        }
+                                    }
+                                @endphp
+            
+                                <td class="text-center py-3" colspan="{{ $colspan }}" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
+                                    {!! $cellContent !!}
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
                             </thead>
                         </table>
                         {{-- ///////////////////////////month day and table end///////////////////////////// --}}
@@ -135,13 +183,30 @@
                             </td>
                             @endforeach
                         </tr>
+                        @foreach ($sessions as $session)
+                        @php
+                        // Convert session start and end dates to Carbon instances
+                        $startDate = \Carbon\Carbon::parse($session->start_date);
+                        $endDate = \Carbon\Carbon::parse($session->end_date);
+                        
+                        // Calculate the number of days the session spans
+                        $daysSpan = $startDate->diffInDays($endDate) + 1;
+                        
+                        // Prepare an array to keep track of the days covered by the session
+                        $coveredDays = [];
+                        for ($i = 0; $i < $daysSpan; $i++) {
+                            $coveredDays[] = $startDate->copy()->addDays($i)->toDateString();
+                        }
+                    @endphp
                         <tr>
                             @foreach ($weekDays as $day)
                             <td  class="text-center py-3" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
+                            
                             </td>
                             @endforeach
                           </td>
                         </tr>
+                        @endforeach
                     </table>  
                         @endif
                 </div>

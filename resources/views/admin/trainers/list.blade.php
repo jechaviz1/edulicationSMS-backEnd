@@ -121,6 +121,9 @@
                             {{-- @dd($calendar[0]['date']->format('Y-m-d')) --}}
                             <thead>
                                 <tr class="py-2">
+                                    <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
+                                        Trainer
+                                    </td>
                                     @foreach ($calendar as $day)
                                     <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
                                         {!! $day['date']->format('D') . '<br>' . $day['date']->format('d') . '<br>' . $day['date']->format('M')!!}
@@ -128,7 +131,11 @@
                                         {{-- <td>{{ $day['date']->format('d M') }}</td> --}}
                                     @endforeach
                                 </tr>
+                                
                                 <tr class="text-center py-2">
+                                    <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
+                                        Trainer
+                                    </td>
                                     @foreach ($calendar as $day)
                                     <td class="text-center py-3" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55p0x;background:#A0CF1A;color:#fff;">
                                         {{-- {!! $day['date']->format('D') . '<br>' . $day['date']->format('d') . '<br>' . $day['date']->format('M')!!} --}}
@@ -141,7 +148,11 @@
                         {{-- ///////////////////////////month day and table end///////////////////////////// --}}
                         @else
                     <table>
+                       
                         <tr>
+                            <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
+                                Trainer
+                            </td>
                             @foreach ($weekDays as $day)
                             <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
                                     {{ $day->format('D') }} <br> {{ $day->format('M d') }}
@@ -149,6 +160,9 @@
                             @endforeach
                         </tr>
                         <tr>
+                            <td  class="text-center py-2" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
+                                
+                            </td>
                             @foreach ($weekDays as $day)
                             <td  class="text-center py-3" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">
                             </td>
@@ -156,7 +170,7 @@
                           </td>
                         </tr>
                     </table>  
-                        @endif
+                 @endif
                 </div>
             </div>
         </div>

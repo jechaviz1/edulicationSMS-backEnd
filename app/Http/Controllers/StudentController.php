@@ -39,9 +39,9 @@ class StudentController extends Controller {
         $data['title'] = 'Register Student List';
         $data['menu_active_tab'] = 'user-list';
         $data['student'] = \App\Models\Student::orderBy('id', 'DESC')->get();
-        $data['blood_group'] = DB::table('blood_group')->get();
-        $data['marital_status'] = DB::table('marital_status')->get();
-        $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
+        // $data['blood_group'] = DB::table('blood_group')->get();
+        // $data['marital_status'] = DB::table('marital_status')->get();
+        // $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
 
         return view('admin.student.list')->with($data);
     }
@@ -50,9 +50,9 @@ class StudentController extends Controller {
         $data = [];
         $data['title'] = 'Add User';
         $data['menu_active_tab'] = 'add-user';
-        $data['blood_group'] = DB::table('blood_group')->get();
-        $data['marital_status'] = DB::table('marital_status')->get();
-        $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
+        // $data['blood_group'] = DB::table('blood_group')->get();
+        // $data['marital_status'] = DB::table('marital_status')->get();
+        // $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
 
         return view('admin.student.add')->with($data);
@@ -100,9 +100,9 @@ class StudentController extends Controller {
             $student = \App\Models\Student::find($id);
             $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
             
-            $data['blood_group'] = DB::table('blood_group')->get();
-            $data['marital_status'] = DB::table('marital_status')->get();
-            $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
+            // $data['blood_group'] = DB::table('blood_group')->get();
+            // $data['marital_status'] = DB::table('marital_status')->get();
+            // $data['statuses'] = StatusType::where('status', '1')->orderBy('title', 'asc')->get();
             
             if ($student) {
                 $data['student'] = $student;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use App\Models\Session;
 class TrainersController extends Controller
 {
     
@@ -26,6 +26,7 @@ class TrainersController extends Controller
             $calendar[] = ['date' => $currentDate->copy()];
             $currentDate->addDay();
         }
+        $sessions = Session::get();
         return view('admin.trainers.list',['view' => 'month','calendar' => $calendar,'prevMonth' => $prevMonth,'next' => $next]);
         }else{
             if ($request->filled('date')) {
@@ -48,8 +49,9 @@ class TrainersController extends Controller
                 $weekDays[] = $currentDay->copy();
                 $currentDay->addDay();
             }
+            $sessions = Session::get();
             // dd($weekDays,$lastWeekDate);
-            return view('admin.trainers.list', ['view' => 'week','weekDays' => $weekDays,'prev' => $prev,'next' => $next]);
+            return view('admin.trainers.list', ['view' => 'week','weekDays' => $weekDays,'prev' => $prev,'next' => $next,'sessions' =>  $sessions]);
         }
          
     }
