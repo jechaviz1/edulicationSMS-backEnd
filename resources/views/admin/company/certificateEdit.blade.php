@@ -1,6 +1,5 @@
 @php
     use Carbon\Carbon;
-
 @endphp
 @extends('admin.layout.header')
 <!-- Specify content -->
@@ -58,7 +57,10 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                 aria-labelledby="home-tab">
-
+                                
+                                @php
+                                $template_data = $template;
+                                @endphp
                                 <form action="{{ route('certificate.template.update', $template->id) }}"
                                     enctype="multipart/form-data" method="POST">
                                     @csrf()
@@ -253,11 +255,10 @@
                                                                 href="{{ asset($template->image) }}"
                                                                 target="_blank">Preview</a>
                                                             <a style="cursor: pointer;background: #f8cb00;color:#fff;padding:5px;"
-                                                                href="{{ asset($template->image) }}"
+                                                                href="{{ route('document.template.edit.record',$template->id)}}"
                                                                 target="_blank">Edit</a>
                                                         </td>
                                                     </tr>
-                                                        
                                                 @endforeach
                                                    
                                             </tbody>
@@ -284,36 +285,45 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                               <form action="{{ route('course.associated.update')}}" method="post">
+                                @csrf()
+                                @method('POST')
                                 <table>
                                     <tbody>
                                         <tr>
+                            
                                             <td style="font-size:1rem; margin-bottom:1rem;" colspan="2"><b>
-                                                    <div style="margin-bottom:1.5rem;">software</div>
+                                                    <div style="margin-bottom:1.5rem;">{{ $certificate->course->category->name }}</div>
                                                 </b></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <input type="checkbox" name="courses" disabled="" id="course2565"
+                                                <input type="checkbox" name="courses" id="course2565"
                                                     value="2565">
                                             </td>
                                             <td>
-                                                <label style="font-size:0.9rem;margin:0.2rem 0.1rem;"
-                                                    for="course2565">BSB40820 - Certificate IV in marketing and
-                                                    communication</label>
+                                            {{ $certificate->course->name}}
                                             </td>
 
                                         </tr>
                                     </tbody>
                                 </table>
+                                <button class="btn btn-primary" type="submit">Save</button>
+                               </form>
                             </div>
                             <div class="tab-pane fade" id="text_editor" role="tabpanel" aria-labelledby="contact-tab">
-                                <textarea name="" id="" cols="30" rows="10" class="form-control mt-3">
-
+                              <form action="{{ route('document.text.editor.body')}}" method="post">
+                                @csrf()
+                                @method('POST')
+                                <input type="hidden" name="template_id" value="{{ $template_data->id }}">
+                                <textarea name="text_editor" id="" cols="30" rows="10" class="form-control mt-3">
+                                        {{$template_data->text_body}}
                                 </textarea>
                                 <div class="mt-3">
-                                  <button class="btn btn-primary">Save</button>
+                                  <button class="btn btn-primary" type="submit">Save</button>
                                   <button class="btn btn-primary">Preview</button>
                                 </div>
+                            </form>
                             </div>
                         </div>
                         <!-- Modal -->

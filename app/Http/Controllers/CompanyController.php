@@ -113,11 +113,11 @@ class CompanyController extends Controller
     try {
         $template = Template::where('id', $id)->first();
         $backgroundTemplate = BackgroundTemplate::where('templates_id',$template->id)->get();
-        // dd($backgroundTemplate);
+        $certificate = courseEmail::where('certificate_id',$template->id)->first();
         if (!$template) {
             throw new \Exception('Template not found');
         }
-        return view('admin.company.certificateEdit', compact('template','backgroundTemplate'));
+        return view('admin.company.certificateEdit', compact('template','backgroundTemplate','certificate'));
     } catch (\Exception $e) {
         // Handle the exception, log it or display an error message
         return redirect()->back()->with('error', $e->getMessage());

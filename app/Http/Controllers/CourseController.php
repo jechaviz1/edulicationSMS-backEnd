@@ -556,4 +556,29 @@ class CourseController extends Controller
             $document->save();
             return redirect()->back()->with('success', 'Document data Saved successfully!');
         }
+        public function certificateDocument($id){
+            $certificate =  BackgroundTemplate::find($id);
+            return view('admin.course.template.edit',compact('certificate'));
+        }
+        public function template_update(Request $request){
+                    $id = $request->template_id;
+                    $certificate =  BackgroundTemplate::find($id);
+                    $certificate->name = $request->name;
+                    $certificate->dpi = $request->dpi;
+                    $certificate->save();
+                    return redirect()->back()->with('success', 'Document data Saved successfully!');
+
+        }
+        public function associated_update(Request $request){
+                // dd($request);
+                return redirect()->back()->with('success', 'Document data Saved successfully!');
+        }
+
+    public function text_editor(Request $request){
+        $template = Template::where('id',$request->template_id)->first();
+        $template->text_body = $request->text_editor;
+        $template->save();
+        // dd($template);
+        return redirect()->back()->with('success', 'Document data Saved successfully!');
+    }
 }
