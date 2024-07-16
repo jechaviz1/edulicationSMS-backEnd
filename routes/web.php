@@ -654,6 +654,7 @@ Route::group(['prefix' => 'admin'], function () {
     //Start Event Enrollment 
     Route::post('/event/enrollment/course/certificate/issue', [App\Http\Controllers\EnrollmentController::class, 'enrollment_issue'])->name('event.enrollment.issue');
     Route::post('/event/enrollment/course/people/add', [App\Http\Controllers\EnrollmentController::class, 'enrollment_add_people'])->name('event.enrollment.add.people');
+    Route::get('/event/enrollment/course/people/update/{id}', [App\Http\Controllers\EnrollmentController::class, 'enrolment_add_people_update'])->name('event.enrollment.people.update');
   
     
     // End Event Enrollment 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Enrolment;
+use App\Models\State;
 use Log;
 class EnrollmentController extends Controller
 {
@@ -122,10 +123,47 @@ class EnrollmentController extends Controller
         $enrollment->RTOStudentId = $request->RTOStudentId;
         $enrollment->save();
         return redirect()->back()->with('sucess', 'Sucess Record');
-
-
     }
     public function enrollment_add_people(Request $request){
-                dd($request);
+                $student = new Student;
+                $student->title = $request->title;
+                $student->first_name = $request->firstName;
+                $student->middle_name = $request->middleName;
+                $student->last_name = $request->lastName;
+                $student->gender = $request->gender;
+                $student->birth = $request->birth;
+                $student->clientCompany = $request->clientCompany;
+                $student->role = $request->role;
+                $student->address1 = $request->address1;
+                $student->address2 = $request->address2;
+                $student->uniqueStudentIdentifier = $request->uniqueStudentIdentifier;
+                $student->buildingName = $request->buildingName;
+                $student->streetNumber = $request->streetNumber;
+                $student->streetName = $request->streetName;
+                $student->suburb = $request->suburb;
+                $student->postcode = $request->postcode;
+                $student->nationality = $request->country;
+                $student->contactNumber = $request->contactNumber;
+                $student->businessNumber = $request->businessNumber;
+                $student->facsimileNumber = $request->facsimileNumber;
+                $student->email = $request->studentEmail;
+                $student->studentEmail2 = $request->studentEmail2;
+                $student->studentEmail3 = $request->studentEmail3;
+                $student->buildingName_postal = $request->buildingName_postal;
+                $student->unitDetails_postal = $request->unitDetails_postal;
+                $student->streetNumber_postal = $request->streetNumber_postal;
+                $student->streetName_postal = $request->streetName_postal;
+                $student->deliveryBox_postal = $request->deliveryBox_postal;
+                $student->suburb_postal = $request->suburb_postal;
+                $student->postalCode_postal = $request->postalCode_postal;
+                $student->country_postal = $request->country_postal;
+                $student->save();
+                return redirect()->back()->with('sucess', 'Sucess Record');
+    }
+    public function enrolment_add_people_update($id){
+                // dd($id);
+                $enrollment = Enrolment::find($id);
+                $states = State::get();
+                return view('admin.enrollment.student.update', compact('enrollment','states'));
     }
 }
