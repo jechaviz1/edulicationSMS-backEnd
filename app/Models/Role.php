@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model {
-
+    use HasFactory;
     protected $table = 'roles';
     protected $fillable = [
         'name', 'guard_name',
     ];
-
-    use HasFactory;
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'faculty_id');
+    }
 }

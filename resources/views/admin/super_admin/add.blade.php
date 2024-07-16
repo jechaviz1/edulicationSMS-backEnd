@@ -19,10 +19,29 @@
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Add Super Admin</h5>
-
                     <form class="needs-validation" novalidate method="POST" action="{{ route('store-super-admin' ) }}" >
                         @csrf
                         <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <select class="form-select" aria-label="Default select example" name="role">
+                                            <option selected>Open this select Role</option>
+                                            @foreach ($role as $ro)
+                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                            @endforeach
+                                          </select>
+                                        <div class="invalid-feedback">
+                                            Please Select a Role.
+                                        </div>
+                                        @if($errors->has('role'))
+                                        <div class="error">{{ $errors->first('role') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">First Name <span

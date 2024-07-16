@@ -750,3 +750,5 @@ Route::group(['prefix' => 'admin'], function () {
  
 });
 });
+Route::get('password/reset/{token}', [App\Http\Controllers\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [App\Http\Controllers\ResetPasswordController::class, 'reset'])->name('password.update');

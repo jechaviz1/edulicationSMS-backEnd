@@ -271,6 +271,14 @@ var W3Admin = function(){
 				jQuery('#dz-password').attr('type','password');
 			}
 		});
+		jQuery('.show-pass-confirm').on('click',function(){
+			jQuery(this).toggleClass('active');
+			if(jQuery('#dz-password-confirm').attr('type') == 'password'){
+				jQuery('#dz-password-confirm').attr('type','text');
+			}else if(jQuery('#dz-password-confirm').attr('type') == 'text'){
+				jQuery('#dz-password-confirm').attr('type','password');
+			}
+		});
 	}
 
 	

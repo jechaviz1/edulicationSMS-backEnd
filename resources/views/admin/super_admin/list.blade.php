@@ -4,7 +4,9 @@
 
 <!-- Specify content -->
 @section('content')
-
+@php
+	use Carbon\Carbon;
+@endphp
 @if ($message = Session::get('success'))
 <div class="alert alert-primary alert-dismissible fade show">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -21,14 +23,14 @@
             </div>
             <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ URL::route('add-super-admin') }}" class="btn btn-primary light">Add Super Admin</a>
+                    <a href="{{ URL::route('add-super-admin') }}" class="btn btn-primary light me-3">Add Super Admin</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button type="button" class="btn btn-primary light btn-icon-md"><i class="fa fa-filter"></i></button>
+                    <button type="button" class="btn btn-primary light btn-icon-md me-3"><i class="fa fa-filter"></i></button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <div class="dropdown ms-auto">
-                        <a href="#" class="btn btn-primary light light light sharp " data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
+                        <a href="#" class="btn btn-primary btn-icon-md light light" data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li class="dropdown-item"><i class="fa fa-print text-primary me-2"></i> Print</li>
                             <li class="dropdown-item"><i class="fa fa-file-pdf text-primary me-2"></i> Generate PDF</li>
@@ -48,6 +50,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Role</th>
                                     <th>Email</th>
                                     <th>User Name</th>
                                     <th>Create  date</th>
@@ -57,12 +60,17 @@
                             <tbody>
                                 @if(!empty($user))
                                 @foreach ($user as $row)
-
+								@php
+									// Parse the existing date and convert it to the new format
+										$originalDate = Carbon::parse($row['created_at']);
+										$newDate = $originalDate->format('d-m-Y'); 
+								@endphp
                                 <tr>
                                     <td>{{$row->first_name}} {{$row->last_name}}</td>
+                                    <td>{{ $row->role->name }}</td>
                                     <td>{{$row->email}}</td>
                                     <td>{{$row->username}}</td>
-                                    <td>2011/04/25</td>
+                                    <td>{{ $newDate }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('edit-super-admin',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
@@ -70,10 +78,8 @@
                                         </div>
                                     </td>
                                 </tr>
-
                                 @endforeach
                                 @endif
-
                             </tbody>
                         </table>
                     </div>

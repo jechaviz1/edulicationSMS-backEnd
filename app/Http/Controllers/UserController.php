@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Mail;
-
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 class UserController extends Controller {
 
     public function login() {
@@ -582,7 +583,7 @@ class UserController extends Controller {
         $data['title'] = 'Add User';
         $data['menu_active_tab'] = 'add-user';
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
-
+        
         return view('admin.super_admin.add')->with($data);
     }
 
@@ -601,12 +602,16 @@ class UserController extends Controller {
             $user->last_name = isset($data['last_name']) ? $data['last_name'] : null;
             $user->email = isset($data['email']) ? $data['email'] : null;
             $user->username = isset($data['username']) ? $data['username'] : null;
-            $user->role_id = 1;
+            $user->role_id = $request->role;
             $user->gender = isset($data['gender']) ? $data['gender'] : 1;
             $user->password = isset($data['password']) ? Hash($data['password']) : null;
             $user->save();
-
-            $this->sendRegisterLinkEmail($user->email);
+                 // Generate password reset token
+                $token = Password::createToken($user);
+            Mail::send('emails.password_reset', ['token' => $token,'user' => $user], function ($message) use ($user) {
+                $message->to($user->email);
+                $message->subject('Set Your Password');
+            });
 
             return redirect()->route('super-admin-list')->with('success', 'Record added successfully.');
         } catch (Exception $e) {
@@ -618,9 +623,9 @@ class UserController extends Controller {
         $data = [];
         $data['title'] = 'Super Admin List';
         $data['menu_active_tab'] = 'super-admin-list';
-        $user = \App\Models\User::select('users.id', 'role_id', 'first_name', 'last_name', 'email', 'users.created_at')->orderBy('users.id', 'DESC')
+        $user = \App\Models\User::select('users.id', 'role_id', 'first_name','username', 'last_name', 'email', 'users.created_at')->orderBy('users.id', 'DESC')
                 ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
-                ->where('users.role_id', '1')->where('users.is_deleted', '0')
+                ->where('users.is_deleted', '0')
                 ->get();
         // dd($user);
         $data['user'] = $user;
@@ -677,21 +682,6 @@ class UserController extends Controller {
                 $user->email = isset($data['email']) ? $data['email'] : null;
                 $user->username = isset($data['username']) ? $data['username'] : null;
                 $user->gender = isset($data['gender']) ? $data['gender'] : 1;
-                //profile_image
-//                $file_name = null;
-//                $file_path = null;
-//                if ($request->file()) {
-//                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
-//                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
-//                }
-//                $user->mobile_no = $request->input('mobile_no');
-//                if ($file_name != null) {
-//                    $user->profile_image = $file_name;
-//                }
-//                if ($file_path != null) {
-//                    $user->profile_image_path = $file_path;
-//                }
-//                $user->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $user->save();
             }
             return redirect()->route('super-admin-list')->with('success', 'Record Updated.');
@@ -714,14 +704,8 @@ class UserController extends Controller {
             //  $header .= "Cc:afgh@somedomain.com \r\n";
             $header .= "MIME-Version: 1.0\r\n";
             $header .= "Content-type: text/html\r\n";
-
-            $retval = mail($to, $subject, $message, $header);
-        }
-        //  if( $retval == true ) {
-        //     echo "Message sent successfully...";
-        //  }else {
-        //     echo "Message could not be sent...";
-        //  }
+           // Generate password reset token
+   
     }
-
+    }
 }
