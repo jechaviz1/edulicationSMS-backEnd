@@ -11,6 +11,7 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\Teacher;
 use App\Models\CourseCategory;
+use App\Models\Enrolment;
 use App\Models\Session;
 use App\Models\LearnerSMSNote;
 
@@ -191,8 +192,10 @@ class CourseController extends Controller
     }
     public function course_event($id){
         $course_event = Event::find($id);
+        $states = State::get();
         $course = Course::find($course_event->course_name);
-        return view('admin.event.course.update', compact('course_event','course'));
+        $enrollments = Enrolment::where('event_id',$course_event->id)->get();
+        return view('admin.event.course.update', compact('course_event','course','states','enrollments'));
     }
 
     public function course_note(Request $request){

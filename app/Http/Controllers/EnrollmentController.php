@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Enrolment;
+use Log;
 class EnrollmentController extends Controller
 {
     /**
@@ -22,7 +24,7 @@ class EnrollmentController extends Controller
             }
         } catch (\Exception $e) {
             // Handle the exception, e.g., log the error and show an error message to the user
-            Log::error('An error occurred: '.$e->getMessage());
+            \Log::error('An error occurred: '.$e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while processing your request.');
         }
     }
@@ -106,5 +108,24 @@ class EnrollmentController extends Controller
             Log::error('An error occurred: '.$e->getMessage());
             return redirect()->back()->with('error', 'An error occurred while processing your request.');
         }
+    }
+    public function enrollment_issue(Request $request){
+        $enrollment = new Enrolment;
+        $enrollment->course_id = $request->course_id;
+        $enrollment->event_id = $request->event_id;
+        $enrollment->student_id = $request->studentList;
+        $enrollment->receivedBy = $request->receivedBy;
+        $enrollment->paymentStatus = $request->paymentStatus;
+        $enrollment->discountAmount = $request->discountAmount;
+        $enrollment->isTrainee = $request->isTrainee;
+        $enrollment->isReported = $request->isReported;
+        $enrollment->RTOStudentId = $request->RTOStudentId;
+        $enrollment->save();
+        return redirect()->back()->with('sucess', 'Sucess Record');
+
+
+    }
+    public function enrollment_add_people(Request $request){
+                dd($request);
     }
 }

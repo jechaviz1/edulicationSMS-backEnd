@@ -623,7 +623,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/events/calender', [App\Http\Controllers\CalenderController::class, 'index'])->name('event.calender');
     Route::get('/events/calender/session', [App\Http\Controllers\CalenderController::class, 'index_session'])->name('event.calender.session');
     Route::get('/api/calender/find', [App\Http\Controllers\CalenderController::class, 'find_data'])->name('course.find');
-
     // END -  Event calender 
     // START - Event Room calender 
     Route::get('/events/room/calender', [App\Http\Controllers\RoomController::class, 'index'])->name('event.room.calender');
@@ -652,6 +651,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/people/active/learns', [App\Http\Controllers\LearnerRecord::class, 'index'])->name('people.active.learners.index');
     Route::get('/people/enquirySearch', [App\Http\Controllers\LearnerRecord::class, 'enquiry'])->name('people.enquiry.index');
     // START - People 
+    //Start Event Enrollment 
+    Route::post('/event/enrollment/course/certificate/issue', [App\Http\Controllers\EnrollmentController::class, 'enrollment_issue'])->name('event.enrollment.issue');
+    Route::post('/event/enrollment/course/people/add', [App\Http\Controllers\EnrollmentController::class, 'enrollment_add_people'])->name('event.enrollment.add.people');
+  
+    
+    // End Event Enrollment 
     // START - Lerner Record 
     Route::get('/people/enrolmentSearch', [App\Http\Controllers\EnrollmentController::class, 'index'])->name('people.enrollment.search');
     Route::get('/people/enquirySearch', [App\Http\Controllers\LearnerRecord::class, 'enquiry'])->name('people.enquiry.index');
