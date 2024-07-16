@@ -732,7 +732,7 @@
     function uncheckAll_8_0() {
         jQuery('.reportType_8_0').removeAttr('checked');
     }
-    
+
           </script>
           <script>
         $(document).ready(function(){
@@ -742,7 +742,7 @@
         // Get the selected value
         var searchBy = $('#searchBy1').val();
 
-        // Make sure the input is not empty
+        // Make sure the input is not empty/
         if(query.length > 0){
             $.ajax({
                 url: '/api/courseload', // URL to send the request to

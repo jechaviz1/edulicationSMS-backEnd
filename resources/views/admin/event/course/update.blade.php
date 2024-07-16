@@ -2,6 +2,11 @@
 @extends('admin.layout.header')
 <!-- Specify content -->
 @section('content')
+<style>
+    .modal-backdrop{
+        display: none;
+    }
+</style>
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-enrolments"
@@ -23,9 +28,9 @@
             <div class="mt-3 mb-3">
                 <div class="" role="group" aria-label="Basic example">
                     <button type="button" class="btn btn-primary ms-2">Email all learners</button>
-                    <button type="button" class="btn btn-primary ms-2">SMS all learners</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">SMS all learners</button>
                     <button type="button" class="btn btn-primary ms-2">Send Survey</button>
-                    <button type="button" class="btn btn-primary ms-2">Manage Certificates</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#certificate_manage">Manage Certificates</button>
                     <button type="button" class="btn btn-primary ms-2">Add Enrolments</button>
                     <button type="button" class="btn btn-primary ms-2">Enrol Units</button>
                     <button type="button" class="btn btn-primary ms-2">Update Outcomes</button>
@@ -58,6 +63,83 @@
                 </tbody>
             </table>
             {{-- // tables end --}}
+            {{-- SMS all Lerners  --}}
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Send SMS</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('event.course.sendAllLearnersSMS')}}" method="post">
+                            @csrf()
+                            @method('POST')
+                            <input type="hidden" name="course_id" value="{{$course_event->course_name}}">
+                            <input type="hidden" name="event_id" value="{{$course_event->id}}">
+                        <p>Note: Sending one SMS message will cost you $0.09 (AUD, GST Excl).</p>
+                        <textarea name="sms_Content" id="sms_Content" style="width:600px;height:200px;"></textarea>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{-- SMS All Learners End --}}
+              {{-- Manage Certificates Start  --}}
+            <div class="modal fade" id="certificate_manage" tabindex="-1" aria-labelledby="certificate_manageLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="certificate_manageLabel">Manage Certificates</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Issue Certificate</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Issue History</button>
+                            </li>
+                          </ul>
+                          <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <h5>Issue Course Certificates</h5>
+                                <p>The following students are not enrolled in any units:</p>
+                                <p>Note: Student email will be used if Issuing via Email and sending to individuals. Please ensure a valid email address is entered before issuing.</p>
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Student ID</th>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Is Paid</th>
+                                        <th scope="col">Cert. Issued</th>
+                                        <th scope="col">Student Email</th>
+                                        <th scope="col"> <input type="checkbox" class="form-check-input" id="exampleCheck1"></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th></th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{-- Manage Certificates Start En --}}
         </div>
         <div class="tab-pane fade" id="nav-sessions" role="tabpanel" aria-labelledby="nav-sessions-tab">
             <table cellpadding="0" cellspacing="0" border="0" width="95%" align="center" class="table">
@@ -249,13 +331,14 @@
                 </tbody>
             </table>
         </div>
+        {{-- @dd($course_event) --}}
         <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-profile-tab">
             <button type="button" class="btn btn-primary mt-4" id="tnotes">Add Notes</button>
             <div id="tNoteForm_34643" style="display: none;">
                 <form method="post" enctype="multipart/form-data" action="{{ route('course.event.note') }}">
                     @csrf
                     @method('post')
-                    <input type="hidden" value="{{ $course_id }}" name="couser_id">
+                    <input type="hidden" value="{{ $course_event->course_name }}" name="couser_id">
                     <div class="row mt-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Select note
                             category:</label>
@@ -304,26 +387,7 @@
                         <th width="20%">Last Updated on</th>
                         <th width="10%"></th>
                     </tr>
-                    @foreach ($course_note as $note)
-                        <tr>
-                            <td style="padding-left:10px; border-bottom:1px solid gray;" align="left">
-                                {{ $note->note }}</td>
-                            <td style="border-bottom:1px solid gray;text-align:left">schedule</td>
-                            <td style="border-bottom:1px solid gray;text-align:left">{{ $note->note_category }}</td>
-                            <td style="border-bottom:1px solid gray;"></td>
-                            <td style="border-bottom:1px solid gray;" align="left">Kabir Kiron</td>
-                            <td style="border-bottom:1px solid gray;" align="left">{{ $note->created_at }}</td>
-                            <td style="border-bottom:1px solid gray;text-align:right" align="left">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    <i class="fa fa-pencil fa-2x mr-2 text-info" title="Edit"></i>
-                                </button>
-                                <i class="fa fa-trash fa-2x mr-2 text-danger" title="Delete"
-                                    onclick="deleteNote({{ $note->id }})"></i>
-                            </td>
-                        </tr>
-                    @endforeach
+                   
                 </tbody>
             </table>
         </div>
@@ -335,7 +399,7 @@
                     </div>
                     <div class="col-4 form-group">
                         <input style="padding-left:1rem;width:18vw;" name="displayCourseID" class="form-control mb-2"
-                            id="displayCourseID" type="text" value="{{ $course_id }}" disabled="">
+                            id="displayCourseID" type="text" value="{{ $course_event->course_name  }}" disabled="">
                     </div>
                     <div class="col-2 mt-2 form-group">
                         <label>Schedule ID</label>
