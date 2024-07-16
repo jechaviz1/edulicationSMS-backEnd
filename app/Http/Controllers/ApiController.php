@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Teacher;
 use App\Models\DefaultSession;
 use App\Models\Course;
+use App\Models\Student;
 use App\Http\Resources\UserResource;
 
 class ApiController extends Controller
@@ -76,6 +77,15 @@ class ApiController extends Controller
     public function sessions_course_trainer_list(){
         $trainers = Teacher::get();
         return response()->json(['trainer' => $trainers]); 
+
+    }
+    public function findpeople(Request $request){
+        $search_filled = $request->query('search_filled');
+        $searchvalue = $request->query('searchvalue');
+        
+        $students =  Student::where( $search_filled , $searchvalue)->get();
+        
+        return response()->json(['students' => $students]); 
 
     }
 }

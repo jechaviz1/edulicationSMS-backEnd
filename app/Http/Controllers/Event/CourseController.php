@@ -191,7 +191,8 @@ class CourseController extends Controller
     }
     public function course_event($id){
         $course_event = Event::find($id);
-        return view('admin.event.course.update', compact('course_event'));
+        $course = Course::find($course_event->course_name);
+        return view('admin.event.course.update', compact('course_event','course'));
     }
 
     public function course_note(Request $request){

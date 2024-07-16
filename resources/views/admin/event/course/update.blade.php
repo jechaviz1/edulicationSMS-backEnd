@@ -27,14 +27,17 @@
         <div class="tab-pane fade show active" id="nav-enrolments" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="mt-3 mb-3">
                 <div class="" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-primary ms-2">Email all learners</button>
+                    {{-- <button type="button" class="btn btn-primary ms-2">Email all learners</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">SMS all learners</button>
                     <button type="button" class="btn btn-primary ms-2">Send Survey</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#certificate_manage">Manage Certificates</button>
                     <button type="button" class="btn btn-primary ms-2">Add Enrolments</button>
                     <button type="button" class="btn btn-primary ms-2">Enrol Units</button>
                     <button type="button" class="btn btn-primary ms-2">Update Outcomes</button>
-                    <button type="button" class="btn btn-primary ms-2">Create Invoice</button>
+                    <button type="button" class="btn btn-primary ms-2">Create Invoice</button> --}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addenrolments">
+                    Add Enrolments
+                      </button>
                 </div>
             </div>
             {{-- // tables start --}}
@@ -63,6 +66,58 @@
                 </tbody>
             </table>
             {{-- // tables end --}}
+            {{-- Add Enrolments  --}}
+            <div class="modal fade" id="addenrolments" tabindex="-1" aria-labelledby="addenrolmentsLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addenrolmentsLabel">Course Enrolment for {{ $course->code}} - {{ $course->name }}</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" checked value="option1" onclick="document.getElementById('FindPerson').style.display = 'block',document.getElementById('AddPerson').style.display = 'none'">
+                            <label class="form-check-label" for="inlineRadio1">Find Person</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" onclick="document.getElementById('AddPerson').style.display = 'block',document.getElementById('FindPerson').style.display = 'none'">
+                            <label class="form-check-label" for="inlineRadio2">Add Person</label>
+                          </div>
+                                <div id="FindPerson" style="display: block;">
+                                        <div class="row">
+                                            <div class="col-auto">Find Person By</div>
+                                            <div class="col-auto">
+                                                <select name="searchBy" class="form-control mr-1" id="searchByThis" onchange="document.getElementById('searchValue').value='';">
+                                                <option value="first_name">First Name</option>
+                                                <option value="middle_name">Middle Name</option>
+                                                <option value="last_name">Last Name</option>
+                                                <option value="email">Email</option>
+                                                <option value="contact_no">Mobile</option>
+                                                <option value="postcode">Post Code</option>
+                                            </select>
+                                        </div>
+                                            <div class="col-auto"><input type="text" name="searchValue" id="searchValueIs" class="input_text1 form-control"></div>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn btn-primary ml-1" onclick="loadStudentList();" fdprocessedid="680bi9">Go</button>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <label for="">Select Person</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <select name="studentList" class="form-control" id="studentList" size="3" style="width:100%;" onchange="loadEnquiries(this.options[this.selectedIndex].value);"></select>
+                                        </div>
+                                </div>
+                                <div id="AddPerson" style="display: none;">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              {{-- SMS All Learners End --}}
             {{-- SMS all Lerners  --}}
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -812,6 +867,32 @@
         }
     </style>
     <script>
+            function loadStudentList (){
+               var searchby = $('#searchByThis').val();
+               var searchvalue = $('#searchValueIs').val();
+               $('#studentList').empty();
+                $.ajax({
+                    url: "{{ route('api.people.find') }}",
+                    type: 'GET',
+                    data: {
+                        'search_filled' : searchby,
+                        'searchvalue' : searchvalue
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        response.students.forEach(student => {
+                            console.log(student)
+                            $('#studentList').append(new Option(student.searchby, student.id));
+                             });
+                       
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+            }
+
+
         $(document).ready(function() {
             var modal = $("#sms_opportunities");
             // Get the button that opens the modal
