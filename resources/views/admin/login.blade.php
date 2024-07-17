@@ -77,14 +77,13 @@
                                         </div>
                                     </div>
                                     <div class="mb-4">
-                                        <a href="page-forgot-password.html" class="btn-link text-primary">Forgot Password?</a>
+                                        <a href="{{ route('forget.password.get')}}" class="btn-link text-primary">Forgot Password?</a>
                                     </div>
                                 </div>
                                 <div class="text-center mb-4">
                                     <button type="submit" class="btn btn-primary light btn-block">Sign In</button>
                                 </div>
                                 <h6 class="login-title"><span>Or continue with</span></h6>
-
                                 <div class="mb-3">
                                     <ul class="d-flex align-self-center justify-content-center">
                                         <li><a target="_blank" href="https://www.facebook.com/" class="fab fa-facebook-f btn-facebook"></a></li>
@@ -94,7 +93,7 @@
                                     </ul>
                                 </div>
                                 <p class="text-center">Not registered?  
-                                    <a class="btn-link text-primary" href="page-register.html">Register</a>
+                                    <a class="btn-link text-primary" href="">Register</a>
                                 </p>
                             </form>
                         </div>

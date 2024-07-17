@@ -21,14 +21,14 @@
             </div>
             <ul class="nav nav-tabs dzm-tabs" id="myTab-3" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{ URL::route('add-school') }}" class="btn btn-primary light">Add School</a>
+                    <a href="{{ URL::route('add-school') }}" class="btn btn-primary light me-3">Add School</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button type="button" class="btn btn-primary light btn-icon-md"><i class="fa fa-filter"></i></button>
+                    <button type="button" class="btn btn-primary light btn-icon-md me-3"><i class="fa fa-filter"></i></button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <div class="dropdown ms-auto">
-                        <a href="#" class="btn btn-primary light light light sharp " data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
+                        <a href="#" class="btn btn-primary btn-icon-md light light" data-bs-toggle="dropdown" aria-expanded="true"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li class="dropdown-item"><i class="fa fa-print text-primary me-2"></i> Print</li>
                             <li class="dropdown-item"><i class="fa fa-file-pdf text-primary me-2"></i> Generate PDF</li>

@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Mail;
-
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 class SchoolController extends Controller {
 
     public function schoolList() {
@@ -40,18 +41,20 @@ class SchoolController extends Controller {
     }
 
     public function storeSchool(Request $request) {
+       
         $this->validate($request, [
             'name' => 'required|string|min:1|max:255',
             'email' => 'required|string|email|max:255|unique:school,email',
         ]);
         $data = $request->input();
         try {
+            
             $school = new \App\Models\School();
             $school->name = $data['name'];
             $school->address = $data['address'];
             $school->email = $data['email'];
             $school->phone_no = $data['phone_no'];
-            $school->created_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+            $school->created_by_id = Auth::user()->id ? Auth::user()->id : null;
             //logo
             $file_name = null;
             $file_path = null;
@@ -67,6 +70,7 @@ class SchoolController extends Controller {
             }
             $school->note = $data['note'] ? $data['note'] : null;
             $school->save();
+            $token = Password::createToken($school);
             $school_id = null;
             if (isset($school->id)) {
                 $school_id = $school->id;
@@ -96,13 +100,15 @@ class SchoolController extends Controller {
                 }
                 $school_contact_person->save();
             }
-
-            // dd($school);
+            
             // Send registration link to the provided email
-            $this->sendRegistrationLink($school);
+            Mail::send('emails.password_reset', ['token' => $token,'user' => $school], function ($message) use ($school) {
+                $message->to($school->email);
+                $message->subject('Set Your Password');
+            });
 
             return redirect()->route('school-list')->with('success', 'Record added successfully.');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->route('school-list')->with('failed', 'Record not added.');
         }
     }

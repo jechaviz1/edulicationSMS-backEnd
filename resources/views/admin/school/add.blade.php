@@ -17,7 +17,6 @@
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Add School</h5>
-
                     <form class="needs-validation" novalidate method="POST" action="{{ route('store-school') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -140,10 +139,21 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
+                                    </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_1" />
-                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                        <select class="form-select" aria-label="Default select example" name="role">
+                                            <option selected>Open this select Role</option>
+                                            @foreach ($role as $ro)
+                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                            @endforeach
+                                          </select>
+                                        <div class="invalid-feedback">
+                                            Please Select a Role.
+                                        </div>
+                                        @if($errors->has('role'))
+                                        <div class="error">{{ $errors->first('role') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -201,10 +211,21 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
+                                    </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_2">
-                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                        <select class="form-select" aria-label="Default select example" name="role">
+                                            <option selected>Open this select Role</option>
+                                            @foreach ($role as $ro)
+                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                            @endforeach
+                                          </select>
+                                        <div class="invalid-feedback">
+                                            Please Select a Role.
+                                        </div>
+                                        @if($errors->has('role'))
+                                        <div class="error">{{ $errors->first('role') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -231,7 +252,7 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <h2 class=" col-form-label">Contact Person 2</h2>
+                                    <h2 class=" col-form-label">Contact Person 3</h2>
                                 </div>
                             </div>
                         </div>
@@ -261,10 +282,21 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
+                                    </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_3">
-                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                        <select class="form-select" aria-label="Default select example" name="role">
+                                            <option selected>Open this select Role</option>
+                                            @foreach ($role as $ro)
+                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                            @endforeach
+                                          </select>
+                                        <div class="invalid-feedback">
+                                            Please Select a Role.
+                                        </div>
+                                        @if($errors->has('role'))
+                                        <div class="error">{{ $errors->first('role') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

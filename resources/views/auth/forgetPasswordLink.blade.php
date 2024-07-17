@@ -33,8 +33,8 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
                         <div class="login-form">
                             <div class="text-center">
-                                <h3 class="title">PassWord Generate</h3>
-                                <p>Generate Password</p>
+                                <h3 class="title">Sign In</h3>
+                                <p>Sign in to your account to start using W3Admin</p>
                             </div>
 
                             @if ($message = Session::get('success'))
@@ -52,23 +52,41 @@
                                 <strong>Error!</strong> {{ $message }}
                             </div>
                             @endif
-
-                            <form method="POST" action="{{ route('password.update') }}">
+                            <form action="{{ route('reset.password.post') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
-                                <input type="hidden" name="email" value="{{ $email }}">
-                                <div class="mb-4 position-relative">
-                                    <label class="mb-1 text-dark">New Password</label>
-                                    <input type="password" id="dz-password" class="form-control form-control" value="" name="password">
-                                   
+  
+                                <div class="form-group row">
+                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                    <div class="col-md-8">
+                                        <input type="text" id="email_address" class="form-control" name="email" required autofocus>
+                                        @if ($errors->has('email'))
+                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="mb-4 position-relative">
-                                    <label class="mb-1 text-dark">Confirm Password</label>
-                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" name="password_confirmation">
-                                 
+        
+                                <div class="form-group row mt-3">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                    <div class="col-md-8">
+                                        <input type="password" id="password" class="form-control" name="password" required autofocus>
+                                        @if ($errors->has('password'))
+                                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="text-center mb-4">
-                                    <button type="submit" class="btn btn-primary light btn-block">Password Reset</button>
+        
+                                <div class="form-group row mt-3">
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                    <div class="col-md-8">
+                                        <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autofocus>
+                                        @if ($errors->has('password_confirmation'))
+                                            <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="text-center mb-4 mt-3">
+                                    <button type="submit" class="btn btn-primary light btn-block">Reset Password</button>
                                 </div>
                             </form>
                         </div>
@@ -76,11 +94,11 @@
                     <div class="col-xl-6 col-lg-6">
                         <div class="pages-left h-100">
                             <div class="login-content">
-                                <a href=""><img src="{{ asset('admin/images/logo-full.png') }}" class="mb-3" alt=""></a>
+                                <a href="index.html"><img src="images/logo-full.png" class="mb-3" alt=""></a>
                                 <p>Your true value is determined by how much more you give in value than you take in payment. ...</p>
                             </div>
                             <div class="login-media text-center">
-                                <img src="{{ asset('admin/images/login.png') }}" alt="">
+                                <img src="images/login.png" alt="">
                             </div>
                         </div>
                     </div>

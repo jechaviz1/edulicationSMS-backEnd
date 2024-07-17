@@ -27,24 +27,22 @@
     </head>
 
     <body class="vh-100">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-primary alert-dismissible fade show">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+            </button>
+            <strong>Success!</strong> {{ $message }}
+        </div>
+        @endif
         <div class="authincation h-100">
             <div class="container-fluid h-100">
                 <div class="row h-100">
                     <div class="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
                         <div class="login-form">
                             <div class="text-center">
-                                <h3 class="title">PassWord Generate</h3>
-                                <p>Generate Password</p>
+                                <h3 class="title">Forgot Password</h3>
+                                <p>Forgot Password</p>
                             </div>
-
-                            @if ($message = Session::get('success'))
-                            <div class="alert alert-primary alert-dismissible fade show">
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
-                                </button>
-                                <strong>Success!</strong> {{ $message }}
-                            </div>
-                            @endif
-
                             @if ($message = Session::get('failed'))
                             <div class="alert alert-danger alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -52,23 +50,17 @@
                                 <strong>Error!</strong> {{ $message }}
                             </div>
                             @endif
-
-                            <form method="POST" action="{{ route('password.update') }}">
+                            <form action="{{ route('forget.password.post') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="token" value="{{ $token }}">
-                                <input type="hidden" name="email" value="{{ $email }}">
-                                <div class="mb-4 position-relative">
-                                    <label class="mb-1 text-dark">New Password</label>
-                                    <input type="password" id="dz-password" class="form-control form-control" value="" name="password">
-                                   
+                                <div class="mb-4">
+                                    <label class="mb-1 text-dark">Email</label>
+                                    <input type="email"   id="email_address" class="form-control form-control" value="" name="email" required >
                                 </div>
-                                <div class="mb-4 position-relative">
-                                    <label class="mb-1 text-dark">Confirm Password</label>
-                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" name="password_confirmation">
-                                 
-                                </div>
+                            @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
                                 <div class="text-center mb-4">
-                                    <button type="submit" class="btn btn-primary light btn-block">Password Reset</button>
+                                    <button type="submit" class="btn btn-primary light btn-block">Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -76,11 +68,11 @@
                     <div class="col-xl-6 col-lg-6">
                         <div class="pages-left h-100">
                             <div class="login-content">
-                                <a href=""><img src="{{ asset('admin/images/logo-full.png') }}" class="mb-3" alt=""></a>
+                                <a href="index.html"><img src="images/logo-full.png" class="mb-3" alt=""></a>
                                 <p>Your true value is determined by how much more you give in value than you take in payment. ...</p>
                             </div>
                             <div class="login-media text-center">
-                                <img src="{{ asset('admin/images/login.png') }}" alt="">
+                                <img src="images/login.png" alt="">
                             </div>
                         </div>
                     </div>
