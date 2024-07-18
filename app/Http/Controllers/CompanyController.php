@@ -12,6 +12,8 @@ use App\Models\InfoPakSpecific;
 use App\Models\BackgroundTemplate;
 use App\Models\courseEmail;
 use App\Models\User;
+use App\Models\CompanySetting;
+use App\Models\StudentNoteCategory;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ImageController;
 use Exception;
@@ -319,8 +321,13 @@ class CompanyController extends Controller
 
             public function companysettings(){
                 try {
-                    $infos = CompanyDocument::where('type','info')->get();
-                    return view('admin.company.companySetting');
+                    // $infos = CompanyDocument::where('type','info')->get();
+                    $note = StudentNoteCategory::get();
+                    $corses_settings = CompanySetting::where('name','Course Setting')->first();
+                    $students_setting = CompanySetting::where('name','Student Setting')->first();
+                    $course_setting = json_decode($corses_settings->description,true);
+                    $student_setting = json_decode($students_setting->description,true);
+                    return view('admin.company.companySetting',compact('course_setting','note','student_setting'));
                 } catch (Exception $e) {
                     // Handle the error and redirect back with an error message
                     return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
@@ -424,4 +431,5 @@ class CompanyController extends Controller
                 $document_info->save();
                 return redirect()->back()->with('success', 'Document Update successfully!');
             }
+            
     }

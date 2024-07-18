@@ -655,7 +655,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/event/enrollment/course/certificate/issue', [App\Http\Controllers\EnrollmentController::class, 'enrollment_issue'])->name('event.enrollment.issue');
     Route::post('/event/enrollment/course/people/add', [App\Http\Controllers\EnrollmentController::class, 'enrollment_add_people'])->name('event.enrollment.add.people');
     Route::get('/event/enrollment/course/people/update/{id}', [App\Http\Controllers\EnrollmentController::class, 'enrolment_add_people_update'])->name('event.enrollment.people.update');
-  
+    Route::post('/event/enrolment/course/people/note', [App\Http\Controllers\EnrollmentController::class, 'enolmentNoteAdd'])->name('event.course.enrolment.student.note');
+    Route::post('/event/enrolment/course/people/update', [App\Http\Controllers\EnrollmentController::class, 'enolmentNoteUpdate'])->name('event.course.enrolment.student.note.update');
+    Route::get('/event/enrollment/note/{id}', [App\Http\Controllers\EnrollmentController::class, 'enrolment_note_delete'])->name('note.enrolment.delete');
+      
     
     // End Event Enrollment 
     // START - Lerner Record 
@@ -698,6 +701,12 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/competencyReport/edit', [App\Http\Controllers\CompanyController::class, 'competencyReportEdit'])->name('competency.report.background');
     //Start Company Setting //
     Route::get('/companysettings', [App\Http\Controllers\CompanyController::class, 'companysettings'])->name('company.company.setting');
+    Route::post('/company/course/setting/store', [App\Http\Controllers\CompanySettingController::class, 'courseSetting'])->name('company.setting.course.store');
+    Route::post('/company/student/settings/store', [App\Http\Controllers\CompanySettingController::class, 'studentSetting'])->name('company.settings.student.store');
+    Route::post('/company/student/note/category/setting/store', [App\Http\Controllers\CompanySettingController::class, 'noteCategory'])->name('company.setting.student.store');
+    Route::get('/company/student/note/category/setting/{id}', [App\Http\Controllers\CompanySettingController::class, 'remove_category'])->name('company.setting.student.delete');
+    Route::post('/company/setting/student/update', [App\Http\Controllers\CompanySettingController::class, 'editnotecategory'])->name('company.note.category.student.store');
+
     //Start CQR Report
     Route::get('/CQRreport', [App\Http\Controllers\CompanyController::class, 'CQR'])->name('company.CQR');
     Route::post('/CQRreport/store', [App\Http\Controllers\CQRreportController::class, 'store'])->name('company.CQR.store');
@@ -747,6 +756,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/api/course/get/single', [App\Http\Controllers\ApiController::class,'course_single'])->name('api.course.get');  
   Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');  
   Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');  
+  Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');  
  
 });
 });

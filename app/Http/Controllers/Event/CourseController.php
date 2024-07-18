@@ -33,7 +33,7 @@ class CourseController extends Controller
         $data = [];
         $data['title'] = 'Event';
         $data['menu_active_tab'] = 'event';
-        $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
+        $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '1')->get();
         $rows = Event::paginate(10);
         return view('admin.event.courses.list', compact('courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
     }
@@ -155,12 +155,11 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
+        // dd($id);
         if ($id) {
             $course = Event::find($id);
             if ($course) {
-                //  dd($course);
-                $course->is_deleted = '1';
-                $course->save();
+                $course->delete();
             }
             return redirect()->route('event.courses')->with('success', 'Record deleted.');
         } else {

@@ -11,6 +11,9 @@
                 --bs-modal-width: 1502px;
             }
         }
+        .modal-backdrop{
+            display: none;
+        }
     </style>
     @if ($message = Session::get('success'))
         <div class="alert alert-primary alert-dismissible fade show">
@@ -27,9 +30,6 @@
             </div>
             <div class="card-block p-3">
                 {{-- ///////////////////////////////////////////////////////////////////////// --}}
-
-
-
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pills-course-tab" data-bs-toggle="pill"
@@ -64,7 +64,7 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-course" role="tabpanel"
                         aria-labelledby="pills-course-tab">
-                        <form action="" mwthod="">
+                        <form action="{{ route('company.setting.course.store') }}" method="post">
                             @csrf()
                             @method('POST')
                             <div class="row">
@@ -103,124 +103,111 @@
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2"><input type="checkbox" id="sel" class="CourseTypeSettings"
                                             checked="" disabled=""> Self Paced</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
+                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="sel_rename"
                                             id="sel_rename" value="Self Paced" maxlength="20" fdprocessedid="ael3mf">
                                     </div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
+                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="sel_init"
                                             id="sel_init" value="SP" maxlength="8" fdprocessedid="q2tqbg"></div>
                                 </div>
+                                
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub" checked=""
+                                    <div class="col-lg-2"><input type="checkbox" id="pub" value="1"  name="pub" @if(isset($course_setting['pub']) == "on") checked  @endif
                                             class="CourseTypeSettings"> Public Sessions</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub_rename" value="Public Sessions" maxlength="20"
+                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" value="{{$course_setting['pub_rename']}}"
+                                            id="pub_rename" value="Public Sessions" maxlength="20" name="pub_rename" 
                                             fdprocessedid="8ouer"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
+                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub_init" value="{{$course_setting['pub_init']}}"
                                             id="pub_init" value="PUB" maxlength="8" fdprocessedid="te0pbsg"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub_single" checked=""
+                                    <div class="col-lg-1"><input type="checkbox" id="pub_single"  name="pub_single" @if(isset($course_setting['pub_single'])) checked  @endif
                                             class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub_multiple" checked=""
-                                            class="CourseTypeSettings"></div>
-                                </div>
-                                <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pri" checked=""
-                                            class="CourseTypeSettings"> Private Sessions</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pri_rename" value="Private Sessions" maxlength="20"
-                                            fdprocessedid="24aeyp"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pri_init" value="PRI" maxlength="8" fdprocessedid="s1zuo9"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pri_single" checked=""
-                                            class="CourseTypeSettings"> </div>
-                                    <div class="col-lg-2"> <input type="checkbox" id="pri_multiple" checked=""
+                                    <div class="col-lg-2"><input type="checkbox" id="pub_multiple"  name="pub_multiple" @if(isset($course_setting['pub_multiple'])) checked  @endif
                                             class="CourseTypeSettings"></div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub2"
+                                    <div class="col-lg-2"><input type="checkbox" id="pri" checked="" name="pri" @if(isset($course_setting['pri']) == "on") checked  @endif
+                                        class="CourseTypeSettings"> Private Sessions</div>
+                                        <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
+                                            id="pri_rename" value="Private Sessions" maxlength="20" name="pri_rename" value="{{$course_setting['pri_rename']}}"
+                                            fdprocessedid="24aeyp"></div> 
+                                            <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"  name="pri_init" value="{{$course_setting['pri_init']}}"
+                                                id="pri_init" value="PRI" maxlength="8" fdprocessedid="s1zuo9"></div>
+                                                <div class="col-lg-1"><input type="checkbox" id="pri_single" checked=""  name="pri_single" @if(isset($course_setting['pri_single']) == "on") checked  @endif
+                                                    class="CourseTypeSettings"> </div>
+                                                    <div class="col-lg-2"> <input type="checkbox" id="pri_multiple" checked="" name="pri_multiple" @if(isset($course_setting['pri_multiple']) == "on") checked  @endif
+                                                        class="CourseTypeSettings"></div>
+                                                    </div>
+                                <div class="row mb-2 align-items-center"> 
+                                    <div class="col-lg-2"><input type="checkbox" id="pub2" @if(isset($course_setting['pub2']) == "on") checked  @endif
                                             class="CourseTypeSettings"> Public
                                         Sessions 2</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub2_rename" maxlength="20" fdprocessedid="6odtei"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
+                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub2_rename" value="{{$course_setting['pub2_rename']}}"
+                                            id="pub2_rename" maxlength="20" fdprocessedid="6odtei"></div> 
+                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub2_init" value="{{$course_setting['pub2_init']}}"
                                             id="pub2_init" maxlength="8" fdprocessedid="owb5io"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub2_single"
+                                    <div class="col-lg-1"><input type="checkbox" id="pub2_single" name="pub2_single" @if(isset($course_setting['pub2_single']) == "on") checked  @endif
                                             class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub2_multiple"
+                                    <div class="col-lg-2"><input type="checkbox" id="pub2_multiple" name="pub2_multiple" @if(isset($course_setting['pub2_multiple']) == "on") checked  @endif
                                             class="CourseTypeSettings">
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub3"
+                                    <div class="col-lg-2"><input type="checkbox" id="pub3" name="pub3"  @if(isset($course_setting['pub3']) == "on") checked  @endif
                                             class="CourseTypeSettings"> Public
-                                        Sessions 3</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub3_rename" maxlength="20" fdprocessedid="jp2gpz"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub3_init" maxlength="8" fdprocessedid="cweg6g"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub3_single"
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub3_multiple"
+                                            Sessions 3</div>
+                                            <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub3_rename" value="{{$course_setting['pub3_rename']}}"
+                                                id="pub3_rename" maxlength="20" fdprocessedid="jp2gpz"></div>  
+                                                <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub3_init" value="{{$course_setting['pub3_init']}}"
+                                                    id="pub3_init" maxlength="8" fdprocessedid="cweg6g"></div>
+                                    <div class="col-lg-1"><input type="checkbox" id="pub3_single" name="pub3_single" @if(isset($course_setting['pub3_single']) == "on") checked  @endif
+                                        class="CourseTypeSettings"></div>
+                                    <div class="col-lg-2"><input type="checkbox" id="pub3_multiple" name="pub3_multiple" @if(isset($course_setting['pub3_multiple']) == "on") checked  @endif
                                             class="CourseTypeSettings">
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub4"
+                                    <div class="col-lg-2"><input type="checkbox" id="pub4" name="pub4"  @if(isset($course_setting['pub4']) == "on") checked  @endif
                                             class="CourseTypeSettings"> Public
                                         Sessions 4</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
+                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub4_rename"  value="{{$course_setting['pub4_rename']}}"
                                             id="pub4_rename" maxlength="20" fdprocessedid="h1ebbi"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub4_init" maxlength="8" fdprocessedid="c2jxs4"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub4_single"
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub4_multiple"
+                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub4_init"  value="{{$course_setting['pub4_init']}}"
+                                            id="pub4_init" maxlength="8" fdprocessedid="c2jxs4"></div> 
+                                    <div class="col-lg-1"><input type="checkbox" id="pub4_single"  name="pub4_single" @if(isset($course_setting['pub4_single']) == "on") checked  @endif
+                                            class="CourseTypeSettings"></div> 
+                                    <div class="col-lg-2"><input type="checkbox" id="pub4_multiple" name="pub4_multiple" @if(isset($course_setting['pub4_multiple']) == "on") checked  @endif
                                             class="CourseTypeSettings">
                                     </div>
                                     <div style="clear:both"></div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub5"
+                                    <div class="col-lg-2"><input type="checkbox" id="pub5" @if(isset($course_setting['pub5']) == "on") checked  @endif
                                             class="CourseTypeSettings"> Public
                                         Sessions 5</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub5_rename" maxlength="20" fdprocessedid="slxz1d"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
+                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub5_rename"  value="{{$course_setting['pub5_rename']}}"
+                                            id="pub5_rename" maxlength="20" fdprocessedid="slxz1d"></div> 
+                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub5_init"  value="{{$course_setting['pub5_init']}}"
                                             id="pub5_init" maxlength="8" fdprocessedid="15ea4"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub5_single"
+                                    <div class="col-lg-1"><input type="checkbox" id="pub5_single" name="pub5_single" @if(isset($course_setting['pub5_single']) == "on") checked  @endif
                                             class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub5_multiple"
+                                    <div class="col-lg-2"><input type="checkbox" id="pub5_multiple" name="pub5_multiple" @if(isset($course_setting['pub5_multiple']) == "on") checked  @endif
                                             class="CourseTypeSettings">
                                     </div>
                                     <div style="clear:both"></div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub5"
-                                            class="CourseTypeSettings"> Public
-                                        Sessions 5</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub5_rename" maxlength="20" fdprocessedid="slxz1d"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub5_init" maxlength="8" fdprocessedid="15ea4"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub5_single"
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub5_multiple"
-                                            class="CourseTypeSettings">
-                                    </div>
-                                    <div style="clear:both"></div>
-                                </div>
-                                <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub6"
+                                    <div class="col-lg-2"><input type="checkbox" id="pub6" name="pub6"  @if(isset($course_setting['pub6']) == "on") checked  @endif
                                             class="CourseTypeSettings"> Public
                                         Sessions 6</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub6_rename" maxlength="20" fdprocessedid="so7y64"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pub6_init" maxlength="8" fdprocessedid="nyixrr"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub6_single"
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub6_multiple"
+                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub6_rename"  value="{{$course_setting['pub6_rename']}}"
+                                            id="pub6_rename" maxlength="20" fdprocessedid="slxz1d"></div>
+                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub6_init"  value="{{$course_setting['pub6_init']}}"
+                                            id="pub6_init" maxlength="8" fdprocessedid="15ea4"></div>
+                                    <div class="col-lg-1"><input type="checkbox" id="pub6_single" name="pub6_single" @if(isset($course_setting['pub6_single']) == "on") checked  @endif
+                                            class="CourseTypeSettings"></div> 
+                                    <div class="col-lg-2"><input type="checkbox" id="pub6_multiple" name="pub6_multiple" @if(isset($course_setting['pub6_multiple']) == "on") checked  @endif
                                             class="CourseTypeSettings">
                                     </div>
+                                    <div style="clear:both"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 my-4 fw-bolder">Course Booking Settings
@@ -229,13 +216,13 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-check">
-                                            <input type="checkbox" id="trainers_book"> Allow trainers to be double booked
+                                            <input type="checkbox" id="trainers_book" name="trainers_book"> Allow trainers to be double booked
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" id="rooms_book"> Allow room to be double booked
+                                            <input type="checkbox" id="rooms_book" name="rooms_book"> Allow room to be double booked
                                         </div>
                                         <div class="form-check">
-                                            <input type="checkbox" id="trainers_competency">
+                                            <input type="checkbox" id="trainers_competency" name="trainers_competency">
                                             Enforce trainer competencies when assigning trainers to a course. This will
                                             limit the trainers you see when scheduling a new course, based on the Trainer
                                             Competencies that are stored in Weworbook.
@@ -245,29 +232,28 @@
                                     <div class="col-lg-3">
                                         <select name="eventStatusDefault" id="eventStatusDefault"
                                             class="form-control mt-3 col-2" fdprocessedid="dq4ppi">
-                                            <option value="All">Show All Courses</option>
-                                            <option value="Open" selected="">Show Open Courses</option>
-                                            <option value="Closed">Show Closed Courses</option>
+                                            <option value="All" @if($course_setting['eventStatusDefault'] == 'All') selected @endif>Show All Courses</option>
+                                            <option value="Open" @if($course_setting['eventStatusDefault'] == 'Open') selected @endif>Show Open Courses</option>
+                                            <option value="Closed" @if($course_setting['eventStatusDefault'] == 'Closed') selected @endif>Show Closed Courses</option>
                                         </select>
                                     </div>
-
                                     <div class="col-lg-12 my-4 fw-bolder">Course Archive Notification</div>
                                     <div class="col-lg-12">
                                         <div class="form-check">
-                                            <input type="radio" id="emailSettingsOption_No" name="emailSettingsOption"
-                                                value="No" checked=""
+                                            <input type="radio" id="emailSettingsOption_No" name="emailSettingsOption" 
+                                                value="No"  @if($course_setting['emailSettingsOption'] == 'No') checked @endif
                                                 onclick="document.getElementById('showEmailSettings').style.display = 'none'">
                                             No, do not email my company email address when a course schedule is archived
                                         </div>
                                         <div class="form-check">
                                             <input type="radio" id="emailSettingsOption_Yes" name="emailSettingsOption"
-                                                value="Yes"
+                                                value="Yes" @if($course_setting['emailSettingsOption'] == 'Yes') checked @endif
                                                 onclick="document.getElementById('showEmailSettings').style.display = 'block'">
                                             Yes, email my company email address when a course schedule is archived
                                         </div>
                                         <div id="showEmailSettings" style="display:none;">
-                                            Enter email address: <input type="text" id="emailAddress"
-                                                name="emailAddress" value="" style="width:200px;" maxlength="50">
+                                            Enter email address: <input type="text" id="emailAddress" name="emailAddress"
+                                                name="emailAddress" value="{{ $course_setting['emailAddress']}}" style="width:200px;" maxlength="50">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 my-4 font-weight-bold">Attendance List</div>
@@ -275,11 +261,11 @@
                                         <label for="">Confirm all students as attended when session dates
                                             lapse?</label>
                                         <div class="form-check">
-                                            <input type="radio" id="attendanceList_Yes" name="setattendanceListOption"
+                                            <input type="radio" id="attendanceList_Yes" name="setattendanceListOption"  @if($course_setting['setattendanceListOption'] == '1') checked @endif
                                                 value="1"> Yes, mark student as attended automatically
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" id="attendanceList_No" name="setattendanceListOption"
+                                            <input type="radio" id="attendanceList_No" name="setattendanceListOption"  @if($course_setting['setattendanceListOption'] == '0') checked @endif
                                                 value="0" checked=""> No, my company will manage attendance by
                                             ourselves
                                         </div>
@@ -291,11 +277,11 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-check">
-                                            <input type="radio" id="showInfoPakChk_No" name="showInfoPakChk"
+                                            <input type="radio" id="showInfoPakChk_No" name="showInfoPakChk"   @if($course_setting['showInfoPakChk'] == '0') checked @endif
                                                 value="0"> No
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" id="showInfoPakChk_Yes" name="showInfoPakChk"
+                                            <input type="radio" id="showInfoPakChk_Yes" name="showInfoPakChk"   @if($course_setting['showInfoPakChk'] == '1') checked @endif
                                                 value="1" checked=""> Yes
                                         </div>
                                     </div>
@@ -306,56 +292,48 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="pills-student-record" role="tabpanel"
-                        aria-labelledby="pills-student-record-tab">
-                        <div class="col-lg-12 my-4 font-weight-bold">Custom field settings<i
-                                class="fa fa-info-circle ml-2"
+                    <div class="tab-pane fade" id="pills-student-record" role="tabpanel" aria-labelledby="pills-student-record-tab">
+                       <form action="{{ route('company.settings.student.store') }}" method="post"> 
+                        @csrf()
+                        @method('post')
+                        <div class="col-lg-12 my-4 font-weight-bold">Custom field settings<i class="fa fa-info-circle ml-2"
                                 title="Fields enables here will display on all student pages in your profile. This will allow you to capture information which may be unique to your training organisation."></i>
                         </div>
                         <div class="col-lg-12">Fields enabled here will display on all student pages in your profile. This
                             will allow you to capture information which may be unique to your training organisation.<br><br>
                         </div>
+                       
                         <div class="col-lg-6 mt-2">
-                            <form class="d-flex">
                                 <input type="checkbox" id="cfield1">
-                                <input type="text" class="form-control ms-4" id="custom_field1" value=""
+                                <input type="text" class="form-control ms-4" id="custom_field1" value="{{$student_setting['custom_field1']}}" name="custom_field1"
                                     maxlength="20">
-                            </form>
                         </div>
                         <div class="col-lg-6 mt-2">
-                            <form class="d-flex">
                                 <input type="checkbox" id="cfield2">
-                                <input type="text" class="form-control ms-4" id="custom_field2" value=""
+                                <input type="text" class="form-control ms-4" id="custom_field2" value="{{$student_setting['custom_field2']}}" name="custom_field2"
                                     maxlength="20">
-                            </form>
                         </div>
                         <div class="col-lg-6 mt-2">
-                            <form class="d-flex">
                                 <input type="checkbox" id="cfield3">
-                                <input type="text" class="form-control ms-4" id="custom_field3" value=""
+                                <input type="text" class="form-control ms-4" id="custom_field3" value="{{$student_setting['custom_field3']}}" name="custom_field3"
                                     maxlength="20">
-                            </form>
                         </div>
                         <div class="col-lg-6 mt-2">
-                            <form class="d-flex">
                                 <input type="checkbox" id="cfield4">
-                                <input type="text" class="form-control ms-4" id="custom_field4" value=""
+                                <input type="text" class="form-control ms-4" id="custom_field4" value="{{$student_setting['custom_field4']}}" name="custom_field4"
                                     maxlength="20">
-                            </form>
                         </div>
                         <div class="col-lg-6 mt-2">
-                            <form class="d-flex">
                                 <input type="checkbox" id="cfield5">
-                                <input type="text" class="form-control ms-4" id="custom_field5" value=""
+                                <input type="text" class="form-control ms-4" id="custom_field5" value="{{$student_setting['custom_field5']}}" name="custom_field5"
                                     maxlength="20">
-                            </form>
                         </div>
                         <div class="col-lg-6 mt-2">
-                            <form class="d-flex">
+                            
                                 <input type="checkbox" id="cfield6">
-                                <input type="text" class="form-control ms-4" id="custom_field6" value=""
+                                <input type="text" class="form-control ms-4" id="custom_field6" value="{{$student_setting['custom_field6']}}" name="custom_field6"
                                     maxlength="20">
-                            </form>
+                         
                         </div>
                         <div class="col-lg-6 my-4 fw-bold">National ID Settings<i class="fa fa-info-circle ml-2"
                                 title="It is recommended you use the Weworkbook unique ID unless we have migrated data from another provider."></i>
@@ -366,12 +344,12 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-check">
-                                <input type="radio" id="option1" name="NationalID" value="0" checked=""
+                                <input type="radio" id="option1" name="NationalID" value="0" @if($student_setting['NationalID'] == "0")  checked  @endif
                                     onclick="document.getElementById('leading').style.display = 'none'"> Using Weworkbook
                                 unique ID
                             </div>
                             <div class="form-check">
-                                <input type="radio" id="option2" name="NationalID" value="1"
+                                <input type="radio" id="option2" name="NationalID" value="1" @if($student_setting['NationalID'] == "1")  checked  @endif
                                     onclick="document.getElementById('leading').style.display = 'block'"> Use my own
                                 National Id
                             </div>
@@ -380,24 +358,24 @@
                                 <table cellpadding="0" cellspacing="3" class="table">
                                     <tbody>
                                         <tr>
-                                            <td colspan="3" style="padding-right:5px;"><strong>National ID</strong> -
+                                        <td colspan="3" style="padding-right:5px;"><strong>National ID</strong> -
                                                 [leadingText][number][trailingText]</td>
                                         </tr>
                                         <tr>
                                             <td style="padding-right:5px;">Number: </td>
                                             <td colspan="2"><input type="text" name="number" id="number"
-                                                    value=""> (if set the National Id will start here and increase by
+                                                    value="{{$student_setting['number']}}"> (if set the National Id will start here and increase by
                                                 one for each student)</td>
                                         </tr>
                                         <tr>
                                             <td>Leading Text: </td>
                                             <td colspan="2"><input type="text" name="leadingtext" id="leadingtext"
-                                                    value=""></td>
+                                                value="{{$student_setting['leadingtext']}}"></td>
                                         </tr>
                                         <tr>
                                             <td>Trailing Text: </td>
                                             <td colspan="2"><input type="text" name="trailingtext"
-                                                    id="trailingtext" value=""></td>
+                                                    id="trailingtext"value="{{$student_setting['trailingtext']}}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -411,11 +389,11 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-check">
-                                    <input type="radio" id="setDOBSettings_No" name="DOBSettingsOption" value="0"
-                                        checked=""> No (Default)
+                                    <input type="radio" id="setDOBSettings_No" name="DOBSettingsOption" value="0"  @if($student_setting['DOBSettingsOption'] == "0")  checked  @endif
+                                     > No (Default)
                                 </div>
                                 <div class="form-check">
-                                    <input type="radio" id="setDOBSettings_Yes" name="DOBSettingsOption"
+                                    <input type="radio" id="setDOBSettings_Yes" name="DOBSettingsOption"  @if($student_setting['DOBSettingsOption'] == "1")  checked  @endif
                                         value="1"> Yes
                                 </div>
                             </div>
@@ -425,11 +403,11 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="form-check">
-                                <input type="radio" id="sendConfirmationEmail_Yes" name="sendConfirmationEmailOption"
+                                <input type="radio" id="sendConfirmationEmail_Yes" name="sendConfirmationEmailOption" @if(isset($student_setting['sendConfirmationEmail_No']) == "1")  checked  @endif
                                     value="1"> Yes
                             </div>
                             <div class="form-check">
-                                <input type="radio" id="sendConfirmationEmail_No" name="sendConfirmationEmailOption"
+                                <input type="radio" id="sendConfirmationEmail_No" name="sendConfirmationEmailOption" @if(isset($student_setting['sendConfirmationEmail_No']) == "0")  checked  @endif
                                     value="0" checked=""> No
                             </div>
                         </div>
@@ -440,11 +418,13 @@
                                     <b title="">Note categories</b>
                                 </span>
                                 <span>
-                                    <a class="text-info" onclick="newNoteCategory()">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                         <i title="Add Note Category" class="fa fa-plus-square fa-lg"
-                                            aria-hidden="true"></i>
-                                    </a>
+                                        aria-hidden="true"></i>
+                                      </button>
                                 </span>
+                                <!-- Modal -->
+                              
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -456,13 +436,19 @@
                             <div class="form-check col-md-4">
                                 <table id="dataTablesCategoriesList" class="display" cellpadding="1" width="100%;">
                                     <tbody>
+                                        @foreach ($note as $n)
                                         <tr>
-                                            <td style="font-size:0.8125rem;">Categoryhello Name</td>
+                                            <td style="font-size:0.8125rem;">{{ $n->name }}</td>
                                             <td><i title="Edit Note Category" class="fa fa-pencil fa-lg m-2 text-info"
-                                                    onclick="editCategory(&quot;97&quot;);"></i><i
-                                                    title="Delete Note Category" class="fa fa-trash fa-lg text-danger"
-                                                    onclick="removeCategory(&quot;97&quot;);"></i></td>
+                                                    onclick="editCategory({{$n->id}},'{{ $n->name}}')"></i>
+                                                    <a href="{{ route('company.setting.student.delete',$n->id)}}">
+                                                        <i
+                                                        title="Delete Note Category" class="fa fa-trash fa-lg text-danger"
+                                                        ></i>
+                                                    </a>
+                                                   </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -470,10 +456,10 @@
                         <div class="col-lg-12 my-4 fw-bold">Enable Victorian Student Number</div>
                         <div class="col-lg-12">
                             <div class="form-check">
-                                <input type="radio" id="enableVSN_Yes" name="enableVSN" value="1"> Yes
+                                <input type="radio" id="enableVSN_Yes" name="enableVSN" value="1"   @if($student_setting['enableVSN'] == "0")  checked  @endif> Yes
                             </div>
                             <div class="form-check">
-                                <input type="radio" id="enableVSN_No" name="enableVSN" value="0" checked="">
+                                <input type="radio" id="enableVSN_No" name="enableVSN" value="0"  @if($student_setting['enableVSN'] == "0")  checked  @endif>
                                 No
                             </div>
                         </div>
@@ -481,29 +467,70 @@
                             the update to all units in that enrolment</div>
                         <div class="col-lg-12">
                             <div class="form-check">
-                                <input type="radio" id="enableApplyAll_Yes" name="enableApplyAll" value="1"
+                                <input type="radio" id="enableApplyAll_Yes" name="enableApplyAll" value="1" @if($student_setting['enableApplyAll'] == "0")  checked  @endif
                                     checked=""> Yes
                             </div>
                             <div class="form-check">
-                                <input type="radio" id="enableApplyAll_No" name="enableApplyAll" value="0"> No
+                                <input type="radio" id="enableApplyAll_No" name="enableApplyAll" value="0" @if($student_setting['enableApplyAll'] == "0")  checked  @endif> No 
                             </div>
                         </div>
                         <div class="col-lg-12 my-4 fw-bold">Allow a student to enrol more than once in a course</div>
                         <div class="col-lg-12">
                             <div class="form-check">
-                                <input type="radio" id="allowMultipleEnrol_Yes" name="allowMultipleEnrol"
+                                <input type="radio" id="allowMultipleEnrol_Yes" name="allowMultipleEnrol" @if($student_setting['allowMultipleEnrol'] == "0")  checked  @endif
                                     value="1"> Yes
                             </div>
                             <div class="form-check">
-                                <input type="radio" id="allowMultipleEnrol_No" name="allowMultipleEnrol"
+                                <input type="radio" id="allowMultipleEnrol_No" name="allowMultipleEnrol" @if($student_setting['allowMultipleEnrol'] == "0")  checked  @endif
                                     value="0" checked=""> No
                             </div>
                         </div>
                         <div class="col-lg-12 my-4">
-                            <button class="btn btn-primary" onclick="saveCourseType();"
-                                fdprocessedid="5birl">Save</button>
+                            <button class="btn btn-primary" type="submit"
+                               >Save</button>
+                        </div>
+                    </form>
+                    </div>
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">New Note Cataegory</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form action="{{ route('company.setting.student.store')}}" method="post">
+                                @csrf()
+                                @method('POST')
+                                <input type="text" id="name" class="form-control" name="name" placeholder="Category Name"  required>
+                                <button class="btn btn-primary mt-2" type="submit">Save</button>
+                            </form>
+                            </div>
+                        </div>
                         </div>
                     </div>
+                    {{-- // edit note start// --}}
+                    <!-- Modal -->
+                        <div class="modal fade" id="staticBackdropnote" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Edit Note Category</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="editCategoryForm" action="{{ route('company.setting.student.store')}}" method="post">
+                                            @csrf
+                                            @method('POST')
+                                            <input type="hidden" id="categoryId" name="id">
+                                            <input type="text" id="categoryName" class="form-control" name="name" placeholder="Category Name" required>
+                                            <button class="btn btn-primary mt-2" type="submit">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- // edit note emd// --}}
                     <div class="tab-pane fade" id="pills-reporting" role="tabpanel"
                         aria-labelledby="pills-reporting-tab">
                         <form action="" mwthod="">
@@ -812,6 +839,26 @@
             </div>
         </div>
     </div>
-@stop
+    <script>
+        function editCategory(id,name) {
+            console.log(id,name)
+            // Set the form action to the specific category's update route
+            // You may need to modify this based on your actual update route
+            var form = document.getElementById('editCategoryForm');
+            form.action = "{{ route('company.note.category.student.store') }}/";
+            
+            // Set the hidden input value and the text input value
+            document.getElementById('categoryId').value = id;
+            document.getElementById('categoryName').value = name;
+            
+            // Show the modal
+            var modal = new bootstrap.Modal(document.getElementById('staticBackdropnote'), {
+                keyboard: false
+            });
+            modal.show();
+        }
+    </script>
+        @stop
 @push('scripts')
+
 @endpush

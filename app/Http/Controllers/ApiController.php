@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use App\Models\DefaultSession;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\EnrolmentAddNote;
 use App\Http\Resources\UserResource;
 
 class ApiController extends Controller
@@ -87,5 +88,10 @@ class ApiController extends Controller
         
         return response()->json(['students' => $students]); 
 
+    }
+    public function findnote(Request $request){
+                    $id = $request->query('id');
+                    $note = EnrolmentAddNote::where('id',$id)->first();
+                    return response()->json(['note' => $note]); 
     }
 }

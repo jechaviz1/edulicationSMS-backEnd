@@ -1342,7 +1342,140 @@
                     <p class="mb-1">Invoiced Fees Overdue: <span class="float-right ">$0.00</span></p>
                 </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div id="taable_note" style="display: block;">
+                                <button class="btn btn-primary">Export to PDF</button>
+                                <table class="table" id="taable_note" style="display:block;">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Note</th>
+                                        <th scope="col">Note Category</th>
+                                        <th scope="col">Added By</th>
+                                        <th scope="col">Added On</th>
+                                        <th scope="col">Actions</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($enrolmentnote as $enrol)
+                                        <tr>
+                                            <th scope="row">
+                                               <div>{{ $enrol->note }}</div>
+                                               <div> 
+                                            @if ($enrol->attachment != null)
+                                            Attachment : <a href="{{ asset($enrol->upload)}}"  target="_blank" >{{$enrol->attachment}}</a>
+                                            @endif
+                                               </div>
+                                            </th>
+                                            <td>{{ $enrol->category->name }}</td>
+                                            <td>{{ $enrol->created_by }}</td>
+                                            <td>{{ $enrol->created_at }}</td>
+                                            <td>
+                                                <i title="Edit" class="fa fa-pencil fa-2x mr-2 text-info" aria-hidden="true" onclick="editEnrolmentNote({{$enrol->id}},{{$enrol->note_category}});"></i>
+                                           <a href="{{ route('note.enrolment.delete',$enrol->id)}}"><i class="fa fa-trash fa-2x mr-2 text-danger" aria-hidden="true"></i></a>
+                                            </td>
+                                          </tr>
+                                        @endforeach
+                                       
+                                    </tbody>
+                                  </table>
+                                  <button type="button" class="btn btn-primary text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Add Note
+                                  </button>
+                            </div>
+                              <div id="block_element" style="display:none;">
+                                <form action="{{ route('event.course.enrolment.student.note.update')}}" method="post"  enctype="multipart/form-data">
+                                    @csrf
+                                    @method('post')
+                                    <input type="hidden" name="student_id" value="{{$enrollment->student->id}}">
+                                    <input type="hidden" name="course_id" value="{{$enrollment->course->id}}">
+                                    <input type="hidden" name="note_id" id="note_id" value="">
+                                    <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-3 col-form-label">Select note category:</label>
+                                        <div class="col-sm-8">
+                                        <select class="form-select" aria-label="Default select example" name="note_category" id="note_category_update">
+                                            <option value="" selected>Open this select Note Category</option>
+                                            @foreach($note_student as $note)
+                                                <option value="{{$note->id}}" >{{ $note->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        </div>
+                                      </div>
+                                      <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">Template</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-select" aria-label="Default select example" name="template" id="template_update">
+                                                <option selected>Open this select Template</option>
+                                              </select>
+                                        </div>
+                                      </div>
+                                      <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">Note</label>
+                                        <div class="col-sm-10">
+                                         <textarea name="note" id="note_update" cols="30" rows="10" class="form-controls" ></textarea>
+                                        </div>
+                                      </div>
+                                      <div class="mb-3 row">
+                                        <label for="inputPassword" class="col-sm-2 col-form-label">Upload</label>
+                                        <div class="col-sm-10">
+                                          <input type="file" name="upload" class="form-control" id="upload">
+                                        </div>
+                                      </div>
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                    <button class="btn btn-primary" type="button" onclick="closeelement();">Close</button>
+                                </form>
+                        </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered ">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Add Note</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                            <form action="{{ route('event.course.enrolment.student.note')}}" method="post"  enctype="multipart/form-data">
+                                                @csrf
+                                                @method('post')
+                                                <input type="hidden" name="student_id" value="{{$enrollment->student->id}}">
+                                                <input type="hidden" name="course_id" value="{{$enrollment->course->id}}">
+                                                <div class="mb-3 row">
+                                                    <label for="inputPassword" class="col-sm-3 col-form-label">Select note category:</label>
+                                                    <div class="col-sm-8">
+                                                    <select class="form-select" aria-label="Default select example" name="note_category" >
+                                                        <option value="" selected>Open this select Note Category</option>
+                                                        @foreach($note_student as $note)
+                                                            <option value="{{$note->id}}">{{ $note->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3 row">
+                                                    <label for="inputPassword" class="col-sm-2 col-form-label">Template</label>
+                                                    <div class="col-sm-10">
+                                                        <select class="form-select" aria-label="Default select example" name="template" >
+                                                            <option selected>Open this select Template</option>
+                                                          </select>
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3 row">
+                                                    <label for="inputPassword" class="col-sm-2 col-form-label">Note</label>
+                                                    <div class="col-sm-10">
+                                                     <textarea name="note" id="" cols="30" rows="10" class="form-controls"></textarea>
+                                                    </div>
+                                                  </div>
+                                                  <div class="mb-3 row">
+                                                    <label for="inputPassword" class="col-sm-2 col-form-label">Upload</label>
+                                                    <div class="col-sm-10">
+                                                      <input type="file" name="upload" class="form-control" id="upload">
+                                                    </div>
+                                                  </div>
+                                                <button class="btn btn-primary" type="submit">Save</button>
+                                            </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                        </div>
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
                         <div class="tab-pane fade" id="pills-enrolment" role="tabpanel" aria-labelledby="pills-enrolment-tab">...</div>
                         <div class="tab-pane fade" id="pills-outcomes" role="tabpanel" aria-labelledby="pills-outcomes-tab">...</div>
@@ -1356,6 +1489,44 @@
             </div>
         </div>
     </div>
+    <style>
+        .modal-backdrop{
+            display: none;
+        }
+    </style>
+    <script>
+      function  editEnrolmentNote(id,category){
+        var element = document.getElementById('block_element');
+        var block = document.getElementById('taable_note');
+        element.style.display = 'block';
+        block.style.display = 'none';
+        document.getElementById('note_id').value = id;
+        document.getElementById('note_category_update').value = category;
+        $.ajax({
+                url: "{{ route('api.note.find') }}",
+                type: 'GET',
+                data: {
+                    'id': id,
+                }, // Pass the scheduleId as a query parameter
+                success: function(response) {
+                    console.log(response.note)
+                    document.getElementById('note_update').value = response.note.note;
+
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors here
+                    console.error(error);
+                }
+            });
+
+    }
+       function closeelement(){
+        var element = document.getElementById('block_element');
+        var block = document.getElementById('taable_note');
+        element.style.display = 'none';
+        block.style.display = 'block';
+       }
+    </script>
     <script>
          function loadStudentList() {
             var searchby = $('#searchByThis').val();
