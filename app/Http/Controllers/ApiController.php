@@ -10,7 +10,7 @@ use App\Models\Course;
 use App\Models\Student;
 use App\Models\EnrolmentAddNote;
 use App\Http\Resources\UserResource;
-
+use PDF;
 class ApiController extends Controller
 {
     public function cityget(){
@@ -93,5 +93,13 @@ class ApiController extends Controller
                     $id = $request->query('id');
                     $note = EnrolmentAddNote::where('id',$id)->first();
                     return response()->json(['note' => $note]); 
+    }
+    public function exportToPdf(Request $request){
+            // dd($request);
+            $enrolmentNotes = EnrolmentAddNote::where('student_id',$request->student_id)->where('course_id',$request->course_id)->get();
+
+            $pdf = PDF::loadView('admin.enrolment_notes.note', ['enrolmentNotes' => $enrolmentNotes]);
+    
+            return $pdf->download('note.pdf');
     }
 }

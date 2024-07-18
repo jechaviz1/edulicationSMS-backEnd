@@ -757,7 +757,8 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');  
   Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');  
   Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');  
- 
+  Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
+
 });
 });
 

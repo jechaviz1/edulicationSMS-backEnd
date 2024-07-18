@@ -1344,7 +1344,13 @@
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <div id="taable_note" style="display: block;">
-                                <button class="btn btn-primary">Export to PDF</button>
+                                <form action="{{route('enrolment.notes.pdf') }}" method="post">
+                                    @csrf()
+                                    @method('post')
+                                    <input type="hidden" name="student_id" value="{{$enrollment->student->id}}">
+                                    <input type="hidden" name="course_id" value="{{$enrollment->course->id}}">
+                                    <button class="btn btn-primary" type="submit">Export to PDF</button>
+                                </form>
                                 <table class="table" id="taable_note" style="display:block;">
                                     <thead>
                                       <tr>

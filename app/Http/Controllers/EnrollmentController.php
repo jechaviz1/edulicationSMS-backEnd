@@ -9,7 +9,7 @@ use App\Models\State;
 use App\Models\StudentNoteCategory;
 use App\Models\EnrolmentAddNote;
 use Log;
-
+use PDF;
 class EnrollmentController extends Controller
 {
     /**
@@ -219,5 +219,14 @@ class EnrollmentController extends Controller
         $enrolment_update = EnrolmentAddNote::find($id);
         $enrolment_update->delete();
         return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function exportToPdf()
+    {
+        
+        $enrolmentNotes = EnrolmentAddNote::all();
+
+        $pdf = PDF::loadView('admin.enrolment_notes.pdf', ['enrolmentNotes' => $enrolmentNotes]);
+
+        return $pdf->download('admin.enrolment_notes.pdf');
     }
 }
