@@ -10,7 +10,9 @@
             <strong>Success!</strong> {{ $message }}
         </div>
     @endif
-  
+  @php
+      use App\Models\StudentModule;
+  @endphp
     <div class="col-xl-12 events">
         <div class="card dz-card" id="accordion-four">
             <div class="card-header">
@@ -1482,8 +1484,57 @@
                                         </div>
                                     </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-                        <div class="tab-pane fade" id="pills-enrolment" role="tabpanel" aria-labelledby="pills-enrolment-tab">...</div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+                        <div class="tab-pane fade" id="pills-enrolment" role="tabpanel" aria-labelledby="pills-enrolment-tab">
+                            <form action="{{ route('module.select.people')}}" method="post">
+                                @csrf()
+                                @method('POST')
+                                <table id="example_new" class="display table" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" name="coreunitCheck" id="coreunitCheck" onclick="toggleAllCheckBoxes(this);"> Code </th>
+                                            <th>Name</th>
+                                            <th>Competency Flag</th>
+                                            <th>Enrol Date</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($unit_core_active as $k => $row)
+                                        @php
+                                            $unit = StudentModule::where('student_id',$enrollment->student->id)->where('unit_competency_id', $row->id)->first();
+                                       @endphp
+                                        <tr>
+                                            <td>
+                                            <input type="hidden" name="module[{{$k}}][student_id]" value="{{$enrollment->student->id}}" >
+                                            <input type="checkbox" name="module[{{$k}}][unit_competency_id]" class="coreunits" value="{{$row->id}}"  @if( $unit != null) checked  @endif>
+                                            {{ $row->code }}
+                                        </td>
+                                        <td>{{ $row->name }}</td>
+                                        <td>
+                                            @if ($row->competency_flag == '0')
+                                                Competency 
+                                            @else
+                                                Module
+                                            @endif 
+                                        </td>
+                                        <td>
+                                            @if( $unit != null) {{ $unit->enrollment_date }}  @endif
+                                        </td>
+                                        <td>
+                                            <textarea class="notesta" style="width:100%" name="module[{{$k}}][note]" id="nsu_BIOFTY" >@if( $unit != null) {{ $unit->note }}  @endif</textarea>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary" type="submit">Save</button>
+                                </div>
+                            </div>
+                            <form>
+                        </div>
                         <div class="tab-pane fade" id="pills-outcomes" role="tabpanel" aria-labelledby="pills-outcomes-tab">...</div>
                         <div class="tab-pane fade" id="pills-avetmiss" role="tabpanel" aria-labelledby="pills-avetmiss-tab">...</div>
                         <div class="tab-pane fade" id="pills-funding" role="tabpanel" aria-labelledby="pills-funding-tab">...</div>
@@ -1500,6 +1551,15 @@
             display: none;
         }
     </style>
+    <script>
+        // Function to toggle all checkboxes in the table body based on the header checkbox
+        function toggleAllCheckBoxes(checkbox) {
+            var checkboxes = document.getElementsByClassName('coreunits');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = checkbox.checked;
+            }
+        }
+    </script>
     <script>
       function  editEnrolmentNote(id,category){
         var element = document.getElementById('block_element');

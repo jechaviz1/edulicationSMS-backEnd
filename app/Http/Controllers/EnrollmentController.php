@@ -8,8 +8,11 @@ use App\Models\Enrolment;
 use App\Models\State;
 use App\Models\StudentNoteCategory;
 use App\Models\EnrolmentAddNote;
+use App\Models\UnitCompetency;
 use Log;
 use PDF;
+use DB;
+use Carbon\Carbon;
 class EnrollmentController extends Controller
 {
     /**
@@ -169,8 +172,12 @@ class EnrollmentController extends Controller
         $enrollment = Enrolment::find($id);
         $states = State::get();
         $note_student = StudentNoteCategory::get();
+        $data['unit_core_active'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type','core')->where('status', 'A')->get();
+        $data['unit_elective_active']  = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'elective')->where('status', 'A')->get();
+        $data['unit_core_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'core')->where('status', 'A')->get();
+        $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'elective')->where('status', 'A')->get();
         $enrolmentnote  = EnrolmentAddNote::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->get();
-        return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote'));
+        return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote'))->with($data);
     }
 
     public function enolmentNoteAdd(Request $request)
@@ -228,5 +235,34 @@ class EnrollmentController extends Controller
         $pdf = PDF::loadView('admin.enrolment_notes.pdf', ['enrolmentNotes' => $enrolmentNotes]);
 
         return $pdf->download('admin.enrolment_notes.pdf');
+    }
+    public function enrolmentModule(Request $request){
+        foreach ($request->module as $module) {
+            // Validate the data before processing
+            $validatedData = $request->validate([
+                'module.*.student_id' => 'required|exists:students,id',
+                'module.*.unit_competency_id' => 'required|exists:unit_of_competency,id',
+                'module.*.note' => 'nullable|string',
+            ]);
+        //  dd(Carbon::now());
+            // Find the student
+            $student = Student::find($module['student_id']);
+
+            // Update or insert the pivot table record
+            $student->unitCompetencies()->updateOrInsert(
+                [
+                    'student_id' => $module['student_id'],
+                    'unit_competency_id' => $module['unit_competency_id']
+                ],
+                [
+                    'note' => $module['note'],
+                    'enrollment_date' => Carbon::now()
+                ]
+            );
+        }
+
+        return redirect()->back()->with('success', 'Success! Records have been updated.');
+    
+    
     }
 }

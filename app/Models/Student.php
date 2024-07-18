@@ -23,7 +23,10 @@ class Student extends Model {
     {
         return $this->morphMany(Transaction::class, 'transactionable');
     }
-    
+    public function unitCompetencies()
+    {
+        return $this->belongsToMany(UnitCompetency::class)->withPivot('note')->withTimestamps();
+    }
     // Get Current Enroll
     public static function enroll($id)
     {
@@ -33,5 +36,8 @@ class Student extends Model {
                                 ->first();
 
         return $enroll;
-    }
+    } 
+
+  
+
 }
