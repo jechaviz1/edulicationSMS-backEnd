@@ -9,6 +9,7 @@ use App\Models\State;
 use App\Models\StudentNoteCategory;
 use App\Models\EnrolmentAddNote;
 use App\Models\UnitCompetency;
+use App\Models\StudentModule;
 use Log;
 use PDF;
 use DB;
@@ -176,7 +177,9 @@ class EnrollmentController extends Controller
         $data['unit_elective_active']  = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'elective')->where('status', 'A')->get();
         $data['unit_core_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'core')->where('status', 'A')->get();
         $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'elective')->where('status', 'A')->get();
-        $enrolmentnote  = EnrolmentAddNote::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->get();
+        $data['student_module'] = StudentModule::where('student_id',$enrollment->student->id)->where('unit_competency_id',$enrollment->course->id)->get();
+        
+       $enrolmentnote  = EnrolmentAddNote::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->get();
         return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote'))->with($data);
     }
 
@@ -237,6 +240,7 @@ class EnrollmentController extends Controller
         return $pdf->download('admin.enrolment_notes.pdf');
     }
     public function enrolmentModule(Request $request){
+        dd($request);
         foreach ($request->module as $module) {
             // Validate the data before processing
             $validatedData = $request->validate([
@@ -244,10 +248,9 @@ class EnrollmentController extends Controller
                 'module.*.unit_competency_id' => 'required|exists:unit_of_competency,id',
                 'module.*.note' => 'nullable|string',
             ]);
-        //  dd(Carbon::now());
+          
             // Find the student
             $student = Student::find($module['student_id']);
-
             // Update or insert the pivot table record
             $student->unitCompetencies()->updateOrInsert(
                 [
@@ -260,9 +263,6 @@ class EnrollmentController extends Controller
                 ]
             );
         }
-
         return redirect()->back()->with('success', 'Success! Records have been updated.');
-    
-    
     }
 }

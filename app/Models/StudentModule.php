@@ -12,5 +12,5 @@ class StudentModule extends Model
     protected $fillable = [
         'student_id', 'module_id','note','enrollment_date','completion_date'
     ];
-   
+    
 }

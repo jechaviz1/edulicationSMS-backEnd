@@ -1489,6 +1489,11 @@
                             <form action="{{ route('module.select.people')}}" method="post">
                                 @csrf()
                                 @method('POST')
+                                <div class="row bg-primary text-white">
+                                    <div class="col-md-6">
+                                        <p class="mb-0" style="padding: 3px 0px 3px 12px;">Elective</p>
+                                    </div>
+                                </div>
                                 <table id="example_new" class="display table" style="min-width: 845px">
                                     <thead>
                                         <tr>
@@ -1528,14 +1533,196 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="row bg-primary text-white">
+                                <div class="col-md-6">
+                                    <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive
+                                        Core Units</p>
+                                </div>
+                            </div>
+                            <table id="example_new" class="display table" style="min-width: 845px">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" name="coreunitCheck" id="coreunitCheck" onclick="toggleAllCheckBoxes(this);"> Code </th>
+                                        <th>Name</th>
+                                        <th>Competency Flag</th>
+                                        <th>Enrol Date</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($unit_elective_active as $k => $row)
+                                    @php
+                                            $unit = StudentModule::where('student_id',$enrollment->student->id)->where('unit_competency_id', $row->id)->first();
+                                       @endphp
+                                          <tr>
+                                            <td>
+                                            <input type="hidden" name="module[{{$k}}][student_id]" value="{{$enrollment->student->id}}" >
+                                            <input type="checkbox" name="module[{{$k}}][unit_competency_id]" class="coreunits" value="{{$row->id}}"  @if( $unit != null) checked  @endif>
+                                            {{ $row->code }}
+                                        </td>
+                                        <td>{{ $row->name }}</td>
+                                        <td>
+                                            @if ($row->competency_flag == '0')
+                                                Competency 
+                                            @else
+                                                Module
+                                            @endif 
+                                        </td>
+                                        <td>
+                                            @if( $unit != null) {{ $unit->enrollment_date }}  @endif
+                                        </td>
+                                        <td>
+                                            <textarea class="notesta" style="width:100%" name="module[{{$k}}][note]" id="nsu_BIOFTY" >@if( $unit != null) {{ $unit->note }}  @endif</textarea>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                            <div class="table-responsive mt-4">
+                                <div class="row bg-primary text-white">
+                                    <div class="col-md-6">
+                                        <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive
+                                            Core Units</p>
+                                    </div>
+                                </div>
+                                <table id="example_new" class="display table" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Field Of Education</th>
+                                            <th>Nominal Hours</th>
+                                            <th>VET</th>
+                                            <th>Compentency Flag</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($unit_core_inactive as $k => $row)
+                                            <tr>
+                                                <td>{{ $row->code }}</td>
+                                                <td>{{ $row->name }}</td>
+                                                <td>{{ $row->field_of_education }}</td>
+                                                <td>{{ $row->nominal_hours }}</td>
+                                                <td>
+                                                    @if ($row->vet == '0')
+                                                        No
+                                                    @else
+                                                        Yes
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($row->competency_flag == '0')
+                                                        Competency
+                                                    @else
+                                                        Module
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive mt-4">
+                                <div class="row bg-primary text-white">
+                                    <div class="col-md-6">
+                                        <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive
+                                            Elective Units</p>
+                                    </div>
+                                </div>
+                                <table id="example_new" class="display table" style="min-width: 845px">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Field Of Education</th>
+                                            <th>Nominal Hours</th>
+                                            <th>VET</th>
+                                            <th>Compentency Flag</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($unit_elective_inactive as $k => $row)
+                                            <tr>
+                                                <td>{{ $row->code }}</td>
+                                                <td>{{ $row->name }}</td>
+                                                <td>{{ $row->field_of_education }}</td>
+                                                <td>{{ $row->nominal_hours }}</td>
+                                                <td>
+                                                    @if ($row->vet == '0')
+                                                        No
+                                                    @else
+                                                        Yes
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($row->competency_flag == '0')
+                                                        Competency
+                                                    @else
+                                                        Module
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                       </tbody>
+                                   </table>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button class="btn btn-primary" type="submit">Save</button>
                                 </div>
                             </div>
-                            <form>
+                        </form>
                         </div>
-                        <div class="tab-pane fade" id="pills-outcomes" role="tabpanel" aria-labelledby="pills-outcomes-tab">...</div>
+                        <div class="tab-pane fade" id="pills-outcomes" role="tabpanel" aria-labelledby="pills-outcomes-tab">
+                            <p>Number of Required Units : 22 (6 Core) Successfully Completed / Enrolled Units :   0 /2    (0 /2) </p>
+                            <p>Note: Blue units are Inactive.</p>
+                           <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
+                            <div class="col-sm-6 d-flex align-items-center">
+                                <h5 class="m-0">Core</h5>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="btn btn-primary float-end">Compentancy Report</button>
+                            </div>
+                           </div>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Enrol Date</th>
+                                    <th scope="col">Activity Start</th>
+                                    <th scope="col">Outcome Identifier - National</th>
+                                    <th scope="col">Hours Attended</th>
+                                    <th scope="col">Notes</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+
+                                    @endphp
+                                   
+                                  @foreach ($enrollment->student->unitCompetencies as $module)
+                                  <tr>
+                                  <th scope="col">{{$module->code}}</th>
+                                  <th scope="col">{{ $module->name }}</th>
+                                  <th scope="col">{{ $module->pivot->enrollment_date }}</th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col"></th>
+                                  <th scope="col">{{ $module->pivot->note }}</th>
+                                  <th scope="col"></th>
+                                  <tr>
+                                  @endforeach
+                                </tbody>
+                              </table>
+
+                        </div>
                         <div class="tab-pane fade" id="pills-avetmiss" role="tabpanel" aria-labelledby="pills-avetmiss-tab">...</div>
                         <div class="tab-pane fade" id="pills-funding" role="tabpanel" aria-labelledby="pills-funding-tab">...</div>
                         <div class="tab-pane fade" id="pills-confirm-email" role="tabpanel" aria-labelledby="pills-confirm-email">...</div>

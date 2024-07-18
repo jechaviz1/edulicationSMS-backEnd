@@ -42,4 +42,8 @@ class Course extends Model
     {
         return $this->hasOne(courseEmail::class, 'course_id');
     }
+    public function unitCompetencies()
+    {
+        return $this->belongsToMany(UnitCompetency::class,'course_id','id');
+    }
 }

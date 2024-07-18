@@ -12,7 +12,7 @@ class UnitCompetency extends Model {
     protected $fillable = [
         'course_id', 'code', 'name', 'field_of_education', 'nominal_hours', 'vet', 'competency_flag', 'type', 'status',
     ];
-
+    
     public function students()
     {
         return $this->belongsToMany(Student::class)->withPivot('note')->withTimestamps();
