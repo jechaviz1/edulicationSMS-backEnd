@@ -10,6 +10,7 @@ use App\Models\StudentNoteCategory;
 use App\Models\EnrolmentAddNote;
 use App\Models\UnitCompetency;
 use App\Models\StudentModule;
+use App\Models\AvitmissEnrolment;
 use Log;
 use PDF;
 use DB;
@@ -178,7 +179,7 @@ class EnrollmentController extends Controller
         $data['unit_core_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'core')->where('status', 'A')->get();
         $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'elective')->where('status', 'A')->get();
         $data['student_module'] = StudentModule::where('student_id',$enrollment->student->id)->where('unit_competency_id',$enrollment->course->id)->get();
-        
+        $data['avitmiss'] = AvitmissEnrolment::where('student_id',$enrollment->student->id)->where('course_id',$enrollment->course->id)->first();
        $enrolmentnote  = EnrolmentAddNote::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->get();
         return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote'))->with($data);
     }
@@ -240,8 +241,8 @@ class EnrollmentController extends Controller
         return $pdf->download('admin.enrolment_notes.pdf');
     }
     public function enrolmentModule(Request $request){
-        dd($request);
-        foreach ($request->module as $module) {
+        // dd($request->module);
+        foreach ($request->module as $module){
             // Validate the data before processing
             $validatedData = $request->validate([
                 'module.*.student_id' => 'required|exists:students,id',
@@ -250,19 +251,85 @@ class EnrollmentController extends Controller
             ]);
           
             // Find the student
+            if(isset($module['student_id'])){
+                                                           
+
+            }else{
+
+                dd($module);
+
+            }
             $student = Student::find($module['student_id']);
-            // Update or insert the pivot table record
-            $student->unitCompetencies()->updateOrInsert(
+            $module =  StudentModule::updateOrInsert(
                 [
-                    'student_id' => $module['student_id'],
+                   'student_id' => $module['student_id'],
                     'unit_competency_id' => $module['unit_competency_id']
                 ],
                 [
                     'note' => $module['note'],
                     'enrollment_date' => Carbon::now()
-                ]
-            );
+                    ]
+                );
+            }
+        return redirect()->back()->with('success', 'Success! Records have been updated.');
+    }
+    public function moduleEnrolment(Request $request,$id){
+        // dd($request);
+               $module = StudentModule::where('id',$id)->first();
+               $module->enrollment_date = $request->enrolDate;
+               $module->module_activity_start = $request->module_activity_start;
+               $module->outcomeId = $request->outcomeId;
+               $module->unitCompetencyDate = $request->unitCompetencyDate;
+               $module->note = $request->notes;
+               $module->save();
+            //    dd($module,$request);
+               return redirect()->back()->with('success', 'Success! Records have been updated.');
+    }
+    public function enrolmentPdf(Request $request){
+        // dd($request);
+        $enrollment = Enrolment::find($request->enrolment);
+
+        $pdf = PDF::loadView('admin.enrollment.unit.pdf', ['enrollment' => $enrollment]);
+
+        return $pdf->download('admin.enrolment_notes.pdf');
+    }
+    public function enrolmentAvimiss(Request $request){
+        // dd($request->student_id,$request);
+        $avitmissEnrolment = AvitmissEnrolment::where('student_id',$request->student_id)->where('course_id',$request->course_id)->first();
+        //    dd($avitmissEnrolment);
+        if($avitmissEnrolment != null){
+            $avitmissEnrolment->student_id = $request->student_id;
+            $avitmissEnrolment->course_id = $request->course_id;
+            $avitmissEnrolment->deliverymodeId = $request->deliverymodeId;
+            $avitmissEnrolment->scheduledHours = $request->scheduledHours;
+            $avitmissEnrolment->studyReasonId = $request->studyReasonId;
+            $avitmissEnrolment->commencourseId = $request->commencourseId;
+            $avitmissEnrolment->isVETSchool = $request->isVETSchool;
+            $avitmissEnrolment->schoolTypeId = $request->schoolTypeId;
+            $avitmissEnrolment->contractApprenticeshipId = $request->contractApprenticeshipId;
+            $avitmissEnrolment->clientApprenticeshipId = $request->clientApprenticeshipId;
+            $avitmissEnrolment->associatedCourseId = $request->associatedCourseId;
+            $avitmissEnrolment->tuitionFee = $request->tuitionFee;
+            $avitmissEnrolment->save();
+        }else{
+            $avitmiss_enrolment = new AvitmissEnrolment;
+            $avitmiss_enrolment->student_id = $request->student_id;
+            $avitmiss_enrolment->course_id = $request->course_id;
+            $avitmiss_enrolment->deliverymodeId = $request->deliverymodeId;
+            $avitmiss_enrolment->scheduledHours = $request->scheduledHours;
+            $avitmiss_enrolment->studyReasonId = $request->studyReasonId;
+            $avitmiss_enrolment->commencourseId = $request->commencourseId;
+            $avitmiss_enrolment->isVETSchool = $request->isVETSchool;
+            $avitmiss_enrolment->schoolTypeId = $request->schoolTypeId;
+            // dd($request->schoolTypeId);
+            $avitmiss_enrolment->contractApprenticeshipId = $request->contractApprenticeshipId;
+            $avitmiss_enrolment->clientApprenticeshipId = $request->clientApprenticeshipId;
+            $avitmiss_enrolment->associatedCourseId = $request->associatedCourseId;
+            $avitmiss_enrolment->tuitionFee = $request->tuitionFee;
+            $avitmiss_enrolment->save();
         }
+        
+        // dd($request);
         return redirect()->back()->with('success', 'Success! Records have been updated.');
     }
 }

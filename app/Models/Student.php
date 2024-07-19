@@ -26,7 +26,7 @@ class Student extends Model {
     
     public function unitCompetencies()
     {
-        return $this->belongsToMany(UnitCompetency::class)->withPivot('note','enrollment_date')->withTimestamps();
+        return $this->belongsToMany(UnitCompetency::class)->withPivot('note','enrollment_date','unitCompetencyDate','outcomeId','module_activity_start','completion_date')->withTimestamps();
     }
     // Get Current Enroll
     public static function enroll($id)

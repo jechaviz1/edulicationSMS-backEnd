@@ -659,6 +659,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/event/enrolment/course/people/update', [App\Http\Controllers\EnrollmentController::class, 'enolmentNoteUpdate'])->name('event.course.enrolment.student.note.update');
     Route::get('/event/enrollment/note/{id}', [App\Http\Controllers\EnrollmentController::class, 'enrolment_note_delete'])->name('note.enrolment.delete');
     Route::post('/event/enrollment/module', [App\Http\Controllers\EnrollmentController::class, 'enrolmentModule'])->name('module.select.people');
+    Route::put('/event/enrollment/module/{id}', [App\Http\Controllers\EnrollmentController::class, 'moduleEnrolment'])->name('core.module.unit.update');
+    Route::post('/event/enrollment/module/pdf', [App\Http\Controllers\EnrollmentController::class, 'enrolmentPdf'])->name('student.enrolment.module.pdf');
+    Route::post('/event/enrollment/course/avitmiss', [App\Http\Controllers\EnrollmentController::class, 'enrolmentAvimiss'])->name('enrolment.avetmiss.course');
       
     
     // End Event Enrollment 
