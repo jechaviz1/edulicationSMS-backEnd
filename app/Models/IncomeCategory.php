@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class IncomeCategory extends Model {
 
+    use HasFactory;
     protected $table = 'income_categories';
     protected $fillable = [
         'title', 'slug', 'description', 'status',
     ];
 
-    use HasFactory;
 }

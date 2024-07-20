@@ -342,7 +342,11 @@ class EnrollmentController extends Controller
             $issue_certificate->issue_date = $request->issue_date;
             $issue_certificate->template = $request->template;
             $issue_certificate->delivery_method = $request->delivery_method;
-            $issue_certificate->include_report = $request->include_report;
+            if($request->include_report == "1"){
+                $issue_certificate->include_report = "1";
+            }else{
+                $issue_certificate->include_report = "0";
+            }
             $issue_certificate->comments = $request->comments;
             $issue_certificate->save();
             return redirect()->back()->with('success', 'Success! Records have been updated.');

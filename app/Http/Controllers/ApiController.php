@@ -8,6 +8,7 @@ use App\Models\Teacher;
 use App\Models\DefaultSession;
 use App\Models\Course;
 use App\Models\Student;
+use App\Models\Enrolment;
 use App\Models\EnrolmentAddNote;
 use App\Http\Resources\UserResource;
 use App\Models\IssueCertificate;
@@ -103,12 +104,11 @@ class ApiController extends Controller
     
             return $pdf->download('note.pdf');
     }
-    public function certificatepdf(Request $request){
-        dd($request);
-        $id = $request->query('id');
+    public function certificatepdf($id){
         $data = IssueCertificate::where('id',$id)->first();
+        $enrollment = Enrolment::find($data->enrolment_id);
         // dd($data);
-        $pdf = PDF::loadView('admin.certificate.certificate', ['data' => $data]);
+        $pdf = PDF::loadView('admin.certificate.certificate', ['data' => $data,'enrollment' => $enrollment]);
     
         return $pdf->download('note.pdf');
         // return response()->json(['data' => $data]); 

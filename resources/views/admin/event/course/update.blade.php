@@ -27,17 +27,14 @@
         <div class="tab-pane fade show active" id="nav-enrolments" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="mt-3 mb-3">
                 <div class="" role="group" aria-label="Basic example">
-                    {{-- <button type="button" class="btn btn-primary ms-2">Email all learners</button>
+                    <button type="button" class="btn btn-primary ms-2">Email all learners</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">SMS all learners</button>
                     <button type="button" class="btn btn-primary ms-2">Send Survey</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#certificate_manage">Manage Certificates</button>
-                    <button type="button" class="btn btn-primary ms-2">Add Enrolments</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addenrolments">Add Enrolments</button>
                     <button type="button" class="btn btn-primary ms-2">Enrol Units</button>
                     <button type="button" class="btn btn-primary ms-2">Update Outcomes</button>
-                    <button type="button" class="btn btn-primary ms-2">Create Invoice</button> --}}
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addenrolments">
-                        Add Enrolments
-                    </button>
+                    <button type="button" class="btn btn-primary ms-2">Create Invoice</button>
                 </div>
             </div>
             {{-- // tables start --}}

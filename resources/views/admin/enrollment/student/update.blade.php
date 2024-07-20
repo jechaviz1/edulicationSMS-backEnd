@@ -2531,7 +2531,7 @@
                                         <label for="">Include Competency Report :</label>
                                     </div>
                                     <div class="col-10">
-                                        <input class="form-check-input" name="include_report" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input" name="include_report" type="checkbox" value="1" id="flexCheckDefault">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -2622,25 +2622,7 @@
         function changetemplate(id){
             console.log(id);
         }
-        function PrintIssuedCertificate(id){
-                console.log(id);
-                $.ajax({
-                url: "{{ route('api.enrolment.course.certificate.pdf') }}", // Replace with your API endpoint
-                type: 'GET',
-                data: { id: id },
-                xhrFields: {
-                    responseType: 'blob'
-                },
-                success: function(data) {
-                    var blob = new Blob([data.data], { type: 'application/pdf' });
-                    var url = window.URL.createObjectURL(blob);
-                    window.open(url);
-                },
-                error: function(xhr, status, error) {
-                    console.error("Failed to fetch certificate:", status, error);
-                }
-            });
-        }
+        
     </script>
     <script>
         // Function to toggle all checkboxes in the table body based on the header checkbox
