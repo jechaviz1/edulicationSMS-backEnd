@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 17, 2024 at 03:28 PM
+-- Generation Time: Jul 20, 2024 at 06:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -192,6 +192,37 @@ CREATE TABLE `avetmiss_code` (
 
 INSERT INTO `avetmiss_code` (`id`, `course_id`, `course_code`, `state_course_code`, `reporting_state`, `nominal_hours`, `recognition_identifier`, `qualification_category`, `anzscod_id`, `vet_flag`, `field_of_education`, `associated_course_identifier`, `status`, `is_deleted`, `created_at`, `updated_at`) VALUES
 (1, 1, 'fdsf', 'fdsf', '1', '10', '4', '1', 'ASOPDd', '1', NULL, 'fds', 'A', NULL, '2024-07-09 01:47:44', '2024-07-09 01:47:44');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `avitmiss_enrolments`
+--
+
+CREATE TABLE `avitmiss_enrolments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `deliverymodeId` varchar(255) DEFAULT NULL,
+  `scheduledHours` varchar(255) DEFAULT NULL,
+  `studyReasonId` varchar(255) DEFAULT NULL,
+  `commencourseId` varchar(255) DEFAULT NULL,
+  `isVETSchool` varchar(255) DEFAULT NULL,
+  `schoolTypeId` varchar(255) DEFAULT NULL,
+  `contractApprenticeshipId` varchar(255) DEFAULT NULL,
+  `clientApprenticeshipId` varchar(255) DEFAULT NULL,
+  `associatedCourseId` varchar(255) DEFAULT NULL,
+  `tuitionFee` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `avitmiss_enrolments`
+--
+
+INSERT INTO `avitmiss_enrolments` (`id`, `student_id`, `course_id`, `deliverymodeId`, `scheduledHours`, `studyReasonId`, `commencourseId`, `isVETSchool`, `schoolTypeId`, `contractApprenticeshipId`, `clientApprenticeshipId`, `associatedCourseId`, `tuitionFee`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'Employment based', '1200', 'To develop my existing business', NULL, 'N', 'School - Government', '1123456', '1123456', '112356', '0100', '2024-07-19 06:00:28', '2024-07-19 06:40:05');
 
 -- --------------------------------------------------------
 
@@ -865,9 +896,9 @@ CREATE TABLE `enrolment_add_notes` (
 --
 
 INSERT INTO `enrolment_add_notes` (`id`, `student_id`, `course_id`, `note_category`, `template`, `note`, `attachment`, `upload`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 2, '1', 2, 'Open this select Template', 'afdsfdsf', 'Enrolment_Notes_kuldip_domadiya.pdf', 'notes/Enrolment_1721220027_Enrolment_Notes_kuldip_domadiya.pdf', NULL, '2024-07-17 07:10:27', '2024-07-17 07:10:27'),
-(2, 2, '1', 2, 'Open this select Template', 'dsadsf', 'Enrolment_Notes_kuldip_domadiya.pdf', 'notes/Enrolment_1721220224_Enrolment_Notes_kuldip_domadiya.pdf', NULL, '2024-07-17 07:13:44', '2024-07-17 07:13:44'),
-(3, 2, '1', 2, 'Open this select Template', 'fasdfasdf', 'Enrolment_Notes_kuldip_domadiya.pdf', 'notes/Enrolment_1721220569_Enrolment_Notes_kuldip_domadiya.pdf', ' rakesh makwana', '2024-07-17 07:19:29', '2024-07-17 07:19:29');
+(2, 2, '1', 2, 'Open this select Template', 'dsadsf', 'Enrolment_Notes_kuldip_domadiya.pdf', 'notes/Enrolment_1721220224_Enrolment_Notes_kuldip_domadiya.pdf', ' rakesh makwana', '2024-07-17 07:13:44', '2024-07-17 22:27:51'),
+(3, 2, '1', 2, 'Open this select Template', 'fasdfasdf', 'Enrolment_Notes_kuldip_domadiya.pdf', 'notes/Enrolment_1721220569_Enrolment_Notes_kuldip_domadiya.pdf', ' rakesh makwana', '2024-07-17 07:19:29', '2024-07-17 07:19:29'),
+(4, 2, '1', 2, 'Open this select Template', 'fdsafasdf', 'Enrolment_Notes_kuldip_domadiya.pdf', 'notes/Enrolment_1721270910_Enrolment_Notes_kuldip_domadiya.pdf', ' rakesh makwana', '2024-07-17 21:18:30', '2024-07-17 21:18:30');
 
 -- --------------------------------------------------------
 
@@ -1187,7 +1218,20 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (36, '2024_07_15_154219_create_issue_certificates_table', 23),
 (37, '2024_07_16_143224_create_password_resets_table', 24),
 (38, '2024_07_17_055818_create_company_settings_table', 25),
-(39, '2024_07_17_090200_create_student_note_categories_table', 26);
+(39, '2024_07_17_090200_create_student_note_categories_table', 26),
+(40, '2024_07_18_070714_create_model_student_table', 27);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `model_student`
+--
+
+CREATE TABLE `model_student` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1714,6 +1758,36 @@ INSERT INTO `student_note_categories` (`id`, `name`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `student_unit_competency`
+--
+
+CREATE TABLE `student_unit_competency` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `unit_competency_id` bigint(20) UNSIGNED NOT NULL,
+  `enrollment_date` varchar(255) DEFAULT NULL,
+  `completion_date` varchar(255) DEFAULT NULL,
+  `module_activity_start` varchar(255) DEFAULT NULL,
+  `outcomeId` varchar(255) DEFAULT NULL,
+  `unitCompetencyDate` varchar(255) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_unit_competency`
+--
+
+INSERT INTO `student_unit_competency` (`id`, `student_id`, `unit_competency_id`, `enrollment_date`, `completion_date`, `module_activity_start`, `outcomeId`, `unitCompetencyDate`, `note`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, '2024-07-19 07:05:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 3, NULL, NULL, 'fasdf', 'Competency not achieved/fail', '100', 'retretret', NULL, '2024-07-19 04:46:40'),
+(3, 2, 4, '2024-07-17', NULL, '2024-07-16', 'Competency not achieved/fail', NULL, NULL, NULL, '2024-07-19 03:53:03'),
+(7, 2, 1, '2024-07-19 07:05:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subject`
 --
 
@@ -1954,10 +2028,10 @@ CREATE TABLE `unit_of_competency` (
 --
 
 INSERT INTO `unit_of_competency` (`id`, `course_id`, `code`, `name`, `recognition_identifier`, `qualification_category`, `field_of_education`, `nominal_hours`, `vet`, `competency_flag`, `type`, `status`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(1, 1, 'IND', 'dasd', NULL, NULL, 'jio', '30', '1', '0', 'elective', 'A', '0', '2024-07-09 02:15:57', '2024-07-09 02:15:57'),
-(2, 1, 'IND', 'kuldip', NULL, NULL, 'jio', '30', '1', '0', 'core', 'A', '0', '2024-07-09 02:16:32', '2024-07-09 02:18:26'),
-(3, 1, 'IND', 'dasd', NULL, NULL, NULL, '30', '1', '0', 'core', 'A', '0', '2024-07-09 02:17:17', '2024-07-09 02:17:17'),
-(4, 1, 'test1', 'test1', NULL, NULL, 'tewst`', '7', '1', '0', 'core', 'A', '0', '2024-07-09 02:18:00', '2024-07-09 02:18:54');
+(1, 1, 'IND1', 'dasd', NULL, NULL, 'jio', '30', '1', '0', 'elective', 'A', '0', '2024-07-09 02:15:57', '2024-07-09 02:15:57'),
+(2, 1, 'IND2', 'kuldip', NULL, NULL, 'jio', '30', '1', '0', 'core', 'A', '0', '2024-07-09 02:16:32', '2024-07-09 02:18:26'),
+(3, 1, 'IND3', 'dasd', NULL, NULL, NULL, '30', '1', '0', 'core', 'A', '0', '2024-07-09 02:17:17', '2024-07-09 02:17:17'),
+(4, 1, 'test14', 'test1', NULL, NULL, 'tewst`', '7', '1', '0', 'core', 'A', '0', '2024-07-09 02:18:00', '2024-07-09 02:18:54');
 
 -- --------------------------------------------------------
 
@@ -2034,6 +2108,12 @@ ALTER TABLE `avetmisses`
 ALTER TABLE `avetmiss_code`
   ADD PRIMARY KEY (`id`),
   ADD KEY `avetmiss_code_course_id_foreign` (`course_id`);
+
+--
+-- Indexes for table `avitmiss_enrolments`
+--
+ALTER TABLE `avitmiss_enrolments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `batches`
@@ -2303,6 +2383,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `model_student`
+--
+ALTER TABLE `model_student`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `modules`
 --
 ALTER TABLE `modules`
@@ -2435,6 +2521,13 @@ ALTER TABLE `student_note_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `student_unit_competency`
+--
+ALTER TABLE `student_unit_competency`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `foreign_studnts_unit` (`student_id`);
+
+--
 -- Indexes for table `subject`
 --
 ALTER TABLE `subject`
@@ -2521,6 +2614,12 @@ ALTER TABLE `avetmisses`
 --
 ALTER TABLE `avetmiss_code`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `avitmiss_enrolments`
+--
+ALTER TABLE `avitmiss_enrolments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `batches`
@@ -2682,7 +2781,7 @@ ALTER TABLE `enrolments`
 -- AUTO_INCREMENT for table `enrolment_add_notes`
 --
 ALTER TABLE `enrolment_add_notes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -2772,7 +2871,13 @@ ALTER TABLE `leave_type`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `model_student`
+--
+ALTER TABLE `model_student`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `modules`
@@ -2893,6 +2998,12 @@ ALTER TABLE `students`
 --
 ALTER TABLE `student_note_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `student_unit_competency`
+--
+ALTER TABLE `student_unit_competency`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `subject`

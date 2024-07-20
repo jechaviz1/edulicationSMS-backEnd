@@ -2019,18 +2019,33 @@
                                 action="{{ route('enrolment.avetmiss.course') }}">
                                 @csrf
                                 @method('POST')
-                                <input type="hidden" name="student_id" value="{{ $enrollment->student->id}}">
-                                <input type="hidden" name="course_id" value="{{$enrollment->course->id}}">
+                                <input type="hidden" name="student_id" value="{{ $enrollment->student->id }}">
+                                <input type="hidden" name="course_id" value="{{ $enrollment->course->id }}">
                                 <div>
                                     <div class="form-group row mt-2">
                                         <div class="col-sm-2">Delivery Mode</div><!--//WWB-220-->
                                         <div class="col-sm-4">
-                                            <select name="deliverymodeId" id="deliverymodeId" class="input_text_1 form-control" style="width:350px;" >
-                                                <option value="Classroom-based" @if($avitmiss->deliverymodeId == "Classroom-based") selected @endif>Classroom-based</option>
-                                                <option value="Electronic based" @if($avitmiss->deliverymodeId == "Electronic based") selected @endif>Electronic based</option>
-                                                <option value="Employment based" @if($avitmiss->deliverymodeId == "Employment based") selected @endif>Employment based</option>
-                                                <option value="Not applicable - recognition of prior learning/recognition of current competency/ credit transfer" @if($avitmiss->deliverymodeId == "Not applicable - recognition of prior learning/recognition of current competency/ credit transfer") selected @endif>Not applicable - recognition of prior learning/recognition of current competency/ credit transfer</option>
-                                                <option value="Other delivery (e.g. correspondence)" @if($avitmiss->deliverymodeId == "Other delivery (e.g. correspondence)") selected @endif>Other delivery (e.g. correspondence)</option>
+                                            <select name="deliverymodeId" id="deliverymodeId"
+                                                class="input_text_1 form-control" style="width:350px;">
+                                                <option value="Classroom-based"
+                                                    @if ($avitmiss->deliverymodeId == 'Classroom-based') selected @endif>Classroom-based
+                                                </option>
+                                                <option value="Electronic based"
+                                                    @if ($avitmiss->deliverymodeId == 'Electronic based') selected @endif>Electronic based
+                                                </option>
+                                                <option value="Employment based"
+                                                    @if ($avitmiss->deliverymodeId == 'Employment based') selected @endif>Employment based
+                                                </option>
+                                                <option
+                                                    value="Not applicable - recognition of prior learning/recognition of current competency/ credit transfer"
+                                                    @if (
+                                                        $avitmiss->deliverymodeId ==
+                                                            'Not applicable - recognition of prior learning/recognition of current competency/ credit transfer') selected @endif>Not applicable -
+                                                    recognition of prior learning/recognition of current competency/ credit
+                                                    transfer</option>
+                                                <option value="Other delivery (e.g. correspondence)"
+                                                    @if ($avitmiss->deliverymodeId == 'Other delivery (e.g. correspondence)') selected @endif>Other delivery (e.g.
+                                                    correspondence)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -2039,7 +2054,9 @@
                                             Scheduled Hours
                                         </div>
                                         <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="scheduledHours" id="scheduledHours" value="{{ $avitmiss->scheduledHours }}" style="width:350px;">
+                                            <input class="form-control" type="text" name="scheduledHours"
+                                                id="scheduledHours" value="{{ $avitmiss->scheduledHours }}"
+                                                style="width:350px;">
                                         </div>
                                     </div>
                                     <div class="form-group row mt-2">
@@ -2051,35 +2068,63 @@
                                                 class="input_text_1 form-control" style="width:350px;">
                                                 <option></option>
                                                 <optgroup label="Job Related">
-                                                    <option value="To get a job" @if($avitmiss->studyReasonId == "To get a job") selected @endif>To get a job</option>
-                                                    <option value="To develop my existing business" @if($avitmiss->studyReasonId == "To develop my existing business") selected @endif>To develop my existing business</option>
-                                                    <option value="To start my own business" @if($avitmiss->studyReasonId == "To start my own business") selected @endif>To start my own business</option>
-                                                    <option value="To try for a different career" @if($avitmiss->studyReasonId == "To try for a different career") selected @endif>To try for a different career</option>
-                                                    <option value="To get a better job or promotion" @if($avitmiss->studyReasonId == "To get a better job or promotion") selected @endif>To get a better job or promotion</option>
-                                                    <option value="It was a requirement of my job" @if($avitmiss->studyReasonId == "It was a requirement of my job") selected @endif>It was a requirement of my job</option>
-                                                    <option value="I wanted extra skills for my job" @if($avitmiss->studyReasonId == "I wanted extra skills for my job") selected @endif>I wanted extra skills for my job</option>
+                                                    <option value="To get a job"
+                                                        @if ($avitmiss->studyReasonId == 'To get a job') selected @endif>To get a job
+                                                    </option>
+                                                    <option value="To develop my existing business"
+                                                        @if ($avitmiss->studyReasonId == 'To develop my existing business') selected @endif>To develop my
+                                                        existing business</option>
+                                                    <option value="To start my own business"
+                                                        @if ($avitmiss->studyReasonId == 'To start my own business') selected @endif>To start my own
+                                                        business</option>
+                                                    <option value="To try for a different career"
+                                                        @if ($avitmiss->studyReasonId == 'To try for a different career') selected @endif>To try for a
+                                                        different career</option>
+                                                    <option value="To get a better job or promotion"
+                                                        @if ($avitmiss->studyReasonId == 'To get a better job or promotion') selected @endif>To get a better
+                                                        job or promotion</option>
+                                                    <option value="It was a requirement of my job"
+                                                        @if ($avitmiss->studyReasonId == 'It was a requirement of my job') selected @endif>It was a
+                                                        requirement of my job</option>
+                                                    <option value="I wanted extra skills for my job"
+                                                        @if ($avitmiss->studyReasonId == 'I wanted extra skills for my job') selected @endif>I wanted extra
+                                                        skills for my job</option>
                                                 </optgroup>
                                                 <optgroup label="Further Study">
-                                                    <option value="To get into another course of study" @if($avitmiss->studyReasonId == "To get into another course of study") selected @endif>To get into another course of study</option>
+                                                    <option value="To get into another course of study"
+                                                        @if ($avitmiss->studyReasonId == 'To get into another course of study') selected @endif>To get into
+                                                        another course of study</option>
                                                 </optgroup>
                                                 <optgroup label="Other">
                                                     <option value="Other reasons">Other reasons</option>
-                                                    <option value="For personal interest or self-development" @if($avitmiss->studyReasonId == "For personal interest or self-development") selected @endif>For personal interest or self-development</option>
-                                                    <option value="To get skills for community/voluntary work" @if($avitmiss->studyReasonId == "To get skills for community/voluntary work") selected @endif>To get skills for community/voluntary work</option>
+                                                    <option value="For personal interest or self-development"
+                                                        @if ($avitmiss->studyReasonId == 'For personal interest or self-development') selected @endif>For personal
+                                                        interest or self-development</option>
+                                                    <option value="To get skills for community/voluntary work"
+                                                        @if ($avitmiss->studyReasonId == 'To get skills for community/voluntary work') selected @endif>To get skills
+                                                        for community/voluntary work</option>
                                                 </optgroup>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group row mt-2" >
+                                    <div class="form-group row mt-2">
                                         <div class="col-sm-2">
                                             Enrolment Type
                                         </div>
                                         <div class="col-sm-4">
-                                            <select name="commencourseId" id="commencourseId" class="input_text_1 form-control" style="width:350px;">
+                                            <select name="commencourseId" id="commencourseId"
+                                                class="input_text_1 form-control" style="width:350px;">
                                                 <option value="n">&nbsp;</option>
-                                                <option value="Commencing enrolment in the qualification or course"  @if($avitmiss->studyReasonId == "Commencing enrolment in the qualification or course") seected @endif>Commencing enrolment in the qualification or course</option>
-                                                <option value="Continuing enrolment in the qualification or course from a previous year"  @if($avitmiss->studyReasonId == "TContinuing enrolment in the qualification or course from a previous year") seected @endif>Continuing enrolment in the qualification or course from a previous year</option>
-                                                <option value="Unit of competency or module enrolment only"  @if($avitmiss->studyReasonId == "Unit of competency or module enrolment only") seected @endif>Unit of competency or module enrolment only</option>
+                                                <option value="Commencing enrolment in the qualification or course"
+                                                    @if ($avitmiss->studyReasonId == 'Commencing enrolment in the qualification or course') seected @endif>Commencing enrolment
+                                                    in the qualification or course</option>
+                                                <option
+                                                    value="Continuing enrolment in the qualification or course from a previous year"
+                                                    @if ($avitmiss->studyReasonId == 'TContinuing enrolment in the qualification or course from a previous year') seected @endif>Continuing enrolment
+                                                    in the qualification or course from a previous year</option>
+                                                <option value="Unit of competency or module enrolment only"
+                                                    @if ($avitmiss->studyReasonId == 'Unit of competency or module enrolment only') seected @endif>Unit of competency or
+                                                    module enrolment only</option>
                                             </select>
                                         </div>
                                     </div>
@@ -2112,8 +2157,10 @@
                                         <div class="col-sm-4">
                                             <select name="isVETSchool" id="isVETSchool"
                                                 class="input_text_1 form-control" style="width:113px;">
-                                                <option value="Y" @if($avitmiss->isVETSchool == "Y") selected @endif>Yes</option>
-                                                <option value="N" @if($avitmiss->isVETSchool == "N") selected @endif>
+                                                <option value="Y"
+                                                    @if ($avitmiss->isVETSchool == 'Y') selected @endif>Yes</option>
+                                                <option value="N"
+                                                    @if ($avitmiss->isVETSchool == 'N') selected @endif>
                                                     No
                                                 </option>
                                             </select>
@@ -2127,14 +2174,29 @@
                                                 data-original-title="Must be the school type of the home school of the learner and not where the training takes place"></i>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select name="schoolTypeId" id="schoolTypeId" class="input_text_1 form-control" style="width:350px;">
-                                                <option value="School - Government" @if($avitmiss->schoolTypeId == "School - Government") selected @endif>School - Government</option>
-                                                <option value="School - Catholic" @if($avitmiss->schoolTypeId == "School - Catholic") selected @endif>School - Catholic</option>
-                                                <option value="School - Independent" @if($avitmiss->schoolTypeId == "School - Independent") selected @endif>School - Independent</option>
-                                                <option value="Technical and Further Education Institute" @if($avitmiss->schoolTypeId == "Technical and Further Education Institute") selected @endif>  Technical and Further Education Institute </option>
-                                                <option value="Community-based adult education provider" @if($avitmiss->schoolTypeId == "Community-based adult education provider") selected @endif>Community-based adult education provider</option>
-                                                <option value="Privately operated registered training organisation" @if($avitmiss->schoolTypeId == "Privately operated registered training organisation") selected @endif>Privately operated registered training organisation</option>
-                                                <option value="Home school arrangement" @if($avitmiss->schoolTypeId == "Home school arrangement") selected @endif>Home school arrangement</option>
+                                            <select name="schoolTypeId" id="schoolTypeId"
+                                                class="input_text_1 form-control" style="width:350px;">
+                                                <option value="School - Government"
+                                                    @if ($avitmiss->schoolTypeId == 'School - Government') selected @endif>School - Government
+                                                </option>
+                                                <option value="School - Catholic"
+                                                    @if ($avitmiss->schoolTypeId == 'School - Catholic') selected @endif>School - Catholic
+                                                </option>
+                                                <option value="School - Independent"
+                                                    @if ($avitmiss->schoolTypeId == 'School - Independent') selected @endif>School - Independent
+                                                </option>
+                                                <option value="Technical and Further Education Institute"
+                                                    @if ($avitmiss->schoolTypeId == 'Technical and Further Education Institute') selected @endif> Technical and
+                                                    Further Education Institute </option>
+                                                <option value="Community-based adult education provider"
+                                                    @if ($avitmiss->schoolTypeId == 'Community-based adult education provider') selected @endif>Community-based
+                                                    adult education provider</option>
+                                                <option value="Privately operated registered training organisation"
+                                                    @if ($avitmiss->schoolTypeId == 'Privately operated registered training organisation') selected @endif>Privately operated
+                                                    registered training organisation</option>
+                                                <option value="Home school arrangement"
+                                                    @if ($avitmiss->schoolTypeId == 'Home school arrangement') selected @endif>Home school
+                                                    arrangement</option>
                                             </select>
                                         </div>
                                     </div>
@@ -2147,7 +2209,8 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="text" name="contractApprenticeshipId" class="form-control"
-                                                id="contractApprenticeshipId" value="{{ $avitmiss->contractApprenticeshipId }}" style="width:350px;"
+                                                id="contractApprenticeshipId"
+                                                value="{{ $avitmiss->contractApprenticeshipId }}" style="width:350px;"
                                                 maxlength="10" fdprocessedid="3t8h3t">
                                         </div>
                                     </div>
@@ -2159,7 +2222,8 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="text" name="clientApprenticeshipId" class="form-control"
-                                                id="clientApprenticeshipId" value="{{ $avitmiss->clientApprenticeshipId }}" style="width:350px;"
+                                                id="clientApprenticeshipId"
+                                                value="{{ $avitmiss->clientApprenticeshipId }}" style="width:350px;"
                                                 maxlength="10">
                                         </div>
                                     </div>
@@ -2169,8 +2233,8 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="text" name="associatedCourseId" class="form-control"
-                                                id="associatedCourseId" value="{{ $avitmiss->associatedCourseId }}" style="width:350px;"
-                                                maxlength="10" >
+                                                id="associatedCourseId" value="{{ $avitmiss->associatedCourseId }}"
+                                                style="width:350px;" maxlength="10">
                                         </div>
                                     </div>
                                     <!-- bug 4542 starts here -->
@@ -2182,8 +2246,8 @@
                                         </div>
                                         <div class="col-sm-4">
                                             <input type="text" name="tuitionFee" class="form-control"
-                                                id="tuitionFee" value="{{ $avitmiss->tuitionFee }}" style="width:350px;" maxlength="10"
-                                                fdprocessedid="f8kytf">
+                                                id="tuitionFee" value="{{ $avitmiss->tuitionFee }}"
+                                                style="width:350px;" maxlength="10" fdprocessedid="f8kytf">
                                         </div>
                                     </div>
                                     <!-- bug 4542 ends here -->
@@ -2196,50 +2260,183 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="pills-funding" role="tabpanel" aria-labelledby="pills-funding-tab">
+                        <div class="tab-pane fade" id="pills-funding" role="tabpanel"
+                            aria-labelledby="pills-funding-tab">
                             <p><strong>Note: Blue units are Inactive.</strong>
                                 <span style="align:right;padding-left:550px;"><strong>Qualification:&nbsp;&nbsp;</strong>
-                      <span id="qualification" style="display:inline;"><strong>Not Completed&nbsp;&nbsp;</strong></span>
-                      <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
-                        <div class="col-sm-6 d-flex align-items-center">
-                            <h5 class="m-0">Core</h5>
-                        </div>
-                    </div>
-                      </span>
+                                    <span id="qualification" style="display:inline;"><strong>Not
+                                            Completed&nbsp;&nbsp;</strong></span>
+                                    <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
+                                        <div class="col-sm-6 d-flex align-items-center">
+                                            <h5 class="m-0">Core</h5>
+                                        </div>
+                                    </div>
+                                </span>
                             </p>
                             <table class="table">
                                 <thead>
-                                  <tr>
-                                    <th scope="col">Code</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Funding Source - National</th>
-                                    <th scope="col">Specific Funding Identifier </th>
-                                    <th scope="col">Funding Source - State</th>
-                                    <th scope="col">Delivery Mode(Avetmiss 8)</th>
-                                    <th scope="col">Predominant delivery mode</th>
-                                    <th scope="col">Action</th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Funding Source - National</th>
+                                        <th scope="col">Specific Funding Identifier </th>
+                                        <th scope="col">Funding Source - State</th>
+                                        <th scope="col">Delivery Mode(Avetmiss 8)</th>
+                                        <th scope="col">Predominant delivery mode</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th>1</th>
-                                  </tr>
+                                    @foreach ($enrollment->student->unitCompetencies as $module)
+                                        @if ($module->type == 'core')
+                                            <tr>
+                                                <th scope="col">{{ $module->code }} </th>
+                                                <th scope="col">{{ $module->name }}</th>
+                                                <th>
+                                                    <select name="fundingsourceId_{{$module->id}}" id="fundingsourceId_{{$module->id}}" class="input_text_1 form-control" onchange="showHideText(this.options[this.selectedIndex].value,{{$module->id}});">
+                                                        <option value="Commonwealth and state general purpose recurrent (11)">Commonwealth and state general purpose recurrent (11)</option>
+                                                        <option value="Commonwealth specific funding program (13)" selected="">Commonwealth specific funding program (13)</option>
+                                                        <option value="State specific funding program (15)">State specific funding program (15)</option>
+                                                        <option value="Domestic client - other revenue (20)">Domestic client - other revenue (20)</option>
+                                                        <option value="International onshore client - other revenue (31)">International onshore client - other revenue (31)</option>
+                                                        <option value="International offshore client - other revenue (32)">International offshore client - other revenue (32)</option>
+                                                        <option value="Revenue earned from another training organisation (80)">Revenue earned from another training organisation (80)</option>
+                                                    </select>
+                                                </th>
+                                                <th>
+                                                    <select name="input_funding_identifier_{{$module->id}}" id="input_funding_identifier_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" >
+                                                        <option value="0" selected=""></option>
+                                                     </select>
+                                                </th>
+                                                <th>
+                                                    <select name="fundingStateId_{{$module->id}}" id="fundingStateId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
+                                                       
+                                                    </select>
+                                                </th>
+                                                <th>
+                                                    <select name="deliverymode_{{$module->id}}" id="deliverymode_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" onchange="chkModeId(this.value, {{$module->id}});">
+                                                        <option value="YYY">Combination of all modes</option>
+                                                        <option value="NYY">Combination of external and workplace-based</option>
+                                                        <option value="YYN">Combination of internal and external</option>
+                                                        <option value="YNY">Combination of internal and workplace-based</option>
+                                                        <option value="NYN">External only</option>
+                                                        <option value="YNN" selected="">Internal only</option>
+                                                        <option value="NNN">Not applicable (RPL or credit transfer)</option>
+                                                        <option value="NNY">Workplace-based only</option> 
+                                                    </select>
+                                                </th>
+                                                <th>
+                                                    <select name="preModeId_{{$module->id}}" id="preModeId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
+                                                        <option value="E">External delivery</option>
+                                                        <option value="I">Internal delivery</option>
+                                                        <option value="W">Workplace-based delivery</option>
+                                                        <option value="N" selected="">Not applicable-RPL/credit transfer</option>
+                                                     </select>
+                                                </th>
+                                                <th>
+                                                    <span class="badge badge-success"><a style="cursor:pointer;color:white;" onclick="saveFundSource({{$module->id}});">Save</a></span>
+                                                    <span class="badge badge-warning"><a style="cursor:pointer;color:white;" onclick="switchTab({{$module->id}})">Cancel</a></span>
+                                                </th>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
-                              </table>
+                            </table>
+                            <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
+                                <div class="col-sm-6 d-flex align-items-center">
+                                    <h5 class="m-0">Core</h5>
+                                </div>
+                            </div>
+                        </span>
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Funding Source - National</th>
+                                <th scope="col">Specific Funding Identifier </th>
+                                <th scope="col">Funding Source - State</th>
+                                <th scope="col">Delivery Mode(Avetmiss 8)</th>
+                                <th scope="col">Predominant delivery mode</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($enrollment->student->unitCompetencies as $module)
+                            @if ($module->type == 'elective')
+                                    <tr>
+                                        <th scope="col">{{ $module->code }} </th>
+                                        <th scope="col">{{ $module->name }}</th>
+                                        <th>
+                                            <select name="fundingsourceId_{{$module->id}}" id="fundingsourceId_{{$module->id}}" class="input_text_1 form-control" onchange="showHideText(this.options[this.selectedIndex].value,{{$module->id}});">
+                                                <option value="Commonwealth and state general purpose recurrent (11)">Commonwealth and state general purpose recurrent (11)</option>
+                                                <option value="Commonwealth specific funding program (13)" selected="">Commonwealth specific funding program (13)</option>
+                                                <option value="State specific funding program (15)">State specific funding program (15)</option>
+                                                <option value="Domestic client - other revenue (20)">Domestic client - other revenue (20)</option>
+                                                <option value="International onshore client - other revenue (31)">International onshore client - other revenue (31)</option>
+                                                <option value="International offshore client - other revenue (32)">International offshore client - other revenue (32)</option>
+                                                <option value="Revenue earned from another training organisation (80)">Revenue earned from another training organisation (80)</option>
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <select name="input_funding_identifier_{{$module->id}}" id="input_funding_identifier_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" >
+                                                <option value="0" selected=""></option>
+                                             </select>
+                                        </th>
+                                        <th>
+                                            <select name="fundingStateId_{{$module->id}}" id="fundingStateId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
+                                               
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <select name="deliverymode_{{$module->id}}" id="deliverymode_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" onchange="chkModeId(this.value, {{$module->id}});">
+                                                <option value="YYY">Combination of all modes</option>
+                                                <option value="NYY">Combination of external and workplace-based</option>
+                                                <option value="YYN">Combination of internal and external</option>
+                                                <option value="YNY">Combination of internal and workplace-based</option>
+                                                <option value="NYN">External only</option>
+                                                <option value="YNN" selected="">Internal only</option>
+                                                <option value="NNN">Not applicable (RPL or credit transfer)</option>
+                                                <option value="NNY">Workplace-based only</option> 
+                                            </select>
+                                        </th>
+                                        <th>
+                                            <select name="preModeId_{{$module->id}}" id="preModeId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
+                                                <option value="E">External delivery</option>
+                                                <option value="I">Internal delivery</option>
+                                                <option value="W">Workplace-based delivery</option>
+                                                <option value="N" selected="">Not applicable-RPL/credit transfer</option>
+                                             </select>
+                                        </th>
+                                        <th>
+                                            <span class="badge badge-success"><a style="cursor:pointer;color:white;" onclick="saveFundSource({{$module->id}});">Save</a></span>
+                                            <span class="badge badge-warning"><a style="cursor:pointer;color:white;" onclick="switchTab({{$module->id}})">Cancel</a></span>
+                                        </th>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                        </div>
+                        <div class="tab-pane fade" id="pills-confirm-email" role="tabpanel"  aria-labelledby="pills-confirm-email">
 
                         </div>
-                        <div class="tab-pane fade" id="pills-confirm-email" role="tabpanel" aria-labelledby="pills-confirm-email">
-                        
-                        </div>
-                        <div class="tab-pane fade" id="pills-cert-issue" role="tabpanel" aria-labelledby="pills-cert-issue">
-
+                        <div class="tab-pane fade" id="pills-cert-issue" role="tabpanel"
+                            aria-labelledby="pills-cert-issue">
+                            <div class="pageSubTitle">
+                                <div style="float:left">Issue Course Certificate</div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div id="loading-issueCertificate" style="display:none;">
+                                <p><img src="../images/ajax-loader.gif"></p>
+                              </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
     <style>
         .modal-backdrop {
             display: none;
@@ -2257,6 +2454,45 @@
             $row.find('.hour_attandence').toggle();
             $row.find('.module_note').toggle();
             $row.find('.module_action').toggle();
+        }
+
+        function showHideText(code,id){
+            console.log(code,id)
+            var newOptions = '';
+            var funding = '';
+            if(code == "Commonwealth specific funding program (13)"){
+                newOptions = `<option value="0" selected=""></option>
+                <option value="42" selected="">Adult Migrant English Program</option>
+                <option value="93">Commonwealth funded - VET AMC</option>
+                <option value="92">Dual award - HE AMC </option>
+                <option value="91">Dual award - VET AMC </option>
+                <option value="23">Foundation Skills for Your Future Program</option>
+                <option value="14">Industry Skills Fund</option>
+                <option value="99">Other Commonwealth government funding</option>
+                <option value="22">PaTH - Employability Skills Training</option>
+                <option value="21">Skills for Education and Employment Program</option>`;
+                funding = `<option value="BET">Better Skills Better Care</option>
+                <option value="DEO">DEEWR Funded Programs (Other)</option>
+                <option value="DEV">DEEWR Funded Programs (Vouchers)</option>
+                <option value="IGN">Ignite</option>
+                <option value="DPE">Productivity General Existing Worker</option>
+                <option value="DPJ">Productivity General Job Seeker</option>
+                <option value="DHP">Productivity General/Health Existing Worker</option>
+                <option value="DHE">Productivity Health Existing Worker</option>
+                <option value="DHJ">Productivity Health Job Seeker</option>
+                <option value="SED">Southern Edge Training</option>
+                            <option value="TIF">TIFIARRC</option>`;
+                $("#input_funding_identifier_" + id).html(newOptions);
+                $("#fundingStateId_" + id).html(funding);
+            }
+            if(code == "Commonwealth and state general purpose recurrent (11)"){
+                $("#input_funding_identifier_" + id).attr(disabled,'disabled');
+                $("#fundingStateId_" + id).attr(disabled,'disabled');
+            }
+        }
+
+        function chkModeId(value,id){
+            consoel.log(value,id)
         }
     </script>
     <script>
