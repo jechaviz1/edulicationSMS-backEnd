@@ -662,6 +662,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('/event/enrollment/module/{id}', [App\Http\Controllers\EnrollmentController::class, 'moduleEnrolment'])->name('core.module.unit.update');
     Route::post('/event/enrollment/module/pdf', [App\Http\Controllers\EnrollmentController::class, 'enrolmentPdf'])->name('student.enrolment.module.pdf');
     Route::post('/event/enrollment/course/avitmiss', [App\Http\Controllers\EnrollmentController::class, 'enrolmentAvimiss'])->name('enrolment.avetmiss.course');
+    Route::post('/event/enrollment/course/certificate', [App\Http\Controllers\EnrollmentController::class, 'enrolmentCertificate'])->name('issue.enrolment.certificates');
       
     
     // End Event Enrollment 
@@ -761,6 +762,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');  
   Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');  
   Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');  
+  Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');  
   Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
 
 });

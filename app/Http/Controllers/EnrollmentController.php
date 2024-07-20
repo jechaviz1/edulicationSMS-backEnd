@@ -11,6 +11,8 @@ use App\Models\EnrolmentAddNote;
 use App\Models\UnitCompetency;
 use App\Models\StudentModule;
 use App\Models\AvitmissEnrolment;
+use App\Models\IssueCertificate;
+use App\Models\Template;
 use Log;
 use PDF;
 use DB;
@@ -103,8 +105,7 @@ class EnrollmentController extends Controller
         //
     }
 
-    public function bulk(Request $request)
-    {
+    public function bulk(Request $request){
         try {
             if ($request->columns != null) {
             } else {
@@ -117,8 +118,7 @@ class EnrollmentController extends Controller
             return redirect()->back()->with('error', 'An error occurred while processing your request.');
         }
     }
-    public function enrollment_issue(Request $request)
-    {
+    public function enrollment_issue(Request $request){
         $enrollment = new Enrolment;
         $enrollment->course_id = $request->course_id;
         $enrollment->event_id = $request->event_id;
@@ -169,8 +169,7 @@ class EnrollmentController extends Controller
         $student->save();
         return redirect()->back()->with('sucess', 'Sucess Record');
     }
-    public function enrolment_add_people_update($id)
-    {
+    public function enrolment_add_people_update($id){
         $enrollment = Enrolment::find($id);
         $states = State::get();
         $note_student = StudentNoteCategory::get();
@@ -180,7 +179,9 @@ class EnrollmentController extends Controller
         $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $enrollment->course_id)->where('type', 'elective')->where('status', 'A')->get();
         $data['student_module'] = StudentModule::where('student_id',$enrollment->student->id)->where('unit_competency_id',$enrollment->course->id)->get();
         $data['avitmiss'] = AvitmissEnrolment::where('student_id',$enrollment->student->id)->where('course_id',$enrollment->course->id)->first();
+        $data['templates'] = Template::get();
        $enrolmentnote  = EnrolmentAddNote::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->get();
+       $data['issue_certificate']  = IssueCertificate::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->where('template',$enrollment->id)->first();
         return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote'))->with($data);
     }
 
@@ -225,14 +226,15 @@ class EnrollmentController extends Controller
         $enrolment_update->save();
         return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
+
     public function enrolment_note_delete($id){
         // dd($id);
         $enrolment_update = EnrolmentAddNote::find($id);
         $enrolment_update->delete();
         return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
-    public function exportToPdf()
-    {
+
+    public function exportToPdf(){
         
         $enrolmentNotes = EnrolmentAddNote::all();
 
@@ -240,6 +242,7 @@ class EnrollmentController extends Controller
 
         return $pdf->download('admin.enrolment_notes.pdf');
     }
+
     public function enrolmentModule(Request $request){
         // dd($request->module);
         foreach ($request->module as $module){
@@ -329,7 +332,19 @@ class EnrollmentController extends Controller
             $avitmiss_enrolment->save();
         }
         
-        // dd($request);
         return redirect()->back()->with('success', 'Success! Records have been updated.');
+    }
+    public function enrolmentCertificate(Request $request){
+            $issue_certificate = new IssueCertificate;
+            $issue_certificate->student_id = $request->student_id;
+            $issue_certificate->course_id = $request->course_id;
+            $issue_certificate->enrolment_id = $request->enrolment_id;
+            $issue_certificate->issue_date = $request->issue_date;
+            $issue_certificate->template = $request->template;
+            $issue_certificate->delivery_method = $request->delivery_method;
+            $issue_certificate->include_report = $request->include_report;
+            $issue_certificate->comments = $request->comments;
+            $issue_certificate->save();
+            return redirect()->back()->with('success', 'Success! Records have been updated.');
     }
 }

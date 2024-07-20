@@ -2423,14 +2423,138 @@
 
                         </div>
                         <div class="tab-pane fade" id="pills-cert-issue" role="tabpanel"
-                            aria-labelledby="pills-cert-issue">
-                            <div class="pageSubTitle">
+                            aria-labelledby="pills-cert-issue mt-3 ">
+                            <div class="pageSubTitle border p-3">
                                 <div style="float:left">Issue Course Certificate</div>
+                                
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Certificate Number	</th>
+                                        <th scope="col">Date Issued</th>
+                                        <th scope="col">Issued By</th>
+                                        <th scope="col">Reissue</th>
+                                        <th scope="col">Reason for Reissue</th>
+                                        <th scope="col">Delivery Date</th>
+                                        <th scope="col">Delivery Method</th>
+                                        <th scope="col">Comments</th>
+                                        <th scope="col">Action</th>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th>{{ $issue_certificate->id }}</th>
+                                        <td>{{ $issue_certificate->issue_date  }}</td>
+                                        <td>{{ $issue_certificate->issue_by  }}</td>
+                                        <td>{{ $issue_certificate->reissue  }}</td>
+                                        <td>{{ $issue_certificate->reasonreissue  }}</td>
+                                        <td>{{ $issue_certificate->issue_date  }}</td>
+                                        <td>{{ $issue_certificate->delivery_method  }}</td>
+                                        <td>{{ $issue_certificate->comments  }}</td>
+                                        <td>
+                                            <a href="{{ route('api.enrolment.course.certificate.pdf',$issue_certificate->id) }}" class="btn btn-primary">View</a>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                            </div>
+                            @if($issue_certificate == null)
+                            <div class="pageSubTitle mt-3 border p-3">
+                                <div style="float:left">Initial Issue of Certificate</div>
                                 <div style="clear:both;"></div>
                             </div>
-                            <div id="loading-issueCertificate" style="display:none;">
-                                <p><img src="../images/ajax-loader.gif"></p>
-                              </div>
+                            <form action="{{ route('issue.enrolment.certificates') }}" method="post">
+                                @csrf
+                                @method('POST')
+                                <input type="hidden" name="student_id" value="{{$enrollment->student->id}}">
+                                <input type="hidden" name="course_id" value="{{$enrollment->course->id}}">
+                                <input type="hidden" name="enrolment_id" value="{{$enrollment->id}}">
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label for="">Certificate Name:</label>
+                                    </div>
+                                    <div class="col-10">
+                                        <span id="certificate_number"></span>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label for="">Certificate Number :</label>
+                                    </div>
+                                    <div class="col-10">
+                                        <span id="certificate_number"></span>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label for="">Issue Date:</label>
+                                    </div>
+                                    <div class="col-10"> 
+                                        <input type="date" name="issue_date" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label for="">Template :</label>
+                                    </div>
+                                    {{-- @dd($templates) --}}
+                                    <div class="col-10">
+                                        <select name="template" id="template" class="form-select" onchange="changetemplate(this.value);">
+                                            <option value=""></option>
+                                            @foreach ($templates as $template)
+                                            <option value="{{ $template->id }}">{{ $template->newCertificateName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label for="">Delivery Method :</label>
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="delivery_method" id="email" value="email">
+                                            <label class="form-check-label" for="inlineRadio1">Email</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="delivery_method" id="post" value="post" checked>
+                                            <label class="form-check-label" for="inlineRadio2">Post</label>
+                                          </div>
+                                          <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="delivery_method" id="collected" value="collected">
+                                            <label class="form-check-label" for="inlineRadio3">Collected</label>
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        <label for="">Include Competency Report :</label>
+                                    </div>
+                                    <div class="col-10">
+                                        <input class="form-check-input" name="include_report" type="checkbox" value="" id="flexCheckDefault">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-2">
+                                        Comments :
+                                    </div>
+                                    <div class="col-10">
+                                        <textarea name="comments" id="" cols="30" rows="10" name="comments" class="form-control">
+
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Issue</button>
+                                        <button type="button" class="btn btn-secondary">Issue w/ background</button>
+                                        <button type="button" class="btn btn-secondary">Preview</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            @endif
+                           
                         </div>
                     </div>
                 </div>
@@ -2493,6 +2617,29 @@
 
         function chkModeId(value,id){
             consoel.log(value,id)
+        }
+
+        function changetemplate(id){
+            console.log(id);
+        }
+        function PrintIssuedCertificate(id){
+                console.log(id);
+                $.ajax({
+                url: "{{ route('api.enrolment.course.certificate.pdf') }}", // Replace with your API endpoint
+                type: 'GET',
+                data: { id: id },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(data) {
+                    var blob = new Blob([data.data], { type: 'application/pdf' });
+                    var url = window.URL.createObjectURL(blob);
+                    window.open(url);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Failed to fetch certificate:", status, error);
+                }
+            });
         }
     </script>
     <script>
