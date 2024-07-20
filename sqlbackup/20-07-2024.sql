@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2024 at 06:55 AM
+-- Generation Time: Jul 20, 2024 at 01:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1034,9 +1034,27 @@ INSERT INTO `info_pak_specific_documents` (`id`, `documentname`, `filename`, `pa
 
 CREATE TABLE `issue_certificates` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `enrolment_id` varchar(11) DEFAULT NULL,
+  `course_id` bigint(11) DEFAULT NULL,
+  `student_id` bigint(11) DEFAULT NULL,
+  `template` varchar(255) DEFAULT NULL,
+  `issue_date` varchar(255) DEFAULT NULL,
+  `reissue` varchar(255) DEFAULT NULL,
+  `reasonreissue` varchar(255) DEFAULT NULL,
+  `issued_by` varchar(255) DEFAULT NULL,
+  `delivery_method` varchar(255) DEFAULT NULL,
+  `include_report` varchar(255) DEFAULT NULL,
+  `comments` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `issue_certificates`
+--
+
+INSERT INTO `issue_certificates` (`id`, `enrolment_id`, `course_id`, `student_id`, `template`, `issue_date`, `reissue`, `reasonreissue`, `issued_by`, `delivery_method`, `include_report`, `comments`, `created_at`, `updated_at`) VALUES
+(5, '3', 1, 2, '3', '2024-07-19', NULL, NULL, NULL, 'post', '1', 'fsdfsadf', '2024-07-20 01:41:35', '2024-07-20 01:41:35');
 
 -- --------------------------------------------------------
 
@@ -1079,7 +1097,9 @@ CREATE TABLE `learner_s_m_s_notes` (
 INSERT INTO `learner_s_m_s_notes` (`id`, `course_id`, `event_id`, `note`, `created_at`, `updated_at`) VALUES
 (1, 1, '54', 'dsdfsdfsdf', '2024-07-15 09:37:24', '2024-07-15 09:37:24'),
 (2, 1, '54', 'dsdfsdfsdf', '2024-07-15 09:39:00', '2024-07-15 09:39:00'),
-(3, 1, '54', 'fdsfafasdfasf', '2024-07-15 09:39:16', '2024-07-15 09:39:16');
+(3, 1, '54', 'fdsfafasdfasf', '2024-07-15 09:39:16', '2024-07-15 09:39:16'),
+(4, 1, '59', 'fdsfsdfdgdg', '2024-07-20 05:15:06', '2024-07-20 05:15:06'),
+(5, 1, '59', 'fsdfasdf', '2024-07-20 05:33:26', '2024-07-20 05:33:26');
 
 -- --------------------------------------------------------
 
@@ -1781,7 +1801,7 @@ CREATE TABLE `student_unit_competency` (
 
 INSERT INTO `student_unit_competency` (`id`, `student_id`, `unit_competency_id`, `enrollment_date`, `completion_date`, `module_activity_start`, `outcomeId`, `unitCompetencyDate`, `note`, `created_at`, `updated_at`) VALUES
 (1, 2, 2, '2024-07-19 07:05:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 2, 3, NULL, NULL, 'fasdf', 'Competency not achieved/fail', '100', 'retretret', NULL, '2024-07-19 04:46:40'),
+(2, 2, 3, NULL, NULL, NULL, 'Competency not achieved/fail', 'asdfadsf', 'sadfdsaf', NULL, '2024-07-20 04:46:53'),
 (3, 2, 4, '2024-07-17', NULL, '2024-07-16', 'Competency not achieved/fail', NULL, NULL, NULL, '2024-07-19 03:53:03'),
 (7, 2, 1, '2024-07-19 07:05:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
@@ -2823,7 +2843,7 @@ ALTER TABLE `info_pak_specific_documents`
 -- AUTO_INCREMENT for table `issue_certificates`
 --
 ALTER TABLE `issue_certificates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `language`
@@ -2835,7 +2855,7 @@ ALTER TABLE `language`
 -- AUTO_INCREMENT for table `learner_s_m_s_notes`
 --
 ALTER TABLE `learner_s_m_s_notes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `leave_allocation`
