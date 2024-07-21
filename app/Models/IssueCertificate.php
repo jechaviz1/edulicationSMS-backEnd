@@ -16,4 +16,7 @@ class IssueCertificate extends Model
     public function templatesa(){
         return $this->belongsTo(Template::class, 'template');
     }
+    public function student(){
+        return $this->belongsTo(Student::class, 'student_id');
+    }
 }

@@ -13,7 +13,9 @@ use App\Models\Teacher;
 use App\Models\CourseCategory;
 use App\Models\Enrolment;
 use App\Models\Session;
+use App\Models\StudentNoteCategory;
 use App\Models\LearnerSMSNote;
+use App\Models\UnitCompetency;
 
 class CourseController extends Controller
 {
@@ -194,11 +196,22 @@ class CourseController extends Controller
         $states = State::get();
         $course = Course::find($course_event->course_name);
         $enrollments = Enrolment::where('event_id',$course_event->id)->get();
-        return view('admin.event.course.update', compact('course_event','course','states','enrollments'));
+        $learn_sms = LearnerSMSNote::where('event_id',$course_event->id)->get();
+        $note_category = StudentNoteCategory::get();
+        return view('admin.event.course.update', compact('course_event','course','states','enrollments','learn_sms','note_category'));
     }
 
     public function course_note(Request $request){
-            
+    //   dd($request);
+        $sms_send = new LearnerSMSNote;
+     
+        $sms_send->course_id = $request->course_id;
+        $sms_send->event_id = $request->event_id;
+        $sms_send->note = "Group sms sent to all students by". auth()->user()->first_name . ' ' .  auth()->user()->last_name.$request->sms_Content;
+        $sms_send->created_by =  auth()->user()->first_name . ' ' .  auth()->user()->last_name;
+        $sms_send->type_of_note = "schedule";       
+        $sms_send->save();
+        return redirect()->back()->with('success', 'Template updated successfully.');
     }
 
     public function sms_send_course(Request $request)
@@ -206,9 +219,20 @@ class CourseController extends Controller
         $sms_send = new LearnerSMSNote;
         $sms_send->course_id = $request->course_id;
         $sms_send->event_id = $request->event_id;
-        $sms_send->note = $request->sms_Content;
-
+        $sms_send->note = "Group sms sent to all students by". auth()->user()->first_name . ' ' .  auth()->user()->last_name.$request->sms_Content;
+        $sms_send->created_by =  auth()->user()->first_name . ' ' .  auth()->user()->last_name;
+        $sms_send->type_of_note = "schedule";       
         $sms_send->save();
         return redirect()->back()->with('success', 'Template updated successfully.');
+    }
+    public function enrolment_units_bulk(Request $request){
+       
+        foreach($request->unit as $unit){
+            $unit = UnitCompetency::where('course_id',$unit['course_id'])->get();
+            
+        }
+
+        // $unit = UnitCompetency::find($id);
+
     }
 }

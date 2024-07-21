@@ -48,7 +48,6 @@ class SchoolController extends Controller {
         ]);
         $data = $request->input();
         try {
-            
             $school = new \App\Models\School();
             $school->name = $data['name'];
             $school->address = $data['address'];

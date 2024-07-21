@@ -614,6 +614,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/course/event/note/edit', [App\Http\Controllers\Event\CourseController::class, 'edit_course'])->name('event.note.course.edit');
     Route::post('/course/event/note/delete', [App\Http\Controllers\Event\CourseController::class, 'delete_course'])->name('event.note.course.delete');
     Route::post('/course/event/smssendlearners', [App\Http\Controllers\Event\CourseController::class, 'sms_send_course'])->name('event.course.sendAllLearnersSMS');
+    Route::post('/event/enrolment/units/bulk', [App\Http\Controllers\Event\CourseController::class, 'enrolment_units_bulk'])->name('enrolment.units.bulk');
     //  Route::get('/city-town-list', [CityTownController::class, 'list'])->name('city-town-list');
     //  Route::get('/edit-city-town/{id}', [CityTownController::class, 'edit'])->name('edit-city-town');
     //  Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');

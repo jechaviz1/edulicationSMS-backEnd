@@ -32,7 +32,8 @@
                     <button type="button" class="btn btn-primary ms-2">Send Survey</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#certificate_manage">Manage Certificates</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addenrolments">Add Enrolments</button>
-                    <button type="button" class="btn btn-primary ms-2">Enrol Units</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#enrollment_unit">Enrol Units</button>
+                    {{-- <button type="button" class="btn btn-primary ms-2">Enrol Units</button> --}}
                     <button type="button" class="btn btn-primary ms-2">Update Outcomes</button>
                     <button type="button" class="btn btn-primary ms-2">Create Invoice</button>
                 </div>
@@ -809,7 +810,6 @@
                                                 </select>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="col-6">
                                         <h5>Contact Info</h5>
@@ -1406,7 +1406,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body" style="overflow:scroll;">
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
@@ -1439,28 +1439,183 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <th></th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td><input type="email" class="form-control" id="exampleInputEmail1"
-                                                        aria-describedby="emailHelp"></td>
-                                            </tr>
+                                @foreach($enrollments as $k =>$row)
+                                   @php
+                                     $issue_certificate =  App\Models\IssueCertificate::where('enrolment_id',$row->id)->first();
+                                   @endphp
+                                        <tr>
+                                            <th>{{$row->student->id }}</th>
+                                            <th>{{$row->student->first_name }} {{ $row->student->last_name }}</th>
+                                            <td>{{ $row->paymentStatus }}</td>
+                                            <td>
+                                                @if ( $issue_certificate != null)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
+                                            </td>
+                                            <td><input type="email" class="form-control" id="exampleInputEmail1"
+                                                    aria-describedby="emailHelp"></td>
+                                        </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
+
+                                    <p>(*) Required Fields</p>
+                                    <form action="">
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            Issue Date:
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" name="issue_date" class="form-control" value="" >
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-2">Template:</div>
+                                        <div class="col-8">
+                                            <select name="template" id="template" class="form-control"> 
+                                                <option value="" value=""></option>
+                                                @foreach ($note_category as $category)
+                                                <option value="{{ $category->id}}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            <p>How do you want to issue your certificate?*:	</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="certificate_method" id="inlineRadio1" value="post">
+                                                <label class="form-check-label" for="inlineRadio1">Post</label>
+                                              </div>
+                                              <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="certificate_method" id="inlineRadio2" value="email">
+                                                <label class="form-check-label" for="inlineRadio2">Email</label>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            <p>Reason for Reissue (This field is only for reissue.)*:	</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <input type="text" name="ReissueReason" id="ReissueReason" class="form-control" style="width:100%;">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            <p>Include Competency Report:	</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-2">
+                                            <p>Comments:	</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <textarea type="text" name="certificateComments" class="form-control" id="certificateComments" style="width:314px;"></textarea>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Issue</button>
+                                </form>
                                 </div>
                                 <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                                     aria-labelledby="pills-contact-tab">
-
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Certificate Number</th>
+                                            <th scope="col">Student Name</th>
+                                            <th scope="col">Date Issued	</th>
+                                            <th scope="col">Issued By</th>
+                                            <th scope="col">Reissue</th>
+                                            <th scope="col">Reason for reissue</th>
+                                            <th scope="col">Issue Method</th>
+                                            <th scope="col">Issue Type	</th>
+                                            <th scope="col">Recipient Email	</th>
+                                            <th scope="col">Action </th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($enrollments as $k =>$row)
+                                            @php
+                                              $issue_certificate =  App\Models\IssueCertificate::where('enrolment_id',$row->id)->first();
+                                            @endphp
+                                            @if ( $issue_certificate != null)
+                                            <tr>
+                                                <th>{{ $issue_certificate->id }}</th>
+                                                <td>{{ $row->student->first_name }} {{ $row->student->last_name }}</td>
+                                                <td>{{  $issue_certificate->issue_date }}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                              </tr>
+                                            @endif
+                                          @endforeach
+                                        </tbody>
+                                      </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- Manage Certificates Start En --}}
+            {{-- Manage Certificates Start End --}}
+            {{-- SMS all Lerners  --}}
+            <div class="modal fade" id="enrollment_unit" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Select Student</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('enrolment.units.bulk')}}" method="POST">
+                                @csrf()
+                                @method('post')
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!empty($enrollments))
+                                    @foreach ($enrollments as $k => $row)
+                                        <tr>
+                                            <td>{{ $row->student->first_name }} . {{ $row->student->last_name }}</td>
+                                            <td>{{ $row->student->email }}</td>
+                                            <td>Not Completed</td>
+                                            <td>
+                                                <input type="checkbox" name="unit[{{$k}}][student_id]" value="{{ $row->student->id}}" >
+                                                <input type="hidden" name="unit[{{$k}}][course_id]" value="{{ $row->course->id}}" >
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                              </table>
+                              <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- SMS All Learners End --}}
         </div>
         <div class="tab-pane fade" id="nav-sessions" role="tabpanel" aria-labelledby="nav-sessions-tab">
             <table cellpadding="0" cellspacing="0" border="0" width="95%" align="center" class="table">
@@ -1661,12 +1816,16 @@
                     @csrf
                     @method('post')
                     <input type="hidden" value="{{ $course_event->course_name }}" name="couser_id">
+                    <input type="hidden" value="{{ $course_event->id }}" name="event_id">
                     <div class="row mt-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Select note
                             category:</label>
                         <div class="col-sm-10">
                             <select class="form-select">
-                                <option selected>Open this select menu</option>
+                                <option value="" selected>Open this select Category</option>
+                                @foreach ($note_category as $category)
+                                <option value="{{$category->id}}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -1708,8 +1867,20 @@
                         <th>Module Name</th>
                         <th width="20%">Last Updated by</th>
                         <th width="20%">Last Updated on</th>
-                        <th width="10%"></th>
+                        {{-- <th width="10%">Action</th> --}}
                     </tr>
+                   
+                    @foreach ($learn_sms as $learn)
+                    <tr style="text-align:center;">
+                        <th>{{ $learn->note }}</th>
+                        <th>{{ $learn->type_of_note }} </th>
+                        <th></th>
+                        <th></th>
+                        <th>{{ $learn->created_by }}</th>
+                        <th>{{ $learn->updated_at }}</th>
+                    </tr>
+                    @endforeach
+                   
 
                 </tbody>
             </table>

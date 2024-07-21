@@ -23,7 +23,10 @@ class Student extends Model {
     {
         return $this->morphMany(Transaction::class, 'transactionable');
     }
-    
+    public function certificatesa()
+    {
+        return $this->belongsTo(IssueCertificate::class,'student_id');
+    }
     public function unitCompetencies()
     {
         return $this->belongsToMany(UnitCompetency::class)->withPivot('note','enrollment_date','unitCompetencyDate','outcomeId','module_activity_start','completion_date')->withTimestamps();
