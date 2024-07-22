@@ -49,6 +49,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- /tab-content -->
             <div class="tab-content " id="myTabContent-3">
                 <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel" aria-labelledby="home-tab-3">
@@ -74,19 +75,20 @@
                                 <tbody>
                                     @if(!empty($rows))
                                     @foreach ($rows as $k=> $row)
+                                  
                                     <tr>
                                         <td>
-                                            <a href="{{ route('people.profile',$row->id)}}">{{$row->firstName}} {{ $row->lastName }}</a>
+                                            <a href="{{ route('people.profile',$row->id)}}">{{$row->first_name}} {{ $row->last_name }}</a>
                                         </td>
                                         <td>
-                                         {{ $row->preferred_contact }}                                           
+                                         {{ $row->contact_no }}                                           
                                         </td>
-                                        <td>{{$row->studentEmail}}</td>
+                                        <td>{{$row->email}}</td>
                                         <td>
                                             {{ $row->country_postal }}
                                         </td>
-                                        <td>{{$row->birthCountry}}</td>
-                                        <td>{{$row->dob }}</td>
+                                        <td>{{$row->date_of_birth}}</td>
+                                        <td>{{$row->date_of_birth }}</td>
                                         <td>
                                             {{ $row->isMainEnglish}}
                                          </td>

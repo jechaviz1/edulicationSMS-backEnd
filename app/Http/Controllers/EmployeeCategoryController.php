@@ -48,8 +48,6 @@ class EmployeeCategoryController extends Controller
          //dd($data);
             try {
                 $data = new EmployeeCategory();
-        
-               
                         $data->name = $request->input('name');
                         $data->description = $request->input('description');
                         $data->employee_designation_id = $request->input('designation_id');
@@ -118,7 +116,4 @@ class EmployeeCategoryController extends Controller
         }
     
     }
-
-
-
 }

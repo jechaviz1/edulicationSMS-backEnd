@@ -253,15 +253,6 @@ class EnrollmentController extends Controller
                 'module.*.note' => 'nullable|string',
             ]);
           
-            // Find the student
-            if(isset($module['student_id'])){
-                                                           
-
-            }else{
-
-                dd($module);
-
-            }
             $student = Student::find($module['student_id']);
             $module =  StudentModule::updateOrInsert(
                 [

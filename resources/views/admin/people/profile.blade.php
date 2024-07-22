@@ -182,57 +182,90 @@
                                 <div class="row" id="details">
                                     <div class="col-sm-6">
                                         <h6 class="mt-3">Basic Information</h6>
+                                        @if($student->title != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Contact Information</label>
+                                                <label for="">Title</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->firstName }} {{ $student->lastName }}</p>
+                                                <p>{{ $student->title}}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->entryDate != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Certificate Name</label>
+                                                <label for="">Entry Date</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->firstName }} {{ $student->lastName }}</p>
+                                                <p>{{ $student->entryDate}}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->entryDate != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Name</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->first_name}} {{$student->middle_name }} {{ $student->last_name }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->entryDate != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Date of Birth</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->birth}}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->entryDate != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Gender</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->gender}}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->entryDate != null)
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="">Employee Number</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->employeeNumber }}</p>
+                                                <p>{{ $student->employeeNumber}}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->entryDate != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Usual Residence</label>
+                                                <label for="">Employee Number</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->addressLine2 }}</p>
+                                                <p>{{ $student->employeeNumber}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Postal Address</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->postalCode_postal }}</p>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                     <div class="col-sm-6">
                                         <h6>Contact Information</h6>
                                         <div class="row">
+                                        @if($student->entryDate != null)
+                                        <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Business Phone</label>
+                                                <label for="">Employee Number</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->businessNumber }}</p>
+                                                <p>{{ $student->employeeNumber}}</p>
                                             </div>
                                         </div>
+                                        @endif
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="">Business Phone</label>
@@ -287,12 +320,12 @@
                                         <button id="toggleButton" class="btn btn-primary">Edit</button>
 
                                     </div>
+                                    {{-- @dd($student) --}}
                                 </div>
                                 <div class="hidden" id="details-edit">
                                     <form action="{{ route('people.update', $student->id) }}" method="POST">
                                         @csrf
                                         @method('POST')
-                                        {{-- @dd($student) --}}
                                         <div class="row">
                                             <div class="col-sm-6 mt-4">
                                                 <h4>Basic Information</h4>
@@ -3487,7 +3520,6 @@
                                 data-bs-target="#note-example">
                                 New Enquiry
                             </button>
-
                             <!-- Modal -->
                             <div class="modal fade" id="note-example" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -3495,21 +3527,21 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <span style="font-size: 20px;margin-bottom: 20px;"
-                                                class="mb-5 text-center">New Enquiry for {{ $student->firstName }}
-                                                {{ $student->lastName }}</span>
+                                                class="mb-5 text-center">New Enquiry for {{ $student->first_name }} {{ $student->last_name }}</span>
                                             <form name="add_opppr" id="add_opppr" method="post"
-                                                enctype="multipart/form-data" action="">
+                                                enctype="multipart/form-data" action="{{ route('people.new.enquiry') }}" method="POST">
+                                                @csrf()
+                                                @method('POST')
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <div style="padding:5px; float:left; width:150px;"
                                                             align="left">
                                                             Preferred Course</div>
                                                         <div style="padding:5px; float:left">
-                                                            <select name="courseList" class="form-control"
-                                                                id="courseList" size="1"
-                                                                onchange="loadDefaultAssingTo(); loadCourseTypeForEnquiry();"
-                                                                style="width:200px;" fdprocessedid="i8zgb">
-                                                                <option value="2565">BSB40820</option>
+                                                            <select name="courseList" class="form-control" id="courseList" size="1" style="width:200px;">
+                                                               @foreach ($courses as $course)
+                                                                   <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                                               @endforeach
                                                             </select>
                                                             <input type="hidden" value="524977" name="studentId"
                                                                 id="studentId">

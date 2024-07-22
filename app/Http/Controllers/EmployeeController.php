@@ -56,18 +56,6 @@ class EmployeeController extends Controller
         else{
             $data['selected_shift'] = '0';
         }
-
-
-       
-
-
-        // $data['employee'] = Employee::join('department','department.id','=','employee.department_id')
-        // ->join('designation','designation.id','=','employee.designation_id')
-        // ->orderBy('id', 'DESC')
-        // ->get(['employee.*','department.department_name','designation.designation_name']);
-        
-       
-
         $emp = Employee::where('id', '!=', null);
 
         if(!empty($request->role)){

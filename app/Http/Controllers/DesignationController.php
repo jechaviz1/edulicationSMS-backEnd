@@ -52,8 +52,6 @@ class DesignationController extends Controller
                         $data->designation_name = $request->input('designation_name');
                         $data->department_id= $request->input('department_id');
                         $data->description = $request->input('description');
-                       
-                        //dd($data);
                         $data->save();
                        // dd("success");
                 return redirect()->route('designation-list')->with('success', 'Record added successfully.');

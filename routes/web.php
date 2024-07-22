@@ -615,6 +615,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/course/event/note/delete', [App\Http\Controllers\Event\CourseController::class, 'delete_course'])->name('event.note.course.delete');
     Route::post('/course/event/smssendlearners', [App\Http\Controllers\Event\CourseController::class, 'sms_send_course'])->name('event.course.sendAllLearnersSMS');
     Route::post('/event/enrolment/units/bulk', [App\Http\Controllers\Event\CourseController::class, 'enrolment_units_bulk'])->name('enrolment.units.bulk');
+    Route::post('/edit/schecdule/course', [App\Http\Controllers\Event\CourseController::class, 'edit_schedule'])->name('edit.schedule.course');
     //  Route::get('/city-town-list', [CityTownController::class, 'list'])->name('city-town-list');
     //  Route::get('/edit-city-town/{id}', [CityTownController::class, 'edit'])->name('edit-city-town');
     //  Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
@@ -646,6 +647,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/bulk_sms_filter_form', [App\Http\Controllers\PeopleController::class, 'sms_filter'])->name('bulk_sms_filter_form');
     Route::get('/people/profile/{id}', [App\Http\Controllers\PeopleController::class, 'profile'])->name('people.profile');
     Route::post('/people/profileupdate/{id}', [App\Http\Controllers\PeopleController::class, 'profileUpdate'])->name('people.update');
+    Route::post('/people/new/enquiry', [App\Http\Controllers\PeopleController::class, 'new_enquiry'])->name('people.new.enquiry');
     Route::delete('/people/profileupdate/{id}', [App\Http\Controllers\PeopleController::class, 'delete'])->name('people.destroy');
     // END - Event Trainers
     // START - Lerner Record 

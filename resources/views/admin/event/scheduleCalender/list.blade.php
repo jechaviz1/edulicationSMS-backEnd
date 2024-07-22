@@ -102,10 +102,10 @@
                         $colspan = 1;
                         $event = Event::find($session->event_id);
                         $city = city::find($event->city);
+                        if($event != null){
                         if (in_array($currentDay->toDateString(), $coveredDays)) {
                             if ($currentDay->isSameDay($startDate)) {
-                            
-                                $cellContent .=  $city->name . '<br>';
+                            $cellContent .=  $city->name . '<br>';
                               $cellContent .= $session->title . '<br>';
                               $cellContent .=  $session->course->name . '<br>';
                               if($event->course_type == "2"){
@@ -121,6 +121,7 @@
                                 continue;
                             }
                         }
+                    }
                     @endphp
 
                     <td class="text-center py-3" colspan="{{ $colspan }}" style="border-bottom:#ffffff 1px solid;border-right:#ffffff 1px solid;width:55px;background:#A0CF1A;color:#fff;">

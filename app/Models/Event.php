@@ -17,4 +17,8 @@ class Event extends Model
         {
             return $this->belongsTo(Course::class, 'course_name','id');
         }
+        public function citys()
+        {
+            return $this->belongsTo(City::class,'city','id');
+        }
 }

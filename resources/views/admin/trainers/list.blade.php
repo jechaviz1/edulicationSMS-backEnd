@@ -85,26 +85,26 @@
                             @if($view == 'month')
                         <div class="row">
                             <div class="col-sm-3">
-                                <a href="{{ route('event.calender', ['date' => $prevMonth]) }} " class="btn btn-primary mb-2 float-end">Last Month</a>
+                                <a href="{{ route('event.trainers.index', ['date' => $prevMonth]) }} " class="btn btn-primary mb-2 float-end">Last Month</a>
                             </div>
                             <div class="col-sm-6">
                                 <input type="month" id="date" name="start" min="2000-03" value="{{ $calendar[0]['date']->format('Y-m') }}" class="form-control"/>
                             </div>
                             <div class="col-sm-3">
-                                <a href="{{ route('event.calender', ['date' => $next]) }} " class="btn btn-primary mb-2">Next Month</a>
+                                <a href="{{ route('event.trainers.index', ['date' => $next]) }} " class="btn btn-primary mb-2">Next Month</a>
                             </div>
                         </div>
                             @else
                         <div class="row mt-4">
                             <div class="col-sm-3">
-                                <a href="{{ route('event.room.calender', ['date' => $prev]) }} " class="btn btn-primary mb-2 float-end">Last Week</a>
+                                <a href="{{ route('event.trainers.index', ['date' => $prev]) }} " class="btn btn-primary mb-2 float-end">Last Week</a>
                             </div>
                             <div class="col-sm-6">
                                 {{-- <input type="month" id="date" name="start" min="2000-03" value="{{ $calendar[0]['date']->format('Y-m') }}" class="form-control"/> --}}
                                 <input type="date" class="form-control" id="date" name="date" value="{{ $weekDays[0]->format('Y-m-d') }}">
                             </div>
                             <div class="col-sm-3">
-                                <a href="{{ route('event.room.calender', ['date' => $next]) }} " class="btn btn-primary mb-2">Next Week</a>
+                                <a href="{{ route('event.trainers.index', ['date' => $next]) }} " class="btn btn-primary mb-2">Next Week</a>
                             </div>
                         </div>
                         @endif

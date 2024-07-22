@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student ;
+use App\Models\Student;
+use App\Models\Course;
 use App\Http\Controllers\ImageController;
 class PeopleController extends Controller
 {
     public function index(Request $request){
         if($request->columns != null){
-            dd($request);
+           
 
         }else{
             $rows = Student::where('is_deleted', '0')->paginate(10);
@@ -26,16 +27,6 @@ class PeopleController extends Controller
         $student->firstName = $request['first_name'];
         $student->lastName = $request['last_name'];
         $student->preferred_contact =  $request['contactType'] . ":" . $request['contactInfo'];
-        // $contactType = $request['contactType'];
-        //     if($contactType == 'email'){
-        //         $student->studentEmail = $request['contactInfo'];
-        //     }elseif($contactType == 'home'){
-        //         $student->homeNumber = $request['contactInfo'];
-        //     }elseif($contactType == 'mobile'){
-        //         $student->contactNumber = $request['contactInfo'];
-        //     }else{
-        //         $student->businessNumber = $request['contactInfo'];
-        //     }
         $student->save();
         $id = $student->id;
         return redirect()->route('people.profile',$id)->with('sucess','Sucessfully Add People');
@@ -43,7 +34,8 @@ class PeopleController extends Controller
     public function profile(Request $request,$id){
         $studentID  = $id;
         $student = Student::find($id);
-        return view('admin.people.profile',compact('studentID','student'));
+        $courses = Course::get();
+        return view('admin.people.profile',compact('studentID','student','courses'));
 
     }
     public function profileUpdate(Request $request,$id){
@@ -73,7 +65,7 @@ class PeopleController extends Controller
          $student->studentEmail3 = $request->Email3;
          $student->employeeNumber = $request->employeeNumber;
          $student->entryDate = $request->entryDate;
-         $student->firstName = $request->first;
+         $student->first_name = $request->first;
          $student->unitDetails = $request->unitDetails;
          $student->unitDetails_postal = $request->unitDetails_postal;
          $student->gender = $request->gender;
@@ -82,8 +74,8 @@ class PeopleController extends Controller
          $student->indigenousStatus = $request->home;
          $student->isContact = $request->isContact;
          $student->isLearner = $request->isLearner;
-         $student->lastName = $request->last;
-         $student->middleName = $request->middle;
+         $student->last_name = $request->last;
+         $student->middle_name = $request->middle;
          $student->RTOStudentId = $request->RTOStudentId;
          $student->isInternational = $request->isInternational;
          $student->nationalID = $request->nationalID;
@@ -136,5 +128,9 @@ class PeopleController extends Controller
         } else {
             return redirect()->route('people.find.index')->with('failed', 'Record not found.');
         }
+    }
+    public function new_enquiry(Request $request){
+        dd($request);
+        
     }
 }

@@ -16,7 +16,8 @@ use App\Models\Session;
 use App\Models\StudentNoteCategory;
 use App\Models\LearnerSMSNote;
 use App\Models\UnitCompetency;
-
+use App\Models\StudentModule;
+use Carbon\Carbon;
 class CourseController extends Controller
 {
     /**
@@ -64,7 +65,7 @@ class CourseController extends Controller
             'course_type' => 'required',
         ]);
 
-        //    try{
+           try{
         $events = new Event;
         $events->course_type = $request->course_type;
         $events->reporting_state = $request->reporting_state;
@@ -109,10 +110,10 @@ class CourseController extends Controller
             'message' => 'Record added successfully.',
             'sucess' => "true"
         ]);
-        // } catch (\Exception $e) {
-        //    // dd($e);
-        //     // return redirect()->route('course-list')->with('failed', 'Record not added.');
-        // }
+        } catch (\Exception $e) {
+           // dd($e);
+            // return redirect()->route('course-list')->with('failed', 'Record not added.');
+        }
     }
 
     /**
@@ -216,6 +217,7 @@ class CourseController extends Controller
 
     public function sms_send_course(Request $request)
     {
+        // dd($request);
         $sms_send = new LearnerSMSNote;
         $sms_send->course_id = $request->course_id;
         $sms_send->event_id = $request->event_id;
@@ -226,13 +228,53 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Template updated successfully.');
     }
     public function enrolment_units_bulk(Request $request){
-       
         foreach($request->unit as $unit){
-            $unit = UnitCompetency::where('course_id',$unit['course_id'])->get();
-            
+            $unit_module = UnitCompetency::where('course_id',$unit['course_id'])->get();
+            foreach($unit_module as $unit_modal){
+                $unit_compencacy = StudentModule::where('student_id',$unit['student_id'])->where('unit_competency_id',$unit_modal->id)->first();
+                if($unit_compencacy != null){
+                }else{
+                    $unit_modal = new StudentModule;
+                    $unit_modal->student_id = $unit['student_id'];
+                    $unit_modal->unit_competency_id = $unit_modal->id;
+                    $unit_modal->enrollment_date = Carbon::now();
+                    $unit_modal->completion_date = "";
+                    $unit_modal->module_activity_start = "";
+                    $unit_modal->outcomeId = "";
+                    $unit_modal->unitCompetencyDate = "";
+                    $unit_modal->note = "";
+                    $unit_modal->save();
+                }
+            }
         }
-
-        // $unit = UnitCompetency::find($id);
+        return redirect()->back()->with('success', 'Template updated successfully.');
+    }
+    public function edit_schedule(Request $request){
+        try{
+            
+            $events = Event::where('event_id',$request->event_id)->first();
+            $events->course_type = $request->course_type;
+            $events->reporting_state = $request->reporting_state;
+            $events->course_name = $request->course_name;
+            $events->group = $request->group;
+            $events->trainers = $request->trainers;
+            $events->assessors = $request->assessors;
+            $events->month = $request->month;
+            $events->year = $request->spyear;
+            $events->course_quota = $request->course_quota;
+            $events->course_cost = $request->course_cost;
+            $events->city = $request->city;
+            $events->location = $request->location;
+            $events->resources = $request->requirement;
+            $events->selects_units = $request->selects_units;
+            $events->delevery_mode = $request->modeId;
+            $events->predominant_delivery_mode = $request->preModeId;
+            $events->save();
+            return redirect()->back()->with('success', 'Template updated successfully.');
+            } catch (\Exception $e) {
+               // dd($e);
+               return redirect()->back()->with('success', 'Template updated successfully.');
+            }
 
     }
 }
