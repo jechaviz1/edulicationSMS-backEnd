@@ -17,4 +17,8 @@ class UnitCompetency extends Model {
     {
         return $this->belongsToMany(Student::class)->withPivot('note')->withTimestamps();
     }
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id','id');
+    }
 }

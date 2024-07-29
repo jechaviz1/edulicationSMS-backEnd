@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\StudentModule;
+use App\Models\Enquiry;
 class LearnerRecord extends Controller
 {
     /**
@@ -15,7 +17,7 @@ class LearnerRecord extends Controller
     {
         // dd("fs");
         try {
-            $learners = Student::all();
+            $learners = StudentModule::all();
             return view('admin.learner.active.list',compact('learners'));
         } catch (\Exception $e) {
             // dd("hello");
@@ -95,8 +97,8 @@ class LearnerRecord extends Controller
     {
        
         try {
-            $learners = Student::all();
-            return view('admin.enquiry.list',compact('learners'));
+            $enuiries = Enquiry::all();
+            return view('admin.enquiry.list',compact('enuiries'));
         } catch (\Exception $e) {
             // dd("hello");
             return response()->json([

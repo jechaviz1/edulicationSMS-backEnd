@@ -666,8 +666,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/event/enrollment/module/pdf', [App\Http\Controllers\EnrollmentController::class, 'enrolmentPdf'])->name('student.enrolment.module.pdf');
     Route::post('/event/enrollment/course/avitmiss', [App\Http\Controllers\EnrollmentController::class, 'enrolmentAvimiss'])->name('enrolment.avetmiss.course');
     Route::post('/event/enrollment/course/certificate', [App\Http\Controllers\EnrollmentController::class, 'enrolmentCertificate'])->name('issue.enrolment.certificates');
-      
-    
     // End Event Enrollment 
     // START - Lerner Record 
     Route::get('/people/enrolmentSearch', [App\Http\Controllers\EnrollmentController::class, 'index'])->name('people.enrollment.search');

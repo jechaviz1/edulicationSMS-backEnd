@@ -76,10 +76,7 @@
                                     name="cdT" id="cdT" placeholder="Course Commencement Start Date To"
                                     style="width: 198px;height:26px" value="2024-05-20" fdprocessedid="czjsjr"></div>
                         </div>
-
-
                     </form>
-
                     <div id="result" style="width:100%;padding-top: 20px;overflow-x: auto;white-space: nowrap;">
                         <div id="result_table_wrapper" class="dataTables_wrapper no-footer">
                             <div class="dt-buttons"> <button class="buttons-excel buttons-html5 btn btn-primary"
@@ -187,10 +184,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if($learners == null)
                                     <tr class="odd">
-                                        <td valign="top" colspan="21" class="dataTables_empty">No data available in
-                                            table</td>
+                                        <td valign="top" colspan="21" class="dataTables_empty">No data available in table</td>
                                     </tr>
+                                    @else
+                                    @foreach ($learners as $learn)
+                                    <tr>
+                                        <td> {{ $learn->student->id}}  </td>
+                                        <td> {{ $learn->student->first_name }} </td>
+                                        <td> {{ $learn->student->last_name }} </td>
+                                        <td>  </td>
+                                        <td> N </td>
+                                        <td> {{ $learn->unit->course->code }} </td>
+                                        <td> {{ $learn->unit->code }} </td>
+                                        <td> {{ $learn->unit->name }} </td>
+                                        <td> {{ $learn->enrollment_date }} </td>
+                                        <td> {{ $learn->module_activity_start }} </td>
+                                        <td> {{ $learn->outcomeId }} </td>
+                                        <td> {{ $learn->completion_date }} </td>
+                                        <td> {{ $learn->enrollment_date }} </td>
+                                        <td> Not Completed </td>
+                                        <td>  </td>
+                                        <td> Y </td>
+                                        <td>   </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                        <td>  </td>
+                                    </tr>
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                             <div class="dataTables_info" id="result_table_info" role="status" aria-live="polite">

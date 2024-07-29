@@ -10,7 +10,7 @@ class Enquiry extends Model
     use HasFactory;
 
     protected $fillable = [
-        'reference_id', 'source_id', 'program_id', 'course_id', '0.', 'father_name', 'phone', 'email', 'address', 'purpose', 'note', 'date', 'follow_up_date', 'assigned', 'number_of_students', 'status', 'created_by', 'updated_by',
+        'student_id', 'course_id', 'assignTo','course_id' ,'delevery_method', 'important', 'cityList', 'likelyMonth', 'referralList', 'note', 'followUpDate'
     ];
 
     // public function reference()
@@ -20,9 +20,12 @@ class Enquiry extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(Course::class, 'course_id','id');
     }
-
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id','id');
+    }
     // public function source()
     // {
     //     return $this->belongsTo(EnquirySource::class, 'source_id');

@@ -10,7 +10,12 @@ class StudentModule extends Model
     protected $table = 'student_unit_competency';
     use HasFactory;
     protected $fillable = [
-        'student_id', 'module_id','note','enrollment_date','completion_date'
+        'student_id', 'unit_competency_id','enrollment_date','completion_date','module_activity_start','outcomeId','unitCompetencyDate','note'
     ];
-    
+    public function student(){
+        return $this->belongsTo(Student::class, 'student_id','id');
+    }
+    public function unit(){
+        return $this->belongsTo(UnitCompetency::class, 'unit_competency_id','id');
+    }
 }

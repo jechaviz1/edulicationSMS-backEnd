@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Course;
+use App\Models\Enquiry;
+use App\Models\City;
 use App\Http\Controllers\ImageController;
 class PeopleController extends Controller
 {
@@ -35,7 +37,9 @@ class PeopleController extends Controller
         $studentID  = $id;
         $student = Student::find($id);
         $courses = Course::get();
-        return view('admin.people.profile',compact('studentID','student','courses'));
+        $enquiry = Enquiry::where('student_id',$id)->get();
+        $cities = City::get();
+        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities'));
 
     }
     public function profileUpdate(Request $request,$id){
@@ -130,7 +134,19 @@ class PeopleController extends Controller
         }
     }
     public function new_enquiry(Request $request){
-        dd($request);
-        
+        // dd($request);
+        $enuiry = new Enquiry;
+        $enuiry->student_id  = $request->studentId;
+        $enuiry->course_id  =$request->courseList;
+        $enuiry->assignTo  = $request->assignTo;
+        $enuiry->delevery_method  = json_encode($request->delevery_method);
+        $enuiry->important  = $request->important;
+        $enuiry->cityList  = json_encode($request->cityList);
+        $enuiry->likelyMonth  = $request->likelyMonth;
+        $enuiry->referralList  = $request->referralList;
+        $enuiry->note  = $request->note;
+        $enuiry->followUpDate  = $request->followUpDate;
+        $enuiry->save();
+        return redirect()->back()->with('failed', 'Record not found.');
     }
 }

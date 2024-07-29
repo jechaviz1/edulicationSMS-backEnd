@@ -1004,10 +1004,10 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('people.find.index')}}">Find People</a></li>
-                        <li><a href="">Learner Records</a></li>
-                        <li><a href="">Enquiry Search</a></li>
-                        <li><a href="">Enrolment Search</a></li>
-                        <li><a href="">Bulk Enrolment</a></li>
+                        <li><a href="{{ route('people.active.learners.index')}}">Learner Records</a></li>
+                        <li><a href="{{ route('people.enquiry.index')}}">Enquiry Search</a></li>
+                        <li><a href="{{ route('people.enrollment.search') }}">Enrolment Search</a></li>
+                        <li><a href="{{ route('people.bulk.enrolment') }}">Bulk Enrolment</a></li>
                         <li><a href="">Employer Groups</a></li>
                     </ul>
                 </li>

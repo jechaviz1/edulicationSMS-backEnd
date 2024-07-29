@@ -177,8 +177,7 @@
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                aria-labelledby="home-tab">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="row" id="details">
                                     <div class="col-sm-6">
                                         <h6 class="mt-3">Basic Information</h6>
@@ -253,19 +252,20 @@
                                         </div>
                                         @endif
                                     </div>
+                                  
                                     <div class="col-sm-6">
                                         <h6>Contact Information</h6>
-                                        <div class="row">
                                         @if($student->entryDate != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Employee Number</label>
+                                                <label for="">Mobile</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->employeeNumber}}</p>
+                                                <p>{{ $student->contact_no}}</p>
                                             </div>
                                         </div>
                                         @endif
+                                        @if($student->businessNumber != null)
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <label for="">Business Phone</label>
@@ -274,54 +274,231 @@
                                                 <p>{{ $student->businessNumber }}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->homeNumber != null)
                                         <h6>More Information</h6>
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Is Learner</label>
+                                                <label for="">Home Phone</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->isLearner }}</p>
+                                                <p>{{ $student->homeNumber }}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->fax != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Is Contact
+                                                <label for="">Fax
                                                 </label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->isContact }}</p>
+                                                <p>{{ $student->fax }}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->email != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Unique ID</label>
+                                                <label for="">Email 1</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->id }}</p>
+                                                <p>{{ $student->email }}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->email != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">National ID </label>
+                                                <label for="">Email 2</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>{{ $student->id }}</p>
+                                                <p>{{ $student->studentEmail2 }}</p>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($student->studentEmail3 != null)
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label for="">Survey contact status:
-                                                </label>
+                                                <label for="">Email 3</label>
                                             </div>
                                             <div class="col-sm-8">
-                                                <p>Available for survey use</p>
+                                                <p>{{ $student->studentEmail3 }}</p>
                                             </div>
                                         </div>
-                                        <button id="toggleButton" class="btn btn-primary">Edit</button>
-
-                                    </div>
-                                    {{-- @dd($student) --}}
+                                        @endif
+                                    
                                 </div>
+                                <div class="col-sm-6">
+                                    <h6>Usual Residence</h6>
+                                    @if($student->buildingName != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Building / Property Name</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->buildingName }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->fax != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Flat / Unit Details</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->fax }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->streetNumber != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Street Number</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->streetNumber }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->streetName != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Street Name</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->streetName }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->postalCode_postal != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Post Code</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->postalCode_postal }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->suburb != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Suburb</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->suburb }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->country != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Country </label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->country }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if($student->state != null)
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">State</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>{{ $student->state }}</p>
+                                            </div>
+                                        </div>
+                                        @endif
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6>More Information</h6>
+                                    @if($student->isLearner != null)
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Is Learner</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $student->isLearner }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($student->isContact != null)
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Is Contact</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $student->isContact }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
+
+                                    @if($student->unitDetails != null)
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Unique ID</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $student->unitDetails }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($student->isLearner != null)
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Overseas Client?</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $student->isLearner }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($student->isLearner != null)
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">National ID</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $student->nationalID }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Survey contact status:</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>Available for survey use
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6>Postal Address</h6>
+                                    @if($student->isLearner != null)
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="">Building / Property Name</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p>{{ $student->nationalID }}</p>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="row">
+                                <div class="col-sm-4"></div>
+                                <div class="col-sm-4">
+                                    <button id="toggleButton" class="btn btn-primary">Edit</button>
+                                </div>
+                                <div class="col-sm-4"></div>
+                                </div>
+                            
+                                {{-- <div class="col-sm-4"></div> --}}
+                            </div>
                                 <div class="hidden" id="details-edit">
                                     <form action="{{ route('people.update', $student->id) }}" method="POST">
                                         @csrf
@@ -3284,7 +3461,6 @@
                             </div>
                             <div class="tab-pane fade" id="employment" role="tabpanel"
                                 aria-labelledby="employment-tab">
-
                                 <div id="details-employment">
                                     <div style="float:left;padding-left:150px;">
                                         <div style="padding:5px;width:320px;font-weight:bold;float:left;">Employment</div>
@@ -3503,7 +3679,6 @@
                             </div>
                         </div>
                     </div>
-
                     {{-- <----------------------------------- Enquiry Details ----------------------------------------------------> --}}
                     <hr>
                     <div class="row">
@@ -3543,20 +3718,17 @@
                                                                    <option value="{{ $course->id }}">{{ $course->name }}</option>
                                                                @endforeach
                                                             </select>
-                                                            <input type="hidden" value="524977" name="studentId"
-                                                                id="studentId">
+                                                            <input type="hidden" value="{{  $student->id }}" name="studentId" id="studentId">
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
                                                         <div style="padding:5px; float:left;width:150px;"
                                                             align="left">
                                                             Delivery Method(s)</div>
                                                         <div style="padding:5px; float:left">
-                                                            <select name="courseTypeList[]" class="form-control"
-                                                                id="courseTypeList" multiple="multiple"
-                                                                style="width:200px; height:50px;" fdprocessedid="e1x91">
-                                                                <option value="1">Self Paced</option>
-                                                                <option value="2">Public Sessions</option>
-                                                                <option value="3">Private Sessions</option>
+                                                            <select name="delevery_method[]" class="form-control" id="courseTypeList" multiple="multiple" style="width:200px; height:50px;" >
+                                                                <option value="Self Paced">Self Paced</option>
+                                                                <option value="Public Sessions">Public Sessions</option>
+                                                                <option value="Private Sessions">Private Sessions</option>
                                                             </select>
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
@@ -3568,7 +3740,9 @@
                                                                 id="cityList" multiple="multiple"
                                                                 style="width:200px; height:100px;"
                                                                 fdprocessedid="sbd71b">
-                                                                <option value="1502">Sydney</option>
+                                                                @foreach ($cities as $city)
+                                                                <option value="{{ $city->id  }}">{{ $city->name }}</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
@@ -3611,10 +3785,10 @@
                                                             <select name="assignTo" id="assignTo"
                                                                 class="form-control" size="1"
                                                                 style="width:200px;" fdprocessedid="t3awc9">
-                                                                <option value="1523">Kabir Kiron</option>
-                                                                <option value="1522">Kabir H Kiron</option>
-                                                                <option value="1555">newtest newtest</option>
-                                                                <option value="1521">Weworkbook Support</option>
+                                                                <option value="Kabir Kiron">Kabir Kiron</option>
+                                                                <option value="Kabir H Kiron">Kabir H Kiron</option>
+                                                                <option value="newtest newtest">newtest newtest</option>
+                                                                <option value="Weworkbook Support">Weworkbook Support</option>
                                                             </select>
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
@@ -3681,8 +3855,46 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Course Code	</th>
+                                        <th scope="col">Location	</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Assigned To	</th>
+                                        <th scope="col">Reference</th>
+                                        <th scope="col">InfoPAK Sent?</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($enquiry as $enqu)
+                                        <tr>
+                                            <th scope="row">{{ $enqu->course->code }}</th>
+                                           <td>
+                                            @php
+                                            foreach(json_decode($enqu->cityList) as $row_city){
+                                               $city =  App\Models\City::where('id',$row_city)->first(); 
+                                                echo $city->name . '<br>';
+                                            }
+                                        @endphp
+                                            </td>
+                                            <td>  {{ $enqu->delevery_method }} </td>
+                                            <td>{{ $enqu->referralList  }}</td>
+                                            <td>{{ $enqu->assignTo  }}</td>
+                                            <td>N</td>
+                                            <td>active {{ $enqu->important	 }}</td>
+                                            <td></td>
+                                          </tr>
+                                        @endforeach
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
                     </div>
-
                     {{-- <----------------------------------- Current Enrolments ----------------------------------------------------> --}}
                     <hr>
                     <div class="row">
@@ -3702,7 +3914,45 @@
                                 Select Columns
                             </button>
                         </div>
-
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Course Code	</th>
+                                <th scope="col">Method</th>
+                                <th scope="col">Group</th>
+                                <th scope="col">City Name</th>
+                                <th scope="col">Activity End Date</th>
+                                <th scope="col">Activity Start Date</th>
+                                <th scope="col">Enrolled On</th>
+                                <th scope="col">Schedule End Date</th>
+                                <th scope="col">Schedule Month</th>
+                                <th scope="col">Schedule Start Date	</th>
+                                <th scope="col">Qualification Status</th>
+                                <th scope="col">Certificate Issued</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($enquiry as $enqu)
+                                <tr>
+                                    <th scope="row">{{ $enqu->course->code }}</th>
+                                   <td>
+                                    @php
+                                    foreach(json_decode($enqu->cityList) as $row_city){
+                                       $city =  App\Models\City::where('id',$row_city)->first(); 
+                                        echo $city->name . '<br>';
+                                    }
+                                @endphp
+                                    </td>
+                                    <td>  {{ $enqu->delevery_method }} </td>
+                                    <td>{{ $enqu->referralList  }}</td>
+                                    <td>{{ $enqu->assignTo  }}</td>
+                                    <td>N</td>
+                                    <td>active {{ $enqu->important	 }}</td>
+                                    <td></td>
+                                  </tr>
+                                @endforeach
+                            </tbody>
+                          </table>
                         <div class="modal fade" id="newEnrolment" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -3790,7 +4040,6 @@
                                                             <option value="Other">Other</option>
                                                         </select>
                                                     </div>
-
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">&nbsp;</div>
@@ -3888,7 +4137,6 @@
                                                     <div class="row">
                                                     </div>
                                                 </div>
-
                                                 <div id="RTOStudentIdDiv" style="float:left; display:none;">
                                                     <div class="col-2 col-form-label" style="float:left">National ID:
                                                     </div>
@@ -3919,32 +4167,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="selectColumns" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="selectColumns" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <h2>Select Columns</h2>
-                                   <table>   
-						<tbody><tr style="height:10px;"></tr>
-						<tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="unitCompetentDate_1" id="unitCompetentDate_1" checked=""><label for="unitCompetentDate">&nbsp;&nbsp;Activity End Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="activityStartDate_1" id="activityStartDate_1" checked=""><label for="activityStartDate">&nbsp;&nbsp;Activity Start Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="enrolTime_1" id="enrolTime_1" checked=""><label for="enrolTime">&nbsp;&nbsp;Enrolled On</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="endDate_1" id="endDate_1" checked=""><label for="endDate">&nbsp;&nbsp;Schedule End Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="month_1" id="month_1" checked=""><label for="month">&nbsp;&nbsp;Schedule Month</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="startDate_1" id="startDate_1" checked=""><label for="startDate">&nbsp;&nbsp;Schedule Start Date</label></strong></td></tr>                        
-                                        
-                    <tr style="height:10px;"></tr>
-                    <tr style="height:30px;">
-                        <td align="center">
-                            <button class="btn btn-primary" style="margin:0px 2px;" type="button" onclick="addSelectedCols();" fdprocessedid="h78jc">Save</button>
-                            <button class="btn btn-primary" style="margin:0px 2px;" type="button"data-bs-dismiss="modal">Cancel</button>
-                        </td>
-                    </tr>                    
-                </tbody></table>
-
+                                
+                                 `    <table>   
+                                    <tbody><tr style="height:10px;"></tr>
+                                        <tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="unitCompetentDate_1" id="unitCompetentDate_1" checked=""><label for="unitCompetentDate">&nbsp;&nbsp;Activity End Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="activityStartDate_1" id="activityStartDate_1" checked=""><label for="activityStartDate">&nbsp;&nbsp;Activity Start Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="enrolTime_1" id="enrolTime_1" checked=""><label for="enrolTime">&nbsp;&nbsp;Enrolled On</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="endDate_1" id="endDate_1" checked=""><label for="endDate">&nbsp;&nbsp;Schedule End Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="month_1" id="month_1" checked=""><label for="month">&nbsp;&nbsp;Schedule Month</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="startDate_1" id="startDate_1" checked=""><label for="startDate">&nbsp;&nbsp;Schedule Start Date</label></strong></td></tr>                        
+                                                            
+                                        <tr style="height:10px;"></tr>
+                                        <tr style="height:30px;">
+                                            <td align="center">
+                                                <button class="btn btn-primary" style="margin:0px 2px;" type="button" onclick="addSelectedCols();" fdprocessedid="h78jc">Save</button>
+                                                <button class="btn btn-primary" style="margin:0px 2px;" type="button"data-bs-dismiss="modal">Cancel</button>
+                                            </td>
+                                        </tr>                    
+                                    </tbody>
+                                </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
                     </div>
                     {{-- <----------------------------------- Past Enrolments  ----------------------------------------------------> --}}
                     <hr>
@@ -3957,6 +4203,49 @@
                         </div>
                         <div class="col-sm-2">
 
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Course Code	</th>
+                                        <th scope="col">Method</th>
+                                        <th scope="col">Group</th>
+                                        <th scope="col">City Name</th>
+                                        <th scope="col">Activity End Date</th>
+                                        <th scope="col">Activity Start Date</th>
+                                        <th scope="col">Enrolled On</th>
+                                        <th scope="col">Schedule End Date</th>
+                                        <th scope="col">Schedule Month</th>
+                                        <th scope="col">Schedule Start Date	</th>
+                                        <th scope="col">Qualification Status</th>
+                                        <th scope="col">Certificate Issued</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($enquiry as $enqu)
+                                        <tr>
+                                            <th scope="row">{{ $enqu->course->code }}</th>
+                                           <td>
+                                            @php
+                                            foreach(json_decode($enqu->cityList) as $row_city){
+                                               $city =  App\Models\City::where('id',$row_city)->first(); 
+                                                echo $city->name . '<br>';
+                                            }
+                                        @endphp
+                                            </td>
+                                            <td>  {{ $enqu->delevery_method }} </td>
+                                            <td>{{ $enqu->referralList  }}</td>
+                                            <td>{{ $enqu->assignTo  }}</td>
+                                            <td>N</td>
+                                            <td>active {{ $enqu->important	 }}</td>
+                                            <td></td>
+                                          </tr>
+                                        @endforeach
+                                    </tbody>
+                                  </table>
+                            </div>
                         </div>
                     </div>
                     {{-- <----------------------------------- Qualifications Completed   ----------------------------------------------------> --}}

@@ -43,14 +43,36 @@
                                 <th>Assigned To</th>
                                 <th>InfoPAK sent?</th>
                                 <th>Chance</th>
-                                <th>Email 2</th>
-                                <th>Email 3</th>
                                 <th>Actions</th>
                             </th>
                             </tr>
                         </thead>
                         <tbody> 
+                            @foreach ($enuiries as $enuiry)
+                           {{-- @dd($enuiry) --}}
+                            <tr>
+                                <td>{{ $enuiry->created_at }}</td>
+                                <td>{{ $enuiry->student->first_name }} . {{ $enuiry->student->last_name }}</td>
+                                <td>{{ $enuiry->course->code }}</td>
+                                <td>
+                                    @php
+                                    foreach(json_decode($enuiry->cityList) as $row_city){
+                                       $city =  App\Models\City::where('id',$row_city)->first(); 
+                                        echo $city->name . '<br>';
+                                    }
+                                @endphp
+                                    </td>
+                                    <td>{{ $enuiry->updated_at }}</td>
+                                <td>{{ $enuiry->assignTo }}</td>
+                                <td>N</td>
+                                <td> {{ $enuiry->important}}</td>
+                                <td>
+                                    <i title="Edit Enquiry" class="fa fa-pencil fa-2x mr-2 text-info" aria-hidden="true" onclick="editEnquiry({{$enuiry->id}});"></i>
+                                </td>
+                            </tr>
+                            @endforeach
                         </tbody>
+                    </table>
                     </table>
                   </div>
             </div>
@@ -58,4 +80,9 @@
     </div>
     </div>
     </div>
+    <script>
+     function  editEnquiry(id){
+            console.log(id)
+        }
+    </script>
 @stop
