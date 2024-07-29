@@ -7,7 +7,10 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\Enquiry;
 use App\Models\City;
+use App\Models\EnrolmentAddNote;
+use App\Models\StudentNoteCategory;
 use App\Http\Controllers\ImageController;
+use PDF;
 class PeopleController extends Controller
 {
     public function index(Request $request){
@@ -39,7 +42,9 @@ class PeopleController extends Controller
         $courses = Course::get();
         $enquiry = Enquiry::where('student_id',$id)->get();
         $cities = City::get();
-        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities'));
+        $noteCtegory = StudentNoteCategory::get();
+        $noteEnrolment = EnrolmentAddNote::where('student_id',$studentID)->get();
+        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities','noteCtegory','noteEnrolment'));
 
     }
     public function profileUpdate(Request $request,$id){
@@ -148,5 +153,38 @@ class PeopleController extends Controller
         $enuiry->followUpDate  = $request->followUpDate;
         $enuiry->save();
         return redirect()->back()->with('failed', 'Record not found.');
+    }
+
+    public function person_note(Request $request){
+        
+        $enrolment = new EnrolmentAddNote;
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = 'Enrolment_' . time() . '_' . $file->getClientOriginalName();
+            $enrolment->attachment = $file->getClientOriginalName();
+            $file->move(public_path('notes'), $filename);
+            $fileUrl = 'notes/' . $filename;
+            $enrolment->upload = $fileUrl;
+        }
+        $enrolment->student_id = $request->student_id;
+        $enrolment->note_category = $request->noteCategory;
+        $enrolment->template = $request->template;
+        $enrolment->note = $request->note;
+        $enrolment->follow_up_to_date = $request->follow_up_to_date;
+        $enrolment->created_by = auth()->user()->first_name . ' ' .  auth()->user()->last_name;
+        $enrolment->save();
+        return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function exportPDF($id){
+        $enrolment = EnrolmentAddNote::where('student_id',$id)->get();
+    
+        $pdf = PDF::loadView('admin.enrolment_notes.pdf', ['enrolmentNotes' => $enrolment]);
+
+        return $pdf->download('admin.enrolment_notes.pdf');
+    }
+    public function deletePerson($id){
+            $enrolment = EnrolmentAddNote::find($id);
+            $enrolment->delete();
+            return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
 }

@@ -649,6 +649,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/people/profileupdate/{id}', [App\Http\Controllers\PeopleController::class, 'profileUpdate'])->name('people.update');
     Route::post('/people/new/enquiry', [App\Http\Controllers\PeopleController::class, 'new_enquiry'])->name('people.new.enquiry');
     Route::delete('/people/profileupdate/{id}', [App\Http\Controllers\PeopleController::class, 'delete'])->name('people.destroy');
+    Route::post('/people/notes/', [App\Http\Controllers\PeopleController::class, 'person_note'])->name('person.notes');
+    Route::get('/people/notes/export/pdf/{id}', [App\Http\Controllers\PeopleController::class, 'exportPDF'])->name('person.note.export');
+    Route::get('/people/note/delete/{id}', [App\Http\Controllers\PeopleController::class, 'deletePerson'])->name('person.note.delete');
     // END - Event Trainers
     // START - Lerner Record 
     Route::get('/people/active/learns', [App\Http\Controllers\LearnerRecord::class, 'index'])->name('people.active.learners.index');

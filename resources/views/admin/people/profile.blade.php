@@ -4204,8 +4204,13 @@
                         <div class="col-sm-2">
 
                         </div>
+                        <style>
+                            .scroll::-webkit-scrollbar-thumb {
+            background: #666; 
+            }
+                        </style>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 scroll" style="overflow: scroll;">
                                 <table class="table">
                                     <thead>
                                       <tr>
@@ -4265,41 +4270,50 @@
                     {{-- <----------------------------------- Qualifications Completed   ----------------------------------------------------> --}}
                     <hr>
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <div class="card-header1">
                                 <span style="font-size: 21px;">Notes </span>
                                 <p>There are no current enrolment records for this person</p>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal"
+                        <div class="col-sm-4 d-flex">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#add-notes" style="height: 50px;"> Add Note </button>
-
+                                <a href="{{ route('person.note.export',$studentID)}}" class="btn btn-primary ms-2" style="height: 50px;">Export to PDF</a>
+                                {{-- // This Model // --}}
                                 <div class="modal fade" id="add-notes" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                                    <div class="modal-content">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                    <div class="modal-content" style="height:500px;">
                                         <div class="modal-body">
                                             <h2>Add Person Notes for {{ $student->firstName }} {{ $student->lastName }}</h2>
-                                            <form name="saveForm" id="saveForm" method="post" target="_self" enctype="multipart/form-data" action="">
+                                            <form name="saveForm" action="{{ route('person.notes')}}" id="saveForm" method="post" target="_self" enctype="multipart/form-data">
+                                                @csrf
+                                                @method('post')
+                                                <input type="hidden" name="student_id" value="{{ $studentID }}">
                                                 <div class="form-group row">
                                                     <label for="template" class="col-sm-2 col-form-label">Template</label>
                                                     <div class="col-sm-10">
-                                                        <select id="ptemplateselect" onchange="ptemplatechanged()" class="form-control" fdprocessedid="qbyxs"><option value="">None</option></select>
+                                                        <select id="template" onchange="ptemplatechanged()" name="template" class="form-control">
+                                                            <option value="">None</option>
+                                                        </select>
                                                     </div>
                                                     </div>  
                                                 <div class="form-group row mt-2">
                                                     <label for="note" class="col-sm-2 col-form-label">Note</label>
                                                     <div class="col-sm-10">
-                                                            <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                                            <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
                                                           </div>
                                                 </div>  
                                                             <div class="form-group row mt-2"> 
                                                     <label for="note" class="col-sm-2 col-form-label">Select note category:</label>
                                                     <div class="col-sm-10">
-                                                        <select name="noteCat" id="noteCat" style=""  class="form-control" fdprocessedid="ve5tlr">
-                                                            <option value="0" selected=""></option>;
-                                                                                </select>
+                                                        <select name="noteCategory" id="noteCategory"  class="form-control">
+                                                            <option value="0" selected="">Select Cataegory</option>
+                                                            @foreach ($noteCtegory as $cataegoryNote)
+                                                            <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mt-2">
@@ -4307,33 +4321,53 @@
                                                     <div class="col-sm-10">
                                                         <input type="file" class="form-control" name="upload_file" id="upload_file" size="50">
                                                     </div>
-                                                </div>  
+                                                </div>
                                                 <div class="form-group row mt-2">
                                                     <label for="followUpDate2" class="col-sm-2 col-form-label">Follow-up Date</label>
                                                     <div class="col-sm-10">
-                                                    <input type="text" class="form-control hasDatepicker" value="" name="followUpDate2" id="followUpDate2" fdprocessedid="88xhv8">
-                                                    </div>
-                                                </div>  
-                                                <div class="form-group row mt-2">
-                                                    <label for="followUpDate2" class="col-sm-2 col-form-label">Assign To</label>
-                                                    <div class="col-sm-10">
-                                                        <select name="assignTo" class="form-control" id="assignTo" size="1" fdprocessedid="yslpcj">
-                                                            <option></option>
-                                                            <option value="1523">Kabir Kiron</option><option value="1522">Kabir H Kiron</option><option value="1555">newtest newtest</option><option value="1521">Weworkbook Support</option>                    </select>
+                                                    <input type="date" class="form-control hasDatepicker" value="" name="follow_up_to_date" id="follow_up_to_date">
                                                     </div>
                                                 </div>  
                                                             <div class="form-group row mt-2">
                                                     <label for="followUpDate2" class="col-sm-2 col-form-label"></label>
                                                     <div class="col-sm-10">
-                                                                                <button type="submit" class="btn btn-primary" style="margin:0px 2px;" fdprocessedid="uv5hv">Save</button>
+                                                        <button type="submit" class="btn btn-primary" style="margin:0px 2px;" fdprocessedid="uv5hv">Save</button>
                                                             <button type="button" class="btn btn-primary" style="margin:0px 2px;" id="closeForm" fdprocessedid="khkvru" data-bs-dismiss="modal">Cancel</button>
-                                                                        </div>
+                                                        </div>
                                                 </div>     
                                                 </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Note</th>
+                                    <th scope="col">Note Category</th>
+                                    <th scope="col">Follow-up Date</th>
+                                    <th scope="col">Posted By</th>
+                                    <th scope="col">Posted On</th>
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($noteEnrolment as  $note)
+                                    <tr>
+                                        <th>{{ $note->note }}  </th>
+                                        <td>{{ $note->category->name }}</td>
+                                        <td>{{ $note->follow_up_to_date }}</td>
+                                        <td>{{ $note->created_at }}</td>
+                                        <td>{{ $note->created_by }}</td>
+                                        <td><a href="{{ route('person.note.delete',$note->id)}}"><i title="Delete Student" class="fa fa-trash fa-2x text-danger"></i></a></td>
+                                      </tr>      
+                                    @endforeach
+                                </tbody>
+                              </table>
                         </div>
                     </div>
                 </div>
@@ -4546,4 +4580,9 @@
       </div>
     </div>
   </div>
+  <style>
+    .scroll::-webkit-scrollbar-thumb {
+  background: #666;
+}
+  </style>
 @stop
