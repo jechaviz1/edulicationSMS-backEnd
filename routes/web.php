@@ -652,6 +652,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/people/notes/', [App\Http\Controllers\PeopleController::class, 'person_note'])->name('person.notes');
     Route::get('/people/notes/export/pdf/{id}', [App\Http\Controllers\PeopleController::class, 'exportPDF'])->name('person.note.export');
     Route::get('/people/note/delete/{id}', [App\Http\Controllers\PeopleController::class, 'deletePerson'])->name('person.note.delete');
+    Route::post('/bulk_sms_filter_form', [App\Http\Controllers\PeopleController::class, 'AddEnuiryNote'])->name('enrolment.enuiry.note.add');
+    Route::get('/enquiry/note/list', [App\Http\Controllers\PeopleController::class,'noteList'])->name('enuiry.note.list');
     // END - Event Trainers
     // START - Lerner Record 
     Route::get('/people/active/learns', [App\Http\Controllers\LearnerRecord::class, 'index'])->name('people.active.learners.index');

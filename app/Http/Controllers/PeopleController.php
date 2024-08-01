@@ -9,6 +9,7 @@ use App\Models\Enquiry;
 use App\Models\City;
 use App\Models\EnrolmentAddNote;
 use App\Models\StudentNoteCategory;
+use App\Models\EnuquiryNote;
 use App\Http\Controllers\ImageController;
 use PDF;
 class PeopleController extends Controller
@@ -186,5 +187,31 @@ class PeopleController extends Controller
             $enrolment = EnrolmentAddNote::find($id);
             $enrolment->delete();
             return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function AddEnuiryNote(Request $request){
+        $enuiryNote = new EnuquiryNote;
+        $enuiryNote->student_id = $request->studentId;
+        $enuiryNote->course_id = $request->courseId;
+        $enuiryNote->enuquiry_id = $request->enquiryId;
+        $enuiryNote->note_category = $request->noteCat;
+        $enuiryNote->followUpDate = $request->followUpDate2;
+        $enuiryNote->assignTo = $request->assignTo;
+        $enuiryNote->chance_success = $request->important;
+        $enuiryNote->likelyMonth = $request->likelyMonth;
+        $enuiryNote->template = $request->likelyMonth;
+        $enuiryNote->note = $request->note;
+        $enuiryNote->save();
+        return redirect()->back()->with('sucess', 'Sucess Record Created');
+
+    }
+    public function noteList(Request $request){
+        // Retrieve the 'id' from the request
+        $enquiryId = $request->query('id');
+        // Fetch the notes related to the enquiry ID from the database
+        // Assuming you have a Note model related to an Enquiry
+        $notes = EnuquiryNote::where('enuquiry_id', $enquiryId)->with('category')->get();
+
+        // Return the notes as a JSON response
+        return response()->json($notes);
     }
 }

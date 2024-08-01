@@ -3854,6 +3854,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- model end  --}}
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -3887,7 +3888,13 @@
                                             <td>{{ $enqu->assignTo  }}</td>
                                             <td>N</td>
                                             <td>active {{ $enqu->important	 }}</td>
-                                            <td></td>
+                                            <td><i title="View Notes" style="cursor:pointer;" class="fa fa-sticky-note fa-2x text-warning ml-2" aria-hidden="true" onclick="openEnquiryNotes({{ $enqu->student }},{{ $enqu }} );"></i>
+                                                <i title="Edit Enquiry" style="cursor:pointer" class="fa fa-pencil fa-2x text-info ml-2" aria-hidden="true" onclick="openNewEnquiry({{ $enqu->student }},{{$enqu}});"></i>
+                                                <i title="Enrol" style="cursor:pointer" class="fa fa-user-plus fa-2x text-success ml-2" aria-hidden="true" onclick="openEnrolForm(539103, 'falak', 'khan', '133730', 'BSB40820', 'new');"></i>
+                                                <i title="Email InfoPAK. *To unlock this feature, please upgrade to a Non-Free License" style="cursor:pointer" class="fa fa-book fa-2x text-primary ml-2" aria-hidden="true"></i>
+                                                <i title="Send Email. *To unlock this feature, please upgrade to a Non-Free License" style="cursor:pointer" class="fa fa-book fa-2x text-primary ml-2" aria-hidden="true"></i>
+                                                <i title="Cancel Enquiry" style="cursor:pointer" class="fa fa-trash fa-2x ml-2 text-danger" aria-hidden="true" onclick="deleteEnquiry(539103, '133730');"></i>
+                                            </td>
                                           </tr>
                                         @endforeach
                                     </tbody>
@@ -4206,8 +4213,8 @@
                         </div>
                         <style>
                             .scroll::-webkit-scrollbar-thumb {
-            background: #666; 
-            }
+                                    background: #666; 
+                            }
                         </style>
                         <div class="row">
                             <div class="col-sm-12 scroll" style="overflow: scroll;">
@@ -4303,15 +4310,15 @@
                                                     <label for="note" class="col-sm-2 col-form-label">Note</label>
                                                     <div class="col-sm-10">
                                                             <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
-                                                          </div>
+                                                        </div>
                                                 </div>  
-                                                            <div class="form-group row mt-2"> 
+                                                    <div class="form-group row mt-2"> 
                                                     <label for="note" class="col-sm-2 col-form-label">Select note category:</label>
                                                     <div class="col-sm-10">
                                                         <select name="noteCategory" id="noteCategory"  class="form-control">
                                                             <option value="0" selected="">Select Cataegory</option>
                                                             @foreach ($noteCtegory as $cataegoryNote)
-                                                            <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}</option>
+                                                                <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -4334,8 +4341,8 @@
                                                         <button type="submit" class="btn btn-primary" style="margin:0px 2px;" fdprocessedid="uv5hv">Save</button>
                                                             <button type="button" class="btn btn-primary" style="margin:0px 2px;" id="closeForm" fdprocessedid="khkvru" data-bs-dismiss="modal">Cancel</button>
                                                         </div>
-                                                </div>     
-                                                </form>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -4377,6 +4384,7 @@
     </div>
     {{-- Modal select column start --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $("#toggleButton").click(function() {
@@ -4465,6 +4473,59 @@
         }
     </style>
     <script>
+       function openEnquiryNotes(item,enquiry){
+            $('#enuiry_notes #enuiry_note').empty('show');
+            $('#enuiry_notes').modal('show');
+            $('#enuiry_notes #enuiry_note').append('Enquiry Notes for ' + item.first_name + ' ' + item.last_name);
+            $('#courseId').val(enquiry.course.id)
+            $('#enquiryId').val(enquiry.id)
+            $.ajax({
+    url: "{{ route('enuiry.note.list') }}", // Your server script URL
+    type: 'GET',
+    data: { id: enquiry.id }, // Send data as an object
+    success: function(response) {
+        // Handle success
+        console.log(response);
+         // Clear existing rows
+        $('#notesTable tbody').empty();
+        // Append new rows
+        $.each(response, function(index, note) {
+            $('#notesTable tbody').append(
+                '<tr>' +
+                    '<td>' + note.id + '</td>' +
+                    '<td>' + note.note + '</td>' +
+                    '<td>' + note.category.name + '</td>' +
+                '</tr>'
+            );
+        }); 
+    },
+    error: function(xhr, status, error) {
+        // Handle error
+        alert('An error occurred: ' + error);
+        console.log(xhr.responseText);
+    }
+        });
+    }
+
+    function openNewEnquiry(item,enquiry){
+        console.log(item)
+        $('#enuiry_notes .enuiry_note').empty('show');
+        $('#enuiry_notes_1').modal('show');
+        $('#enuiry_notes_1 .enuiry_note').append('Enquiry Notes for ' + item.first_name + ' ' + item.last_name);
+    } 
+
+    function showAddNotesBox(){
+        $('#enrolment_enuiry_note').css('display', 'flex');
+        $('#enrolment_enquiry_note_add_button').css('display', 'none');
+    }
+
+    function hideAddNotesBox(){
+        $('#enrolment_enuiry_note').css('display', 'none');
+        $('#enrolment_enquiry_note_add_button').css('display', 'flex');
+    }
+  
+    </script>
+    <script>
         $(document).ready(function() {
             // Function to add a new row
             $("#addRowBtn").click(function() {
@@ -4483,8 +4544,224 @@
             });
         });
     </script>
+    {{-- Enuiry Modal Notes --}}
+    <div class="modal fade" id="enuiry_notes" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="enuiry_note"></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> 
+            <div class="modal-body">
+              <div class="row" id="enrolment_enquiry_note_add_button" style="display: flex;">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" onclick="showAddNotesBox();">Add Notes</button>
+                </div>
+                <div class="col-sm-6 text-end">
+                    <a href="#" class="btn btn-primary">
+                        Export to PDF
+                    </a>
+                </div>
+              </div>
+              <div id="enrolment_enuiry_note" style="display: none;">
+                <form name="" id="saveForm" method="post" target="" action="{{ route('enrolment.enuiry.note.add')}}" enctype="multipart/form-data" >
+					@csrf()
+                    @method('POST')
+                    <div class="form-group row"> 
+						<label for="note" class="col-sm-3 col-form-label">Select note category:</label>
+						<div class="col-sm-9">
+							<select name="noteCat" id="noteCat" style="w" class="form-control">
+								<option value="" selected=""></option>
+                                @foreach ($noteCtegory as $cataegoryNote)
+                                <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}</option>
+                                @endforeach
+                            </select>
+						</div>
+					</div>
+					<!-- start wwb-1218 -->
+					<div class="form-group row"> 
+						<label for="note" class="col-sm-3 col-form-label">Followup Date:</label>
+						<div class="col-sm-9">
+							<input type="date" class="form-control mt-3" name="followUpDate2" value="0000-00-00">
+						</div>
+					</div>
+					<div class="form-group row mt-3"> 
+						<label for="note" class="col-sm-3 col-form-label">Assigned To:</label>
+						<div class="col-sm-9">
+							<select name="assignTo" class="form-control">
+							<option value="1523" selected="">Kabir Kiron</option><option value="1522">Kabir H Kiron</option><option value="1555">newtest newtest</option><option value="1521">Weworkbook Support</option>							</select>
+						</div>
+					</div>
+					<div class="form-group row mt-3"> 
+						<label for="note" class="col-sm-3 col-form-label">Chance of Success:</label>
+						<div class="col-sm-9">
+							<select name="important" class="form-control" fdprocessedid="4vzju6">
+							<option value="10%">10%</option>
+							<option value="30%">30%</option>
+							<option value="50%">50%</option>
+							<option value="70%">70%</option>
+							<option value="90%">90%</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row mt-3"> 
+						<label for="note" class="col-sm-3 col-form-label">Likely Month:</label>
+						<div class="col-sm-9">
+						<select name="likelyMonth" class="form-control" fdprocessedid="xwl3ae">
+						<option value="">Unknown</option><option value="2024-07-01">Jul 2024</option><option value="2024-08-01">Aug 2024</option><option value="2024-09-01">Sep 2024</option><option value="2024-10-01">Oct 2024</option><option value="2024-11-01">Nov 2024</option><option value="2024-12-01">Dec 2024</option><option value="2025-01-01">Jan 2025</option><option value="2025-02-01">Feb 2025</option><option value="2025-03-01">Mar 2025</option><option value="2025-04-01">Apr 2025</option><option value="2025-05-01">May 2025</option><option value="2025-06-01">Jun 2025</option>						</select>
+						</div>
+					</div>
+					<!-- end wwb-1218 -->
+					<div class="form-group row mt-3" id="enqtemplateselectdiv"> 
+						<label for="enqtemplateselect" class="col-sm-3 col-form-label">Template</label>
+						<div class="col-sm-9">
+						<select id="enqtemplateselect" class="form-control" name="template">
+						<option value="">None</option>
+                    </select>
+						</div>
+					</div>
+					<div class="form-group row mt-3"> 
+						<label for="note" class="col-sm-3 col-form-label">Note Content:</label>
+						<textarea class="form-control" name="note" id="note" style="width: 100%; height: 70px;"></textarea>
+					</div>
+                    <div class="form-group row mt-3"> 
+						<label for="note" class="col-sm-3 col-form-label">Attach File:</label>
+						<input type="file" name="document" class="form-control" value="">
+					</div>
+					<div class="form-group row mt-3">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-primary" style="margin-right:3px;" fdprocessedid="qck51">Save</button>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary" onclick="hideAddNotesBox();" style="margin-left:3px;" fdprocessedid="j0r1b4">Cancel</button>
+                        </div>
+					</div>
+					<input type="hidden" id="enquiryId" name="enquiryId" value="">
+					<input type="hidden" id="studentId" name="studentId" value="{{ $studentID }}">
+					<input type="hidden" id="courseId" name="courseId" value="">
+			</form>
+              </div>
+              <div class="table">
+                <table class="table" id="notesTable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Posted By</th>
+                        <th scope="col">Note</th>
+                        <th scope="col">Note Category</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>    
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Modal -->
-<div class="modal fade" id="sendsurvey" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     {{-- Enuiry Modal Notes --}}
+     <div class="modal fade" id="enuiry_notes_1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 enuiry_note"></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div> 
+            <div class="modal-body">
+                <form name="" id="" method="post" enctype="multipart/form-data" action="">        
+                    @csrf
+                    @method('POST') 
+                    <div style="padding:5px; float:left; width:150px;" align="left">Preferred Course</div>
+                    <div style="padding:5px; float:left">  
+                        <select name="courseList" class="form-control" id="courseList" size="1"  style="width:200px;">
+                            <option value=""></option>    
+                        </select>
+                         <input type="hidden" value="539789" name="studentId" id="studentId">
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div style="padding:5px; float:left;width:150px;" align="left">Delivery Method(s)</div>
+                    <div style="padding:5px; float:left">
+                        <select name="courseTypeList[]" class="form-control" id="courseTypeList" multiple="multiple" style="width:200px; height:50px;" fdprocessedid="8qjmhw"><option value="1">Self Pafsdafced</option><option value="2">Public Sessions</option><option value="3">Private Sessions</option><option value="4">Public Sessions 2</option></select>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div style="padding:5px; float:left; width:150px;" align="left">Preferred Cities</div>
+                    <div style="padding:5px; float:left">
+                        <select name="cityList[]" class="form-control" id="cityList" multiple="multiple" style="width:200px; height:100px;" fdprocessedid="job7pa">
+                            <option value="1519" selected="">new</option><option value="1501" selected="">sudny</option><option value="1502" selected="">Sydney</option>        	</select>
+                    </div> 
+                    <div style="clear:both;height:10px;"></div>
+                    <div style="padding:5px; float:left; width:150px;" align="left">Referred By</div>
+                    <div style="padding:5px; float:left">
+                        <select name="referralList" class="form-control" id="referralList" size="1" style="width:200px;" fdprocessedid="94ngi4">
+                             <option value=""></option>
+                            <option value="360" selected="">test</option>			</select>
+                    </div> 
+                    <div style="clear:both;height:10px;"></div>
+                    <div style="display:none">
+                        <div style="padding:5px;float:left;width:150px;" align="left">Note</div>
+                        <div style="padding:5px;float:left">
+                            <textarea name="note" class="form-control" id="note" style="height:50px;width:195px;" onkeypress="return imposeMaxLength(event, this, 250);"></textarea>
+                        </div>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div>
+                        <div style="padding:5px;float:left;width:150px;" align="left">Follow-up Date</div>
+                        <div style="padding:5px;float:left">
+                            <input type="date" class="form-control hasDatepicker" value="" name="followUpDate" id="followUpDate" style="width:180px;">
+                        </div>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div style="padding:5px;float:left;width:150px;" align="left">Assign To</div>
+                    <div style="padding:5px;float:left">
+                        <select name="assignTo" id="assignTo" class="form-control" size="1" style="width:200px;" fdprocessedid="pudgy">
+                            <option value="1523" selected="">Kabir Kiron</option><option value="1522">Kabir H Kiron</option><option value="1555">newtest newtest</option><option value="1521">Weworkbook Support</option>			</select>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div>
+                        <div style="padding:5px;float:left;width:150px;" align="left">Chance of Success</div>
+                        <div style="padding:5px;float:left">
+                            <select class="form-control" name="important" id="important" size="1" style="width:200px;" fdprocessedid="ioa6mr">
+                                <option value="10%">10%</option>
+                                <option value="30%">30%</option>
+                                <option value="50%">50%</option>
+                                <option value="70%">70%</option>
+                                <option value="90%">90%</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div style="clear:both;height:10px;"></div>
+                    <div>
+                        <div style="padding:5px;float:left;width:150px;" align="left">Likely Month</div>
+                        <div style="padding:5px;float:left">
+                            <label style="width:150px;">Sep 2024&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
+                                            </div> 
+                                            <div style="clear:both;height:10px;"></div>
+                                                <div>
+                                                <div style="padding:5px;float:left;width:150px;" align="left">Update Likely Month to </div>
+                                                <div style="padding:5px;float:left"><select class="form-control" id="likelyMonth" name="likelyMonth" size="1" style="width:200px;" fdprocessedid="rdyz3d"><option value=""></option><option value="Unknown">Unknown</option><option value="2024-07-01">Jul 2024</option><option value="2024-08-01">Aug 2024</option><option value="2024-09-01">Sep 2024</option><option value="2024-10-01">Oct 2024</option><option value="2024-11-01">Nov 2024</option><option value="2024-12-01">Dec 2024</option><option value="2025-01-01">Jan 2025</option><option value="2025-02-01">Feb 2025</option><option value="2025-03-01">Mar 2025</option><option value="2025-04-01">Apr 2025</option><option value="2025-05-01">May 2025</option><option value="2025-06-01">Jun 2025</option></select>			</div>
+                    </div>
+                    <div style="clear:both;height:10px;"></div>
+                    <div style="display:none">
+                        <div style="padding:5px; float:left; width:150px;" align="left">Set Status</div>
+                        <div style="padding:5px; float:left">
+                            <select name="status" id="status" size="1">
+                                <option value="active" selected="">Active</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="clear:both;height:20px;"></div>
+                    <div align="center">
+                        <button type="submit" class="btn btn-primary" fdprocessedid="zi702f">Save</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="sendsurvey" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
       <div class="modal-content">
         <div class="modal-header">
@@ -4518,14 +4795,12 @@
                         <input type="email" name="subject" id="subject" class="form-control" value="" fdprocessedid="hxg5xj">
                     </div>
                 </div>
-
-                <div class="form-group row col-sm-12 mt-2">
+                <div class="form-group row col-sm-12 mt-3">
                     <label for="email_Content" class="col-sm-1 col-form-label">Body</label>
                     <div class="col-sm-11">
                     <textarea name="email_Content" id="email_Content" class="form-control"  rows="5" style=""></textarea>
                     </div>
                 </div>
-                <iframe id="email_target" name="email_target" src="../config.php" style="width:0;height:0;border:0px solid #fff;"></iframe>
                 <div class="form-group row col-sm-12">
                     <div class="col-sm-1 col-form-label">
                         <input type="hidden" id="studenrolmentid" name="enrolmentid" value="0">
@@ -4585,4 +4860,5 @@
   background: #666;
 }
   </style>
+  
 @stop
