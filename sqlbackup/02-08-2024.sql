@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2024 at 07:54 AM
+-- Generation Time: Aug 02, 2024 at 07:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `prixma_data_extra`
+-- Database: `data`
 --
 
 -- --------------------------------------------------------
@@ -403,6 +403,264 @@ INSERT INTO `compnies_documents` (`id`, `document_name`, `file_name`, `upload_by
 (11, 'czxczxcc', 'document/1721023264_Attestation-for-marriage-Certificate.jpg', NULL, 'info', '2024-07-15 00:31:04', '2024-07-15 00:31:04'),
 (12, 'gfdgdfg', 'document/1721027201_Attestation-for-marriage-Certificate.jpg', NULL, 'info', '2024-07-15 01:36:41', '2024-07-15 01:36:41'),
 (13, 'kuldip', 'document/1721027217_Attestation-for-marriage-Certificate.jpg', NULL, 'email', '2024-07-15 01:36:57', '2024-07-15 01:36:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `countries`
+--
+
+INSERT INTO `countries` (`id`, `name`, `code`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Adelie Land (France)', 'ALF', 'Adelie Land, a part of France', NULL, NULL),
+(2, 'Afghanistan', 'AF', 'A country located in South Asia', NULL, NULL),
+(3, 'Albania', 'AL', 'A country located in Southeastern Europe', NULL, NULL),
+(4, 'Algeria', 'DZ', 'A country in North Africa', NULL, NULL),
+(5, 'Andorra', 'AD', 'A small country between France and Spain', NULL, NULL),
+(6, 'Angola', 'AO', 'A country on the west coast of Southern Africa', NULL, NULL),
+(7, 'Anguilla', 'AI', 'A British Overseas Territory in the Caribbean', NULL, NULL),
+(8, 'Antarctica', 'AQ', 'The southernmost continent, containing the South Pole', NULL, NULL),
+(9, 'Antigua and Barbuda', 'AG', 'A country located in the West Indies in the Americas', NULL, NULL),
+(10, 'Argentina', 'AR', 'A country in South America', NULL, NULL),
+(11, 'Armenia', 'AM', 'A country in the South Caucasus region of Eurasia', NULL, NULL),
+(12, 'Aruba', 'AW', 'An island country in the mid-south of the Caribbean Sea', NULL, NULL),
+(13, 'Australia', 'AU', 'A country and continent surrounded by the Indian and Pacific oceans', NULL, NULL),
+(14, 'Austria', 'AT', 'A landlocked East Alpine country in the southern part of Central Europe', NULL, NULL),
+(15, 'Azerbaijan', 'AZ', 'A country located at the boundary of Eastern Europe and Western Asia', NULL, NULL),
+(16, 'Bahamas', 'BS', 'A country within the Lucayan Archipelago of the West Indies in the Atlantic', NULL, NULL),
+(17, 'Bahrain', 'BH', 'A country in the Persian Gulf', NULL, NULL),
+(18, 'Bangladesh', 'BD', 'A country in South Asia', NULL, NULL),
+(19, 'Barbados', 'BB', 'An island country in the Lesser Antilles of the West Indies', NULL, NULL),
+(20, 'Belarus', 'BY', 'A country in Eastern Europe', NULL, NULL),
+(21, 'Belgium', 'BE', 'A country in Western Europe', NULL, NULL),
+(22, 'Belize', 'BZ', 'A country on the eastern coast of Central America', NULL, NULL),
+(23, 'Benin', 'BJ', 'A country in West Africa', NULL, NULL),
+(24, 'Bermuda', 'BM', 'A British Overseas Territory in the North Atlantic Ocean', NULL, NULL),
+(25, 'Bhutan', 'BT', 'A landlocked country in the Eastern Himalayas', NULL, NULL),
+(26, 'Bolivia', 'BO', 'A landlocked country in western-central South America', NULL, NULL),
+(27, 'Bosnia and Herzegovina', 'BA', 'A country on the Balkan Peninsula in southeastern Europe', NULL, NULL),
+(28, 'Botswana', 'BW', 'A landlocked country in Southern Africa', NULL, NULL),
+(29, 'Brazil', 'BR', 'The largest country in South America and Latin America', NULL, NULL),
+(30, 'Brunei', 'BN', 'A country located on the north coast of the island of Borneo in Southeast Asia', NULL, NULL),
+(31, 'Bulgaria', 'BG', 'A country in Southeast Europe', NULL, NULL),
+(32, 'Burkina Faso', 'BF', 'A landlocked country in West Africa', NULL, NULL),
+(33, 'Burundi', 'BI', 'A landlocked country in the Great Rift Valley where the African Great Lakes region and East Africa converge', NULL, NULL),
+(34, 'Cambodia', 'KH', 'A country located in the southern portion of the Indochinese Peninsula in Southeast Asia', NULL, NULL),
+(35, 'Cameroon', 'CM', 'A country in Central Africa', NULL, NULL),
+(36, 'Canada', 'CA', 'A country in North America', NULL, NULL),
+(37, 'Cape Verde', 'CV', 'An island country in the central Atlantic Ocean', NULL, NULL),
+(38, 'Cayman Islands', 'KY', 'A British Overseas Territory in the western Caribbean Sea', NULL, NULL),
+(39, 'Central African Republic', 'CF', 'A landlocked country in Central Africa', NULL, NULL),
+(40, 'Chad', 'TD', 'A landlocked country in north-central Africa', NULL, NULL),
+(41, 'Chile', 'CL', 'A country in western South America', NULL, NULL),
+(42, 'China', 'CN', 'A country in East Asia', NULL, NULL),
+(43, 'Christmas Island', 'CX', 'An Australian external territory in the Indian Ocean', NULL, NULL),
+(44, 'Cocos (Keeling) Islands', 'CC', 'An Australian external territory in the Indian Ocean', NULL, NULL),
+(45, 'Colombia', 'CO', 'A country in South America', NULL, NULL),
+(46, 'Comoros', 'KM', 'A country in the Indian Ocean, located at the northern end of the Mozambique Channel off the eastern coast of Africa', NULL, NULL),
+(47, 'Congo (Brazzaville)', 'CG', 'A country in Central Africa, officially known as the Republic of the Congo', NULL, NULL),
+(48, 'Congo (Kinshasa)', 'CD', 'A country in Central Africa, officially known as the Democratic Republic of the Congo', NULL, NULL),
+(49, 'Cook Islands', 'CK', 'A self-governing island country in free association with New Zealand, located in the South Pacific Ocean', NULL, NULL),
+(50, 'Costa Rica', 'CR', 'A country in Central America', NULL, NULL),
+(51, 'Croatia', 'HR', 'A country at the crossroads of Central and Southeast Europe', NULL, NULL),
+(52, 'Cuba', 'CU', 'A country comprising the island of Cuba, as well as Isla de la Juventud and several minor archipelagos', NULL, NULL),
+(53, 'Cyprus', 'CY', 'An island country in the Eastern Mediterranean', NULL, NULL),
+(54, 'Czech Republic', 'CZ', 'A landlocked country in Central Europe', NULL, NULL),
+(55, 'Denmark', 'DK', 'A Nordic country in Northern Europe', NULL, NULL),
+(56, 'Djibouti', 'DJ', 'A country located in the Horn of Africa', NULL, NULL),
+(57, 'Dominica', 'DM', 'An island country in the Caribbean', NULL, NULL),
+(58, 'Dominican Republic', 'DO', 'A country located on the island of Hispaniola in the Greater Antilles archipelago of the Caribbean region', NULL, NULL),
+(59, 'East Timor', 'TL', 'A country in Southeast Asia', NULL, NULL),
+(60, 'Ecuador', 'EC', 'A country in northwestern South America', NULL, NULL),
+(61, 'Egypt', 'EG', 'A transcontinental country spanning the northeast corner of Africa and southwest corner of Asia', NULL, NULL),
+(62, 'El Salvador', 'SV', 'The smallest and the most densely populated country in Central America', NULL, NULL),
+(63, 'Equatorial Guinea', 'GQ', 'A country located on the west coast of Central Africa', NULL, NULL),
+(64, 'Eritrea', 'ER', 'A country in the Horn of Africa', NULL, NULL),
+(65, 'Estonia', 'EE', 'A country in Northern Europe', NULL, NULL),
+(66, 'Eswatini', 'SZ', 'A landlocked country in Southern Africa, formerly known as Swaziland', NULL, NULL),
+(67, 'Ethiopia', 'ET', 'A country in the Horn of Africa', NULL, NULL),
+(68, 'Falkland Islands', 'FK', 'An archipelago in the South Atlantic Ocean, a British Overseas Territory', NULL, NULL),
+(69, 'Faroe Islands', 'FO', 'A North Atlantic archipelago and an autonomous territory of the Kingdom of Denmark', NULL, NULL),
+(70, 'Fiji', 'FJ', 'An island country in Melanesia, part of Oceania in the South Pacific Ocean', NULL, NULL),
+(71, 'Finland', 'FI', 'A Nordic country in Northern Europe', NULL, NULL),
+(72, 'France', 'FR', 'A country in Western Europe', NULL, NULL),
+(73, 'French Guiana', 'GF', 'An overseas department of France on the northeast coast of South America', NULL, NULL),
+(74, 'French Polynesia', 'PF', 'An overseas collectivity of France in the South Pacific Ocean', NULL, NULL),
+(75, 'Gabon', 'GA', 'A country on the west coast of Central Africa', NULL, NULL),
+(76, 'Gambia', 'GM', 'A country in West Africa', NULL, NULL),
+(77, 'Georgia', 'GE', 'A country located at the intersection of Eastern Europe and Western Asia', NULL, NULL),
+(78, 'Germany', 'DE', 'A country in Central Europe', NULL, NULL),
+(79, 'Ghana', 'GH', 'A country in West Africa', NULL, NULL),
+(80, 'Gibraltar', 'GI', 'A British Overseas Territory located at the southern tip of the Iberian Peninsula', NULL, NULL),
+(81, 'Greece', 'GR', 'A country in Southeast Europe', NULL, NULL),
+(82, 'Greenland', 'GL', 'An autonomous territory within the Kingdom of Denmark', NULL, NULL),
+(83, 'Grenada', 'GD', 'A country in the West Indies in the Caribbean Sea', NULL, NULL),
+(84, 'Guadeloupe', 'GP', 'An overseas region of France in the Caribbean', NULL, NULL),
+(85, 'Guam', 'GU', 'An unincorporated and organized territory of the United States in Micronesia in the western Pacific Ocean', NULL, NULL),
+(86, 'Guatemala', 'GT', 'A country in Central America', NULL, NULL),
+(87, 'Guernsey', 'GG', 'A British Crown Dependency in the English Channel', NULL, NULL),
+(88, 'Guinea', 'GN', 'A country in West Africa', NULL, NULL),
+(89, 'Guinea-Bissau', 'GW', 'A country in West Africa', NULL, NULL),
+(90, 'Guyana', 'GY', 'A country on the northern mainland of South America', NULL, NULL),
+(91, 'Haiti', 'HT', 'A country located on the island of Hispaniola in the Caribbean', NULL, NULL),
+(92, 'Honduras', 'HN', 'A country in Central America', NULL, NULL),
+(93, 'Hong Kong', 'HK', 'A Special Administrative Region of China', NULL, NULL),
+(94, 'Hungary', 'HU', 'A country in Central Europe', NULL, NULL),
+(95, 'Iceland', 'IS', 'A Nordic island country in the North Atlantic Ocean', NULL, NULL),
+(96, 'India', 'IN', 'A country in South Asia', NULL, NULL),
+(97, 'Indonesia', 'ID', 'A country in Southeast Asia and Oceania', NULL, NULL),
+(98, 'Iran', 'IR', 'A country in Western Asia', NULL, NULL),
+(99, 'Iraq', 'IQ', 'A country in Western Asia', NULL, NULL),
+(100, 'Ireland', 'IE', 'A country in Western Europe', NULL, NULL),
+(101, 'Isle of Man', 'IM', 'A self-governing British Crown dependency in the Irish Sea', NULL, NULL),
+(102, 'Israel', 'IL', 'A country in Western Asia', NULL, NULL),
+(103, 'Italy', 'IT', 'A country in Southern Europe', NULL, NULL),
+(104, 'Jamaica', 'JM', 'An island country in the Caribbean', NULL, NULL),
+(105, 'Japan', 'JP', 'An island country in East Asia', NULL, NULL),
+(106, 'Jersey', 'JE', 'A British Crown Dependency in the English Channel', NULL, NULL),
+(107, 'Jordan', 'JO', 'A country in Western Asia', NULL, NULL),
+(108, 'Kazakhstan', 'KZ', 'A country in Central Asia', NULL, NULL),
+(109, 'Kenya', 'KE', 'A country in East Africa', NULL, NULL),
+(110, 'Kiribati', 'KI', 'A country in the central Pacific Ocean', NULL, NULL),
+(111, 'Korea (North)', 'KP', 'A country in East Asia, officially known as the Democratic People\'s Republic of Korea', NULL, NULL),
+(112, 'Korea (South)', 'KR', 'A country in East Asia, officially known as the Republic of Korea', NULL, NULL),
+(113, 'Kuwait', 'KW', 'A country in Western Asia', NULL, NULL),
+(114, 'Kyrgyzstan', 'KG', 'A country in Central Asia', NULL, NULL),
+(115, 'Lao', 'LA', 'A landlocked country in Southeast Asia', NULL, NULL),
+(116, 'Latvia', 'LV', 'A country in the Baltic region of Northern Europe', NULL, NULL),
+(117, 'Lebanon', 'LB', 'A country in Western Asia', NULL, NULL),
+(118, 'Lesotho', 'LS', 'A landlocked country in Southern Africa', NULL, NULL),
+(119, 'Liberia', 'LR', 'A country on the west coast of Africa', NULL, NULL),
+(120, 'Libya', 'LY', 'A country in North Africa', NULL, NULL),
+(121, 'Liechtenstein', 'LI', 'A small landlocked country in Central Europe', NULL, NULL),
+(122, 'Lithuania', 'LT', 'A country in the Baltic region of Europe', NULL, NULL),
+(123, 'Luxembourg', 'LU', 'A small landlocked country in Western Europe', NULL, NULL),
+(124, 'Macao', 'MO', 'A Special Administrative Region of China', NULL, NULL),
+(125, 'Madagascar', 'MG', 'An island country in the Indian Ocean', NULL, NULL),
+(126, 'Malawi', 'MW', 'A landlocked country in southeastern Africa', NULL, NULL),
+(127, 'Malaysia', 'MY', 'A country in Southeast Asia', NULL, NULL),
+(128, 'Maldives', 'MV', 'An island country in the Indian Ocean', NULL, NULL),
+(129, 'Mali', 'ML', 'A landlocked country in West Africa', NULL, NULL),
+(130, 'Malta', 'MT', 'An island country in the Mediterranean Sea', NULL, NULL),
+(131, 'Marshall Islands', 'MH', 'A country of atolls and islands in the central Pacific Ocean', NULL, NULL),
+(132, 'Mauritania', 'MR', 'A country in West Africa', NULL, NULL),
+(133, 'Mauritius', 'MU', 'An island nation in the Indian Ocean', NULL, NULL),
+(134, 'Mayotte', 'YT', 'An overseas department and region of France', NULL, NULL),
+(135, 'Mexico', 'MX', 'A country in the southern portion of North America', NULL, NULL),
+(136, 'Micronesia', 'FM', 'A country in Oceania consisting of four states in the western Pacific Ocean', NULL, NULL),
+(137, 'Moldova', 'MD', 'A landlocked country in Eastern Europe', NULL, NULL),
+(138, 'Monaco', 'MC', 'A sovereign city-state on the French Riviera in Western Europe', NULL, NULL),
+(139, 'Mongolia', 'MN', 'A landlocked country in East Asia and Central Asia', NULL, NULL),
+(140, 'Montenegro', 'ME', 'A country in Southeast Europe on the Adriatic Sea', NULL, NULL),
+(141, 'Montserrat', 'MS', 'A British Overseas Territory in the Caribbean', NULL, NULL),
+(142, 'Morocco', 'MA', 'A country in North Africa', NULL, NULL),
+(143, 'Mozambique', 'MZ', 'A country in Southeast Africa', NULL, NULL),
+(144, 'Myanmar', 'MM', 'A country in Southeast Asia', NULL, NULL),
+(145, 'Namibia', 'NA', 'A country in southern Africa', NULL, NULL),
+(146, 'Nauru', 'NR', 'A small island country in Micronesia in the Central Pacific', NULL, NULL),
+(147, 'Nepal', 'NP', 'A landlocked country in South Asia', NULL, NULL),
+(148, 'Netherlands', 'NL', 'A country in Northwestern Europe', NULL, NULL),
+(149, 'New Caledonia', 'NC', 'A special collectivity of France located in the southwest Pacific Ocean', NULL, NULL),
+(150, 'New Zealand', 'NZ', 'An island country in the southwestern Pacific Ocean', NULL, NULL),
+(151, 'Nicaragua', 'NI', 'A country in Central America', NULL, NULL),
+(152, 'Niger', 'NE', 'A landlocked country in West Africa', NULL, NULL),
+(153, 'Nigeria', 'NG', 'A country in West Africa', NULL, NULL),
+(154, 'Niue', 'NU', 'An island country in the South Pacific Ocean in free association with New Zealand', NULL, NULL),
+(155, 'Norfolk Island', 'NF', 'An external territory of Australia located in the Pacific Ocean', NULL, NULL),
+(156, 'North Macedonia', 'MK', 'A country in Southeast Europe on the Balkan Peninsula', NULL, NULL),
+(157, 'Northern Mariana Islands', 'MP', 'A group of islands in the western Pacific Ocean, a commonwealth of the United States', NULL, NULL),
+(158, 'Norway', 'NO', 'A country in Northern Europe', NULL, NULL),
+(159, 'Oman', 'OM', 'A country on the southeastern coast of the Arabian Peninsula in Western Asia', NULL, NULL),
+(160, 'Pakistan', 'PK', 'A country in South Asia', NULL, NULL),
+(161, 'Palau', 'PW', 'An island country in the western Pacific Ocean', NULL, NULL),
+(162, 'Palestine', 'PS', 'A region in Western Asia', NULL, NULL),
+(163, 'Panama', 'PA', 'A country in Central America', NULL, NULL),
+(164, 'Papua New Guinea', 'PG', 'A country in Oceania, located in Melanesia', NULL, NULL),
+(165, 'Paraguay', 'PY', 'A landlocked country in South America', NULL, NULL),
+(166, 'Peru', 'PE', 'A country in South America', NULL, NULL),
+(167, 'Philippines', 'PH', 'An island country in Southeast Asia', NULL, NULL),
+(168, 'Pitcairn Islands', 'PN', 'A group of four volcanic islands in the southern Pacific Ocean, a British Overseas Territory', NULL, NULL),
+(169, 'Poland', 'PL', 'A country in Central Europe', NULL, NULL),
+(170, 'Portugal', 'PT', 'A country in Southwestern Europe', NULL, NULL),
+(171, 'Puerto Rico', 'PR', 'An unincorporated territory of the United States located in the Caribbean', NULL, NULL),
+(172, 'Qatar', 'QA', 'A country in Western Asia', NULL, NULL),
+(173, 'Réunion', 'RE', 'An overseas department and region of France in the Indian Ocean', NULL, NULL),
+(174, 'Romania', 'RO', 'A country in Southeastern Europe', NULL, NULL),
+(175, 'Russia', 'RU', 'A country spanning Eastern Europe and Northern Asia', NULL, NULL),
+(176, 'Rwanda', 'RW', 'A landlocked country in East-Central Africa', NULL, NULL),
+(177, 'Saint Barthelemy', 'BL', 'An overseas collectivity of France located in the Caribbean', NULL, NULL),
+(178, 'Saint Helena', 'SH', 'A British Overseas Territory located in the South Atlantic Ocean', NULL, NULL),
+(179, 'Saint Kitts and Nevis', 'KN', 'A country in the West Indies', NULL, NULL),
+(180, 'Saint Lucia', 'LC', 'An island country in the Eastern Caribbean', NULL, NULL),
+(181, 'Saint Martin', 'MF', 'An overseas collectivity of France in the Caribbean', NULL, NULL),
+(182, 'Saint Pierre and Miquelon', 'PM', 'An overseas collectivity of France near Canada', NULL, NULL),
+(183, 'Saint Vincent and the Grenadines', 'VC', 'A country in the Caribbean', NULL, NULL),
+(184, 'Samoa', 'WS', 'A country in Polynesia in the South Pacific Ocean', NULL, NULL),
+(185, 'San Marino', 'SM', 'A landlocked country surrounded by Italy', NULL, NULL),
+(186, 'Sao Tome and Principe', 'ST', 'A country in Central Africa', NULL, NULL),
+(187, 'Saudi Arabia', 'SA', 'A country in Western Asia', NULL, NULL),
+(188, 'Senegal', 'SN', 'A country in West Africa', NULL, NULL),
+(189, 'Serbia', 'RS', 'A country in Southeast Europe', NULL, NULL),
+(190, 'Seychelles', 'SC', 'An archipelago of 115 islands in the Indian Ocean', NULL, NULL),
+(191, 'Sierra Leone', 'SL', 'A country in West Africa', NULL, NULL),
+(192, 'Singapore', 'SG', 'A city-state and island country in Southeast Asia', NULL, NULL),
+(193, 'Sint Maarten', 'SX', 'A country within the Kingdom of the Netherlands in the Caribbean', NULL, NULL),
+(194, 'Slovakia', 'SK', 'A landlocked country in Central Europe', NULL, NULL),
+(195, 'Slovenia', 'SI', 'A country in Southern Central Europe', NULL, NULL),
+(196, 'Solomon Islands', 'SB', 'A country consisting of six major islands and over 900 smaller islands in the South Pacific Ocean', NULL, NULL),
+(197, 'Somalia', 'SO', 'A country in the Horn of Africa', NULL, NULL),
+(198, 'South Africa', 'ZA', 'A country located at the southern tip of Africa', NULL, NULL),
+(199, 'South Georgia and the South Sandwich Islands', 'GS', 'A British Overseas Territory in the South Atlantic Ocean', NULL, NULL),
+(200, 'South Sudan', 'SS', 'A country in East-Central Africa', NULL, NULL),
+(201, 'Spain', 'ES', 'A country in Southwestern Europe', NULL, NULL),
+(202, 'Sri Lanka', 'LK', 'An island country in South Asia', NULL, NULL),
+(203, 'Sudan', 'SD', 'A country in North-East Africa', NULL, NULL),
+(204, 'Suriname', 'SR', 'A country in South America', NULL, NULL),
+(205, 'Svalbard', 'SJ', 'An archipelago in the Arctic Ocean, under Norwegian sovereignty', NULL, NULL),
+(206, 'Sweden', 'SE', 'A country in Northern Europe', NULL, NULL),
+(207, 'Switzerland', 'CH', 'A country in Central Europe', NULL, NULL),
+(208, 'Syria', 'SY', 'A country in Western Asia', NULL, NULL),
+(209, 'Taiwan', 'TW', 'A country in East Asia, officially known as the Republic of China', NULL, NULL),
+(210, 'Tajikistan', 'TJ', 'A country in Central Asia', NULL, NULL),
+(211, 'Tanzania', 'TZ', 'A country in East Africa', NULL, NULL),
+(212, 'Thailand', 'TH', 'A country in Southeast Asia', NULL, NULL),
+(213, 'Timor-Leste', 'TL', 'A country in Southeast Asia, also known as East Timor', NULL, NULL),
+(214, 'Togo', 'TG', 'A country in West Africa', NULL, NULL),
+(215, 'Tokelau', 'TK', 'A territory of New Zealand in the South Pacific Ocean', NULL, NULL),
+(216, 'Tonga', 'TO', 'A Polynesian country in the South Pacific Ocean', NULL, NULL),
+(217, 'Trinidad and Tobago', 'TT', 'A country in the Caribbean', NULL, NULL),
+(218, 'Tunisia', 'TN', 'A country in North Africa', NULL, NULL),
+(219, 'Turkey', 'TR', 'A country straddling Eastern Europe and Western Asia', NULL, NULL),
+(220, 'Turkmenistan', 'TM', 'A country in Central Asia', NULL, NULL),
+(221, 'Tuvalu', 'TV', 'A country in Polynesia in the Pacific Ocean', NULL, NULL),
+(222, 'Uganda', 'UG', 'A country in East Africa', NULL, NULL),
+(223, 'Ukraine', 'UA', 'A country in Eastern Europe', NULL, NULL),
+(224, 'United Arab Emirates', 'AE', 'A country in Western Asia', NULL, NULL),
+(225, 'United Kingdom', 'GB', 'A country in Europe consisting of England, Scotland, Wales, and Northern Ireland', NULL, NULL),
+(226, 'United States', 'US', 'A country in North America', NULL, NULL),
+(227, 'Uruguay', 'UY', 'A country in South America', NULL, NULL),
+(228, 'Uzbekistan', 'UZ', 'A country in Central Asia', NULL, NULL),
+(229, 'Vanuatu', 'VU', 'A country in the South Pacific Ocean', NULL, NULL),
+(230, 'Vatican City', 'VA', 'The smallest independent state in the world, located in Rome', NULL, NULL),
+(231, 'Venezuela', 'VE', 'A country on the northern coast of South America', NULL, NULL),
+(232, 'Vietnam', 'VN', 'A country in Southeast Asia', NULL, NULL),
+(233, 'Wallis and Futuna', 'WF', 'An overseas collectivity of France located in the South Pacific Ocean', NULL, NULL),
+(234, 'Western Sahara', 'EH', 'A disputed territory in North Africa', NULL, NULL),
+(235, 'Yemen', 'YE', 'A country in the Arabian Peninsula', NULL, NULL),
+(236, 'Zambia', 'ZM', 'A landlocked country in Southern Africa', NULL, NULL),
+(237, 'Zimbabwe', 'ZW', 'A country in Southern Africa', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1475,7 +1733,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (37, '2024_07_16_143224_create_password_resets_table', 24),
 (38, '2024_07_17_055818_create_company_settings_table', 25),
 (39, '2024_07_17_090200_create_student_note_categories_table', 26),
-(40, '2024_07_18_070714_create_model_student_table', 27);
+(40, '2024_07_18_070714_create_model_student_table', 27),
+(41, '2024_08_02_061043_create_countries_table', 28);
 
 -- --------------------------------------------------------
 
@@ -2004,17 +2263,20 @@ CREATE TABLE `students` (
   `birthCountry` varchar(255) DEFAULT NULL,
   `streetName` varchar(255) DEFAULT NULL,
   `suburb` varchar(255) DEFAULT NULL,
-  `isMainEnglish` varchar(255) DEFAULT NULL
-)  ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET latin1;
+  `isMainEnglish` varchar(255) DEFAULT NULL,
+  `spokenLanguage` varchar(255) DEFAULT NULL,
+  `englishProficiency` varchar(255) DEFAULT NULL,
+  `nospokenlanguage` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `title`, `entryDate`, `first_name`, `middle_name`, `last_name`, `gender`, `birth`, `clientCompany`, `role`, `relation`, `contact_no`, `address1`, `address2`, `uniqueStudentIdentifier`, `postcode`, `contactNumber`, `businessNumber`, `facsimileNumber`, `emergency_contact_no`, `email`, `studentEmail2`, `studentEmail3`, `buildingName_postal`, `unitDetails_postal`, `streetNumber_postal`, `nationality`, `first_guardian_name`, `streetName_postal`, `deliveryBox_postal`, `suburb_postal`, `postalCode_postal`, `country_postal`, `country`, `date_of_birth`, `companyName`, `homeNumber`, `dob`, `highestLevelCompleted`, `certificateName`, `preferred_contact`, `studentEmail`, `employeeNumber`, `unitDetails`, `address`, `image`, `indigenousStatus`, `isContact`, `isLearner`, `RTOStudentId`, `nationalID`, `fax`, `preferredName`, `nameType`, `addressLine1`, `isInternational`, `state_postal`, `colStatusSurveyResponse`, `surveyStat`, `state`, `profile_image_path`, `modified_by_id`, `is_deleted`, `created_at`, `updated_at`, `buildingName`, `streetNumber`, `addressLine2`, `vsn`, `birthCountry`, `streetName`, `suburb`, `isMainEnglish`) VALUES
-(1, NULL, NULL, 'sdfg1', 'df2', '233', NULL, NULL, NULL, '', NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, 'asdfg', '22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'address', 'profile_image1698138522.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1698138522.jpg', 46, '0', '2023-09-18 15:49:27', '2024-01-15 20:15:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, NULL, NULL, 'kuldip', 'j', 'domaadiya', NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1990-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', '2024/07/22/emoji keyboard in windows_07-30-53.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1705337987.png', 46, '0', '2024-01-15 20:54:23', '2024-07-22 02:00:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Mr', '2024-07-29', 'bjk', 'fsdf', 'jkjn', 'M', NULL, NULL, 'fsdfsdf', NULL, 'abcdfghji', NULL, NULL, NULL, '2356', '05623895623', NULL, NULL, 'abcdfghji', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, 'India', '1990-01-01', 'cdsf  fdsf', NULL, '2024-07-29', 'M', 'vlina', 'fsdfsdfsdf', 'kdomdiya@gmail.com', NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', NULL, NULL, '1', '1', NULL, NULL, NULL, 'fsdfsdfsdf', '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, 46, '0', '2024-01-15 22:08:31', '2024-07-29 04:36:21', NULL, 'njknjkjnk', NULL, NULL, NULL, NULL, 'surat', NULL),
-(4, 'Mr', '2024-07-22', 'kuldip', 'j', 'domaadiya', 'M', '2024-07-16', 'cdsf  fdsf', 'dsd', NULL, NULL, 'njknjkjnk', 'jnkjn', 'czxczxczxc', NULL, '05623895623', NULL, 'fed up', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'India', NULL, NULL, NULL, NULL, NULL, NULL, 'Polynesia (excludes Hawaii), nec', NULL, NULL, NULL, NULL, 'M', 'dipak sharma', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, NULL, '0', '2024-07-16 05:23:36', '2024-07-22 02:21:20', '12 srty', 'asdasdasd', NULL, 'czxczxczxc', NULL, 'jnkjn', 'surat', NULL);
+INSERT INTO `students` (`id`, `title`, `entryDate`, `first_name`, `middle_name`, `last_name`, `gender`, `birth`, `clientCompany`, `role`, `relation`, `contact_no`, `address1`, `address2`, `uniqueStudentIdentifier`, `postcode`, `contactNumber`, `businessNumber`, `facsimileNumber`, `emergency_contact_no`, `email`, `studentEmail2`, `studentEmail3`, `buildingName_postal`, `unitDetails_postal`, `streetNumber_postal`, `nationality`, `first_guardian_name`, `streetName_postal`, `deliveryBox_postal`, `suburb_postal`, `postalCode_postal`, `country_postal`, `country`, `date_of_birth`, `companyName`, `homeNumber`, `dob`, `highestLevelCompleted`, `certificateName`, `preferred_contact`, `studentEmail`, `employeeNumber`, `unitDetails`, `address`, `image`, `indigenousStatus`, `isContact`, `isLearner`, `RTOStudentId`, `nationalID`, `fax`, `preferredName`, `nameType`, `addressLine1`, `isInternational`, `state_postal`, `colStatusSurveyResponse`, `surveyStat`, `state`, `profile_image_path`, `modified_by_id`, `is_deleted`, `created_at`, `updated_at`, `buildingName`, `streetNumber`, `addressLine2`, `vsn`, `birthCountry`, `streetName`, `suburb`, `isMainEnglish`, `spokenLanguage`, `englishProficiency`, `nospokenlanguage`) VALUES
+(1, NULL, NULL, 'sdfg1', 'df2', '233', NULL, NULL, NULL, '', NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, 'asdfg', '22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'address', 'profile_image1698138522.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1698138522.jpg', 46, '0', '2023-09-18 15:49:27', '2024-01-15 20:15:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, NULL, NULL, 'kuldip', 'j', 'domaadiya', NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1990-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', '2024/07/22/emoji keyboard in windows_07-30-53.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1705337987.png', 46, '0', '2024-01-15 20:54:23', '2024-07-22 02:00:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Mr', '2024-07-22', 'kuldip', 'j', 'domaadiya', 'M', '2024-07-16', 'cdsf  fdsf', 'dsd', NULL, NULL, 'njknjkjnk', 'jnkjn', 'czxczxczxc', NULL, '05623895623', NULL, 'fed up', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'India', NULL, NULL, NULL, NULL, NULL, NULL, 'Polynesia (excludes Hawaii), nec', NULL, NULL, NULL, NULL, 'M', 'dipak sharma', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, NULL, '0', '2024-07-16 05:23:36', '2024-07-22 02:21:20', '12 srty', 'asdasdasd', NULL, 'czxczxczxc', NULL, 'jnkjn', 'surat', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2346,7 +2608,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `middle_name`, `email`, `gender`, `username`, `password`, `activation_token`, `status`, `remember_token`, `options`, `profile_image`, `profile_image_path`, `is_deleted`, `created_at`, `updated_at`) VALUES
-(46, 2, ' rakesh', 'makwana', NULL, 'makwanarakesh256@gmail.com', '1', 'rakesh256', '$2y$10$rckuKW58DgYtxAkMD4DDeeZn.BPY.5Vs1u8cQSktq6Rq/PaS7zTQ.', NULL, NULL, NULL, NULL, NULL, NULL, '0', '2023-10-20 13:03:00', '2023-10-20 18:40:19'),
+(46, 2, ' rakesh', 'makwana', NULL, 'makwanarakesh256@gmail.com', '1', 'rakesh256', '$2y$10$rckuKW58DgYtxAkMD4DDeeZn.BPY.5Vs1u8cQSktq6Rq/PaS7zTQ.', NULL, NULL, NULL, NULL, 'Attestation-for-marriage-Certificate.jpg', 'notes/Enrolment_1722604522_Attestation-for-marriage-Certificate.jpg', '0', '2023-10-20 13:03:00', '2024-08-02 07:45:22'),
 (78, 2, 'kdomdiya@gmail.com', 'dasd', NULL, 'kdomdiya@gmail.com', '1', 'admin@weloxpharma.com', '$2y$10$uxmANT/UCMlKqxL/l/wpNORn0v8EfYPvTXU477H7txasyTC9BbtV2', NULL, NULL, NULL, NULL, NULL, NULL, '0', '2024-07-16 09:45:50', '2024-07-16 22:23:17');
 
 --
@@ -2449,6 +2711,12 @@ ALTER TABLE `company_settings`
 -- Indexes for table `compnies_documents`
 --
 ALTER TABLE `compnies_documents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2975,6 +3243,12 @@ ALTER TABLE `compnies_documents`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
+
+--
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
@@ -3188,7 +3462,7 @@ ALTER TABLE `leave_type`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `model_student`

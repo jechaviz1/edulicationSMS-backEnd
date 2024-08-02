@@ -621,8 +621,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade" id="pills-integrations" role="tabpanel"
-                        aria-labelledby="pills-integrations-tab">
+                    <div class="tab-pane fade" id="pills-integrations" role="tabpanel" aria-labelledby="pills-integrations-tab">
                         <div id="tabs-t5" aria-labelledby="ui-id-16"
                             class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true"
                             aria-hidden="false" style="display: block;">
@@ -636,7 +635,7 @@
                                 <div class="form-check">
                                     <input type="radio" id="twoWaySMS_Yes" name="setTwoWaySMSOption" value="1"
                                         checked=""> Yes
-                                </div>
+                                </div> 
                                 <div class="form-check">
                                     <input type="radio" id="twoWaySMS_No" name="setTwoWaySMSOption" value="0"> No
                                 </div>
@@ -652,7 +651,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 font-weight-bold">Name</div>
                             <div class="col-lg-3">
-                                <input type="text" value="AUSTRALIAN INSTITUTE OF FINANCE TRAINING PTY LTD"
+                                <input type="text" value=""
                                     name="companyName" id="companyName" onfocus="onfocusInput('companyName');"
                                     onblur="onblurInput('companyName')" class="input_text form-control" maxlength="100"
                                     style="width:280px;">
