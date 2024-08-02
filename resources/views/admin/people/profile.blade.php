@@ -112,7 +112,7 @@
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#sendsurvey">
                                     Send Survey
-                                </button>  
+                                </button>
                                 {{-- <button type="button" class="btn btn-primary ms-3"></button> --}}
                                 <button type="button" class="btn btn-primary ms-3">Send Email</button>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -122,7 +122,7 @@
                                 <form action="{{ route('people.destroy', $student->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger ms-3" >Delete</button>
+                                    <button type="submit" class="btn btn-danger ms-3">Delete</button>
                                 </form>
                                 {{-- <button type="button" class="btn btn-danger ms-3">Delete</button> --}}
                             </div>
@@ -161,8 +161,8 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="schooling-tab" data-bs-toggle="tab" data-bs-target="#schooling"
-                                    type="button" role="tab" aria-controls="schooling"
+                                <button class="nav-link" id="schooling-tab" data-bs-toggle="tab"
+                                    data-bs-target="#schooling" type="button" role="tab" aria-controls="schooling"
                                     aria-selected="false">Schooling</button>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -177,328 +177,330 @@
                             </li>
                         </ul>
                         <div class="tab-content mt-3" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                aria-labelledby="home-tab">
                                 <div class="row" id="details">
                                     <div class="col-sm-6">
                                         <h6 class="mt-3">Basic Information</h6>
-                                        @if($student->title != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Title</label>
+                                        @if ($student->title != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Title</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->title }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->title}}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Entry Date</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Entry Date</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->entryDate }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->entryDate}}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Name</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Name</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->first_name }} {{ $student->middle_name }}
+                                                        {{ $student->last_name }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->first_name}} {{$student->middle_name }} {{ $student->last_name }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Date of Birth</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Date of Birth</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->birth }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->birth}}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Gender</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Gender</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->gender }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->gender}}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Employee Number</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Employee Number</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->employeeNumber }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->employeeNumber}}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Employee Number</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Employee Number</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->employeeNumber }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->employeeNumber}}</p>
-                                            </div>
-                                        </div>
                                         @endif
                                     </div>
-                                  
+
                                     <div class="col-sm-6">
                                         <h6>Contact Information</h6>
-                                        @if($student->entryDate != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Mobile</label>
+                                        @if ($student->entryDate != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Mobile</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->contact_no }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->contact_no}}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->businessNumber != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Business Phone</label>
+                                        @if ($student->businessNumber != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Business Phone</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->businessNumber }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->businessNumber }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->homeNumber != null)
-                                        <h6>More Information</h6>
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Home Phone</label>
+                                        @if ($student->homeNumber != null)
+                                            <h6>More Information</h6>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Home Phone</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->homeNumber }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->homeNumber }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->fax != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Fax
-                                                </label>
+                                        @if ($student->fax != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Fax
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->fax }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->fax }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->email != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Email 1</label>
+                                        @if ($student->email != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Email 1</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->email }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->email }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->email != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Email 2</label>
+                                        @if ($student->email != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Email 2</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->studentEmail2 }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->studentEmail2 }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                        @if($student->studentEmail3 != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Email 3</label>
+                                        @if ($student->studentEmail3 != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Email 3</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->studentEmail3 }}</p>
+                                                </div>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->studentEmail3 }}</p>
-                                            </div>
-                                        </div>
                                         @endif
-                                    
-                                </div>
-                                <div class="col-sm-6">
-                                    <h6>Usual Residence</h6>
-                                    @if($student->buildingName != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Building / Property Name</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->buildingName }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->fax != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Flat / Unit Details</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->fax }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->streetNumber != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Street Number</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->streetNumber }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->streetName != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Street Name</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->streetName }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->postalCode_postal != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Post Code</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->postalCode_postal }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->suburb != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Suburb</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->suburb }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->country != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">Country </label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->country }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                        @if($student->state != null)
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label for="">State</label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <p>{{ $student->state }}</p>
-                                            </div>
-                                        </div>
-                                        @endif
-                                </div>
-                                <div class="col-sm-6">
-                                    <h6>More Information</h6>
-                                    @if($student->isLearner != null)
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="">Is Learner</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ $student->isLearner }}</p>
-                                        </div>
-                                    </div>
-                                    @endif
-                                    @if($student->isContact != null)
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="">Is Contact</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ $student->isContact }}</p>
-                                        </div>
-                                    </div>
-                                    @endif
 
-                                    @if($student->unitDetails != null)
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="">Unique ID</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ $student->unitDetails }}</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h6>Usual Residence</h6>
+                                        @if ($student->buildingName != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Building / Property Name</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->buildingName }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->fax != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Flat / Unit Details</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->fax }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->streetNumber != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Street Number</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->streetNumber }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->streetName != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Street Name</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->streetName }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->postalCode_postal != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Post Code</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->postalCode_postal }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->suburb != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Suburb</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->suburb }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->country != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Country </label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->country }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->state != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">State</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->state }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h6>More Information</h6>
+                                        @if ($student->isLearner != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Is Learner</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->isLearner }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->isContact != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Is Contact</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->isContact }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        @if ($student->unitDetails != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Unique ID</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->unitDetails }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->isLearner != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Overseas Client?</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->isLearner }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($student->isLearner != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">National ID</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->nationalID }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label for="">Survey contact status:</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <p>Available for survey use
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    @endif
-                                    @if($student->isLearner != null)
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="">Overseas Client?</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ $student->isLearner }}</p>
-                                        </div>
+                                    <div class="col-sm-6">
+                                        <h6>Postal Address</h6>
+                                        @if ($student->isLearner != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Building / Property Name</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->nationalID }}</p>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
-                                    @endif
-                                    @if($student->isLearner != null)
                                     <div class="row">
+                                        <div class="col-sm-4"></div>
                                         <div class="col-sm-4">
-                                            <label for="">National ID</label>
+                                            <button id="toggleButton" class="btn btn-primary">Edit</button>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ $student->nationalID }}</p>
-                                        </div>
+                                        <div class="col-sm-4"></div>
                                     </div>
-                                    @endif
-                                    
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="">Survey contact status:</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>Available for survey use
-                                            </p>
-                                        </div>
-                                    </div>
+
+                                    {{-- <div class="col-sm-4"></div> --}}
                                 </div>
-                                <div class="col-sm-6">
-                                    <h6>Postal Address</h6>
-                                    @if($student->isLearner != null)
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label for="">Building / Property Name</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <p>{{ $student->nationalID }}</p>
-                                        </div>
-                                    </div>
-                                    @endif
-                                </div>
-                                <div class="row">
-                                <div class="col-sm-4"></div>
-                                <div class="col-sm-4">
-                                    <button id="toggleButton" class="btn btn-primary">Edit</button>
-                                </div>
-                                <div class="col-sm-4"></div>
-                                </div>
-                            
-                                {{-- <div class="col-sm-4"></div> --}}
-                            </div>
                                 <div class="hidden" id="details-edit">
                                     <form action="{{ route('people.update', $student->id) }}" method="POST">
                                         @csrf
@@ -1116,10 +1118,12 @@
                                                                 @if ($student->country == 'Burundi') selected @endif>Burundi
                                                             </option>
                                                             <option value="Cambodia"
-                                                                @if ($student->country == 'Cambodia') selected @endif>Cambodia
+                                                                @if ($student->country == 'Cambodia') selected @endif>
+                                                                Cambodia
                                                             </option>
                                                             <option value="Cameroon"
-                                                                @if ($student->country == 'Cameroon') selected @endif>Cameroon
+                                                                @if ($student->country == 'Cameroon') selected @endif>
+                                                                Cameroon
                                                             </option>
                                                             <option value="Canada"
                                                                 @if ($student->country == 'Canada') selected @endif>Canada
@@ -1161,7 +1165,8 @@
                                                                 @if ($student->country == 'Chinese Asia (includes Mongolia)') selected @endif>Chinese
                                                                 Asia (includes Mongolia)</option>
                                                             <option value="Colombia"
-                                                                @if ($student->country == 'Colombia') selected @endif>Colombia
+                                                                @if ($student->country == 'Colombia') selected @endif>
+                                                                Colombia
                                                             </option>
                                                             <option value="Comoros"
                                                                 @if ($student->country == 'Comoros') selected @endif>Comoros
@@ -1973,8 +1978,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($document as $doc)
+                                        <tr>
+                                            <td>{{$doc->document_name}}</td>
+                                            <td><a href="{{ asset($doc->path) }}" target="_blank">{{$doc->file_name}}</a></td>
+                                            <td>{{$doc->upload_by}} {{ $doc->created_at }}</td>
+                                            <td>
+                                                <a href="{{ route('delete.student.enrolment',$doc->id) }}" onclick="return confirm('Are you sure?')"><i title="Delete Document"  class="fa fa-trash fa-2x text-danger" aria-hidden="true"></i></a>
+                                                <a href="{{ asset($doc->path) }}" class="ms-3" target="_blank"><i title="Download Document" class="fa fa-download fa-2x text-success" aria-hidden="true"></i></a>
+                                                <i title="Email Document" class="fa fa-envelope fa-2x text-primary" onclick="openEmailDialog({{ $doc }})" aria-hidden="true"></i>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                                <form action="{{ route('student.enrolment.document')}}" method="post" enctype="multipart/form-data" >
                                 <table border="0" cellpadding="15" cellspacing="15">
                                     <tbody>
                                         <tr>
@@ -1986,41 +2004,46 @@
                                                 style=" padding-left:5px; line-height:20px;" valign="middle">
                                                 <table style="border-collapse: collapse; width:100%;color:#666666;"
                                                     border="0" id="1" cellpadding="2" cellspacing="2">
-                                                    <tbody id="dataTable">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <input type="hidden" name="student_id" value="{{$studentID}}">
+                                                    <tbody id="dataTable"> 
                                                         <tr>
                                                             <td>Upload File (Max size of 20MB)<input type="hidden"
                                                                     name="MAX_FILE_SIZE" value="20971520"></td>
                                                             <td>
-                                                                <input class="form-control" type="file"
+                                                                <input class="form-control" type="file" name="document_file[]"
                                                                     id="formFileMultiple" multiple>
-                                                                <input type="hidden" id="student_ID" name="student_ID"
-                                                                    value="524977">
                                                             </td>
                                                             <td nowrap="">Give the document a name</td>
                                                             <td>
                                                                 <input type="text" class="form-control"
-                                                                    name="documentName[]" id="documentName[]"
+                                                                    name="ducment_name[]" id="documentName[]"
                                                                     maxlength="50"
                                                                     style="width:200px;border:#666666 1px solid; vertical-align:middle;"
                                                                     fdprocessedid="2fsg38">
                                                             </td>
                                                             <td align="center">
-                                                                <button name="create" id="" type="submit"
-                                                                    class="btn btn-primary ms-2"
-                                                                    fdprocessedid="7kfe7">Upload</button>
+                                                               
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <button id="addRowBtn" type="submit"
-                                                                class="btn btn-primary ms-2">Add more files</button>
+                                                            <button id="addRowBtn" type="button" class="btn btn-primary ms-2">Add more files</button>
                                                         </tr>
                                                     </tbody>
+                            
                                                 </table>
                                             </td>
                                         </tr>
-
                                     </tbody>
                                 </table>
+                                <div class="row">
+                                    <div class="col-12">
+                                            <button name="create" id="" type="submit"
+                                            class="btn btn-primary ms-2">Upload</button>
+                                        </div>
+                                    </div>
+                            </form>
                                 {{-- /////////////////////// create new enrollment ///////////////////////// --}}
                                 <!-- Modal -->
                                 <div class="modal fade" id="document" data-bs-backdrop="static"
@@ -2041,7 +2064,8 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="exampleFormControlInput1" class="form-label">Document Name
+                                                    <label for="exampleFormControlInput1" class="form-label">Document
+                                                        Name
 
                                                     </label>
                                                     <input type="email" class="form-control" id="exampleInputEmail1"
@@ -2103,12 +2127,11 @@
                                                 </label>
                                             </div>
                                             <!-- No, English only <input style="margin-left:50px;" class="custom-checkbox" type="checkbox" name="nospokenlanguage" id="nospokenlanguage" onChange=change_english_level() checked disabled /><br>
-                                                Yes, other - Please specify:  -->
+                                                    Yes, other - Please specify:  -->
                                         </div>
                                         <div style="clear:both;height:5px;"></div>
                                         <br>
-                                        <div style="padding:5px;font-weight:bold;width:380px;float:left">Indigenous
-                                            Status: </div>
+                                        <div style="padding:5px;font-weight:bold;width:380px;float:left">Indigenous Status: </div>
                                         <div style="padding:5px 20px;float:left;">
                                             <input type="radio" name="indigenousStatus" value="1"
                                                 disabled="">
@@ -2129,8 +2152,9 @@
                                 </div>
 
                                 <div class="hidden" id="edit-form">
-                                    <form name="edit_language_frm" id="edit_language_frm" method="post"
-                                        action="" onsubmit="unsaved=true;">
+                                    <form name="edit_language_frm" id="edit_language_frm" method="POST" action="{{ route('edit.language.people') }}">
+                                        @csrf
+                                        @method('POST')
                                         <div style="float:left;padding-left:150px;">
                                             <div style="padding:5px;float:left;font-weight:bold;width:400px;"
                                                 align="left">Country of Birth? </div>
@@ -2138,311 +2162,306 @@
                                                 <select class="form-control" name="birthCountry" id="birthCountry"
                                                     fdprocessedid="v7rc46">
                                                     <option></option>
-                                                    <option value="1601">Adelie Land (France)</option>
-                                                    <option value="7201">Afghanistan</option>
-                                                    <option value="0918">Africa, nfd</option>
-                                                    <option value="2408">Aland Islands</option>
-                                                    <option value="3201">Albania</option>
-                                                    <option value="4101">Algeria</option>
-                                                    <option value="8000">Americas</option>
-                                                    <option value="3101">Andorra</option>
-                                                    <option value="9201">Angola</option>
-                                                    <option value="8401">Anguilla</option>
-                                                    <option value="1600">Antarctica</option>
-                                                    <option value="8402">Antigua and Barbuda</option>
-                                                    <option value="8201">Argentina</option>
-                                                    <option value="1602">Argentinian Antarctic Territory</option>
-                                                    <option value="7202">Armenia</option>
-                                                    <option value="8403">Aruba</option>
-                                                    <option value="0917">Asia, nfd</option>
-                                                    <option value="0001">At Sea</option>
-                                                    <option value="1101">Australia</option>
-                                                    <option value="1100">Australia (includes External Territories)
-                                                    </option>
-                                                    <option value="1603">Australian Antarctic Territory</option>
-                                                    <option value="1199">Australian External Territories, nec</option>
-                                                    <option value="2301">Austria</option>
-                                                    <option value="7203">Azerbaijan</option>
-                                                    <option value="8404">Bahamas</option>
-                                                    <option value="4201">Bahrain</option>
-                                                    <option value="7101">Bangladesh</option>
-                                                    <option value="8405">Barbados</option>
-                                                    <option value="3301">Belarus</option>
-                                                    <option value="2302">Belgium</option>
-                                                    <option value="8301">Belize</option>
-                                                    <option value="9101">Benin</option>
-                                                    <option value="8101">Bermuda</option>
-                                                    <option value="7102">Bhutan</option>
-                                                    <option value="8202">Bolivia, Plurinational State of</option>
-                                                    <option value="8433">Bonaire, Sint Eustatius and Saba</option>
-                                                    <option value="3202">Bosnia and Herzegovina</option>
-                                                    <option value="9202">Botswana</option>
-                                                    <option value="8203">Brazil</option>
-                                                    <option value="1604">British Antarctic Territory</option>
-                                                    <option value="5201">Brunei Darussalam</option>
-                                                    <option value="3203">Bulgaria</option>
-                                                    <option value="9102">Burkina Faso</option>
-                                                    <option value="5101">Burma (Republic of the Union of Myanmar)
-                                                    </option>
-                                                    <option value="9203">Burundi</option>
-                                                    <option value="5102">Cambodia</option>
-                                                    <option value="9103">Cameroon</option>
-                                                    <option value="8102">Canada</option>
-                                                    <option value="9104">Cape Verde</option>
-                                                    <option value="8400">Caribbean</option>
-                                                    <option value="8406">Cayman Islands</option>
-                                                    <option value="9105">Central African Republic</option>
-                                                    <option value="8300">Central America</option>
-                                                    <option value="9100">Central and West Africa</option>
-                                                    <option value="7200">Central Asia</option>
-                                                    <option value="9106">Chad</option>
-                                                    <option value="8204">Chile</option>
-                                                    <option value="1605">Chilean Antarctic Territory</option>
-                                                    <option value="6101">China (excludes SARs and Taiwan)</option>
-                                                    <option value="6100">Chinese Asia (includes Mongolia)</option>
-                                                    <option value="8205">Colombia</option>
-                                                    <option value="9204">Comoros</option>
-                                                    <option value="9108">Congo, Democratic Republic of</option>
-                                                    <option value="9107">Congo, Republic of </option>
-                                                    <option value="1501">Cook Islands</option>
-                                                    <option value="8302">Costa Rica</option>
-                                                    <option value="9111">Cote d'Ivoire</option>
-                                                    <option value="3204">Croatia</option>
-                                                    <option value="8407">Cuba</option>
-                                                    <option value="8434">Curacao</option>
-                                                    <option value="3205">Cyprus</option>
-                                                    <option value="3302">Czech Republic</option>
-                                                    <option value="2401">Denmark</option>
-                                                    <option value="9205">Djibouti</option>
-                                                    <option value="8408">Dominica</option>
-                                                    <option value="8411">Dominican Republic</option>
-                                                    <option value="0916">East Asia, nfd</option>
-                                                    <option value="3300">Eastern Europe</option>
-                                                    <option value="8206">Ecuador</option>
-                                                    <option value="4102">Egypt</option>
-                                                    <option value="8303">El Salvador</option>
-                                                    <option value="2102">England</option>
-                                                    <option value="9112">Equatorial Guinea</option>
-                                                    <option value="9206">Eritrea</option>
-                                                    <option value="3303">Estonia</option>
-                                                    <option value="9207">Ethiopia</option>
-                                                    <option value="0911">Europe, nfd</option>
-                                                    <option value="8207">Falkland Islands</option>
-                                                    <option value="2402">Faroe Islands</option>
-                                                    <option value="1502">Fiji</option>
-                                                    <option value="2403">Finland</option>
-                                                    <option value="0912">Former USSR, nfd</option>
-                                                    <option value="3206">Former Yugoslav Republic of Macedonia (FYROM)
-                                                    </option>
-                                                    <option value="2303">France</option>
-                                                    <option value="8208">French Guiana</option>
-                                                    <option value="1503">French Polynesia</option>
-                                                    <option value="9113">Gabon</option>
-                                                    <option value="9114">Gambia</option>
-                                                    <option value="4202">Gaza Strip and West Bank</option>
-                                                    <option value="7204">Georgia</option>
-                                                    <option value="2304">Germany</option>
-                                                    <option value="9115">Ghana</option>
-                                                    <option value="3102">Gibraltar</option>
-                                                    <option value="3207">Greece</option>
-                                                    <option value="2404">Greenland</option>
-                                                    <option value="8412">Grenada</option>
-                                                    <option value="8413">Guadeloupe</option>
-                                                    <option value="1401">Guam</option>
-                                                    <option value="8304">Guatemala</option>
-                                                    <option value="2107">Guernsey</option>
-                                                    <option value="9116">Guinea</option>
-                                                    <option value="9117">Guinea-Bissau</option>
-                                                    <option value="8211">Guyana</option>
-                                                    <option value="8414">Haiti</option>
-                                                    <option value="3103">Holy See</option>
-                                                    <option value="8305">Honduras</option>
-                                                    <option value="6102">Hong Kong (SAR of China)</option>
-                                                    <option value="3304">Hungary</option>
-                                                    <option value="2405">Iceland</option>
-                                                    <option value="0000">Inadequately Described</option>
-                                                    <option value="7103">India</option>
-                                                    <option value="5202">Indonesia</option>
-                                                    <option value="4203">Iran</option>
-                                                    <option value="4204">Iraq</option>
-                                                    <option value="2201">Ireland</option>
-                                                    <option value="2103">Isle of Man</option>
-                                                    <option value="4205">Israel</option>
-                                                    <option value="3104">Italy</option>
-                                                    <option value="8415">Jamaica</option>
-                                                    <option value="6201">Japan</option>
-                                                    <option value="6200">Japan and the Koreas</option>
-                                                    <option value="2108">Jersey</option>
-                                                    <option value="4206">Jordan</option>
-                                                    <option value="7205">Kazakhstan</option>
-                                                    <option value="9208">Kenya</option>
-                                                    <option value="1402">Kiribati</option>
-                                                    <option value="6202">Korea, Democratic People's Republic of (North)
-                                                    </option>
-                                                    <option value="6203">Korea, Republic of (South)</option>
-                                                    <option value="3216">Kosovo</option>
-                                                    <option value="0915">Kurdistan, nfd</option>
-                                                    <option value="4207">Kuwait</option>
-                                                    <option value="7206">Kyrgyzstan</option>
-                                                    <option value="5103">Laos</option>
-                                                    <option value="3305">Latvia</option>
-                                                    <option value="4208">Lebanon</option>
-                                                    <option value="9211">Lesotho</option>
-                                                    <option value="9118">Liberia</option>
-                                                    <option value="4103">Libya</option>
-                                                    <option value="2305">Liechtenstein</option>
-                                                    <option value="3306">Lithuania</option>
-                                                    <option value="2306">Luxembourg</option>
-                                                    <option value="6103">Macau (SAR of China)</option>
-                                                    <option value="9212">Madagascar</option>
-                                                    <option value="5100">Mainland South-East Asia</option>
-                                                    <option value="9213">Malawi</option>
-                                                    <option value="5203">Malaysia</option>
-                                                    <option value="7104">Maldives</option>
-                                                    <option value="9121">Mali</option>
-                                                    <option value="3105">Malta</option>
-                                                    <option value="5200">Maritime South-East Asia</option>
-                                                    <option value="1403">Marshall Islands</option>
-                                                    <option value="8416">Martinique</option>
-                                                    <option value="9122">Mauritania</option>
-                                                    <option value="9214">Mauritius</option>
-                                                    <option value="9215">Mayotte</option>
-                                                    <option value="1300">Melanesia</option>
-                                                    <option value="8306">Mexico</option>
-                                                    <option value="1400">Micronesia</option>
-                                                    <option value="1404">Micronesia, Federated States of</option>
-                                                    <option value="4200">Middle East</option>
-                                                    <option value="3208">Moldova</option>
-                                                    <option value="2307">Monaco</option>
-                                                    <option value="6104">Mongolia</option>
-                                                    <option value="3214">Montenegro</option>
-                                                    <option value="8417">Montserrat</option>
-                                                    <option value="4104">Morocco</option>
-                                                    <option value="9216">Mozambique</option>
-                                                    <option value="9217">Namibia</option>
-                                                    <option value="1405">Nauru</option>
-                                                    <option value="7105">Nepal</option>
-                                                    <option value="2308">Netherlands</option>
-                                                    <option value="8418">Netherlands Antilles</option>
-                                                    <option value="1301">New Caledonia</option>
-                                                    <option value="1201">New Zealand</option>
-                                                    <option value="8307">Nicaragua</option>
-                                                    <option value="9123">Niger</option>
-                                                    <option value="9124">Nigeria</option>
-                                                    <option value="1504">Niue</option>
-                                                    <option value="1102">Norfolk Island</option>
-                                                    <option value="4100">North Africa</option>
-                                                    <option value="4000">North Africa and the Middle East</option>
-                                                    <option value="6000">North-East Asia</option>
-                                                    <option value="2000">North-West Europe</option>
-                                                    <option value="8100">Northern America</option>
-                                                    <option value="2400">Northern Europe</option>
-                                                    <option value="2104">Northern Ireland</option>
-                                                    <option value="1406">Northern Mariana Islands</option>
-                                                    <option value="2406">Norway</option>
-                                                    <option value="@@@@">Not
-                                                        Specified</option>
-                                                    <option value="1000">Oceania and Antarctica</option>
-                                                    <option value="4211">Oman</option>
-                                                    <option value="7106">Pakistan</option>
-                                                    <option value="1407">Palau</option>
-                                                    <option value="8308">Panama</option>
-                                                    <option value="1302">Papua New Guinea</option>
-                                                    <option value="8212">Paraguay</option>
-                                                    <option value="8213">Peru</option>
-                                                    <option value="5204">Philippines</option>
-                                                    <option value="1513">Pitcairn Islands</option>
-                                                    <option value="3307">Poland</option>
-                                                    <option value="1500">Polynesia (excludes Hawaii)</option>
-                                                    <option value="1599">Polynesia (excludes Hawaii), nec</option>
-                                                    <option value="3106">Portugal</option>
-                                                    <option value="8421">Puerto Rico</option>
-                                                    <option value="4212">Qatar</option>
-                                                    <option value="1606">Queen Maud Land (Norway)</option>
-                                                    <option value="9218">Reunion</option>
-                                                    <option value="3211">Romania</option>
-                                                    <option value="1607">Ross Dependency (New Zealand)</option>
-                                                    <option value="3308">Russian Federation</option>
-                                                    <option value="9221">Rwanda</option>
-                                                    <option value="1505">Samoa</option>
-                                                    <option value="1506">Samoa, American</option>
-                                                    <option value="3107">San Marino</option>
-                                                    <option value="9125">Sao Tome and Principe</option>
-                                                    <option value="4213">Saudi Arabia</option>
-                                                    <option value="2105">Scotland</option>
-                                                    <option value="9126">Senegal</option>
-                                                    <option value="3215">Serbia</option>
-                                                    <option value="9223">Seychelles</option>
-                                                    <option value="9127">Sierra Leone</option>
-                                                    <option value="5205">Singapore</option>
-                                                    <option value="8435">Sint Maarten (Dutch part)</option>
-                                                    <option value="3311">Slovakia</option>
-                                                    <option value="3212">Slovenia</option>
-                                                    <option value="1303">Solomon Islands</option>
-                                                    <option value="9224">Somalia</option>
-                                                    <option value="9225">South Africa</option>
-                                                    <option value="8200">South America</option>
-                                                    <option value="8299">South America, nec</option>
-                                                    <option value="3200">South Eastern Europe</option>
-                                                    <option value="4111">South Sudan</option>
-                                                    <option value="5000">South-East Asia</option>
-                                                    <option value="7000">Southern and Central Asia</option>
-                                                    <option value="9200">Southern and East Africa</option>
-                                                    <option value="9299">Southern and East Africa, nec</option>
-                                                    <option value="3000">Southern and Eastern Europe</option>
-                                                    <option value="7100">Southern Asia</option>
-                                                    <option value="3100">Southern Europe</option>
-                                                    <option value="3108">Spain</option>
-                                                    <option value="4108">Spanish North Africa</option>
-                                                    <option value="7107">Sri Lanka</option>
-                                                    <option value="8431">St Barthelemy</option>
-                                                    <option value="9222">St Helena</option>
-                                                    <option value="8422">St Kitts and Nevis</option>
-                                                    <option value="8423">St Lucia</option>
-                                                    <option value="8432">St Martin (French part)</option>
-                                                    <option value="8103">St Pierre and Miquelon</option>
-                                                    <option value="8424">St Vincent and the Grenadines</option>
-                                                    <option value="9000">Sub-Saharan Africa</option>
-                                                    <option value="4105">Sudan</option>
-                                                    <option value="8214">Suriname</option>
-                                                    <option value="9226">Swaziland</option>
-                                                    <option value="2407">Sweden</option>
-                                                    <option value="2311">Switzerland</option>
-                                                    <option value="4214">Syria</option>
-                                                    <option value="6105">Taiwan</option>
-                                                    <option value="7207">Tajikistan</option>
-                                                    <option value="9227">Tanzania</option>
-                                                    <option value="5104">Thailand</option>
-                                                    <option value="5206">Timor-Leste</option>
-                                                    <option value="9128">Togo</option>
-                                                    <option value="1507">Tokelau</option>
-                                                    <option value="1508">Tonga</option>
-                                                    <option value="8425">Trinidad and Tobago</option>
-                                                    <option value="4106">Tunisia</option>
-                                                    <option value="4215">Turkey</option>
-                                                    <option value="7208">Turkmenistan</option>
-                                                    <option value="8426">Turks and Caicos Islands</option>
-                                                    <option value="1511">Tuvalu</option>
-                                                    <option value="9228">Uganda</option>
-                                                    <option value="3312">Ukraine</option>
-                                                    <option value="4216">United Arab Emirates</option>
-                                                    <option value="2100">United Kingdom, Channel Islands and Isle of Man
-                                                    </option>
-                                                    <option value="8104">United States of America</option>
-                                                    <option value="8215">Uruguay</option>
-                                                    <option value="7211">Uzbekistan</option>
-                                                    <option value="1304">Vanuatu</option>
-                                                    <option value="8216">Venezuela, Bolivarian Republic of</option>
-                                                    <option value="5105">Vietnam</option>
-                                                    <option value="8427">Virgin Islands, British</option>
-                                                    <option value="8428">Virgin Islands, United States</option>
-                                                    <option value="2106">Wales</option>
-                                                    <option value="1512">Wallis and Futuna</option>
-                                                    <option value="2300">Western Europe</option>
-                                                    <option value="4107">Western Sahara</option>
-                                                    <option value="4217">Yemen</option>
-                                                    <option value="9231">Zambia</option>
-                                                    <option value="9232">Zimbabwe</option>
+                                                     <option value=""></option>
+                                                        <option value="Adelie Land (France)">Adelie Land (France)</option>
+                                                        <option value="Afghanistan">Afghanistan</option>
+                                                        <option value="Africa, nfd">Africa, nfd</option>
+                                                        <option value="Aland Islands">Aland Islands</option>
+                                                        <option value="Albania">Albania</option>
+                                                        <option value="Algeria">Algeria</option>
+                                                        <option value="Americas">Americas</option>
+                                                        <option value="Andorra">Andorra</option>
+                                                        <option value="Angola">Angola</option>
+                                                        <option value="Anguilla">Anguilla</option>
+                                                        <option value="Antarctica">Antarctica</option>
+                                                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                                        <option value="Argentina">Argentina</option>
+                                                        <option value="Argentinian Antarctic Territory">Argentinian Antarctic Territory</option>
+                                                        <option value="Armenia">Armenia</option>
+                                                        <option value="Aruba">Aruba</option>
+                                                        <option value="Asia, nfd">Asia, nfd</option>
+                                                        <option value="At Sea">At Sea</option>
+                                                        <option value="Australia" selected="">Australia</option>
+                                                        <option value="Australia (includes External Territories)">Australia (includes External Territories)</option>
+                                                        <option value="Australian Antarctic Territory">Australian Antarctic Territory</option>
+                                                        <option value="Australian External Territories, nec">Australian External Territories, nec</option>
+                                                        <option value="Austria">Austria</option>
+                                                        <option value="Azerbaijan">Azerbaijan</option>
+                                                        <option value="Bahamas">Bahamas</option>
+                                                        <option value="Bahrain">Bahrain</option>
+                                                        <option value="Bangladesh">Bangladesh</option>
+                                                        <option value="Barbados">Barbados</option>
+                                                        <option value="Belarus">Belarus</option>
+                                                        <option value="Belgium">Belgium</option>
+                                                        <option value="Belize">Belize</option>
+                                                        <option value="Benin">Benin</option>
+                                                        <option value="Bermuda">Bermuda</option>
+                                                        <option value="Bhutan">Bhutan</option>
+                                                        <option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
+                                                        <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
+                                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                                        <option value="Botswana">Botswana</option>
+                                                        <option value="Brazil">Brazil</option>
+                                                        <option value="British Antarctic Territory">British Antarctic Territory</option>
+                                                        <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                                        <option value="Bulgaria">Bulgaria</option>
+                                                        <option value="Burkina Faso">Burkina Faso</option>
+                                                        <option value="Burma (Republic of the Union of Myanmar)">Burma (Republic of the Union of Myanmar)</option>
+                                                        <option value="Burundi">Burundi</option>
+                                                        <option value="Cambodia">Cambodia</option>
+                                                        <option value="Cameroon">Cameroon</option>
+                                                        <option value="Canada">Canada</option>
+                                                        <option value="Cape Verde">Cape Verde</option>
+                                                        <option value="Caribbean">Caribbean</option>
+                                                        <option value="Cayman Islands">Cayman Islands</option>
+                                                        <option value="Central African Republic">Central African Republic</option>
+                                                        <option value="Central America">Central America</option>
+                                                        <option value="Central and West Africa">Central and West Africa</option>
+                                                        <option value="Central Asia">Central Asia</option>
+                                                        <option value="Chad">Chad</option>
+                                                        <option value="Chile">Chile</option>
+                                                        <option value="Chilean Antarctic Territory">Chilean Antarctic Territory </option>
+                                                        <option value="China (excludes SARs and Taiwan)">China (excludes SARs and Taiwan)</option>
+                                                        <option value="Chinese Asia (includes Mongolia)">Chinese Asia (includes Mongolia)</option>
+                                                        <option value="Colombia">Colombia</option>
+                                                        <option value="Comoros">Comoros</option>
+                                                        <option value="Congo, Democratic Republic of">Congo, Democratic Republic of</option>
+                                                        <option value="Congo, Republic of ">Congo, Republic of </option>
+                                                        <option value="Cook Islands">Cook Islands</option>
+                                                        <option value="Costa Rica">Costa Rica</option>
+                                                        <option value="Cote d'ivoire">Cote d'Ivoire</option>
+                                                        <option value="Croatia">Croatia</option>
+                                                        <option value="Cuba">Cuba</option>
+                                                        <option value="Curacao">Curacao</option>
+                                                        <option value="Cyprus">Cyprus</option>
+                                                        <option value="Czech Republic">Czech Republic</option>
+                                                        <option value="Denmark">Denmark</option>
+                                                        <option value="Djibouti">Djibouti</option>
+                                                        <option value="Dominica">Dominica</option>
+                                                        <option value="Dominican Republic">Dominican Republic</option>
+                                                        <option value="East Asia, nfd">East Asia, nfd</option>
+                                                        <option value="Eastern Europe">Eastern Europe</option>
+                                                        <option value="Ecuador">Ecuador</option>
+                                                        <option value="Egypt">Egypt</option>
+                                                        <option value="El Salvador">El Salvador</option>
+                                                        <option value="England">England</option>
+                                                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                                        <option value="Eritrea">Eritrea</option>
+                                                        <option value="Estonia">Estonia</option>
+                                                        <option value="Ethiopia">Ethiopia</option>
+                                                        <option value="Europe, nfd">Europe, nfd</option>
+                                                        <option value="Falkland Islands">Falkland Islands</option>
+                                                        <option value="Faroe Islands">Faroe Islands</option>
+                                                        <option value="Fiji">Fiji</option>
+                                                        <option value="Finland">Finland</option>
+                                                        <option value="Former USSR, nfd">Former USSR, nfd</option>
+                                                        <option value="Former Yugoslav Republic of Macedonia (FYROM)"> Former Yugoslav Republic of Macedonia (FYROM)</option>
+                                                        <option value="France">France</option>
+                                                        <option value="French Guiana">French Guiana</option>
+                                                        <option value="French Polynesia">French Polynesia</option>
+                                                        <option value="Gabon">Gabon</option>
+                                                        <option value="Gambia">Gambia</option>
+                                                        <option value="Gaza Strip and West Bank">Gaza Strip and West Bank</option>
+                                                        <option value="Georgia">Georgia</option>
+                                                        <option value="Germany">Germany</option>
+                                                        <option value="Ghana">Ghana</option>
+                                                        <option value="Gibraltar">Gibraltar</option>
+                                                        <option value="Greece">Greece</option>
+                                                        <option value="Greenland">Greenland</option>
+                                                        <option value="Grenada">Grenada</option>
+                                                        <option value="Guadeloupe">Guadeloupe</option>
+                                                        <option value="Guam">Guam</option>
+                                                        <option value="Guatemala">Guatemala</option>
+                                                        <option value="Guernsey">Guernsey</option>
+                                                        <option value="Guinea">Guinea</option>
+                                                        <option value="Guinea-Bissau">Guinea-Bissau</option>
+                                                        <option value="Guyana">Guyana</option>
+                                                        <option value="Haiti">Haiti</option>
+                                                        <option value="Holy See">Holy See</option>
+                                                        <option value="Honduras">Honduras</option>
+                                                        <option value="Hong Kong (SAR of China)">Hong Kong (SAR of China)</option>
+                                                        <option value="Hungary">Hungary</option>
+                                                        <option value="Iceland">Iceland</option>
+                                                        <option value="Inadequately Described">Inadequately Described</option>
+                                                        <option value="India">India</option>
+                                                        <option value="Indonesia">Indonesia</option>
+                                                        <option value="Iran">Iran</option>
+                                                        <option value="Iraq">Iraq</option>
+                                                        <option value="Ireland">Ireland</option>
+                                                        <option value="Isle of Man">Isle of Man</option>
+                                                        <option value="Israel">Israel</option>
+                                                        <option value="Italy">Italy</option>
+                                                        <option value="Jamaica">Jamaica</option>
+                                                        <option value="Japan">Japan</option>
+                                                        <option value="Japan and the Koreas">Japan and the Koreas</option>
+                                                        <option value="Jersey">Jersey</option>
+                                                        <option value="Jordan">Jordan</option>
+                                                        <option value="Kazakhstan">Kazakhstan</option>
+                                                        <option value="Kenya">Kenya</option>
+                                                        <option value="Kiribati">Kiribati</option>
+                                                        <option value="Korea, Democratic People' republic'of(north)">Korea,Democratic People's Republic of (North)</option>
+                                                        <option value="Korea, Republic of (South)">Korea, Republic of (South) </option>
+                                                        <option value="Kosovo">Kosovo</option>
+                                                        <option value="Kurdistan, nfd">Kurdistan, nfd</option>
+                                                        <option value="Kuwait">Kuwait</option>
+                                                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                                        <option value="Laos">Laos</option>
+                                                        <option value="Latvia">Latvia</option>
+                                                        <option value="Lebanon">Lebanon</option>
+                                                        <option value="Lesotho">Lesotho</option>
+                                                        <option value="Liberia">Liberia</option>
+                                                        <option value="Libya">Libya</option>
+                                                        <option value="Liechtenstein">Liechtenstein</option>
+                                                        <option value="Lithuania">Lithuania</option>
+                                                        <option value="Luxembourg">Luxembourg</option>
+                                                        <option value="Macau (SAR of China)">Macau (SAR of China)</option>
+                                                        <option value="Madagascar">Madagascar</option>
+                                                        <option value="Mainland South-East Asia">Mainland South-East Asia</option>
+                                                        <option value="Malawi">Malawi</option>
+                                                        <option value="Malaysia">Malaysia</option>
+                                                        <option value="Maldives">Maldives</option>
+                                                        <option value="Mali">Mali</option>
+                                                        <option value="Malta">Malta</option>
+                                                        <option value="Maritime South-East Asia">Maritime South-East Asia</option>
+                                                        <option value="Marshall Islands">Marshall Islands</option>
+                                                        <option value="Martinique">Martinique</option>
+                                                        <option value="Mauritania">Mauritania</option>
+                                                        <option value="Mauritius">Mauritius</option>
+                                                        <option value="Mayotte">Mayotte</option>
+                                                        <option value="Melanesia">Melanesia</option>
+                                                        <option value="Mexico">Mexico</option>
+                                                        <option value="Micronesia">Micronesia</option>
+                                                        <option value="Micronesia, Federated States of">Micronesia,Federated States of</option>
+                                                        <option value="Middle East">Middle East</option>
+                                                        <option value="Moldova">Moldova</option>
+                                                        <option value="Monaco">Monaco</option>
+                                                        <option value="Mongolia">Mongolia</option>
+                                                        <option value="Montenegro">Montenegro</option>
+                                                        <option value="Montserrat">Montserrat</option>
+                                                        <option value="Morocco">Morocco</option>
+                                                        <option value="Mozambique">Mozambique</option>
+                                                        <option value="Namibia">Namibia</option>
+                                                        <option value="Nauru">Nauru</option>
+                                                        <option value="Nepal">Nepal</option>
+                                                        <option value="Netherlands">Netherlands</option>
+                                                        <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                                        <option value="New Caledonia">New Caledonia</option>
+                                                        <option value="New Zealand">New Zealand</option>
+                                                        <option value="Nicaragua">Nicaragua</option>
+                                                        <option value="Niger">Niger</option>
+                                                        <option value="Nigeria">Nigeria</option>
+                                                        <option value="Niue">Niue</option>
+                                                        <option value="Norfolk Island">Norfolk Island</option>
+                                                        <option value="North Africa">North Africa</option>
+                                                        <option value="North Africa and the Middle East">North Africa and the Middle East</option>
+                                                        <option value="North-East Asia">North-East Asia</option>
+                                                        <option value="North-West Europe">North-West Europe</option>
+                                                        <option value="Northern America">Northern America</option>
+                                                        <option value="Northern Europe">Northern Europe</option>
+                                                        <option value="Northern Ireland">Northern Ireland</option>
+                                                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                                        <option value="Norway">Norway</option>
+                                                        <option value="Not Specified">Not Specified</option>
+                                                        <option value="Oceania and Antarctica">Oceania and Antarctica</option>
+                                                        <option value="Oman">Oman</option>
+                                                        <option value="Pakistan">Pakistan</option>
+                                                        <option value="Palau">Palau</option>
+                                                        <option value="Panama">Panama</option>
+                                                        <option value="Papua New Guinea">Papua New Guinea</option>
+                                                        <option value="Paraguay">Paraguay</option>
+                                                        <option value="Peru">Peru</option>
+                                                        <option value="Philippines">Philippines</option>
+                                                        <option value="Pitcairn Islands">Pitcairn Islands</option>
+                                                        <option value="Poland">Poland</option>
+                                                        <option value="Polynesia (excludes Hawaii)">Polynesia (excludes  Hawaii)</option>
+                                                        <option value="Polynesia (excludes Hawaii), nec">Polynesia(excludesHawaii), nec</option>
+                                                        <option value="Portugal">Portugal</option>
+                                                        <option value="Puerto Rico">Puerto Rico</option>
+                                                        <option value="Qatar">Qatar</option>
+                                                        <option value="Queen Maud Land (Norway)">Queen Maud Land (Norway)</option>
+                                                        <option value="Reunion">Reunion</option>
+                                                        <option value="Romania">Romania</option>
+                                                        <option value="Ross Dependency (New Zealand)">Ross Dependency (New Zealand)</option>
+                                                        <option value="Russian Federation">Russian Federation</option>
+                                                        <option value="Rwanda">Rwanda</option>
+                                                        <option value="Samoa">Samoa</option>
+                                                        <option value="Samoa, American">Samoa, American</option>
+                                                        <option value="San Marino">San Marino</option>
+                                                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                                                        <option value="Saudi Arabia">Saudi Arabia</option>
+                                                        <option value="Scotland">Scotland</option>
+                                                        <option value="Senegal">Senegal</option>
+                                                        <option value="Serbia">Serbia</option>
+                                                        <option value="Seychelles">Seychelles</option>
+                                                        <option value="Sierra Leone">Sierra Leone</option>
+                                                        <option value="Singapore">Singapore</option>
+                                                        <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                                                        <option value="Slovakia">Slovakia</option>
+                                                        <option value="Slovenia">Slovenia</option>
+                                                        <option value="Solomon Islands">Solomon Islands</option>
+                                                        <option value="Somalia">Somalia</option>
+                                                        <option value="South Africa">South Africa</option>
+                                                        <option value="South America">South America</option>
+                                                        <option value="South America, nec">South America, nec</option>
+                                                        <option value="South Eastern Europe">South Eastern Europe</option>
+                                                        <option value="South Sudan">South Sudan</option>
+                                                        <option value="South-East Asia">South-East Asia</option>
+                                                        <option value="Southern and Central Asia">Southern and Central Asia</option>
+                                                        <option value="Southern and East Africa">Southern and East Africa</option>
+                                                        <option value="Southern and East Africa, nec">Southern and EastAfrica,nec</option>
+                                                        <option value="Southern and Eastern Europe">Southern and EasternEurope</option>
+                                                        <option value="Southern Asia">Southern Asia</option>
+                                                        <option value="Southern Europe">Southern Europe</option>
+                                                        <option value="Spain">Spain</option>
+                                                        <option value="Spanish North Africa">Spanish North Africa</option>
+                                                        <option value="Sri Lanka">Sri Lanka</option>
+                                                        <option value="St Barthelemy">St Barthelemy</option>
+                                                        <option value="St Helena">St Helena</option>
+                                                        <option value="St Kitts and Nevis">St Kitts and Nevis</option>
+                                                        <option value="St Lucia">St Lucia</option>
+                                                        <option value="St Martin (French part)">St Martin (French part)</option>
+                                                        <option value="St Pierre and Miquelon">St Pierre and Miquelon</option>
+                                                        <option value="St Vincent and the Grenadines">St Vincent and the Grenadines</option>
+                                                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
+                                                        <option value="Sudan">Sudan</option>
+                                                        <option value="Suriname">Suriname</option>
+                                                        <option value="Swaziland">Swaziland</option>
+                                                        <option value="Sweden">Sweden</option>
+                                                        <option value="Switzerland">Switzerland</option>
+                                                        <option value="Syria">Syria</option>
+                                                        <option value="Taiwan">Taiwan</option>
+                                                        <option value="Tajikistan">Tajikistan</option>
+                                                        <option value="Tanzania">Tanzania</option>
+                                                        <option value="Thailand">Thailand</option>
+                                                        <option value="Timor-Leste">Timor-Leste</option>
+                                                        <option value="Togo">Togo</option>
+                                                        <option value="Tokelau">Tokelau</option>
+                                                        <option value="Tonga">Tonga</option>
+                                                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                                        <option value="Tunisia">Tunisia</option>
+                                                        <option value="Turkey">Turkey</option>
+                                                        <option value="Turkmenistan">Turkmenistan</option>
+                                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                                        <option value="Tuvalu">Tuvalu</option>
+                                                        <option value="Uganda">Uganda</option>
+                                                        <option value="Ukraine">Ukraine</option>
+                                                        <option value="United Arab Emirates">United Arab Emirates</option>
+                                                        <option value="United Kingdom, Channel Islands and Isle of Man">United Kingdom, Channel Islands and Isle of Man</option>
+                                                        <option value="United States of America">United States of America</option>
+                                                        <option value="Uruguay">Uruguay</option>
+                                                        <option value="Uzbekistan">Uzbekistan</option>
+                                                        <option value="Vanuatu">Vanuatu</option>
+                                                        <option value="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
+                                                        <option value="Vietnam">Vietnam</option>
+                                                        <option value="Virgin Islands, British">Virgin Islands, British</option>
+                                                        <option value="Virgin Islands, United States">Virgin Islands,United States</option>
+                                                        <option value="Wales">Wales</option>
+                                                        <option value="Wallis and Futuna">Wallis and Futuna</option>
+                                                        <option value="Western Europe">Western Europe</option>
+                                                        <option value="Western Sahara">Western Sahara</option>
+                                                        <option value="Yemen">Yemen</option>
+                                                        <option value="Zambia">Zambia</option>
+                                                        <option value="Zimbabwe">Zimbabwe</option>
                                                 </select>
                                             </div>
                                             <div style="clear:both;height:5px;"></div>
@@ -2461,16 +2480,12 @@
                                             <div style="padding:5px 5px; width:400px; float:left">
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="nospokenlanguage" id="nospokenlanguage" value="on"
-                                                        onchange="change_english_level()" checked="">
+                                                    <input class="form-check-input" type="radio"name="nospokenlanguage" id="nospokenlanguage" value="no" onchange="change_english_level(this.value)">
                                                     <label class="form-check-label" for="nospokenlanguage">No, English
                                                         only</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="nospokenlanguage" id="yesspokenlanguage" value="off"
-                                                        onchange="change_english_level()">
+                                                    <input class="form-check-input" type="radio" name="nospokenlanguage" id="yesspokenlanguage" value="yes" onchange="change_english_level(this.value)">
                                                     <label class="form-check-label" for="yesspokenlanguage">Yes, other -
                                                         Please specify:</label>
                                                     <select class="form-control" style="width:200px;display:inline;"
@@ -2478,184 +2493,185 @@
                                                         onchange="show_english_level(this.options[this.selectedIndex].value)"
                                                         fdprocessedid="5e3bmv">
                                                         <option></option>
-                                                        <option value="8998">Aboriginal English, so described</option>
-                                                        <option value="6513">Acehnese</option>
-                                                        <option value="9201">Acholi</option>
-                                                        <option value="8901">Adnymathanha</option>
-                                                        <option value="9200">African Languages</option>
-                                                        <option value="9299">African Languages, nec</option>
-                                                        <option value="1403">Afrikaans</option>
-                                                        <option value="9203">Akan</option>
-                                                        <option value="8121">Alawa</option>
-                                                        <option value="3901">Albanian</option>
-                                                        <option value="8315">Alngith</option>
-                                                        <option value="8603">Alyawarr</option>
-                                                        <option value="9101">American Languages</option>
-                                                        <option value="9214">Amharic</option>
-                                                        <option value="8156">Amurdak</option>
-                                                        <option value="8101">Anindilyakwa</option>
-                                                        <option value="8610">Anmatyerr</option>
-                                                        <option value="8619">Anmatyerr, nec</option>
-                                                        <option value="8607">Antekerrepenh</option>
-                                                        <option value="8703">Antikarinya</option>
-                                                        <option value="9241">Anuak</option>
-                                                        <option value="8902">Arabana</option>
-                                                        <option value="4202">Arabic</option>
-                                                        <option value="8600">Arandic</option>
-                                                        <option value="8699">Arandic, nec</option>
-                                                        <option value="4901">Armenian</option>
-                                                        <option value="8100">Arnhem Land and Daly River Region Languages
+                                                        <option value="Aboriginal English, so described">Aboriginal English, so described</option>
+                                                        <option value="Acehnese">Acehnese</option>
+                                                        <option value="Acholi">Acholi</option>
+                                                        <option value="Adnymathanha">Adnymathanha</option>
+                                                        <option value="African Languages">African Languages</option>
+                                                        <option value="African Languages, nec">African Languages, nec</option>
+                                                        <option value="Afrikaans">Afrikaans</option>
+                                                        <option value="Akan">Akan</option>
+                                                        <option value="Alawa">Alawa</option>
+                                                        <option value="Albanian">Albanian</option>
+                                                        <option value="Alngith">Alngith</option>
+                                                        <option value="Alyawarr">Alyawarr</option>
+                                                        <option value="American Languages">American Languages</option>
+                                                        <option value="Amharic">Amharic</option>
+                                                        <option value="Amurdak">Amurdak</option>
+                                                        <option value="Anindilyakwa">Anindilyakwa</option>
+                                                        <option value="Anmatyerr">Anmatyerr</option>
+                                                        <option value="Anmatyerr, nec">Anmatyerr, nec</option>
+                                                        <option value="Antekerrepenh">Antekerrepenh</option>
+                                                        <option value="Antikarinya">Antikarinya</option>
+                                                        <option value="Anuak">Anuak</option>
+                                                        <option value="Arabana">Arabana</option>
+                                                        <option value="Arabic">Arabic</option>
+                                                        <option value="Arandic">Arandic</option>
+                                                        <option value="Arandic, nec">Arandic, nec</option>
+                                                        <option value="Armenian">Armenian</option>
+                                                        <option value="Arnhem Land and Daly River Region Languages">Arnhem Land and Daly River Region Languages
                                                         </option>
-                                                        <option value="8199">Arnhem Land and Daly River Region
+                                                        <option value="Arnhem Land and Daly River Region
+                                                            Languages, nec">Arnhem Land and Daly River Region
                                                             Languages, nec</option>
-                                                        <option value="3903">Aromunian (Macedo-Romanian)</option>
-                                                        <option value="8620">Arrernte</option>
-                                                        <option value="8629">Arrernte, nec</option>
-                                                        <option value="5213">Assamese</option>
-                                                        <option value="4206">Assyrian Neo-Aramaic</option>
-                                                        <option value="9701">Auslan</option>
-                                                        <option value="8000">AUSTRALIAN INDIGENOUS LANGUAGES</option>
-                                                        <option value="4302">Azeri</option>
-                                                        <option value="8946">Baanbay</option>
-                                                        <option value="8947">Badimaya</option>
-                                                        <option value="6514">Balinese</option>
-                                                        <option value="4104">Balochi</option>
-                                                        <option value="3100">Baltic</option>
-                                                        <option value="8903">Bandjalang</option>
-                                                        <option value="8904">Banyjima</option>
-                                                        <option value="8948">Barababaraba</option>
-                                                        <option value="8801">Bardi</option>
-                                                        <option value="9242">Bari</option>
-                                                        <option value="2901">Basque</option>
-                                                        <option value="9243">Bassa</option>
-                                                        <option value="8905">Batjala</option>
-                                                        <option value="3401">Belorussian</option>
-                                                        <option value="9215">Bemba</option>
-                                                        <option value="5201">Bengali</option>
-                                                        <option value="8906">Bidjara</option>
-                                                        <option value="6515">Bikol</option>
-                                                        <option value="8504">Bilinarra</option>
-                                                        <option value="6501">Bisaya</option>
-                                                        <option value="9402">Bislama</option>
-                                                        <option value="3501">Bosnian</option>
-                                                        <option value="3502">Bulgarian</option>
-                                                        <option value="8802">Bunuba</option>
-                                                        <option value="8181">Burarra</option>
-                                                        <option value="8180">Burarran</option>
-                                                        <option value="8189">Burarran, nec</option>
-                                                        <option value="6101">Burmese</option>
-                                                        <option value="6100">Burmese and Related Languages</option>
-                                                        <option value="6199">Burmese and Related Languages, nec</option>
-                                                        <option value="7101">Cantonese</option>
-                                                        <option value="8300">Cape York Peninsula Languages</option>
-                                                        <option value="8399">Cape York Peninsula Languages, nec</option>
-                                                        <option value="2301">Catalan</option>
-                                                        <option value="6502">Cebuano</option>
-                                                        <option value="1100">Celtic</option>
-                                                        <option value="1199">Celtic, nec</option>
-                                                        <option value="8611">Central Anmatyerr</option>
-                                                        <option value="4207">Chaldean Neo-Aramaic</option>
-                                                        <option value="7100">Chinese</option>
-                                                        <option value="7199">Chinese, nec</option>
-                                                        <option value="0005">Creole</option>
-                                                        <option value="3503">Croatian</option>
-                                                        <option value="0004">Cypriot, so decribed</option>
-                                                        <option value="3601">Czech</option>
-                                                        <option value="3604">Czechoslovakian, so described</option>
-                                                        <option value="8233">Daatiwuy</option>
-                                                        <option value="8951">Dadi Dadi</option>
-                                                        <option value="8122">Dalabon</option>
-                                                        <option value="9244">Dan (Gio-Dan)</option>
-                                                        <option value="1501">Danish</option>
-                                                        <option value="4105">Dari</option>
-                                                        <option value="8221">Dhalwangu</option>
-                                                        <option value="8907">Dhanggatti</option>
-                                                        <option value="8210">Dhangu</option>
-                                                        <option value="8219">Dhangu, nec</option>
-                                                        <option value="8952">Dharawal</option>
-                                                        <option value="8220">Dhay yi</option>
-                                                        <option value="8229">Dhay yi, nec</option>
-                                                        <option value="5214">Dhivehi</option>
-                                                        <option value="8230">Dhuwal</option>
-                                                        <option value="8239">Dhuwal, nec</option>
-                                                        <option value="8240">Dhuwala</option>
-                                                        <option value="8249">Dhuwala, nec</option>
-                                                        <option value="8291">Dhuwaya</option>
-                                                        <option value="9216">Dinka</option>
-                                                        <option value="8908">Diyari</option>
-                                                        <option value="8305">Djabugay</option>
-                                                        <option value="8953">Djabwurrung</option>
-                                                        <option value="8231">Djambarrpuyngu</option>
-                                                        <option value="8292">Djangu</option>
-                                                        <option value="8232">Djapu</option>
-                                                        <option value="8222">Djarrwark</option>
-                                                        <option value="8250">Djinang</option>
-                                                        <option value="8259">Djinang, nec</option>
-                                                        <option value="8262">Djinba</option>
-                                                        <option value="8269">Djinba, nec</option>
-                                                        <option value="5100">Dravidian</option>
-                                                        <option value="5199">Dravidian, nec</option>
-                                                        <option value="1401">Dutch</option>
-                                                        <option value="1400">Dutch and Related Languages</option>
-                                                        <option value="8306">Dyirbal</option>
-                                                        <option value="3400">East Slavic</option>
-                                                        <option value="8612">Eastern Anmatyerr</option>
-                                                        <option value="8621">Eastern Arrernte</option>
-                                                        <option value="7000">EASTERN ASIAN LANGUAGES</option>
-                                                        <option value="3000">EASTERN EUROPEAN LANGUAGES</option>
-                                                        <option value="1201">English</option>
-                                                        <option value="1601">Estonian</option>
-                                                        <option value="9217">Ewe</option>
-                                                        <option value="9301">Fijian</option>
-                                                        <option value="5217">Fijian Hindustani</option>
-                                                        <option value="6512">Filipino</option>
-                                                        <option value="1602">Finnish</option>
-                                                        <option value="1600">Finnish and Related Languages</option>
-                                                        <option value="1699">Finnish and Related Languages, nec</option>
-                                                        <option value="2101">French</option>
-                                                        <option value="0006">French Creole</option>
-                                                        <option value="1402">Frisian</option>
-                                                        <option value="9245">Fulfulde</option>
-                                                        <option value="9218">Ga</option>
-                                                        <option value="1101">Gaelic (Scotland)</option>
-                                                        <option value="8211">Galpu</option>
-                                                        <option value="8813">Gambera</option>
-                                                        <option value="8911">Gamilaraay</option>
-                                                        <option value="8261">Ganalbingu</option>
-                                                        <option value="8157">Garrwa</option>
-                                                        <option value="8913">Garuwali</option>
-                                                        <option value="4902">Georgian</option>
-                                                        <option value="1301">German</option>
-                                                        <option value="1300">German and Related Languages</option>
-                                                        <option value="9302">Gilbertese</option>
-                                                        <option value="8307">Girramay</option>
-                                                        <option value="8914">Githabul</option>
-                                                        <option value="8212">Golumala</option>
-                                                        <option value="8803">Gooniyandi</option>
-                                                        <option value="2201">Greek</option>
-                                                        <option value="8123">Gudanji</option>
-                                                        <option value="8954">Gudjal</option>
-                                                        <option value="5202">Gujarati</option>
-                                                        <option value="8242">Gumatj</option>
-                                                        <option value="8915">Gumbaynggir</option>
-                                                        <option value="8182">Gun-nartpa</option>
-                                                        <option value="8171">Gundjeihmi</option>
-                                                        <option value="8243">Gupapuyngu</option>
-                                                        <option value="8505">Gurindji</option>
-                                                        <option value="8506">Gurindji Kriol</option>
-                                                        <option value="8183">Gurr-goni</option>
-                                                        <option value="8302">Guugu Yimidhirr</option>
-                                                        <option value="8244">Guyamirrilili</option>
-                                                        <option value="6102">Haka</option>
-                                                        <option value="7102">Hakka</option>
-                                                        <option value="9221">Harari</option>
-                                                        <option value="9222">Hausa</option>
-                                                        <option value="9403">Hawaiian English</option>
-                                                        <option value="4107">Hazaraghi</option>
-                                                        <option value="4204">Hebrew</option>
-                                                        <option value="5203">Hindi</option>
-                                                        <option value="6201">Hmong</option>
-                                                        <option value="6200">Hmong-Mien</option>
+                                                        <option value="Aromunian (Macedo-Romanian)">Aromunian (Macedo-Romanian)</option>
+                                                        <option value="Arrernte">Arrernte</option>
+                                                        <option value="Arrernte, nec">Arrernte, nec</option>
+                                                        <option value="Assamese">Assamese</option>
+                                                        <option value="Assyrian Neo-Aramaic">Assyrian Neo-Aramaic</option>
+                                                        <option value="Auslan">Auslan</option>
+                                                        <option value="AUSTRALIAN INDIGENOUS LANGUAGES">AUSTRALIAN INDIGENOUS LANGUAGES</option>
+                                                        <option value="Azeri">Azeri</option>
+                                                        <option value="Baanbay">Baanbay</option>
+                                                        <option value="Badimaya">Badimaya</option>
+                                                        <option value="Balinese">Balinese</option>
+                                                        <option value="Balochi">Balochi</option>
+                                                        <option value="Baltic">Baltic</option>
+                                                        <option value="Bandjalang">Bandjalang</option>
+                                                        <option value="Banyjima">Banyjima</option>
+                                                        <option value="Barababaraba">Barababaraba</option>
+                                                        <option value="Bardi">Bardi</option>
+                                                        <option value="Bari">Bari</option>
+                                                        <option value="Basque">Basque</option>
+                                                        <option value="Bassa">Bassa</option>
+                                                        <option value="Batjala">Batjala</option>
+                                                        <option value="Belorussian">Belorussian</option>
+                                                        <option value="Bemba">Bemba</option>
+                                                        <option value="Bengali">Bengali</option>
+                                                        <option value="Bidjara">Bidjara</option>
+                                                        <option value="Bikol">Bikol</option>
+                                                        <option value="Bilinarra">Bilinarra</option>
+                                                        <option value="Bisaya">Bisaya</option>
+                                                        <option value="Bislama">Bislama</option>
+                                                        <option value="Bosnian">Bosnian</option>
+                                                        <option value="Bulgarian">Bulgarian</option>
+                                                        <option value="Bunuba">Bunuba</option>
+                                                        <option value="Burarra">Burarra</option>
+                                                        <option value="Burarran">Burarran</option>
+                                                        <option value="Burarran, nec">Burarran, nec</option>
+                                                        <option value="Burmese">Burmese</option>
+                                                        <option value="Burmese and Related Languages">Burmese and Related Languages</option>
+                                                        <option value="Burmese and Related Languages, nec">Burmese and Related Languages, nec</option>
+                                                        <option value="Cantonese">Cantonese</option>
+                                                        <option value="Cape York Peninsula Languages">Cape York Peninsula Languages</option>
+                                                        <option value="Cape York Peninsula Languages, nec">Cape York Peninsula Languages, nec</option>
+                                                        <option value="Catalan">Catalan</option>
+                                                        <option value="Cebuano">Cebuano</option>
+                                                        <option value="Celtic">Celtic</option>
+                                                        <option value="Celtic, nec">Celtic, nec</option>
+                                                        <option value="Central Anmatyerr">Central Anmatyerr</option>
+                                                        <option value="Chaldean Neo-Aramaic">Chaldean Neo-Aramaic</option>
+                                                        <option value="Chinese">Chinese</option>
+                                                        <option value="Chinese, nec">Chinese, nec</option>
+                                                        <option value="Creole">Creole</option>
+                                                        <option value="Croatian">Croatian</option>
+                                                        <option value="Cypriot, so decribed">Cypriot, so decribed</option>
+                                                        <option value="Czech">Czech</option>
+                                                        <option value="Czechoslovakian, so described">Czechoslovakian, so described</option>
+                                                        <option value="Daatiwuy">Daatiwuy</option>
+                                                        <option value="Dadi Dadi">Dadi Dadi</option>
+                                                        <option value="Dalabon">Dalabon</option>
+                                                        <option value="92Dan (Gio-Dan)44">Dan (Gio-Dan)</option>
+                                                        <option value="Danish">Danish</option>
+                                                        <option value="Dari">Dari</option>
+                                                        <option value="Dhalwangu">Dhalwangu</option>
+                                                        <option value="Dhanggatti">Dhanggatti</option>
+                                                        <option value="Dhangu">Dhangu</option>
+                                                        <option value="Dhangu, nec">Dhangu, nec</option>
+                                                        <option value="Dharawal">Dharawal</option>
+                                                        <option value="Dhay yi">Dhay yi</option>
+                                                        <option value="Dhay yi, nec">Dhay yi, nec</option>
+                                                        <option value="Dhivehi">Dhivehi</option>
+                                                        <option value="Dhuwal">Dhuwal</option>
+                                                        <option value="Dhuwal, nec">Dhuwal, nec</option>
+                                                        <option value="Dhuwala">Dhuwala</option>
+                                                        <option value="Dhuwala, nec">Dhuwala, nec</option>
+                                                        <option value="Dhuwaya">Dhuwaya</option>
+                                                        <option value="Dinka">Dinka</option>
+                                                        <option value="Diyari">Diyari</option>
+                                                        <option value="Djabugay">Djabugay</option>
+                                                        <option value="Djabwurrung">Djabwurrung</option>
+                                                        <option value="Djambarrpuyngu">Djambarrpuyngu</option>
+                                                        <option value="Djangu">Djangu</option>
+                                                        <option value="Djapu">Djapu</option>
+                                                        <option value="Djarrwark">Djarrwark</option>
+                                                        <option value="Djinang">Djinang</option>
+                                                        <option value="Djinang, nec">Djinang, nec</option>
+                                                        <option value="Djinba">Djinba</option>
+                                                        <option value="Djinba, nec">Djinba, nec</option>
+                                                        <option value="Dravidian">Dravidian</option>
+                                                        <option value="Dravidian, nec">Dravidian, nec</option>
+                                                        <option value="Dutch">Dutch</option>
+                                                        <option value="Dutch and Related Languages">Dutch and Related Languages</option>
+                                                        <option value="Dyirbal">Dyirbal</option>
+                                                        <option value="East Slavic">East Slavic</option>
+                                                        <option value="Eastern Anmatyerr">Eastern Anmatyerr</option>
+                                                        <option value="Eastern Arrernte">Eastern Arrernte</option>
+                                                        <option value="EASTERN ASIAN LANGUAGES">EASTERN ASIAN LANGUAGES</option>
+                                                        <option value="EASTERN EUROPEAN LANGUAGES">EASTERN EUROPEAN LANGUAGES</option>
+                                                        <option value="English">English</option>
+                                                        <option value="Estonian">Estonian</option>
+                                                        <option value="Ewe">Ewe</option>
+                                                        <option value="Fijian">Fijian</option>
+                                                        <option value="Fijian Hindustani">Fijian Hindustani</option>
+                                                        <option value="Filipino">Filipino</option>
+                                                        <option value="Finnish">Finnish</option>
+                                                        <option value="Finnish and Related Languages">Finnish and Related Languages</option>
+                                                        <option value="Finnish and Related Languages, nec">Finnish and Related Languages, nec</option>
+                                                        <option value="French">French</option>
+                                                        <option value="French Creole">French Creole</option>
+                                                        <option value="Frisian">Frisian</option>
+                                                        <option value="Fulfulde">Fulfulde</option>
+                                                        <option value="Ga">Ga</option>
+                                                        <option value="Gaelic (Scotland)">Gaelic (Scotland)</option>
+                                                        <option value="Galpu">Galpu</option>
+                                                        <option value="Gambera">Gambera</option>
+                                                        <option value="Gamilaraay">Gamilaraay</option>
+                                                        <option value="Ganalbingu">Ganalbingu</option>
+                                                        <option value="Garrwa">Garrwa</option>
+                                                        <option value="Garuwali">Garuwali</option>
+                                                        <option value="Georgian">Georgian</option>
+                                                        <option value="German">German</option>
+                                                        <option value="German and Related Languages">German and Related Languages</option>
+                                                        <option value="Gilbertese">Gilbertese</option>
+                                                        <option value="Girramay">Girramay</option>
+                                                        <option value="Githabul">Githabul</option>
+                                                        <option value="Golumala">Golumala</option>
+                                                        <option value="Gooniyandi">Gooniyandi</option>
+                                                        <option value="Greek">Greek</option>
+                                                        <option value="Gudanji">Gudanji</option>
+                                                        <option value="Gudjal">Gudjal</option>
+                                                        <option value="Gujarati">Gujarati</option>
+                                                        <option value="Gumatj">Gumatj</option>
+                                                        <option value="Gumbaynggir">Gumbaynggir</option>
+                                                        <option value="Gun-nartpa">Gun-nartpa</option>
+                                                        <option value="Gundjeihmi">Gundjeihmi</option>
+                                                        <option value="Gupapuyngu">Gupapuyngu</option>
+                                                        <option value="Gurindji">Gurindji</option>
+                                                        <option value="Gurindji Kriol">Gurindji Kriol</option>
+                                                        <option value="Gurr-goni">Gurr-goni</option>
+                                                        <option value="Guugu Yimidhirr">Guugu Yimidhirr</option>
+                                                        <option value="Guyamirrilili">Guyamirrilili</option>
+                                                        <option value="Haka">Haka</option>
+                                                        <option value="Hakka">Hakka</option>
+                                                        <option value="Harari">Harari</option>
+                                                        <option value="Hausa">Hausa</option>
+                                                        <option value="Hawaiian English">Hawaiian English</option>
+                                                        <option value="Hazaraghi">Hazaraghi</option>
+                                                        <option value="Hebrew">Hebrew</option>
+                                                        <option value="Hindi">Hindi</option>
+                                                        <option value="Hmong">Hmong</option>
+                                                        <option value="Hmong-Mien">Hmong-Mien</option>
                                                         <option value="6299">Hmong-Mien, nec</option>
                                                         <option value="3301">Hungarian</option>
                                                         <option value="6516">Iban</option>
@@ -2955,59 +2971,59 @@
                                                         <option value="8961">Waluwarra</option>
                                                         <option value="8154">Wambaya</option>
                                                         <option value="8715">Wangkajunga</option>
-                                                        <option value="8962">Wangkangurru</option>
-                                                        <option value="8716">Wangkatha</option>
-                                                        <option value="8213">Wangurri</option>
-                                                        <option value="8517">Wanyjirra</option>
-                                                        <option value="8155">Wardaman</option>
-                                                        <option value="8963">Wargamay</option>
-                                                        <option value="8518">Warlmanpa</option>
-                                                        <option value="8521">Warlpiri</option>
-                                                        <option value="8717">Warnman</option>
-                                                        <option value="8294">Warramiri</option>
-                                                        <option value="8522">Warumungu</option>
-                                                        <option value="1103">Welsh</option>
-                                                        <option value="8964">Wergaia</option>
-                                                        <option value="3600">West Slavic</option>
-                                                        <option value="8622">Western Arrarnta</option>
-                                                        <option value="8700">Western Desert Language</option>
-                                                        <option value="8799">Western Desert Language, nec</option>
-                                                        <option value="8304">Wik Mungkan</option>
-                                                        <option value="8314">Wik Ngathan</option>
-                                                        <option value="8941">Wiradjuri</option>
-                                                        <option value="8807">Worla</option>
-                                                        <option value="8808">Worrorra</option>
-                                                        <option value="7106">Wu</option>
-                                                        <option value="8247">Wubulkarra</option>
-                                                        <option value="8811">Wunambal</option>
-                                                        <option value="8251">Wurlaki</option>
-                                                        <option value="9237">Xhosa</option>
-                                                        <option value="8270">Yakuy</option>
-                                                        <option value="8279">Yakuy, nec</option>
-                                                        <option value="8282">Yan-Nhangu</option>
-                                                        <option value="8718">Yankunytjatjara</option>
-                                                        <option value="8165">Yanyuwa</option>
-                                                        <option value="9315">Yapese</option>
-                                                        <option value="8812">Yawuru</option>
-                                                        <option value="1303">Yiddish</option>
-                                                        <option value="8313">Yidiny</option>
-                                                        <option value="8943">Yindjibarndi</option>
-                                                        <option value="8944">Yinhawangka</option>
-                                                        <option value="8200">Yolngu Matha</option>
-                                                        <option value="8945">Yorta Yorta</option>
-                                                        <option value="9212">Yoruba</option>
-                                                        <option value="8965">Yugambeh</option>
-                                                        <option value="8721">Yulparija</option>
-                                                        <option value="8321">Yupangathi</option>
-                                                        <option value="6105">Zomi</option>
-                                                        <option value="9213">Zulu</option>
+                                                        <option value="Wangkangurru">Wangkangurru</option>
+                                                        <option value="Wangkatha">Wangkatha</option>
+                                                        <option value="Wangurri">Wangurri</option>
+                                                        <option value="Wanyjirra">Wanyjirra</option>
+                                                        <option value="Wardaman">Wardaman</option>
+                                                        <option value="Wargamay">Wargamay</option>
+                                                        <option value="Warlmanpa">Warlmanpa</option>
+                                                        <option value="Warlpiri">Warlpiri</option>
+                                                        <option value="Warnman">Warnman</option>
+                                                        <option value="Warramiri">Warramiri</option>
+                                                        <option value="Warumungu">Warumungu</option>
+                                                        <option value="Welsh">Welsh</option>
+                                                        <option value="Wergaia">Wergaia</option>
+                                                        <option value="West Slavic">West Slavic</option>
+                                                        <option value="Western Arrarnta">Western Arrarnta</option>
+                                                        <option value="Western Desert Language">Western Desert Language</option>
+                                                        <option value="Western Desert Language, nec">Western Desert Language, nec</option>
+                                                        <option value="Wik Mungkan">Wik Mungkan</option>
+                                                        <option value="Wik Ngathan">Wik Ngathan</option>
+                                                        <option value="Wiradjuri">Wiradjuri</option>
+                                                        <option value="Worla">Worla</option>
+                                                        <option value="Worrorra">Worrorra</option>
+                                                        <option value="Wu">Wu</option>
+                                                        <option value="Wubulkarra">Wubulkarra</option>
+                                                        <option value="Wunambal">Wunambal</option>
+                                                        <option value="Wurlaki">Wurlaki</option>
+                                                        <option value="Xhosa">Xhosa</option>
+                                                        <option value="Yakuy">Yakuy</option>
+                                                        <option value="Yakuy, nec">Yakuy, nec</option>
+                                                        <option value="Yan-Nhangu">Yan-Nhangu</option>
+                                                        <option value="Yankunytjatjara">Yankunytjatjara</option>
+                                                        <option value="Yanyuwa">Yanyuwa</option>
+                                                        <option value="Yapese">Yapese</option>
+                                                        <option value="Yawuru">Yawuru</option>
+                                                        <option value="Yiddish">Yiddish</option>
+                                                        <option value="Yidiny">Yidiny</option>
+                                                        <option value="Yindjibarndi">Yindjibarndi</option>
+                                                        <option value="Yinhawangka">Yinhawangka</option>
+                                                        <option value="Yolngu Matha">Yolngu Matha</option>
+                                                        <option value="Yorta Yorta">Yorta Yorta</option>
+                                                        <option value="Yoruba">Yoruba</option>
+                                                        <option value="Yugambeh">Yugambeh</option>
+                                                        <option value="Yulparija">Yulparija</option>
+                                                        <option value="Yupangathi">Yupangathi</option>
+                                                        <option value="Zomi">Zomi</option>
+                                                        <option value="Zulu">Zulu</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div style="clear:both;height:5px;"></div>
                                             <div id="englishProfTitle"
                                                 style="padding: 5px; font-weight: bold; width: 380px; float: left; display: block;" "="">Proficiency in English: </div>
-                                                 <div id="englishProf" style="padding: 0px 20px; float: left; display: block;" "="">
+                                                     <div id="englishProf" style="padding: 0px 20px; float: left; display: block;" "="">
                                                 <input type="radio" name="englishProficiency" value="1">
                                                 Very well<br><input type="radio" name="englishProficiency"
                                                     value="2">
@@ -3672,7 +3688,7 @@
                                             <button type="submit" class="btn btn-primary" style="margin:0px 5px;"
                                                 fdprocessedid="rym2bo">Save</button>
                                             <button type="button" class="btn btn-primary" style="margin:0px 5px;"
-                                            data-bs-dismiss="modal">Cancel</button>
+                                                data-bs-dismiss="modal">Cancel</button>
                                         </div>
                                     </form>
                                 </div>
@@ -3702,9 +3718,11 @@
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <span style="font-size: 20px;margin-bottom: 20px;"
-                                                class="mb-5 text-center">New Enquiry for {{ $student->first_name }} {{ $student->last_name }}</span>
+                                                class="mb-5 text-center">New Enquiry for {{ $student->first_name }}
+                                                {{ $student->last_name }}</span>
                                             <form name="add_opppr" id="add_opppr" method="post"
-                                                enctype="multipart/form-data" action="{{ route('people.new.enquiry') }}" method="POST">
+                                                enctype="multipart/form-data"
+                                                action="{{ route('people.new.enquiry') }}" method="POST">
                                                 @csrf()
                                                 @method('POST')
                                                 <div class="row">
@@ -3713,19 +3731,24 @@
                                                             align="left">
                                                             Preferred Course</div>
                                                         <div style="padding:5px; float:left">
-                                                            <select name="courseList" class="form-control" id="courseList" size="1" style="width:200px;">
-                                                               @foreach ($courses as $course)
-                                                                   <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                                               @endforeach
+                                                            <select name="courseList" class="form-control"
+                                                                id="courseList" size="1" style="width:200px;">
+                                                                @foreach ($courses as $course)
+                                                                    <option value="{{ $course->id }}">
+                                                                        {{ $course->name }}</option>
+                                                                @endforeach
                                                             </select>
-                                                            <input type="hidden" value="{{  $student->id }}" name="studentId" id="studentId">
+                                                            <input type="hidden" value="{{ $student->id }}"
+                                                                name="studentId" id="studentId">
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
                                                         <div style="padding:5px; float:left;width:150px;"
                                                             align="left">
                                                             Delivery Method(s)</div>
                                                         <div style="padding:5px; float:left">
-                                                            <select name="delevery_method[]" class="form-control" id="courseTypeList" multiple="multiple" style="width:200px; height:50px;" >
+                                                            <select name="delevery_method[]" class="form-control"
+                                                                id="courseTypeList" multiple="multiple"
+                                                                style="width:200px; height:50px;">
                                                                 <option value="Self Paced">Self Paced</option>
                                                                 <option value="Public Sessions">Public Sessions</option>
                                                                 <option value="Private Sessions">Private Sessions</option>
@@ -3741,7 +3764,8 @@
                                                                 style="width:200px; height:100px;"
                                                                 fdprocessedid="sbd71b">
                                                                 @foreach ($cities as $city)
-                                                                <option value="{{ $city->id  }}">{{ $city->name }}</option>
+                                                                    <option value="{{ $city->id }}">
+                                                                        {{ $city->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -3753,7 +3777,7 @@
                                                                 id="referralList" size="1" style="width:200px;"
                                                                 fdprocessedid="g1ck6">
                                                                 <option value=""></option>
-                                                                <option value="360">test</option>
+                                                                <option value="test">test</option>
                                                             </select>
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
@@ -3788,7 +3812,8 @@
                                                                 <option value="Kabir Kiron">Kabir Kiron</option>
                                                                 <option value="Kabir H Kiron">Kabir H Kiron</option>
                                                                 <option value="newtest newtest">newtest newtest</option>
-                                                                <option value="Weworkbook Support">Weworkbook Support</option>
+                                                                <option value="Weworkbook Support">Weworkbook Support
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div style="clear:both;height:10px;"></div>
@@ -3860,45 +3885,61 @@
                             <div class="col-sm-12">
                                 <table class="table">
                                     <thead>
-                                      <tr>
-                                        <th scope="col">Course Code	</th>
-                                        <th scope="col">Location	</th>
-                                        <th scope="col">Method</th>
-                                        <th scope="col">Assigned To	</th>
-                                        <th scope="col">Reference</th>
-                                        <th scope="col">InfoPAK Sent?</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Action</th>
-                                      </tr>
+                                        <tr>
+                                            <th scope="col">Course Code </th>
+                                            <th scope="col">Location </th>
+                                            <th scope="col">Method</th>
+                                            <th scope="col">Assigned To </th>
+                                            <th scope="col">Reference</th>
+                                            <th scope="col">InfoPAK Sent?</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($enquiry as $enqu)
-                                        <tr>
-                                            <th scope="row">{{ $enqu->course->code }}</th>
-                                           <td>
-                                            @php
-                                            foreach(json_decode($enqu->cityList) as $row_city){
-                                               $city =  App\Models\City::where('id',$row_city)->first(); 
-                                                echo $city->name . '<br>';
-                                            }
-                                        @endphp
-                                            </td>
-                                            <td>  {{ $enqu->delevery_method }} </td>
-                                            <td>{{ $enqu->referralList  }}</td>
-                                            <td>{{ $enqu->assignTo  }}</td>
-                                            <td>N</td>
-                                            <td>active {{ $enqu->important	 }}</td>
-                                            <td><i title="View Notes" style="cursor:pointer;" class="fa fa-sticky-note fa-2x text-warning ml-2" aria-hidden="true" onclick="openEnquiryNotes({{ $enqu->student }},{{ $enqu }} );"></i>
-                                                <i title="Edit Enquiry" style="cursor:pointer" class="fa fa-pencil fa-2x text-info ml-2" aria-hidden="true" onclick="openNewEnquiry({{ $enqu->student }},{{$enqu}});"></i>
-                                                <i title="Enrol" style="cursor:pointer" class="fa fa-user-plus fa-2x text-success ml-2" aria-hidden="true" onclick="openEnrolForm(539103, 'falak', 'khan', '133730', 'BSB40820', 'new');"></i>
-                                                <i title="Email InfoPAK. *To unlock this feature, please upgrade to a Non-Free License" style="cursor:pointer" class="fa fa-book fa-2x text-primary ml-2" aria-hidden="true"></i>
-                                                <i title="Send Email. *To unlock this feature, please upgrade to a Non-Free License" style="cursor:pointer" class="fa fa-book fa-2x text-primary ml-2" aria-hidden="true"></i>
-                                                <i title="Cancel Enquiry" style="cursor:pointer" class="fa fa-trash fa-2x ml-2 text-danger" aria-hidden="true" onclick="deleteEnquiry(539103, '133730');"></i>
-                                            </td>
-                                          </tr>
+                                            <tr>
+                                                <th scope="row">{{ $enqu->course->code }}</th>
+                                                <td>
+                                                    @php
+                                                        foreach (json_decode($enqu->cityList) as $row_city) {
+                                                            $city = App\Models\City::where('id', $row_city)->first();
+                                                            echo $city->name . '<br>';
+                                                        }
+                                                    @endphp
+                                                </td>
+                                                <td> {{ $enqu->delevery_method }} </td>
+                                                <td>{{ $enqu->referralList }}</td>
+                                                <td>{{ $enqu->assignTo }}</td>
+                                                <td>N</td>
+                                                <td>active {{ $enqu->important }}</td>
+                                                <td><i title="View Notes" style="cursor:pointer;"
+                                                        class="fa fa-sticky-note fa-2x text-warning ml-2"
+                                                        aria-hidden="true"
+                                                        onclick="openEnquiryNotes({{ $enqu->student }},{{ $enqu }} );"></i>
+                                                    <i title="Edit Enquiry" style="cursor:pointer"
+                                                        class="fa fa-pencil fa-2x text-info ml-2" aria-hidden="true"
+                                                        onclick="openNewEnquiry({{ $enqu->student }},{{ $enqu }});"></i>
+                                                    <i title="Enrol" style="cursor:pointer"
+                                                        class="fa fa-user-plus fa-2x text-success ml-2"
+                                                        aria-hidden="true"
+                                                        onclick="openEnrolForm(539103, 'falak', 'khan', '133730', 'BSB40820', 'new');"></i>
+                                                    <i title="Email InfoPAK. *To unlock this feature, please upgrade to a Non-Free License"
+                                                        style="cursor:pointer"
+                                                        class="fa fa-book fa-2x text-primary ml-2"
+                                                        aria-hidden="true"></i>
+                                                    <i title="Send Email. *To unlock this feature, please upgrade to a Non-Free License"
+                                                        style="cursor:pointer"
+                                                        class="fa fa-book fa-2x text-primary ml-2"
+                                                        aria-hidden="true"></i>
+                                                    <i title="Cancel Enquiry" style="cursor:pointer"
+                                                        class="fa fa-trash fa-2x ml-2 text-danger" aria-hidden="true"
+                                                        onclick="deleteEnquiry(539103, '133730');"></i>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
-                                  </table>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -3912,54 +3953,54 @@
                             </div>
                         </div>
                         <div class="col-sm-4 d-flex">
-                            <button type="button" class="btn btn-primary w-100 ms-2" style="height: 50px;" data-bs-toggle="modal"
-                                data-bs-target="#newEnrolment">
+                            <button type="button" class="btn btn-primary w-100 ms-2" style="height: 50px;"
+                                data-bs-toggle="modal" data-bs-target="#newEnrolment">
                                 New Enrolment
                             </button>
-                            <button type="button" class="btn btn-primary w-100 ms-2" style="height: 50px;" data-bs-toggle="modal"
-                                data-bs-target="#selectColumns">
+                            <button type="button" class="btn btn-primary w-100 ms-2" style="height: 50px;"
+                                data-bs-toggle="modal" data-bs-target="#selectColumns">
                                 Select Columns
                             </button>
                         </div>
                         <table class="table">
                             <thead>
-                              <tr>
-                                <th scope="col">Course Code	</th>
-                                <th scope="col">Method</th>
-                                <th scope="col">Group</th>
-                                <th scope="col">City Name</th>
-                                <th scope="col">Activity End Date</th>
-                                <th scope="col">Activity Start Date</th>
-                                <th scope="col">Enrolled On</th>
-                                <th scope="col">Schedule End Date</th>
-                                <th scope="col">Schedule Month</th>
-                                <th scope="col">Schedule Start Date	</th>
-                                <th scope="col">Qualification Status</th>
-                                <th scope="col">Certificate Issued</th>
-                              </tr>
+                                <tr>
+                                    <th scope="col">Course Code </th>
+                                    <th scope="col">Method</th>
+                                    <th scope="col">Group</th>
+                                    <th scope="col">City Name</th>
+                                    <th scope="col">Activity End Date</th>
+                                    <th scope="col">Activity Start Date</th>
+                                    <th scope="col">Enrolled On</th>
+                                    <th scope="col">Schedule End Date</th>
+                                    <th scope="col">Schedule Month</th>
+                                    <th scope="col">Schedule Start Date </th>
+                                    <th scope="col">Qualification Status</th>
+                                    <th scope="col">Certificate Issued</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($enquiry as $enqu)
-                                <tr>
-                                    <th scope="row">{{ $enqu->course->code }}</th>
-                                   <td>
-                                    @php
-                                    foreach(json_decode($enqu->cityList) as $row_city){
-                                       $city =  App\Models\City::where('id',$row_city)->first(); 
-                                        echo $city->name . '<br>';
-                                    }
-                                @endphp
-                                    </td>
-                                    <td>  {{ $enqu->delevery_method }} </td>
-                                    <td>{{ $enqu->referralList  }}</td>
-                                    <td>{{ $enqu->assignTo  }}</td>
-                                    <td>N</td>
-                                    <td>active {{ $enqu->important	 }}</td>
-                                    <td></td>
-                                  </tr>
+                                    <tr>
+                                        <th scope="row">{{ $enqu->course->code }}</th>
+                                        <td>
+                                            @php
+                                                foreach (json_decode($enqu->cityList) as $row_city) {
+                                                    $city = App\Models\City::where('id', $row_city)->first();
+                                                    echo $city->name . '<br>';
+                                                }
+                                            @endphp
+                                        </td>
+                                        <td> {{ $enqu->delevery_method }} </td>
+                                        <td>{{ $enqu->referralList }}</td>
+                                        <td>{{ $enqu->assignTo }}</td>
+                                        <td>N</td>
+                                        <td>active {{ $enqu->important }}</td>
+                                        <td></td>
+                                    </tr>
                                 @endforeach
                             </tbody>
-                          </table>
+                        </table>
                         <div class="modal fade" id="newEnrolment" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
@@ -4034,7 +4075,8 @@
                                                     </div>
                                                     <div class="col-1 col-form-label">Received Date:</div>
                                                     <div class="col-2">
-                                                        <input type="date" style="width:80%;" class="form-control"  name="receivedDate" id="receivedDate">
+                                                        <input type="date" style="width:80%;" class="form-control"
+                                                            name="receivedDate" id="receivedDate">
                                                     </div>
                                                     <div class="col-1 col-form-label">Received By:</div>
                                                     <div class="col-3"><select class="form-control"
@@ -4174,30 +4216,79 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="modal fade" id="selectColumns" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <h2>Select Columns</h2>
-                                
-                                 `    <table>   
-                                    <tbody><tr style="height:10px;"></tr>
-                                        <tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="unitCompetentDate_1" id="unitCompetentDate_1" checked=""><label for="unitCompetentDate">&nbsp;&nbsp;Activity End Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="activityStartDate_1" id="activityStartDate_1" checked=""><label for="activityStartDate">&nbsp;&nbsp;Activity Start Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="enrolTime_1" id="enrolTime_1" checked=""><label for="enrolTime">&nbsp;&nbsp;Enrolled On</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="endDate_1" id="endDate_1" checked=""><label for="endDate">&nbsp;&nbsp;Schedule End Date</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="month_1" id="month_1" checked=""><label for="month">&nbsp;&nbsp;Schedule Month</label></strong></td></tr><tr style="height:30px;"><td style="width:600px"><strong><input align="middle" class="selColsCheckBox" type="checkbox" name="startDate_1" id="startDate_1" checked=""><label for="startDate">&nbsp;&nbsp;Schedule Start Date</label></strong></td></tr>                        
-                                                            
-                                        <tr style="height:10px;"></tr>
-                                        <tr style="height:30px;">
-                                            <td align="center">
-                                                <button class="btn btn-primary" style="margin:0px 2px;" type="button" onclick="addSelectedCols();" fdprocessedid="h78jc">Save</button>
-                                                <button class="btn btn-primary" style="margin:0px 2px;" type="button"data-bs-dismiss="modal">Cancel</button>
-                                            </td>
-                                        </tr>                    
-                                    </tbody>
-                                </table>
+                        <div class="modal fade" id="selectColumns" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <h2>Select Columns</h2>
+
+                                        ` <table>
+                                            <tbody>
+                                                <tr style="height:10px;"></tr>
+                                                <tr style="height:30px;">
+                                                    <td style="width:600px"><strong><input align="middle"
+                                                                class="selColsCheckBox" type="checkbox"
+                                                                name="unitCompetentDate_1" id="unitCompetentDate_1"
+                                                                checked=""><label
+                                                                for="unitCompetentDate">&nbsp;&nbsp;Activity End
+                                                                Date</label></strong></td>
+                                                </tr>
+                                                <tr style="height:30px;">
+                                                    <td style="width:600px"><strong><input align="middle"
+                                                                class="selColsCheckBox" type="checkbox"
+                                                                name="activityStartDate_1" id="activityStartDate_1"
+                                                                checked=""><label
+                                                                for="activityStartDate">&nbsp;&nbsp;Activity Start
+                                                                Date</label></strong></td>
+                                                </tr>
+                                                <tr style="height:30px;">
+                                                    <td style="width:600px"><strong><input align="middle"
+                                                                class="selColsCheckBox" type="checkbox"
+                                                                name="enrolTime_1" id="enrolTime_1"
+                                                                checked=""><label
+                                                                for="enrolTime">&nbsp;&nbsp;Enrolled On</label></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height:30px;">
+                                                    <td style="width:600px"><strong><input align="middle"
+                                                                class="selColsCheckBox" type="checkbox"
+                                                                name="endDate_1" id="endDate_1" checked=""><label
+                                                                for="endDate">&nbsp;&nbsp;Schedule End
+                                                                Date</label></strong></td>
+                                                </tr>
+                                                <tr style="height:30px;">
+                                                    <td style="width:600px"><strong><input align="middle"
+                                                                class="selColsCheckBox" type="checkbox" name="month_1"
+                                                                id="month_1" checked=""><label
+                                                                for="month">&nbsp;&nbsp;Schedule Month</label></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height:30px;">
+                                                    <td style="width:600px"><strong><input align="middle"
+                                                                class="selColsCheckBox" type="checkbox"
+                                                                name="startDate_1" id="startDate_1"
+                                                                checked=""><label
+                                                                for="startDate">&nbsp;&nbsp;Schedule Start
+                                                                Date</label></strong></td>
+                                                </tr>
+
+                                                <tr style="height:10px;"></tr>
+                                                <tr style="height:30px;">
+                                                    <td align="center">
+                                                        <button class="btn btn-primary" style="margin:0px 2px;"
+                                                            type="button" onclick="addSelectedCols();"
+                                                            fdprocessedid="h78jc">Save</button>
+                                                        <button class="btn btn-primary" style="margin:0px 2px;"
+                                                            type="button"data-bs-dismiss="modal">Cancel</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                     {{-- <----------------------------------- Past Enrolments  ----------------------------------------------------> --}}
                     <hr>
@@ -4213,50 +4304,50 @@
                         </div>
                         <style>
                             .scroll::-webkit-scrollbar-thumb {
-                                    background: #666; 
+                                background: #666;
                             }
                         </style>
                         <div class="row">
                             <div class="col-sm-12 scroll" style="overflow: scroll;">
                                 <table class="table">
                                     <thead>
-                                      <tr>
-                                        <th scope="col">Course Code	</th>
-                                        <th scope="col">Method</th>
-                                        <th scope="col">Group</th>
-                                        <th scope="col">City Name</th>
-                                        <th scope="col">Activity End Date</th>
-                                        <th scope="col">Activity Start Date</th>
-                                        <th scope="col">Enrolled On</th>
-                                        <th scope="col">Schedule End Date</th>
-                                        <th scope="col">Schedule Month</th>
-                                        <th scope="col">Schedule Start Date	</th>
-                                        <th scope="col">Qualification Status</th>
-                                        <th scope="col">Certificate Issued</th>
-                                      </tr>
+                                        <tr>
+                                            <th scope="col">Course Code </th>
+                                            <th scope="col">Method</th>
+                                            <th scope="col">Group</th>
+                                            <th scope="col">City Name</th>
+                                            <th scope="col">Activity End Date</th>
+                                            <th scope="col">Activity Start Date</th>
+                                            <th scope="col">Enrolled On</th>
+                                            <th scope="col">Schedule End Date</th>
+                                            <th scope="col">Schedule Month</th>
+                                            <th scope="col">Schedule Start Date </th>
+                                            <th scope="col">Qualification Status</th>
+                                            <th scope="col">Certificate Issued</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($enquiry as $enqu)
-                                        <tr>
-                                            <th scope="row">{{ $enqu->course->code }}</th>
-                                           <td>
-                                            @php
-                                            foreach(json_decode($enqu->cityList) as $row_city){
-                                               $city =  App\Models\City::where('id',$row_city)->first(); 
-                                                echo $city->name . '<br>';
-                                            }
-                                        @endphp
-                                            </td>
-                                            <td>  {{ $enqu->delevery_method }} </td>
-                                            <td>{{ $enqu->referralList  }}</td>
-                                            <td>{{ $enqu->assignTo  }}</td>
-                                            <td>N</td>
-                                            <td>active {{ $enqu->important	 }}</td>
-                                            <td></td>
-                                          </tr>
+                                            <tr>
+                                                <th scope="row">{{ $enqu->course->code }}</th>
+                                                <td>
+                                                    @php
+                                                        foreach (json_decode($enqu->cityList) as $row_city) {
+                                                            $city = App\Models\City::where('id', $row_city)->first();
+                                                            echo $city->name . '<br>';
+                                                        }
+                                                    @endphp
+                                                </td>
+                                                <td> {{ $enqu->delevery_method }} </td>
+                                                <td>{{ $enqu->referralList }}</td>
+                                                <td>{{ $enqu->assignTo }}</td>
+                                                <td>N</td>
+                                                <td>active {{ $enqu->important }}</td>
+                                                <td></td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
-                                  </table>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -4286,61 +4377,79 @@
                         <div class="col-sm-4 d-flex">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#add-notes" style="height: 50px;"> Add Note </button>
-                                <a href="{{ route('person.note.export',$studentID)}}" class="btn btn-primary ms-2" style="height: 50px;">Export to PDF</a>
-                                {{-- // This Model // --}}
-                                <div class="modal fade" id="add-notes" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
+                            <a href="{{ route('person.note.export', $studentID) }}" class="btn btn-primary ms-2"
+                                style="height: 50px;">Export to PDF</a>
+                            {{-- // This Model // --}}
+                            <div class="modal fade" id="add-notes" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                                     <div class="modal-content" style="height:500px;">
                                         <div class="modal-body">
-                                            <h2>Add Person Notes for {{ $student->firstName }} {{ $student->lastName }}</h2>
-                                            <form name="saveForm" action="{{ route('person.notes')}}" id="saveForm" method="post" target="_self" enctype="multipart/form-data">
+                                            <h2>Add Person Notes for {{ $student->firstName }} {{ $student->lastName }}
+                                            </h2>
+                                            <form name="saveForm" action="{{ route('person.notes') }}" id="saveForm"
+                                                method="post" target="_self" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('post')
                                                 <input type="hidden" name="student_id" value="{{ $studentID }}">
                                                 <div class="form-group row">
-                                                    <label for="template" class="col-sm-2 col-form-label">Template</label>
+                                                    <label for="template"
+                                                        class="col-sm-2 col-form-label">Template</label>
                                                     <div class="col-sm-10">
-                                                        <select id="template" onchange="ptemplatechanged()" name="template" class="form-control">
+                                                        <select id="template" onchange="ptemplatechanged()"
+                                                            name="template" class="form-control">
                                                             <option value="">None</option>
                                                         </select>
                                                     </div>
-                                                    </div>  
+                                                </div>
                                                 <div class="form-group row mt-2">
                                                     <label for="note" class="col-sm-2 col-form-label">Note</label>
                                                     <div class="col-sm-10">
-                                                            <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
-                                                        </div>
-                                                </div>  
-                                                    <div class="form-group row mt-2"> 
-                                                    <label for="note" class="col-sm-2 col-form-label">Select note category:</label>
+                                                        <textarea class="form-control" name="note" id="" cols="30" rows="10"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mt-2">
+                                                    <label for="note" class="col-sm-2 col-form-label">Select note
+                                                        category:</label>
                                                     <div class="col-sm-10">
-                                                        <select name="noteCategory" id="noteCategory"  class="form-control">
-                                                            <option value="0" selected="">Select Cataegory</option>
+                                                        <select name="noteCategory" id="noteCategory"
+                                                            class="form-control">
+                                                            <option value="0" selected="">Select Cataegory
+                                                            </option>
                                                             @foreach ($noteCtegory as $cataegoryNote)
-                                                                <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}</option>
+                                                                <option value="{{ $cataegoryNote->id }}">
+                                                                    {{ $cataegoryNote->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mt-2">
-                                                    <label for="upload_file" class="col-sm-2 col-form-label">Attach File</label>
+                                                    <label for="upload_file" class="col-sm-2 col-form-label">Attach
+                                                        File</label>
                                                     <div class="col-sm-10">
-                                                        <input type="file" class="form-control" name="upload_file" id="upload_file" size="50">
+                                                        <input type="file" class="form-control" name="upload_file"
+                                                            id="upload_file" size="50">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row mt-2">
-                                                    <label for="followUpDate2" class="col-sm-2 col-form-label">Follow-up Date</label>
+                                                    <label for="followUpDate2" class="col-sm-2 col-form-label">Follow-up
+                                                        Date</label>
                                                     <div class="col-sm-10">
-                                                    <input type="date" class="form-control hasDatepicker" value="" name="follow_up_to_date" id="follow_up_to_date">
+                                                        <input type="date" class="form-control hasDatepicker"
+                                                            value="" name="follow_up_to_date"
+                                                            id="follow_up_to_date">
                                                     </div>
-                                                </div>  
-                                                            <div class="form-group row mt-2">
+                                                </div>
+                                                <div class="form-group row mt-2">
                                                     <label for="followUpDate2" class="col-sm-2 col-form-label"></label>
                                                     <div class="col-sm-10">
-                                                        <button type="submit" class="btn btn-primary" style="margin:0px 2px;" fdprocessedid="uv5hv">Save</button>
-                                                            <button type="button" class="btn btn-primary" style="margin:0px 2px;" id="closeForm" fdprocessedid="khkvru" data-bs-dismiss="modal">Cancel</button>
-                                                        </div>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            style="margin:0px 2px;" fdprocessedid="uv5hv">Save</button>
+                                                        <button type="button" class="btn btn-primary"
+                                                            style="margin:0px 2px;" id="closeForm"
+                                                            fdprocessedid="khkvru"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </div>
@@ -4353,28 +4462,30 @@
                         <div class="col-sm-12">
                             <table class="table">
                                 <thead>
-                                  <tr>
-                                    <th scope="col">Note</th>
-                                    <th scope="col">Note Category</th>
-                                    <th scope="col">Follow-up Date</th>
-                                    <th scope="col">Posted By</th>
-                                    <th scope="col">Posted On</th>
-                                    <th scope="col">Action</th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">Note</th>
+                                        <th scope="col">Note Category</th>
+                                        <th scope="col">Follow-up Date</th>
+                                        <th scope="col">Posted By</th>
+                                        <th scope="col">Posted On</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($noteEnrolment as  $note)
-                                    <tr>
-                                        <th>{{ $note->note }}  </th>
-                                        <td>{{ $note->category->name }}</td>
-                                        <td>{{ $note->follow_up_to_date }}</td>
-                                        <td>{{ $note->created_at }}</td>
-                                        <td>{{ $note->created_by }}</td>
-                                        <td><a href="{{ route('person.note.delete',$note->id)}}"><i title="Delete Student" class="fa fa-trash fa-2x text-danger"></i></a></td>
-                                      </tr>      
+                                    @foreach ($noteEnrolment as $note)
+                                        <tr>
+                                            <th>{{ $note->note }} </th>
+                                            <td>{{ $note->category->name }}</td>
+                                            <td>{{ $note->follow_up_to_date }}</td>
+                                            <td>{{ $note->created_at }}</td>
+                                            <td>{{ $note->created_by }}</td>
+                                            <td><a href="{{ route('person.note.delete', $note->id) }}"><i
+                                                        title="Delete Student"
+                                                        class="fa fa-trash fa-2x text-danger"></i></a></td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
-                              </table>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -4384,7 +4495,6 @@
     </div>
     {{-- Modal select column start --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script>
         $(document).ready(function() {
             $("#toggleButton").click(function() {
@@ -4473,58 +4583,82 @@
         }
     </style>
     <script>
-       function openEnquiryNotes(item,enquiry){
+        function openEnquiryNotes(item, enquiry) {
             $('#enuiry_notes #enuiry_note').empty('show');
             $('#enuiry_notes').modal('show');
             $('#enuiry_notes #enuiry_note').append('Enquiry Notes for ' + item.first_name + ' ' + item.last_name);
             $('#courseId').val(enquiry.course.id)
             $('#enquiryId').val(enquiry.id)
+
             $.ajax({
-    url: "{{ route('enuiry.note.list') }}", // Your server script URL
-    type: 'GET',
-    data: { id: enquiry.id }, // Send data as an object
-    success: function(response) {
-        // Handle success
-        console.log(response);
-         // Clear existing rows
-        $('#notesTable tbody').empty();
-        // Append new rows
-        $.each(response, function(index, note) {
-            $('#notesTable tbody').append(
-                '<tr>' +
-                    '<td>' + note.id + '</td>' +
-                    '<td>' + note.note + '</td>' +
-                    '<td>' + note.category.name + '</td>' +
-                '</tr>'
-            );
-        }); 
-    },
-    error: function(xhr, status, error) {
-        // Handle error
-        alert('An error occurred: ' + error);
-        console.log(xhr.responseText);
-    }
-        });
-    }
+                url: "{{ route('enuiry.note.list') }}", // Your server script URL
+                type: 'GET',
+                data: {
+                    id: enquiry.id
+                }, // Send data as an object
+                success: function(response) {
+                    // Handle success
+                    console.log(response);
+                    // Clear existing rows
+                    $('#notesTable tbody').empty();
+                    // Append new rows
+                    $.each(response, function(index, note) {
+                        $('#notesTable tbody').append(
+                            '<tr>' +
+                            '<td>' + note.id + '</td>' +
+                            '<td>' + note.note + '</td>' +
+                            '<td>' + note.category.name + '</td>' +
+                            '</tr>'
+                        );
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    alert('An error occurred: ' + error);
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+        function change_english_level (newValue){
+            console.log(newValue)
+            $("#spokenLanguage").attr('disabled')
+        }
+        function openNewEnquiry(item,enquiry) {
+            console.log(enquiry.delevery_method)
+            $('#enuiry_notes_1 .enuiry_note').empty('show');
+            $('#enuiry_notes .enuiry_note').empty('show');
+            $('#enuiry_notes_1').modal('show');
+            $('#enuiry_notes_1 .enuiry_note').append('Enquiry Notes for ' + item.first_name + ' ' + item.last_name);
+            $('#courseList_edit').val(enquiry.course_id);
+            var valuesToSelect = enquiry.delevery_method;
+            
+            var selectElement = document.getElementById('courseTypeList_1');
+            for (var i = 0; i < selectElement.options.length; i++) {
+            if (valuesToSelect.includes(parseInt(selectElement.options[i].value))) {
+                console.log(selectElement.options[i].selected)
+                selectElement.options[i].selected = true;
+            }
+        }
+        }
 
-    function openNewEnquiry(item,enquiry){
-        console.log(item)
-        $('#enuiry_notes .enuiry_note').empty('show');
-        $('#enuiry_notes_1').modal('show');
-        $('#enuiry_notes_1 .enuiry_note').append('Enquiry Notes for ' + item.first_name + ' ' + item.last_name);
-    } 
+        function showAddNotesBox() {
+            $('#enrolment_enuiry_note').css('display', 'flex');
+            $('#enrolment_enquiry_note_add_button').css('display', 'none');
+        }
 
-    function showAddNotesBox(){
-        $('#enrolment_enuiry_note').css('display', 'flex');
-        $('#enrolment_enquiry_note_add_button').css('display', 'none');
-    }
+        function hideAddNotesBox() {
+            $('#enrolment_enuiry_note').css('display', 'none');
+            $('#enrolment_enquiry_note_add_button').css('display', 'flex');
+        }
 
-    function hideAddNotesBox(){
-        $('#enrolment_enuiry_note').css('display', 'none');
-        $('#enrolment_enquiry_note_add_button').css('display', 'flex');
-    }
-  
+        function openEmailDialog(text){
+            console.log(text)
+            $('#enquiry_email').modal('show');
+            $('#document_people').html(`<a href="/`+ text.path +`">`+ text.file_name +`</a>`)
+            $('#document_path').val(text.path)
+        }
     </script>
+
     <script>
         $(document).ready(function() {
             // Function to add a new row
@@ -4532,12 +4666,11 @@
                 var newRow = '<tr class="mt-2">' +
                     '<td>Upload File (Max size of 20MB)<input type="hidden" name="MAX_FILE_SIZE" value="20971520"></td>' +
                     '<td>' +
-                    '<input class="form-control" type="file" id="formFileMultiple" multiple="">' +
-                    '<input type="hidden" id="student_ID" name="student_ID" value="524977">' +
+                    '<input class="form-control" type="file" name="document_file[]" id="formFileMultiple[]" multiple="">' +
                     '</td>' +
                     '<td nowrap="">Give the document a name</td>' +
                     '<td>' +
-                    '<input type="text" class="form-control" name="documentName[]" id="documentName[]" maxlength="50" style="width:200px;border:#666666 1px solid; vertical-align:middle;" fdprocessedid="2fsg38">' +
+                    '<input type="text" class="form-control" name="ducment_name[]" id="documentName[]" maxlength="50">' +
                     '</td>' +
                     '</tr>';
                 $("#dataTable").append(newRow);
@@ -4545,320 +4678,464 @@
         });
     </script>
     {{-- Enuiry Modal Notes --}}
-    <div class="modal fade" id="enuiry_notes" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal fade" id="enuiry_notes" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
+            <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="enuiry_note"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="enrolment_enquiry_note_add_button" style="display: flex;">
+                        <div class="col-sm-6">
+                            <button class="btn btn-primary" onclick="showAddNotesBox();">Add Notes</button>
+                        </div>
+                        <div class="col-sm-6 text-end">
+                            <a href="#" class="btn btn-primary">
+                                Export to PDF
+                            </a>
+                        </div>
+                    </div>
+                    <div id="enrolment_enuiry_note" style="display: none;">
+                        <form name="" id="saveForm" method="post" target=""
+                            action="{{ route('enrolment.enuiry.note.add') }}" enctype="multipart/form-data">
+                            @csrf()
+                            @method('POST')
+                            <div class="form-group row">
+                                <label for="note" class="col-sm-3 col-form-label">Select note category:</label>
+                                <div class="col-sm-9">
+                                    <select name="noteCat" id="noteCat" style="w" class="form-control">
+                                        <option value="" selected=""></option>
+                                        @foreach ($noteCtegory as $cataegoryNote)
+                                            <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- start wwb-1218 -->
+                            <div class="form-group row">
+                                <label for="note" class="col-sm-3 col-form-label">Followup Date:</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control mt-3" name="followUpDate2"
+                                        value="0000-00-00">
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="note" class="col-sm-3 col-form-label">Assigned To:</label>
+                                <div class="col-sm-9">
+                                    <select name="assignTo" class="form-control">
+                                        <option value="1523" selected="">Kabir Kiron</option>
+                                        <option value="1522">Kabir H Kiron</option>
+                                        <option value="1555">newtest newtest</option>
+                                        <option value="1521">Weworkbook Support</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="note" class="col-sm-3 col-form-label">Chance of Success:</label>
+                                <div class="col-sm-9">
+                                    <select name="important" class="form-control" fdprocessedid="4vzju6">
+                                        <option value="10%">10%</option>
+                                        <option value="30%">30%</option>
+                                        <option value="50%">50%</option>
+                                        <option value="70%">70%</option>
+                                        <option value="90%">90%</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="note" class="col-sm-3 col-form-label">Likely Month:</label>
+                                <div class="col-sm-9">
+                                    <select name="likelyMonth" id="" class="form-control" fdprocessedid="xwl3ae">
+                                        <option value="">Unknown</option>
+                                        <option value="2024-07-01">Jul 2024</option>
+                                        <option value="2024-08-01">Aug 2024</option>
+                                        <option value="2024-09-01">Sep 2024</option>
+                                        <option value="2024-10-01">Oct 2024</option>
+                                        <option value="2024-11-01">Nov 2024</option>
+                                        <option value="2024-12-01">Dec 2024</option>
+                                        <option value="2025-01-01">Jan 2025</option>
+                                        <option value="2025-02-01">Feb 2025</option>
+                                        <option value="2025-03-01">Mar 2025</option>
+                                        <option value="2025-04-01">Apr 2025</option>
+                                        <option value="2025-05-01">May 2025</option>
+                                        <option value="2025-06-01">Jun 2025</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- end wwb-1218 -->
+                            <div class="form-group row mt-3" id="enqtemplateselectdiv">
+                                <label for="enqtemplateselect" class="col-sm-3 col-form-label">Template</label>
+                                <div class="col-sm-9">
+                                    <select id="enqtemplateselect" class="form-control" name="template">
+                                        <option value="">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="note" class="col-sm-3 col-form-label">Note Content:</label>
+                                <textarea class="form-control" name="note" id="note" style="width: 100%; height: 70px;"></textarea>
+                            </div>
+                            <div class="form-group row mt-3">
+                                <label for="note" class="col-sm-3 col-form-label">Attach File:</label>
+                                <input type="file" name="document" class="form-control" value="">
+                            </div>
+                            <div class="form-group row mt-3">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary" style="margin-right:3px;"
+                                        fdprocessedid="qck51">Save</button>
+                                </div>
+                                <div class="col-6">
+                                    <button type="button" class="btn btn-secondary" onclick="hideAddNotesBox();"
+                                        style="margin-left:3px;" fdprocessedid="j0r1b4">Cancel</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="enquiryId" name="enquiryId" value="">
+                            <input type="hidden" id="studentId" name="studentId" value="{{ $studentID }}">
+                            <input type="hidden" id="courseId" name="courseId" value="">
+                        </form>
+                    </div>
+                    <div class="table">
+                        <table class="table" id="notesTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Posted By</th>
+                                    <th scope="col">Note</th>
+                                    <th scope="col">Note Category</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    {{-- Modal Email --}}
+    <div class="modal fade" id="enquiry_email" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="enuiry_note"></h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div> 
+                <h1 class="modal-title fs-5 enuiry_note">Document Email</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div class="modal-body">
-              <div class="row" id="enrolment_enquiry_note_add_button" style="display: flex;">
-                <div class="col-sm-6">
-                    <button class="btn btn-primary" onclick="showAddNotesBox();">Add Notes</button>
+               <form action="{{ route('send.mail.people') }}" method="post" enctype="multipart/form-data" >
+                @csrf
+                @method('post')
+                <div class="row">
+                    <div class="col-2">
+                      <label for="enuiry_document_email">To</label>  
+                    </div>
+                    <div class="col-10">
+                        <input type="email" name="" class="form-control" id="enuiry_document_email" value="{{$student->studentEmail}}" disabled>
+                        <input type="hidden" name="email" class="form-control" id="" value="{{$student->studentEmail}}">
+                    </div>
                 </div>
-                <div class="col-sm-6 text-end">
-                    <a href="#" class="btn btn-primary">
-                        Export to PDF
-                    </a>
+                <div class="row mt-3">
+                    <div class="col-2">
+                      <label for="enuiry_document_email">CC</label>  
+                    </div>
+                    <div class="col-10">
+                        <input type="text" name="email_cc" class="form-control" id="enuiry_document_email" value="{{ $student->studentEmail2 }};{{ $student->studentEmail3 }}">
+                    </div>
                 </div>
-              </div>
-              <div id="enrolment_enuiry_note" style="display: none;">
-                <form name="" id="saveForm" method="post" target="" action="{{ route('enrolment.enuiry.note.add')}}" enctype="multipart/form-data" >
-					@csrf()
-                    @method('POST')
-                    <div class="form-group row"> 
-						<label for="note" class="col-sm-3 col-form-label">Select note category:</label>
-						<div class="col-sm-9">
-							<select name="noteCat" id="noteCat" style="w" class="form-control">
-								<option value="" selected=""></option>
-                                @foreach ($noteCtegory as $cataegoryNote)
-                                <option value="{{ $cataegoryNote->id }}">{{ $cataegoryNote->name }}</option>
+                <div class="row mt-3">
+                    <div class="col-2">
+                      <label for="enuiry_document_email">Subject</label>  
+                    </div>
+                    <div class="col-10">
+                        <input type="text" name="subject" class="form-control" id="enuiry_document_email">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-2">
+                      <label for="enuiry_document_email">Note</label>  
+                    </div>
+                    <div class="col-10">
+                       <textarea name="note_email" class="form-control" id="document_email" cols="30" rows="4"></textarea>
+                    </div>
+                </div>
+                <p id="document">
+                    <span>Attached:</span> <span id="document_people"></span>
+                    <input type="hidden" id="document_path" name="document_path" value="">
+                </p>
+                <div class="row text-center mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-primary text-center" type="submit">Send</button>
+                    </div>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+</div>
+    {{-- Enuiry Modal Notes --}}
+    <div class="modal fade" id="enuiry_notes_1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 enuiry_note"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="" id="" method="post" enctype="multipart/form-data"
+                        action="">
+                        @csrf
+                        @method('POST')
+                        <div style="padding:5px; float:left; width:150px;" align="left">Preferred Course</div>
+                        <div style="padding:5px; float:left">
+                            <select name="courseList" class="form-control" id="courseList_edit" size="1"
+                                style="width:200px;">
+                                <option value=""></option>
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->code }}</option>
                                 @endforeach
                             </select>
-						</div>
-					</div>
-					<!-- start wwb-1218 -->
-					<div class="form-group row"> 
-						<label for="note" class="col-sm-3 col-form-label">Followup Date:</label>
-						<div class="col-sm-9">
-							<input type="date" class="form-control mt-3" name="followUpDate2" value="0000-00-00">
-						</div>
-					</div>
-					<div class="form-group row mt-3"> 
-						<label for="note" class="col-sm-3 col-form-label">Assigned To:</label>
-						<div class="col-sm-9">
-							<select name="assignTo" class="form-control">
-							<option value="1523" selected="">Kabir Kiron</option><option value="1522">Kabir H Kiron</option><option value="1555">newtest newtest</option><option value="1521">Weworkbook Support</option>							</select>
-						</div>
-					</div>
-					<div class="form-group row mt-3"> 
-						<label for="note" class="col-sm-3 col-form-label">Chance of Success:</label>
-						<div class="col-sm-9">
-							<select name="important" class="form-control" fdprocessedid="4vzju6">
-							<option value="10%">10%</option>
-							<option value="30%">30%</option>
-							<option value="50%">50%</option>
-							<option value="70%">70%</option>
-							<option value="90%">90%</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group row mt-3"> 
-						<label for="note" class="col-sm-3 col-form-label">Likely Month:</label>
-						<div class="col-sm-9">
-						<select name="likelyMonth" class="form-control" fdprocessedid="xwl3ae">
-						<option value="">Unknown</option><option value="2024-07-01">Jul 2024</option><option value="2024-08-01">Aug 2024</option><option value="2024-09-01">Sep 2024</option><option value="2024-10-01">Oct 2024</option><option value="2024-11-01">Nov 2024</option><option value="2024-12-01">Dec 2024</option><option value="2025-01-01">Jan 2025</option><option value="2025-02-01">Feb 2025</option><option value="2025-03-01">Mar 2025</option><option value="2025-04-01">Apr 2025</option><option value="2025-05-01">May 2025</option><option value="2025-06-01">Jun 2025</option>						</select>
-						</div>
-					</div>
-					<!-- end wwb-1218 -->
-					<div class="form-group row mt-3" id="enqtemplateselectdiv"> 
-						<label for="enqtemplateselect" class="col-sm-3 col-form-label">Template</label>
-						<div class="col-sm-9">
-						<select id="enqtemplateselect" class="form-control" name="template">
-						<option value="">None</option>
-                    </select>
-						</div>
-					</div>
-					<div class="form-group row mt-3"> 
-						<label for="note" class="col-sm-3 col-form-label">Note Content:</label>
-						<textarea class="form-control" name="note" id="note" style="width: 100%; height: 70px;"></textarea>
-					</div>
-                    <div class="form-group row mt-3"> 
-						<label for="note" class="col-sm-3 col-form-label">Attach File:</label>
-						<input type="file" name="document" class="form-control" value="">
-					</div>
-					<div class="form-group row mt-3">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-primary" style="margin-right:3px;" fdprocessedid="qck51">Save</button>
+                            <input type="hidden" value="539789" name="studentId" id="studentId">
                         </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-secondary" onclick="hideAddNotesBox();" style="margin-left:3px;" fdprocessedid="j0r1b4">Cancel</button>
-                        </div>
-					</div>
-					<input type="hidden" id="enquiryId" name="enquiryId" value="">
-					<input type="hidden" id="studentId" name="studentId" value="{{ $studentID }}">
-					<input type="hidden" id="courseId" name="courseId" value="">
-			</form>
-              </div>
-              <div class="table">
-                <table class="table" id="notesTable">
-                    <thead>
-                      <tr>
-                        <th scope="col">Posted By</th>
-                        <th scope="col">Note</th>
-                        <th scope="col">Note Category</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>    
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- Modal -->
-     {{-- Enuiry Modal Notes --}}
-     <div class="modal fade" id="enuiry_notes_1" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content modal-dialog-scrollable" style="height: 500px;">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5 enuiry_note"></h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div> 
-            <div class="modal-body">
-                <form name="" id="" method="post" enctype="multipart/form-data" action="">        
-                    @csrf
-                    @method('POST') 
-                    <div style="padding:5px; float:left; width:150px;" align="left">Preferred Course</div>
-                    <div style="padding:5px; float:left">  
-                        <select name="courseList" class="form-control" id="courseList" size="1"  style="width:200px;">
-                            <option value=""></option>    
-                        </select>
-                         <input type="hidden" value="539789" name="studentId" id="studentId">
-                    </div>
-                    <div style="clear:both;height:10px;"></div>
-                    <div style="padding:5px; float:left;width:150px;" align="left">Delivery Method(s)</div>
-                    <div style="padding:5px; float:left">
-                        <select name="courseTypeList[]" class="form-control" id="courseTypeList" multiple="multiple" style="width:200px; height:50px;" fdprocessedid="8qjmhw"><option value="1">Self Pafsdafced</option><option value="2">Public Sessions</option><option value="3">Private Sessions</option><option value="4">Public Sessions 2</option></select>
-                    </div>
-                    <div style="clear:both;height:10px;"></div>
-                    <div style="padding:5px; float:left; width:150px;" align="left">Preferred Cities</div>
-                    <div style="padding:5px; float:left">
-                        <select name="cityList[]" class="form-control" id="cityList" multiple="multiple" style="width:200px; height:100px;" fdprocessedid="job7pa">
-                            <option value="1519" selected="">new</option><option value="1501" selected="">sudny</option><option value="1502" selected="">Sydney</option>        	</select>
-                    </div> 
-                    <div style="clear:both;height:10px;"></div>
-                    <div style="padding:5px; float:left; width:150px;" align="left">Referred By</div>
-                    <div style="padding:5px; float:left">
-                        <select name="referralList" class="form-control" id="referralList" size="1" style="width:200px;" fdprocessedid="94ngi4">
-                             <option value=""></option>
-                            <option value="360" selected="">test</option>			</select>
-                    </div> 
-                    <div style="clear:both;height:10px;"></div>
-                    <div style="display:none">
-                        <div style="padding:5px;float:left;width:150px;" align="left">Note</div>
-                        <div style="padding:5px;float:left">
-                            <textarea name="note" class="form-control" id="note" style="height:50px;width:195px;" onkeypress="return imposeMaxLength(event, this, 250);"></textarea>
-                        </div>
-                    </div>
-                    <div style="clear:both;height:10px;"></div>
-                    <div>
-                        <div style="padding:5px;float:left;width:150px;" align="left">Follow-up Date</div>
-                        <div style="padding:5px;float:left">
-                            <input type="date" class="form-control hasDatepicker" value="" name="followUpDate" id="followUpDate" style="width:180px;">
-                        </div>
-                    </div>
-                    <div style="clear:both;height:10px;"></div>
-                    <div style="padding:5px;float:left;width:150px;" align="left">Assign To</div>
-                    <div style="padding:5px;float:left">
-                        <select name="assignTo" id="assignTo" class="form-control" size="1" style="width:200px;" fdprocessedid="pudgy">
-                            <option value="1523" selected="">Kabir Kiron</option><option value="1522">Kabir H Kiron</option><option value="1555">newtest newtest</option><option value="1521">Weworkbook Support</option>			</select>
-                    </div>
-                    <div style="clear:both;height:10px;"></div>
-                    <div>
-                        <div style="padding:5px;float:left;width:150px;" align="left">Chance of Success</div>
-                        <div style="padding:5px;float:left">
-                            <select class="form-control" name="important" id="important" size="1" style="width:200px;" fdprocessedid="ioa6mr">
-                                <option value="10%">10%</option>
-                                <option value="30%">30%</option>
-                                <option value="50%">50%</option>
-                                <option value="70%">70%</option>
-                                <option value="90%">90%</option>
-                            </select>
-                        </div>
-                    </div> 
-                    <div style="clear:both;height:10px;"></div>
-                    <div>
-                        <div style="padding:5px;float:left;width:150px;" align="left">Likely Month</div>
-                        <div style="padding:5px;float:left">
-                            <label style="width:150px;">Sep 2024&nbsp;&nbsp;&nbsp;&nbsp;</label></div>
-                                            </div> 
-                                            <div style="clear:both;height:10px;"></div>
-                                                <div>
-                                                <div style="padding:5px;float:left;width:150px;" align="left">Update Likely Month to </div>
-                                                <div style="padding:5px;float:left"><select class="form-control" id="likelyMonth" name="likelyMonth" size="1" style="width:200px;" fdprocessedid="rdyz3d"><option value=""></option><option value="Unknown">Unknown</option><option value="2024-07-01">Jul 2024</option><option value="2024-08-01">Aug 2024</option><option value="2024-09-01">Sep 2024</option><option value="2024-10-01">Oct 2024</option><option value="2024-11-01">Nov 2024</option><option value="2024-12-01">Dec 2024</option><option value="2025-01-01">Jan 2025</option><option value="2025-02-01">Feb 2025</option><option value="2025-03-01">Mar 2025</option><option value="2025-04-01">Apr 2025</option><option value="2025-05-01">May 2025</option><option value="2025-06-01">Jun 2025</option></select>			</div>
-                    </div>
-                    <div style="clear:both;height:10px;"></div>
-                    <div style="display:none">
-                        <div style="padding:5px; float:left; width:150px;" align="left">Set Status</div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div style="padding:5px; float:left;width:150px;" align="left">Delivery Method(s)</div>
                         <div style="padding:5px; float:left">
-                            <select name="status" id="status" size="1">
-                                <option value="active" selected="">Active</option>
-                                <option value="cancelled">Cancelled</option>
+                            <select name="delevery_method[]" class="form-control"
+                                                                id="courseTypeList_1" multiple="multiple"
+                                                                style="width:200px; height:50px;">
+                                                                <option value="Self Paced">Self Paced</option>
+                                                                <option value="Public Sessions">Public Sessions</option>
+                                                                <option value="Private Sessions">Private Sessions</option>
+                                                            </select>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div style="padding:5px; float:left; width:150px;" align="left">Preferred Cities</div>
+                        <div style="padding:5px; float:left">
+                            <select name="cityList[]" class="form-control" id="cityList" multiple="multiple"
+                                style="width:200px; height:100px;" fdprocessedid="job7pa">
+                                <option value="1519" selected="">new</option>
+                                <option value="1501" selected="">sudny</option>
+                                <option value="1502" selected="">Sydney</option>
                             </select>
                         </div>
-                    </div>
-                    <div style="clear:both;height:20px;"></div>
-                    <div align="center">
-                        <button type="submit" class="btn btn-primary" fdprocessedid="zi702f">Save</button>
-                    </div>
-                </form>
+                        <div style="clear:both;height:10px;"></div>
+                        <div style="padding:5px; float:left; width:150px;" align="left">Referred By</div>
+                        <div style="padding:5px; float:left">
+                            <select name="referralList" class="form-control" id="referralList" size="1"
+                                style="width:200px;" fdprocessedid="94ngi4">
+                                <option value=""></option>
+                                <option value="360" selected="">test</option>
+                            </select>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div style="display:none">
+                            <div style="padding:5px;float:left;width:150px;" align="left">Note</div>
+                            <div style="padding:5px;float:left">
+                                <textarea name="note" class="form-control" id="note" style="height:50px;width:195px;"
+                                    onkeypress="return imposeMaxLength(event, this, 250);"></textarea>
+                            </div>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div>
+                            <div style="padding:5px;float:left;width:150px;" align="left">Follow-up Date</div>
+                            <div style="padding:5px;float:left">
+                                <input type="date" class="form-control hasDatepicker" value=""
+                                    name="followUpDate" id="followUpDate" style="width:180px;">
+                            </div>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div style="padding:5px;float:left;width:150px;" align="left">Assign To</div>
+                        <div style="padding:5px;float:left">
+                            <select name="assignTo" id="assignTo" class="form-control" size="1"
+                                style="width:200px;" fdprocessedid="pudgy">
+                                <option value="1523" selected="">Kabir Kiron</option>
+                                <option value="1522">Kabir H Kiron</option>
+                                <option value="1555">newtest newtest</option>
+                                <option value="1521">Weworkbook Support</option>
+                            </select>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div>
+                            <div style="padding:5px;float:left;width:150px;" align="left">Chance of Success</div>
+                            <div style="padding:5px;float:left">
+                                <select class="form-control" name="important" id="important" size="1"
+                                    style="width:200px;" fdprocessedid="ioa6mr">
+                                    <option value="10%">10%</option>
+                                    <option value="30%">30%</option>
+                                    <option value="50%">50%</option>
+                                    <option value="70%">70%</option>
+                                    <option value="90%">90%</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div>
+                            <div style="padding:5px;float:left;width:150px;" align="left">Likely Month</div>
+                            <div style="padding:5px;float:left">
+                                <label style="width:150px;">Sep 2024&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            </div>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div>
+                            <div style="padding:5px;float:left;width:150px;" align="left">Update Likely Month to
+                            </div>
+                            <div style="padding:5px;float:left"><select class="form-control" id="likelyMonth"
+                                    name="likelyMonth" size="1" style="width:200px;" fdprocessedid="rdyz3d">
+                                    <option value=""></option>
+                                    <option value="Unknown">Unknown</option>
+                                    <option value="2024-07-01">Jul 2024</option>
+                                    <option value="2024-08-01">Aug 2024</option>
+                                    <option value="2024-09-01">Sep 2024</option>
+                                    <option value="2024-10-01">Oct 2024</option>
+                                    <option value="2024-11-01">Nov 2024</option>
+                                    <option value="2024-12-01">Dec 2024</option>
+                                    <option value="2025-01-01">Jan 2025</option>
+                                    <option value="2025-02-01">Feb 2025</option>
+                                    <option value="2025-03-01">Mar 2025</option>
+                                    <option value="2025-04-01">Apr 2025</option>
+                                    <option value="2025-05-01">May 2025</option>
+                                    <option value="2025-06-01">Jun 2025</option>
+                                </select> </div>
+                        </div>
+                        <div style="clear:both;height:10px;"></div>
+                        <div style="display:none">
+                            <div style="padding:5px; float:left; width:150px;" align="left">Set Status</div>
+                            <div style="padding:5px; float:left">
+                                <select name="status" id="status" size="1">
+                                    <option value="active" selected="">Active</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="clear:both;height:20px;"></div>
+                        <div align="center">
+                            <button type="submit" class="btn btn-primary" fdprocessedid="zi702f">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="sendsurvey" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Send Survey Email</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Survey Email</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form name="surveyform" style="width:100%" id="surveyform" method="post"
+                        target="email_target">
+                        <div class="form-group row col-sm-12 mt-2">
+                            <label for="from" class="col-sm-1 col-form-label">From</label>
+                            <div class="col-sm-11">
+                                <select name="from" class="form-control" fdprocessedid="gz1mk">
+                                    <option value="company379@weworkbook.com">company379@weworkbook.com (Weworkbook
+                                        Support)</option>
+                                    <option value="info@aift.com.au (del)">info@aift.com.au (del) (Kabir H Kiron)</option>
+                                    <option value="info@aift.com.au">info@aift.com.au (Kabir Kiron)</option>
+                                    <option value="newtest@yopmail.com">newtest@yopmail.com (newtest newtest)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12 mt-2">
+                            <label for="to" class="col-sm-1 col-form-label">To</label>
+                            <div class="col-sm-11">
+                                <input type="email" class="form-control" name="to" id="toemail"
+                                    value="dipak@mail.com" fdprocessedid="3n4458">
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12 mt-2">
+                            <label for="surveyname" class="col-sm-1 col-form-label">Survey</label>
+                            <div class="col-sm-11">
+                                <select id="studcategoryid" name="categoryid" onchange="surveychanged()"
+                                    class="form-control" fdprocessedid="3hfomd3">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12 mt-2">
+                            <label for="subject" class="col-sm-1 col-form-label">Subject</label>
+                            <div class="col-sm-11">
+                                <input type="email" name="subject" id="subject" class="form-control"
+                                    value="" fdprocessedid="hxg5xj">
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12 mt-3">
+                            <label for="email_Content" class="col-sm-1 col-form-label">Body</label>
+                            <div class="col-sm-11">
+                                <textarea name="email_Content" id="email_Content" class="form-control" rows="5" style=""></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row col-sm-12">
+                            <div class="col-sm-1 col-form-label">
+                                <input type="hidden" id="studenrolmentid" name="enrolmentid" value="0">
+                                <input type="hidden" id="studstudentid" name="studentid" value="528675">
+                                <input type="hidden" id="studentemail" name="studentemail" value="dipak@mail.com">
+                                <input type="hidden" id="hidemployerid" name="hidemployerid" value="0">
+                                <input type="hidden" id="hidcompanyName" name="hidcompanyName" value="">
+                            </div>
+                            <div class="col-sm-11">
+                                <input type="button" value="Send Link" id="sendsurveybtn"
+                                    onclick="sendsurveylink()" class="btn btn-primary" fdprocessedid="c2zpzk">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <form name="surveyform" style="width:100%" id="surveyform" method="post" target="email_target">
-                <div class="form-group row col-sm-12 mt-2">
-                    <label for="from" class="col-sm-1 col-form-label">From</label>
-                    <div class="col-sm-11">
-                        <select name="from" class="form-control" fdprocessedid="gz1mk"><option value="company379@weworkbook.com">company379@weworkbook.com (Weworkbook Support)</option><option value="info@aift.com.au (del)">info@aift.com.au (del) (Kabir H Kiron)</option><option value="info@aift.com.au">info@aift.com.au (Kabir Kiron)</option><option value="newtest@yopmail.com">newtest@yopmail.com (newtest newtest)</option></select>
-                    </div>
-                </div>                
-                <div class="form-group row col-sm-12 mt-2">
-                    <label for="to" class="col-sm-1 col-form-label">To</label>
-                    <div class="col-sm-11">
-                    <input type="email" class="form-control" name="to" id="toemail" value="dipak@mail.com" fdprocessedid="3n4458">
-                    </div>
-                </div>
-                <div class="form-group row col-sm-12 mt-2">
-                    <label for="surveyname" class="col-sm-1 col-form-label">Survey</label>
-                    <div class="col-sm-11">
-                    <select id="studcategoryid" name="categoryid" onchange="surveychanged()" class="form-control" fdprocessedid="3hfomd3">
-                    </select>
-                    </div>
-                </div>
-                <div class="form-group row col-sm-12 mt-2">
-                    <label for="subject" class="col-sm-1 col-form-label">Subject</label>
-                    <div class="col-sm-11">
-                        <input type="email" name="subject" id="subject" class="form-control" value="" fdprocessedid="hxg5xj">
-                    </div>
-                </div>
-                <div class="form-group row col-sm-12 mt-3">
-                    <label for="email_Content" class="col-sm-1 col-form-label">Body</label>
-                    <div class="col-sm-11">
-                    <textarea name="email_Content" id="email_Content" class="form-control"  rows="5" style=""></textarea>
-                    </div>
-                </div>
-                <div class="form-group row col-sm-12">
-                    <div class="col-sm-1 col-form-label">
-                        <input type="hidden" id="studenrolmentid" name="enrolmentid" value="0">
-                        <input type="hidden" id="studstudentid" name="studentid" value="528675">
-                        <input type="hidden" id="studentemail" name="studentemail" value="dipak@mail.com">
-						<input type="hidden" id="hidemployerid" name="hidemployerid" value="0">
-						<input type="hidden" id="hidcompanyName" name="hidcompanyName" value="">
-                    </div>
-                    <div class="col-sm-11">
-                    <input type="button" value="Send Link" id="sendsurveybtn" onclick="sendsurveylink()" class="btn btn-primary" fdprocessedid="c2zpzk">
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="modal fade" id="sendsms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Send SMS </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form name="sms_form" id="sms_form" method="post" target="_self">
-                <label for="phone">To:</label>
-                <input type="hidden" name="studentPhone" value="">
-                <input type="hidden" name="studentName" value="dipak sharma">
-                <input type="hidden" name="studentId" value="528675">
-                No mobile number on file for this learner                <br><div class="form-group">
-                    <label for="etemplateselect">Template</label>
-                    <select id="stemplateselect" name="template" onchange="getsmstemplate()" class="form-control" fdprocessedid="ew047c"><option value="0">None</option></select>
-                </div>                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="smsMessage" id="smsMessage" class="form-control" style="height:100px"></textarea>
+    <div class="modal fade" id="sendsms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send SMS </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="forn-group">
-                <span id="countdown">800 characters remaining. The number of messages: 0/5</span>
+                <div class="modal-body">
+                    <form name="sms_form" id="sms_form" method="post" target="_self">
+                        <label for="phone">To:</label>
+                        <input type="hidden" name="studentPhone" value="">
+                        <input type="hidden" name="studentName" value="dipak sharma">
+                        <input type="hidden" name="studentId" value="528675">
+                        No mobile number on file for this learner <br>
+                        <div class="form-group">
+                            <label for="etemplateselect">Template</label>
+                            <select id="stemplateselect" name="template" onchange="getsmstemplate()"
+                                class="form-control" fdprocessedid="ew047c">
+                                <option value="0">None</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea name="smsMessage" id="smsMessage" class="form-control" style="height:100px"></textarea>
+                        </div>
+                        <div class="forn-group">
+                            <span id="countdown">800 characters remaining. The number of messages: 0/5</span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="smsSendBtn"
+                                fdprocessedid="76g61e">Send</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" id="smsSendBtn" fdprocessedid="76g61e">Send</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
-  <style>
-    .scroll::-webkit-scrollbar-thumb {
-  background: #666;
-}
-  </style>
-  
+    <style>
+        .scroll::-webkit-scrollbar-thumb {
+            background: #666;
+        }
+    </style>
+
 @stop

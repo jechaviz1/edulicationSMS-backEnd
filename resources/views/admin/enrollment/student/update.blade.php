@@ -464,10 +464,8 @@
                                                     </label>
                                                 </div>
                                                 <div class="col">
-                                                    <select name="country" id="country"
-                                                        class="input_text_1 form-control" style="width:100%; height:35px;"
-                                                        fdprocessedid="c6kidd">
-                                                        <option value=""></option> <!-- bug 4176 -->
+                                                    <select name="country" id="country" class="input_text_1 form-control" style="width:100%; height:35px;">
+                                                        <option value=""></option>
                                                         <option value="Adelie Land (France)">Adelie Land (France)</option>
                                                         <option value="Afghanistan">Afghanistan</option>
                                                         <option value="Africa, nfd">Africa, nfd</option>
@@ -481,20 +479,15 @@
                                                         <option value="Antarctica">Antarctica</option>
                                                         <option value="Antigua and Barbuda">Antigua and Barbuda</option>
                                                         <option value="Argentina">Argentina</option>
-                                                        <option value="Argentinian Antarctic Territory">Argentinian
-                                                            Antarctic
-                                                            Territory</option>
+                                                        <option value="Argentinian Antarctic Territory">Argentinian Antarctic Territory</option>
                                                         <option value="Armenia">Armenia</option>
                                                         <option value="Aruba">Aruba</option>
                                                         <option value="Asia, nfd">Asia, nfd</option>
                                                         <option value="At Sea">At Sea</option>
                                                         <option value="Australia" selected="">Australia</option>
-                                                        <option value="Australia (includes External Territories)">Australia
-                                                            (includes External Territories)</option>
-                                                        <option value="Australian Antarctic Territory">Australian Antarctic
-                                                            Territory</option>
-                                                        <option value="Australian External Territories, nec">Australian
-                                                            External Territories, nec</option>
+                                                        <option value="Australia (includes External Territories)">Australia (includes External Territories)</option>
+                                                        <option value="Australian Antarctic Territory">Australian Antarctic Territory</option>
+                                                        <option value="Australian External Territories, nec">Australian External Territories, nec</option>
                                                         <option value="Austria">Austria</option>
                                                         <option value="Azerbaijan">Azerbaijan</option>
                                                         <option value="Bahamas">Bahamas</option>
@@ -507,23 +500,16 @@
                                                         <option value="Benin">Benin</option>
                                                         <option value="Bermuda">Bermuda</option>
                                                         <option value="Bhutan">Bhutan</option>
-                                                        <option value="Bolivia, Plurinational State of">Bolivia,
-                                                            Plurinational
-                                                            State of</option>
-                                                        <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint
-                                                            Eustatius and Saba</option>
-                                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina
-                                                        </option>
+                                                        <option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
+                                                        <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
+                                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
                                                         <option value="Botswana">Botswana</option>
                                                         <option value="Brazil">Brazil</option>
-                                                        <option value="British Antarctic Territory">British Antarctic
-                                                            Territory
-                                                        </option>
+                                                        <option value="British Antarctic Territory">British Antarctic Territory</option>
                                                         <option value="Brunei Darussalam">Brunei Darussalam</option>
                                                         <option value="Bulgaria">Bulgaria</option>
                                                         <option value="Burkina Faso">Burkina Faso</option>
-                                                        <option value="Burma (Republic of the Union of Myanmar)">Burma
-                                                            (Republic of the Union of Myanmar)</option>
+                                                        <option value="Burma (Republic of the Union of Myanmar)">Burma (Republic of the Union of Myanmar)</option>
                                                         <option value="Burundi">Burundi</option>
                                                         <option value="Cambodia">Cambodia</option>
                                                         <option value="Cameroon">Cameroon</option>
@@ -531,27 +517,18 @@
                                                         <option value="Cape Verde">Cape Verde</option>
                                                         <option value="Caribbean">Caribbean</option>
                                                         <option value="Cayman Islands">Cayman Islands</option>
-                                                        <option value="Central African Republic">Central African Republic
-                                                        </option>
+                                                        <option value="Central African Republic">Central African Republic</option>
                                                         <option value="Central America">Central America</option>
-                                                        <option value="Central and West Africa">Central and West Africa
-                                                        </option>
+                                                        <option value="Central and West Africa">Central and West Africa</option>
                                                         <option value="Central Asia">Central Asia</option>
                                                         <option value="Chad">Chad</option>
                                                         <option value="Chile">Chile</option>
-                                                        <option value="Chilean Antarctic Territory">Chilean Antarctic
-                                                            Territory
-                                                        </option>
-                                                        <option value="China (excludes SARs and Taiwan)">China (excludes
-                                                            SARs
-                                                            and Taiwan)</option>
-                                                        <option value="Chinese Asia (includes Mongolia)">Chinese Asia
-                                                            (includes
-                                                            Mongolia)</option>
+                                                        <option value="Chilean Antarctic Territory">Chilean Antarctic Territory </option>
+                                                        <option value="China (excludes SARs and Taiwan)">China (excludes SARs and Taiwan)</option>
+                                                        <option value="Chinese Asia (includes Mongolia)">Chinese Asia (includes Mongolia)</option>
                                                         <option value="Colombia">Colombia</option>
                                                         <option value="Comoros">Comoros</option>
-                                                        <option value="Congo, Democratic Republic of">Congo, Democratic
-                                                            Republic of</option>
+                                                        <option value="Congo, Democratic Republic of">Congo, Democratic Republic of</option>
                                                         <option value="Congo, Republic of ">Congo, Republic of </option>
                                                         <option value="Cook Islands">Cook Islands</option>
                                                         <option value="Costa Rica">Costa Rica</option>
@@ -581,16 +558,13 @@
                                                         <option value="Fiji">Fiji</option>
                                                         <option value="Finland">Finland</option>
                                                         <option value="Former USSR, nfd">Former USSR, nfd</option>
-                                                        <option value="Former Yugoslav Republic of Macedonia (FYROM)">
-                                                            Former
-                                                            Yugoslav Republic of Macedonia (FYROM)</option>
+                                                        <option value="Former Yugoslav Republic of Macedonia (FYROM)"> Former Yugoslav Republic of Macedonia (FYROM)</option>
                                                         <option value="France">France</option>
                                                         <option value="French Guiana">French Guiana</option>
                                                         <option value="French Polynesia">French Polynesia</option>
                                                         <option value="Gabon">Gabon</option>
                                                         <option value="Gambia">Gambia</option>
-                                                        <option value="Gaza Strip and West Bank">Gaza Strip and West Bank
-                                                        </option>
+                                                        <option value="Gaza Strip and West Bank">Gaza Strip and West Bank</option>
                                                         <option value="Georgia">Georgia</option>
                                                         <option value="Germany">Germany</option>
                                                         <option value="Ghana">Ghana</option>
@@ -608,12 +582,10 @@
                                                         <option value="Haiti">Haiti</option>
                                                         <option value="Holy See">Holy See</option>
                                                         <option value="Honduras">Honduras</option>
-                                                        <option value="Hong Kong (SAR of China)">Hong Kong (SAR of China)
-                                                        </option>
+                                                        <option value="Hong Kong (SAR of China)">Hong Kong (SAR of China)</option>
                                                         <option value="Hungary">Hungary</option>
                                                         <option value="Iceland">Iceland</option>
-                                                        <option value="Inadequately Described">Inadequately Described
-                                                        </option>
+                                                        <option value="Inadequately Described">Inadequately Described</option>
                                                         <option value="India">India</option>
                                                         <option value="Indonesia">Indonesia</option>
                                                         <option value="Iran">Iran</option>
@@ -630,12 +602,8 @@
                                                         <option value="Kazakhstan">Kazakhstan</option>
                                                         <option value="Kenya">Kenya</option>
                                                         <option value="Kiribati">Kiribati</option>
-                                                        <option value="Korea, Democratic People' republic'of(north)">Korea,
-                                                            Democratic People's Republic of
-                                                            (North)</option>
-                                                        <option value="Korea, Republic of (South)">Korea, Republic of
-                                                            (South)
-                                                        </option>
+                                                        <option value="Korea, Democratic People' republic'of(north)">Korea,Democratic People's Republic of (North)</option>
+                                                        <option value="Korea, Republic of (South)">Korea, Republic of (South) </option>
                                                         <option value="Kosovo">Kosovo</option>
                                                         <option value="Kurdistan, nfd">Kurdistan, nfd</option>
                                                         <option value="Kuwait">Kuwait</option>
@@ -651,15 +619,13 @@
                                                         <option value="Luxembourg">Luxembourg</option>
                                                         <option value="Macau (SAR of China)">Macau (SAR of China)</option>
                                                         <option value="Madagascar">Madagascar</option>
-                                                        <option value="Mainland South-East Asia">Mainland South-East Asia
-                                                        </option>
+                                                        <option value="Mainland South-East Asia">Mainland South-East Asia</option>
                                                         <option value="Malawi">Malawi</option>
                                                         <option value="Malaysia">Malaysia</option>
                                                         <option value="Maldives">Maldives</option>
                                                         <option value="Mali">Mali</option>
                                                         <option value="Malta">Malta</option>
-                                                        <option value="Maritime South-East Asia">Maritime South-East Asia
-                                                        </option>
+                                                        <option value="Maritime South-East Asia">Maritime South-East Asia</option>
                                                         <option value="Marshall Islands">Marshall Islands</option>
                                                         <option value="Martinique">Martinique</option>
                                                         <option value="Mauritania">Mauritania</option>
@@ -668,9 +634,7 @@
                                                         <option value="Melanesia">Melanesia</option>
                                                         <option value="Mexico">Mexico</option>
                                                         <option value="Micronesia">Micronesia</option>
-                                                        <option value="Micronesia, Federated States of">Micronesia,
-                                                            Federated
-                                                            States of</option>
+                                                        <option value="Micronesia, Federated States of">Micronesia,Federated States of</option>
                                                         <option value="Middle East">Middle East</option>
                                                         <option value="Moldova">Moldova</option>
                                                         <option value="Monaco">Monaco</option>
@@ -692,20 +656,16 @@
                                                         <option value="Niue">Niue</option>
                                                         <option value="Norfolk Island">Norfolk Island</option>
                                                         <option value="North Africa">North Africa</option>
-                                                        <option value="North Africa and the Middle East">North Africa and
-                                                            the
-                                                            Middle East</option>
+                                                        <option value="North Africa and the Middle East">North Africa and the Middle East</option>
                                                         <option value="North-East Asia">North-East Asia</option>
                                                         <option value="North-West Europe">North-West Europe</option>
                                                         <option value="Northern America">Northern America</option>
                                                         <option value="Northern Europe">Northern Europe</option>
                                                         <option value="Northern Ireland">Northern Ireland</option>
-                                                        <option value="Northern Mariana Islands">Northern Mariana Islands
-                                                        </option>
+                                                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
                                                         <option value="Norway">Norway</option>
                                                         <option value="Not Specified">Not Specified</option>
-                                                        <option value="Oceania and Antarctica">Oceania and Antarctica
-                                                        </option>
+                                                        <option value="Oceania and Antarctica">Oceania and Antarctica</option>
                                                         <option value="Oman">Oman</option>
                                                         <option value="Pakistan">Pakistan</option>
                                                         <option value="Palau">Palau</option>
@@ -716,28 +676,21 @@
                                                         <option value="Philippines">Philippines</option>
                                                         <option value="Pitcairn Islands">Pitcairn Islands</option>
                                                         <option value="Poland">Poland</option>
-                                                        <option value="Polynesia (excludes Hawaii)">Polynesia (excludes
-                                                            Hawaii)
-                                                        </option>
-                                                        <option value="Polynesia (excludes Hawaii), nec">Polynesia
-                                                            (excludes
-                                                            Hawaii), nec</option>
+                                                        <option value="Polynesia (excludes Hawaii)">Polynesia (excludes  Hawaii)</option>
+                                                        <option value="Polynesia (excludes Hawaii), nec">Polynesia(excludesHawaii), nec</option>
                                                         <option value="Portugal">Portugal</option>
                                                         <option value="Puerto Rico">Puerto Rico</option>
                                                         <option value="Qatar">Qatar</option>
-                                                        <option value="Queen Maud Land (Norway)">Queen Maud Land (Norway)
-                                                        </option>
+                                                        <option value="Queen Maud Land (Norway)">Queen Maud Land (Norway)</option>
                                                         <option value="Reunion">Reunion</option>
                                                         <option value="Romania">Romania</option>
-                                                        <option value="Ross Dependency (New Zealand)">Ross Dependency (New
-                                                            Zealand)</option>
+                                                        <option value="Ross Dependency (New Zealand)">Ross Dependency (New Zealand)</option>
                                                         <option value="Russian Federation">Russian Federation</option>
                                                         <option value="Rwanda">Rwanda</option>
                                                         <option value="Samoa">Samoa</option>
                                                         <option value="Samoa, American">Samoa, American</option>
                                                         <option value="San Marino">San Marino</option>
-                                                        <option value="Sao Tome and Principe">Sao Tome and Principe
-                                                        </option>
+                                                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
                                                         <option value="Saudi Arabia">Saudi Arabia</option>
                                                         <option value="Scotland">Scotland</option>
                                                         <option value="Senegal">Senegal</option>
@@ -745,8 +698,7 @@
                                                         <option value="Seychelles">Seychelles</option>
                                                         <option value="Sierra Leone">Sierra Leone</option>
                                                         <option value="Singapore">Singapore</option>
-                                                        <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)
-                                                        </option>
+                                                        <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
                                                         <option value="Slovakia">Slovakia</option>
                                                         <option value="Slovenia">Slovenia</option>
                                                         <option value="Solomon Islands">Solomon Islands</option>
@@ -757,16 +709,10 @@
                                                         <option value="South Eastern Europe">South Eastern Europe</option>
                                                         <option value="South Sudan">South Sudan</option>
                                                         <option value="South-East Asia">South-East Asia</option>
-                                                        <option value="Southern and Central Asia">Southern and Central Asia
-                                                        </option>
-                                                        <option value="Southern and East Africa">Southern and East Africa
-                                                        </option>
-                                                        <option value="Southern and East Africa, nec">Southern and East
-                                                            Africa,
-                                                            nec</option>
-                                                        <option value="Southern and Eastern Europe">Southern and Eastern
-                                                            Europe
-                                                        </option>
+                                                        <option value="Southern and Central Asia">Southern and Central Asia</option>
+                                                        <option value="Southern and East Africa">Southern and East Africa</option>
+                                                        <option value="Southern and East Africa, nec">Southern and EastAfrica,nec</option>
+                                                        <option value="Southern and Eastern Europe">Southern and EasternEurope</option>
                                                         <option value="Southern Asia">Southern Asia</option>
                                                         <option value="Southern Europe">Southern Europe</option>
                                                         <option value="Spain">Spain</option>
@@ -776,12 +722,9 @@
                                                         <option value="St Helena">St Helena</option>
                                                         <option value="St Kitts and Nevis">St Kitts and Nevis</option>
                                                         <option value="St Lucia">St Lucia</option>
-                                                        <option value="St Martin (French part)">St Martin (French part)
-                                                        </option>
-                                                        <option value="St Pierre and Miquelon">St Pierre and Miquelon
-                                                        </option>
-                                                        <option value="St Vincent and the Grenadines">St Vincent and the
-                                                            Grenadines</option>
+                                                        <option value="St Martin (French part)">St Martin (French part)</option>
+                                                        <option value="St Pierre and Miquelon">St Pierre and Miquelon</option>
+                                                        <option value="St Vincent and the Grenadines">St Vincent and the Grenadines</option>
                                                         <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
                                                         <option value="Sudan">Sudan</option>
                                                         <option value="Suriname">Suriname</option>
@@ -801,29 +744,20 @@
                                                         <option value="Tunisia">Tunisia</option>
                                                         <option value="Turkey">Turkey</option>
                                                         <option value="Turkmenistan">Turkmenistan</option>
-                                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands
-                                                        </option>
+                                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
                                                         <option value="Tuvalu">Tuvalu</option>
                                                         <option value="Uganda">Uganda</option>
                                                         <option value="Ukraine">Ukraine</option>
                                                         <option value="United Arab Emirates">United Arab Emirates</option>
-                                                        <option value="United Kingdom, Channel Islands and Isle of Man">
-                                                            United
-                                                            Kingdom, Channel Islands and Isle of Man</option>
-                                                        <option value="United States of America">United States of America
-                                                        </option>
+                                                        <option value="United Kingdom, Channel Islands and Isle of Man">United Kingdom, Channel Islands and Isle of Man</option>
+                                                        <option value="United States of America">United States of America</option>
                                                         <option value="Uruguay">Uruguay</option>
                                                         <option value="Uzbekistan">Uzbekistan</option>
                                                         <option value="Vanuatu">Vanuatu</option>
-                                                        <option value="Venezuela, Bolivarian Republic of">Venezuela,
-                                                            Bolivarian
-                                                            Republic of</option>
+                                                        <option value="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
                                                         <option value="Vietnam">Vietnam</option>
-                                                        <option value="Virgin Islands, British">Virgin Islands, British
-                                                        </option>
-                                                        <option value="Virgin Islands, United States">Virgin Islands,
-                                                            United
-                                                            States</option>
+                                                        <option value="Virgin Islands, British">Virgin Islands, British</option>
+                                                        <option value="Virgin Islands, United States">Virgin Islands,United States</option>
                                                         <option value="Wales">Wales</option>
                                                         <option value="Wallis and Futuna">Wallis and Futuna</option>
                                                         <option value="Western Europe">Western Europe</option>

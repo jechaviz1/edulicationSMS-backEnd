@@ -9,8 +9,11 @@ use App\Models\Enquiry;
 use App\Models\City;
 use App\Models\EnrolmentAddNote;
 use App\Models\StudentNoteCategory;
+use App\Models\EnrolmentDocument;
 use App\Models\EnuquiryNote;
 use App\Http\Controllers\ImageController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DocumentMail;
 use PDF;
 class PeopleController extends Controller
 {
@@ -43,9 +46,10 @@ class PeopleController extends Controller
         $courses = Course::get();
         $enquiry = Enquiry::where('student_id',$id)->get();
         $cities = City::get();
+        $document = EnrolmentDocument::where('student_id',$studentID)->with('student')->get();
         $noteCtegory = StudentNoteCategory::get();
         $noteEnrolment = EnrolmentAddNote::where('student_id',$studentID)->get();
-        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities','noteCtegory','noteEnrolment'));
+        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities','noteCtegory','noteEnrolment','document'));
 
     }
     public function profileUpdate(Request $request,$id){
@@ -214,4 +218,42 @@ class PeopleController extends Controller
         // Return the notes as a JSON response
         return response()->json($notes);
     }
-}
+    public function  document_enrolment(Request $request){
+        foreach($request->ducment_name as $key => $documentName){
+                if($documentName != null){
+                    $document = new EnrolmentDocument;
+                    $document->student_id = $request->student_id;
+                    $document->document_name = $documentName; 
+                    $file = $request->document_file[$key]; 
+                    $filename = 'Document_' . time() . '_' . $file->getClientOriginalName();
+                    $document->file_name = $file->getClientOriginalName();
+                    $file->move(public_path('Enrolment_Document'), $filename);  
+                    $fileUrl = 'Enrolment_Document/' . $filename; 
+                    $document->path = $fileUrl;
+                    $document->upload_by = auth()->user()->first_name . ' ' .  auth()->user()->last_name;
+                    $document->save();
+                }
+        }
+        return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+
+    public function enrolment_delete($id){
+            $enrolment = EnrolmentDocument::where('id',$id)->first();
+            $enrolment->delete();
+            return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function send_mail(Request $request){
+        $details = [
+            'subject' => $request->subject,
+            'body' => $request->note_email
+        ];
+        $filePath = public_path($request->document_path); // Path to the attachment file
+    
+        Mail::to($request->email)->send(new DocumentMail($details, $filePath));
+        return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function edit_lnguage(Request $request){
+        dd($request);
+
+    }
+} 

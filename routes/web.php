@@ -654,6 +654,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/people/note/delete/{id}', [App\Http\Controllers\PeopleController::class, 'deletePerson'])->name('person.note.delete');
     Route::post('/bulk_sms_filter_form', [App\Http\Controllers\PeopleController::class, 'AddEnuiryNote'])->name('enrolment.enuiry.note.add');
     Route::get('/enquiry/note/list', [App\Http\Controllers\PeopleController::class,'noteList'])->name('enuiry.note.list');
+    Route::post('/student/enrolment/document',[App\Http\Controllers\PeopleController::class,'document_enrolment'])->name('student.enrolment.document');
+    Route::get('/delete-enrolment/{id}', [App\Http\Controllers\PeopleController::class,'enrolment_delete'])->name('delete.student.enrolment');
+    Route::post('/people/send/email', [App\Http\Controllers\PeopleController::class,'send_mail'])->name('send.mail.people');
+    Route::post('/people/language/edit', [App\Http\Controllers\PeopleController::class,'edit_lnguage'])->name('edit.language.people');
+    
     // END - Event Trainers
     // START - Lerner Record 
     Route::get('/people/active/learns', [App\Http\Controllers\LearnerRecord::class, 'index'])->name('people.active.learners.index');
