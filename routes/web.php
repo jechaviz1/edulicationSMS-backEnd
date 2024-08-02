@@ -658,6 +658,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-enrolment/{id}', [App\Http\Controllers\PeopleController::class,'enrolment_delete'])->name('delete.student.enrolment');
     Route::post('/people/send/email', [App\Http\Controllers\PeopleController::class,'send_mail'])->name('send.mail.people');
     Route::post('/people/language/edit', [App\Http\Controllers\PeopleController::class,'edit_lnguage'])->name('edit.language.people');
+    Route::post('/people/', [App\Http\Controllers\PeopleController::class,'edit'])->name('people.profile.photo.update');
     
     // END - Event Trainers
     // START - Lerner Record 
@@ -722,7 +723,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/company/student/note/category/setting/store', [App\Http\Controllers\CompanySettingController::class, 'noteCategory'])->name('company.setting.student.store');
     Route::get('/company/student/note/category/setting/{id}', [App\Http\Controllers\CompanySettingController::class, 'remove_category'])->name('company.setting.student.delete');
     Route::post('/company/setting/student/update', [App\Http\Controllers\CompanySettingController::class, 'editnotecategory'])->name('company.note.category.student.store');
-
+    Route::post('/company/setting/logo/update', [App\Http\Controllers\PeopleController::class,'logo_update'])->name('people.profile.photo.update');
+    Route::get('/company/setting/logo/delete/{id}', [App\Http\Controllers\PeopleController::class,'logo_delete'])->name('people.profile.photo.delete');
     //Start CQR Report
     Route::get('/CQRreport', [App\Http\Controllers\CompanyController::class, 'CQR'])->name('company.CQR');
     Route::post('/CQRreport/store', [App\Http\Controllers\CQRreportController::class, 'store'])->name('company.CQR.store');

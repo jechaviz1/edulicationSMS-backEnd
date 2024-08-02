@@ -11,9 +11,12 @@ use App\Models\EnrolmentAddNote;
 use App\Models\StudentNoteCategory;
 use App\Models\EnrolmentDocument;
 use App\Models\EnuquiryNote;
+use App\Models\Language;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DocumentMail;
+use App\Models\Country;
+use App\Models\User;
 use PDF;
 class PeopleController extends Controller
 {
@@ -46,10 +49,12 @@ class PeopleController extends Controller
         $courses = Course::get();
         $enquiry = Enquiry::where('student_id',$id)->get();
         $cities = City::get();
+        $countries = Country::get();
+        $languages = Language::get();
         $document = EnrolmentDocument::where('student_id',$studentID)->with('student')->get();
         $noteCtegory = StudentNoteCategory::get();
         $noteEnrolment = EnrolmentAddNote::where('student_id',$studentID)->get();
-        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities','noteCtegory','noteEnrolment','document'));
+        return view('admin.people.profile',compact('studentID','student','courses','enquiry','cities','noteCtegory','noteEnrolment','document','languages','countries'));
 
     }
     public function profileUpdate(Request $request,$id){
@@ -253,7 +258,36 @@ class PeopleController extends Controller
         return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
     public function edit_lnguage(Request $request){
-        dd($request);
-
+        $student = Student::where('id',$request->student_id)->first();
+        $student->birthCountry = $request->birthCountry;
+        $student->isMainEnglish = $request->isMainEnglish;
+        $student->nospokenlanguage = $request->nospokenlanguage;
+        $student->spokenLanguage = $request->spokenLanguage;
+        $student->englishProficiency = $request->englishProficiency;
+        $student->indigenousStatus = $request->indigenousStatus;
+        $student->save();
+        // dd($student);
+        return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function logo_update(Request $request){
+        $student = User::where('id',$request->companyId)->first();
+        if ($request->hasFile('logoImg')) {
+            $file = $request->file('logoImg');
+            $filename = 'Enrolment_' . time() . '_' . $file->getClientOriginalName();
+            $student->profile_image = $file->getClientOriginalName();
+            $file->move(public_path('notes'), $filename);
+            $fileUrl = 'notes/' . $filename;
+            $student->profile_image_path = $fileUrl;
+        }
+        $student->save();  
+        return redirect()->back()->with('sucess', 'Sucess Record Created');
+        
+    }
+    public function logo_delete($id){
+            $student = User::where('id',$id)->first();
+            $student->profile_image = null;
+            $student->profile_image_path = null;
+            $student->save();
+            return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
 } 

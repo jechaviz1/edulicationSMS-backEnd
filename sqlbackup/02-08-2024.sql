@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2024 at 06:02 AM
+-- Generation Time: Aug 02, 2024 at 07:54 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -1137,6 +1137,166 @@ CREATE TABLE `language` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`id`, `name`, `code`, `description`, `direction`, `default`, `status`, `is_deleted`, `created_at`, `updated_at`) VALUES
+(1, 'Aboriginal English, so described', 'AE', 'A dialect of English used by Aboriginal Australians', '', '', 'A', NULL, NULL, NULL),
+(2, 'Acehnese', 'AC', 'A language spoken by the Acehnese people of Indonesia', '', '', 'A', NULL, NULL, NULL),
+(3, 'Acholi', 'ACH', 'A Luo-Nilotic language spoken by the Acholi people', '', '', 'A', NULL, NULL, NULL),
+(4, 'Adnymathanha', 'AD', 'A language of the Adnyamathanha people of Australia', '', '', 'A', NULL, NULL, NULL),
+(5, 'African Languages', 'AF', 'Languages spoken on the African continent', '', '', 'A', NULL, NULL, NULL),
+(6, 'African Languages, nec', 'AFN', 'Other African languages not elsewhere classified', '', '', 'A', NULL, NULL, NULL),
+(7, 'Afrikaans', 'AFK', 'A West Germanic language spoken in South Africa and Namibia', '', '', 'A', NULL, NULL, NULL),
+(8, 'Akan', 'AK', 'A Central Tano language spoken in Ghana', '', '', 'A', NULL, NULL, NULL),
+(9, 'Alawa', 'ALW', 'A language of the Northern Territory of Australia', '', '', 'A', NULL, NULL, NULL),
+(10, 'Albanian', 'ALB', 'An Indo-European language spoken by the Albanians', '', '', 'A', NULL, NULL, NULL),
+(11, 'Alngith', 'ALN', 'A language of the Cape York Peninsula in Australia', '', '', 'A', NULL, NULL, NULL),
+(12, 'Alyawarr', 'ALY', 'A language spoken in the Northern Territory of Australia', '', '', 'A', NULL, NULL, NULL),
+(13, 'American Languages', 'AML', 'Languages spoken by indigenous peoples of the Americas', '', '', 'A', NULL, NULL, NULL),
+(14, 'Amharic', 'AMH', 'A Semitic language spoken in Ethiopia', '', '', 'A', NULL, NULL, NULL),
+(15, 'Amurdak', 'AMU', 'A language spoken in the Northern Territory of Australia', '', '', 'A', NULL, NULL, NULL),
+(16, 'Anindilyakwa', 'ANI', 'A language spoken by the Anindilyakwa people of Australia', '', '', 'A', NULL, NULL, NULL),
+(17, 'Anmatyerr', 'ANM', 'A language spoken by the Anmatyerr people of Australia', '', '', 'A', NULL, NULL, NULL),
+(18, 'Anmatyerr, nec', 'ANX', 'Other Anmatyerr languages not elsewhere classified', '', '', 'A', NULL, NULL, NULL),
+(19, 'Antekerrepenh', 'ANT', 'A language spoken in the Northern Territory of Australia', '', '', 'A', NULL, NULL, NULL),
+(20, 'Antikarinya', 'ANK', 'A language spoken in South Australia', '', '', 'A', NULL, NULL, NULL),
+(21, 'Anuak', 'ANU', 'A Nilotic language spoken by the Anuak people', '', '', 'A', NULL, NULL, NULL),
+(22, 'Arabana', 'ARB', 'A language of the Arabana people of Australia', '', '', 'A', NULL, NULL, NULL),
+(23, 'Arabic', 'ARA', 'A Semitic language spoken widely across the Arab world', 'rtl', '', 'A', NULL, NULL, NULL),
+(24, 'Arandic', 'ARD', 'Languages spoken by the Arrernte people of Australia', '', '', 'A', NULL, NULL, NULL),
+(25, 'Arandic, nec', 'ARN', 'Other Arandic languages not elsewhere classified', '', '', 'A', NULL, NULL, NULL),
+(26, 'Aranda', 'ARA', 'A language spoken by the Aranda people of Australia', '', '', 'A', NULL, NULL, NULL),
+(27, 'Armenian', 'ARM', 'An Indo-European language spoken by the Armenians', '', '', 'A', NULL, NULL, NULL),
+(28, 'Assyrian', 'ASY', 'A dialect of Neo-Aramaic spoken by the Assyrian people', '', '', 'A', NULL, NULL, NULL),
+(29, 'Atayal', 'ATY', 'An Austronesian language spoken in Taiwan', '', '', 'A', NULL, NULL, NULL),
+(30, 'Australian Languages', 'AUL', 'Languages spoken by indigenous Australians', '', '', 'A', NULL, NULL, NULL),
+(31, 'Aymara', 'AYM', 'A language spoken by the Aymara people of the Andes', '', '', 'A', NULL, NULL, NULL),
+(32, 'Azeri', 'AZE', 'A language spoken in Azerbaijan', '', '', 'A', NULL, NULL, NULL),
+(33, 'Balinese', 'BAL', 'An Austronesian language spoken by the Balinese people', '', '', 'A', NULL, NULL, NULL),
+(34, 'Bambara', 'BAM', 'A Mande language spoken in Mali', '', '', 'A', NULL, NULL, NULL),
+(35, 'Basque', 'BAS', 'A language spoken by the Basque people of Spain and France', '', '', 'A', NULL, NULL, NULL),
+(36, 'Belarusian', 'BEL', 'An East Slavic language spoken in Belarus', '', '', 'A', NULL, NULL, NULL),
+(37, 'Bemba', 'BEM', 'A Bantu language spoken in Zambia', '', '', 'A', NULL, NULL, NULL),
+(38, 'Bengali', 'BEN', 'An Indo-Aryan language spoken in Bangladesh and India', '', '', 'A', NULL, NULL, NULL),
+(39, 'Bislama', 'BIS', 'A creole language spoken in Vanuatu', '', '', 'A', NULL, NULL, NULL),
+(40, 'Bosnian', 'BOS', 'A South Slavic language spoken in Bosnia and Herzegovina', '', '', 'A', NULL, NULL, NULL),
+(41, 'Breton', 'BRE', 'A Celtic language spoken in Brittany, France', '', '', 'A', NULL, NULL, NULL),
+(42, 'Bulgarian', 'BUL', 'A South Slavic language spoken in Bulgaria', '', '', 'A', NULL, NULL, NULL),
+(43, 'Burmese', 'BUR', 'A Sino-Tibetan language spoken in Myanmar', '', '', 'A', NULL, NULL, NULL),
+(44, 'Catalan', 'CAT', 'A Romance language spoken in Catalonia, Spain', '', '', 'A', NULL, NULL, NULL),
+(45, 'Cebuano', 'CEB', 'An Austronesian language spoken in the Philippines', '', '', 'A', NULL, NULL, NULL),
+(46, 'Chechen', 'CHE', 'A Northeast Caucasian language spoken in Chechnya', '', '', 'A', NULL, NULL, NULL),
+(47, 'Cherokee', 'CHR', 'An Iroquoian language spoken by the Cherokee people', '', '', 'A', NULL, NULL, NULL),
+(48, 'Chichewa', 'CHI', 'A Bantu language spoken in Malawi', '', '', 'A', NULL, NULL, NULL),
+(49, 'Chinese', 'CHN', 'A group of related but distinct language varieties', 'ltr', '', 'A', NULL, NULL, NULL),
+(50, 'Chinook', 'CHO', 'A group of languages spoken by the Chinook people', '', '', 'A', NULL, NULL, NULL),
+(51, 'Chipewyan', 'CHP', 'An Athabaskan language spoken in Canada', '', '', 'A', NULL, NULL, NULL),
+(52, 'Choctaw', 'CHT', 'A Muskogean language spoken by the Choctaw people', '', '', 'A', NULL, NULL, NULL),
+(53, 'Cree', 'CRE', 'A group of Algonquian languages spoken in Canada', '', '', 'A', NULL, NULL, NULL),
+(54, 'Creole', 'CRL', 'A stable, natural language developed from a mixture of different languages', '', '', 'A', NULL, NULL, NULL),
+(55, 'Croatian', 'CRO', 'A South Slavic language spoken in Croatia', '', '', 'A', NULL, NULL, NULL),
+(56, 'Czech', 'CZE', 'A West Slavic language spoken in the Czech Republic', '', '', 'A', NULL, NULL, NULL),
+(57, 'Danish', 'DAN', 'A North Germanic language spoken in Denmark', '', '', 'A', NULL, NULL, NULL),
+(58, 'Dinka', 'DIN', 'A Nilotic language spoken in South Sudan', '', '', 'A', NULL, NULL, NULL),
+(59, 'Dutch', 'DUT', 'A West Germanic language spoken in the Netherlands', '', '', 'A', NULL, NULL, NULL),
+(60, 'Dzongkha', 'DZO', 'A Sino-Tibetan language spoken in Bhutan', '', '', 'A', NULL, NULL, NULL),
+(61, 'Edo', 'EDO', 'A language spoken in Nigeria', '', '', 'A', NULL, NULL, NULL),
+(62, 'Estonian', 'EST', 'A Finno-Ugric language spoken in Estonia', '', '', 'A', NULL, NULL, NULL),
+(63, 'Faroese', 'FAR', 'A North Germanic language spoken in the Faroe Islands', '', '', 'A', NULL, NULL, NULL),
+(64, 'Fijian', 'FIJ', 'An Austronesian language spoken in Fiji', '', '', 'A', NULL, NULL, NULL),
+(65, 'Finnish', 'FIN', 'A Finno-Ugric language spoken in Finland', '', '', 'A', NULL, NULL, NULL),
+(66, 'Flemish', 'FLE', 'A variety of Dutch spoken in Belgium', '', '', 'A', NULL, NULL, NULL),
+(67, 'French', 'FRE', 'A Romance language spoken in France and other countries', '', '', 'A', NULL, NULL, NULL),
+(68, 'Friulian', 'FRI', 'A Romance language spoken in Italy', '', '', 'A', NULL, NULL, NULL),
+(69, 'Gaelic', 'GAE', 'A Celtic language spoken in Scotland', '', '', 'A', NULL, NULL, NULL),
+(70, 'Galician', 'GAL', 'A Romance language spoken in Galicia, Spain', '', '', 'A', NULL, NULL, NULL),
+(71, 'Georgian', 'GEO', 'A South Caucasian language spoken in Georgia', '', '', 'A', NULL, NULL, NULL),
+(72, 'German', 'GER', 'A West Germanic language spoken in Germany', '', '', 'A', NULL, NULL, NULL),
+(73, 'Greek', 'GRE', 'An Indo-European language spoken in Greece', '', '', 'A', NULL, NULL, NULL),
+(74, 'Guarani', 'GUA', 'A Tupi-Guarani language spoken in Paraguay', '', '', 'A', NULL, NULL, NULL),
+(75, 'Gujarati', 'GUJ', 'An Indo-Aryan language spoken in Gujarat, India', '', '', 'A', NULL, NULL, NULL),
+(76, 'Haitian Creole', 'HAI', 'A French-based creole language spoken in Haiti', '', '', 'A', NULL, NULL, NULL),
+(77, 'Hausa', 'HAU', 'A Chadic language spoken in Nigeria', '', '', 'A', NULL, NULL, NULL),
+(78, 'Hawaiian', 'HAW', 'A Polynesian language spoken in Hawaii', '', '', 'A', NULL, NULL, NULL),
+(79, 'Hebrew', 'HEB', 'A Semitic language spoken in Israel', 'rtl', '', 'A', NULL, NULL, NULL),
+(80, 'Hindi', 'HIN', 'An Indo-Aryan language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(81, 'Hmong', 'HMO', 'A Hmong-Mien language spoken in China, Vietnam, Laos, and Thailand', '', '', 'A', NULL, NULL, NULL),
+(82, 'Hungarian', 'HUN', 'A Finno-Ugric language spoken in Hungary', '', '', 'A', NULL, NULL, NULL),
+(83, 'Icelandic', 'ICE', 'A North Germanic language spoken in Iceland', '', '', 'A', NULL, NULL, NULL),
+(84, 'Igbo', 'IGB', 'A Niger-Congo language spoken in Nigeria', '', '', 'A', NULL, NULL, NULL),
+(85, 'Ilocano', 'ILO', 'An Austronesian language spoken in the Philippines', '', '', 'A', NULL, NULL, NULL),
+(86, 'Indonesian', 'IND', 'An Austronesian language spoken in Indonesia', '', '', 'A', NULL, NULL, NULL),
+(87, 'Inuktitut', 'INU', 'An Inuit language spoken in Canada', '', '', 'A', NULL, NULL, NULL),
+(88, 'Irish', 'IRI', 'A Celtic language spoken in Ireland', '', '', 'A', NULL, NULL, NULL),
+(89, 'Italian', 'ITA', 'A Romance language spoken in Italy', '', '', 'A', NULL, NULL, NULL),
+(90, 'Japanese', 'JAP', 'A language spoken in Japan', '', '', 'A', NULL, NULL, NULL),
+(91, 'Javanese', 'JAV', 'An Austronesian language spoken in Indonesia', '', '', 'A', NULL, NULL, NULL),
+(92, 'Kannada', 'KAN', 'A Dravidian language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(93, 'Kashmiri', 'KAS', 'An Indo-Aryan language spoken in Kashmir', '', '', 'A', NULL, NULL, NULL),
+(94, 'Kazakh', 'KAZ', 'A Turkic language spoken in Kazakhstan', '', '', 'A', NULL, NULL, NULL),
+(95, 'Khmer', 'KHM', 'A Mon-Khmer language spoken in Cambodia', '', '', 'A', NULL, NULL, NULL),
+(96, 'Korean', 'KOR', 'A language spoken in Korea', '', '', 'A', NULL, NULL, NULL),
+(97, 'Kurdish', 'KUR', 'An Indo-Iranian language spoken by Kurds', '', '', 'A', NULL, NULL, NULL),
+(98, 'Kyrgyz', 'KYR', 'A Turkic language spoken in Kyrgyzstan', '', '', 'A', NULL, NULL, NULL),
+(99, 'Lao', 'LAO', 'A Kra-Dai language spoken in Laos', '', '', 'A', NULL, NULL, NULL),
+(100, 'Latvian', 'LAT', 'A Baltic language spoken in Latvia', '', '', 'A', NULL, NULL, NULL),
+(101, 'Lithuanian', 'LIT', 'A Baltic language spoken in Lithuania', '', '', 'A', NULL, NULL, NULL),
+(102, 'Luxembourgish', 'LUX', 'A West Germanic language spoken in Luxembourg', '', '', 'A', NULL, NULL, NULL),
+(103, 'Macedonian', 'MAC', 'A South Slavic language spoken in North Macedonia', '', '', 'A', NULL, NULL, NULL),
+(104, 'Malagasy', 'MAL', 'An Austronesian language spoken in Madagascar', '', '', 'A', NULL, NULL, NULL),
+(105, 'Malay', 'MAY', 'An Austronesian language spoken in Malaysia', '', '', 'A', NULL, NULL, NULL),
+(106, 'Malayalam', 'MAL', 'A Dravidian language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(107, 'Maltese', 'MAL', 'A Semitic language spoken in Malta', '', '', 'A', NULL, NULL, NULL),
+(108, 'Maori', 'MAO', 'A Polynesian language spoken in New Zealand', '', '', 'A', NULL, NULL, NULL),
+(109, 'Marathi', 'MAR', 'An Indo-Aryan language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(110, 'Mongolian', 'MON', 'A Mongolic language spoken in Mongolia', '', '', 'A', NULL, NULL, NULL),
+(111, 'Nepali', 'NEP', 'An Indo-Aryan language spoken in Nepal', '', '', 'A', NULL, NULL, NULL),
+(112, 'Norwegian', 'NOR', 'A North Germanic language spoken in Norway', '', '', 'A', NULL, NULL, NULL),
+(113, 'Oriya', 'ORI', 'An Indo-Aryan language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(114, 'Pashto', 'PAS', 'An Iranian language spoken in Afghanistan and Pakistan', '', '', 'A', NULL, NULL, NULL),
+(115, 'Persian', 'PER', 'An Iranian language spoken in Iran', '', '', 'A', NULL, NULL, NULL),
+(116, 'Polish', 'POL', 'A West Slavic language spoken in Poland', '', '', 'A', NULL, NULL, NULL),
+(117, 'Portuguese', 'POR', 'A Romance language spoken in Portugal and Brazil', '', '', 'A', NULL, NULL, NULL),
+(118, 'Punjabi', 'PUN', 'An Indo-Aryan language spoken in Punjab, India', '', '', 'A', NULL, NULL, NULL),
+(119, 'Quechua', 'QUE', 'An indigenous language spoken in the Andes', '', '', 'A', NULL, NULL, NULL),
+(120, 'Romanian', 'ROM', 'A Romance language spoken in Romania', '', '', 'A', NULL, NULL, NULL),
+(121, 'Russian', 'RUS', 'An East Slavic language spoken in Russia', '', '', 'A', NULL, NULL, NULL),
+(122, 'Samoan', 'SAM', 'A Polynesian language spoken in Samoa', '', '', 'A', NULL, NULL, NULL),
+(123, 'Sanskrit', 'SAN', 'An ancient Indo-Aryan language', '', '', 'A', NULL, NULL, NULL),
+(124, 'Serbian', 'SER', 'A South Slavic language spoken in Serbia', '', '', 'A', NULL, NULL, NULL),
+(125, 'Sindhi', 'SIN', 'An Indo-Aryan language spoken in Pakistan and India', '', '', 'A', NULL, NULL, NULL),
+(126, 'Sinhala', 'SIN', 'An Indo-Aryan language spoken in Sri Lanka', '', '', 'A', NULL, NULL, NULL),
+(127, 'Slovak', 'SLO', 'A West Slavic language spoken in Slovakia', '', '', 'A', NULL, NULL, NULL),
+(128, 'Slovene', 'SLV', 'A South Slavic language spoken in Slovenia', '', '', 'A', NULL, NULL, NULL),
+(129, 'Somali', 'SOM', 'A Cushitic language spoken in Somalia', '', '', 'A', NULL, NULL, NULL),
+(130, 'Spanish', 'SPA', 'A Romance language spoken in Spain and Latin America', '', '', 'A', NULL, NULL, NULL),
+(131, 'Sundanese', 'SUN', 'A language spoken in Indonesia', '', '', 'A', NULL, NULL, NULL),
+(132, 'Swahili', 'SWA', 'A Bantu language spoken in East Africa', '', '', 'A', NULL, NULL, NULL),
+(133, 'Swedish', 'SWE', 'A North Germanic language spoken in Sweden', '', '', 'A', NULL, NULL, NULL),
+(134, 'Tagalog', 'TGL', 'An Austronesian language spoken in the Philippines', '', '', 'A', NULL, NULL, NULL),
+(135, 'Tahitian', 'TAH', 'A Polynesian language spoken in Tahiti', '', '', 'A', NULL, NULL, NULL),
+(136, 'Tamil', 'TAM', 'A Dravidian language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(137, 'Tatar', 'TAT', 'A Turkic language spoken in Russia', '', '', 'A', NULL, NULL, NULL),
+(138, 'Telugu', 'TEL', 'A Dravidian language spoken in India', '', '', 'A', NULL, NULL, NULL),
+(139, 'Thai', 'THA', 'A Kra-Dai language spoken in Thailand', '', '', 'A', NULL, NULL, NULL),
+(140, 'Tibetan', 'TIB', 'A Sino-Tibetan language spoken in Tibet', '', '', 'A', NULL, NULL, NULL),
+(141, 'Tigrinya', 'TIG', 'A Semitic language spoken in Eritrea and Ethiopia', '', '', 'A', NULL, NULL, NULL),
+(142, 'Tonga', 'TON', 'A Polynesian language spoken in Tonga', '', '', 'A', NULL, NULL, NULL),
+(143, 'Turkish', 'TUR', 'A Turkic language spoken in Turkey', '', '', 'A', NULL, NULL, NULL),
+(144, 'Turkmen', 'TUK', 'A Turkic language spoken in Turkmenistan', '', '', 'A', NULL, NULL, NULL),
+(145, 'Ukrainian', 'UKR', 'An East Slavic language spoken in Ukraine', '', '', 'A', NULL, NULL, NULL),
+(146, 'Urdu', 'URD', 'An Indo-Aryan language spoken in Pakistan and India', '', '', 'A', NULL, NULL, NULL),
+(147, 'Uzbek', 'UZB', 'A Turkic language spoken in Uzbekistan', '', '', 'A', NULL, NULL, NULL),
+(148, 'Vietnamese', 'VIE', 'A Kra-Dai language spoken in Vietnam', '', '', 'A', NULL, NULL, NULL),
+(149, 'Welsh', 'WEL', 'A Celtic language spoken in Wales', '', '', 'A', NULL, NULL, NULL),
+(150, 'Wolof', 'WOL', 'A Niger-Congo language spoken in Senegal', '', '', 'A', NULL, NULL, NULL),
+(151, 'Xhosa', 'XHO', 'A Bantu language spoken in South Africa', '', '', 'A', NULL, NULL, NULL),
+(152, 'Yiddish', 'YID', 'A High German-derived language spoken by Ashkenazi Jews', '', '', 'A', NULL, NULL, NULL),
+(153, 'Yoruba', 'YOR', 'A Niger-Congo language spoken in Nigeria', '', '', 'A', NULL, NULL, NULL),
+(154, 'Zulu', 'ZUL', 'A Bantu language spoken in South Africa', '', '', 'A', NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1843,18 +2003,18 @@ CREATE TABLE `students` (
   `vsn` varchar(255) DEFAULT NULL,
   `birthCountry` varchar(255) DEFAULT NULL,
   `streetName` varchar(255) DEFAULT NULL,
-  `suburb` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=COMPRESSED;
-
+  `suburb` varchar(255) DEFAULT NULL,
+  `isMainEnglish` varchar(255) DEFAULT NULL
+)  ENGINE=InnoDB ROW_FORMAT=DYNAMIC DEFAULT CHARSET latin1;
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `title`, `entryDate`, `first_name`, `middle_name`, `last_name`, `gender`, `birth`, `clientCompany`, `role`, `relation`, `contact_no`, `address1`, `address2`, `uniqueStudentIdentifier`, `postcode`, `contactNumber`, `businessNumber`, `facsimileNumber`, `emergency_contact_no`, `email`, `studentEmail2`, `studentEmail3`, `buildingName_postal`, `unitDetails_postal`, `streetNumber_postal`, `nationality`, `first_guardian_name`, `streetName_postal`, `deliveryBox_postal`, `suburb_postal`, `postalCode_postal`, `country_postal`, `country`, `date_of_birth`, `companyName`, `homeNumber`, `dob`, `highestLevelCompleted`, `certificateName`, `preferred_contact`, `studentEmail`, `employeeNumber`, `unitDetails`, `address`, `image`, `indigenousStatus`, `isContact`, `isLearner`, `RTOStudentId`, `nationalID`, `fax`, `preferredName`, `nameType`, `addressLine1`, `isInternational`, `state_postal`, `colStatusSurveyResponse`, `surveyStat`, `state`, `profile_image_path`, `modified_by_id`, `is_deleted`, `created_at`, `updated_at`, `buildingName`, `streetNumber`, `addressLine2`, `vsn`, `birthCountry`, `streetName`, `suburb`) VALUES
-(1, NULL, NULL, 'sdfg1', 'df2', '233', NULL, NULL, NULL, '', NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, 'asdfg', '22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'address', 'profile_image1698138522.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1698138522.jpg', 46, '0', '2023-09-18 15:49:27', '2024-01-15 20:15:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, NULL, NULL, 'kuldip', 'j', 'domaadiya', NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1990-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', '2024/07/22/emoji keyboard in windows_07-30-53.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1705337987.png', 46, '0', '2024-01-15 20:54:23', '2024-07-22 02:00:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Mr', '2024-07-29', 'bjk', 'fsdf', 'jkjn', 'M', NULL, NULL, 'fsdfsdf', NULL, 'abcdfghji', NULL, NULL, NULL, '2356', '05623895623', NULL, NULL, 'abcdfghji', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, 'India', '1990-01-01', 'cdsf  fdsf', NULL, '2024-07-29', 'M', 'vlina', 'fsdfsdfsdf', 'kdomdiya@gmail.com', NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', NULL, NULL, '1', '1', NULL, NULL, NULL, 'fsdfsdfsdf', '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, 46, '0', '2024-01-15 22:08:31', '2024-07-29 04:36:21', NULL, 'njknjkjnk', NULL, NULL, NULL, NULL, 'surat'),
-(4, 'Mr', '2024-07-22', 'kuldip', 'j', 'domaadiya', 'M', '2024-07-16', 'cdsf  fdsf', 'dsd', NULL, NULL, 'njknjkjnk', 'jnkjn', 'czxczxczxc', NULL, '05623895623', NULL, 'fed up', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'India', NULL, NULL, NULL, NULL, NULL, NULL, 'Polynesia (excludes Hawaii), nec', NULL, NULL, NULL, NULL, 'M', 'dipak sharma', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, NULL, '0', '2024-07-16 05:23:36', '2024-07-22 02:21:20', '12 srty', 'asdasdasd', NULL, 'czxczxczxc', NULL, 'jnkjn', 'surat');
+INSERT INTO `students` (`id`, `title`, `entryDate`, `first_name`, `middle_name`, `last_name`, `gender`, `birth`, `clientCompany`, `role`, `relation`, `contact_no`, `address1`, `address2`, `uniqueStudentIdentifier`, `postcode`, `contactNumber`, `businessNumber`, `facsimileNumber`, `emergency_contact_no`, `email`, `studentEmail2`, `studentEmail3`, `buildingName_postal`, `unitDetails_postal`, `streetNumber_postal`, `nationality`, `first_guardian_name`, `streetName_postal`, `deliveryBox_postal`, `suburb_postal`, `postalCode_postal`, `country_postal`, `country`, `date_of_birth`, `companyName`, `homeNumber`, `dob`, `highestLevelCompleted`, `certificateName`, `preferred_contact`, `studentEmail`, `employeeNumber`, `unitDetails`, `address`, `image`, `indigenousStatus`, `isContact`, `isLearner`, `RTOStudentId`, `nationalID`, `fax`, `preferredName`, `nameType`, `addressLine1`, `isInternational`, `state_postal`, `colStatusSurveyResponse`, `surveyStat`, `state`, `profile_image_path`, `modified_by_id`, `is_deleted`, `created_at`, `updated_at`, `buildingName`, `streetNumber`, `addressLine2`, `vsn`, `birthCountry`, `streetName`, `suburb`, `isMainEnglish`) VALUES
+(1, NULL, NULL, 'sdfg1', 'df2', '233', NULL, NULL, NULL, '', NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '123', NULL, NULL, NULL, NULL, NULL, NULL, 'asdfg', '22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'address', 'profile_image1698138522.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1698138522.jpg', 46, '0', '2023-09-18 15:49:27', '2024-01-15 20:15:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, NULL, NULL, 'kuldip', 'j', 'domaadiya', NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1990-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', '2024/07/22/emoji keyboard in windows_07-30-53.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'profile_image/profile_image1705337987.png', 46, '0', '2024-01-15 20:54:23', '2024-07-22 02:00:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Mr', '2024-07-29', 'bjk', 'fsdf', 'jkjn', 'M', NULL, NULL, 'fsdfsdf', NULL, 'abcdfghji', NULL, NULL, NULL, '2356', '05623895623', NULL, NULL, 'abcdfghji', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'Indian', NULL, NULL, NULL, NULL, NULL, NULL, 'India', '1990-01-01', 'cdsf  fdsf', NULL, '2024-07-29', 'M', 'vlina', 'fsdfsdfsdf', 'kdomdiya@gmail.com', NULL, NULL, '05-b, Trade Corner, Saki Naka, Andheri (west)', NULL, NULL, '1', '1', NULL, NULL, NULL, 'fsdfsdfsdf', '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, 46, '0', '2024-01-15 22:08:31', '2024-07-29 04:36:21', NULL, 'njknjkjnk', NULL, NULL, NULL, NULL, 'surat', NULL),
+(4, 'Mr', '2024-07-22', 'kuldip', 'j', 'domaadiya', 'M', '2024-07-16', 'cdsf  fdsf', 'dsd', NULL, NULL, 'njknjkjnk', 'jnkjn', 'czxczxczxc', NULL, '05623895623', NULL, 'fed up', NULL, 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', 'kdomdiya@gmail.com', NULL, NULL, NULL, 'India', NULL, NULL, NULL, NULL, NULL, NULL, 'Polynesia (excludes Hawaii), nec', NULL, NULL, NULL, NULL, 'M', 'dipak sharma', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1', '1', NULL, NULL, NULL, NULL, '1', NULL, 'Y', NULL, 'A', 'A', NULL, NULL, NULL, '0', '2024-07-16 05:23:36', '2024-07-22 02:21:20', '12 srty', 'asdasdasd', NULL, 'czxczxczxc', NULL, 'jnkjn', 'surat', NULL);
 
 -- --------------------------------------------------------
 
@@ -2986,7 +3146,7 @@ ALTER TABLE `issue_certificates`
 -- AUTO_INCREMENT for table `language`
 --
 ALTER TABLE `language`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `learner_s_m_s_notes`

@@ -18,6 +18,7 @@ use App\Models\LearnerSMSNote;
 use App\Models\UnitCompetency;
 use App\Models\StudentModule;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 class CourseController extends Controller
 {
     /**
@@ -27,18 +28,27 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courseCategory = CourseCategory::get();
-        $courses = Course::where('self_paced_sessions', '!=', null)->with('trainers')->get();
-        $users = User::get();
-        $cities = City::get();
-        $states = State::get();
-        $teachers = Teacher::get();
-        $data = [];
-        $data['title'] = 'Event';
-        $data['menu_active_tab'] = 'event';
-        $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '1')->get();
-        $rows = Event::paginate(10);
-        return view('admin.event.courses.list', compact('courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
+        try {
+            $courseCategory = CourseCategory::get();
+            $courses = Course::where('self_paced_sessions', '!=', null)->with('trainers')->get();
+            $users = User::get();
+            $cities = City::get();
+            $states = State::get();
+            $teachers = Teacher::get();
+            $data = [];
+            $data['title'] = 'Event';
+            $data['menu_active_tab'] = 'event';
+            $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '1')->get();
+            $rows = Event::paginate(10);
+    
+            return view('admin.event.courses.list', compact('courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in index method: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'There was an error loading the event list. Please try again later.');
+        }
     }
 
     /**
@@ -59,12 +69,9 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-
-        // Field Validation
         $request->validate([
             'course_type' => 'required',
         ]);
-
            try{
         $events = new Event;
         $events->course_type = $request->course_type;
@@ -158,100 +165,182 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
-        if ($id) {
-            $course = Event::find($id);
-            if ($course) {
-                $course->delete();
+        try {
+            if ($id) {
+                $course = Event::find($id);
+                if ($course) {
+                    $course->delete();
+                    return redirect()->route('event.courses')->with('success', 'Record deleted.');
+                } else {
+                    return redirect()->route('event.courses')->with('failed', 'Record not found.');
+                }
+            } else {
+                return redirect()->route('event.courses')->with('failed', 'Invalid ID provided.');
             }
-            return redirect()->route('event.courses')->with('success', 'Record deleted.');
-        } else {
-            return redirect()->route('event.courses')->with('failed', 'Record not found.');
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in deleteEventCourse method: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->route('event.courses')->with('error', 'There was an error deleting the record. Please try again later.');
         }
     }
 
     public function status(Request $request)
     {
-
-        $id = request()->query('id');
-        $status = request()->query('status');
-        $course = Event::find($id);
-        $course->status = $status;
-        $course->Save();
-        return redirect()->route('event.courses');
-        // return view('admin.event.courses.list',compact('courseCategory','courses','users','rows'))->with($data);
+        try {
+            $id = $request->query('id');
+            $status = $request->query('status');
+            
+            $course = Event::find($id);
+    
+            if ($course) {
+                $course->status = $status;
+                $course->save();
+                return redirect()->route('event.courses')->with('success', 'Course status updated successfully.');
+            } else {
+                return redirect()->route('event.courses')->with('failed', 'Course not found.');
+            }
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in status method: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->route('event.courses')->with('error', 'There was an error updating the course status. Please try again later.');
+        }
     }
 
     public function archive(Request $request)
     {
-        $id = request()->query('id');
-        $archive = request()->query('archive');
-        // dd($archive);    
-        $course = Event::find($id);
-        $course->archive = $archive;
-        $course->Save();
-        return redirect()->route('event.courses');
+        try {
+            $id = $request->query('id');
+            $archive = $request->query('archive');
+            
+            $course = Event::find($id);
+    
+            if ($course) {
+                $course->archive = $archive;
+                $course->save();
+                return redirect()->route('event.courses')->with('success', 'Course archive status updated successfully.');
+            } else {
+                return redirect()->route('event.courses')->with('failed', 'Course not found.');
+            }
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in archiveEvent method: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->route('event.courses')->with('error', 'There was an error updating the course archive status. Please try again later.');
+        }
     }
     public function course_event($id){
-        $course_event = Event::find($id);
-        $states = State::get();
-        $course = Course::find($course_event->course_name);
-        $enrollments = Enrolment::where('event_id',$course_event->id)->get();
-        $learn_sms = LearnerSMSNote::where('event_id',$course_event->id)->get();
-        $note_category = StudentNoteCategory::get();
-        return view('admin.event.course.update', compact('course_event','course','states','enrollments','learn_sms','note_category'));
+        try {
+            $course_event = Event::find($id);
+    
+            if (!$course_event) {
+                return redirect()->route('event.courses')->with('failed', 'Course event not found.');
+            }
+    
+            $states = State::get();
+            $course = Course::find($course_event->course_name);
+    
+            if (!$course) {
+                return redirect()->route('event.courses')->with('failed', 'Course not found.');
+            }
+    
+            $enrollments = Enrolment::where('event_id', $course_event->id)->get();
+            $learn_sms = LearnerSMSNote::where('event_id', $course_event->id)->get();
+            $note_category = StudentNoteCategory::get();
+    
+            return view('admin.event.course.update', compact('course_event', 'course', 'states', 'enrollments', 'learn_sms', 'note_category'));
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in updateEventCourse method: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->route('event.courses')->with('error', 'There was an error loading the course event details. Please try again later.');
+        }
     }
 
     public function course_note(Request $request){
     //   dd($request);
+    try {
         $sms_send = new LearnerSMSNote;
-     
         $sms_send->course_id = $request->course_id;
         $sms_send->event_id = $request->event_id;
-        $sms_send->note = "Group sms sent to all students by". auth()->user()->first_name . ' ' .  auth()->user()->last_name.$request->sms_Content;
-        $sms_send->created_by =  auth()->user()->first_name . ' ' .  auth()->user()->last_name;
+        $sms_send->note = "Group sms sent to all students by " . auth()->user()->first_name . ' ' .  auth()->user()->last_name . " " . $request->sms_Content;
+        $sms_send->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
         $sms_send->type_of_note = "schedule";       
         $sms_send->save();
+
         return redirect()->back()->with('success', 'Template updated successfully.');
+    } catch (\Exception $e) {
+        // Log the exception
+        Log::error('Error in sendSms method: ' . $e->getMessage());
+
+        // Redirect back with an error message
+        return redirect()->back()->with('error', 'There was an error sending the SMS. Please try again later.');
+    }
     }
 
     public function sms_send_course(Request $request)
     {
         // dd($request);
-        $sms_send = new LearnerSMSNote;
-        $sms_send->course_id = $request->course_id;
-        $sms_send->event_id = $request->event_id;
-        $sms_send->note = "Group sms sent to all students by". auth()->user()->first_name . ' ' .  auth()->user()->last_name.$request->sms_Content;
-        $sms_send->created_by =  auth()->user()->first_name . ' ' .  auth()->user()->last_name;
-        $sms_send->type_of_note = "schedule";       
-        $sms_send->save();
-        return redirect()->back()->with('success', 'Template updated successfully.');
+        try {
+            $sms_send = new LearnerSMSNote;
+            $sms_send->course_id = $request->course_id;
+            $sms_send->event_id = $request->event_id;
+            $sms_send->note = "Group sms sent to all students by " . auth()->user()->first_name . ' ' .  auth()->user()->last_name . " " . $request->sms_Content;
+            $sms_send->created_by = auth()->user()->first_name . ' ' . auth()->user()->last_name;
+            $sms_send->type_of_note = "schedule";       
+            $sms_send->save();
+    
+            return redirect()->back()->with('success', 'Template updated successfully.');
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in sendSms method: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'There was an error sending the SMS. Please try again later.');
+        }
     }
-    public function enrolment_units_bulk(Request $request){
-        foreach($request->unit as $unit){
-            $unit_module = UnitCompetency::where('course_id',$unit['course_id'])->get();
-            foreach($unit_module as $unit_modal){
-                $unit_compencacy = StudentModule::where('student_id',$unit['student_id'])->where('unit_competency_id',$unit_modal->id)->first();
-                if($unit_compencacy != null){
-                }else{
-                    $unit_modal = new StudentModule;
-                    $unit_modal->student_id = $unit['student_id'];
-                    $unit_modal->unit_competency_id = $unit_modal->id;
-                    $unit_modal->enrollment_date = Carbon::now();
-                    $unit_modal->completion_date = "";
-                    $unit_modal->module_activity_start = "";
-                    $unit_modal->outcomeId = "";
-                    $unit_modal->unitCompetencyDate = "";
-                    $unit_modal->note = "";
-                    $unit_modal->save();
+    public function enrolment_units_bulk(Request $request)
+    {
+        try {
+            foreach($request->unit as $unit) {
+                $unit_modules = UnitCompetency::where('course_id', $unit['course_id'])->get();
+                
+                foreach($unit_modules as $unit_module) {
+                    $unit_competency = StudentModule::where('student_id', $unit['student_id'])
+                                                    ->where('unit_competency_id', $unit_module->id)
+                                                    ->first();
+                    
+                    if ($unit_competency == null) {
+                        $student_module = new StudentModule;
+                        $student_module->student_id = $unit['student_id'];
+                        $student_module->unit_competency_id = $unit_module->id;
+                        $student_module->enrollment_date = Carbon::now();
+                        $student_module->completion_date = null;
+                        $student_module->module_activity_start = null;
+                        $student_module->outcomeId = null;
+                        $student_module->unitCompetencyDate = null;
+                        $student_module->note = null;
+                        $student_module->save();
+                    }
                 }
             }
+    
+            return redirect()->back()->with('success', 'Template updated successfully.');
+        } catch (\Exception $e) {
+            // Log the exception
+            Log::error('Error in enrolment_units_bulk: ' . $e->getMessage());
+    
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'There was an error updating the template. Please try again later.');
         }
-        return redirect()->back()->with('success', 'Template updated successfully.');
     }
     public function edit_schedule(Request $request){
         try{
-            
             $events = Event::where('event_id',$request->event_id)->first();
             $events->course_type = $request->course_type;
             $events->reporting_state = $request->reporting_state;
@@ -272,7 +361,6 @@ class CourseController extends Controller
             $events->save();
             return redirect()->back()->with('success', 'Template updated successfully.');
             } catch (\Exception $e) {
-               // dd($e);
                return redirect()->back()->with('success', 'Template updated successfully.');
             }
 

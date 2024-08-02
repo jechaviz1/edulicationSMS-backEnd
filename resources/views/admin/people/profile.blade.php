@@ -1766,7 +1766,7 @@
                                                             <option value="Suriname"
                                                                 @if ($student->country == 'Suriname') selected @endif>
                                                                 Suriname</option>
-                                                            <option value="Swaziland"
+                                                            <option value="Swaziland" 
                                                                 @if ($student->country == 'Swaziland') selected @endif>
                                                                 Swaziland</option>
                                                             <option value="Sweden"
@@ -2099,13 +2099,14 @@
                                     <div style="float:left;padding-left:150px;">
                                         <div style="padding:5px;float:left;font-weight:bold;width:400px;"
                                             align="left">Country of Birth? </div>
+                                            
                                         <div style="padding:5px 5px;float:left;vertical-align:bottom">
-                                            No selection </div>
+                                           @if($student->birthCountry == null ) No selection @else {{ $student->Birthcountry->name }}  @endif  </div>
                                         <div style="clear:both;"></div>
                                         <div style="padding:5px;float:left;width:400px;font-weight:bold;">Do you mainly
                                             speak English at home?</div>
                                         <div style="padding:5px 5px;float:left;vertical-align:bottom">
-                                            No selection
+                                            @if($student->isMainEnglish == null ) No selection @else {{ $student->isMainEnglish }}  @endif 
                                         </div>
                                         <div style="clear:both;height:5px;"></div>
                                         <div style="padding:5px;float:left;font-weight:bold;width:400px;"
@@ -2114,14 +2115,14 @@
 
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="nospokenlanguage"
-                                                    id="nospokenlanguage" onchange="change_english_level()"
+                                                    id="nospokenlanguage" onchange="change_english_level()" @if($student->nospokenlanguage == "n") checked @endif
                                                     checked="" disabled="">
                                                 <label class="" for="nospokenlanguage">No, English only</label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio"
                                                     name="yesspokenlanguage" id="yesspokenlanguage"
-                                                    onchange="change_english_level()" disabled="">
+                                                    onchange="change_english_level()" @if($student->nospokenlanguage == "y") checked @endif disabled="">
                                                 <label class="" for="yesspokenlanguage">
                                                     Yes, other - Please specify:
                                                 </label>
@@ -2133,16 +2134,17 @@
                                         <br>
                                         <div style="padding:5px;font-weight:bold;width:380px;float:left">Indigenous Status: </div>
                                         <div style="padding:5px 20px;float:left;">
-                                            <input type="radio" name="indigenousStatus" value="1"
-                                                disabled="">
+                                            <input type="radio" name="indigenousStatus" value="1" @if($student->indigenousStatus == "1") checked @endif
+                                            disabled="">
                                             Yes, Aboriginal<br><input type="radio" name="indigenousStatus"
-                                                value="2" disabled="">
+                                            value="2" disabled=""  @if($student->indigenousStatus == "2") checked @endif>
                                             Yes, Torres Strait Islander<br><input type="radio" name="indigenousStatus"
-                                                value="3" disabled="">
+                                            value="3" disabled=""  @if($student->indigenousStatus == "3") checked @endif>
                                             Yes, Aboriginal AND Torres Strait Islander<br><input type="radio"
-                                                name="indigenousStatus" value="4" disabled="">
+                                            name="indigenousStatus" value="4" disabled=""  @if($student->indigenousStatus == "4") checked @endif>
                                             No, Neither Aboriginal nor Torres Strait Islander<br>
                                         </div>
+                                        
                                     </div>
                                     <div style="clear:both;height:20px;"></div>
                                     <div style="clear:both;text-align:center">
@@ -2155,313 +2157,16 @@
                                     <form name="edit_language_frm" id="edit_language_frm" method="POST" action="{{ route('edit.language.people') }}">
                                         @csrf
                                         @method('POST')
+                                        <input type="hidden" name="student_id" value="{{ $studentID }}">
                                         <div style="float:left;padding-left:150px;">
                                             <div style="padding:5px;float:left;font-weight:bold;width:400px;"
                                                 align="left">Country of Birth? </div>
                                             <div style="padding:0px 5px;float:left;vertical-align:bottom">
-                                                <select class="form-control" name="birthCountry" id="birthCountry"
-                                                    fdprocessedid="v7rc46">
+                                                <select class="form-control" name="birthCountry" id="birthCountry">
                                                     <option></option>
-                                                     <option value=""></option>
-                                                        <option value="Adelie Land (France)">Adelie Land (France)</option>
-                                                        <option value="Afghanistan">Afghanistan</option>
-                                                        <option value="Africa, nfd">Africa, nfd</option>
-                                                        <option value="Aland Islands">Aland Islands</option>
-                                                        <option value="Albania">Albania</option>
-                                                        <option value="Algeria">Algeria</option>
-                                                        <option value="Americas">Americas</option>
-                                                        <option value="Andorra">Andorra</option>
-                                                        <option value="Angola">Angola</option>
-                                                        <option value="Anguilla">Anguilla</option>
-                                                        <option value="Antarctica">Antarctica</option>
-                                                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                                        <option value="Argentina">Argentina</option>
-                                                        <option value="Argentinian Antarctic Territory">Argentinian Antarctic Territory</option>
-                                                        <option value="Armenia">Armenia</option>
-                                                        <option value="Aruba">Aruba</option>
-                                                        <option value="Asia, nfd">Asia, nfd</option>
-                                                        <option value="At Sea">At Sea</option>
-                                                        <option value="Australia" selected="">Australia</option>
-                                                        <option value="Australia (includes External Territories)">Australia (includes External Territories)</option>
-                                                        <option value="Australian Antarctic Territory">Australian Antarctic Territory</option>
-                                                        <option value="Australian External Territories, nec">Australian External Territories, nec</option>
-                                                        <option value="Austria">Austria</option>
-                                                        <option value="Azerbaijan">Azerbaijan</option>
-                                                        <option value="Bahamas">Bahamas</option>
-                                                        <option value="Bahrain">Bahrain</option>
-                                                        <option value="Bangladesh">Bangladesh</option>
-                                                        <option value="Barbados">Barbados</option>
-                                                        <option value="Belarus">Belarus</option>
-                                                        <option value="Belgium">Belgium</option>
-                                                        <option value="Belize">Belize</option>
-                                                        <option value="Benin">Benin</option>
-                                                        <option value="Bermuda">Bermuda</option>
-                                                        <option value="Bhutan">Bhutan</option>
-                                                        <option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
-                                                        <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
-                                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-                                                        <option value="Botswana">Botswana</option>
-                                                        <option value="Brazil">Brazil</option>
-                                                        <option value="British Antarctic Territory">British Antarctic Territory</option>
-                                                        <option value="Brunei Darussalam">Brunei Darussalam</option>
-                                                        <option value="Bulgaria">Bulgaria</option>
-                                                        <option value="Burkina Faso">Burkina Faso</option>
-                                                        <option value="Burma (Republic of the Union of Myanmar)">Burma (Republic of the Union of Myanmar)</option>
-                                                        <option value="Burundi">Burundi</option>
-                                                        <option value="Cambodia">Cambodia</option>
-                                                        <option value="Cameroon">Cameroon</option>
-                                                        <option value="Canada">Canada</option>
-                                                        <option value="Cape Verde">Cape Verde</option>
-                                                        <option value="Caribbean">Caribbean</option>
-                                                        <option value="Cayman Islands">Cayman Islands</option>
-                                                        <option value="Central African Republic">Central African Republic</option>
-                                                        <option value="Central America">Central America</option>
-                                                        <option value="Central and West Africa">Central and West Africa</option>
-                                                        <option value="Central Asia">Central Asia</option>
-                                                        <option value="Chad">Chad</option>
-                                                        <option value="Chile">Chile</option>
-                                                        <option value="Chilean Antarctic Territory">Chilean Antarctic Territory </option>
-                                                        <option value="China (excludes SARs and Taiwan)">China (excludes SARs and Taiwan)</option>
-                                                        <option value="Chinese Asia (includes Mongolia)">Chinese Asia (includes Mongolia)</option>
-                                                        <option value="Colombia">Colombia</option>
-                                                        <option value="Comoros">Comoros</option>
-                                                        <option value="Congo, Democratic Republic of">Congo, Democratic Republic of</option>
-                                                        <option value="Congo, Republic of ">Congo, Republic of </option>
-                                                        <option value="Cook Islands">Cook Islands</option>
-                                                        <option value="Costa Rica">Costa Rica</option>
-                                                        <option value="Cote d'ivoire">Cote d'Ivoire</option>
-                                                        <option value="Croatia">Croatia</option>
-                                                        <option value="Cuba">Cuba</option>
-                                                        <option value="Curacao">Curacao</option>
-                                                        <option value="Cyprus">Cyprus</option>
-                                                        <option value="Czech Republic">Czech Republic</option>
-                                                        <option value="Denmark">Denmark</option>
-                                                        <option value="Djibouti">Djibouti</option>
-                                                        <option value="Dominica">Dominica</option>
-                                                        <option value="Dominican Republic">Dominican Republic</option>
-                                                        <option value="East Asia, nfd">East Asia, nfd</option>
-                                                        <option value="Eastern Europe">Eastern Europe</option>
-                                                        <option value="Ecuador">Ecuador</option>
-                                                        <option value="Egypt">Egypt</option>
-                                                        <option value="El Salvador">El Salvador</option>
-                                                        <option value="England">England</option>
-                                                        <option value="Equatorial Guinea">Equatorial Guinea</option>
-                                                        <option value="Eritrea">Eritrea</option>
-                                                        <option value="Estonia">Estonia</option>
-                                                        <option value="Ethiopia">Ethiopia</option>
-                                                        <option value="Europe, nfd">Europe, nfd</option>
-                                                        <option value="Falkland Islands">Falkland Islands</option>
-                                                        <option value="Faroe Islands">Faroe Islands</option>
-                                                        <option value="Fiji">Fiji</option>
-                                                        <option value="Finland">Finland</option>
-                                                        <option value="Former USSR, nfd">Former USSR, nfd</option>
-                                                        <option value="Former Yugoslav Republic of Macedonia (FYROM)"> Former Yugoslav Republic of Macedonia (FYROM)</option>
-                                                        <option value="France">France</option>
-                                                        <option value="French Guiana">French Guiana</option>
-                                                        <option value="French Polynesia">French Polynesia</option>
-                                                        <option value="Gabon">Gabon</option>
-                                                        <option value="Gambia">Gambia</option>
-                                                        <option value="Gaza Strip and West Bank">Gaza Strip and West Bank</option>
-                                                        <option value="Georgia">Georgia</option>
-                                                        <option value="Germany">Germany</option>
-                                                        <option value="Ghana">Ghana</option>
-                                                        <option value="Gibraltar">Gibraltar</option>
-                                                        <option value="Greece">Greece</option>
-                                                        <option value="Greenland">Greenland</option>
-                                                        <option value="Grenada">Grenada</option>
-                                                        <option value="Guadeloupe">Guadeloupe</option>
-                                                        <option value="Guam">Guam</option>
-                                                        <option value="Guatemala">Guatemala</option>
-                                                        <option value="Guernsey">Guernsey</option>
-                                                        <option value="Guinea">Guinea</option>
-                                                        <option value="Guinea-Bissau">Guinea-Bissau</option>
-                                                        <option value="Guyana">Guyana</option>
-                                                        <option value="Haiti">Haiti</option>
-                                                        <option value="Holy See">Holy See</option>
-                                                        <option value="Honduras">Honduras</option>
-                                                        <option value="Hong Kong (SAR of China)">Hong Kong (SAR of China)</option>
-                                                        <option value="Hungary">Hungary</option>
-                                                        <option value="Iceland">Iceland</option>
-                                                        <option value="Inadequately Described">Inadequately Described</option>
-                                                        <option value="India">India</option>
-                                                        <option value="Indonesia">Indonesia</option>
-                                                        <option value="Iran">Iran</option>
-                                                        <option value="Iraq">Iraq</option>
-                                                        <option value="Ireland">Ireland</option>
-                                                        <option value="Isle of Man">Isle of Man</option>
-                                                        <option value="Israel">Israel</option>
-                                                        <option value="Italy">Italy</option>
-                                                        <option value="Jamaica">Jamaica</option>
-                                                        <option value="Japan">Japan</option>
-                                                        <option value="Japan and the Koreas">Japan and the Koreas</option>
-                                                        <option value="Jersey">Jersey</option>
-                                                        <option value="Jordan">Jordan</option>
-                                                        <option value="Kazakhstan">Kazakhstan</option>
-                                                        <option value="Kenya">Kenya</option>
-                                                        <option value="Kiribati">Kiribati</option>
-                                                        <option value="Korea, Democratic People' republic'of(north)">Korea,Democratic People's Republic of (North)</option>
-                                                        <option value="Korea, Republic of (South)">Korea, Republic of (South) </option>
-                                                        <option value="Kosovo">Kosovo</option>
-                                                        <option value="Kurdistan, nfd">Kurdistan, nfd</option>
-                                                        <option value="Kuwait">Kuwait</option>
-                                                        <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                                        <option value="Laos">Laos</option>
-                                                        <option value="Latvia">Latvia</option>
-                                                        <option value="Lebanon">Lebanon</option>
-                                                        <option value="Lesotho">Lesotho</option>
-                                                        <option value="Liberia">Liberia</option>
-                                                        <option value="Libya">Libya</option>
-                                                        <option value="Liechtenstein">Liechtenstein</option>
-                                                        <option value="Lithuania">Lithuania</option>
-                                                        <option value="Luxembourg">Luxembourg</option>
-                                                        <option value="Macau (SAR of China)">Macau (SAR of China)</option>
-                                                        <option value="Madagascar">Madagascar</option>
-                                                        <option value="Mainland South-East Asia">Mainland South-East Asia</option>
-                                                        <option value="Malawi">Malawi</option>
-                                                        <option value="Malaysia">Malaysia</option>
-                                                        <option value="Maldives">Maldives</option>
-                                                        <option value="Mali">Mali</option>
-                                                        <option value="Malta">Malta</option>
-                                                        <option value="Maritime South-East Asia">Maritime South-East Asia</option>
-                                                        <option value="Marshall Islands">Marshall Islands</option>
-                                                        <option value="Martinique">Martinique</option>
-                                                        <option value="Mauritania">Mauritania</option>
-                                                        <option value="Mauritius">Mauritius</option>
-                                                        <option value="Mayotte">Mayotte</option>
-                                                        <option value="Melanesia">Melanesia</option>
-                                                        <option value="Mexico">Mexico</option>
-                                                        <option value="Micronesia">Micronesia</option>
-                                                        <option value="Micronesia, Federated States of">Micronesia,Federated States of</option>
-                                                        <option value="Middle East">Middle East</option>
-                                                        <option value="Moldova">Moldova</option>
-                                                        <option value="Monaco">Monaco</option>
-                                                        <option value="Mongolia">Mongolia</option>
-                                                        <option value="Montenegro">Montenegro</option>
-                                                        <option value="Montserrat">Montserrat</option>
-                                                        <option value="Morocco">Morocco</option>
-                                                        <option value="Mozambique">Mozambique</option>
-                                                        <option value="Namibia">Namibia</option>
-                                                        <option value="Nauru">Nauru</option>
-                                                        <option value="Nepal">Nepal</option>
-                                                        <option value="Netherlands">Netherlands</option>
-                                                        <option value="Netherlands Antilles">Netherlands Antilles</option>
-                                                        <option value="New Caledonia">New Caledonia</option>
-                                                        <option value="New Zealand">New Zealand</option>
-                                                        <option value="Nicaragua">Nicaragua</option>
-                                                        <option value="Niger">Niger</option>
-                                                        <option value="Nigeria">Nigeria</option>
-                                                        <option value="Niue">Niue</option>
-                                                        <option value="Norfolk Island">Norfolk Island</option>
-                                                        <option value="North Africa">North Africa</option>
-                                                        <option value="North Africa and the Middle East">North Africa and the Middle East</option>
-                                                        <option value="North-East Asia">North-East Asia</option>
-                                                        <option value="North-West Europe">North-West Europe</option>
-                                                        <option value="Northern America">Northern America</option>
-                                                        <option value="Northern Europe">Northern Europe</option>
-                                                        <option value="Northern Ireland">Northern Ireland</option>
-                                                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
-                                                        <option value="Norway">Norway</option>
-                                                        <option value="Not Specified">Not Specified</option>
-                                                        <option value="Oceania and Antarctica">Oceania and Antarctica</option>
-                                                        <option value="Oman">Oman</option>
-                                                        <option value="Pakistan">Pakistan</option>
-                                                        <option value="Palau">Palau</option>
-                                                        <option value="Panama">Panama</option>
-                                                        <option value="Papua New Guinea">Papua New Guinea</option>
-                                                        <option value="Paraguay">Paraguay</option>
-                                                        <option value="Peru">Peru</option>
-                                                        <option value="Philippines">Philippines</option>
-                                                        <option value="Pitcairn Islands">Pitcairn Islands</option>
-                                                        <option value="Poland">Poland</option>
-                                                        <option value="Polynesia (excludes Hawaii)">Polynesia (excludes  Hawaii)</option>
-                                                        <option value="Polynesia (excludes Hawaii), nec">Polynesia(excludesHawaii), nec</option>
-                                                        <option value="Portugal">Portugal</option>
-                                                        <option value="Puerto Rico">Puerto Rico</option>
-                                                        <option value="Qatar">Qatar</option>
-                                                        <option value="Queen Maud Land (Norway)">Queen Maud Land (Norway)</option>
-                                                        <option value="Reunion">Reunion</option>
-                                                        <option value="Romania">Romania</option>
-                                                        <option value="Ross Dependency (New Zealand)">Ross Dependency (New Zealand)</option>
-                                                        <option value="Russian Federation">Russian Federation</option>
-                                                        <option value="Rwanda">Rwanda</option>
-                                                        <option value="Samoa">Samoa</option>
-                                                        <option value="Samoa, American">Samoa, American</option>
-                                                        <option value="San Marino">San Marino</option>
-                                                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-                                                        <option value="Saudi Arabia">Saudi Arabia</option>
-                                                        <option value="Scotland">Scotland</option>
-                                                        <option value="Senegal">Senegal</option>
-                                                        <option value="Serbia">Serbia</option>
-                                                        <option value="Seychelles">Seychelles</option>
-                                                        <option value="Sierra Leone">Sierra Leone</option>
-                                                        <option value="Singapore">Singapore</option>
-                                                        <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
-                                                        <option value="Slovakia">Slovakia</option>
-                                                        <option value="Slovenia">Slovenia</option>
-                                                        <option value="Solomon Islands">Solomon Islands</option>
-                                                        <option value="Somalia">Somalia</option>
-                                                        <option value="South Africa">South Africa</option>
-                                                        <option value="South America">South America</option>
-                                                        <option value="South America, nec">South America, nec</option>
-                                                        <option value="South Eastern Europe">South Eastern Europe</option>
-                                                        <option value="South Sudan">South Sudan</option>
-                                                        <option value="South-East Asia">South-East Asia</option>
-                                                        <option value="Southern and Central Asia">Southern and Central Asia</option>
-                                                        <option value="Southern and East Africa">Southern and East Africa</option>
-                                                        <option value="Southern and East Africa, nec">Southern and EastAfrica,nec</option>
-                                                        <option value="Southern and Eastern Europe">Southern and EasternEurope</option>
-                                                        <option value="Southern Asia">Southern Asia</option>
-                                                        <option value="Southern Europe">Southern Europe</option>
-                                                        <option value="Spain">Spain</option>
-                                                        <option value="Spanish North Africa">Spanish North Africa</option>
-                                                        <option value="Sri Lanka">Sri Lanka</option>
-                                                        <option value="St Barthelemy">St Barthelemy</option>
-                                                        <option value="St Helena">St Helena</option>
-                                                        <option value="St Kitts and Nevis">St Kitts and Nevis</option>
-                                                        <option value="St Lucia">St Lucia</option>
-                                                        <option value="St Martin (French part)">St Martin (French part)</option>
-                                                        <option value="St Pierre and Miquelon">St Pierre and Miquelon</option>
-                                                        <option value="St Vincent and the Grenadines">St Vincent and the Grenadines</option>
-                                                        <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
-                                                        <option value="Sudan">Sudan</option>
-                                                        <option value="Suriname">Suriname</option>
-                                                        <option value="Swaziland">Swaziland</option>
-                                                        <option value="Sweden">Sweden</option>
-                                                        <option value="Switzerland">Switzerland</option>
-                                                        <option value="Syria">Syria</option>
-                                                        <option value="Taiwan">Taiwan</option>
-                                                        <option value="Tajikistan">Tajikistan</option>
-                                                        <option value="Tanzania">Tanzania</option>
-                                                        <option value="Thailand">Thailand</option>
-                                                        <option value="Timor-Leste">Timor-Leste</option>
-                                                        <option value="Togo">Togo</option>
-                                                        <option value="Tokelau">Tokelau</option>
-                                                        <option value="Tonga">Tonga</option>
-                                                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-                                                        <option value="Tunisia">Tunisia</option>
-                                                        <option value="Turkey">Turkey</option>
-                                                        <option value="Turkmenistan">Turkmenistan</option>
-                                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
-                                                        <option value="Tuvalu">Tuvalu</option>
-                                                        <option value="Uganda">Uganda</option>
-                                                        <option value="Ukraine">Ukraine</option>
-                                                        <option value="United Arab Emirates">United Arab Emirates</option>
-                                                        <option value="United Kingdom, Channel Islands and Isle of Man">United Kingdom, Channel Islands and Isle of Man</option>
-                                                        <option value="United States of America">United States of America</option>
-                                                        <option value="Uruguay">Uruguay</option>
-                                                        <option value="Uzbekistan">Uzbekistan</option>
-                                                        <option value="Vanuatu">Vanuatu</option>
-                                                        <option value="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
-                                                        <option value="Vietnam">Vietnam</option>
-                                                        <option value="Virgin Islands, British">Virgin Islands, British</option>
-                                                        <option value="Virgin Islands, United States">Virgin Islands,United States</option>
-                                                        <option value="Wales">Wales</option>
-                                                        <option value="Wallis and Futuna">Wallis and Futuna</option>
-                                                        <option value="Western Europe">Western Europe</option>
-                                                        <option value="Western Sahara">Western Sahara</option>
-                                                        <option value="Yemen">Yemen</option>
-                                                        <option value="Zambia">Zambia</option>
-                                                        <option value="Zimbabwe">Zimbabwe</option>
+                                                    @foreach ($countries as $country)
+                                                    <option value="{{ $country->id }}" @if($country->id == $student->birthCountry) selected @endif>{{ $country->name }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div style="clear:both;height:5px;"></div>
@@ -2478,7 +2183,6 @@
                                             <div style="padding:5px;font-weight:bold;width:400px;float:left;"
                                                 align="left">Do you speak a language other than English at home?</div>
                                             <div style="padding:5px 5px; width:400px; float:left">
-
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"name="nospokenlanguage" id="nospokenlanguage" value="no" onchange="change_english_level(this.value)">
                                                     <label class="form-check-label" for="nospokenlanguage">No, English
@@ -2488,562 +2192,38 @@
                                                     <input class="form-check-input" type="radio" name="nospokenlanguage" id="yesspokenlanguage" value="yes" onchange="change_english_level(this.value)">
                                                     <label class="form-check-label" for="yesspokenlanguage">Yes, other -
                                                         Please specify:</label>
-                                                    <select class="form-control" style="width:200px;display:inline;"
-                                                        name="spokenLanguage" id="spokenLanguage"
-                                                        onchange="show_english_level(this.options[this.selectedIndex].value)"
-                                                        fdprocessedid="5e3bmv">
-                                                        <option></option>
-                                                        <option value="Aboriginal English, so described">Aboriginal English, so described</option>
-                                                        <option value="Acehnese">Acehnese</option>
-                                                        <option value="Acholi">Acholi</option>
-                                                        <option value="Adnymathanha">Adnymathanha</option>
-                                                        <option value="African Languages">African Languages</option>
-                                                        <option value="African Languages, nec">African Languages, nec</option>
-                                                        <option value="Afrikaans">Afrikaans</option>
-                                                        <option value="Akan">Akan</option>
-                                                        <option value="Alawa">Alawa</option>
-                                                        <option value="Albanian">Albanian</option>
-                                                        <option value="Alngith">Alngith</option>
-                                                        <option value="Alyawarr">Alyawarr</option>
-                                                        <option value="American Languages">American Languages</option>
-                                                        <option value="Amharic">Amharic</option>
-                                                        <option value="Amurdak">Amurdak</option>
-                                                        <option value="Anindilyakwa">Anindilyakwa</option>
-                                                        <option value="Anmatyerr">Anmatyerr</option>
-                                                        <option value="Anmatyerr, nec">Anmatyerr, nec</option>
-                                                        <option value="Antekerrepenh">Antekerrepenh</option>
-                                                        <option value="Antikarinya">Antikarinya</option>
-                                                        <option value="Anuak">Anuak</option>
-                                                        <option value="Arabana">Arabana</option>
-                                                        <option value="Arabic">Arabic</option>
-                                                        <option value="Arandic">Arandic</option>
-                                                        <option value="Arandic, nec">Arandic, nec</option>
-                                                        <option value="Armenian">Armenian</option>
-                                                        <option value="Arnhem Land and Daly River Region Languages">Arnhem Land and Daly River Region Languages
-                                                        </option>
-                                                        <option value="Arnhem Land and Daly River Region
-                                                            Languages, nec">Arnhem Land and Daly River Region
-                                                            Languages, nec</option>
-                                                        <option value="Aromunian (Macedo-Romanian)">Aromunian (Macedo-Romanian)</option>
-                                                        <option value="Arrernte">Arrernte</option>
-                                                        <option value="Arrernte, nec">Arrernte, nec</option>
-                                                        <option value="Assamese">Assamese</option>
-                                                        <option value="Assyrian Neo-Aramaic">Assyrian Neo-Aramaic</option>
-                                                        <option value="Auslan">Auslan</option>
-                                                        <option value="AUSTRALIAN INDIGENOUS LANGUAGES">AUSTRALIAN INDIGENOUS LANGUAGES</option>
-                                                        <option value="Azeri">Azeri</option>
-                                                        <option value="Baanbay">Baanbay</option>
-                                                        <option value="Badimaya">Badimaya</option>
-                                                        <option value="Balinese">Balinese</option>
-                                                        <option value="Balochi">Balochi</option>
-                                                        <option value="Baltic">Baltic</option>
-                                                        <option value="Bandjalang">Bandjalang</option>
-                                                        <option value="Banyjima">Banyjima</option>
-                                                        <option value="Barababaraba">Barababaraba</option>
-                                                        <option value="Bardi">Bardi</option>
-                                                        <option value="Bari">Bari</option>
-                                                        <option value="Basque">Basque</option>
-                                                        <option value="Bassa">Bassa</option>
-                                                        <option value="Batjala">Batjala</option>
-                                                        <option value="Belorussian">Belorussian</option>
-                                                        <option value="Bemba">Bemba</option>
-                                                        <option value="Bengali">Bengali</option>
-                                                        <option value="Bidjara">Bidjara</option>
-                                                        <option value="Bikol">Bikol</option>
-                                                        <option value="Bilinarra">Bilinarra</option>
-                                                        <option value="Bisaya">Bisaya</option>
-                                                        <option value="Bislama">Bislama</option>
-                                                        <option value="Bosnian">Bosnian</option>
-                                                        <option value="Bulgarian">Bulgarian</option>
-                                                        <option value="Bunuba">Bunuba</option>
-                                                        <option value="Burarra">Burarra</option>
-                                                        <option value="Burarran">Burarran</option>
-                                                        <option value="Burarran, nec">Burarran, nec</option>
-                                                        <option value="Burmese">Burmese</option>
-                                                        <option value="Burmese and Related Languages">Burmese and Related Languages</option>
-                                                        <option value="Burmese and Related Languages, nec">Burmese and Related Languages, nec</option>
-                                                        <option value="Cantonese">Cantonese</option>
-                                                        <option value="Cape York Peninsula Languages">Cape York Peninsula Languages</option>
-                                                        <option value="Cape York Peninsula Languages, nec">Cape York Peninsula Languages, nec</option>
-                                                        <option value="Catalan">Catalan</option>
-                                                        <option value="Cebuano">Cebuano</option>
-                                                        <option value="Celtic">Celtic</option>
-                                                        <option value="Celtic, nec">Celtic, nec</option>
-                                                        <option value="Central Anmatyerr">Central Anmatyerr</option>
-                                                        <option value="Chaldean Neo-Aramaic">Chaldean Neo-Aramaic</option>
-                                                        <option value="Chinese">Chinese</option>
-                                                        <option value="Chinese, nec">Chinese, nec</option>
-                                                        <option value="Creole">Creole</option>
-                                                        <option value="Croatian">Croatian</option>
-                                                        <option value="Cypriot, so decribed">Cypriot, so decribed</option>
-                                                        <option value="Czech">Czech</option>
-                                                        <option value="Czechoslovakian, so described">Czechoslovakian, so described</option>
-                                                        <option value="Daatiwuy">Daatiwuy</option>
-                                                        <option value="Dadi Dadi">Dadi Dadi</option>
-                                                        <option value="Dalabon">Dalabon</option>
-                                                        <option value="92Dan (Gio-Dan)44">Dan (Gio-Dan)</option>
-                                                        <option value="Danish">Danish</option>
-                                                        <option value="Dari">Dari</option>
-                                                        <option value="Dhalwangu">Dhalwangu</option>
-                                                        <option value="Dhanggatti">Dhanggatti</option>
-                                                        <option value="Dhangu">Dhangu</option>
-                                                        <option value="Dhangu, nec">Dhangu, nec</option>
-                                                        <option value="Dharawal">Dharawal</option>
-                                                        <option value="Dhay yi">Dhay yi</option>
-                                                        <option value="Dhay yi, nec">Dhay yi, nec</option>
-                                                        <option value="Dhivehi">Dhivehi</option>
-                                                        <option value="Dhuwal">Dhuwal</option>
-                                                        <option value="Dhuwal, nec">Dhuwal, nec</option>
-                                                        <option value="Dhuwala">Dhuwala</option>
-                                                        <option value="Dhuwala, nec">Dhuwala, nec</option>
-                                                        <option value="Dhuwaya">Dhuwaya</option>
-                                                        <option value="Dinka">Dinka</option>
-                                                        <option value="Diyari">Diyari</option>
-                                                        <option value="Djabugay">Djabugay</option>
-                                                        <option value="Djabwurrung">Djabwurrung</option>
-                                                        <option value="Djambarrpuyngu">Djambarrpuyngu</option>
-                                                        <option value="Djangu">Djangu</option>
-                                                        <option value="Djapu">Djapu</option>
-                                                        <option value="Djarrwark">Djarrwark</option>
-                                                        <option value="Djinang">Djinang</option>
-                                                        <option value="Djinang, nec">Djinang, nec</option>
-                                                        <option value="Djinba">Djinba</option>
-                                                        <option value="Djinba, nec">Djinba, nec</option>
-                                                        <option value="Dravidian">Dravidian</option>
-                                                        <option value="Dravidian, nec">Dravidian, nec</option>
-                                                        <option value="Dutch">Dutch</option>
-                                                        <option value="Dutch and Related Languages">Dutch and Related Languages</option>
-                                                        <option value="Dyirbal">Dyirbal</option>
-                                                        <option value="East Slavic">East Slavic</option>
-                                                        <option value="Eastern Anmatyerr">Eastern Anmatyerr</option>
-                                                        <option value="Eastern Arrernte">Eastern Arrernte</option>
-                                                        <option value="EASTERN ASIAN LANGUAGES">EASTERN ASIAN LANGUAGES</option>
-                                                        <option value="EASTERN EUROPEAN LANGUAGES">EASTERN EUROPEAN LANGUAGES</option>
-                                                        <option value="English">English</option>
-                                                        <option value="Estonian">Estonian</option>
-                                                        <option value="Ewe">Ewe</option>
-                                                        <option value="Fijian">Fijian</option>
-                                                        <option value="Fijian Hindustani">Fijian Hindustani</option>
-                                                        <option value="Filipino">Filipino</option>
-                                                        <option value="Finnish">Finnish</option>
-                                                        <option value="Finnish and Related Languages">Finnish and Related Languages</option>
-                                                        <option value="Finnish and Related Languages, nec">Finnish and Related Languages, nec</option>
-                                                        <option value="French">French</option>
-                                                        <option value="French Creole">French Creole</option>
-                                                        <option value="Frisian">Frisian</option>
-                                                        <option value="Fulfulde">Fulfulde</option>
-                                                        <option value="Ga">Ga</option>
-                                                        <option value="Gaelic (Scotland)">Gaelic (Scotland)</option>
-                                                        <option value="Galpu">Galpu</option>
-                                                        <option value="Gambera">Gambera</option>
-                                                        <option value="Gamilaraay">Gamilaraay</option>
-                                                        <option value="Ganalbingu">Ganalbingu</option>
-                                                        <option value="Garrwa">Garrwa</option>
-                                                        <option value="Garuwali">Garuwali</option>
-                                                        <option value="Georgian">Georgian</option>
-                                                        <option value="German">German</option>
-                                                        <option value="German and Related Languages">German and Related Languages</option>
-                                                        <option value="Gilbertese">Gilbertese</option>
-                                                        <option value="Girramay">Girramay</option>
-                                                        <option value="Githabul">Githabul</option>
-                                                        <option value="Golumala">Golumala</option>
-                                                        <option value="Gooniyandi">Gooniyandi</option>
-                                                        <option value="Greek">Greek</option>
-                                                        <option value="Gudanji">Gudanji</option>
-                                                        <option value="Gudjal">Gudjal</option>
-                                                        <option value="Gujarati">Gujarati</option>
-                                                        <option value="Gumatj">Gumatj</option>
-                                                        <option value="Gumbaynggir">Gumbaynggir</option>
-                                                        <option value="Gun-nartpa">Gun-nartpa</option>
-                                                        <option value="Gundjeihmi">Gundjeihmi</option>
-                                                        <option value="Gupapuyngu">Gupapuyngu</option>
-                                                        <option value="Gurindji">Gurindji</option>
-                                                        <option value="Gurindji Kriol">Gurindji Kriol</option>
-                                                        <option value="Gurr-goni">Gurr-goni</option>
-                                                        <option value="Guugu Yimidhirr">Guugu Yimidhirr</option>
-                                                        <option value="Guyamirrilili">Guyamirrilili</option>
-                                                        <option value="Haka">Haka</option>
-                                                        <option value="Hakka">Hakka</option>
-                                                        <option value="Harari">Harari</option>
-                                                        <option value="Hausa">Hausa</option>
-                                                        <option value="Hawaiian English">Hawaiian English</option>
-                                                        <option value="Hazaraghi">Hazaraghi</option>
-                                                        <option value="Hebrew">Hebrew</option>
-                                                        <option value="Hindi">Hindi</option>
-                                                        <option value="Hmong">Hmong</option>
-                                                        <option value="Hmong-Mien">Hmong-Mien</option>
-                                                        <option value="6299">Hmong-Mien, nec</option>
-                                                        <option value="3301">Hungarian</option>
-                                                        <option value="6516">Iban</option>
-                                                        <option value="2300">Iberian Romance</option>
-                                                        <option value="2399">Iberian Romance, nec</option>
-                                                        <option value="1502">Icelandic</option>
-                                                        <option value="9223">Igbo</option>
-                                                        <option value="6503">IIokano</option>
-                                                        <option value="6517">Ilonggo (Hiligaynon)</option>
-                                                        <option value="5200">Indo-Aryan</option>
-                                                        <option value="5299">Indo-Aryan, nec</option>
-                                                        <option value="6504">Indonesian</option>
-                                                        <option value="9601">Invented Languages</option>
-                                                        <option value="4100">Iranic</option>
-                                                        <option value="4199">Iranic, nec</option>
-                                                        <option value="1102">Irish</option>
-                                                        <option value="2401">Italian</option>
-                                                        <option value="8127">Iwaidja</option>
-                                                        <option value="8128">Jaminjung</option>
-                                                        <option value="7201">Japanese</option>
-                                                        <option value="8507">Jaru</option>
-                                                        <option value="6518">Javanese</option>
-                                                        <option value="8814">Jawi</option>
-                                                        <option value="8131">Jawoyn</option>
-                                                        <option value="8132">Jingulu</option>
-                                                        <option value="8401">Kalaw Kawaw Ya/Kalaw Lagaw Ya</option>
-                                                        <option value="8916">Kanai</option>
-                                                        <option value="5101">Kannada</option>
-                                                        <option value="8917">Karajarri</option>
-                                                        <option value="6103">Karen</option>
-                                                        <option value="8918">Kariyarra</option>
-                                                        <option value="8704">Kartujarra</option>
-                                                        <option value="5215">Kashmiri</option>
-                                                        <option value="8921">Kaurna</option>
-                                                        <option value="8922">Kayardild</option>
-                                                        <option value="8606">Kaytetye</option>
-                                                        <option value="8955">Keerray-Woorroong</option>
-                                                        <option value="6301">Khmer</option>
-                                                        <option value="8815">Kija</option>
-                                                        <option value="9224">Kikuyu</option>
-                                                        <option value="8800">Kimberley Area Languages</option>
-                                                        <option value="8899">Kimberley Area Languages, nec</option>
-                                                        <option value="9246">Kinyarwanda (Rwanda)</option>
-                                                        <option value="9247">Kirundi (Rundi)</option>
-                                                        <option value="9502">Kiwai</option>
-                                                        <option value="8308">Koko-Bera</option>
-                                                        <option value="5204">Konkani</option>
-                                                        <option value="7301">Korean</option>
-                                                        <option value="9248">Kpelle</option>
-                                                        <option value="9251">Krahn</option>
-                                                        <option value="9225">Krio</option>
-                                                        <option value="8924">Kriol</option>
-                                                        <option value="8316">Kugu Muminh</option>
-                                                        <option value="8705">Kukatha</option>
-                                                        <option value="8706">Kukatja</option>
-                                                        <option value="8301">Kuku Yalanji</option>
-                                                        <option value="8133">Kunbarlang</option>
-                                                        <option value="8172">Kune</option>
-                                                        <option value="8173">Kuninjku</option>
-                                                        <option value="8174">Kunwinjku</option>
-                                                        <option value="8170">Kunwinjkuan</option>
-                                                        <option value="8179">Kunwinjkuan, nec</option>
-                                                        <option value="4101">Kurdish</option>
-                                                        <option value="8311">Kuuk Thayorre</option>
-                                                        <option value="8303">Kuuku-Ya u</option>
-                                                        <option value="8158">Kuwema</option>
-                                                        <option value="8956">Ladji Ladji</option>
-                                                        <option value="8312">Lamalama</option>
-                                                        <option value="6401">Lao</option>
-                                                        <option value="8925">Lardil</option>
-                                                        <option value="8136">Larrakiya</option>
-                                                        <option value="2902">Latin</option>
-                                                        <option value="3101">Latvian</option>
-                                                        <option value="1302">Letzeburgish</option>
-                                                        <option value="9252">Liberian (Liberian English)</option>
-                                                        <option value="8508">Light Warlpiri</option>
-                                                        <option value="9262">Lingala</option>
-                                                        <option value="3102">Lithuanian</option>
-                                                        <option value="8235">Liyagalawumirr</option>
-                                                        <option value="8236">Liyagawumirr</option>
-                                                        <option value="9253">Loma (Lorma)</option>
-                                                        <option value="9226">Luganda</option>
-                                                        <option value="9254">Lumun (Kuku Lumun)</option>
-                                                        <option value="9227">Luo</option>
-                                                        <option value="8707">Luritja</option>
-                                                        <option value="3504">Macedonian</option>
-                                                        <option value="8293">Madarrpa</option>
-                                                        <option value="9255">Madi</option>
-                                                        <option value="9702">Makaton</option>
-                                                        <option value="8137">Malak Malak</option>
-                                                        <option value="6505">Malay</option>
-                                                        <option value="5102">Malayalam</option>
-                                                        <option value="8511">Malngin</option>
-                                                        <option value="2501">Maltese</option>
-                                                        <option value="4208">Mandaean (Mandaic)</option>
-                                                        <option value="7104">Mandarin</option>
-                                                        <option value="9256">Mandinka</option>
-                                                        <option value="8926">Mangala</option>
-                                                        <option value="8138">Mangarrayi</option>
-                                                        <option value="8246">Manggalili</option>
-                                                        <option value="9257">Mann</option>
-                                                        <option value="8263">Manyjalpingu</option>
-                                                        <option value="8708">Manyjilyjarra</option>
-                                                        <option value="9303">Maori (Cook Island)</option>
-                                                        <option value="9304">Maori (New Zealand)</option>
-                                                        <option value="5205">Marathi</option>
-                                                        <option value="8141">Maringarr</option>
-                                                        <option value="8142">Marra</option>
-                                                        <option value="8161">Marramaninyshi</option>
-                                                        <option value="8234">Marrangu</option>
-                                                        <option value="8166">Marridan (Maridan)</option>
-                                                        <option value="8143">Marrithiyel</option>
-                                                        <option value="8711">Martu Wangka</option>
-                                                        <option value="8144">Matngala</option>
-                                                        <option value="8111">Maung</option>
-                                                        <option value="9205">Mauritian Creole</option>
-                                                        <option value="8175">Mayali</option>
-                                                        <option value="8402">Meriam Mir</option>
-                                                        <option value="4200">Middle Eastern Semitic Languages</option>
-                                                        <option value="4299">Middle Eastern Semitic Languages, nec
-                                                        </option>
-                                                        <option value="7107">Min Nan</option>
-                                                        <option value="8804">Miriwoong</option>
-                                                        <option value="8957">Mirning</option>
-                                                        <option value="6303">Mon</option>
-                                                        <option value="6300">Mon-Khmer</option>
-                                                        <option value="6399">Mon-Khmer, nec</option>
-                                                        <option value="7902">Mongolian</option>
-                                                        <option value="9258">Moro (Nuba Moro)</option>
-                                                        <option value="8317">Morrobalama</option>
-                                                        <option value="9503">Motu (HiriMotu)</option>
-                                                        <option value="8512">Mudburra</option>
-                                                        <option value="8146">Murrinh Patha</option>
-                                                        <option value="8927">Muruwari</option>
-                                                        <option value="8147">Na-kara</option>
-                                                        <option value="8928">Narungga</option>
-                                                        <option value="9306">Nauruan</option>
-                                                        <option value="9228">Ndebele</option>
-                                                        <option value="8148">Ndjébbana (Gunavidji)</option>
-                                                        <option value="5206">Nepali</option>
-                                                        <option value="8712">Ngaanyatjarra</option>
-                                                        <option value="8151">Ngalakgan</option>
-                                                        <option value="8152">Ngaliwurru</option>
-                                                        <option value="8113">Ngan gikurunggurr</option>
-                                                        <option value="8162">Ngandi</option>
-                                                        <option value="8514">Ngardi</option>
-                                                        <option value="8805">Ngarinyin</option>
-                                                        <option value="8515">Ngarinyman</option>
-                                                        <option value="8931">Ngarluma</option>
-                                                        <option value="8932">Ngarrindjeri</option>
-                                                        <option value="8958">Ngatjumaya</option>
-                                                        <option value="8281">Nhangu</option>
-                                                        <option value="8289">Nhangu, nec</option>
-                                                        <option value="9307">Niue</option>
-                                                        <option value="0001">Non Verbal</option>
-                                                        <option value="8500">Northern Desert Fringe Area Languages
-                                                        </option>
-                                                        <option value="8599">Northern Desert Fringe Area Languages, nec
-                                                        </option>
-                                                        <option value="1000">NORTHERN EUROPEAN LANGUAGES</option>
-                                                        <option value="1503">Norwegian</option>
-                                                        <option
-                                                            value="@@@@">Not
-                                                            Stated</option>
-                                                        <option value="9231">Nuer</option>
-                                                        <option value="8153">Nungali</option>
-                                                        <option value="8114">Nunggubuyu</option>
-                                                        <option value="8933">Nyamal</option>
-                                                        <option value="8934">Nyangumarta</option>
-                                                        <option value="9232">Nyanja (Chichewa)</option>
-                                                        <option value="8806">Nyikina</option>
-                                                        <option value="8935">Nyungar</option>
-                                                        <option value="9400">Oceanian Pidgins and Creoles</option>
-                                                        <option value="9499">Oceanian Pidgins and Creoles, nec</option>
-                                                        <option value="5216">Oriya</option>
-                                                        <option value="9206">Oromo</option>
-                                                        <option value="8900">Other Australian Indigenous Languages
-                                                        </option>
-                                                        <option value="8999">Other Australian Indigenous Languages, nec
-                                                        </option>
-                                                        <option value="7900">Other Eastern Asian Languages</option>
-                                                        <option value="7999">Other Eastern Asian Languages, nec</option>
-                                                        <option value="3900">Other Eastern European Languages</option>
-                                                        <option value="3999">Other Eastern European Languages, nec
-                                                        </option>
-                                                        <option value="9000">OTHER LANGUAGES</option>
-                                                        <option value="6999">Other Southeast Asian Languages</option>
-                                                        <option value="5999">Other Southern Asian Languages</option>
-                                                        <option value="2900">Other Southern European Languages</option>
-                                                        <option value="2999">Other Southern European Languages, nec
-                                                        </option>
-                                                        <option value="4900">Other Southwest and Central Asian Languages
-                                                        </option>
-                                                        <option value="4999">Other Southwest and Central Asian
-                                                            Languages, nec</option>
-                                                        <option value="8290">Other Yolngu Matha</option>
-                                                        <option value="8299">Other Yolngu Matha</option>
-                                                        <option value="8936">Paakantyi</option>
-                                                        <option value="9300">Pacific Austronesian Languages</option>
-                                                        <option value="9399">Pacific Austronesian Languages, nec
-                                                        </option>
-                                                        <option value="8937">Palyku/Nyiyaparli</option>
-                                                        <option value="6521">Pampangan</option>
-                                                        <option value="9500">Papua New Guinea Papuan Languages</option>
-                                                        <option value="9599">Papua New Guinea Papuan Languages, nec
-                                                        </option>
-                                                        <option value="4102">Pashto</option>
-                                                        <option value="4106">Persian (excluding Dari)</option>
-                                                        <option value="0009">Pidgin</option>
-                                                        <option value="8713">Pintupi</option>
-                                                        <option value="9404">Pitcairnese</option>
-                                                        <option value="8714">Pitjantjatjara</option>
-                                                        <option value="3602">Polish</option>
-                                                        <option value="2302">Portuguese</option>
-                                                        <option value="0008">Portuguese Creole</option>
-                                                        <option value="5207">Punjabi</option>
-                                                        <option value="8115">Rembarrnga</option>
-                                                        <option value="8295">Rirratjingu</option>
-                                                        <option value="8271">Ritharrngu</option>
-                                                        <option value="6104">Rohingya</option>
-                                                        <option value="3904">Romanian</option>
-                                                        <option value="3905">Romany</option>
-                                                        <option value="9312">Rotuman</option>
-                                                        <option value="3402">Russian</option>
-                                                        <option value="9308">Samoan</option>
-                                                        <option value="1500">Scandinavian</option>
-                                                        <option value="1599">Scandinavian, nec</option>
-                                                        <option value="3505">Serbian</option>
-                                                        <option value="3507">Serbo-Croatian/Yugoslavian, so described
-                                                        </option>
-                                                        <option value="9238">Seychelles Creole</option>
-                                                        <option value="9233">Shilluk</option>
-                                                        <option value="9207">Shona</option>
-                                                        <option value="9700">Sign Languages</option>
-                                                        <option value="9799">Sign Languages, nec</option>
-                                                        <option value="5208">Sindhi</option>
-                                                        <option value="5211">Sinhalese</option>
-                                                        <option value="3603">Slovak</option>
-                                                        <option value="3506">Slovene</option>
-                                                        <option value="9405">Solomon Islands Pijin</option>
-                                                        <option value="9208">Somali</option>
-                                                        <option value="3500">South Slavic</option>
-                                                        <option value="6500">Southeast Asian Austronesian Languages
-                                                        </option>
-                                                        <option value="6599">Southeast Asian Austronesian Languages, nec
-                                                        </option>
-                                                        <option value="6000">SOUTHEAST ASIAN LANGUAGES</option>
-                                                        <option value="5000">SOUTHERN ASIAN LANGUAGES</option>
-                                                        <option value="2000">SOUTHERN EUROPEAN LANGUAGES</option>
-                                                        <option value="4000">SOUTHWEST AND CENTRAL ASIAN LANGUAGES
-                                                        </option>
-                                                        <option value="2303">Spanish</option>
-                                                        <option value="0007">Spanish Creole</option>
-                                                        <option value="9211">Swahili</option>
-                                                        <option value="1504">Swedish</option>
-                                                        <option value="0003">Swiss, so described</option>
-                                                        <option value="6511">Tagalog</option>
-                                                        <option value="6400">Tai</option>
-                                                        <option value="6499">Tai, nec</option>
-                                                        <option value="5103">Tamil</option>
-                                                        <option value="4303">Tatar</option>
-                                                        <option value="5104">Telugu</option>
-                                                        <option value="6507">Tetum</option>
-                                                        <option value="6402">Thai</option>
-                                                        <option value="8318">Thaynakwith</option>
-                                                        <option value="9261">Themne</option>
-                                                        <option value="7901">Tibetan</option>
-                                                        <option value="9234">Tigré</option>
-                                                        <option value="9235">Tigrinya</option>
-                                                        <option value="6508">Timorese</option>
-                                                        <option value="8117">Tiwi</option>
-                                                        <option value="8322">Tjungundji</option>
-                                                        <option value="8722">Tjupany</option>
-                                                        <option value="9504">Tok Pisin (Neomelanesian)</option>
-                                                        <option value="9313">Tokelauan</option>
-                                                        <option value="9311">Tongan</option>
-                                                        <option value="8403">Torres Strait Creole</option>
-                                                        <option value="8400">Torres Strait Island Languages</option>
-                                                        <option value="9236">Tswana</option>
-                                                        <option value="5105">Tulu</option>
-                                                        <option value="4300">Turkic</option>
-                                                        <option value="4399">Turkic, nec</option>
-                                                        <option value="4301">Turkish</option>
-                                                        <option value="4304">Turkmen</option>
-                                                        <option value="9314">Tuvaluan</option>
-                                                        <option value="3403">Ukrainian</option>
-                                                        <option value="0000">Unknown</option>
-                                                        <option value="5212">Urdu</option>
-                                                        <option value="4305">Uygur</option>
-                                                        <option value="4306">Uzbek</option>
-                                                        <option value="6302">Vietnamese</option>
-                                                        <option value="8163">Waanyi</option>
-                                                        <option value="8272">Wagilak</option>
-                                                        <option value="8164">Wagiman</option>
-                                                        <option value="8938">Wajarri</option>
-                                                        <option value="8516">Walmajarri</option>
-                                                        <option value="8961">Waluwarra</option>
-                                                        <option value="8154">Wambaya</option>
-                                                        <option value="8715">Wangkajunga</option>
-                                                        <option value="Wangkangurru">Wangkangurru</option>
-                                                        <option value="Wangkatha">Wangkatha</option>
-                                                        <option value="Wangurri">Wangurri</option>
-                                                        <option value="Wanyjirra">Wanyjirra</option>
-                                                        <option value="Wardaman">Wardaman</option>
-                                                        <option value="Wargamay">Wargamay</option>
-                                                        <option value="Warlmanpa">Warlmanpa</option>
-                                                        <option value="Warlpiri">Warlpiri</option>
-                                                        <option value="Warnman">Warnman</option>
-                                                        <option value="Warramiri">Warramiri</option>
-                                                        <option value="Warumungu">Warumungu</option>
-                                                        <option value="Welsh">Welsh</option>
-                                                        <option value="Wergaia">Wergaia</option>
-                                                        <option value="West Slavic">West Slavic</option>
-                                                        <option value="Western Arrarnta">Western Arrarnta</option>
-                                                        <option value="Western Desert Language">Western Desert Language</option>
-                                                        <option value="Western Desert Language, nec">Western Desert Language, nec</option>
-                                                        <option value="Wik Mungkan">Wik Mungkan</option>
-                                                        <option value="Wik Ngathan">Wik Ngathan</option>
-                                                        <option value="Wiradjuri">Wiradjuri</option>
-                                                        <option value="Worla">Worla</option>
-                                                        <option value="Worrorra">Worrorra</option>
-                                                        <option value="Wu">Wu</option>
-                                                        <option value="Wubulkarra">Wubulkarra</option>
-                                                        <option value="Wunambal">Wunambal</option>
-                                                        <option value="Wurlaki">Wurlaki</option>
-                                                        <option value="Xhosa">Xhosa</option>
-                                                        <option value="Yakuy">Yakuy</option>
-                                                        <option value="Yakuy, nec">Yakuy, nec</option>
-                                                        <option value="Yan-Nhangu">Yan-Nhangu</option>
-                                                        <option value="Yankunytjatjara">Yankunytjatjara</option>
-                                                        <option value="Yanyuwa">Yanyuwa</option>
-                                                        <option value="Yapese">Yapese</option>
-                                                        <option value="Yawuru">Yawuru</option>
-                                                        <option value="Yiddish">Yiddish</option>
-                                                        <option value="Yidiny">Yidiny</option>
-                                                        <option value="Yindjibarndi">Yindjibarndi</option>
-                                                        <option value="Yinhawangka">Yinhawangka</option>
-                                                        <option value="Yolngu Matha">Yolngu Matha</option>
-                                                        <option value="Yorta Yorta">Yorta Yorta</option>
-                                                        <option value="Yoruba">Yoruba</option>
-                                                        <option value="Yugambeh">Yugambeh</option>
-                                                        <option value="Yulparija">Yulparija</option>
-                                                        <option value="Yupangathi">Yupangathi</option>
-                                                        <option value="Zomi">Zomi</option>
-                                                        <option value="Zulu">Zulu</option>
-                                                    </select>
+                                                    <select class="form-control" style="width:200px;display:inline;" name="spokenLanguage" id="spokenLanguage" onchange="show_english_level(this.options[this.selectedIndex].value)">
+                                                        <option>Select Languagae</option>
+                                                        @foreach ($languages as $language)
+                                                        <option value="{{ $language->id }}" @if($student->spokenLanguage == $language->id) selected @endif>{{ $language->name }}</option>
+                                                        @endforeach
+                                                     </select>
                                                 </div>
                                             </div>
                                             <div style="clear:both;height:5px;"></div>
                                             <div id="englishProfTitle"
-                                                style="padding: 5px; font-weight: bold; width: 380px; float: left; display: block;" "="">Proficiency in English: </div>
-                                                     <div id="englishProf" style="padding: 0px 20px; float: left; display: block;" "="">
-                                                <input type="radio" name="englishProficiency" value="1">
-                                                Very well<br><input type="radio" name="englishProficiency"
-                                                    value="2">
-                                                Well<br><input type="radio" name="englishProficiency"
-                                                    value="3">
-                                                Not well<br><input type="radio" name="englishProficiency"
-                                                    value="4">
+                                            style="padding: 5px; font-weight: bold; width: 380px; float: left; display: block;">Proficiency in English: </div>
+                                            <div id="englishProf" style="padding: 0px 20px; float: left; display: block;">
+                                                <input type="radio" name="englishProficiency" value="1" @if($student->englishProficiency == "1") checked @endif>
+                                                Very well<br><input type="radio" name="englishProficiency" @if($student->englishProficiency == "2") checked @endif
+                                                value="2">
+                                                Well<br><input type="radio" name="englishProficiency" @if($student->englishProficiency == "3") checked @endif
+                                                value="3">
+                                                Not well<br><input type="radio" name="englishProficiency" @if($student->englishProficiency == "4") checked @endif
+                                                value="4"> 
                                                 Not at all<br>
                                             </div>
                                             <div style="clear:both;height:5px;"></div>
                                             <div style="padding:5px;font-weight:bold;float:left;width:380px;">Indigenous
                                                 Status: </div>
                                             <div style="padding:5px 20px;float:left;">
-                                                <input type="radio" name="indigenousStatus" value="1">
+                                                <input type="radio" name="indigenousStatus" value="1"  @if($student->indigenousStatus == "1") checked @endif>
                                                 Yes, Aboriginal<br><input type="radio" name="indigenousStatus"
-                                                    value="2">
+                                                    value="2"  @if($student->indigenousStatus == "2") checked @endif >
                                                 Yes, Torres Strait Islander<br><input type="radio"
-                                                    name="indigenousStatus" value="3">
+                                                    name="indigenousStatus" value="3"  @if($student->indigenousStatus == "3") checked @endif>
                                                 Yes, Aboriginal AND Torres Strait Islander<br><input type="radio"
-                                                    name="indigenousStatus" value="4">
+                                                    name="indigenousStatus" value="4"  @if($student->indigenousStatus == "4") checked @endif> 
                                                 No, Neither Aboriginal nor Torres Strait Islander<br>
                                             </div>
                                         </div>
@@ -3053,8 +2233,8 @@
                                                 fdprocessedid="j210e">Save</button>
                                             <button type="button" class="btn btn-primary" style="margin:0px 5px;"
                                                 onclick="unsaved=true;editLanguageAndDiversity(524977, 'view');"
-                                                fdprocessedid="o9gpn">Cancel</button>
-                                        </div>
+                                                fdprocessedid="o9gpn" > Cancel</button>
+                                        </div>  
                                     </form>
                                 </div>
                             </div>
@@ -3947,7 +3127,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-sm-8">
-                            <div class="card-header1">
+                             <div class="card-header1">
                                 <span style="font-size: 21px;">Current Enrolments </span>
                                 <p>There are no current enrolment records for this person</p>
                             </div>

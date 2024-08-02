@@ -800,8 +800,9 @@
                     </div>
                     <div class="tab-pane fade" id="pills-others" role="tabpanel" aria-labelledby="pills-others-tab">
 
-                        <form name="frm_uplod_logo" id="frm_uplod_logo" method="post" enctype="multipart/form-data"
-                            action="../widgetFunctions/uploadlogo.php">
+                        <form name="frm_uplod_logo" id="form_uplod_logo" method="POST" enctype="multipart/form-data" action="{{ route('people.profile.photo.update') }}">
+                            @csrf
+                            @method('POST')
                             <div id="upload_process" style="display: none; text-align: center; height: 100px;">
                                 <br><br><img src="../home/images/ajax-loader.gif" border="0">&nbsp;uploading...
                             </div>
@@ -813,7 +814,7 @@
                                             <td width="300" valign="bottom">
                                                 <input type="file" id="logoImg" name="logoImg" size="45"
                                                     style="width:300px;">
-                                                <input type="hidden" name="companyId" value="379">
+                                                <input type="hidden" name="companyId" value="{{ Auth::user()->id }}">
                                                 <p style="font-size:10px">(Image Dimensions: 158 x 50 px; Image Format: jpg
                                                     |
                                                     gif | png)</p>
@@ -824,15 +825,22 @@
                                                     fdprocessedid="wsnmje">Upload
                                                 </button>
                                             </td>
-                                            <td><img class="img-avatar" style="max-width:158px;max-height:50px;"
-                                                    src="../manage/downloadcertificate.php?t=1">&nbsp;&nbsp;</td>
-                                            <td><i title="Delete Logo" class="fa fa-trash fa-lg text-danger"
-                                                    onclick="deleteCompanyLogo();"></i></td>
                                         </tr>
-                                    </tbody>
                                 </table>
                             </div>
                         </form>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @if(Auth::user()->profile_image != null)
+                                <img class="img-avatar" style="max-width:158px;max-height:150px;" src="{{ asset(Auth::user()->profile_image_path) }}">
+                                <form action="{{ route('people.profile.photo.delete',Auth::user()->id)}}">
+                                   <button class="btn">
+                                    <i title="Delete Logo" class="fa fa-trash fa-lg text-danger"></i>
+                                </button> 
+                                </form>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{-- /////////////////////////////////////////////////////////////// --}}
