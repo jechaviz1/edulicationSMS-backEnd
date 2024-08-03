@@ -55,7 +55,6 @@
                             <tbody>
                                 @if(!empty($role))
                                 @foreach ($role as $k=> $row)
-
                                 <tr>
                                     <td>{{$k+1}}</td>
                                     <td>{{$row->name}}</td>

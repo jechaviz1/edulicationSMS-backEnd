@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Mail\MyTestEmail;
 use Illuminate\Support\Facades\Mail;
+use Exception;
 use Illuminate\Support\Facades\Password;
 class UserController extends Controller {
 
@@ -30,7 +31,7 @@ class UserController extends Controller {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $admin_detail = User::where('id', \Auth::id())->first();
+            $admin_detail = User::where('id', Auth::id())->first();
             if ($admin_detail) {
 
                 $admin_detail = User::where('id', \Auth::id())->first();
@@ -583,7 +584,6 @@ class UserController extends Controller {
         $data['title'] = 'Add User';
         $data['menu_active_tab'] = 'add-user';
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
-        
         return view('admin.super_admin.add')->with($data);
     }
 
@@ -651,16 +651,20 @@ class UserController extends Controller {
     }
 
     public function deleteSuperAdmin($id) {
-        if ($id) {
-            $user = User::find($id);
-            if ($user) {
-                $user->is_deleted = '1';
-                //  $user->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $user->save();
+        try {
+            if ($id) {
+                $user = User::find($id);
+                if ($user) {
+                    $user->delete();
+                    return redirect()->route('super-admin-list')->with('success', 'Record deleted.');
+                } else {
+                    return redirect()->route('super-admin-list')->with('failed', 'Record not found.');
+                }
+            } else {
+                return redirect()->route('super-admin-list')->with('failed', 'Invalid ID.');
             }
-            return redirect()->route('super-admin-list')->with('success', 'Record deleted.');
-        } else {
-            return redirect()->route('super-admin-list')->with('failed', 'Record not found.');
+        } catch (\Exception $e) {
+            return redirect()->route('super-admin-list')->with('failed', 'An error occurred: ' . $e->getMessage());
         }
     }
 

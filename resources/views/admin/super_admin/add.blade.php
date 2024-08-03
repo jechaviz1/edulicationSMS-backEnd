@@ -13,7 +13,6 @@
                     <li class="nav-item" role="presentation">
                         <a href="{{ route('super-admin-list') }}" class="btn btn-primary light">Super Admin List</a>
                     </li>
-
                 </ul>
             </div>
             <div class="card-body">
@@ -27,6 +26,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
+                                      
                                         <select class="form-select" aria-label="Default select example" name="role">
                                             <option selected>Open this select Role</option>
                                             @foreach ($role as $ro)

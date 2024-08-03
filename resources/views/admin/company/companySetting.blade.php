@@ -651,6 +651,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-3 font-weight-bold">Name</div>
                             <div class="col-lg-3">
+                                
                                 <input type="text" value=""
                                     name="companyName" id="companyName" onfocus="onfocusInput('companyName');"
                                     onblur="onblurInput('companyName')" class="input_text form-control" maxlength="100"
