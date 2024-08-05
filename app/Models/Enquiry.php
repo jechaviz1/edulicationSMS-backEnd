@@ -20,11 +20,11 @@ class Enquiry extends Model
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id','id');
+        return $this->belongsTo(Course::class,'course_id','id');
     }
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id','id');
+        return $this->belongsTo(Student::class,'student_id','id');
     }
     // public function source()
     // {

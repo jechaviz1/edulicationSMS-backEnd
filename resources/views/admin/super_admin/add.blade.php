@@ -30,7 +30,7 @@
                                         <select class="form-select" aria-label="Default select example" name="role">
                                             <option selected>Open this select Role</option>
                                             @foreach ($role as $ro)
-                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                                <option value="{{$ro->id}}">{{ $ro->name }}</option>
                                             @endforeach
                                           </select>
                                         <div class="invalid-feedback">

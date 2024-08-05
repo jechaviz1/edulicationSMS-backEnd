@@ -658,7 +658,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-enrolment/{id}', [App\Http\Controllers\PeopleController::class,'enrolment_delete'])->name('delete.student.enrolment');
     Route::post('/people/send/email', [App\Http\Controllers\PeopleController::class,'send_mail'])->name('send.mail.people');
     Route::post('/people/language/edit', [App\Http\Controllers\PeopleController::class,'edit_lnguage'])->name('edit.language.people');
-    Route::post('/people/', [App\Http\Controllers\PeopleController::class,'edit'])->name('people.profile.photo.update');
+    Route::post('/people/profile/photo/update', [App\Http\Controllers\PeopleController::class,'edit'])->name('people.profile.photo.update');
+    Route::post('/people/search/student', [App\Http\Controllers\PeopleController::class,'search_profile'])->name('people.profile.student');
     
     // END - Event Trainers
     // START - Lerner Record 
@@ -677,6 +678,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/event/enrollment/module/pdf', [App\Http\Controllers\EnrollmentController::class, 'enrolmentPdf'])->name('student.enrolment.module.pdf');
     Route::post('/event/enrollment/course/avitmiss', [App\Http\Controllers\EnrollmentController::class, 'enrolmentAvimiss'])->name('enrolment.avetmiss.course');
     Route::post('/event/enrollment/course/certificate', [App\Http\Controllers\EnrollmentController::class, 'enrolmentCertificate'])->name('issue.enrolment.certificates');
+    Route::post('/event/bulk/enrolment', [App\Http\Controllers\EnrollmentController::class, 'bulk_enrolment'])->name('bulk.enrolment.serch');
     // End Event Enrollment 
     // START - Lerner Record 
     Route::get('/people/enrolmentSearch', [App\Http\Controllers\EnrollmentController::class, 'index'])->name('people.enrollment.search');

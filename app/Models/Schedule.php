@@ -20,5 +20,8 @@ class Schedule extends Model
         'status',
         'is_completed',
     ];
-
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_name','id');
+    }
 }

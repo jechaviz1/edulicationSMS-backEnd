@@ -30,14 +30,14 @@ class PeopleController extends Controller
         }
     }
     public function store(Request $request){
-        // dd($request);
+
         $this->validate($request, [
             'first_name' => 'required|string|min:1|max:255',
             'last_name' => 'required|string|min:1|max:255',
         ]);
         $student = new \App\Models\Student();
-        $student->firstName = $request['first_name'];
-        $student->lastName = $request['last_name'];
+        $student->first_name = $request['first_name'];
+        $student->last_name = $request['last_name'];
         $student->preferred_contact =  $request['contactType'] . ":" . $request['contactInfo'];
         $student->save();
         $id = $student->id;
@@ -219,7 +219,6 @@ class PeopleController extends Controller
         // Fetch the notes related to the enquiry ID from the database
         // Assuming you have a Note model related to an Enquiry
         $notes = EnuquiryNote::where('enuquiry_id', $enquiryId)->with('category')->get();
-
         // Return the notes as a JSON response
         return response()->json($notes);
     }
@@ -243,7 +242,7 @@ class PeopleController extends Controller
     }
 
     public function enrolment_delete($id){
-            $enrolment = EnrolmentDocument::where('id',$id)->first();
+            $enrolment = EnrolmentDocument::where('id',$id)->first();+
             $enrolment->delete();
             return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
@@ -289,5 +288,12 @@ class PeopleController extends Controller
             $student->profile_image_path = null;
             $student->save();
             return redirect()->back()->with('sucess', 'Sucess Record Created');
+    }
+    public function search_profile(Request $request){
+        $students = Student::where('first_name', 'like', "%$request->data%")
+                        ->orWhere('last_name', 'like', "%$request->data%")
+                        ->get();
+
+    return response()->json($students);
     }
 } 

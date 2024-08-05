@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\State;
-use App\Models\Schedule ;
+use App\Models\Schedule;
+use App\Models\NATFile;
 use App\Models\Enquiry ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -13,6 +14,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use ZipArchive;
 use File;
+use Auth;
 class ExportController extends Controller
 {
     public function dataExporter()
@@ -28,10 +30,9 @@ class ExportController extends Controller
 
     public function exportToXml(Request $request)
     {
-     
         try {
             $table = $request->query('table');
-            if ($table == 'student') {
+            if ($table == 'student'){
                 $students = Student::get();
                 $xml = new \SimpleXMLElement('<?xml version="1.0"?><Weworkbook></Weworkbook>');
                 foreach ($students as $student) {
@@ -121,7 +122,13 @@ class ExportController extends Controller
                 $from = $request->query('from');
                 $to = $request->query('to');
                 if($from != null && $to != null){
-                    $schedules = Schedule::whereBetween('start_date', [$from, $to])->get();
+                    $schedules = Schedule::whereBetween('start_date', [$from, $to])
+                    ->orWhereBetween('end_date', [$from, $to])
+                    ->orWhere(function ($query) use ($from, $to) {
+                        $query->where('start_date', '<=', $from)
+                        ->where('end_date', '>=', $to);
+                    })->get();
+                    
                     $xml = new \SimpleXMLElement('<?xml version="1.0"?><Weworkbook></Weworkbook>');
                     foreach ($schedules as $schedule) {
                         $blogXml = $xml->addChild('student');
@@ -140,8 +147,6 @@ class ExportController extends Controller
                     'Content-Type' => 'application/xml',
                     'Content-Disposition' => 'attachment; filename="schedule.xml"',
                 ]);
-            }else{
-                
             }
         }
 
@@ -149,7 +154,7 @@ class ExportController extends Controller
             $from = $request->query('from');
             $to = $request->query('to');
                 if($from != null && $to != null){
-                    $courses = Course::whereBetween('start_date', [$from, $to])->get();
+                    $courses = Course::whereBetween('created_at', [$from, $to])->get();
                     $xml = new \SimpleXMLElement('<?xml version="1.0"?><Weworkbook></Weworkbook>');
                     foreach ($courses as $course) {
                         $blogXml = $xml->addChild('student');
@@ -168,19 +173,14 @@ class ExportController extends Controller
                     'Content-Type' => 'application/xml',
                     'Content-Disposition' => 'attachment; filename="courses.xml"',
                 ]);
-            }else{
-                
-
-
             }
         }
 
-
-        if($table = 'enquirie'){
+        if($table == 'enquirie'){
             $from = $request->query('from');
             $to = $request->query('to');
-                if($from != null && $to != null){
-                    $enquiries = Enquiry::whereBetween('start_date', [$from, $to])->get();
+            if($from != null && $to != null){
+                    $enquiries = Enquiry::whereBetween('created_at', [$from, $to])->get();
                     $xml = new \SimpleXMLElement('<?xml version="1.0"?><Weworkbook></Weworkbook>');
                     foreach ($enquiries as $enquiry) {
                         $blogXml = $xml->addChild('student');
@@ -205,11 +205,8 @@ class ExportController extends Controller
                     'Content-Type' => 'application/xml',
                     'Content-Disposition' => 'attachment; filename="schedule.xml"',
                 ]);
-            }else{
-                
-
-
             }
+           
         }
             return view('admin.export.data');
         } catch (\Exception $e) {
@@ -648,15 +645,16 @@ class ExportController extends Controller
     public function ExportNAT(){
         try {
             $states = State::where('is_deleted','0')->get();
-            // dd($states);
-            return view('admin.export.NAT',compact('states'));
+            $name = Auth::user()->first_name . " " . Auth::user()->last_name;
+            $nat_file = NATFile::where('generated_by',$name)->get();
+            return view('admin.export.NAT',compact('states','nat_file'));
         } catch (\Exception $e) {
             // Optionally, display an error message or take other actions
             echo "An error occurred while creating the record: " . $e->getMessage();
         }
     }
     public function exportNATGenerator(Request $request){
-       
+      
         if($request->excelVersion == "excelVersion"){
             $students = Student::where('is_deleted',"0")->get();
         // Set headers for download
@@ -856,6 +854,27 @@ class ExportController extends Controller
             }
             // Close the ZIP file
             $zip->close();
+            // dd( Auth::user());
+            $nat_file_store = new NATFile;
+            $nat_file_store->date_from = $request->exportDateFrom ;
+            $nat_file_store->date_to = $request->exportDateTo ;
+            $nat_file_store->nat_file =  $zipFileName;
+            $nat_file_store->no_out_come = "";
+            $nat_file_store->generated_by = Auth::user()->first_name . " " . Auth::user()->last_name;
+            // if($request->seriesname == "38"){
+                $nat_file_store->exclusion = "" ;
+            // }
+            // if($request->seriesname == "0"){
+                $nat_file_store->inclusions = $request->seriesname ;
+            // }
+            $nat_file_store->version = $request->exportDateFrom ;
+            $nat_file_store->reporting_state = $request->reportingState ;
+            $nat_file_store->start_enrolments = "";
+            $nat_file_store->forstate = "" ;
+            $nat_file_store->report_type = "zip";
+            $nat_file_store->status = "A";
+            $nat_file_store->save();
+            return redirect()->back();
         } else {
             return response()->json(['error' => "Cannot create <$zipFileName>"], 500);
         }

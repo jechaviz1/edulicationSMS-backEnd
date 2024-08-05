@@ -49,7 +49,6 @@
                         </thead>
                         <tbody> 
                             @foreach ($enuiries as $enuiry)
-                           {{-- @dd($enuiry) --}}
                             <tr>
                                 <td>{{ $enuiry->created_at }}</td>
                                 <td>{{ $enuiry->student->first_name }} . {{ $enuiry->student->last_name }}</td>

@@ -47,14 +47,15 @@
                         @foreach ($CQR as $item)
                         @php
                             $state = State::where('id',$item->state)->first();
-
                         @endphp
                         <tr>
                             <th>{{ $item->from }} - {{ $item->to }}</th>
                             <td><a href="{{ $item->cqr_xml }}" download>{{ $item->cqr_xml }}</a></td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->generated_by }}</td>
+                            @if ($state != null)
                             <td>{{ $state->name }}</td>
+                            @endif
                           </tr>
                         @endforeach
                      

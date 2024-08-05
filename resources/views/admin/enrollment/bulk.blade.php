@@ -2,6 +2,12 @@
 @extends('admin.layout.header')
 <!-- Specify content -->
 @section('content')
+<style>
+    #search-list{
+        padding: 10px;
+        border: 1px solid #a1a1a1;
+    }
+</style>
     @if ($message = Session::get('success'))
         <div class="alert alert-primary alert-dismissible fade show">
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i
@@ -24,34 +30,36 @@
                         <div class="col-2" style="float:left;">
                             <input type="hidden" name="studentList" id="studentList" value="">
                             <select style="padding: 9px 4px;height:35px;width:100%" name="courseList" id="courseList"
-                                class="form-control" size="1" >
-                                <option value=""></option>
-                                <option value="BSB40820">BSB40820</option>
+                                class="form-control schedule" size="1">
+                                <option value="">No Set</option>
+                                @foreach ($courses as $course)
+                                    <option value="{{ $course->id }}">{{ $course->code }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-1" style="float:left;">
                         </div>
                         <div class="col-1">City:</div>
                         <div class="col-2" style="float:left;">
-                            <select name="cityList" id="cityList" class="form-control" size="1"
-                                style="height:35px;width:100%; padding: 9px 4px; margin-top:0px;"
-                                >
-                                <option value=""></option>
-                                <option value="1502">Sydney</option>
+                            <select name="cityList" id="cityList" class="form-control schedule" size="1"
+                                style="height:35px;width:100%; padding: 9px 4px; margin-top:0px;">
+                                <option value="">Not Set</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-1" style="float:left;">
                             <button type="button" class="btn btn-info" id="resetButton">Reset</button>
-                        </div>  
+                        </div>
                         <div class="col-3" id="referralsource">
                         </div>
                     </div>
                     <div class="row mt-3">
+                        <div class=""></div>
                         <div class="col-2">Schedule:</div>
                         <div style="float:left" class="col-10">
                             <select name="scheduleList" id="scheduleList" size="6" style="width:100%;">
-                                <option value="34643">Sydney, January, 996 vacancies, SP</option>
-                                <option value="35022">Sydney, January, 1 vacancies, SP</option>
                             </select>
                         </div>
                     </div>
@@ -128,24 +136,24 @@
                         <div class="col-6">
                             <input type="text" name="searchValueNameBulk" id="searchValueNameBulk" valign="middle"
                                 placeholder="Search people" class="form-control form-control-sm ui-autocomplete-input"
-                                style="height:35px" autocomplete="off"
-                                onkeydown="if((13 == event.keyCode) || (13 == event.which)) {ver_field();}"
-                                fdprocessedid="iiwyyi"><span role="status" aria-live="polite"
-                                class="ui-helper-hidden-accessible">2 results are available, use up and down arrow keys to
+                                style="height:35px" autocomplete="off">
+                            <div class="suggesstion-box"></div>
+                            <input type="hidden" name="searchValueNameBulk" id="value_search" value="">
+                            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible">2 results are
+                                available, use up and down arrow keys to
                                 navigate.</span>
                         </div>
                         <div class="col-3"></div>
                         <div class="col-3">
-                            <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#add_student">
-                            New Student
+                            <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal"
+                                data-bs-target="#add_student">
+                                New Student
                             </button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <table id="dtStudents" class="table" cellpadding="0" width="100%">
-                                
-                            </table>
+                            <table id="dtStudents" class="table" cellpadding="0" width="100%"></table>
                         </div>
                     </div>
                 </div>
@@ -155,52 +163,56 @@
     <!-- Modal Start-->
     <div class="modal fade" id="add_student" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add New Student</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-                    <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="{{ route('people.store') }}" id="new_student" method="POST" novalidate>
-                            @csrf
-                            @method('POST')
-                            <div class="mb-3">
-                                <label for="first_name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Full Name" required>
-                                <div class="invalid-feedback">
-                                    Please select a valid Full Name.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                <label for="last_name" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required>
-                                <div class="invalid-feedback">
-                                    Please select a valid Last Name.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                <label for="contact" class="form-label">Contact</label>
-                                <select class="form-select" name="contactType" aria-label="Default select example" required>
-                                    <option value="email " selected>Email</option>
-                                    <option value="home">Home</option>
-                                    <option value="mobile">Mobile</option>
-                                    <option value="office">Office</option>
-                                  </select>
-                                  <div class="invalid-feedback">
-                                    Please select a valid Email.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                <label for="contact_info" class="form-label">Contact Info</label>
-                                <input type="text" class="form-control" name="contactInfo" id="contact_info" placeholder="Contact Info" required>
-                                <div class="invalid-feedback">
-                                    Please select a valid Info.
-                                  </div> 
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 needs-validation" action="{{ route('people.store') }}" id="new_student"
+                        method="POST" novalidate>
+                        @csrf
+                        @method('POST')
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name"
+                                placeholder="Full Name" required>
+                            <div class="invalid-feedback">
+                                Please select a valid Full Name.
                             </div>
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                          </form>
-                    </div>
-        </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name"
+                                placeholder="Last Name" required>
+                            <div class="invalid-feedback">
+                                Please select a valid Last Name.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Contact</label>
+                            <select class="form-select" name="contactType" aria-label="Default select example" required>
+                                <option value="email " selected>Email</option>
+                                <option value="home">Home</option>
+                                <option value="mobile">Mobile</option>
+                                <option value="office">Office</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a valid Email.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact_info" class="form-label">Contact Info</label>
+                            <input type="text" class="form-control" name="contactInfo" id="contact_info"
+                                placeholder="Contact Info" required>
+                            <div class="invalid-feedback">
+                                Please select a valid Info.
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Modal End-->
@@ -210,25 +222,53 @@
         }
     </style>
     <script>
-            function resetFilter() {
-        document.getElementById("courseList").disabled = false;
-        document.getElementById("courseList").selectedIndex = 0;
-        document.getElementById("cityList").selectedIndex = 0;
-        jQuery("#scheduleList").html("");
-    }
+        function resetFilter() {
+            document.getElementById("courseList").disabled = false;
+            document.getElementById("courseList").selectedIndex = 0;
+            document.getElementById("cityList").selectedIndex = 0;
+            jQuery("#scheduleList").html("");
+        }
     </script>
-    @section('customjs')
+@section('customjs')
     <script>
         $(document).ready(function() {
-       $('#resetButton').click(function() {
-           console.log("hello");
-         $('#courseList').prop('selectedIndex', 0);
-         $('#cityList').prop('selectedIndex', 0);
-         $('#scheduleList').empty();
-       });
+            $('#resetButton').click(function() {
+                console.log("hello");
+                $('#courseList').prop('selectedIndex', 0);
+                $('#cityList').prop('selectedIndex', 0);
+                $('#scheduleList').empty();
+            });
 
 
-       $('#new_student').submit(function(event) {
+            $(".schedule").change(function() {
+                var course_id = $('#courseList').val();
+                var city_id = $('#cityList').val();
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('bulk.enrolment.serch') }}",
+                    data: {
+                        _token: $('input[name=_token]').val(),
+                        course_id: course_id,
+                        city_id: city_id
+                    },
+                    success: function(response) {
+                        $('#scheduleList').empty(); // Clear existing options
+                        console.log(response.schedule)
+                        if (response.schedule && response.schedule.length > 0) {
+                            $.each(response.schedule, function(index, schedule) {
+                                $('#scheduleList').append(
+                                    $('<option/>', {
+                                        value: schedule.id,
+                                        text: schedule.city.name
+                                    })
+                                );
+                            });
+                        }
+                    }
+                });
+
+            });
+            $('#new_student').submit(function(event) {
                 event.preventDefault();
                 const newProfile = {
                     name: $('#name').val(),
@@ -241,17 +281,51 @@
                     url: "{{ route('api.people.store') }}", // Replace with your API endpoint
                     method: 'POST',
                     contentType: 'application/json',
+                    "_token": "{{ csrf_token() }}",
                     data: JSON.stringify(newProfile),
                     success: function(data) {
                         $('#profileForm')[0].reset(); // Reset the form
                         fetchProfiles(); // Refresh the profiles list
                     },
                     error: function(error) {
-                        alert('An error occurred while submitting the form.');     
+                        alert('An error occurred while submitting the form.');
                     }
                 });
             });
-       });
-     </script>
-    @endsection
+
+
+            $("#searchValueNameBulk").keyup(function() {
+                var searchTerm = $(this).val();
+                console.log(searchTerm)
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('people.profile.student') }}",
+                    data: {
+                        _token: $('input[name=_token]').val(),
+                        data: searchTerm
+                    },
+                    success: function(response) {
+                        $('.suggesstion-box').empty(); // Clear existing options
+                        console.log(response)
+                        var html_data = "";
+                         html_data = `<ul id="search-list">`;
+                            $.each(response, function(index, schedule) {
+                                html_data += `<li><a href="#" onclick="selectStudent('${schedule.id}','${schedule.first_name}', '${schedule.last_name}')">` + schedule.first_name + " " + schedule.last_name + `</a></li>`;
+                            });
+                            html_data +=`</ul>`;
+                        $('.suggesstion-box').html(html_data);
+                    }
+                });
+
+            });
+           
+        });
+        function selectStudent(id,firstName, lastName) {
+            $('#searchValueNameBulk').val(firstName + " " +lastName);
+            $('#value_search').val(id);
+            $(".suggesstion-box").empty();
+        }
+                
+    </script>
+@endsection
 @stop

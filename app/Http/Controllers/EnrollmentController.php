@@ -12,7 +12,10 @@ use App\Models\UnitCompetency;
 use App\Models\StudentModule;
 use App\Models\AvitmissEnrolment;
 use App\Models\IssueCertificate;
+use App\Models\City;
+use App\Models\Course;
 use App\Models\Template;
+use App\Models\Schedule;
 use Log;
 use PDF;
 use DB;
@@ -110,7 +113,9 @@ class EnrollmentController extends Controller
             if ($request->columns != null) {
             } else {
                 $rows = Student::where('is_deleted', '0')->paginate(10);
-                return view('admin.enrollment.bulk', compact('rows'));
+                $courses = Course::all();
+                $cities = City::all();
+                return view('admin.enrollment.bulk', compact('rows','courses','cities'));
             }
         } catch (\Exception $e) {
             // Handle the exception, e.g., log the error and show an error message to the user
@@ -341,5 +346,9 @@ class EnrollmentController extends Controller
             $issue_certificate->comments = $request->comments;
             $issue_certificate->save();
             return redirect()->back()->with('success', 'Success! Records have been updated.');
+    }
+    public function bulk_enrolment(Request $request){
+        $schedule = Schedule::where('city_name',$request->city_id)->where('corse_id',$request->course_id)->with('city')->get();
+        return response()->json(['schedule' => $schedule]); 
     }
 }

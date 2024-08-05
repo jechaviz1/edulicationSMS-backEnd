@@ -160,6 +160,7 @@
             }
 
 			function scheduleexportDataxml(table){
+                console.log(table);
                 var from = document.getElementById('schedulefrom').value;
                 var to = document.getElementById('scheduleto').value;
 

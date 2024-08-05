@@ -98,6 +98,7 @@ class LearnerRecord extends Controller
        
         try {
             $enuiries = Enquiry::all();
+            // dd($enuiries);
             return view('admin.enquiry.list',compact('enuiries'));
         } catch (\Exception $e) {
             // dd("hello");
