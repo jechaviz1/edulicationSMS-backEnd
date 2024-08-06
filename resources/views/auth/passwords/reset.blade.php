@@ -53,19 +53,23 @@
                             </div>
                             @endif
 
-                            <form method="POST" action="{{ route('password.update') }}">
+                            <form method="POST"  action="{{ route('password.update') }}" class="row g-3 needs-validation" novalidate >
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <input type="hidden" name="email" value="{{ $email }}">
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">New Password</label>
-                                    <input type="password" id="dz-password" class="form-control form-control" value="" name="password">
-                                   
+                                    <input type="password" id="dz-password" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   name="password" required>
+                                    <div class="invalid-feedback">
+                                        Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
+                                      </div>
                                 </div>
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">Confirm Password</label>
-                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" name="password_confirmation">
-                                 
+                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  name="password_confirmation" required>
+                                    <div class="invalid-feedback">
+                                        Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
+                                      </div>
                                 </div>
                                 <div class="text-center mb-4">
                                     <button type="submit" class="btn btn-primary light btn-block">Password Reset</button>
@@ -101,6 +105,28 @@
         <script src="{{ asset('admin/js/deznav-init.js')}}"></script>
       <!--<script src="./js/custom.js"></script>-->
         <script src="{{ asset('admin/js/custom.js')}}"></script>
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+        </script>
 
     </body>
 </html>

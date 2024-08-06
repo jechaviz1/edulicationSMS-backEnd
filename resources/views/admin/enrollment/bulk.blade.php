@@ -293,7 +293,7 @@
                 });
             });
 
-
+                
             $("#searchValueNameBulk").keyup(function() {
                 var searchTerm = $(this).val();
                 console.log(searchTerm)
