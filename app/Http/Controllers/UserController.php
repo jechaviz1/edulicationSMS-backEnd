@@ -14,6 +14,7 @@ use App\Mail\MyTestEmail;
 use Illuminate\Support\Facades\Mail;
 use Exception;
 use Illuminate\Support\Facades\Password;
+use App\Mail\PasswordResetSuccess;
 class UserController extends Controller {
 
     public function login() {
@@ -272,13 +273,17 @@ class UserController extends Controller {
             $user = User::find(\Auth::id());
             if ($user) {
                 //profile_image
+                
                 $file_name = null;
                 $file_path = null;
-                if ($request->file()) {
-                    $file_name = 'profile_image' . time() . '.' . $request->profile_image->extension();
-                    $file_path = $request->file('profile_image')->storeAs('profile_image', $file_name, 'public');
+              
+                if ($request->hasFile('profile_image')) {
+                    $file = $request->file('profile_image');
+                    $file_name = time() . '_' . $file->getClientOriginalName();
+                    $file = $file->move(public_path('profile_image'), $file_name);
+                    $imageName = 'profile_image/' . $file_name;
+                    $file_path = $imageName;
                 }
-
                 $user->first_name = $request->input('first_name');
                 $user->middle_name = $request->input('middle_name');
                 $user->last_name = $request->input('last_name');
@@ -291,7 +296,7 @@ class UserController extends Controller {
                 }
                 if ($file_path != null) {
                     $user->profile_image_path = $file_path;
-                    $request->session()->put('profile_image_path', $file_path);
+                    // $request->session()->put('profile_image_path', $file_path);
                 }
 
                 $request->session()->put('first_name', $request->input('first_name'));
@@ -446,7 +451,8 @@ class UserController extends Controller {
                     if ($user) {
                         $user->password = bcrypt($request->new_password);
                         $user->save();
-                        \App\Models\PasswordReset::where('email', $reset_password->email)->delete();
+                        App\Models\PasswordReset::where('email', $reset_password->email)->delete();
+                        Mail::to($reset_password->email)->send(new PasswordResetSuccess($user));
                         return redirect()->route('login')->with('success', 'Password saved successfully.');
                     } else {
                         return redirect()->route('login')->with('failed', "Record not found");
@@ -590,6 +596,7 @@ class UserController extends Controller {
     public function storeSuperAdmin(Request $request) {
 
         $this->validate($request, [
+            'role' => 'required',
             'first_name' => 'required|string|min:1|max:255',
             'email' => 'required|string|email|max:255|unique:users,email',
             'username' => 'required|string|max:255|unique:users,username'
@@ -671,6 +678,7 @@ class UserController extends Controller {
     public function updateSuperAdmin(Request $request, $id) {
 
         if ($id) {
+            
             $request->validate([
                 'first_name' => 'required|string|min:1|max:255',
                 'last_name' => 'required|string|min:1|max:255',

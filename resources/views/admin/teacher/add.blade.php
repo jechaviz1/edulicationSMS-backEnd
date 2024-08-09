@@ -95,7 +95,7 @@
                                                 class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-8">
-                                            <input type="email" class="form-control" id="email1"
+                                            <input type="email" class="form-control" id="email1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                 placeholder="Your valid Trainer Email 1." required name="email1">
                                             <div class="invalid-feedback">
                                                 Please enter a Trainer Email 1.
@@ -112,7 +112,7 @@
                                                 class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-8">
-                                            <input type="email" class="form-control" id="email2"
+                                            <input type="email" class="form-control" id="email2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                 placeholder="Your valid Trainer Email 2." name="email2">
                                             <div class="invalid-feedback">
                                                 Please enter a Trainer Email 2.
@@ -129,7 +129,7 @@
                                                 class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-8">
-                                            <input type="email" class="form-control" id="email3"
+                                            <input type="email" class="form-control" id="email3" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                 placeholder="Your valid Trainer Email 3." name="email3">
                                             <div class="invalid-feedback">
                                                 Please enter a Trainer Email 3.

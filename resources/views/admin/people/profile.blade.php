@@ -2068,7 +2068,7 @@
                                                         Name
 
                                                     </label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                                    <input type="email" class="form-control" id="exampleInputEmail1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                         aria-describedby="emailHelp">
                                                 </div>
 
@@ -4014,7 +4014,7 @@
                       <label for="enuiry_document_email">To</label>  
                     </div>
                     <div class="col-10">
-                        <input type="email" name="" class="form-control" id="enuiry_document_email" value="{{$student->studentEmail}}" disabled>
+                        <input type="email" name="" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="enuiry_document_email" value="{{$student->studentEmail}}" disabled>
                         <input type="hidden" name="email" class="form-control" id="" value="{{$student->studentEmail}}">
                     </div>
                 </div>
@@ -4226,7 +4226,7 @@
                         <div class="form-group row col-sm-12 mt-2">
                             <label for="to" class="col-sm-1 col-form-label">To</label>
                             <div class="col-sm-11">
-                                <input type="email" class="form-control" name="to" id="toemail"
+                                <input type="email" class="form-control" name="to" id="toemail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                     value="dipak@mail.com" fdprocessedid="3n4458">
                             </div>
                         </div>
@@ -4241,7 +4241,7 @@
                         <div class="form-group row col-sm-12 mt-2">
                             <label for="subject" class="col-sm-1 col-form-label">Subject</label>
                             <div class="col-sm-11">
-                                <input type="email" name="subject" id="subject" class="form-control"
+                                <input type="email" name="subject" id="subject" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                     value="" fdprocessedid="hxg5xj">
                             </div>
                         </div>

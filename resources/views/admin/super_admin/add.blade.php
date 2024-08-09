@@ -18,7 +18,7 @@
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Add Super Admin</h5>
-                    <form class="needs-validation" novalidate method="POST" action="{{ route('store-super-admin' ) }}" >
+                    <form action="{{ route('store-super-admin' ) }}" class="needs-validation"  method="POST"  novalidate>
                         @csrf
                         <div class="row">
                             <div class="col-xl-4">
@@ -26,18 +26,17 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                      
-                                        <select class="form-select" aria-label="Default select example" name="role">
-                                            <option selected>Open this select Role</option>
+                                        <select class="form-select" id="validationServer04" name="role" aria-describedby="validationServer04Feedback" required>
+                                            <option selected  value="">Choose...</option>
                                             @foreach ($role as $ro)
-                                                <option value="{{$ro->id}}">{{ $ro->name }}</option>
-                                            @endforeach
+                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                        @endforeach
                                           </select>
                                         <div class="invalid-feedback">
                                             Please Select a Role.
                                         </div>
                                         @if($errors->has('role'))
-                                        <div class="error">{{ $errors->first('role') }}</div>
+                                            <div class="error">{{ $errors->first('role') }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -77,7 +76,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email">
+                                        <input type="email" class="form-control" id="validationCustom02"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Your valid Email" required name="email">
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
@@ -109,7 +108,7 @@
                                 <div class="mb-3 row">
                                     <div class="row">
                                         <label class="col-form-label col-sm-4 pt-0">Gender</label>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-4">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" value="1" checked >
                                                 <label class="form-check-label">
@@ -117,7 +116,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="col-sm-4">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" value="2">
                                                 <label class="form-check-label">
@@ -143,7 +142,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>-->
-                            <!--                            <div class="col-xl-4">
+                            <!-- <div class="col-xl-4">
                                                             <div class="mb-3 row">
                                                                 <label class="col-lg-3 col-form-label" for="validationCustom02">Confirm Password <span
                                                                         class="text-danger">*</span>
@@ -170,7 +169,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script>
     (function () {

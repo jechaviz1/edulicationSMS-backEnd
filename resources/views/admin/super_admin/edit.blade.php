@@ -13,13 +13,11 @@
                     <li class="nav-item" role="presentation">
                         <a href="user-create.html" class="btn btn-primary light">User List</a>
                     </li>
-
                 </ul>
             </div>
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Edit User</h5>
-
                     <form class="needs-validation" novalidate method="POST" action="{{ route('update-super-admin',$user->id ) }}" >
                         @csrf
                         <div class="col-xl-4">
@@ -27,7 +25,7 @@
                                 <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
                                 </label>
                                 <div class="col-lg-8">
-                                    <select class="form-select" aria-label="Default select example" name="role">
+                                    <select class="form-select" aria-label="Default select example" name="role" disabled>
                                         <option selected>Open this select Role</option>
                                         @foreach ($role as $ro)
                                         <option value="{{$ro->id}}" @if($user->role_id == $ro->id) selected @endif>{{ $ro->name }}</option>
@@ -78,7 +76,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email" value="{{$user->email}}">
+                                        <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Your valid Email" name="email" value="{{$user->email}}" required>
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
@@ -105,22 +103,21 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <div class="row">
-                                        <label class="col-form-label col-sm-4 pt-0">Gender</label>
-                                        <div class="col-sm-2">
+                                        <label class=" col-12 col-form-label col-sm-4 pt-0">Gender</label>
+                                        <div class="col-12 col-sm-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" value="1" checked >
+                                                <input class="form-check-input" type="radio" name="gender" value="1" @if($user->gender == "1") checked @endif>
                                                 <label class="form-check-label">
                                                     Male
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-2">
+                                        <div class="ccol-12 col-sm-4">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" value="2">
+                                                <input class="form-check-input" type="radio" name="gender" value="2" @if($user->gender == "2") checked @endif>
                                                 <label class="form-check-label">
                                                     Female
                                                 </label>
@@ -130,9 +127,6 @@
                                 </div>
                             </div>
                             <div class="col-xl-4"></div>
-
-
-
                             <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">
@@ -142,8 +136,6 @@
                             </div>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>

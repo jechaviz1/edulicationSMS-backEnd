@@ -19,6 +19,7 @@ use App\Models\UnitCompetency;
 use App\Models\StudentModule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Auth;
 class CourseController extends Controller
 {
     /**
@@ -29,7 +30,7 @@ class CourseController extends Controller
     public function index()
     {
         try {
-            $courseCategory = CourseCategory::get();
+            $courseCategory = CourseCategory::where('is_deleted','0')->where('created_by', Auth::user()->id)->orderBy('name', 'asc')->get();
             $courses = Course::where('self_paced_sessions', '!=', null)->with('trainers')->get();
             $users = User::get();
             $cities = City::get();
@@ -365,4 +366,17 @@ class CourseController extends Controller
             }
 
     }
+
+    public function filter(Request $request)
+{
+    $category = $request->input('category');
+    
+    $query = Course::query();
+
+    if ($category) {
+        $query->where('category_id', $category);
+    }
+
+    return $query;
+}
 }

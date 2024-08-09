@@ -21,10 +21,7 @@ class AcademicClassController extends Controller {
             $data = [];
             $data['title'] = 'Academic Class List';
             $data['menu_active_tab'] = 'academic-class-list';
-            $data['academic_class'] = \App\Models\AcademicClass::orderBy('id', 'DESC')
-                ->where('is_deleted', '0')
-                ->get();
-    
+            $data['academic_class'] = \App\Models\AcademicClass::orderBy('id', 'DESC')->where('is_deleted', '0')->get();
             return view('admin.academic_class.list')->with($data);
         } catch (\Exception $e) {
             // Log the exception

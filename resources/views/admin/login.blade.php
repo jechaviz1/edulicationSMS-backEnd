@@ -57,7 +57,7 @@
                                 @csrf
                                 <div class="mb-4">
                                     <label class="mb-1 text-dark">Email</label>
-                                    <input type="email" class="form-control form-control" value="" name="email">
+                                    <input type="email" class="form-control form-control" value="" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" >
                                 </div>
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">Password</label>

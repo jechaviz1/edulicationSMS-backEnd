@@ -1514,7 +1514,7 @@
                                                             No
                                                         @endif
                                                     </td>
-                                                    <td><input type="email" class="form-control"
+                                                    <td><input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                                                             id="exampleInputEmail1" aria-describedby="emailHelp"></td>
                                                 </tr>
                                             @endforeach

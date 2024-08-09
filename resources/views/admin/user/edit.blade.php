@@ -41,7 +41,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email" value="{{$user->email}}">
+                                        <input type="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="validationCustom02"  placeholder="Your valid Email" required name="email" value="{{$user->email}}">
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>

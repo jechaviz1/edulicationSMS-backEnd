@@ -6,20 +6,19 @@ use App\Models\CourseCategory;
 use Exception;
 use Illuminate\Http\Request;
 use Validator;
-
+use Auth;
 class CourseCategoryController extends Controller
 {
-    //
+   
     public function coursecategoryList() {
         $data = [];
         $data['title'] = 'Course Category List';
         $data['menu_active_tab'] = 'coursecategory';
-       
-       
-        $data['rows'] = CourseCategory::where('is_deleted','0')->orderBy('name', 'asc')->get();
+        $data['rows'] = CourseCategory::where('is_deleted','0')->where('created_by', Auth::user()->id)->orderBy('name', 'asc')->get();
         //dd($data['rows']);
         return view('admin.course_category.list')->with($data);
     }
+
     public function addCourseCategory(Request $request) {
         $data = [];
         $data['title'] = 'Add Course Category';
@@ -27,6 +26,7 @@ class CourseCategoryController extends Controller
       
         return view('admin.course_category.add')->with($data);
     }
+
     public function storeCourseCategory(Request $request) {
         //dd($request);
         $rules = [
@@ -45,13 +45,11 @@ class CourseCategoryController extends Controller
          //dd($data);
             try {
                 $data = new CourseCategory();
-        
-               
                         $data->name = $request->input('name');
                         $data->description = $request->input('description');
-                        
+                        $data->created_by =  \Auth::user()->id ? \Auth::user()->id : null;
+                        $data->is_deleted = "0";
                         $data->save();
-                        //dd("success");
                 return redirect()->route('coursecategory-list')->with('success', 'Record added successfully.');
             } catch (Exception $e) {
                // dd($e);
@@ -59,6 +57,7 @@ class CourseCategoryController extends Controller
             }
         }
     }
+
     public function editCourseCategory(Request $request, $id) {
         $data = [];
         $data['title'] = 'Edit Course Category';

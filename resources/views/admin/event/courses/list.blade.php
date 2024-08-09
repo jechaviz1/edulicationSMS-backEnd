@@ -61,7 +61,7 @@
                             <form class="form-inline">
                                 <div class="d-flex py-3">
                                     <h6 class="py-2"> Filter</h6>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2" aria-label="Default select example" id="category-filter">
                                         <option selected>Category</option>
                                         @foreach ($courseCategory as $category)
                                             <option selected value="{{ $category->id }}">{{ $category->name }}</option>
@@ -1972,6 +1972,7 @@ function deleteRow(rowNumber) {
         })
     </script>
     <script>
+      
         // modal open bulk 
         function openCourseDialog(scheduleId) {
             if (scheduleId != "") {
@@ -2050,5 +2051,14 @@ function deleteRow(rowNumber) {
             });
 
         });
+    </script>
+    <script>
+$(document).ready(function() {
+    // Handle category filter change
+    $('#category-filter').on('change', function() {
+        var table = $("#example4").DataTable();
+        table.ajax.reload();
+    });
+});
     </script>
 @stop

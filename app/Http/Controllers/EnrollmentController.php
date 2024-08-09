@@ -287,9 +287,7 @@ class EnrollmentController extends Controller
     public function enrolmentPdf(Request $request){
         // dd($request);
         $enrollment = Enrolment::find($request->enrolment);
-
         $pdf = PDF::loadView('admin.enrollment.unit.pdf', ['enrollment' => $enrollment]);
-
         return $pdf->download('admin.enrolment_notes.pdf');
     }
     public function enrolmentAvimiss(Request $request){
@@ -327,9 +325,9 @@ class EnrollmentController extends Controller
             $avitmiss_enrolment->tuitionFee = $request->tuitionFee;
             $avitmiss_enrolment->save();
         }
-        
         return redirect()->back()->with('success', 'Success! Records have been updated.');
     }
+
     public function enrolmentCertificate(Request $request){
             $issue_certificate = new IssueCertificate;
             $issue_certificate->student_id = $request->student_id;
@@ -347,6 +345,7 @@ class EnrollmentController extends Controller
             $issue_certificate->save();
             return redirect()->back()->with('success', 'Success! Records have been updated.');
     }
+
     public function bulk_enrolment(Request $request){
         $schedule = Schedule::where('city_name',$request->city_id)->where('corse_id',$request->course_id)->with('city')->get();
         return response()->json(['schedule' => $schedule]); 

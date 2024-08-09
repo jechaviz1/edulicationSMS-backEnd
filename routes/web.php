@@ -791,3 +791,5 @@ Route::get('forget-password', [App\Http\Controllers\ForgotPasswordController::cl
 Route::post('forget-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
 Route::get('reset-password/{token}', [App\Http\Controllers\ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+//course filter
+Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseController::class, 'filter']);

@@ -32,7 +32,7 @@ class CompanyController extends Controller
    public function saveAvetmiss(Request $request){
       try {
          $avetmiss = new Avetmiss();
-         dd($request);
+      
          // Set the attributes for the new record
          $avetmiss->contact = $request->contact;
          $avetmiss->companyIdentifier = $request->companyIdentifier;

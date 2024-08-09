@@ -23,9 +23,7 @@
         <link href="{{ URL::asset('/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" />
         <!--<link href="./css/style.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/css/style.css') }}" rel="stylesheet" />
-
     </head>
-
     <body class="vh-100">
         <div class="authincation h-100">
             <div class="container-fluid h-100">
@@ -36,7 +34,6 @@
                                 <h3 class="title">Sign In</h3>
                                 <p>Sign in to your account to start using W3Admin</p>
                             </div>
-
                             @if ($message = Session::get('success'))
                             <div class="alert alert-primary alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -44,7 +41,6 @@
                                 <strong>Success!</strong> {{ $message }}
                             </div>
                             @endif
-
                             @if ($message = Session::get('failed'))
                             <div class="alert alert-danger alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -55,7 +51,6 @@
                             <form action="{{ route('reset.password.post') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
-  
                                 <div class="form-group row">
                                     <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-8">
@@ -65,7 +60,6 @@
                                         @endif
                                     </div>
                                 </div>
-        
                                 <div class="form-group row mt-3">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-8">
@@ -94,11 +88,11 @@
                     <div class="col-xl-6 col-lg-6">
                         <div class="pages-left h-100">
                             <div class="login-content">
-                                <a href="index.html"><img src="images/logo-full.png" class="mb-3" alt=""></a>
+                                <a href=""><img src="{{ asset('admin/images/logo-full.png') }}" class="mb-3" alt=""></a>
                                 <p>Your true value is determined by how much more you give in value than you take in payment. ...</p>
                             </div>
                             <div class="login-media text-center">
-                                <img src="images/login.png" alt="">
+                                <img src="{{ asset('admin/images/login.png') }}" alt="">
                             </div>
                         </div>
                     </div>

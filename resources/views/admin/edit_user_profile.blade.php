@@ -45,7 +45,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email" value="{{$user->email}}">
+                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required name="email" value="{{$user->email}}">
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
@@ -82,7 +82,7 @@
                                         <label class="col-form-label col-sm-4 pt-0">Gender</label>
                                         <div class="col-sm-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" value="1" checked >
+                                                <input class="form-check-input" type="radio" name="gender" value="1" @if($user->gender == "1") checked  @endif>
                                                 <label class="form-check-label">
                                                     Male
                                                 </label>
@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-sm-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="gender" value="2">
+                                                <input class="form-check-input" type="radio" name="gender" value="2" @if($user->gender == "2") checked  @endif>
                                                 <label class="form-check-label">
                                                     Female
                                                 </label>
@@ -103,7 +103,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom05">Profile Image </label>
                                     <div class="col-lg-8">
-                                        <input name="profile_image" id="profile_image" type="file" class="form-control" data-error="Valid Image is required."  >
+                                        <input name="profile_image" id="profile_image" type="file" accept=".png, .jpeg, .jpg, .webp"  class="form-control" data-error="Valid Image is required."  >
 
                                         @if($user->profile_image_path)
                                         <a target="_blank" href="{{ getStoragePath() . $user->profile_image_path }}" class="btn-link text-primary">Profile Image</a>

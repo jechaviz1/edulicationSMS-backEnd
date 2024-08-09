@@ -53,20 +53,28 @@
                             </div>
                             @endif
 
-                            <form method="POST"  action="{{ route('password.update') }}" class="row g-3 needs-validation" novalidate >
+                            <form method="POST"  action="{{ route('password.update') }}" class="row g-3 needs-validation" novalidate>
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <input type="hidden" name="email" value="{{ $email }}">
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">New Password</label>
-                                    <input type="password" id="dz-password" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"   name="password" required>
+                                    <input type="password" id="dz-password" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$" name="password" maxlength="25" required>
+                                    <span class="show-pass eye">
+                                        <i class="fa fa-eye-slash"></i>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
                                     <div class="invalid-feedback">
                                         Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
                                       </div>
                                 </div>
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">Confirm Password</label>
-                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  name="password_confirmation" required>
+                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$"  name="password_confirmation" maxlength="25" required>
+                                    <span class="show-pass-confirm eye">
+                                        <i class="fa fa-eye-slash"></i>
+                                        <i class="fa fa-eye"></i>
+                                    </span>
                                     <div class="invalid-feedback">
                                         Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
                                       </div>
@@ -91,8 +99,17 @@
                 </div>
             </div>
         </div>
-
-
+        <style>
+  .show-pass-confirm.active .fa-eye-slash {
+    display: none;
+}
+.show-pass-confirm .fa-eye {
+    display: none;
+}
+.show-pass-confirm.active .fa-eye {
+    display: inline-block;
+}
+        </style>
         <!--**********************************
                 Scripts
         ***********************************-->
@@ -109,10 +126,8 @@
             // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
-
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
-
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
@@ -121,11 +136,10 @@
           event.preventDefault()
           event.stopPropagation()
         }
-
         form.classList.add('was-validated')
-      }, false)
-    })
-})()
+        }, false)
+        })
+        })()
         </script>
 
     </body>

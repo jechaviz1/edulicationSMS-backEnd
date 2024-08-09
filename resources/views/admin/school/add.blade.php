@@ -53,7 +53,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  placeholder="Your valid Email" required name="email">
+                                        <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Your valid Email" required name="email">
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
@@ -161,7 +161,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_1" />
+                                        <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" name="email_1" />
                                         <div class="invalid-feedback">Please enter a Email.</div>
                                     </div>
                                 </div>
@@ -233,7 +233,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_2">
+                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_2" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                         <div class="invalid-feedback">Please enter a Email.</div>
                                     </div>
                                 </div>
@@ -304,7 +304,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_3">
+                                        <input type="email" class="form-control" id="validationCustom02" placeholder="Email" name="email_3" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                                         <div class="invalid-feedback">Please enter a Email.</div>
                                     </div>
                                 </div>
