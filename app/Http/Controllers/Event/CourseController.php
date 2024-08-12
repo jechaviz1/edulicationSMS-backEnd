@@ -27,12 +27,16 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
+            $courseCode = $request->query('courseCode');
+            $delivery_method = $request->query('delivery_method');
+            // dd($delivery_method);
+            $course_value = null;
             $courseCategory = CourseCategory::where('is_deleted','0')->where('created_by', Auth::user()->id)->orderBy('name', 'asc')->get();
             $courses = Course::where('self_paced_sessions', '!=', null)->with('trainers')->get();
-            $users = User::get();
+            $users = User::get(); 
             $cities = City::get();
             $states = State::get();
             $teachers = Teacher::get();
@@ -40,9 +44,13 @@ class CourseController extends Controller
             $data['title'] = 'Event';
             $data['menu_active_tab'] = 'event';
             $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '1')->get();
-            $rows = Event::paginate(10);
-    
-            return view('admin.event.courses.list', compact('courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
+            if($courseCode != null){
+                $rows = Event::where('course_type', $courseCode)->paginate(10);
+                $course_value = $courseCode;
+            }else{
+                $rows = Event::paginate(10);
+            }
+            return view('admin.event.courses.list', compact('course_value','courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
         } catch (\Exception $e) {
             // Log the exception
             Log::error('Error in index method: ' . $e->getMessage());

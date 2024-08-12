@@ -5,24 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\CompanySetting;
 use App\Models\StudentNoteCategory;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use Auth;
 class CompanySettingController extends Controller
 {
 
    public function courseSetting(Request $request){
-             $data = $request->all();
-             $corses_settings = CompanySetting::where('name','Course Setting')->first();
-             if($corses_settings == null){
-                $course_setting = new CompanySetting;
-                $course_setting->name = "Course Setting";
-                $course_setting->description = json_encode($data,true);
-                $course_setting->save();
-             }else{
-                $corses_settings->name = "Course Setting";
-                $corses_settings->description = json_encode($data,true);
-                $corses_settings->save();
-             }
-           
+    
+      $user = Auth::user()->id;
+      $data = $request->all();
+      $corses_settings = CompanySetting::where('name','Course Setting')->first();
+      $user_singe = User::find($user);
+      $user_singe->deliveryMethods()->attach($request->delivery_method["id"]);
           return redirect()->back()->with('sucess', 'Update Setting Page Update');
    }
 

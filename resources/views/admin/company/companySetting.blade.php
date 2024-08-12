@@ -101,113 +101,128 @@
                                     <div class="col-lg-2">Multiple Session</div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="sel" class="CourseTypeSettings"
-                                            checked="" disabled=""> Self Paced</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="sel_rename"
-                                            id="sel_rename" value="Self Paced" maxlength="20" fdprocessedid="ael3mf">
+                                    <div class="col-lg-2">
+                                        <input type="hidden" value="1" name="delivery_method[id][]">
+                                        <input type="checkbox" id="sel" class="CourseTypeSettings" checked="" disabled=""> Self Paced</div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" name="delivery_method[rename][]" id="sel_rename" value="Self Paced">
                                     </div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="sel_init"
-                                            id="sel_init" value="SP" maxlength="8" fdprocessedid="q2tqbg"></div>
-                                </div>
-                                
-                                <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub" value="1"  name="pub" @if(isset($course_setting['pub']) == "on") checked  @endif
-                                            class="CourseTypeSettings"> Public Sessions</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" value="{{$course_setting['pub_rename']}}"
-                                            id="pub_rename" value="Public Sessions" maxlength="20" name="pub_rename" 
-                                            fdprocessedid="8ouer"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub_init" value="{{$course_setting['pub_init']}}"
-                                            id="pub_init" value="PUB" maxlength="8" fdprocessedid="te0pbsg"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub_single"  name="pub_single" @if(isset($course_setting['pub_single'])) checked  @endif
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub_multiple"  name="pub_multiple" @if(isset($course_setting['pub_multiple'])) checked  @endif
-                                            class="CourseTypeSettings"></div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" name="delivery_method[init][]" name="sel_init" id="sel_init" value="SP">
+                                    </div>
+                                    <input type="hidden" value="1" name="delivery_method[single][]">
+                                    <input type="hidden" value="1" name="delivery_method[multiple][]">
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pri" checked="" name="pri" @if(isset($course_setting['pri']) == "on") checked  @endif
-                                        class="CourseTypeSettings"> Private Sessions</div>
-                                        <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings"
-                                            id="pri_rename" value="Private Sessions" maxlength="20" name="pri_rename" value="{{$course_setting['pri_rename']}}"
-                                            fdprocessedid="24aeyp"></div> 
-                                            <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings"  name="pri_init" value="{{$course_setting['pri_init']}}"
-                                                id="pri_init" value="PRI" maxlength="8" fdprocessedid="s1zuo9"></div>
-                                                <div class="col-lg-1"><input type="checkbox" id="pri_single" checked=""  name="pri_single" @if(isset($course_setting['pri_single']) == "on") checked  @endif
-                                                    class="CourseTypeSettings"> </div>
-                                                    <div class="col-lg-2"> <input type="checkbox" id="pri_multiple" checked="" name="pri_multiple" @if(isset($course_setting['pri_multiple']) == "on") checked  @endif
-                                                        class="CourseTypeSettings"></div>
-                                                    </div>
-                                <div class="row mb-2 align-items-center"> 
-                                    <div class="col-lg-2"><input type="checkbox" id="pub2" @if(isset($course_setting['pub2']) == "on") checked  @endif
-                                            class="CourseTypeSettings"> Public
-                                        Sessions 2</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub2_rename" value="{{$course_setting['pub2_rename']}}"
-                                            id="pub2_rename" maxlength="20" fdprocessedid="6odtei"></div> 
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub2_init" value="{{$course_setting['pub2_init']}}"
-                                            id="pub2_init" maxlength="8" fdprocessedid="owb5io"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub2_single" name="pub2_single" @if(isset($course_setting['pub2_single']) == "on") checked  @endif
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub2_multiple" name="pub2_multiple" @if(isset($course_setting['pub2_multiple']) == "on") checked  @endif
-                                            class="CourseTypeSettings">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="2" class="CourseTypeSettings" name="delivery_method[id][]"> Public Sessions</div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Public Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" value="{{$course_setting['pub_init']}}" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub3" name="pub3"  @if(isset($course_setting['pub3']) == "on") checked  @endif
-                                            class="CourseTypeSettings"> Public
-                                            Sessions 3</div>
-                                            <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub3_rename" value="{{$course_setting['pub3_rename']}}"
-                                                id="pub3_rename" maxlength="20" fdprocessedid="jp2gpz"></div>  
-                                                <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub3_init" value="{{$course_setting['pub3_init']}}"
-                                                    id="pub3_init" maxlength="8" fdprocessedid="cweg6g"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub3_single" name="pub3_single" @if(isset($course_setting['pub3_single']) == "on") checked  @endif
-                                        class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub3_multiple" name="pub3_multiple" @if(isset($course_setting['pub3_multiple']) == "on") checked  @endif
-                                            class="CourseTypeSettings">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="3" class="CourseTypeSettings" name="delivery_method[id][]">  Private Sessions
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub4" name="pub4"  @if(isset($course_setting['pub4']) == "on") checked  @endif
-                                            class="CourseTypeSettings"> Public
-                                        Sessions 4</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub4_rename"  value="{{$course_setting['pub4_rename']}}"
-                                            id="pub4_rename" maxlength="20" fdprocessedid="h1ebbi"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub4_init"  value="{{$course_setting['pub4_init']}}"
-                                            id="pub4_init" maxlength="8" fdprocessedid="c2jxs4"></div> 
-                                    <div class="col-lg-1"><input type="checkbox" id="pub4_single"  name="pub4_single" @if(isset($course_setting['pub4_single']) == "on") checked  @endif
-                                            class="CourseTypeSettings"></div> 
-                                    <div class="col-lg-2"><input type="checkbox" id="pub4_multiple" name="pub4_multiple" @if(isset($course_setting['pub4_multiple']) == "on") checked  @endif
-                                            class="CourseTypeSettings">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="4" class="CourseTypeSettings" name="delivery_method[id][]">   Public Sessions 2
                                     </div>
-                                    <div style="clear:both"></div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                    </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub5" @if(isset($course_setting['pub5']) == "on") checked  @endif
-                                            class="CourseTypeSettings"> Public
-                                        Sessions 5</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub5_rename"  value="{{$course_setting['pub5_rename']}}"
-                                            id="pub5_rename" maxlength="20" fdprocessedid="slxz1d"></div> 
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub5_init"  value="{{$course_setting['pub5_init']}}"
-                                            id="pub5_init" maxlength="8" fdprocessedid="15ea4"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub5_single" name="pub5_single" @if(isset($course_setting['pub5_single']) == "on") checked  @endif
-                                            class="CourseTypeSettings"></div>
-                                    <div class="col-lg-2"><input type="checkbox" id="pub5_multiple" name="pub5_multiple" @if(isset($course_setting['pub5_multiple']) == "on") checked  @endif
-                                            class="CourseTypeSettings">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="5" class="CourseTypeSettings" name="delivery_method[id][]">   Public Sessions 3
                                     </div>
-                                    <div style="clear:both"></div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                    </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
-                                    <div class="col-lg-2"><input type="checkbox" id="pub6" name="pub6"  @if(isset($course_setting['pub6']) == "on") checked  @endif
-                                            class="CourseTypeSettings"> Public
-                                        Sessions 6</div>
-                                    <div class="col-lg-2"><input type="text" class="form-control CourseTypeSettings" name="pub6_rename"  value="{{$course_setting['pub6_rename']}}"
-                                            id="pub6_rename" maxlength="20" fdprocessedid="slxz1d"></div>
-                                    <div class="col-lg-1"><input type="text" class="form-control CourseTypeSettings" name="pub6_init"  value="{{$course_setting['pub6_init']}}"
-                                            id="pub6_init" maxlength="8" fdprocessedid="15ea4"></div>
-                                    <div class="col-lg-1"><input type="checkbox" id="pub6_single" name="pub6_single" @if(isset($course_setting['pub6_single']) == "on") checked  @endif
-                                            class="CourseTypeSettings"></div> 
-                                    <div class="col-lg-2"><input type="checkbox" id="pub6_multiple" name="pub6_multiple" @if(isset($course_setting['pub6_multiple']) == "on") checked  @endif
-                                            class="CourseTypeSettings">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="6" class="CourseTypeSettings" name="delivery_method[id][]">   Public Sessions 4
                                     </div>
-                                    <div style="clear:both"></div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                    </div>
+                                </div>
+                                <div class="row mb-2 align-items-center">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="7" class="CourseTypeSettings" name="delivery_method[id][]"> Public Sessions 5
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                    </div>
+                                </div>
+                                <div class="row mb-2 align-items-center">
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub" value="8" class="CourseTypeSettings" name="delivery_method[id][]">  Public Sessions 6
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                    </div>
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 my-4 fw-bolder">Course Booking Settings

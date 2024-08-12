@@ -67,14 +67,14 @@
                                             <option selected value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2 course-filter" aria-label="Default select example" >
                                         <option selected>Course</option>
                                         @foreach ($courses as $course)
-                                            <option selected value="{{ $course->id }}">{{ $course->name }}</option>
+                                            <option  value="{{ $course->id }}" @if($course_value != null) @if($course_value == $course->id) selected @endif @endif>{{ $course->name }}</option>
                                         @endforeach
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
-                                        <option selected>Delivery Method</option>
+                                    <select class="form-select ms-2 delivery_method_value" aria-label="Default select example">
+                                        <option selected value="">Delivery Method</option>
                                         <option value="1">SP</option>
                                         <option value="2">PUB</option>
                                         <option value="3">PRI</option>
@@ -142,7 +142,7 @@
                                                         +
                                                     </a>
                                                     @foreach ($courses as $course)
-                                                        @if ($course->id == $row->course_type)
+                                                        @if ($course->id == $row->course_name)
                                                             {{ $course->name }}
                                                         @endif
                                                     @endforeach
@@ -1489,7 +1489,6 @@
             });
         });
 
-
         function addSessions(){
             var html = `<tr id="row${number}">
         <th scope="row"><input type="text" class="form-control" name="sessions[${number}]['moduleName']" id="moduleName${number}" value="" style="width:100px;height: 35px;"></th>
@@ -1966,13 +1965,13 @@ function deleteRow(rowNumber) {
                     $('#location_1').hide();
                 }
             });
+            // course end filter
             $("#tnotes").click(function() {
                 $("#tNoteForm_34643").toggle(); // Toggle the display style
             });
         })
     </script>
     <script>
-      
         // modal open bulk 
         function openCourseDialog(scheduleId) {
             if (scheduleId != "") {
@@ -2053,12 +2052,27 @@ function deleteRow(rowNumber) {
         });
     </script>
     <script>
-$(document).ready(function() {
-    // Handle category filter change
-    $('#category-filter').on('change', function() {
-        var table = $("#example4").DataTable();
-        table.ajax.reload();
-    });
-});
+         $(document).ready(function() {
+            $('.course-filter').change(function() {
+            var courseCode = $(this).val();
+            var deliveryMethod = $('.delivery_method_value').val(); // Get the current value of the delivery method dropdown
+            var url = new URL(window.location.href);
+            url.searchParams.set('courseCode', courseCode);
+            console.log(deliveryMethod != "",deliveryMethod)
+            if(deliveryMethod != ''){
+                url.searchParams.set('delivery_method', deliveryMethod);
+            }
+            // window.location.href = url;
+        });
+
+        $('.delivery_method_value').change(function() {
+            var deliveryMethod = $(this).val();
+            var courseCode = $('.course-filter').val(); // Get the current value of the course filter dropdown
+            var url = new URL(window.location.href);
+            url.searchParams.set('delivery_method', deliveryMethod);
+            url.searchParams.set('courseCode', courseCode);
+            window.location.href = url;
+        });
+        });
     </script>
 @stop
