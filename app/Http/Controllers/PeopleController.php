@@ -296,4 +296,17 @@ class PeopleController extends Controller
 
     return response()->json($students);
     }
-} 
+
+    public function websiteEnquiry(){
+        return view('admin.people.websiteEnquiry');
+    }
+
+    public function websiteEnrolment(){
+        return view('admin.people.websiteEnrolment');
+    } 
+
+    public function avitmiss_check(){
+        return view('admin.people.avetmisscheck');
+    }
+
+    } 

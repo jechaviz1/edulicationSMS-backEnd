@@ -32,7 +32,7 @@ class CourseController extends Controller
         try {
             $courseCode = $request->query('courseCode');
             $delivery_method = $request->query('delivery_method');
-            // dd($delivery_method);
+            $city = $request->query('city');
             $course_value = null;
             $courseCategory = CourseCategory::where('is_deleted','0')->where('created_by', Auth::user()->id)->orderBy('name', 'asc')->get();
             $courses = Course::where('self_paced_sessions', '!=', null)->with('trainers')->get();
@@ -44,17 +44,26 @@ class CourseController extends Controller
             $data['title'] = 'Event';
             $data['menu_active_tab'] = 'event';
             $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '1')->get();
-            if($courseCode != null){
-                $rows = Event::where('course_type', $courseCode)->where('archive','!=','1')->paginate(10);
+           // Start building the query
+           
+           $query = Event::where('archive', '!=', '1');
+            // Apply filters based on the presence of each query parameter
+            if ($courseCode != null) {
+                $query->where('course_type', $courseCode);
                 $course_value = $courseCode;
-            }else{
-                $rows = Event::where('archive','!=','1')->paginate(10);
             }
+            if ($delivery_method != null) {
+                $query->where('delivery_method', $delivery_method);
+            }
+            if ($city != null) {
+                $query->where('city', $city);
+            }
+            // Paginate the results
+            $rows = $query->paginate(10);
             return view('admin.event.courses.list', compact('course_value','courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
         } catch (\Exception $e) {
             // Log the exception
             Log::error('Error in index method: ' . $e->getMessage());
-    
             // Redirect back with an error message
             return redirect()->back()->with('error', 'There was an error loading the event list. Please try again later.');
         }

@@ -660,6 +660,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/people/language/edit', [App\Http\Controllers\PeopleController::class,'edit_lnguage'])->name('edit.language.people');
     Route::post('/people/profile/photo/update', [App\Http\Controllers\PeopleController::class,'edit'])->name('people.profile.photo.update');
     Route::post('/people/search/student', [App\Http\Controllers\PeopleController::class,'search_profile'])->name('people.profile.student');
+    Route::get('/people/website/enquiry/email', [App\Http\Controllers\PeopleController::class, 'websiteEnquiry'])->name('people.website.enquiries');
+    Route::get('/people/website/enrolment', [App\Http\Controllers\PeopleController::class, 'websiteEnrolment'])->name('people.website.enrolment');
+    Route::get('/people/AVETMISSCheck', [App\Http\Controllers\PeopleController::class, 'avitmiss_check'])->name('people.avitmiss.check');
     
     // END - Event Trainers
     // START - Lerner Record 

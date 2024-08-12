@@ -1013,6 +1013,9 @@ $user = Auth::user();
                         <li><a href="{{ route('people.enquiry.index')}}">Enquiry Search</a></li>
                         <li><a href="{{ route('people.enrollment.search') }}">Enrolment Search</a></li>
                         <li><a href="{{ route('people.bulk.enrolment') }}">Bulk Enrolment</a></li>
+                        <li><a href="{{ route('people.website.enquiries') }}">Website Enquiries</a></li>
+                        <li><a href="{{ route('people.website.enrolment') }}">Website Enrolments</a></li>
+                        <li><a href="{{ route('people.avitmiss.check')}}">AVETMISS Check</a></li>
                         <li><a href="">Employer Groups</a></li>
                     </ul>
                 </li>

@@ -79,7 +79,7 @@
                                         <option value="2">PUB</option>
                                         <option value="3">PRI</option>
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2 city" aria-label="Default select example">
                                         <option selected>City</option>
                                         @foreach ($cities as $city)
                                             <option value="{{ $city->id }}" style="color:#666">{{ $city->name }}
@@ -2009,25 +2009,22 @@ function deleteRow(rowNumber) {
                 formData.append('_token', csrfToken);
                 console.log(formData); // Add CSRF token here
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+                (function () {
+                'use strict'
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                    })
+                })()
                 // Send the AJAX request
                 $.ajax({
                     url: "{{ route('event.courses.store') }}",
@@ -2058,21 +2055,34 @@ function deleteRow(rowNumber) {
             var deliveryMethod = $('.delivery_method_value').val(); // Get the current value of the delivery method dropdown
             var url = new URL(window.location.href);
             url.searchParams.set('courseCode', courseCode);
-            console.log(deliveryMethod != "",deliveryMethod)
+            console.log(deliveryMethod)
             if(deliveryMethod != ''){
                 url.searchParams.set('delivery_method', deliveryMethod);
+            }else{
+                window.location.href = url;
             }
-            // window.location.href = url;
         });
 
         $('.delivery_method_value').change(function() {
             var deliveryMethod = $(this).val();
-            var courseCode = $('.course-filter').val(); // Get the current value of the course filter dropdown
+            var courseCode = $('.course-filter').val();
+            var city = $('.city').val();
             var url = new URL(window.location.href);
             url.searchParams.set('delivery_method', deliveryMethod);
             url.searchParams.set('courseCode', courseCode);
             window.location.href = url;
         });
+
+        $('.city').change(function() {
+            var city = $(this).val();
+            var courseCode = $('.course-filter').val();
+            var deliveryMethod = $('.delivery_method').val();
+            var url = new URL(window.location.href);
+            url.searchParams.set('delivery_method', deliveryMethod);
+            url.searchParams.set('city', courseCode);
+            window.location.href = url;
+        });
+        
         });
     </script>
 @stop
