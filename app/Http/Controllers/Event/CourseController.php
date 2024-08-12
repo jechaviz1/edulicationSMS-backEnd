@@ -45,10 +45,10 @@ class CourseController extends Controller
             $data['menu_active_tab'] = 'event';
             $data['academic_class'] = Event::orderBy('id', 'DESC')->where('is_deleted', '1')->get();
             if($courseCode != null){
-                $rows = Event::where('course_type', $courseCode)->paginate(10);
+                $rows = Event::where('course_type', $courseCode)->where('archive','!=','1')->paginate(10);
                 $course_value = $courseCode;
             }else{
-                $rows = Event::paginate(10);
+                $rows = Event::where('archive','!=','1')->paginate(10);
             }
             return view('admin.event.courses.list', compact('course_value','courseCategory', 'courses', 'users', 'rows', 'states', 'cities', 'teachers'))->with($data);
         } catch (\Exception $e) {
@@ -224,9 +224,8 @@ class CourseController extends Controller
         try {
             $id = $request->query('id');
             $archive = $request->query('archive');
-            
             $course = Event::find($id);
-    
+            
             if ($course) {
                 $course->archive = $archive;
                 $course->save();

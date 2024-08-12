@@ -56,8 +56,73 @@
             <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel" aria-labelledby="home-tab-3">
                 <div class="card-body pt-0">
                     <div class="table-responsive"> 
-                      
-                        
+                        <div class="table-responsive">
+                            <table id="example4" class="display table" style="min-width: 845px">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>City</th>
+                                        <th>Course Code</th>
+                                        <th>Delivery Method</th>
+                                        <th>Month</th>
+                                        <th>Start Date</th>
+                                        <th>Quota</th>
+                                        <th>Operation</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!empty($rows))
+                                        @foreach ($rows as $k => $row)
+                                            <tr>
+                                                <td>
+                                                    <a href="{{ route('event.course.update', $row->id) }}"
+                                                        style="width: 26px;height: 20px;line-height: 2px;width: 20px;text-align: center;padding: 0;">
+                                                        +
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @foreach ($cities as $city)
+                                                        @if ($city->id == $row->city)
+                                                            {{ $city->name }}
+                                                        @endif
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @foreach ($courses as $course)
+                                                    @if ($course->id == $row->course_name)
+                                                        {{ $course->name }}
+                                                    @endif
+                                                @endforeach
+                                                </td>
+                                                <td>
+                                                   
+                                                </td>
+                                                <td>
+                                                    {{ $row->month }} {{ $row->year }}
+                                                </td>
+                                                <td>
+                                                    
+                                                </td>
+                                                <td>
+                                                    
+                                                </td>
+                                                    <td>
+                                                        <div class="d-flex">
+                                                            <a href="{{ route('event.courses.destroy', $row->id) }}"
+                                                                onclick="return confirm('Are you sure?')"
+                                                                class="btn btn-danger shadow btn-xs sharp me-1"><i
+                                                                    class="fa fa-trash"></i></a>
+                                                            <a href="{{ route('event.courses.archive', ['id' => $row->id, 'archive' => ($row->archive = 0)]) }}"
+                                                                class="btn  me-1">Active</a>
+                                                        </div>
+                                                    </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                           
+                        </div>
                     </div>
                 </div>
             </div>

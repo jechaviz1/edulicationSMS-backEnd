@@ -636,7 +636,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/events/trainers', [App\Http\Controllers\TrainersController::class, 'index'])->name('event.trainers.index');
     // END - Event Trainerscourse-list
     // START - Event Archive 
-    // Route::get('/events/archieve',[App\Http\Controllers\ArchiveController::class, 'index'])->name('event.archive.index');
+    Route::get('/events/archieve',[App\Http\Controllers\ArchiveController::class, 'index'])->name('event.archive.index');
     // END - Event Archive
     // START - People 
     Route::get('/people/find', [App\Http\Controllers\PeopleController::class, 'index'])->name('people.find.index');

@@ -993,7 +993,7 @@ $user = Auth::user();
                             <li><a href="{{ URL::route('event.room.calender') }}">Rooms</a></li>
                             <li><a href="{{ URL::route('event.session.index') }}">Sessions</a></li>
                             <li><a href="{{ URL::route('event.trainers.index') }}">Trainers</a></li>
-                            {{-- <li><a href="{{ URL::route('event.archive.index') }}">Archive</a></li> --}}
+                            <li><a href="{{ URL::route('event.archive.index') }}">Archive</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
