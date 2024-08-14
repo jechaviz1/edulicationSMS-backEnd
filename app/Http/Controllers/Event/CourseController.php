@@ -32,7 +32,7 @@ class CourseController extends Controller
         try {
             $courseCode = $request->query('courseCode');
             $delivery_method = $request->query('delivery_method');
-            $city = $request->query('city');
+            $city = $request->query('cityId');
             $course_value = null;
             $courseCategory = CourseCategory::where('is_deleted','0')->where('created_by', Auth::user()->id)->orderBy('name', 'asc')->get();
             $courses = Course::where('self_paced_sessions', '!=', null)->with('trainers')->get();
@@ -48,6 +48,7 @@ class CourseController extends Controller
            
            $query = Event::where('archive', '!=', '1');
             // Apply filters based on the presence of each query parameter
+            
             if ($courseCode != null) {
                 $query->where('course_type', $courseCode);
                 $course_value = $courseCode;

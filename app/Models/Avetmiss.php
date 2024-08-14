@@ -30,4 +30,8 @@ class Avetmiss extends Model
         'statecompanyIdentifier',
         'fundingSourceState',
     ];
+    public function fundingStates()
+    {
+        return $this->belongsToMany(FundingState::class)->withPivot('description');
+    }
 }

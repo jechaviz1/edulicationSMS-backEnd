@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('funding_sources', function (Blueprint $table) {
+        Schema::create('funding_states', function (Blueprint $table) {
             $table->id();
+            $table->string('state');
             $table->string('name');
-            $table->string('description');
+            $table->string('company_identifier');
             $table->timestamps();
         });
     }
@@ -28,7 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('funding_sources');
+        Schema::dropIfExists('funding_states');
     }
-    
 };

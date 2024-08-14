@@ -9,6 +9,6 @@ class FundingSource extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'slug', 
+        'id','name','description' 
     ];
 }

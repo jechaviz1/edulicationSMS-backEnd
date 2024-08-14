@@ -782,6 +782,7 @@ Route::group(['prefix' => 'admin'], function () {
   Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');  
   Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');  
   Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
+  Route::get('/api/funding/national/find', [App\Http\Controllers\ApiController::class,'funding_find'])->name('avitmiss.funding.find');  
 
 });
 });

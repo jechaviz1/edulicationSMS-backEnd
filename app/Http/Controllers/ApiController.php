@@ -12,7 +12,10 @@ use App\Models\Enrolment;
 use App\Models\EnrolmentAddNote;
 use App\Http\Resources\UserResource;
 use App\Models\IssueCertificate;
+use App\Models\FundingState;
 use PDF;
+use Svg\Tag\Rect;
+
 class ApiController extends Controller
 {
     public function cityget(){
@@ -112,5 +115,11 @@ class ApiController extends Controller
     
         return $pdf->download('note.pdf');
         // return response()->json(['data' => $data]); 
+    }
+    public function funding_find(Request $request){
+        $national = $request->query('national');
+        $state = $request->query('state');
+        $fundingSource = FundingState::where('state',$state)->where('national_id',$national)->get();
+        return response()->json(['fundingSource' => $fundingSource]);
     }
 }

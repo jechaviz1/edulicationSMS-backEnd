@@ -61,45 +61,45 @@
                             <form class="form-inline">
                                 <div class="d-flex py-3">
                                     <h6 class="py-2"> Filter</h6>
-                                    <select class="form-select ms-2" aria-label="Default select example" id="category-filter">
+                                    <select class="form-select ms-2"  id="coursecategory" onchange="reloadPage();">
                                         <option selected>Category</option>
                                         @foreach ($courseCategory as $category)
                                             <option selected value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                    <select class="form-select ms-2 course-filter" aria-label="Default select example" >
+                                    <select class="form-select ms-2 course-filter"  id="courseId" onchange="reloadPage();">
                                         <option selected>Course</option>
                                         @foreach ($courses as $course)
                                             <option  value="{{ $course->id }}" @if($course_value != null) @if($course_value == $course->id) selected @endif @endif>{{ $course->name }}</option>
                                         @endforeach
                                     </select>
-                                    <select class="form-select ms-2 delivery_method_value" aria-label="Default select example">
+                                    <select class="form-select ms-2 delivery_method_value" id="courseTypeId" onchange="reloadPage();">
                                         <option selected value="">Delivery Method</option>
                                         <option value="1">SP</option>
                                         <option value="2">PUB</option>
                                         <option value="3">PRI</option>
                                     </select>
-                                    <select class="form-select ms-2 city" aria-label="Default select example">
+                                    <select class="form-select ms-2 city" id="cityId" onchange="reloadPage();">
                                         <option selected>City</option>
                                         @foreach ($cities as $city)
                                             <option value="{{ $city->id }}" style="color:#666">{{ $city->name }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2" id="status" onchange="reloadPage();">
                                         <option selected>All Status</option>
                                         <option value="All">All Status</option>
                                         <option value="Open">Status Open</option>
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2" id="trainers" onchange="reloadPage();">
                                         <option selected>Trainers</option>
                                         <option value="trainer1 training">trainer1 training</option>
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2" id="asssessors" onchange="reloadPage();">
                                         <option selected>Assessors</option>
                                         <option value="trainer1 training">trainer1 training</option>
                                     </select>
-                                    <select class="form-select ms-2" aria-label="Default select example">
+                                    <select class="form-select ms-2" id="rooms" onchange="reloadPage();">
                                         <option selected>Rooms</option>
                                     </select>
                                 </div>
@@ -2049,40 +2049,39 @@ function deleteRow(rowNumber) {
         });
     </script>
     <script>
-         $(document).ready(function() {
-            $('.course-filter').change(function() {
-            var courseCode = $(this).val();
-            var deliveryMethod = $('.delivery_method_value').val(); // Get the current value of the delivery method dropdown
-            var url = new URL(window.location.href);
-            url.searchParams.set('courseCode', courseCode);
-            console.log(deliveryMethod)
-            if(deliveryMethod != ''){
-                url.searchParams.set('delivery_method', deliveryMethod);
-            }else{
-                window.location.href = url;
+   function reloadPage() {
+            var coursecategory = document.getElementById("coursecategory");
+            var courseTypeId = document.getElementById("courseTypeId");
+            var courseCode = document.getElementById("courseId");
+            var status = document.getElementById("status");
+            var trainers = document.getElementById("trainers");
+            var asssessors = document.getElementById("asssessors");
+            var rooms = document.getElementById("rooms");
+            var temp = "";
+            if(trainers.value != "")
+            temp += "&trainer=" + trainers.value;
+            if(asssessors.value != "")
+            temp += "&assessor=" + asssessors.value;
+            if(rooms.value != "")
+            temp += "&room=" + rooms.value;
+            if (coursecategory.value != "")
+                temp += "&coursecategory=" + coursecategory.value;
+            if (courseTypeId.value != "")
+                temp += "&courseTypeId=" + courseTypeId.value;
+            if (courseCode.value != "")
+                temp += "&courseCode=" + courseCode.value;
+            if (document.getElementById("cityId") && courseTypeId.value != 1) {
+                var cityId = document.getElementById("cityId");
+                if (cityId.value != "")
+                    temp += "&cityId=" + cityId.value;
             }
-        });
-
-        $('.delivery_method_value').change(function() {
-            var deliveryMethod = $(this).val();
-            var courseCode = $('.course-filter').val();
-            var city = $('.city').val();
-            var url = new URL(window.location.href);
-            url.searchParams.set('delivery_method', deliveryMethod);
-            url.searchParams.set('courseCode', courseCode);
-            window.location.href = url;
-        });
-
-        $('.city').change(function() {
-            var city = $(this).val();
-            var courseCode = $('.course-filter').val();
-            var deliveryMethod = $('.delivery_method').val();
-            var url = new URL(window.location.href);
-            url.searchParams.set('delivery_method', deliveryMethod);
-            url.searchParams.set('city', courseCode);
-            window.location.href = url;
-        });
-        
-        });
+            temp += "&status=" + status.value;
+            if (temp != "") {
+                temp = temp.substring(1, temp.length);
+                location.href = "?" + temp;
+            } else {
+                location.href = "?";
+            }
+            }
     </script>
 @stop

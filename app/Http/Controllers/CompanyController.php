@@ -11,19 +11,26 @@ use App\Models\CompanyDocument;
 use App\Models\InfoPakSpecific;
 use App\Models\BackgroundTemplate;
 use App\Models\courseEmail;
+use App\Models\AvitmessFunding;
+use App\Models\FundingSource;
 use App\Models\User;
 use App\Models\CompanySetting;
 use App\Models\StudentNoteCategory;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\ImageController;
 use Exception;
+use DB;
+use Auth;
 class CompanyController extends Controller
 {
    public function avetmisssetting(){
     try {
         $users = User::get();
-        // Return the view
-        return view('admin.company.avetmisssetting',compact('users'));
+        $user_id = Auth::user()->id;
+        $avetmiss = Avetmiss::where('user_id',$user_id)->first();
+        $avitmess_funding = AvitmessFunding::where('avetmiss_id',$avetmiss->id)->get();
+        $interntional = FundingSource::get();
+        return view('admin.company.avetmisssetting',compact('users','avetmiss','avitmess_funding','interntional'));
     } catch (Exception $e) {
         // Handle the error and redirect back with an error message
         return redirect()->back()->with('error', 'An error occurred while loading the AVETMISS settings page.');
@@ -31,8 +38,11 @@ class CompanyController extends Controller
    }
    public function saveAvetmiss(Request $request){
       try {
-         $avetmiss = new Avetmiss();
-      
+        $user_id = Auth::user()->id;
+        $avetmiss = Avetmiss::where('user_id',$user_id)->first();
+        if($avetmiss == null){
+            $avetmiss = new Avetmiss();
+        }
          // Set the attributes for the new record
          $avetmiss->contact = $request->contact;
          $avetmiss->companyIdentifier = $request->companyIdentifier;
@@ -49,11 +59,22 @@ class CompanyController extends Controller
          $avetmiss->temail = $request->temail;
          $avetmiss->tphone = $request->tphone;
          $avetmiss->tfax = $request->tfax;
-         $avetmiss->chkRptState = json_encode($request->chkRptState);
-         $avetmiss->statecompanyIdentifier = json_encode($request->statecompanyIdentifier);
-         $avetmiss->fundingSourceDescription = json_encode($request->fundingSourceDescription);
-         $avetmiss->fundingSourceState = json_encode($request->fundingSourceState);
-         $avetmiss->save();
+         $avetmiss->user_id = Auth::user()->id;
+        // Attach FundingStates to Avetmiss with additional pivot data
+        $avetmiss->save();
+        if($request->funding != null){
+            foreach($request->funding['state'] as $row => $funding){
+                $state = new AvitmessFunding;
+                $state->user_id = Auth::user()->id;
+                $state->state = $request->funding['state'][$row];
+                $state->international =  $request->funding['international'][$row];
+                $state->avetmiss_id  = $avetmiss->id;
+                $state->funding_state_id = $request->funding['state_funding'][$row];
+                $state->description = $request->funding['description'][$row];
+                $state->save();
+               }
+        }
+           
          return redirect()->route('company.avetmissSetting');
     
      } catch (\Exception $e) {
