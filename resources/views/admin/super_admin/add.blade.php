@@ -47,7 +47,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid First Name." required name="first_name">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Last Name." required name="first_name" value="{{ old('first_name') }}">
                                         <div class="invalid-feedback">
                                             Please enter a First Name.
                                         </div>
@@ -61,7 +61,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name <span class="text-danger">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Last Name." required name="last_name">
+                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Last Name." required name="last_name" value="{{ old('last_name') }}"> 
                                         <div class="invalid-feedback">
                                             Please enter a Last Name.
                                         </div>
@@ -76,7 +76,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Your valid Email" required name="email">
+                                        <input type="email" class="form-control" id="validationCustom02"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Your valid Email" required name="email" value="{{ old('email') }}">
                                         <div class="invalid-feedback">
                                             Please enter a Email.
                                         </div>
@@ -93,7 +93,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Username" required name="username">
+                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Username" required name="username" value="{{ old('username') }}">
                                         <div class="invalid-feedback">
                                             Please enter a Username.
                                         </div>
@@ -103,7 +103,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <div class="row">

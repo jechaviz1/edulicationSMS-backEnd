@@ -89,7 +89,7 @@ class ProgramController extends Controller
             }
         }
         public function updateProgram(Request $request, $id) {
-
+            
             $request->validate([
                 'faculty' => 'required',
                 'title' => 'required|max:191|unique:programs,title,'.$id,

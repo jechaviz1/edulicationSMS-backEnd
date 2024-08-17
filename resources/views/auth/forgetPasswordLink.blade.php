@@ -48,6 +48,15 @@
                                 <strong>Error!</strong> {{ $message }}
                             </div>
                             @endif
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                             <form action="{{ route('reset.password.post') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
@@ -60,20 +69,28 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="form-group row mt-3">
+                                <div class="form-group row mt-3 position-relative">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                                     <div class="col-md-8">
-                                        <input type="password" id="password" class="form-control" name="password" required autofocus>
+                                        <input type="password"  id="dz-password" class="form-control" name="password" required autofocus>
+                                        <span class="show-pass eye" style="top: 13px;">
+                                            <i class="fa fa-eye-slash"></i>
+                                            <i class="fa fa-eye"></i>
+                                        </span>
                                         @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                         @endif
                                     </div>
                                 </div>
         
-                                <div class="form-group row mt-3">
+                                <div class="form-group row mt-3 position-relative">
                                     <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
                                     <div class="col-md-8">
-                                        <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autofocus>
+                                        <input type="password" id="dz-password-confirm" class="form-control" name="password_confirmation" required autofocus>
+                                        <span class="show-pass-confirm eye" style="top: 13px;">
+                                            <i class="fa fa-eye-slash"></i>
+                                            <i class="fa fa-eye"></i>
+                                        </span>
                                         @if ($errors->has('password_confirmation'))
                                             <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                                         @endif
@@ -113,6 +130,16 @@
         <script src="{{ asset('admin/js/deznav-init.js')}}"></script>
       <!--<script src="./js/custom.js"></script>-->
         <script src="{{ asset('admin/js/custom.js')}}"></script>
-
+        <style>
+            .show-pass-confirm.active .fa-eye-slash {
+              display: none;
+          }
+          .show-pass-confirm .fa-eye {
+              display: none;
+          }
+          .show-pass-confirm.active .fa-eye {
+              display: inline-block;
+          }
+                  </style>
     </body>
 </html>

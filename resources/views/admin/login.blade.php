@@ -127,6 +127,58 @@
         <script src="{{ asset('admin/js/deznav-init.js')}}"></script>
       <!--<script src="./js/custom.js"></script>-->
         <script src="{{ asset('admin/js/custom.js')}}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const checkbox = document.getElementById('customCheckBox1');
 
+        const preference = getCookie('remember_preference');
+        if (preference === 'true') {
+            checkbox.checked = true;
+            // Apply your preference here (e.g., dark mode, language settings)
+            applyPreference();
+        }
+            
+        // Save the preference when the checkbox is changed
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                setCookie('remember_preference', 'true', 365); // Save preference for 1 year 
+                applyPreference();
+            } else {
+                setCookie('remember_preference', 'false', 365);
+                // Remove or revert preference here
+                removePreference();
+            }
+        });
+    });
+
+    function applyPreference() {
+        // Your code to apply the preference
+        console.log("Preference applied");
+    }
+
+    function removePreference() {
+        // Your code to remove or revert the preference
+        console.log("Preference removed");
+    } 
+
+    // Helper functions to set and get cookies
+    function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+    </script>
     </body>
 </html>

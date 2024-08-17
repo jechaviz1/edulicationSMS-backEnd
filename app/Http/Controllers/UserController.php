@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Mail;
 use Exception;
 use Illuminate\Support\Facades\Password;
 use App\Mail\PasswordResetSuccess;
+use App\Mail\DeleteUser;
 class UserController extends Controller {
 
     public function login() {
@@ -156,14 +157,14 @@ class UserController extends Controller {
             $user->gender = isset($data['gender']) ? $data['gender'] : 1;
             $user->save();
             $this->sendRegisterLinkEmail($user->email);
-//                 $to      =$user->email ;// 'nobody@example.com';
-//    $subject = 'the subject';
-//    $message = 'hello';
-//    $headers = 'From: webmaster@example.com'       . "\r\n" .
-//                 'Reply-To: webmaster@example.com' . "\r\n" .
-//                 'X-Mailer: PHP/' . phpversion();
-//
-//    mail($to, $subject, $message, $headers);
+            //                 $to      =$user->email ;// 'nobody@example.com';
+            //    $subject = 'the subject';
+            //    $message = 'hello';
+            //    $headers = 'From: webmaster@example.com'       . "\r\n" .
+            //                 'Reply-To: webmaster@example.com' . "\r\n" .
+            //                 'X-Mailer: PHP/' . phpversion();
+            //
+            //    mail($to, $subject, $message, $headers);
 
             return redirect()->route('user-list')->with('success', 'Record added successfully.');
         } catch (Exception $e) {
@@ -262,47 +263,51 @@ class UserController extends Controller {
         }
     }
 
-    public function updateUserProfile(Request $request) {
-        if (\Auth::id()) {
-            $request->validate([
-                'first_name' => 'required',
-//                'last_name' => 'required',
-                'email' => 'required',
-//                'mobile_no' => 'required',
-            ]);
-            $user = User::find(\Auth::id());
-            if ($user) {
-                //profile_image
-                
-                $file_name = null;
-                $file_path = null;
-              
+         public function updateUserProfile(Request $request) {
+
+                if (\Auth::id()){
+                    $request->validate([
+                        'first_name' => 'required',
+                        //'last_name' => 'required',
+                        'email' => 'required',
+                        //  'mobile_no' => 'required',
+                        'profile_image' => 'required|image|mimes:png,jpeg,jpg,webp|max:2048', // max:2048 means 2MB
+                    ], [
+                        'profile_image.required' => 'A profile image is required.',
+                        'profile_image.image' => 'The file must be an image.',
+                        'profile_image.mimes' => 'The image must be a file of type: png, jpeg, jpg, webp.',
+                        'profile_image.max' => 'The image size must not exceed 2MB.',           
+                    ]);
+
+                $user = User::find(\Auth::id());
+                    if ($user) {
+                            //profile_image
+                            $file_name = null;
+                            $file_path = null;
                 if ($request->hasFile('profile_image')) {
-                    $file = $request->file('profile_image');
-                    $file_name = time() . '_' . $file->getClientOriginalName();
-                    $file = $file->move(public_path('profile_image'), $file_name);
+                            $file = $request->file('profile_image');
+                            $file_name = time() . '_' . $file->getClientOriginalName();
+                            $file = $file->move(public_path('profile_image'), $file_name);
                     $imageName = 'profile_image/' . $file_name;
                     $file_path = $imageName;
                 }
+
                 $user->first_name = $request->input('first_name');
                 $user->middle_name = $request->input('middle_name');
                 $user->last_name = $request->input('last_name');
                 $user->username = $request->input('username');
                 $user->email = $request->input('email');
-//                $user->mobile_no = $request->input('mobile_no');
-
+                //$user->mobile_no = $request->input('mobile_no');
                 if ($file_name != null) {
                     $user->profile_image = $file_name;
                 }
                 if ($file_path != null) {
                     $user->profile_image_path = $file_path;
-                    // $request->session()->put('profile_image_path', $file_path);
+                    
                 }
-
                 $request->session()->put('first_name', $request->input('first_name'));
                 $request->session()->put('last_name', $request->input('last_name'));
                 $request->session()->put('email', $request->input('email'));
-
                 $user->save();
             }
             return redirect()->route('edit-user-profile')->with('success', 'User Profile Updated.');
@@ -436,8 +441,21 @@ class UserController extends Controller {
     public function resetPasswordPost(Request $request) {
         try {
             $request->validate([
-                'new_password' => 'required',
+                'token' => 'required',
+                'email' => 'required|email',
+                'new_password' => [
+                    'required',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$/'
+                ],
                 'confirm_password' => 'required|same:new_password'
+            ], [
+                'token.required' => 'The token field is required.',
+                'email.required' => 'The email field is required.',
+                'email.email' => 'Please enter a valid email address.',
+                'new_password.required' => 'The new password field is required.',
+                'new_password.regex' => 'The new password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, one special character, and must not contain spaces.',
+                'confirm_password.required' => 'The confirm password field is required.',
+                'confirm_password.same' => 'The confirm password must match the new password.'
             ]);
             $token = $request->token;
             $reset_password = \App\Models\PasswordReset::where('token', $token)->first();
@@ -586,22 +604,31 @@ class UserController extends Controller {
     }
 
     public function addSuperAdmin(Request $request) {
+        // dd($request);
         $data = [];
         $data['title'] = 'Add User';
         $data['menu_active_tab'] = 'add-user';
         $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
         return view('admin.super_admin.add')->with($data);
+
     }
 
     public function storeSuperAdmin(Request $request) {
-
         $this->validate($request, [
             'role' => 'required',
             'first_name' => 'required|string|min:1|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email',
-            'username' => 'required|string|max:255|unique:users,username'
-        ]);
-
+                'email' => [
+                    'required',
+                    'string',
+                    'email',
+                    'max:255',
+                    'unique:users,email',
+                    'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+                ],
+                'username' => 'required|string|max:255|unique:users,username',
+            ], [
+                'email.regex' => 'The email address cannot contain consecutive dots.'
+            ]);
         $data = $request->input();
         try {
             $user = new \App\Models\User();
@@ -644,7 +671,7 @@ class UserController extends Controller {
         $data['title'] = 'Edit Super Admin';
         $data['menu_active_tab'] = 'super-admin-list';
         if ($id) {
-            $user = User::find($id);
+            $user = User::where('id',$id)->first();
             $data['role'] = Role::where('is_deleted', '0')->where('id', '!=', '1')->orderBy('id', 'ASC')->get();
             if ($user) {
                 $data['user'] = $user;
@@ -663,6 +690,7 @@ class UserController extends Controller {
                 $user = User::find($id);
                 if ($user) {
                     $user->delete();
+                    Mail::to($user->email)->send(new DeleteUser($user));
                     return redirect()->route('super-admin-list')->with('success', 'Record deleted.');
                 } else {
                     return redirect()->route('super-admin-list')->with('failed', 'Record not found.');
@@ -678,13 +706,13 @@ class UserController extends Controller {
     public function updateSuperAdmin(Request $request, $id) {
 
         if ($id) {
-            
             $request->validate([
                 'first_name' => 'required|string|min:1|max:255',
                 'last_name' => 'required|string|min:1|max:255',
-                'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+                // 'email' => 'required|string|email|max:255|unique:users,email,' . $id,
                 'username' => 'required|string|max:255|unique:users,username,' . $id,
             ]);
+            // dd($request);
             $data = $request->input();
             $user = User::find($id);
             if ($user) {

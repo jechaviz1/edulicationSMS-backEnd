@@ -13,19 +13,15 @@
         <meta property="og:description" content="W3Admin:Dashboard Bootstrap 5 Template">
         <meta property="og:image" content="https://w3admin.dexignzone.com/xhtml/social-image.png">
         <meta name="format-detection" content="telephone=no">
-
         <!-- PAGE TITLE HERE -->
         <title>W3Admin - Modern-Admin-Dashboard</title>
-
         <!-- FAVICONS ICON -->
         <link rel="shortcut icon" type="image/png" href="images/favicon.png">
         <!--<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" />
         <!--<link href="./css/style.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/css/style.css') }}" rel="stylesheet" />
-
     </head>
-
     <body class="vh-100">
         <div class="authincation h-100">
             <div class="container-fluid h-100">
@@ -36,7 +32,6 @@
                                 <h3 class="title">PassWord Generate</h3>
                                 <p>Generate Password</p>
                             </div>
-
                             @if ($message = Session::get('success'))
                             <div class="alert alert-primary alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -44,7 +39,22 @@
                                 <strong>Success!</strong> {{ $message }}
                             </div>
                             @endif
-
+                            @if ($message = Session::get('error'))
+                            <div class="alert alert-primary alert-dismissible fade show">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+                                </button>
+                                <strong>Success!</strong> {{ $message }}
+                            </div>
+                            @endif
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                             @if ($message = Session::get('failed'))
                             <div class="alert alert-danger alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -52,14 +62,13 @@
                                 <strong>Error!</strong> {{ $message }}
                             </div>
                             @endif
-
                             <form method="POST"  action="{{ route('password.update') }}" class="row g-3 needs-validation" novalidate>
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <input type="hidden" name="email" value="{{ $email }}">
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">New Password</label>
-                                    <input type="password" id="dz-password" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$" name="password" maxlength="25" required>
+                                    <input type="password" id="dz-password" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$" name="password" maxlength="25" required>
                                     <span class="show-pass eye">
                                         <i class="fa fa-eye-slash"></i>
                                         <i class="fa fa-eye"></i>
@@ -67,10 +76,13 @@
                                     <div class="invalid-feedback">
                                         Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters
                                       </div>
+                                      @if ($errors->has('new_password'))
+                                        <span class="text-danger">{{ $errors->first('new_password') }}</span>
+                                    @endif
                                 </div>
                                 <div class="mb-4 position-relative">
                                     <label class="mb-1 text-dark">Confirm Password</label>
-                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{8,}$"  name="password_confirmation" maxlength="25" required>
+                                    <input type="password" id="dz-password-confirm" class="form-control form-control" value="" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$"  name="password_confirmation" maxlength="25" required>
                                     <span class="show-pass-confirm eye">
                                         <i class="fa fa-eye-slash"></i>
                                         <i class="fa fa-eye"></i>
@@ -123,23 +135,35 @@
       <!--<script src="./js/custom.js"></script>-->
         <script src="{{ asset('admin/js/custom.js')}}"></script>
         <script>
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-        form.classList.add('was-validated')
-        }, false)
-        })
-        })()
+         (function () {
+  'use strict';
+  
+  var forms = document.querySelectorAll('.needs-validation');
+  
+  Array.prototype.slice.call(forms).forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      var passwordInput = form.querySelector('#password');
+      var passwordValue = passwordInput.value;
+
+      // Check if the password contains spaces
+      if (/\s/.test(passwordValue)) {
+        event.preventDefault();
+        event.stopPropagation();
+        passwordInput.setCustomValidity("Passwords cannot contain spaces.");
+      } else {
+        passwordInput.setCustomValidity(""); // Clear error if no spaces
+      }
+
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+
         </script>
 
     </body>

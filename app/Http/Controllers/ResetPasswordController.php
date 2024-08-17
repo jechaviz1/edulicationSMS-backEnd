@@ -24,15 +24,24 @@ class ResetPasswordController extends Controller
         ]);
     }
 
-    public function reset(Request $request)
-    {
-        
-        $request->validate([
+    public function reset(Request $request){
+        $request->validate([ 
             'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed|min:8',
+            'password' => [
+                'required',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$/'
+            ],
+            'password_confirmation' => 'required|same:password'
+        ], [
+            'token.required' => 'The token field is required.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'password.required' => 'The new password field is required.',
+            'password.regex' => 'The new password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, one special character, and must not contain spaces.',
+            'password_confirmation.required' => 'The confirm password field is required.',
+            'password_confirmation.same' => 'The confirm password must match the new password.'
         ]);
-  
         $status = Password::reset(
           $user =  $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user, $password) {

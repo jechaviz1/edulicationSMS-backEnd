@@ -8,6 +8,7 @@ use App\Models\User;
 use Mail; 
 use Hash;
 use Illuminate\Support\Str;
+use App\Mail\PasswordResetSuccess;
 class ForgotPasswordController extends Controller
 {
      /**
@@ -27,7 +28,7 @@ class ForgotPasswordController extends Controller
        */
       public function submitForgetPasswordForm(Request $request)
       {
-        dd($request);
+      
           $request->validate([
               'email' => 'required|email|exists:users',
           ]);
@@ -63,23 +64,41 @@ class ForgotPasswordController extends Controller
        */
       public function submitResetPasswordForm(Request $request)
       {
-          $request->validate([
-              'email' => 'required|email|exists:users',
-              'password' => 'required|string|min:6|confirmed',
-              'password_confirmation' => 'required'
-          ]);
+
+        $request->validate([
+          'token' => 'required',
+          'email' => 'required|email',
+          'password' => [
+              'required',
+              'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$/'
+          ],
+          'password_confirmation' => 'required|same:password'
+      ], [
+          'token.required' => 'The token field is required.',
+          'email.required' => 'The email field is required.',
+          'email.email' => 'Please enter a valid email address.',
+          'password.required' => 'The new password field is required.',
+          'password.regex' => 'The new password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, one special character, and must not contain spaces.',
+          'password_confirmation.required' => 'The confirm password field is required.',
+          'password_confirmation.same' => 'The confirm password must match the new password.'
+      ]);
+         
           $updatePassword = DB::table('password_resets')
                               ->where([
                                 'email' => $request->email, 
                                 'token' => $request->token
                               ])
                               ->first();
+                              // dd($updatePassword,$request->email,$request->token);
           if(!$updatePassword){
               return back()->withInput()->with('error', 'Invalid token!');
           }
+          $user =  $request->only('email', 'password', 'password_confirmation', 'token');
           $user = User::where('email', $request->email)
                       ->update(['password' => Hash::make($request->password)]);
           DB::table('password_resets')->where(['email'=> $request->email])->delete();
-          return redirect('login')->with('message', 'Your password has been changed!');
+          Mail::to($request->email)->send(new PasswordResetSuccess($user));
+          // dd("hello");
+          return redirect('/')->with('message', 'Your password has been changed!');
       }
 }

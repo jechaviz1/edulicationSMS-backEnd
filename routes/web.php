@@ -79,14 +79,11 @@ use App\Http\Controllers\CityTownController;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('/', [UserController::class, 'login'])->name('');
+Route::get('/', [UserController::class, 'login'])->name('home');
 
 //Route::get('/login', [UserController::class, 'login'])->name('login');
 //Route::post('/login-post', [UserController::class, 'loginPost'])->name('login-post');
-Route::get('/', [UserController::class, 'login'])->name('');
-
 Route::group(['prefix' => 'admin'], function () {
-
     // login
     Route::get('/login', [UserController::class, 'login'])->name('login');
     Route::post('/login-post', [UserController::class, 'loginPost'])->name('login-post');
