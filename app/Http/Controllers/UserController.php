@@ -617,18 +617,19 @@ class UserController extends Controller {
         $this->validate($request, [
             'role' => 'required',
             'first_name' => 'required|string|min:1|max:255',
-                'email' => [
-                    'required',
-                    'string',
-                    'email',
-                    'max:255',
-                    'unique:users,email',
-                    'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
-                ],
-                'username' => 'required|string|max:255|unique:users,username',
-            ], [
-                'email.regex' => 'The email address cannot contain consecutive dots.'
-            ]);
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users,email',
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'username' => 'required|string|max:255|unique:users,username',
+        ], [
+            'email.regex' => 'The email address cannot contain consecutive dots.'
+        ]);
+        dd($request);
         $data = $request->input();
         try {
             $user = new \App\Models\User();

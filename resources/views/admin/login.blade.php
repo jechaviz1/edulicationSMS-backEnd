@@ -23,7 +23,6 @@
         <link href="{{ URL::asset('/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" />
         <!--<link href="./css/style.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/css/style.css') }}" rel="stylesheet" />
-
     </head>
 
     <body class="vh-100">

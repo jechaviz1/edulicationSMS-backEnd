@@ -42,6 +42,19 @@
                             </div>
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name <span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Last Name.." required name="last_name" value="{{$user->last_name}}">
+                                        <div class="invalid-feedback">
+                                            Please enter a Last Name.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
@@ -75,7 +88,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <div class="row">
@@ -111,8 +123,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <div class="col-xl-6">
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">
@@ -122,13 +132,10 @@
                             </div>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <script>
     (function () {
