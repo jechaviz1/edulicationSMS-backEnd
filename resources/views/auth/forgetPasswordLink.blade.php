@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,10 +12,8 @@
         <meta property="og:description" content="W3Admin:Dashboard Bootstrap 5 Template">
         <meta property="og:image" content="https://w3admin.dexignzone.com/xhtml/social-image.png">
         <meta name="format-detection" content="telephone=no">
-
         <!-- PAGE TITLE HERE -->
         <title>W3Admin - Modern-Admin-Dashboard</title>
-
         <!-- FAVICONS ICON -->
         <link rel="shortcut icon" type="image/png" href="images/favicon.png">
         <!--<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">-->
@@ -116,8 +113,6 @@
                 </div>
             </div>
         </div>
-
-
         <!--**********************************
                 Scripts
         ***********************************-->

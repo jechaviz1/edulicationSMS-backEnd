@@ -41,8 +41,8 @@
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <label class="col-lg-4 col-form-label" for="validationCustom02">Description
-                                        <span
-                                            class="text-danger">*</span>
+                                        {{-- <span
+                                            class="text-danger">*</span> --}}
                                     </label>
                                     <div class="col-lg-8">
                                     <textarea class="form-txtarea form-control" rows="8" id="description" name="description" ></textarea>
