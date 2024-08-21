@@ -75,6 +75,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email <span class="text-danger">*</span>
                                     </label>
+                                    <input type="hidden" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Your valid Email" name="email" value="{{$user->email}}">
                                     <div class="col-lg-8">
                                         <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Your valid Email" name="email" value="{{$user->email}}" required disabled="disabled">
                                         <div class="invalid-feedback">

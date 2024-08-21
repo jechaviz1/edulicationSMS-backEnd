@@ -629,7 +629,6 @@ class UserController extends Controller {
         ], [
             'email.regex' => 'The email address cannot contain consecutive dots.'
         ]);
-       
         $data = $request->input();
         try {
             $user = new \App\Models\User();
