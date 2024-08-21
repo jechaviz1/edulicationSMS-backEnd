@@ -34,9 +34,9 @@ class CourseController extends Controller
         $data['title'] = 'Course List';
         $data['menu_active_tab'] = 'course-list';
         $data['view'] = 'admin.course';
-            $data['rows'] = Course::orderBy('id', 'desc')->get();
-            $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
-            $data['user'] = User::where('is_deleted', '0')->get();
+            $data['rows'] = Course::orderBy('id', 'desc')->where('created_by', Auth::user()->id)->get();
+            $data['course_category'] = CourseCategory::where('is_deleted', '0')->where('created_by', Auth::user()->id)->get();
+            $data['user'] = User::where('is_deleted', '0')->where('id', Auth::user()->id)->get();
             // dd($data);
         return view('admin.course.list')->with($data); 
     }
@@ -45,9 +45,8 @@ class CourseController extends Controller
         $data = [];
         $data['title'] = 'Add Course';
         $data['menu_active_tab'] = 'add-course';
-        
-        $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
-        $data['user'] = User::where('is_deleted', '0')->get();
+        $data['course_category'] = CourseCategory::where('is_deleted', '0')->where('created_by', Auth::user()->id)->get();
+        $data['user'] = User::where('is_deleted', '0')->where('id', Auth::user()->id)->get();
         return view('admin.course.add')->with($data);
     }
 
@@ -119,6 +118,7 @@ class CourseController extends Controller
                 $course->color = $request->color;
                 $course->reporting_this_course = $reporting_this_course;
                 $course->tga_package = $tga_package;
+                $course->created_by = Auth::user()->id;
                 $course->save();
         
                 
@@ -138,8 +138,8 @@ class CourseController extends Controller
                 $course = Course::find($id);
                 if ($course) {
                     $data['course'] = $course;
-                    $data['course_category'] = CourseCategory::where('is_deleted', '0')->get();
-                    $data['user'] = User::where('is_deleted', '0')->get();
+                    $data['course_category'] = CourseCategory::where('is_deleted', '0')->where('created_by', Auth::user()->id)->get();
+                    $data['user'] = User::where('is_deleted', '0')->where('id', Auth::user()->id)->get();
                     $data['avetmiss_code'] = AvetmissCode::where('course_id', $id)->first();
                     $data['unit_core_active'] = UnitCompetency::where('course_id', $id)->where('type','core')->where('status', 'A')->get();
                     $data['unit_elective_active'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'A')->get();
@@ -148,7 +148,7 @@ class CourseController extends Controller
                     $data['states'] = State::where('is_deleted', '0')->get();
                     $data["modules"] = Module::where('course_id',$course->id)->paginate(8);
                     $data["default_session"] = DefaultSession::where('course_id',$course->id)->paginate(7);
-                    $data['teacher'] = Teacher::where('is_deleted', '0')->get();
+                    $data['teacher'] = Teacher::where('is_deleted', '0')->where('created_by', Auth::user()->id)->get();
                     $data['course_documents'] = CourseDocument::where('course_id',$id)->get();
                     $data['email_document'] = CompanyDocument::where('type','email')->get();
                     $data['info_document'] = CompanyDocument::where('type','email')->get();
@@ -249,6 +249,7 @@ class CourseController extends Controller
                 $course->color = $request->color;
                 $course->reporting_this_course = $reporting_this_course;
                 $course->tga_package = $tga_package;
+                $course->updated_by = Auth::user()->id;
                 $course->save();
                 
                 return redirect()->route('course-list')->with('success', 'Record Updated.');
@@ -273,11 +274,15 @@ class CourseController extends Controller
     }
     
     public function changestatus($id,$status) {
-        
         if ($id) {
             $course = Course::find($id);
+            // dd($course);
             if ($course) {
-                $course->status = $status;
+                if($course->status == "A"){
+                    $course->status = "D";
+                }else{
+                    $course->status = "A";
+                }
                 $course->save();
             }
             return redirect()->route('course-list')->with('success', 'Status Updated Successfully.');
@@ -300,13 +305,10 @@ class CourseController extends Controller
 
             
             $id = $request->id;
-
-        // -1 means no data row found
+        //  means no data row found
         if($id == -1){
             // Insert Data
-
             $avetmisscode = new AvetmissCode;
-            
             $avetmisscode->course_id = $request->course_id;
             $avetmisscode->course_code = $request->course_code;
             $avetmisscode->state_course_code = $request->state_course_code;
@@ -338,7 +340,6 @@ class CourseController extends Controller
             $avetmisscode->vet_flag = $request->vet_flag;
             $avetmisscode->field_of_education = $request->field_of_education;;
             $avetmisscode->associated_course_identifier = $request->associated_course_identifier;;
-
             $avetmisscode->save();
             
             return redirect()->route('course-list')->with('success', 'Record Updated.');

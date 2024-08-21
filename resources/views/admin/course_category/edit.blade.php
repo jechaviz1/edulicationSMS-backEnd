@@ -50,13 +50,13 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                          <div class="mb-3 row">
-                                         <label class="col-lg-3 col-form-label" for="status">Status<span class="text-danger">*</span>
+                                         <label class="col-lg-3 col-form-label" for="status">Status
                                         </label>
                        
                                     <div class="col-lg-6">
                                         <select class="form-control" name="status" id="status">
-                                            <option value="1" @if( $coursecategory->status == 1 ) selected @endif>Active</option>
-                                            <option value="0" @if( $coursecategory->status == 0 ) selected @endif>Inactive</option>
+                                            <option value="1" @if( $coursecategory->status == "A" ) selected @endif>Active</option>
+                                            <option value="0" @if( $coursecategory->status == "D" ) selected @endif>Inactive</option>
                                         </select>
                                     </div>
                                         </div>

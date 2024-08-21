@@ -94,9 +94,9 @@
                                             <a href="{{ route('edit-course',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
                                             <a href="{{ route('delete-course',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                             @if($row->status == '1')
-                                              <a href="{{ route('change-course-status',[$row->id,$row->status=0]) }}" onclick="return confirm('Are you sure you want to deactive this course?')" class=""><i title="Deactivate Course" class="fa fa-toggle-on fa-2x text-success" aria-hidden="true"></i></a>
+                                              <a href="{{ route('change-course-status',[$row->id,$row->status=0]) }}" onclick="return confirm('Are you sure you want to deactive this course?')" class="ms-2"><i title="Deactivate Course" class="fa fa-toggle-on fa-2x text-success" aria-hidden="true"></i></a>
                                             @else
-                                             <a href="{{ route('change-course-status',[$row->id,$row->status=1]) }}" onclick="return confirm('Are you sure you want to active this course?')" class="" @if($row->status=1) checked @endif><i title="Activate Course" class="fa fa-toggle-off fa-2x text-success" aria-hidden="true"></i></a>
+                                             <a href="{{ route('change-course-status',[$row->id,$row->status]) }}" onclick="return confirm('Are you sure you want to @if($row->status == 'A') DeActive @else Active @endif this course?')" class="ms-2"><i title="Activate Course" class="fa @if($row->status == 'A') fa-toggle-on @else fa-toggle-off @endif fa-2x text-success" aria-hidden="true"></i></a>
                                             @endif
                                         </div>
                                     </td>

@@ -28,25 +28,26 @@ class CourseCategoryController extends Controller
     }
 
     public function storeCourseCategory(Request $request) {
-        //dd($request);
+        
         $rules = [
              'name' => 'required|string|max:255',
-               
         ];
-        
         $validator = Validator::make($request->all(), $rules);
-
         if ($validator->fails()) {
             return redirect('insert')
                             ->withInput()
                             ->withErrors($validator);
         } else {
              $data = $request->input();
-         //dd($data);
             try {
                 $data = new CourseCategory();
                         $data->name = $request->input('name');
                         $data->description = $request->input('description');
+                        if($request->status == "1"){
+                            $data->status = "A";
+                        }else{
+                            $data->status = "D";
+                        }
                         $data->created_by =  \Auth::user()->id ? \Auth::user()->id : null;
                         $data->is_deleted = "0";
                         $data->save();
@@ -86,8 +87,13 @@ class CourseCategoryController extends Controller
             if ($coursecategory) {
                 $coursecategory->name = $request->input('name');
                 $coursecategory->description = $request->input('description');
-               
+                if($request->status == "1"){
+                    $coursecategory->status = "A";
+                }else{
+                    $coursecategory->status = "D";
+                }
                 $coursecategory->save();
+                // dd($coursecategory);
             }
             return redirect()->route('coursecategory-list')->with('success', 'Record Updated.');
         } else {
