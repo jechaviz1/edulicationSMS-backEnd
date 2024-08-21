@@ -31,7 +31,7 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
                         <div class="login-form">
                             <div class="text-center">
-                                <h3 class="title">Sign In - 1 </h3>
+                                <h3 class="title">Sign In</h3>
                                 <p>Sign in to your account to start using W3Admin</p>
                             </div>
                             @if ($message = Session::get('success'))
