@@ -15,6 +15,27 @@
 
                 </ul>
             </div>
+            @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('failed'))
+    <div class="alert alert-danger">
+        {{ session('failed') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Edit Category</h5>
@@ -40,8 +61,8 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Description </label>
                                     <div class="col-lg-9">
-                                    <input type="text" class="form-control" id="description" name="description" required value="{{$coursecategory->description}}">
-                                        <div class="invalid-feedback">
+                                    <textarea class="form-txtarea form-control" rows="8" id="description" name="description" >{{$coursecategory->description}}</textarea>    
+                                    <div class="invalid-feedback">
                                             Please enter a Description.
                                         </div>
                                     </div>
@@ -50,9 +71,7 @@
                                 <div class="row">
                                     <div class="col-xl-6">
                                          <div class="mb-3 row">
-                                         <label class="col-lg-3 col-form-label" for="status">Status
-                                        </label>
-                       
+                                         <label class="col-lg-3 col-form-label" for="status">Status</label>
                                     <div class="col-lg-6">
                                         <select class="form-control" name="status" id="status">
                                             <option value="1" @if( $coursecategory->status == "A" ) selected @endif>Active</option>

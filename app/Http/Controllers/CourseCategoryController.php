@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
+use Illuminate\Validation\Rule;
 class CourseCategoryController extends Controller
 {
    
@@ -23,39 +24,26 @@ class CourseCategoryController extends Controller
         $data = [];
         $data['title'] = 'Add Course Category';
         $data['menu_active_tab'] = 'add-coursecategory';
-      
         return view('admin.course_category.add')->with($data);
     }
 
     public function storeCourseCategory(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:course_categories,name',
+        ]);
         
-        $rules = [
-             'name' => 'required|string|max:255',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect('insert')
-                            ->withInput()
-                            ->withErrors($validator);
-        } else {
-             $data = $request->input();
-            try {
-                $data = new CourseCategory();
-                        $data->name = $request->input('name');
-                        $data->description = $request->input('description');
-                        if($request->status == "1"){
-                            $data->status = "A";
-                        }else{
-                            $data->status = "D";
-                        }
-                        $data->created_by =  \Auth::user()->id ? \Auth::user()->id : null;
-                        $data->is_deleted = "0";
-                        $data->save();
-                return redirect()->route('coursecategory-list')->with('success', 'Record added successfully.');
-            } catch (Exception $e) {
-               // dd($e);
-                return redirect()->route('coursecategory-list')->with('failed', 'Record not added.');
-            }
+        try {
+            $data = new CourseCategory();
+            $data->name = $request->input('name');
+            $data->description = $request->input('description');
+            $data->status = $request->status == "1" ? "A" : "D";
+            $data->created_by = \Auth::user()->id ? \Auth::user()->id : null;
+            $data->is_deleted = "0";
+            $data->save();
+        
+            return redirect()->route('coursecategory-list')->with('success', 'Record added successfully.');
+        } catch (Exception $e) {
+            return redirect()->route('add-coursecategory')->with('error', $e->getMessage() . ' Record not added.');
         }
     }
 
@@ -77,27 +65,38 @@ class CourseCategoryController extends Controller
         }
     }
 
-    public function updateCourseCategory(Request $request, $id) {
+    public function updateCourseCategory(Request $request,$id) {
         if ($id) {
+            // Validation rules
             $request->validate([
-                'name' => 'required',
-                
+                'name' => [
+                    'required',
+                    Rule::unique('course_categories')->ignore($id), // Ensure unique name except for the current record
+                ],
+                'description' => 'nullable|string|max:255', // Add validation for description if needed
+                'status' => 'required|in:1,0', // Ensures status is either 1 or 0
             ]);
-            $coursecategory = CourseCategory::find($id);
-            if ($coursecategory) {
-                $coursecategory->name = $request->input('name');
-                $coursecategory->description = $request->input('description');
-                if($request->status == "1"){
-                    $coursecategory->status = "A";
-                }else{
-                    $coursecategory->status = "D";
+            try {
+                $coursecategory = CourseCategory::find($id);
+    
+                if ($coursecategory) {
+                    // Update course category details
+                    $coursecategory->name = $request->input('name');
+                    $coursecategory->description = $request->input('description');
+                    $coursecategory->status = $request->status == "1" ? "A" : "D";
+                    $coursecategory->save();
+    
+                    return redirect()->route('coursecategory-list')->with('success', 'Record updated successfully.');
+                } else {
+                    return redirect()->route('coursecategory-list')->with('failed', 'Record not found.');
                 }
-                $coursecategory->save();
-                // dd($coursecategory);
+            } catch (\Exception $e) {
+                // Handle exception and log error
+                \Log::error('Error updating course category: ' . $e->getMessage());
+                return redirect()->route('coursecategory-list')->with('failed', 'An error occurred while updating the record.');
             }
-            return redirect()->route('coursecategory-list')->with('success', 'Record Updated.');
         } else {
-            return redirect()->route('coursecategory-list')->with('failed', 'Record not found.');
+            return redirect()->route('coursecategory-list')->with('failed', 'Invalid ID provided.');
         }
     }
 

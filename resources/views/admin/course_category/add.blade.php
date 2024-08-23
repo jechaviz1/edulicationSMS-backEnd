@@ -1,7 +1,5 @@
- 
 <!-- Extends template page-->
 @extends('admin.layout.header')
-
 <!-- Specify content -->
 @section('content')
 <div class="row">
@@ -16,6 +14,27 @@
 
                 </ul>
             </div>
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <!-- Display Validation Errors -->
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <div class="card-body">
                 <div class="form-validation">
                     <h5>Add New Category</h5>
@@ -29,7 +48,7 @@
                                             class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Category Name" required name="name">
+                                        <input type="text" class="form-control" id="validationCustom02"  placeholder="Your valid Category Name" required name="name" value="{{ old('name') }}">
                                         <div class="invalid-feedback">
                                             Please enter a Category Name.
                                         </div>
@@ -45,7 +64,7 @@
                                             class="text-danger">*</span> --}}
                                     </label>
                                     <div class="col-lg-8">
-                                    <textarea class="form-txtarea form-control" rows="8" id="description" name="description" ></textarea>
+                                    <textarea class="form-txtarea form-control" rows="8" id="description" name="description"></textarea>
                                         <div class="invalid-feedback">
                                             Please enter a Description.
                                         </div>
