@@ -30,13 +30,12 @@ class UserController extends Controller {
             'email' => 'required',
             'password' => 'required',
         ]);
+        // Get the credentials and the remember preference
         $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
+        $remember = $request->has('remember');
+        if (Auth::attempt($credentials, $remember)) {
             $admin_detail = User::where('id', Auth::id())->first();
             if ($admin_detail) {
-
-                $admin_detail = User::where('id', \Auth::id())->first();
                 $request->session()->put('user_id', $admin_detail->id);
                 $request->session()->put('role_id', $admin_detail->role_id);
                 $request->session()->put('first_name', $admin_detail->first_name);
@@ -54,21 +53,24 @@ class UserController extends Controller {
                     $initial .= $admin_detail->last_name[0];
                 }
                 $request->session()->put('user_initial', $initial);
+    
+                $background_colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark'];
+                $rand_background = $background_colors[array_rand($background_colors)];
+                $request->session()->put('user_initial_color', $rand_background);
             }
-            $background_colors = array('bg-primary', 'bg-secondary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark',);
-            $rand_background = $background_colors[array_rand($background_colors)];
-            $request->session()->put('user_initial_color', $rand_background);
-
-            return redirect()->intended('admin/dashboard')->withSuccess('You have Successfully loggedin');
+    
+            return redirect()->intended('admin/dashboard')->withSuccess('You have Successfully logged in');
         } else {
-            if (Auth::attempt(['username' => $request->get('email'), 'password' => $request->get('password')])) {
-                $admin_detail = User::where('id', \Auth::id())->first();
+            // Attempt to login using username
+            if (Auth::attempt(['username' => $request->get('email'), 'password' => $request->get('password')], $remember)) {
+                $admin_detail = User::where('id', Auth::id())->first();
                 $request->session()->put('user_id', $admin_detail->id);
                 $request->session()->put('role_id', $admin_detail->role_id);
                 $request->session()->put('first_name', $admin_detail->first_name);
                 $request->session()->put('last_name', $admin_detail->last_name);
                 $request->session()->put('email', $admin_detail->email);
                 $request->session()->put('profile_image_path', $admin_detail->profile_image_path);
+    
                 $initial = "";
                 if ($admin_detail->first_name != null) {
                     $initial = $admin_detail->first_name[0];
@@ -77,15 +79,16 @@ class UserController extends Controller {
                     $initial .= $admin_detail->last_name[0];
                 }
                 $request->session()->put('user_initial', $initial);
-                $background_colors = array('bg-primary', 'bg-secondary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark',);
+    
+                $background_colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark'];
                 $rand_background = $background_colors[array_rand($background_colors)];
                 $request->session()->put('user_initial_color', $rand_background);
-
-                return redirect()->intended('admin/dashboard')->withSuccess('You have Successfully loggedin');
+    
+                return redirect()->intended('admin/dashboard')->withSuccess('You have Successfully logged in');
             }
         }
-        // return redirect("login")->withSuccess('Opps! You have entered invalid credentials');
-        return redirect('admin/login')->with('failed', "Opps! You have entered invalid credentials");
+    
+        return redirect('admin/login')->with('failed', "Oops! You have entered invalid credentials");
     }
 
     public function logout(Request $request) {
@@ -264,21 +267,19 @@ class UserController extends Controller {
     }
 
          public function updateUserProfile(Request $request) {
-
                 if (\Auth::id()){
                     $request->validate([
                         'first_name' => 'required',
-                        //'last_name' => 'required',
+                        'last_name' => 'required',
                         'email' => 'required',
                         //  'mobile_no' => 'required',
-                        'profile_image' => 'required|image|mimes:png,jpeg,jpg,webp|max:2048', // max:2048 means 2MB
+                        'profile_image' => 'image|mimes:png,jpeg,jpg,webp|max:2048', // max:2048 means 2MB
                     ], [
                         'profile_image.required' => 'A profile image is required.',
                         'profile_image.image' => 'The file must be an image.',
                         'profile_image.mimes' => 'The image must be a file of type: png, jpeg, jpg, webp.',
-                        'profile_image.max' => 'The image size must not exceed 2MB.',           
+                        'profile_image.max' => 'The image size must not exceed 2MB.',
                     ]);
-
                 $user = User::find(\Auth::id());
                     if ($user) {
                             //profile_image
@@ -621,7 +622,7 @@ class UserController extends Controller {
                 'required',
                 'string',
                 'email',
-                'max:255',
+                'max:25',
                 'unique:users,email',
                 'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
             ],

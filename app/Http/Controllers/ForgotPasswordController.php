@@ -9,6 +9,7 @@ use Mail;
 use Hash;
 use Illuminate\Support\Str;
 use App\Mail\PasswordResetSuccess;
+use App\Rules\CheckPreviousPassword;
 class ForgotPasswordController extends Controller
 {
      /**
@@ -53,7 +54,12 @@ class ForgotPasswordController extends Controller
        *
        * @return response()
        */
-      public function showResetPasswordForm($token) { 
+      public function showResetPasswordForm(Request $request,$token) {
+        $reset_password = DB::table('password_resets')->where('token', $token)->first();
+        if (!$reset_password) {
+          // dd($reset_password);
+        return view('auth.error_msg');
+      }
          return view('auth.forgetPasswordLink', ['token' => $token]);
       }
   
@@ -70,17 +76,18 @@ class ForgotPasswordController extends Controller
           'email' => 'required|email',
           'password' => [
               'required',
-              'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$/'
+              'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])(?!.*\s).{8,}$/',
+              new CheckPreviousPassword($request->email)
           ],
           'password_confirmation' => 'required|same:password'
       ], [
           'token.required' => 'The token field is required.',
-          'email.required' => 'The email field is required.',
-          'email.email' => 'Please enter a valid email address.',
-          'password.required' => 'The new password field is required.',
-          'password.regex' => 'The new password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, one special character, and must not contain spaces.',
-          'password_confirmation.required' => 'The confirm password field is required.',
-          'password_confirmation.same' => 'The confirm password must match the new password.'
+    'email.required' => 'The email field is required.',
+    'email.email' => 'Please enter a valid email address.',
+    'password.required' => 'The new password field is required.',
+    'password.regex' => 'The new password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, one special character, and must not contain spaces.',
+    'password_confirmation.required' => 'The confirm password field is required.',
+    'password_confirmation.same' => 'The confirm password must match the new password.'
       ]);
          
           $updatePassword = DB::table('password_resets')
@@ -98,7 +105,6 @@ class ForgotPasswordController extends Controller
                       ->update(['password' => Hash::make($request->password)]);
           DB::table('password_resets')->where(['email'=> $request->email])->delete();
           Mail::to($request->email)->send(new PasswordResetSuccess($user));
-          // dd("hello");
-          return redirect('/')->with('message', 'Your password has been changed!');
+          return redirect('/')->with('success', 'Your password has been changed!');
       }
 }

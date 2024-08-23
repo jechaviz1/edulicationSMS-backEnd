@@ -35,7 +35,7 @@
                                 <h3 class="title">Sign In</h3>
                                 <p>Sign in to your account to start using W3Admin</p>
                             </div>
-
+                
                             @if ($message = Session::get('success'))
                             <div class="alert alert-primary alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
@@ -71,7 +71,7 @@
                                 <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                     <div class="mb-4">
                                         <div class="form-check custom-checkbox mb-3">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox1" >
+                                            <input type="checkbox" class="form-check-input" name="remember" value="1" id="customCheckBox1" >
                                             <label class="form-check-label mt-1" for="customCheckBox1">Remember my preference</label>
                                         </div>
                                     </div>

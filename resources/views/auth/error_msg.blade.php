@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="h-100">
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,19 +12,15 @@
         <meta property="og:description" content="W3Admin:Dashboard Bootstrap 5 Template">
         <meta property="og:image" content="https://w3admin.dexignzone.com/xhtml/social-image.png">
         <meta name="format-detection" content="telephone=no">
-
         <!-- PAGE TITLE HERE -->
-        <title>Pssword Link Disabled</title>
-
+        <title>Password Link Disabled</title>
         <!-- FAVICONS ICON -->
         <link rel="shortcut icon" type="image/png" href="images/favicon.png">
         <!--<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet" />
         <!--<link href="./css/style.css" rel="stylesheet">-->
         <link href="{{ URL::asset('/admin/css/style.css') }}" rel="stylesheet" />
-
     </head>
-
     <body class="vh-100">
         <div class="authincation h-100">
             <div class="container-fluid h-100">
@@ -33,9 +28,8 @@
                     <div class="col-lg-6 col-md-12 col-sm-12 mx-auto align-self-center">
                         <div class="login-form">
                             <div class="text-center">
-                                <h1>OOP's Your Link has Disabled</h1>
+                                <h1>Oops! The link you followed has expired</h1>
                             </div>
-
                             @if ($message = Session::get('success'))
                             <div class="alert alert-primary alert-dismissible fade show">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>

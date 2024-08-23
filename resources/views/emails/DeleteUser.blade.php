@@ -48,20 +48,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <h2>Hi User,</h2>
+            <h2>Hi {{ $data->first_name}},</h2>
         </div>
         <div class="content">
-            <p>We wanted to notify you that your workspace has been inactive for almost a year now. This means that none of your team members have logged into your workspace nor have any sessions been created in the last year.</p>
-            <p>We wanted to inform you that for data protection reasons, your workspace will be deleted within two weeks.</p>
-            <p>If you'd like to keep your Livestorm Starter account, please either log in to your workspace or create a new session.</p>
-            <p>We hope to see you again soon on Livestorm!<br>Thank you!</p>
-        </div>
-        <div class="footer">
-            <img src="https://via.placeholder.com/50" alt="Gilles Bertaux" width="50" height="50">
-            <div>
-                <strong>Our SMS</strong><br>
-                CEO SMS
-            </div>
+            <p>Your account with SMS Edulication has been successfully deleted. All associated data has been removed.</p>
+           <p>If you have any questions, please contact us at Support Email.</p> 
+            <p>Thank you for using our services.</p> 
         </div>
     </div>
 </body>

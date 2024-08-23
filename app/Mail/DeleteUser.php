@@ -27,8 +27,11 @@ class DeleteUser extends Mailable
 
     public function build()
     {
+        // return $this->view('emails.DeleteUser')
+        //             ->subject('Account deletion warning');
         return $this->view('emails.DeleteUser')
-                    ->subject('Account deletion warning');
+        ->with('details', $this->data)
+       ->subject('Account Deletion Confirmation');
     }
 
     

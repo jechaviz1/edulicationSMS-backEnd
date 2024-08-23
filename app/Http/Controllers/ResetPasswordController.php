@@ -53,8 +53,9 @@ class ResetPasswordController extends Controller
        
         Mail::to($request->email)->send(new PasswordResetSuccess($user));
         
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withErrors(['email' => [__($status)]]);
+        // return $status == Password::PASSWORD_RESET
+        //             ? redirect()->route('login')->with('status', __($status))
+        //             : back()->withErrors(['email' => [__($status)]]);
+        return redirect('/')->with('success', 'Your password has been created!');
     }
 }

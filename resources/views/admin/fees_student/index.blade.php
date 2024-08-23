@@ -25,7 +25,8 @@
 				<div class="card-body">
 					<div class="form-validation">
 						<form class="needs-validation" novalidate method="get" action="{{ route('fees-student') }}">
-						    @csrf
+						    @csrf+
+                
 							<div class="row">
 								
 									<div class="col-lg-2">

@@ -102,7 +102,7 @@ class CourseController extends Controller
                 else{
                     $tga_package = '0';
                 }
-              
+               
             //   dd($request);
                 $course = new Course;
                 $course->code = $request->course_code;
@@ -120,7 +120,6 @@ class CourseController extends Controller
                 $course->tga_package = $tga_package;
                 $course->created_by = Auth::user()->id;
                 $course->save();
-        
                 
                 return redirect()->route('course-list')->with('success', 'Record added successfully.');
             } catch (\Exception $e) {
@@ -446,7 +445,6 @@ class CourseController extends Controller
             $module->save();
             return response()->json(['response' => "0"]);  
         }
-       
     }
 
     public function moduleSearch($id){
@@ -459,6 +457,7 @@ class CourseController extends Controller
         $module->delete();
         return response()->json(['response' => "0"]); 
     }
+
     public function saveCourseCity(Request $request){
                 $default_session = new DefaultSession;
                 $default_session->course_id = $request->courseId;
@@ -586,10 +585,8 @@ class CourseController extends Controller
     public function certifiacate_preview($id){
         $certificate = Template::find($id);
         $certificateBackground = BackgroundTemplate::where('templates_id',$certificate->id)->where('select','1')->first();
-     
          // Generate the PDF
          $pdf = PDF::loadView('admin.certificate.pdf', compact('certificate','certificateBackground'));
- 
          // Return the PDF for download or display
          return $pdf->stream('admin.certificate.pdf');
     }

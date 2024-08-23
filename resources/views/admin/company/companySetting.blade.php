@@ -100,128 +100,131 @@
                                     <div class="col-lg-1">Single Session</div>
                                     <div class="col-lg-2">Multiple Session</div>
                                 </div>
+                                {{-- @foreach ($course_delivery_method as $method )
+                                    @dd($method)
+                                @endforeach --}}
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
                                         <input type="hidden" value="1" name="delivery_method[id][]">
-                                        <input type="checkbox" id="sel" class="CourseTypeSettings" checked="" disabled=""> Self Paced</div>
+                                        <input type="checkbox" id="sel" class="CourseTypeSettings" checked=""  disabled=""> Self Paced</div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" name="delivery_method[rename][]" id="sel_rename" value="Self Paced">
+                                        <input type="text" class="form-control CourseTypeSettings" name="delivery_method[rename][]" id="sel_rename" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "1") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" name="delivery_method[init][]" name="sel_init" id="sel_init" value="SP">
+                                        <input type="text" class="form-control CourseTypeSettings" name="delivery_method[init][]" name="sel_init" id="sel_init" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "1") @if($method->init != null) {{ $method->init }} @else SP @endif @endif @endforeach">
                                     </div>
                                     <input type="hidden" value="1" name="delivery_method[single][]">
                                     <input type="hidden" value="1" name="delivery_method[multiple][]">
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="2" class="CourseTypeSettings" name="delivery_method[id][]"> Public Sessions</div>
+                                        <input type="checkbox" id="pub" value="2" class="CourseTypeSettings" name="delivery_method[id][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "2") checked @else  @endif @endforeach> Public Sessions</div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Public Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "2") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" value="{{$course_setting['pub_init']}}" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" value="{{$course_setting['pub_init']}}" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "2") @if($method->init != null) {{ $method->init }} @else PRI @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "2") @if($method->single != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "2") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="3" class="CourseTypeSettings" name="delivery_method[id][]">  Private Sessions
+                                        <input type="checkbox" id="pub" value="3" class="CourseTypeSettings" name="delivery_method[id][]"  @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "3") checked @else  @endif @endforeach>  Private Sessions
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename"  maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "3") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "3") @if($method->init != null) {{ $method->init }} @else PUB @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "3") @if($method->single != "1") checked @else @endif @endif @endforeach> 
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "3") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="4" class="CourseTypeSettings" name="delivery_method[id][]">   Public Sessions 2
+                                        <input type="checkbox" id="pub" value="4" class="CourseTypeSettings" name="delivery_method[id][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "4") checked @else  @endif @endforeach>   Public Sessions 2
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "4") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "4") @if($method->init != null) {{ $method->init }} @else PUB @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "4") @if($method->single != "1") checked @else @endif @endif @endforeach> 
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "4") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="5" class="CourseTypeSettings" name="delivery_method[id][]">   Public Sessions 3
+                                        <input type="checkbox" id="pub" value="5" class="CourseTypeSettings" name="delivery_method[id][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "5") checked @else  @endif @endforeach>   Public Sessions 3
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "5") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "5") @if($method->init != null) {{ $method->init }} @else PUB @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "5") @if($method->single != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "5") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="6" class="CourseTypeSettings" name="delivery_method[id][]">   Public Sessions 4
+                                        <input type="checkbox" id="pub" value="6" class="CourseTypeSettings" name="delivery_method[id][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "6") checked @else  @endif @endforeach>   Public Sessions 4
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "6") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "6") @if($method->init != null) {{ $method->init }} @else PUB @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "6") @if($method->single != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "6") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="7" class="CourseTypeSettings" name="delivery_method[id][]"> Public Sessions 5
+                                        <input type="checkbox" id="pub" value="7" class="CourseTypeSettings" name="delivery_method[id][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "7") checked @else  @endif @endforeach> Public Sessions 5
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "7") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "7") @if($method->init != null) {{ $method->init }} @else PUB @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "7") @if($method->single != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "7") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row mb-2 align-items-center">
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub" value="8" class="CourseTypeSettings" name="delivery_method[id][]">  Public Sessions 6
+                                        <input type="checkbox" id="pub" value="8" class="CourseTypeSettings" name="delivery_method[id][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "8") checked @else  @endif @endforeach>  Public Sessions 6
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_rename" value="Private Sessions" maxlength="20" name="delivery_method[rename][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "8") {{ $method->rename }} @else  @endif @endforeach">
                                     </div>
                                     <div class="col-lg-1">
-                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]">
+                                        <input type="text" class="form-control CourseTypeSettings" id="pub_init" name="delivery_method[init][]" value="@foreach($course_delivery_method as $method) @if($method->delivery_method_id == "8") @if($method->init != null) {{ $method->init }} @else PUB @endif @endif @endforeach">
                                     </div>
-                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]">
+                                    <div class="col-lg-1"><input type="checkbox" value="1" id="pub_single" name="delivery_method[single][]" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "8") @if($method->single != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                     <div class="col-lg-2">
-                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings">
+                                        <input type="checkbox" id="pub_multiple" value="1" name="delivery_method[multiple][]" class="CourseTypeSettings" @foreach($course_delivery_method as $method) @if($method->delivery_method_id == "8") @if($method->multiple != "1") checked @else @endif @endif @endforeach>
                                     </div>
                                 </div>
                                 <div class="row">
