@@ -30,7 +30,6 @@ class ContentController extends Controller {
         $data['content'] = Content::where('is_deleted', '0')->orderBy('id', 'ASC')->get();
         $data['content_type'] = \App\Models\ContentType::where('is_deleted', '0')->where('status', '1')->orderBy('id', 'ASC')->get();
         $data['faculty'] = \App\Models\Faculty::where('is_deleted', '0')->where('status', '1')->orderBy('id', 'ASC')->get();
-
         return view('admin.content.add')->with($data);
     }
 

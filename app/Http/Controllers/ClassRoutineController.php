@@ -69,8 +69,9 @@ class ClassRoutineController extends Controller
         $data['faculties'] = Faculty::where('status', '1')->orderBy('title', 'asc')->get();
 
         if(!empty($request->faculty) && !empty($request->program) && !empty($request->session) && !empty($request->semester) && !empty($request->section)){
-        $data['programs'] = Program::where('faculty_id', $faculty)->where('status', '1')->orderBy('title', 'asc')->get();
-
+        $data['programs'] = Program::where('faculty_id', $faculty)->where('status', '1')->orderBy('
+        00title', 'asc')->get();
+0
         $sessions = Session::where('status', 1);
         $sessions->with('programs')->whereHas('programs', function ($query) use ($program){
             $query->where('program_id', $program);
@@ -236,12 +237,8 @@ class ClassRoutineController extends Controller
         'start_time' => 'required',
         'end_time' => 'required',
     ]);
-    
-
     DB::beginTransaction();
-       
     //dd($request->all());
-        
     if($request->subject){
         $data = $request->except('_token');
         $subject_count = count($data['subject']);
@@ -250,9 +247,6 @@ class ClassRoutineController extends Controller
         $session = $request->session;
         $section = $request->section;
         $semester = $request->semester;
-
-       
-       
         for($j = 0; $j < $subject_count; $j++){
             $start = $data['start_time'][$j];
             //dd($start);
@@ -333,8 +327,6 @@ class ClassRoutineController extends Controller
                     $classRoutine->end_time= $data['end_time'][$j];
                     $classRoutine->day= $day;
                    // dd( $classRoutine->teacher_id);
-                    $classRoutine->save();
-                    
                     //dd($classRoutine->subject_id);
                     session()->flash('update', ('updated successfully'));
                 }

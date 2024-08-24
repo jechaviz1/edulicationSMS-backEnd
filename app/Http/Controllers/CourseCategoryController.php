@@ -78,14 +78,12 @@ class CourseCategoryController extends Controller
             ]);
             try {
                 $coursecategory = CourseCategory::find($id);
-    
                 if ($coursecategory) {
                     // Update course category details
                     $coursecategory->name = $request->input('name');
                     $coursecategory->description = $request->input('description');
                     $coursecategory->status = $request->status == "1" ? "A" : "D";
                     $coursecategory->save();
-    
                     return redirect()->route('coursecategory-list')->with('success', 'Record updated successfully.');
                 } else {
                     return redirect()->route('coursecategory-list')->with('failed', 'Record not found.');
@@ -108,7 +106,6 @@ class CourseCategoryController extends Controller
                 //  $user->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $coursecategory->save();
             }
-
             return redirect()->route('coursecategory-list')->with('success', 'Record deleted.');
         } else {
             return redirect()->route('coursecategory-list')->with('failed', 'Record not found.');
