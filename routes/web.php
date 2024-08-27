@@ -75,6 +75,8 @@ use App\Http\Controllers\CityTownController;
   | contains the "web" middleware group. Now create something great!
   |
  */
+//please valid email id
+//Are you sure you want't to delete this report
 
 //Route::get('/', function () {
 //    return view('welcome');
