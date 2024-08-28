@@ -99,6 +99,7 @@
                                 <div class="mb-3 row">
                                     <div class="row">
                                         <label class="col-form-label col-sm-4 pt-0">Gender</label>
+                                        {{-- @dd($user) --}}
                                         <div class="col-sm-2">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="gender" value="1" @if($user->gender == "1") checked  @endif>

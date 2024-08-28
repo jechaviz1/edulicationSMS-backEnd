@@ -267,6 +267,7 @@ class UserController extends Controller {
     }
 
          public function updateUserProfile(Request $request) {
+           
                 if (\Auth::id()){
                     $request->validate([
                         'first_name' => 'required',
@@ -298,6 +299,7 @@ class UserController extends Controller {
                 $user->last_name = $request->input('last_name');
                 $user->username = $request->input('username');
                 $user->email = $request->input('email');
+                $user->gender = $request->input('gender');
                 //$user->mobile_no = $request->input('mobile_no');
                 if ($file_name != null) {
                     $user->profile_image = $file_name;
