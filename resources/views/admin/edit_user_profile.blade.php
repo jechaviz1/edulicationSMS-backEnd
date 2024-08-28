@@ -124,9 +124,9 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom05">Profile Image </label>
                                     <div class="col-lg-8">
                                         <input name="profile_image" id="profile_image" type="file" accept=".png, .jpeg, .jpg, .webp"  class="form-control" data-error="Valid Image is required."  >
-
+                                       
                                         @if($user->profile_image_path)
-                                        <a target="_blank" href="{{ getStoragePath() . $user->profile_image_path }}" class="btn-link text-primary">Profile Image</a>
+                                        <a target="_blank" href="{{ asset($user->profile_image_path) }}" class="btn-link text-primary">Profile Image</a>
                                         @endif
                                     </div>
                                 </div>
