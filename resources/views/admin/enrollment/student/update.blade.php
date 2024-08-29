@@ -73,7 +73,7 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
                                     id="inlineRadio1" checked value="option1"
-                                    onclick="document.getElementById('FindPerson').style.display = 'block',document.getElementById('AddPerson').style.display = 'none'">
+                                    onclick="document.getElementById('FindPerson').style.display = 'bFlock',document.getElementById('AddPerson').style.display = 'none'">
                                 <label class="form-check-label" for="inlineRadio1">Find Person</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -1343,33 +1343,33 @@
                                     </div>
                                     <button class="btn btn-primary">Save</button>
                                 </form>
-                            </div>
-                            <div class="col-4 mt-3">
-                                <h6 class="border mb-3 p-2">Payment Schedule Overview</h6>
-                                <p class="mb-1">Standard Course Tuition Cost: <i class="fa fa-question-circle"
-                                        aria-hidden="true" data-toggle="tooltip" data-html="true"
-                                        data-placement="top" title=""
-                                        data-original-title="This is added in the <br><strong>Courses We Run</strong> page"></i><span
-                                        class="float-right course-cost">$0.00</span></p>
-                                <p class="mb-1">Discount Applied: <span
-                                        class="float-right course-cost">(${{ $enrollment->discountAmount }}.00)</span>
-                                </p>
-                                <p class="mb-1">Course Tuition Cost to Learner: <span
-                                        class="float-right">$-{{ $enrollment->discountAmount }}</span></p>
-                                <p class="mb-1">Non-tuition (other) Costs to Learner: <span
-                                        class="float-right">$0.00</span></p>
-                                <hr>
-                                <p class="mb-1">Amounts Invoiced to Date (Tuition &amp; Other): <span
-                                        class="float-right">$0.00</span></p>
-                                <p class="mb-1">Scheduled Amounts Yet to Invoice: <span
-                                        class="float-right">$0.00</span></p>
-                                <p class="mb-1">Amount Paid to Date (Tuition &amp; Other): <span
-                                        class="float-right">$0.00</span></p>
-                                <hr>
-                                <p class="mb-1">Scheduled Fees Due but not Invoiced: <span
-                                        class="float-right ">$0.00</span></p>
-                                <p class="mb-1">Invoiced Fees Overdue: <span class="float-right ">$0.00</span></p>
-                            </div>
+                            </div>x
+                                    <div class="col-4 mt-3">
+                                        <h6 class="border mb-3 p-2">Payment Schedule Overview</h6>
+                                        <p class="mb-1">Standard Course Tuition Cost: <i class="fa fa-question-circle"
+                                                aria-hidden="true" data-toggle="tooltip" data-html="true"
+                                                data-placement="top" title=""
+                                                data-original-title="This is added in the <br><strong>Courses We Run</strong> page"></i><span
+                                                class="float-right course-cost">$0.00</span></p>
+                                        <p class="mb-1">Discount Applied: <span
+                                                class="float-right course-cost">(${{ $enrollment->discountAmount }}.00)</span>
+                                        </p>
+                                        <p class="mb-1">Course Tuition Cost to Learner: <span
+                                                class="float-right">$-{{ $enrollment->discountAmount }}</span></p>
+                                        <p class="mb-1">Non-tuition (other) Costs to Learner: <span
+                                                class="float-right">$0.00</span></p>
+                                        <hr>
+                                        <p class="mb-1">Amounts Invoiced to Date (Tuition &amp; Other): <span
+                                                class="float-right">$0.00</span></p>
+                                        <p class="mb-1">Scheduled Amounts Yet to Invoice: <span
+                                                class="float-right">$0.00</span></p>
+                                        <p class="mb-1">Amount Paid to Date (Tuition &amp; Other): <span
+                                                class="float-right">$0.00</span></p>
+                                        <hr>
+                                        <p class="mb-1">Scheduled Fees Due but not Invoiced: <span
+                                                class="float-right ">$0.00</span></p>
+                                        <p class="mb-1">Invoiced Fees Overdue: <span class="float-right ">$0.00</span></p>
+                                    </div>
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                             aria-labelledby="pills-profile-tab">
@@ -1539,8 +1539,167 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                            aria-labelledby="pills-contact-tab"></div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                           <div class="text-center">
+                               <h3>Invoice</h3>
+                           </div>
+                           <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6">
+                                <div class="border p-4">
+                                    <div class="row">
+                                        <div class="col-sm-6 d-flex align-items-center">
+                                            <h5 class="text-center">Payment Schedule Overview</h5>
+                                        </div>
+                                        <div class="col-sm-6 d-flex justify-content-end">
+                                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                Invoice Create
+                                              </button>
+                                            {{-- <a href="" class="btn btn-secondary"></a> --}}
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Standard Course Tuition Cost: </th>
+                                            <th scope="col">$0.00</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">Discount Applied:</th>
+                                            <td>($0.00) </td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Course Tuition Cost to Learner:</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Non-tuition (other) Costs to Learner:</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                          <hr>
+                                          <tr>
+                                            <th scope="row">Amounts Invoiced to Date (Tuition & Other):</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Scheduled Amounts Yet to Invoice:</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Amount Paid to Date (Tuition & Other):</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Scheduled Fees Due but not Invoiced:</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">Invoiced Fees Overdue:</th>
+                                            <td>$0.00</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                      <div class="row">
+                                        <div class="col-sm-12 d-flex justify-content-end">
+                                            <a href="" class="btn btn-primary">Invoice Download</a>
+                                        </div>
+                                      </div>
+                                   </div>
+                                   <!-- Button trigger modal -->
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <h5 class="text-start">Invoice Add</h5>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                            </div>
+                                        <hr>
+                                        <div class="row mb-3">
+                                            <label for="invoice_number" class="col-sm-2 col-form-label">Invoice Number</label>
+                                            <div class="col-sm-10">
+                                              <input type="text" class="form-control" id="invoice_number" name="invoice_number">
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <label for="invoice_date" class="col-sm-2 col-form-label">Invoice Date</label>
+                                            <div class="col-sm-10">
+                                              <input type="date" class="form-control" name="invoice_date" id="invoice_date">
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <label for="invoice_amount" class="col-sm-2 col-form-label">Invoice Amount</label>
+                                            <div class="col-sm-10">
+                                              <input type="number" class="form-control" name="invoice_amount" id="invoice_amount">
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <label for="invoice_description" class="col-sm-2 col-form-label">Invoice Description</label>
+                                            <div class="col-sm-10">
+                                              <input type="text" class="form-control" name="invoice_description" id="invoice_description">
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <label for="due_date" class="col-sm-2 col-form-label">Due Date</label>
+                                            <div class="col-sm-10">
+                                              <input type="date" class="form-control" id="due_date">
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <label for="payment_type" class="col-sm-2 col-form-label">Payment Type</label>
+                                            <div class="col-sm-10">
+                                            
+                                              <select name="payment_type" class="form-select"  id="payment_type" aria-label="Default select example">
+                                                <option selected>Payment Type</option>
+                                                <option value="Tuition">Tuition</option>
+                                                <option value="Other">Other</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <label for="payment_type" class="col-sm-2 col-form-label">Payment Type</label>
+                                            <div class="col-sm-10">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        No
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Full Payment
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Part Payment
+                                                    </label>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-sm-12">
+                                                <button class="btn btn-primary" >Save</button>
+                                                <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">close</button>
+                                            </ddiv>
+                                          </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                           </div>
+                        </div>
                         <div class="tab-pane fade" id="pills-enrolment" role="tabpanel"
                             aria-labelledby="pills-enrolment-tab">
                             <form action="{{ route('module.select.people') }}" method="post">

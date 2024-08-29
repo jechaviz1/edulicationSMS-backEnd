@@ -90,9 +90,8 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom05">Logo </label>
                                     <div class="col-lg-8">
                                         <input name="logo" id="logo" type="file" class="form-control" data-error="Valid Image is required." />
-
                                         @if($school->logo_path)
-                                        <a target="_blank" href="{{ getStoragePath() . $school->logo_path }}" class="btn-link text-primary">Logo</a>
+                                        <a target="_blank" href="{{ asset($school->logo_path) }}" class="btn-link text-primary">Logo</a>
                                         @endif
                                     </div>
                                 </div>
@@ -146,13 +145,24 @@
                                 <div class="mb-3 row"></div>
                             </div>
                         </div>
+                        {{-- @dd($row) --}}
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Position</label>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Position" name="position_{{$key_scp_val}}" value="{{$row->position}}" />
-                                        <div class="invalid-feedback">Please enter a Position.</div>
+                                        <select class="form-select" aria-label="Default select example" name="position">
+                                            <option selected>Open this select Role</option>
+                                            @foreach ($role as $ro)
+                                            <option value="{{$ro->id}}">{{ $ro->name }}</option>
+                                            @endforeach
+                                          </select>
+                                        <div class="invalid-feedback">
+                                            Please Select a Role.
+                                        </div>
+                                        @if($errors->has('role'))
+                                        <div class="error">{{ $errors->first('role') }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +188,6 @@
                         <hr />
                         @endforeach
                         @else
-
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
@@ -218,7 +227,7 @@
                                         <div class="invalid-feedback">Please enter a Position.</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
@@ -374,7 +383,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script>
     (function () {
@@ -396,11 +404,8 @@
                     }, false)
                 })
     })()
-
-
     $('[name=tab]').each(function (i, d) {
         var p = $(this).prop('checked');
-//   console.log(p);
         if (p) {
             $('article').eq(i)
                     .addClass('on');
@@ -417,5 +422,4 @@
         $('article').eq(i).addClass('on');
     });
 </script>
-
 @stop

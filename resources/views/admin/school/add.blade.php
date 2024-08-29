@@ -27,7 +27,7 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Name." required name="name" />
                                         <div class="invalid-feedback">
-                                            Please enter a Name.
+                                            Please enter a Valid Name.
                                         </div>
                                         @if($errors->has('name'))
                                         <div class="error">{{ $errors->first('name') }}</div>
@@ -41,7 +41,7 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Address." required name="address">
                                         <div class="invalid-feedback">
-                                            Please enter a Address.
+                                            Please enter a Valid Address.
                                         </div>
                                         @if($errors->has('address'))
                                         <div class="error">{{ $errors->first('address') }}</div>
@@ -55,27 +55,10 @@
                                     <div class="col-lg-8">
                                         <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"  placeholder="Your valid Email" required name="email">
                                         <div class="invalid-feedback">
-                                            Please enter a Email.
+                                            Please enter a Valid Email.
                                         </div>
                                         @if($errors->has('email'))
                                         <div class="error">{{ $errors->first('email') }}</div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4">
-                                <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Phone No<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Phone No" required name="phone_no">
-                                        <div class="invalid-feedback">
-                                            Please enter a Phone No.
-                                        </div>
-                                        @if($errors->has('phone_no'))
-                                        <div class="error">{{ $errors->first('phone_no') }}</div>
                                         @endif
                                     </div>
                                 </div>
@@ -96,7 +79,7 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="Note" name="note" />
                                         <div class="invalid-feedback">
-                                            Please enter a Note.
+                                            Please enter a Valid Note.
                                         </div>
                                         @if($errors->has('note'))
                                         <div class="error">{{ $errors->first('note') }}</div>
@@ -119,7 +102,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">First Name</label>
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="First Name." name="first_name_1" />
-                                        <div class="invalid-feedback">Please enter a First Name.</div>
+                                        <div class="invalid-feedback">Please enter a valid First Name.</div>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +111,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Last Name</label>
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="Last Name." name="last_name_1" />
-                                        <div class="invalid-feedback">Please enter a Last Name.</div>
+                                        <div class="invalid-feedback">Please enter a valid Last Name.</div>
                                     </div>
                                 </div>
                             </div>
@@ -139,8 +122,7 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
-                                    </label>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role</label>
                                     <div class="col-lg-8">
                                         <select class="form-select" aria-label="Default select example" name="role">
                                             <option selected>Open this select Role</option>
@@ -159,25 +141,24 @@
                             </div>
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Email</label>
+                                    <label class="col-lg-3 col-form-label" for="email_1">Email</label>
                                     <div class="col-lg-8">
-                                        <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" name="email_1" />
-                                        <div class="invalid-feedback">Please enter a Email.</div>
+                                        <input type="email" class="form-control" id="email_1" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" name="email_1" />
+                                        <div class="invalid-feedback">Please enter a Valid Email.</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Phone no</label>
+                                    <label class="col-lg-3 col-form-label" for="phone_no_1">Phone no</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_1" />
-                                        <div class="invalid-feedback">Please enter a Phone no.</div>
+                                        <input type="number" class="form-control" id="phone_no_1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Your valid Phone No" name="phone_no_1" />
+                                        <div class="invalid-feedback">Please enter a Valid Phone no.</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <hr />
+                        <hr/>
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
@@ -211,7 +192,7 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role
                                     </label>
                                     <div class="col-lg-8">
                                         <select class="form-select" aria-label="Default select example" name="role">
@@ -242,7 +223,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Phone no</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_2">
+                                        <input type="number" class="form-control" id="validationCustom02" placeholder="Your valid Phone No" name="phone_no_2">
                                         <div class="invalid-feedback">Please enter a Phone no.</div>
                                     </div>
                                 </div>
@@ -282,7 +263,7 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="mb-3 row">
-                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role<span class="text-danger">*</span>
+                                    <label class="col-lg-3 col-form-label" for="validationCustom02">Select Role
                                     </label>
                                     <div class="col-lg-8">
                                         <select class="form-select" aria-label="Default select example" name="role">
@@ -313,7 +294,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Phone no</label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_3">
+                                        <input type="number" class="form-control" id="validationCustom02" placeholder="Your valid Phone No" name="phone_no_3">
                                         <div class="invalid-feedback">Please enter a Phone no.</div>
                                     </div>
                                 </div>
@@ -334,7 +315,6 @@
             </div>
         </div>
     </div>
-
 </div>
 <script>
     (function () {

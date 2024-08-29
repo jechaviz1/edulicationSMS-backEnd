@@ -25,13 +25,12 @@ class SchoolController extends Controller {
                 ->where('school.is_deleted', '0')
                 ->orderBy('school.id', 'DESC')
                 ->get();
-
         $data['super_admin'] = \App\Models\User::where('role_id', 1)->where('is_deleted', '0')->orderBy('id', 'DESC')->get();
-
         return view('admin.school.list')->with($data);
     }
 
     public function addSchool(Request $request) {
+
         $data = [];
         $data['title'] = 'Add School';
         $data['menu_active_tab'] = 'add-school';
@@ -41,10 +40,43 @@ class SchoolController extends Controller {
     }
 
     public function storeSchool(Request $request) {
-       
         $this->validate($request, [
             'name' => 'required|string|min:1|max:255',
-            'email' => 'required|string|email|max:255|unique:school,email',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:25',
+                'unique:school,email',
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'email_1' => [
+                'required',
+                'string',
+                'email',
+                'max:25',
+                'unique:users,email',
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'email_2' => [
+                'required',
+                'string',
+                'email',
+                'max:25',
+                'unique:users,email',
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'email_3' => [
+                'required',
+                'string',
+                'email',
+                'max:25',
+                'unique:users,email',
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+        ],
+        [
+            'email.regex' => 'Enter Valid Email address.'
         ]);
         $data = $request->input();
         try {
@@ -140,23 +172,31 @@ class SchoolController extends Controller {
             ]);
             $data = $request->input();
             $school = \App\Models\School::find($id);
-            if ($school) {
+            if ($school){
                 $school->name = $data['name'];
                 $school->address = $data['address'];
                 $school->email = $data['email'];
                 $school->phone_no = $data['phone_no'];
-//                $school->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
+                //                $school->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
                 $school->note = $data['note'] ? $data['note'] : null;
-                  $file_name = null;
+                $file_name = null;
                     $file_path = null;
+
                     if ($request->file()) {
-                        if ($request->file('delivery_note_image')) {
-                            $file_name = 'image_' . time() . '.' . $request->delivery_note_image->extension();
-                            $file_path = $request->file('delivery_note_image')->storeAs('delivery_note_image', $file_name, 'public');
+                        if ($request->file('logo')) {
+                            $file_name = 'image_' . time() . '.' . $request->logo->extension();
+                            // Define the path where the file will be stored
+                            $destinationPath = public_path('logo'); // This will store the file in the 'public/logo' directory
+                            // Move the uploaded file to the specified destination path
+                            $request->file('logo')->move($destinationPath, $file_name);
+                            // Set the file path relative to the public directory
+                            $file_path = 'logo/' . $file_name;
                         }
                     }
-                    $stock->delivery_note_image = $file_name;
-                    $stock->delivery_note_image_path = $file_path;
+                    // Store the file name and file path in the database
+                    $school->logo = $file_name;
+                    $school->logo_path = $file_path;
+
                 $school->save();
                 $school_contact_person_list = \App\Models\SchoolContactPerson::where('school_id', $id)->where('is_deleted', '0')->get();
 
@@ -188,7 +228,7 @@ class SchoolController extends Controller {
                     $school_contact_person->phone_no = isset($request->$phone_no_val) ? $request->$phone_no_val : null;
                 }
                 $school_contact_person->save();
-///////////////////////
+                ///////////////////////
                 if (isset($school_contact_person_list[1])) {
                     $school_contact_person = \App\Models\SchoolContactPerson::where('id', $school_contact_person_list[1]['id'])->where('is_deleted', '0')->first();
                 } else {
@@ -214,14 +254,14 @@ class SchoolController extends Controller {
                 $phone_no_val = 'phone_no_' . 2;
                 if (isset($request->$phone_no_val) && $request->$phone_no_val) {
                     $school_contact_person->phone_no = isset($request->$phone_no_val) ? $request->$phone_no_val : null;
-                }
+                }                        
                 $school_contact_person->save();
 
                 /////////
                 if (isset($school_contact_person_list[2])) {
                     $school_contact_person = \App\Models\SchoolContactPerson::where('id', $school_contact_person_list[2]['id'])->where('is_deleted', '0')->first();
                 } else {
-                    $school_contact_person = new \App\Models\SchoolContactPerson();
+                    $school_contact_person = new \App\Models\SchoolContactPerson();       
                     $school_contact_person->school_id = $id;
                 }
                 $first_name_val = 'first_name_' . 3;
@@ -231,7 +271,7 @@ class SchoolController extends Controller {
                 $last_name_val = 'last_name_' . 3;
                 if (isset($request->$last_name_val) && $request->$last_name_val) {
                     $school_contact_person->last_name = isset($request->$last_name_val) ? $request->$last_name_val : null;
-                }
+                } 
                 $position_val = 'position_' . 3;
                 if (isset($request->$position_val) && $request->$position_val) {
                     $school_contact_person->position = isset($request->$position_val) ? $request->$position_val : null;
@@ -271,10 +311,9 @@ class SchoolController extends Controller {
         $data = [
             'school_name' => $school->name,
             'email' => $school->email,
-            'registration_link' => 'https://en.wikipedia.org/wiki/India',
+            'registration_link' => '',
         ];
         // dd($school->email);
         Mail::to($school->email)->send(new \App\Mail\RegistrationLinkMail($data));
     }
-
 }

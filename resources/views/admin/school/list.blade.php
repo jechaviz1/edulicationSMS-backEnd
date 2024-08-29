@@ -38,8 +38,7 @@
                 </li>
             </ul>	
         </div>
-
-        <!-- /tab-content -->	
+        <!-- /tab-content -->
         <div class="tab-content" id="myTabContent-3">
             <div class="tab-pane fade show active" id="withoutBorder" role="tabpanel" aria-labelledby="home-tab-3">
                 <div class="card-body pt-0">
@@ -76,10 +75,8 @@
                                         </div>
                                     </td>
                                 </tr>
-
                                 @endforeach
                                 @endif
-
                             </tbody>
                         </table>
                     </div>

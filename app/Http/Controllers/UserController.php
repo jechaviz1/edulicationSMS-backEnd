@@ -630,7 +630,7 @@ class UserController extends Controller {
             ],
             'username' => 'required|string|max:255|unique:users,username',
         ], [
-            'email.regex' => 'The email address cannot contain consecutive dots.'
+            'email.regex' => 'Enter Valid Email address.'
         ]);
         $data = $request->input();
         try {
