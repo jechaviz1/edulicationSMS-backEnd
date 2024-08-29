@@ -796,3 +796,4 @@ Route::get('reset-password/{token}', [App\Http\Controllers\ForgotPasswordControl
 Route::post('reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 //course filter
 Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseController::class, 'filter']);
+Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode'); 

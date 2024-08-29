@@ -15,6 +15,7 @@ use App\Models\IssueCertificate;
 use App\Models\FundingState;
 use PDF;
 use Svg\Tag\Rect;
+use Auth;
 
 class ApiController extends Controller
 {
@@ -121,5 +122,11 @@ class ApiController extends Controller
         $state = $request->query('state');
         $fundingSource = FundingState::where('state',$state)->where('national_id',$national)->get();
         return response()->json(['fundingSource' => $fundingSource]);
+    }
+    public function mode(Request $request){
+     
+        $user = Auth::user();
+        $user->theme = $request->mode; 
+        $user->save(); 
     }
 }

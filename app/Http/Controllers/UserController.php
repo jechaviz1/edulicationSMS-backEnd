@@ -278,7 +278,7 @@ class UserController extends Controller {
                     ], [
                         'profile_image.required' => 'A profile image is required.',
                         'profile_image.image' => 'The file must be an image.',
-                        'profile_image.mimes' => 'The image must be a file of type: png, jpeg, jpg, webp.',
+                        'profile_image.mimes' => 'The image must be a file of type: png, jpeg, jpg, jifif , webp.',
                         'profile_image.max' => 'The image size must not exceed 2MB.',
                     ]);
                 $user = User::find(\Auth::id());
