@@ -57,7 +57,7 @@
     
     ?>
    
-    <body  @if($user->theme == "1") data-theme-version="light" @else data-theme-version="dark" @endif>
+    <body>
 
         <!--*******************
             Preloader start
@@ -804,7 +804,7 @@
 
                                             </div>
                                         </a>
-                                        <div class=" profile-box">
+                                        <div class="profile-box" id="profile-box"> 
                                             <div class="products">
                                                 <div class="border-img">
                                                     <!--<img src="images/user.jpg" class="avatar " alt="">-->
@@ -1931,6 +1931,9 @@
         
     });
 });
+</script>
+<script>
+    
 </script>
 @stack('scripts')
     </body>

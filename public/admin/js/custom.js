@@ -638,7 +638,8 @@ var W3Admin = function(){
 	}
 	var handleProfileBox = function(){
 		 $(".header-profile2 .nav-link").click(function(){
-			$(".profile-box").toggleClass("active");
+			console.log("hello");
+			$("#profile-box").toggleClass("active");
 		  });
 		
 	}

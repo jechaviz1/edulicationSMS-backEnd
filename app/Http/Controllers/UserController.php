@@ -53,12 +53,18 @@ class UserController extends Controller {
                     $initial .= $admin_detail->last_name[0];
                 }
                 $request->session()->put('user_initial', $initial);
-    
                 $background_colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark'];
                 $rand_background = $background_colors[array_rand($background_colors)];
                 $request->session()->put('user_initial_color', $rand_background);
+                $user = User::where('id', Auth::id())->first();
+                if($request->remember == "1"){
+                    $user->remember = $remember;
+                }else{
+                    $user->remember = $remember;
+                    $user->theme = "light";
+                }
+                $user->save();
             }
-    
             return redirect()->intended('admin/dashboard')->withSuccess('You have Successfully logged in');
         } else {
             // Attempt to login using username
@@ -70,7 +76,6 @@ class UserController extends Controller {
                 $request->session()->put('last_name', $admin_detail->last_name);
                 $request->session()->put('email', $admin_detail->email);
                 $request->session()->put('profile_image_path', $admin_detail->profile_image_path);
-    
                 $initial = "";
                 if ($admin_detail->first_name != null) {
                     $initial = $admin_detail->first_name[0];
@@ -79,15 +84,20 @@ class UserController extends Controller {
                     $initial .= $admin_detail->last_name[0];
                 }
                 $request->session()->put('user_initial', $initial);
-    
                 $background_colors = ['bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-dark'];
                 $rand_background = $background_colors[array_rand($background_colors)];
                 $request->session()->put('user_initial_color', $rand_background);
-    
+                $user = User::where('id', Auth::id())->first();
+                if($request->remember == "1"){
+                    $user->remember = $remember;
+                }else{
+                    $user->remember = $remember;
+                    $user->theme = "light";
+                }
+                $user->save();
                 return redirect()->intended('admin/dashboard')->withSuccess('You have Successfully logged in');
             }
         }
-    
         return redirect('admin/login')->with('failed', "Oops! You have entered invalid credentials");
     }
 
@@ -97,7 +107,13 @@ class UserController extends Controller {
         $request->session()->forget('first_name');
         $request->session()->forget('last_name');
         $request->session()->forget('email');
-
+        $user = User::where('id', Auth::id())->first();
+        if($user->remember == "1"){
+            $user->theme =  $user->theme;
+        }else{
+            $user->theme =  "light";
+        }
+        $user->save();
         \Auth::logout();
         return redirect("admin/login")->withSuccess('Logout successfully.');
     }
