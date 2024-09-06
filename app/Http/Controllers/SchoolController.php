@@ -73,7 +73,22 @@ class SchoolController extends Controller {
             ],
         ],
         [
-            'email.regex' => 'Please enter a valid email id.'
+            'email.regex' => 'Please enter a valid email address.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'Please enter a valid email address.',
+            'email.regex' => 'Please enter a valid email address.',
+            'email_1.regex' => 'Please enter a valid email address ',
+            'email_1.unique' => 'Please enter a valid email address ',
+            'email_1.max' => 'Please enter a valid email address ',
+            'email_1.email' => 'Please enter a valid email address ',
+            'email_2.regex' => 'Please enter a valid email address',
+            'email_2.unique' => 'Please enter a valid email address',
+            'email_2.max' => 'Please enter a valid email address',
+            'email_2.email' => 'Please enter a valid email address',
+            'email_3.regex' => 'Please enter a valid email address',
+            'email_3.unique' => 'Please enter a valid email address',
+            'email_3.max' => 'Please enter a valid email address',
+            'email_3.email' => 'Please enter a valid email address',
         ]);
         $data = $request->input();
         try {
@@ -202,9 +217,21 @@ class SchoolController extends Controller {
             ],
         ], [
             'email.regex' => 'Please enter a valid email address.',
-            'email_1.regex' => 'Please enter a valid email address for Email 1.',
-            'email_2.regex' => 'Please enter a valid email address for Email 2.',
-            'email_3.regex' => 'Please enter a valid email address for Email 3.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'Please enter a valid email address.',
+            'email.regex' => 'Please enter a valid email address.',
+            'email_1.regex' => 'Please enter a valid email address ',
+            'email_1.unique' => 'Please enter a valid email address ',
+            'email_1.max' => 'Please enter a valid email address ',
+            'email_1.email' => 'Please enter a valid email address ',
+            'email_2.regex' => 'Please enter a valid email address',
+            'email_2.unique' => 'Please enter a valid email address',
+            'email_2.max' => 'Please enter a valid email address',
+            'email_2.email' => 'Please enter a valid email address',
+            'email_3.regex' => 'Please enter a valid email address',
+            'email_3.unique' => 'Please enter a valid email address',
+            'email_3.max' => 'Please enter a valid email address',
+            'email_3.email' => 'Please enter a valid email address',
         ]);
             $data = $request->input();
             $school = \App\Models\School::find($id);

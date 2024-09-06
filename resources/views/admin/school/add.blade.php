@@ -68,7 +68,7 @@
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Phone No<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="Your valid Phone No" required name="phone_no" value="">
+                                        <input type="number" class="form-control" id="validationCustom02" placeholder="Your valid Phone No" required name="phone_no" value="">
                                         <div class="invalid-feedback">
                                             Please enter a Phone No.
                                         </div>
