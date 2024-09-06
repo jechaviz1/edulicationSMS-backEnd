@@ -1,7 +1,5 @@
-
 <!-- Extends template page-->
 @extends('admin.layout.header')
-
 <!-- Specify content -->
 @section('content')
 <div class="row">
@@ -129,6 +127,9 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="First Name." name="first_name_{{$key_scp_val}}" value="{{$row->first_name}}" />
                                         <div class="invalid-feedback">Please enter a First Name.</div>
+                                        @if($errors->has("first_name_$key_scp_val"))
+                                        <div class="error">{{ $errors->first("first_name_$key_scp_val") }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -138,6 +139,9 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="Last Name." name="last_name_{{$key_scp_val}}" value="{{$row->last_name}}" />
                                         <div class="invalid-feedback">Please enter a Last Name.</div>
+                                        @if($errors->has("last_name_$key_scp_val"))
+                                        <div class="error">{{ $errors->first("last_name_$key_scp_val") }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -172,6 +176,9 @@
                                     <div class="col-lg-8">
                                         <input type="email" class="form-control" id="validationCustom02" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email" name="email_{{$key_scp_val}}" value="{{$row->email}}" />
                                         <div class="invalid-feedback">Please enter a Email.</div>
+                                        @if($errors->has("email_$key_scp_val"))
+                                        <div class="error">{{ $errors->first("email_$key_scp_val") }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -181,6 +188,9 @@
                                     <div class="col-lg-8">
                                         <input type="text" class="form-control" id="validationCustom02" placeholder="Phone no." name="phone_no_{{$key_scp_val}}" value="{{$row->phone_no}}" />
                                         <div class="invalid-feedback">Please enter a Phone no.</div>
+                                        @if($errors->has("phone_no_$key_scp_val"))
+                                        <div class="error">{{ $errors->first("phone_no_$key_scp_val") }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

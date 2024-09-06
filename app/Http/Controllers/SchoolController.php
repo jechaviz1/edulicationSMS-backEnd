@@ -51,24 +51,21 @@ class SchoolController extends Controller {
                 'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
             ],
             'email_1' => [
-                'required',
-                'string',
+                'nullable',
                 'email',
                 'max:25',
                 'unique:users,email',
                 'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
             ],
             'email_2' => [
-                'required',
-                'string',
+                'nullable',
                 'email',
                 'max:25',
                 'unique:users,email',
                 'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
             ],
             'email_3' => [
-                'required',
-                'string',
+                'nullable',
                 'email',
                 'max:25',
                 'unique:users,email',
@@ -76,10 +73,11 @@ class SchoolController extends Controller {
             ],
         ],
         [
-            'email.regex' => 'Enter Valid Email address.'
+            'email.regex' => 'Please enter a valid email id.'
         ]);
         $data = $request->input();
         try {
+        // dd($request);
             $school = new \App\Models\School();
             $school->name = $data['name'];
             $school->address = $data['address'];
@@ -101,6 +99,7 @@ class SchoolController extends Controller {
             }
             $school->note = $data['note'] ? $data['note'] : null;
             $school->save();
+            // dd($school);
             $token = Password::createToken($school);
             $school_id = null;
             if (isset($school->id)) {
@@ -166,10 +165,47 @@ class SchoolController extends Controller {
 
     public function updateSchool(Request $request, $id) {
         if ($id) {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required|string|email|max:255|unique:school,email,' . $id
-            ]);
+             // Fetch the user record based on the provided ID
+        $user = School::findOrFail($id); // Adjust this based on your actual model
+
+        // Validate the request
+        $this->validate($request, [
+            'name' => 'required|string|min:1|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:25',
+                'unique:school,email,' . $id, // Use the provided ID to exclude the current record
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'email_1' => [
+                'nullable',
+                'email',
+                'max:25',
+                'unique:users,email,' . $id, // Use the provided ID to exclude the current record
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'email_2' => [
+                'nullable',
+                'email',
+                'max:25',
+                'unique:users,email,' . $id, // Use the provided ID to exclude the current record
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+            'email_3' => [
+                'nullable',
+                'email',
+                'max:25',
+                'unique:users,email,' . $id, // Use the provided ID to exclude the current record
+                'regex:/^(?!.*\.\.)[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'
+            ],
+        ], [
+            'email.regex' => 'Please enter a valid email address.',
+            'email_1.regex' => 'Please enter a valid email address for Email 1.',
+            'email_2.regex' => 'Please enter a valid email address for Email 2.',
+            'email_3.regex' => 'Please enter a valid email address for Email 3.',
+        ]);
             $data = $request->input();
             $school = \App\Models\School::find($id);
             if ($school){

@@ -157,11 +157,13 @@ class UserController extends Controller {
     }
 
     public function storeUser(Request $request) {
-
         $this->validate($request, [
             'first_name' => 'required|string|min:4|max:255',
             'city_name' => 'required|string|min:4|max:255',
             'email' => 'required|string|email|max:255|unique:users,email'
+        ],
+        [
+            'email.regex' => 'Please enter a valid email id'
         ]);
 
         $data = $request->input();
@@ -646,7 +648,7 @@ class UserController extends Controller {
             ],
             'username' => 'required|string|max:255|unique:users,username',
         ], [
-            'email.regex' => 'Enter Valid Email address.'
+            'email.regex' => 'Please enter a valid email id'
         ]);
         $data = $request->input();
         try {

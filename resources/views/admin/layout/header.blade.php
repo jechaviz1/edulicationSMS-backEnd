@@ -15,7 +15,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- PAGE TITLE HERE -->
-        <title>Edulica</title>
+        <title>SMS EdulicaTion</title>
         <!-- FAVICONS ICON -->
         <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/favicon.png') }}">
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
