@@ -102,9 +102,7 @@ class CourseCategoryController extends Controller
         if ($id) {
             $coursecategory = CourseCategory::find($id);
             if ($coursecategory) {
-                $coursecategory->is_deleted = '1';
-                //  $user->modified_by_id = \Auth::user()->id ? \Auth::user()->id : null;
-                $coursecategory->save();
+                $coursecategory->delete();
             }
             return redirect()->route('coursecategory-list')->with('success', 'Record deleted.');
         } else {

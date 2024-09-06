@@ -57,7 +57,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('edit-coursecategory',$row->id) }}" class="btn btn-primary light shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('delete-coursecategory',$row->id) }}" onclick="return confirm('Are you sure?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('delete-coursecategory',$row->id) }}" onclick="return confirm('Are you sure you want to delete this record?')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
