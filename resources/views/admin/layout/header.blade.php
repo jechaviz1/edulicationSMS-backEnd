@@ -15,7 +15,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- PAGE TITLE HERE -->
-        <title>SMS EdulicaTion</title>
+        <title>SMS Edulication</title>
         <!-- FAVICONS ICON -->
         <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/favicon.png') }}">
         <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
@@ -1115,6 +1115,7 @@
                     <span class="nav-text">Report</span>
                 </a>
                 <ul aria-expanded="false">
+                    <li><a href="{{ URL::route('report.activity.log') }}">Activity Log</a></li>
                     <li><a href="{{ URL::route('course.complation') }}">Courser Complation</a></li>
                     <li><a href="{{ URL::route('course.utilisation') }}">Courser Utilisation</a></li>
                     <li><a href="{{ URL::route('duplicate.enrolment') }}">Duplicate Enrolments</a></li>
@@ -1765,6 +1766,7 @@
         <script src="{{ asset('admin/vendor/jqvmap/js/jquery.vmap.usa.js')}}"></script>
 
         <script type="text/javascript" src="{{ asset('admin/js/toastr/toastr.min.js')}}  "></script>
+        <script type="text/javascript" src="{{ asset('admin/js/create.js')}}  "></script>
         
         <script src="{{ asset('admin/vendor/datatables/js/datatables.min.js')}}"></script>
 

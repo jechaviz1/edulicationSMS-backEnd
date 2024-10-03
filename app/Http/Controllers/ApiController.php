@@ -15,8 +15,7 @@ use App\Models\IssueCertificate;
 use App\Models\FundingState;
 use PDF;
 use Svg\Tag\Rect;
-use Auth;
-
+use Illuminate\Support\Facades\Auth;
 class ApiController extends Controller
 {
     public function cityget(){
@@ -128,5 +127,18 @@ class ApiController extends Controller
         $user = Auth::user();
         $user->theme = $request->mode; 
         $user->save(); 
+    }
+    public function search_people_report(Request $request){
+        $user = auth()->user(); // Get the currently authenticated user
+        $learnerId = $request->input('learnerId'); // Get learnerId from the request
+            // Fetch students created by the authenticated user and matching the learnerId in name fields
+    $students = Student::where('created_by', $user->id)
+    ->where(function($query) use ($learnerId) {
+        $query->where('first_name', 'like', '%' . $learnerId . '%')
+              ->orWhere('middle_name', 'like', '%' . $learnerId . '%')
+              ->orWhere('last_name', 'like', '%' . $learnerId . '%');
+    })// Select specific columns
+    ->get();
+       return response()->json(['students' => $students]);
     }
 }

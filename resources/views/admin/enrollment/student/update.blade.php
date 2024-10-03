@@ -464,7 +464,9 @@
                                                     </label>
                                                 </div>
                                                 <div class="col">
-                                                    <select name="country" id="country" class="input_text_1 form-control" style="width:100%; height:35px;">
+                                                    <select name="country" id="country"
+                                                        class="input_text_1 form-control"
+                                                        style="width:100%; height:35px;">
                                                         <option value=""></option>
                                                         <option value="Adelie Land (France)">Adelie Land (France)</option>
                                                         <option value="Afghanistan">Afghanistan</option>
@@ -479,15 +481,19 @@
                                                         <option value="Antarctica">Antarctica</option>
                                                         <option value="Antigua and Barbuda">Antigua and Barbuda</option>
                                                         <option value="Argentina">Argentina</option>
-                                                        <option value="Argentinian Antarctic Territory">Argentinian Antarctic Territory</option>
+                                                        <option value="Argentinian Antarctic Territory">Argentinian
+                                                            Antarctic Territory</option>
                                                         <option value="Armenia">Armenia</option>
                                                         <option value="Aruba">Aruba</option>
                                                         <option value="Asia, nfd">Asia, nfd</option>
                                                         <option value="At Sea">At Sea</option>
                                                         <option value="Australia" selected="">Australia</option>
-                                                        <option value="Australia (includes External Territories)">Australia (includes External Territories)</option>
-                                                        <option value="Australian Antarctic Territory">Australian Antarctic Territory</option>
-                                                        <option value="Australian External Territories, nec">Australian External Territories, nec</option>
+                                                        <option value="Australia (includes External Territories)">Australia
+                                                            (includes External Territories)</option>
+                                                        <option value="Australian Antarctic Territory">Australian Antarctic
+                                                            Territory</option>
+                                                        <option value="Australian External Territories, nec">Australian
+                                                            External Territories, nec</option>
                                                         <option value="Austria">Austria</option>
                                                         <option value="Azerbaijan">Azerbaijan</option>
                                                         <option value="Bahamas">Bahamas</option>
@@ -500,16 +506,21 @@
                                                         <option value="Benin">Benin</option>
                                                         <option value="Bermuda">Bermuda</option>
                                                         <option value="Bhutan">Bhutan</option>
-                                                        <option value="Bolivia, Plurinational State of">Bolivia, Plurinational State of</option>
-                                                        <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint Eustatius and Saba</option>
-                                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                                                        <option value="Bolivia, Plurinational State of">Bolivia,
+                                                            Plurinational State of</option>
+                                                        <option value="Bonaire, Sint Eustatius and Saba">Bonaire, Sint
+                                                            Eustatius and Saba</option>
+                                                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina
+                                                        </option>
                                                         <option value="Botswana">Botswana</option>
                                                         <option value="Brazil">Brazil</option>
-                                                        <option value="British Antarctic Territory">British Antarctic Territory</option>
+                                                        <option value="British Antarctic Territory">British Antarctic
+                                                            Territory</option>
                                                         <option value="Brunei Darussalam">Brunei Darussalam</option>
                                                         <option value="Bulgaria">Bulgaria</option>
                                                         <option value="Burkina Faso">Burkina Faso</option>
-                                                        <option value="Burma (Republic of the Union of Myanmar)">Burma (Republic of the Union of Myanmar)</option>
+                                                        <option value="Burma (Republic of the Union of Myanmar)">Burma
+                                                            (Republic of the Union of Myanmar)</option>
                                                         <option value="Burundi">Burundi</option>
                                                         <option value="Cambodia">Cambodia</option>
                                                         <option value="Cameroon">Cameroon</option>
@@ -517,18 +528,24 @@
                                                         <option value="Cape Verde">Cape Verde</option>
                                                         <option value="Caribbean">Caribbean</option>
                                                         <option value="Cayman Islands">Cayman Islands</option>
-                                                        <option value="Central African Republic">Central African Republic</option>
+                                                        <option value="Central African Republic">Central African Republic
+                                                        </option>
                                                         <option value="Central America">Central America</option>
-                                                        <option value="Central and West Africa">Central and West Africa</option>
+                                                        <option value="Central and West Africa">Central and West Africa
+                                                        </option>
                                                         <option value="Central Asia">Central Asia</option>
                                                         <option value="Chad">Chad</option>
                                                         <option value="Chile">Chile</option>
-                                                        <option value="Chilean Antarctic Territory">Chilean Antarctic Territory </option>
-                                                        <option value="China (excludes SARs and Taiwan)">China (excludes SARs and Taiwan)</option>
-                                                        <option value="Chinese Asia (includes Mongolia)">Chinese Asia (includes Mongolia)</option>
+                                                        <option value="Chilean Antarctic Territory">Chilean Antarctic
+                                                            Territory </option>
+                                                        <option value="China (excludes SARs and Taiwan)">China (excludes
+                                                            SARs and Taiwan)</option>
+                                                        <option value="Chinese Asia (includes Mongolia)">Chinese Asia
+                                                            (includes Mongolia)</option>
                                                         <option value="Colombia">Colombia</option>
                                                         <option value="Comoros">Comoros</option>
-                                                        <option value="Congo, Democratic Republic of">Congo, Democratic Republic of</option>
+                                                        <option value="Congo, Democratic Republic of">Congo, Democratic
+                                                            Republic of</option>
                                                         <option value="Congo, Republic of ">Congo, Republic of </option>
                                                         <option value="Cook Islands">Cook Islands</option>
                                                         <option value="Costa Rica">Costa Rica</option>
@@ -558,13 +575,15 @@
                                                         <option value="Fiji">Fiji</option>
                                                         <option value="Finland">Finland</option>
                                                         <option value="Former USSR, nfd">Former USSR, nfd</option>
-                                                        <option value="Former Yugoslav Republic of Macedonia (FYROM)"> Former Yugoslav Republic of Macedonia (FYROM)</option>
+                                                        <option value="Former Yugoslav Republic of Macedonia (FYROM)">
+                                                            Former Yugoslav Republic of Macedonia (FYROM)</option>
                                                         <option value="France">France</option>
                                                         <option value="French Guiana">French Guiana</option>
                                                         <option value="French Polynesia">French Polynesia</option>
                                                         <option value="Gabon">Gabon</option>
                                                         <option value="Gambia">Gambia</option>
-                                                        <option value="Gaza Strip and West Bank">Gaza Strip and West Bank</option>
+                                                        <option value="Gaza Strip and West Bank">Gaza Strip and West Bank
+                                                        </option>
                                                         <option value="Georgia">Georgia</option>
                                                         <option value="Germany">Germany</option>
                                                         <option value="Ghana">Ghana</option>
@@ -582,10 +601,12 @@
                                                         <option value="Haiti">Haiti</option>
                                                         <option value="Holy See">Holy See</option>
                                                         <option value="Honduras">Honduras</option>
-                                                        <option value="Hong Kong (SAR of China)">Hong Kong (SAR of China)</option>
+                                                        <option value="Hong Kong (SAR of China)">Hong Kong (SAR of China)
+                                                        </option>
                                                         <option value="Hungary">Hungary</option>
                                                         <option value="Iceland">Iceland</option>
-                                                        <option value="Inadequately Described">Inadequately Described</option>
+                                                        <option value="Inadequately Described">Inadequately Described
+                                                        </option>
                                                         <option value="India">India</option>
                                                         <option value="Indonesia">Indonesia</option>
                                                         <option value="Iran">Iran</option>
@@ -602,8 +623,10 @@
                                                         <option value="Kazakhstan">Kazakhstan</option>
                                                         <option value="Kenya">Kenya</option>
                                                         <option value="Kiribati">Kiribati</option>
-                                                        <option value="Korea, Democratic People' republic'of(north)">Korea,Democratic People's Republic of (North)</option>
-                                                        <option value="Korea, Republic of (South)">Korea, Republic of (South) </option>
+                                                        <option value="Korea, Democratic People' republic'of(north)">
+                                                            Korea,Democratic People's Republic of (North)</option>
+                                                        <option value="Korea, Republic of (South)">Korea, Republic of
+                                                            (South) </option>
                                                         <option value="Kosovo">Kosovo</option>
                                                         <option value="Kurdistan, nfd">Kurdistan, nfd</option>
                                                         <option value="Kuwait">Kuwait</option>
@@ -619,13 +642,15 @@
                                                         <option value="Luxembourg">Luxembourg</option>
                                                         <option value="Macau (SAR of China)">Macau (SAR of China)</option>
                                                         <option value="Madagascar">Madagascar</option>
-                                                        <option value="Mainland South-East Asia">Mainland South-East Asia</option>
+                                                        <option value="Mainland South-East Asia">Mainland South-East Asia
+                                                        </option>
                                                         <option value="Malawi">Malawi</option>
                                                         <option value="Malaysia">Malaysia</option>
                                                         <option value="Maldives">Maldives</option>
                                                         <option value="Mali">Mali</option>
                                                         <option value="Malta">Malta</option>
-                                                        <option value="Maritime South-East Asia">Maritime South-East Asia</option>
+                                                        <option value="Maritime South-East Asia">Maritime South-East Asia
+                                                        </option>
                                                         <option value="Marshall Islands">Marshall Islands</option>
                                                         <option value="Martinique">Martinique</option>
                                                         <option value="Mauritania">Mauritania</option>
@@ -634,7 +659,8 @@
                                                         <option value="Melanesia">Melanesia</option>
                                                         <option value="Mexico">Mexico</option>
                                                         <option value="Micronesia">Micronesia</option>
-                                                        <option value="Micronesia, Federated States of">Micronesia,Federated States of</option>
+                                                        <option value="Micronesia, Federated States of">
+                                                            Micronesia,Federated States of</option>
                                                         <option value="Middle East">Middle East</option>
                                                         <option value="Moldova">Moldova</option>
                                                         <option value="Monaco">Monaco</option>
@@ -656,16 +682,19 @@
                                                         <option value="Niue">Niue</option>
                                                         <option value="Norfolk Island">Norfolk Island</option>
                                                         <option value="North Africa">North Africa</option>
-                                                        <option value="North Africa and the Middle East">North Africa and the Middle East</option>
+                                                        <option value="North Africa and the Middle East">North Africa and
+                                                            the Middle East</option>
                                                         <option value="North-East Asia">North-East Asia</option>
                                                         <option value="North-West Europe">North-West Europe</option>
                                                         <option value="Northern America">Northern America</option>
                                                         <option value="Northern Europe">Northern Europe</option>
                                                         <option value="Northern Ireland">Northern Ireland</option>
-                                                        <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                                        <option value="Northern Mariana Islands">Northern Mariana Islands
+                                                        </option>
                                                         <option value="Norway">Norway</option>
                                                         <option value="Not Specified">Not Specified</option>
-                                                        <option value="Oceania and Antarctica">Oceania and Antarctica</option>
+                                                        <option value="Oceania and Antarctica">Oceania and Antarctica
+                                                        </option>
                                                         <option value="Oman">Oman</option>
                                                         <option value="Pakistan">Pakistan</option>
                                                         <option value="Palau">Palau</option>
@@ -676,21 +705,26 @@
                                                         <option value="Philippines">Philippines</option>
                                                         <option value="Pitcairn Islands">Pitcairn Islands</option>
                                                         <option value="Poland">Poland</option>
-                                                        <option value="Polynesia (excludes Hawaii)">Polynesia (excludes  Hawaii)</option>
-                                                        <option value="Polynesia (excludes Hawaii), nec">Polynesia(excludesHawaii), nec</option>
+                                                        <option value="Polynesia (excludes Hawaii)">Polynesia (excludes
+                                                            Hawaii)</option>
+                                                        <option value="Polynesia (excludes Hawaii), nec">
+                                                            Polynesia(excludesHawaii), nec</option>
                                                         <option value="Portugal">Portugal</option>
                                                         <option value="Puerto Rico">Puerto Rico</option>
                                                         <option value="Qatar">Qatar</option>
-                                                        <option value="Queen Maud Land (Norway)">Queen Maud Land (Norway)</option>
+                                                        <option value="Queen Maud Land (Norway)">Queen Maud Land (Norway)
+                                                        </option>
                                                         <option value="Reunion">Reunion</option>
                                                         <option value="Romania">Romania</option>
-                                                        <option value="Ross Dependency (New Zealand)">Ross Dependency (New Zealand)</option>
+                                                        <option value="Ross Dependency (New Zealand)">Ross Dependency (New
+                                                            Zealand)</option>
                                                         <option value="Russian Federation">Russian Federation</option>
                                                         <option value="Rwanda">Rwanda</option>
                                                         <option value="Samoa">Samoa</option>
                                                         <option value="Samoa, American">Samoa, American</option>
                                                         <option value="San Marino">San Marino</option>
-                                                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                                                        <option value="Sao Tome and Principe">Sao Tome and Principe
+                                                        </option>
                                                         <option value="Saudi Arabia">Saudi Arabia</option>
                                                         <option value="Scotland">Scotland</option>
                                                         <option value="Senegal">Senegal</option>
@@ -698,7 +732,8 @@
                                                         <option value="Seychelles">Seychelles</option>
                                                         <option value="Sierra Leone">Sierra Leone</option>
                                                         <option value="Singapore">Singapore</option>
-                                                        <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)</option>
+                                                        <option value="Sint Maarten (Dutch part)">Sint Maarten (Dutch part)
+                                                        </option>
                                                         <option value="Slovakia">Slovakia</option>
                                                         <option value="Slovenia">Slovenia</option>
                                                         <option value="Solomon Islands">Solomon Islands</option>
@@ -709,10 +744,14 @@
                                                         <option value="South Eastern Europe">South Eastern Europe</option>
                                                         <option value="South Sudan">South Sudan</option>
                                                         <option value="South-East Asia">South-East Asia</option>
-                                                        <option value="Southern and Central Asia">Southern and Central Asia</option>
-                                                        <option value="Southern and East Africa">Southern and East Africa</option>
-                                                        <option value="Southern and East Africa, nec">Southern and EastAfrica,nec</option>
-                                                        <option value="Southern and Eastern Europe">Southern and EasternEurope</option>
+                                                        <option value="Southern and Central Asia">Southern and Central Asia
+                                                        </option>
+                                                        <option value="Southern and East Africa">Southern and East Africa
+                                                        </option>
+                                                        <option value="Southern and East Africa, nec">Southern and
+                                                            EastAfrica,nec</option>
+                                                        <option value="Southern and Eastern Europe">Southern and
+                                                            EasternEurope</option>
                                                         <option value="Southern Asia">Southern Asia</option>
                                                         <option value="Southern Europe">Southern Europe</option>
                                                         <option value="Spain">Spain</option>
@@ -722,9 +761,12 @@
                                                         <option value="St Helena">St Helena</option>
                                                         <option value="St Kitts and Nevis">St Kitts and Nevis</option>
                                                         <option value="St Lucia">St Lucia</option>
-                                                        <option value="St Martin (French part)">St Martin (French part)</option>
-                                                        <option value="St Pierre and Miquelon">St Pierre and Miquelon</option>
-                                                        <option value="St Vincent and the Grenadines">St Vincent and the Grenadines</option>
+                                                        <option value="St Martin (French part)">St Martin (French part)
+                                                        </option>
+                                                        <option value="St Pierre and Miquelon">St Pierre and Miquelon
+                                                        </option>
+                                                        <option value="St Vincent and the Grenadines">St Vincent and the
+                                                            Grenadines</option>
                                                         <option value="Sub-Saharan Africa">Sub-Saharan Africa</option>
                                                         <option value="Sudan">Sudan</option>
                                                         <option value="Suriname">Suriname</option>
@@ -744,20 +786,26 @@
                                                         <option value="Tunisia">Tunisia</option>
                                                         <option value="Turkey">Turkey</option>
                                                         <option value="Turkmenistan">Turkmenistan</option>
-                                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                                                        <option value="Turks and Caicos Islands">Turks and Caicos Islands
+                                                        </option>
                                                         <option value="Tuvalu">Tuvalu</option>
                                                         <option value="Uganda">Uganda</option>
                                                         <option value="Ukraine">Ukraine</option>
                                                         <option value="United Arab Emirates">United Arab Emirates</option>
-                                                        <option value="United Kingdom, Channel Islands and Isle of Man">United Kingdom, Channel Islands and Isle of Man</option>
-                                                        <option value="United States of America">United States of America</option>
+                                                        <option value="United Kingdom, Channel Islands and Isle of Man">
+                                                            United Kingdom, Channel Islands and Isle of Man</option>
+                                                        <option value="United States of America">United States of America
+                                                        </option>
                                                         <option value="Uruguay">Uruguay</option>
                                                         <option value="Uzbekistan">Uzbekistan</option>
                                                         <option value="Vanuatu">Vanuatu</option>
-                                                        <option value="Venezuela, Bolivarian Republic of">Venezuela, Bolivarian Republic of</option>
+                                                        <option value="Venezuela, Bolivarian Republic of">Venezuela,
+                                                            Bolivarian Republic of</option>
                                                         <option value="Vietnam">Vietnam</option>
-                                                        <option value="Virgin Islands, British">Virgin Islands, British</option>
-                                                        <option value="Virgin Islands, United States">Virgin Islands,United States</option>
+                                                        <option value="Virgin Islands, British">Virgin Islands, British
+                                                        </option>
+                                                        <option value="Virgin Islands, United States">Virgin Islands,United
+                                                            States</option>
                                                         <option value="Wales">Wales</option>
                                                         <option value="Wallis and Futuna">Wallis and Futuna</option>
                                                         <option value="Western Europe">Western Europe</option>
@@ -1344,32 +1392,32 @@
                                     <button class="btn btn-primary">Save</button>
                                 </form>
                             </div>x
-                                    <div class="col-4 mt-3">
-                                        <h6 class="border mb-3 p-2">Payment Schedule Overview</h6>
-                                        <p class="mb-1">Standard Course Tuition Cost: <i class="fa fa-question-circle"
-                                                aria-hidden="true" data-toggle="tooltip" data-html="true"
-                                                data-placement="top" title=""
-                                                data-original-title="This is added in the <br><strong>Courses We Run</strong> page"></i><span
-                                                class="float-right course-cost">$0.00</span></p>
-                                        <p class="mb-1">Discount Applied: <span
-                                                class="float-right course-cost">(${{ $enrollment->discountAmount }}.00)</span>
-                                        </p>
-                                        <p class="mb-1">Course Tuition Cost to Learner: <span
-                                                class="float-right">$-{{ $enrollment->discountAmount }}</span></p>
-                                        <p class="mb-1">Non-tuition (other) Costs to Learner: <span
-                                                class="float-right">$0.00</span></p>
-                                        <hr>
-                                        <p class="mb-1">Amounts Invoiced to Date (Tuition &amp; Other): <span
-                                                class="float-right">$0.00</span></p>
-                                        <p class="mb-1">Scheduled Amounts Yet to Invoice: <span
-                                                class="float-right">$0.00</span></p>
-                                        <p class="mb-1">Amount Paid to Date (Tuition &amp; Other): <span
-                                                class="float-right">$0.00</span></p>
-                                        <hr>
-                                        <p class="mb-1">Scheduled Fees Due but not Invoiced: <span
-                                                class="float-right ">$0.00</span></p>
-                                        <p class="mb-1">Invoiced Fees Overdue: <span class="float-right ">$0.00</span></p>
-                                    </div>
+                            <div class="col-4 mt-3">
+                                <h6 class="border mb-3 p-2">Payment Schedule Overview</h6>
+                                <p class="mb-1">Standard Course Tuition Cost: <i class="fa fa-question-circle"
+                                        aria-hidden="true" data-toggle="tooltip" data-html="true"
+                                        data-placement="top" title=""
+                                        data-original-title="This is added in the <br><strong>Courses We Run</strong> page"></i><span
+                                        class="float-right course-cost">$0.00</span></p>
+                                <p class="mb-1">Discount Applied: <span
+                                        class="float-right course-cost">(${{ $enrollment->discountAmount }}.00)</span>
+                                </p>
+                                <p class="mb-1">Course Tuition Cost to Learner: <span
+                                        class="float-right">$-{{ $enrollment->discountAmount }}</span></p>
+                                <p class="mb-1">Non-tuition (other) Costs to Learner: <span
+                                        class="float-right">$0.00</span></p>
+                                <hr>
+                                <p class="mb-1">Amounts Invoiced to Date (Tuition &amp; Other): <span
+                                        class="float-right">$0.00</span></p>
+                                <p class="mb-1">Scheduled Amounts Yet to Invoice: <span
+                                        class="float-right">$0.00</span></p>
+                                <p class="mb-1">Amount Paid to Date (Tuition &amp; Other): <span
+                                        class="float-right">$0.00</span></p>
+                                <hr>
+                                <p class="mb-1">Scheduled Fees Due but not Invoiced: <span
+                                        class="float-right ">$0.00</span></p>
+                                <p class="mb-1">Invoiced Fees Overdue: <span class="float-right ">$0.00</span></p>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="pills-profile" role="tabpanel"
                             aria-labelledby="pills-profile-tab">
@@ -1539,1146 +1587,494 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                           <div class="text-center">
-                               <h3>Invoice</h3>
-                           </div>
-                           <div class="row">
-                            <div class="col-sm-3"></div>
-                            <div class="col-sm-6">
-                                <div class="border p-4">
-                                    <div class="row">
-                                        <div class="col-sm-6 d-flex align-items-center">
-                                            <h5 class="text-center">Payment Schedule Overview</h5>
+                        <style>
+                            .avatar-upload {
+                                position: relative;
+                                max-width: 150px;
+                            }
+
+                            .avatar-upload .avatar-edit {
+                                position: absolute;
+                                right: 12px;
+                                z-index: 1;
+                                top: 10px;
+                            }
+
+                            .avatar-upload .avatar-edit input {
+                                display: none;
+                            }
+
+                            .avatar-upload .avatar-edit input+label {
+                                display: inline-block;
+                                width: 34px;
+                                height: 34px;
+                                margin-bottom: 0;
+                                border-radius: 100%;
+                                background: #d6cfcf;
+                                border: 1px solid transparent;
+                                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                                cursor: pointer;
+                                font-weight: normal;
+                                transition: all .2s ease-in-out;
+                            }
+
+                            .avatar-upload .avatar-edit input+label:hover {
+                                background: #f1f1f1;
+                                border-color: #d6d6d6;
+                            }
+
+                            .avatar-upload .avatar-edit input+label:after {
+                                content: "\f040";
+                                font-family: 'FontAwesome';
+                                color: #757575;
+                                position: absolute;
+                                top: 10px;
+                                left: 0;
+                                right: 0;
+                                text-align: center;
+                                margin: auto;
+                            }
+
+                            .avatar-upload .avatar-preview {
+                                width: 140px;
+                                height: 140px;
+                                position: relative;
+                                border-radius: 100%;
+                                border: 6px solid #d9d7d7;
+                                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+                            }
+
+                            .avatar-upload .avatar-preview>div {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 100%;
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                            }
+                        </style>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab">
+                            <div class="row">
+                                <div class="col-sm-12 bg-primary p-3">
+                                    <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                        data-bs-target="#tax">
+                                        % Taxes
+                                    </button>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-light" data-bs-toggle="modal"
+                                        data-bs-target="#discount">
+                                        + Discounts
+                                    </button>
+                                    <button id="btnSendInvoice"
+                                        class="btnSendInvoice btn btn-large btn-success float-end"data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"><i class="fa fa-envelope me-2"></i>Send
+                                        Invoice</button>
+                                    <button id="btnPreview" class="btnPreview btn btn-large btn-info float-end mx-2"><i
+                                            class="fa fa-search-plus"></i> Preview / Print</button>
+                                    <button id="btnPreviewPdf" type="button"
+                                        class="btnPreviewPdf btn btn-large btn-info float-end mx-2"><i
+                                            class="fa fa-download"></i> PDF</button>
+                                </div>
+                            </div>
+                            {{-- invoice modal taxes start --}}
+                            <!-- Button trigger modal -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="tax" tabindex="-1"
+                                aria-labelledby="exampleModalLabel " aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Taxes
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
-                                        <div class="col-sm-6 d-flex justify-content-end">
-                                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                Invoice Create
-                                              </button>
-                                            {{-- <a href="" class="btn btn-secondary"></a> --}}
+                                        <div class="modal-body">
+                                            <table class="table table-bordered" id="taxTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Value</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th><input type="text" data-var="name"
+                                                                name="taxes[2][name]" id="Tax2Name" value="Tax 2"
+                                                                class="form-control"></th>
+                                                        <td><input class="form-control" data-var="val" type="text"
+                                                                name="taxes[2][value]" id="Tax2Value" value="0">
+                                                        </td>
+                                                        <td>
+                                                            <button href="#"
+                                                                class="btn btn-danger btn-mini remove-tax">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <button id="addTax" class="btn btn-success"><i
+                                                    class="icon-plus-sign icon-white"></i> Add Tax</button>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
-                                    <table class="table">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">Standard Course Tuition Cost: </th>
-                                            <th scope="col">$0.00</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">Discount Applied:</th>
-                                            <td>($0.00) </td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Course Tuition Cost to Learner:</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Non-tuition (other) Costs to Learner:</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                          <hr>
-                                          <tr>
-                                            <th scope="row">Amounts Invoiced to Date (Tuition & Other):</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Scheduled Amounts Yet to Invoice:</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Amount Paid to Date (Tuition & Other):</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Scheduled Fees Due but not Invoiced:</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">Invoiced Fees Overdue:</th>
-                                            <td>$0.00</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                      <div class="row">
-                                        <div class="col-sm-12 d-flex justify-content-end">
-                                            <a href="" class="btn btn-primary">Invoice Download</a>
-                                        </div>
-                                      </div>
-                                   </div>
-                                   <!-- Button trigger modal -->
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                </div>
+                            </div>
+                            {{-- invoice modal taxes end --}}
+                            {{-- invoice modal Discount start --}}
+                            <!-- Modal -->
+                            <div class="modal fade" id="discount" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Discount</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-sm-6">
-                                                    <h5 class="text-start">Invoice Add</h5>
+                                                <div class="col-xs-2">
+                                                    <label>Type</label>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <div class="col-xs-4">
+                                                    <select id="discountType" class="form-control"
+                                                        fdprocessedid="e96frk">
+                                                        <option value="percent">Percentage</option>
+                                                        <option value="flat">Fixed Amount</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                        <hr>
-                                        <div class="row mb-3">
-                                            <label for="invoice_number" class="col-sm-2 col-form-label">Invoice Number</label>
-                                            <div class="col-sm-10">
-                                              <input type="text" class="form-control" id="invoice_number" name="invoice_number">
+                                            <div class="row">
+                                                <div class="col-xs-2">
+                                                    <label>Value</label>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <input type="text" placeholder="Enter Fixed Amount"
+                                                        id="flatDiscountInput"
+                                                        class="input-small dim-value form-control"
+                                                        fdprocessedid="ghzik6">
+                                                </div>
                                             </div>
-                                          </div>
-                                          <div class="row mb-3">
-                                            <label for="invoice_date" class="col-sm-2 col-form-label">Invoice Date</label>
-                                            <div class="col-sm-10">
-                                              <input type="date" class="form-control" name="invoice_date" id="invoice_date">
-                                            </div>
-                                          </div>
-                                          <div class="row mb-3">
-                                            <label for="invoice_amount" class="col-sm-2 col-form-label">Invoice Amount</label>
-                                            <div class="col-sm-10">
-                                              <input type="number" class="form-control" name="invoice_amount" id="invoice_amount">
-                                            </div>
-                                          </div>
-                                          <div class="row mb-3">
-                                            <label for="invoice_description" class="col-sm-2 col-form-label">Invoice Description</label>
-                                            <div class="col-sm-10">
-                                              <input type="text" class="form-control" name="invoice_description" id="invoice_description">
-                                            </div>
-                                          </div>
-                                          <div class="row mb-3">
-                                            <label for="due_date" class="col-sm-2 col-form-label">Due Date</label>
-                                            <div class="col-sm-10">
-                                              <input type="date" class="form-control" id="due_date">
-                                            </div>
-                                          </div>
-                                          <div class="row mb-3">
-                                            <label for="payment_type" class="col-sm-2 col-form-label">Payment Type</label>
-                                            <div class="col-sm-10">
-                                            
-                                              <select name="payment_type" class="form-select"  id="payment_type" aria-label="Default select example">
-                                                <option selected>Payment Type</option>
-                                                <option value="Tuition">Tuition</option>
-                                                <option value="Other">Other</option>
-                                              </select>
-                                            </div>
-                                          </div>
-                                          <div class="row mb-3">
-                                            <label for="payment_type" class="col-sm-2 col-form-label">Payment Type</label>
-                                            <div class="col-sm-10">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        No
-                                                    </label>
-                                                  </div>
-                                                  <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Full Payment
-                                                    </label>
-                                                  </div>
-                                                  <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Part Payment
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                          </div>
-                                          <div class="row">
-                                            <div class="col-sm-12">
-                                                <button class="btn btn-primary" >Save</button>
-                                                <button type="button" class="btn btn-secondary float-end" data-bs-dismiss="modal">close</button>
-                                            </ddiv>
-                                          </div>
                                         </div>
-                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3"></div>
-                           </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-enrolment" role="tabpanel"
-                            aria-labelledby="pills-enrolment-tab">
-                            <form action="{{ route('module.select.people') }}" method="post">
-                                @csrf()
-                                @method('POST')
-                                @php
-                                    $number = 0;
-                                @endphp
-                                <div class="row bg-primary text-white">
-                                    <div class="col-md-6">
-                                        <p class="mb-0" style="padding: 3px 0px 3px 12px;">Core Active</p>
-                                    </div>
-                                </div>
-                                <table id="example_new" class="display table" style="min-width: 845px">
-                                    <thead>
-                                        <tr>
-                                            <th><input type="checkbox" name="coreunitCheck" id="coreunitCheck"
-                                                    onclick="toggleAllCheckBoxes(this);"> Code </th>
-                                            <th>Name</th>
-                                            <th>Competency Flag</th>
-                                            <th>Enrol Date</th>
-                                            <th>Notes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($unit_core_active as $k => $row)
-                                            @php
-                                                $unit = StudentModule::where('student_id', $enrollment->student->id)
-                                                    ->where('unit_competency_id', $row->id)
-                                                    ->first();
-                                            @endphp
-                                            <tr>
-                                                <td>
-                                                    <input type="hidden"
-                                                        name="module[{{ $number }}][student_id]"
-                                                        value="{{ $enrollment->student->id }}">
-                                                    <input type="checkbox"
-                                                        name="module[{{ $number }}][unit_competency_id]"
-                                                        class="coreunits" value="{{ $row->id }}"
-                                                        @if ($unit != null) checked @endif>
-                                                    {{ $row->code }}
-                                                </td>
-                                                <td>{{ $row->name }}</td>
-                                                <td>
-                                                    @if ($row->competency_flag == '0')
-                                                        Competency
-                                                    @else
-                                                        Module
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($unit != null)
-                                                        {{ $unit->enrollment_date }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <textarea class="notesta" style="width:100%" name="module[{{ $number }}][note]" id="nsu_BIOFTY">
-                                                    @if ($unit != null)
-{{ $unit->note }}
-@endif
-                                                    </textarea>
-                                                </td>
-                                            </tr>
-                                            {{ $number++ }}
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="row bg-primary text-white">
-                                    <div class="col-md-6">
-                                        <p class="mb-0" style="padding: 3px 0px 3px 12px;">Elective Active Units</p>
-                                    </div>
-                                </div>
-                                <table id="example_new" class="display table" style="min-width: 845px">
-                                    <thead>
-                                        <tr>
-                                            <th><input type="checkbox" name="coreunitCheck" id="coreunitCheck"
-                                                    onclick="toggleAllCheckElective(this);"> Code </th>
-                                            <th>Name</th>
-                                            <th>Competency Flag</th>
-                                            <th>Enrol Date</th>
-                                            <th>Notes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($unit_elective_active as $k => $row)
-                                            @php
-                                                $unit = StudentModule::where('student_id', $enrollment->student->id)
-                                                    ->where('unit_competency_id', $row->id)
-                                                    ->first();
-                                            @endphp
-                                            <tr>
-                                                <td>
-                                                    <input type="hidden"
-                                                        name="module[{{ $number }}][student_id]"
-                                                        value="{{ $enrollment->student->id }}">
-                                                    <input type="checkbox"
-                                                        name="module[{{ $number }}][unit_competency_id]"
-                                                        class="electiveunits" value="{{ $row->id }}"
-                                                        @if ($unit != null) checked @endif>
-                                                    {{ $row->code }}
-                                                </td>
-                                                <td>{{ $row->name }}</td>
-                                                <td>
-                                                    @if ($row->competency_flag == '0')
-                                                        Competency
-                                                    @else
-                                                        Module
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @if ($unit != null)
-                                                        {{ $unit->enrollment_date }}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <textarea class="notesta" style="width:100%" name="module[{{ $number }}][note]" id="nsu_BIOFTY">
-                                                    @if ($unit != null)
-{{ $unit->note }}
-@endif
-                                                    </textarea>
-                                                </td>
-                                            </tr>
-                                            {{ $number++ }}
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="table-responsive mt-4">
-                                    <div class="row bg-primary text-white">
-                                        <div class="col-md-6">
-                                            <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive Core Units</p>
+                            {{-- invoice modal Discount end --}}
+                            {{-- invoice email start --}}
+                            <!-- Button trigger modal -->
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Send invoice to client</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
-                                    </div>
-                                    <table id="example_new" class="display table" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>Name</th>
-                                                <th>Field Of Education</th>
-                                                <th>Nominal Hours</th>
-                                                <th>VET</th>
-                                                <th>Compentency Flag</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($unit_core_inactive as $k => $row)
-                                                <tr>
-                                                    <td>{{ $row->code }}</td>
-                                                    <td>{{ $row->name }}</td>
-                                                    <td>{{ $row->field_of_education }}</td>
-                                                    <td>{{ $row->nominal_hours }}</td>
-                                                    <td>
-                                                        @if ($row->vet == '0')
-                                                            No
-                                                        @else
-                                                            Yes
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($row->competency_flag == '0')
-                                                            Competency
-                                                        @else
-                                                            Module
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="table-responsive mt-4">
-                                    <div class="row bg-primary text-white">
-                                        <div class="col-md-6">
-                                            <p class="mb-0" style="padding: 3px 0px 3px 12px;">Inactive Elective Units
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <table id="example_new" class="display table" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>Name</th>
-                                                <th>Field Of Education</th>
-                                                <th>Nominal Hours</th>
-                                                <th>VET</th>
-                                                <th>Compentency Flag</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($unit_elective_inactive as $k => $row)
-                                                <tr>
-                                                    <td>{{ $row->code }}</td>
-                                                    <td>{{ $row->name }}</td>
-                                                    <td>{{ $row->field_of_education }}</td>
-                                                    <td>{{ $row->nominal_hours }}</td>
-                                                    <td>
-                                                        @if ($row->vet == '0')
-                                                            No
-                                                        @else
-                                                            Yes
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        @if ($row->competency_flag == '0')
-                                                            Competency
-                                                        @else
-                                                            Module
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <button class="btn btn-primary" type="submit">Save</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="pills-outcomes" role="tabpanel"
-                            aria-labelledby="pills-outcomes-tab">
-                            <p>Number of Required Units : 22 (6 Core) Successfully Completed / Enrolled Units : 0 /2 (0 /2)
-                            </p>
-                            <p>Note: Blue units are Inactive.</p>
-                            <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
-                                <div class="col-sm-6 d-flex align-items-center">
-                                    <h5 class="m-0">Core</h5>
-                                </div>
-                                <div class="col-sm-6">
-                                    <form action="{{ route('student.enrolment.module.pdf') }}" method="post">
-                                        @csrf
-                                        @method('POST')
-                                        <input type="hidden" name="enrolment" value="{{ $enrollment->id }}">
-                                        <button class="btn btn-primary float-end" type="submit">Compentancy
-                                            Report</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Code</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Enrol Date</th>
-                                        <th scope="col">Activity Start</th>
-                                        <th scope="col">Outcome Identifier - National</th>
-                                        <th scope="col">Hours Attended</th>
-                                        <th scope="col">Notes</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($enrollment->student->unitCompetencies as $module)
-                                        @if ($module->type == 'core')
-                                            <form class="needs-validation" novalidate method="POST"
-                                                action="{{ route('core.module.unit.update', $module->id) }}">
+                                        <div class="modal-body">
+                                            <form action="{{ route('admin.invoice.mail.send') }}" method="post">
                                                 @csrf()
-                                                @method('put')
-                                                <tr>
-                                                    <th scope="col">{{ $module->code }} </th>
-                                                    <th scope="col">{{ $module->name }}</th>
-                                                    <th scope="col">
-                                                        <span class="module_enrolment_date" style="display: block;">
-                                                            {{ $module->pivot->enrollment_date }}
-                                                        </span>
-                                                        <span class="module_enrolment_date" style="display: none;">
-                                                            <input type="date" class="form-control"
-                                                                name="enrolDate"
-                                                                value="{{ $module->pivot->enrollment_date }}">
-                                                        </span>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <span class="module_activity_start" style="display: block;">
-                                                            {{ $module->pivot->module_activity_start }}
-                                                        </span>
-                                                        <span class="module_activity_start" style="display: none;">
-                                                            <input type="date" class="form-control"
-                                                                name="module_activity_start"
-                                                                value="{{ $module->pivot->module_activity_start }}">
-                                                        </span>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <span class="out_comes" style="display: block;">
-                                                            {{ $module->pivot->outcomeId }}
-                                                        </span>
-                                                        <span class="out_comes" style="display: none;">
-                                                            <select name="outcomeId" class="form-control"
-                                                                id="outcomeId" style="width:220px;"
-                                                                onchange="loadStateOutcome();">
-                                                                <option value="Competency achieved/pass">Competency
-                                                                    achieved/pass</option>
-                                                                <option value="Competency not achieved/fail"
-                                                                    selected="">Competency not achieved/fail</option>
-                                                                <option value="Withdrawn/discontinued">
-                                                                    Withdrawn/discontinued</option>
-                                                                <option value="Discontinued due to RTO closure">
-                                                                    Discontinued due to RTO closure</option>
-                                                                <option value="Recognition of prior learning - granted">
-                                                                    Recognition of prior learning - granted</option>
-                                                                <option
-                                                                    value="Recognition of prior learning - not granted">
-                                                                    Recognition of prior learning - not granted</option>
-                                                                <option value="Credit transfer/national recognition">
-                                                                    Credit transfer/national recognition</option>
-                                                                <option value="Superseded subject">Superseded subject
-                                                                </option>
-                                                                <option
-                                                                    value="Did not start - no training activity occurred">
-                                                                    Did not start - no training activity occurred</option>
-                                                                <option value="Continuing enrolment">Continuing enrolment
-                                                                </option>
-                                                                <option
-                                                                    value="Non-assessable enrolment - Satisfactorily completed">
-                                                                    Non-assessable enrolment - Satisfactorily completed
-                                                                </option>
-                                                                <option
-                                                                    value="Non-assessable enrolment - Withdrawn or not satisfactorily completed">
-                                                                    Non-assessable enrolment - Withdrawn or not
-                                                                    satisfactorily completed</option>
-                                                                <option value="Not yet started">Not yet started</option>
-                                                            </select>
-                                                        </span>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <span class="hour_attandence" style="display: block;">
-                                                            {{ $module->pivot->outcomeId }}
-                                                        </span>
-                                                        <span class="hour_attandence" style="display: none;">
-                                                            <input class="form-control hasDatepicker" type="text"
-                                                                name="unitCompetencyDate" id="unitCompetencyDate"
-                                                                style="width:100px;" maxlength="10"
-                                                                value="{{ $module->pivot->unitCompetencyDate }}">
-                                                        </span>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <span class="module_note" style="display: block;">
-                                                            {{ $module->pivot->note }}
-                                                        </span>
-                                                        <span class="module_note" style="display: none;">
-                                                            <textarea name="notes" id="notes">{{ $module->pivot->note }}</textarea>
-                                                        </span>
-                                                    </th>
-                                                    <th scope="col">
-                                                        <span class="module_action" style="display: block;">
-                                                            <i title="Edit" class="fa fa-pencil fa-2x mr-2 text-info"
-                                                                style="margin-left:1.5rem;" aria-hidden="true"
-                                                                onclick="switchTab(this)"></i>
-                                                        </span>
-                                                        <span class="module_action" style="display: none;">
-                                                            <button class="btn">
-                                                                <i title="Save" type="submit"
-                                                                    class="fa fa-save fa-2x me-2 text-success"></i>
-                                                            </button>
-                                                            <i title="Cancel"
-                                                                class="fa fa-times fa-2x me-2 text-warning"
-                                                                aria-hidden="true" onclick="switchTab(this)"></i>
-                                                        </span>
-                                                    </th>
-                                                </tr>
+                                                @method('post')
+                                                <div class="mb-3">
+                                                    <label for="formGroupExampleInput" class="form-label">Your
+                                                        Name</label>
+                                                    <input type="text" class="form-control"
+                                                        id="formGroupExampleInput" placeholder="Your Name">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="formGroupExampleInput2" class="form-label">Your Email
+                                                    </label>
+                                                    <input type="text" class="form-control"
+                                                        id="formGroupExampleInput2" placeholder="Your Email">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="formGroupExampleInput2" class="form-label">Client
+                                                        Name</label>
+                                                    <input type="text" class="form-control"
+                                                        id="formGroupExampleInput2" placeholder="Client Name">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="formGroupExampleInput2" class="form-label">Client's
+                                                        Email</label>
+                                                    <input type="text" class="form-control"
+                                                        id="formGroupExampleInput2" placeholder="Client's Email">
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Receive online payments for this invoice</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value=""
+                                                        id="flexCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexCheckChecked">
+                                                        Send a copy of the sent invoice to my email address (BCC)
+                                                </div>
+                                                <button class="btn btn-primary" id="btnSaveInvoice"
+                                                    data-loading-text="Sending..." fdprocessedid="4yxc78">Send to
+                                                    client</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
                                             </form>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
-                                <div class="col-sm-6 d-flex align-items-center">
-                                    <h5 class="m-0">Elective</h5>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button class="btn btn-primary float-end">Compentancy Report</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Code</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Enrol Date</th>
-                                        <th scope="col">Activity Start</th>
-                                        <th scope="col">Outcome Identifier - National</th>
-                                        <th scope="col">Hours Attended</th>
-                                        <th scope="col">Notes</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($enrollment->student->unitCompetencies as $module)
-                                        @if ($module->type == 'elective')
-                                            <tr>
-                                                <th scope="col">{{ $module->code }}</th>
-                                                <th scope="col">{{ $module->name }}</th>
-                                                <th scope="col">{{ $module->pivot->enrollment_date }}</th>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
-                                                <th scope="col"></th>
-                                                <th scope="col">{{ $module->pivot->note }}</th>
-                                                <th scope="col"></th>
-                                            <tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="pills-avetmiss" role="tabpanel"
-                            aria-labelledby="pills-avetmiss-tab">
-                            <form name="avetenrolform" id="avetenrolform" method="post"
-                                action="{{ route('enrolment.avetmiss.course') }}">
-                                @csrf
-                                @method('POST')
-                                <input type="hidden" name="student_id" value="{{ $enrollment->student->id }}">
-                                <input type="hidden" name="course_id" value="{{ $enrollment->course->id }}">
-                                <div>
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">Delivery Mode</div><!--//WWB-220-->
-                                        <div class="col-sm-4">
-                                            <select name="deliverymodeId" id="deliverymodeId"
-                                                class="input_text_1 form-control" style="width:350px;">
-                                                <option value="Classroom-based"
-                                                    @if ($avitmiss->deliverymodeId == 'Classroom-based') selected @endif>Classroom-based
-                                                </option>
-                                                <option value="Electronic based"
-                                                    @if ($avitmiss->deliverymodeId == 'Electronic based') selected @endif>Electronic based
-                                                </option>
-                                                <option value="Employment based"
-                                                    @if ($avitmiss->deliverymodeId == 'Employment based') selected @endif>Employment based
-                                                </option>
-                                                <option
-                                                    value="Not applicable - recognition of prior learning/recognition of current competency/ credit transfer"
-                                                    @if (
-                                                        $avitmiss->deliverymodeId ==
-                                                            'Not applicable - recognition of prior learning/recognition of current competency/ credit transfer') selected @endif>Not applicable -
-                                                    recognition of prior learning/recognition of current competency/ credit
-                                                    transfer</option>
-                                                <option value="Other delivery (e.g. correspondence)"
-                                                    @if ($avitmiss->deliverymodeId == 'Other delivery (e.g. correspondence)') selected @endif>Other delivery (e.g.
-                                                    correspondence)</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Scheduled Hours
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input class="form-control" type="text" name="scheduledHours"
-                                                id="scheduledHours" value="{{ $avitmiss->scheduledHours }}"
-                                                style="width:350px;">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Reason for Study
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select name="studyReasonId" id="studyReasonId"
-                                                class="input_text_1 form-control" style="width:350px;">
-                                                <option></option>
-                                                <optgroup label="Job Related">
-                                                    <option value="To get a job"
-                                                        @if ($avitmiss->studyReasonId == 'To get a job') selected @endif>To get a job
-                                                    </option>
-                                                    <option value="To develop my existing business"
-                                                        @if ($avitmiss->studyReasonId == 'To develop my existing business') selected @endif>To develop my
-                                                        existing business</option>
-                                                    <option value="To start my own business"
-                                                        @if ($avitmiss->studyReasonId == 'To start my own business') selected @endif>To start my own
-                                                        business</option>
-                                                    <option value="To try for a different career"
-                                                        @if ($avitmiss->studyReasonId == 'To try for a different career') selected @endif>To try for a
-                                                        different career</option>
-                                                    <option value="To get a better job or promotion"
-                                                        @if ($avitmiss->studyReasonId == 'To get a better job or promotion') selected @endif>To get a better
-                                                        job or promotion</option>
-                                                    <option value="It was a requirement of my job"
-                                                        @if ($avitmiss->studyReasonId == 'It was a requirement of my job') selected @endif>It was a
-                                                        requirement of my job</option>
-                                                    <option value="I wanted extra skills for my job"
-                                                        @if ($avitmiss->studyReasonId == 'I wanted extra skills for my job') selected @endif>I wanted extra
-                                                        skills for my job</option>
-                                                </optgroup>
-                                                <optgroup label="Further Study">
-                                                    <option value="To get into another course of study"
-                                                        @if ($avitmiss->studyReasonId == 'To get into another course of study') selected @endif>To get into
-                                                        another course of study</option>
-                                                </optgroup>
-                                                <optgroup label="Other">
-                                                    <option value="Other reasons">Other reasons</option>
-                                                    <option value="For personal interest or self-development"
-                                                        @if ($avitmiss->studyReasonId == 'For personal interest or self-development') selected @endif>For personal
-                                                        interest or self-development</option>
-                                                    <option value="To get skills for community/voluntary work"
-                                                        @if ($avitmiss->studyReasonId == 'To get skills for community/voluntary work') selected @endif>To get skills
-                                                        for community/voluntary work</option>
-                                                </optgroup>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Enrolment Type
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select name="commencourseId" id="commencourseId"
-                                                class="input_text_1 form-control" style="width:350px;">
-                                                <option value="n">&nbsp;</option>
-                                                <option value="Commencing enrolment in the qualification or course"
-                                                    @if ($avitmiss->studyReasonId == 'Commencing enrolment in the qualification or course') seected @endif>Commencing enrolment
-                                                    in the qualification or course</option>
-                                                <option
-                                                    value="Continuing enrolment in the qualification or course from a previous year"
-                                                    @if ($avitmiss->studyReasonId == 'TContinuing enrolment in the qualification or course from a previous year') seected @endif>Continuing enrolment
-                                                    in the qualification or course from a previous year</option>
-                                                <option value="Unit of competency or module enrolment only"
-                                                    @if ($avitmiss->studyReasonId == 'Unit of competency or module enrolment only') seected @endif>Unit of competency or
-                                                    module enrolment only</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- WWB-157 Start -->
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2"> Funding Source - National</div>
-                                        <div class="col-sm-4">
-                                            <div>&nbsp;</div>
-                                        </div>
-                                    </div>
-                                    <!-- Bug 4542 starts here-->
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Specific Funding Identifier <i data-toggle="tooltip" data-placement="top"
-                                                class="fa fa-question-circle" aria-hidden="true" title=""
-                                                data-original-title="Specific funding identifier code as advised by DEEWR (Alphanumeric 10 character limit)"></i>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="col-sm-4">
-                                                <div>&nbsp;</div>
+                            {{-- invoice email end --}}
+
+                            <div class="container mt-5">
+                                <div class="row">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-10">
+                                        <div class="invoice">
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <div class="avatar-upload">
+                                                        <div class="avatar-edit">
+                                                            <input type='file' id="imageUpload"
+                                                                accept=".png, .jpg, .jpeg" />
+                                                            <label for="imageUpload"></label>
+                                                        </div>
+                                                        <div class="avatar-preview">
+                                                            <div id="imagePreview"
+                                                                style="background-image: url({{ asset('admin/images/default-logo.png') }});">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <div class="mb-3">
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10">
+[Business Name]
+ABN: [ABN]
+[Business Address 1]
+[City], [State] [Postal Code]
+[Business Phone Number]
+[Business Email Address]</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control" value="Tax Invoice">
+                                                </div>
+                                            </div>
+                                            <div class="border-line mt-3 mb-3">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" name="" value="Bill To">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7">[Client Name ]
+[Client Address line 1]
+[City], [State] [Postal code]</textarea>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <table class="">
+                                                        <thead>
+                                                          <tr>
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;" value="Invoice Number"></th>
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;" value="2001321"></th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr class="mt-2">
+                                                                <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value="Date"></th>
+                                                                <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value="10/2/2024"></th>
+                                                              </tr>
+                                                          <tr class="mt-2">
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value="Due Date"></th>
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value="10/2/2024"></th>
+                                                          </tr>
+                                                          <tr class="mt-2">
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value=""></th>
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value=""></th>
+                                                          </tr>
+                                                          <tr class="mt-2">
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value=""></th>
+                                                            <th><input type="text" style="width: 150px;margin-left: 4px;margin-top: 4px" value=""></th>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-5">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                      <tr>
+                                                        <th><input type="text" style="width: 110px;" value="Description" readonly></th>
+                                                        <th><input type="text" style="width: 110px;" value="Quantity" readonly></th>
+                                                        <th><input type="text" style="width: 110px;" value="Unit price" readonly></th>
+                                                        <th><input type="text" style="width: 110px;" value="Tax" readonly></th>
+                                                        <th><input type="text" style="width: 110px;" value="Amount" readonly></th>
+                                                        <th></th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody id="table-body">
+                                                      <tr>
+                                                        <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
+                                                        <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
+                                                        <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
+                                                        <th>Handle</th>
+                                                        <th data-key="subtotal" class="subtotal">$0.00</th>
+                                                        <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
+                                                      </tr>
+                                                      <tr>
+                                                        <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
+                                                        <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
+                                                        <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
+                                                        <th>Handle</th>
+                                                        <th data-key="subtotal" class="subtotal">$0.00</th>
+                                                        <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
+                                                      </tr>
+                                                    </tbody>
+                                                    <tfoot id="TotalsSection">
+                                                        <tr class="totals-row" id="SubtotalRow" style="display: table-row;">
+                                                          <td class="wide-cell" colspan="3"></td>
+                                                          <td><strong><input type="text" id="label_subtotal" value="Total without GST" class="invoice-input" style="font-weight: bold;"></strong></td>
+                                                          <td colspan="2"><span id="subtotal">$0.00</span></td>
+                                                        </tr>
+                                                        <tr class="tax-1 totals-row">
+                                                          <td class="wide-cell" colspan="3"></td>
+                                                          <td><strong class="title">GST</strong></td>
+                                                          <td colspan="2"><span id="gst">$0.00</span></td>
+                                                        </tr>
+                                                        <tr class="totals-row" id="TotalRow">
+                                                          <td class="wide-cell" colspan="3"><button type="button" id="AddProduct" class="btn btn-small btn-primary"><i class="fa fa-plus"></i> Add Line</button></td>
+                                                          <td><strong><input type="text" id="label_total" value="Total with GST" class="invoice-input" style="font-weight: bold;"></strong></td>
+                                                          <td colspan="2"><span id="total">$0.00</span></td>
+                                                        </tr>
+                                                        <tr class="totals-row shaped" id="PaidRow">
+                                                          <td class="wide-cell" colspan="3"><a href="#" class="show-row" id="toggle_paid"></a></td>
+                                                          <td><strong><input type="text" id="label_paid" value="Paid Amount" class="invoice-input" style="font-weight: bold;"></strong></td>
+                                                          <td colspan="2"><input type="number" id="paid" value="0" class="invoice-input" oninput="updateBalance()"></td>
+                                                        </tr>
+                                                        <tr class="totals-row shaped" id="UnpaidRow">
+                                                          <td class="wide-cell" colspan="3"></td>
+                                                          <td><strong><input type="text" id="label_unpaid" value="Balance Due" class="invoice-input" style="font-weight: bold;"></strong></td>
+                                                          <td colspan="2"><span id="unpaid">$0.00</span></td>
+                                                        </tr>
+                                                      </tfoot>
+                                                  </table>
                                             </div>
                                         </div>
+
                                     </div>
-                                    <!-- WWB-157 End -->
-                                    <!-- Bug 4542 ends here -->
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Part of VET in Schools program? &nbsp;
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select name="isVETSchool" id="isVETSchool"
-                                                class="input_text_1 form-control" style="width:113px;">
-                                                <option value="Y"
-                                                    @if ($avitmiss->isVETSchool == 'Y') selected @endif>Yes</option>
-                                                <option value="N"
-                                                    @if ($avitmiss->isVETSchool == 'N') selected @endif>
-                                                    No
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Bug 8627 starts here-->
-                                    <div id="schoolTypeIdentifier" class="form-group row mt-2" style="display:none;">
-                                        <div class="col-sm-2">
-                                            School Type Identifier <i data-toggle="tooltip" data-placement="top"
-                                                class="fa fa-question-circle" aria-hidden="true" title=""
-                                                data-original-title="Must be the school type of the home school of the learner and not where the training takes place"></i>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <select name="schoolTypeId" id="schoolTypeId"
-                                                class="input_text_1 form-control" style="width:350px;">
-                                                <option value="School - Government"
-                                                    @if ($avitmiss->schoolTypeId == 'School - Government') selected @endif>School - Government
-                                                </option>
-                                                <option value="School - Catholic"
-                                                    @if ($avitmiss->schoolTypeId == 'School - Catholic') selected @endif>School - Catholic
-                                                </option>
-                                                <option value="School - Independent"
-                                                    @if ($avitmiss->schoolTypeId == 'School - Independent') selected @endif>School - Independent
-                                                </option>
-                                                <option value="Technical and Further Education Institute"
-                                                    @if ($avitmiss->schoolTypeId == 'Technical and Further Education Institute') selected @endif> Technical and
-                                                    Further Education Institute </option>
-                                                <option value="Community-based adult education provider"
-                                                    @if ($avitmiss->schoolTypeId == 'Community-based adult education provider') selected @endif>Community-based
-                                                    adult education provider</option>
-                                                <option value="Privately operated registered training organisation"
-                                                    @if ($avitmiss->schoolTypeId == 'Privately operated registered training organisation') selected @endif>Privately operated
-                                                    registered training organisation</option>
-                                                <option value="Home school arrangement"
-                                                    @if ($avitmiss->schoolTypeId == 'Home school arrangement') selected @endif>Home school
-                                                    arrangement</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- Bug 8627 ends here -->
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Training Contract Identifier <i data-toggle="tooltip" data-placement="top"
-                                                class="fa fa-question-circle" aria-hidden="true" title=""
-                                                data-original-title="Unique ID of the contractual agreement between a client and an employer. Provide only if client is undertaking Apprenticeship or Traineeship under a registered Training Contract."></i>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="contractApprenticeshipId" class="form-control"
-                                                id="contractApprenticeshipId"
-                                                value="{{ $avitmiss->contractApprenticeshipId }}" style="width:350px;"
-                                                maxlength="10" fdprocessedid="3t8h3t">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Client Identifier <i data-toggle="tooltip" data-placement="top"
-                                                class="fa fa-question-circle" aria-hidden="true" title=""
-                                                data-original-title="ID assigned to student for an Apprenticeship or Traineeship training contract"></i>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="clientApprenticeshipId" class="form-control"
-                                                id="clientApprenticeshipId"
-                                                value="{{ $avitmiss->clientApprenticeshipId }}" style="width:350px;"
-                                                maxlength="10">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-sm-2">
-                                            Associated Course Identifier
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="associatedCourseId" class="form-control"
-                                                id="associatedCourseId" value="{{ $avitmiss->associatedCourseId }}"
-                                                style="width:350px;" maxlength="10">
-                                        </div>
-                                    </div>
-                                    <!-- bug 4542 starts here -->
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            Client Tuition Fee <i data-toggle="tooltip" data-placement="top"
-                                                class="fa fa-question-circle" aria-hidden="true" title=""
-                                                data-original-title="The input value must be a 4-digit integer between 0000 and 9999. VICTORIA: Value is a hourly rate in cents, eg. $3.30 per hour entered as 0330. QUEENSLAND: Certificate 3 Guarantee please enter amount as full dollars rounded to nearest dollar eg. $60.55 entered as 0061 - this amount may be edited per unit for Qld only."></i>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <input type="text" name="tuitionFee" class="form-control"
-                                                id="tuitionFee" value="{{ $avitmiss->tuitionFee }}"
-                                                style="width:350px;" maxlength="10" fdprocessedid="f8kytf">
-                                        </div>
-                                    </div>
-                                    <!-- bug 4542 ends here -->
-                                    <div class="form-group row mt-2">
-                                        <div class="col-sm-2">
-                                            <button class="btn btn-primary" type="submit"
-                                                fdprocessedid="yjjre">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="tab-pane fade" id="pills-funding" role="tabpanel"
-                            aria-labelledby="pills-funding-tab">
-                            <p><strong>Note: Blue units are Inactive.</strong>
-                                <span style="align:right;padding-left:550px;"><strong>Qualification:&nbsp;&nbsp;</strong>
-                                    <span id="qualification" style="display:inline;"><strong>Not
-                                            Completed&nbsp;&nbsp;</strong></span>
-                                    <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
-                                        <div class="col-sm-6 d-flex align-items-center">
-                                            <h5 class="m-0">Core</h5>
-                                        </div>
-                                    </div>
-                                </span>
-                            </p>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Code</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Funding Source - National</th>
-                                        <th scope="col">Specific Funding Identifier </th>
-                                        <th scope="col">Funding Source - State</th>
-                                        <th scope="col">Delivery Mode(Avetmiss 8)</th>
-                                        <th scope="col">Predominant delivery mode</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($enrollment->student->unitCompetencies as $module)
-                                        @if ($module->type == 'core')
-                                            <tr>
-                                                <th scope="col">{{ $module->code }} </th>
-                                                <th scope="col">{{ $module->name }}</th>
-                                                <th>
-                                                    <select name="fundingsourceId_{{$module->id}}" id="fundingsourceId_{{$module->id}}" class="input_text_1 form-control" onchange="showHideText(this.options[this.selectedIndex].value,{{$module->id}});">
-                                                        <option value="Commonwealth and state general purpose recurrent (11)">Commonwealth and state general purpose recurrent (11)</option>
-                                                        <option value="Commonwealth specific funding program (13)" selected="">Commonwealth specific funding program (13)</option>
-                                                        <option value="State specific funding program (15)">State specific funding program (15)</option>
-                                                        <option value="Domestic client - other revenue (20)">Domestic client - other revenue (20)</option>
-                                                        <option value="International onshore client - other revenue (31)">International onshore client - other revenue (31)</option>
-                                                        <option value="International offshore client - other revenue (32)">International offshore client - other revenue (32)</option>
-                                                        <option value="Revenue earned from another training organisation (80)">Revenue earned from another training organisation (80)</option>
-                                                    </select>
-                                                </th>
-                                                <th>
-                                                    <select name="input_funding_identifier_{{$module->id}}" id="input_funding_identifier_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" >
-                                                        <option value="0" selected=""></option>
-                                                     </select>
-                                                </th>
-                                                <th>
-                                                    <select name="fundingStateId_{{$module->id}}" id="fundingStateId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
-                                                       
-                                                    </select>
-                                                </th>
-                                                <th>
-                                                    <select name="deliverymode_{{$module->id}}" id="deliverymode_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" onchange="chkModeId(this.value, {{$module->id}});">
-                                                        <option value="YYY">Combination of all modes</option>
-                                                        <option value="NYY">Combination of external and workplace-based</option>
-                                                        <option value="YYN">Combination of internal and external</option>
-                                                        <option value="YNY">Combination of internal and workplace-based</option>
-                                                        <option value="NYN">External only</option>
-                                                        <option value="YNN" selected="">Internal only</option>
-                                                        <option value="NNN">Not applicable (RPL or credit transfer)</option>
-                                                        <option value="NNY">Workplace-based only</option> 
-                                                    </select>
-                                                </th>
-                                                <th>
-                                                    <select name="preModeId_{{$module->id}}" id="preModeId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
-                                                        <option value="E">External delivery</option>
-                                                        <option value="I">Internal delivery</option>
-                                                        <option value="W">Workplace-based delivery</option>
-                                                        <option value="N" selected="">Not applicable-RPL/credit transfer</option>
-                                                     </select>
-                                                </th>
-                                                <th>
-                                                    <span class="badge badge-success"><a style="cursor:pointer;color:white;" onclick="saveFundSource({{$module->id}});">Save</a></span>
-                                                    <span class="badge badge-warning"><a style="cursor:pointer;color:white;" onclick="switchTab({{$module->id}})">Cancel</a></span>
-                                                </th>
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="row my-3" style="border: 1px solid #A0CF1A;padding: 5px">
-                                <div class="col-sm-6 d-flex align-items-center">
-                                    <h5 class="m-0">Core</h5>
+                                    <div class="col-sm-1"></div>
                                 </div>
                             </div>
-                        </span>
-                    </p>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Code</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Funding Source - National</th>
-                                <th scope="col">Specific Funding Identifier </th>
-                                <th scope="col">Funding Source - State</th>
-                                <th scope="col">Delivery Mode(Avetmiss 8)</th>
-                                <th scope="col">Predominant delivery mode</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($enrollment->student->unitCompetencies as $module)
-                            @if ($module->type == 'elective')
-                                    <tr>
-                                        <th scope="col">{{ $module->code }} </th>
-                                        <th scope="col">{{ $module->name }}</th>
-                                        <th>
-                                            <select name="fundingsourceId_{{$module->id}}" id="fundingsourceId_{{$module->id}}" class="input_text_1 form-control" onchange="showHideText(this.options[this.selectedIndex].value,{{$module->id}});">
-                                                <option value="Commonwealth and state general purpose recurrent (11)">Commonwealth and state general purpose recurrent (11)</option>
-                                                <option value="Commonwealth specific funding program (13)" selected="">Commonwealth specific funding program (13)</option>
-                                                <option value="State specific funding program (15)">State specific funding program (15)</option>
-                                                <option value="Domestic client - other revenue (20)">Domestic client - other revenue (20)</option>
-                                                <option value="International onshore client - other revenue (31)">International onshore client - other revenue (31)</option>
-                                                <option value="International offshore client - other revenue (32)">International offshore client - other revenue (32)</option>
-                                                <option value="Revenue earned from another training organisation (80)">Revenue earned from another training organisation (80)</option>
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="input_funding_identifier_{{$module->id}}" id="input_funding_identifier_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" >
-                                                <option value="0" selected=""></option>
-                                             </select>
-                                        </th>
-                                        <th>
-                                            <select name="fundingStateId_{{$module->id}}" id="fundingStateId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
-                                               
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="deliverymode_{{$module->id}}" id="deliverymode_{{$module->id}}" class="input_text_1 form-control" style="width:120px;" onchange="chkModeId(this.value, {{$module->id}});">
-                                                <option value="YYY">Combination of all modes</option>
-                                                <option value="NYY">Combination of external and workplace-based</option>
-                                                <option value="YYN">Combination of internal and external</option>
-                                                <option value="YNY">Combination of internal and workplace-based</option>
-                                                <option value="NYN">External only</option>
-                                                <option value="YNN" selected="">Internal only</option>
-                                                <option value="NNN">Not applicable (RPL or credit transfer)</option>
-                                                <option value="NNY">Workplace-based only</option> 
-                                            </select>
-                                        </th>
-                                        <th>
-                                            <select name="preModeId_{{$module->id}}" id="preModeId_{{$module->id}}" class="input_text_1 form-control" style="width:120px;">
-                                                <option value="E">External delivery</option>
-                                                <option value="I">Internal delivery</option>
-                                                <option value="W">Workplace-based delivery</option>
-                                                <option value="N" selected="">Not applicable-RPL/credit transfer</option>
-                                             </select>
-                                        </th>
-                                        <th>
-                                            <span class="badge badge-success"><a style="cursor:pointer;color:white;" onclick="saveFundSource({{$module->id}});">Save</a></span>
-                                            <span class="badge badge-warning"><a style="cursor:pointer;color:white;" onclick="switchTab({{$module->id}})">Cancel</a></span>
-                                        </th>
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                        </div>
-                        <div class="tab-pane fade" id="pills-confirm-email" role="tabpanel"  aria-labelledby="pills-confirm-email">
-
-                        </div>
-                        <div class="tab-pane fade" id="pills-cert-issue" role="tabpanel"
-                            aria-labelledby="pills-cert-issue mt-3 ">
-                            <div class="pageSubTitle border p-3">
-                                <div style="float:left">Issue Course Certificate</div>
-                                
-                                <table class="table">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">Certificate Number	</th>
-                                        <th scope="col">Date Issued</th>
-                                        <th scope="col">Issued By</th>
-                                        <th scope="col">Reissue</th>
-                                        <th scope="col">Reason for Reissue</th>
-                                        <th scope="col">Delivery Date</th>
-                                        <th scope="col">Delivery Method</th>
-                                        <th scope="col">Comments</th>
-                                        <th scope="col">Action</th>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <th>{{ $issue_certificate->id }}</th>
-                                        <td>{{ $issue_certificate->issue_date  }}</td>
-                                        <td>{{ $issue_certificate->issue_by  }}</td>
-                                        <td>{{ $issue_certificate->reissue  }}</td>
-                                        <td>{{ $issue_certificate->reasonreissue  }}</td>
-                                        <td>{{ $issue_certificate->issue_date  }}</td>
-                                        <td>{{ $issue_certificate->delivery_method  }}</td>
-                                        <td>{{ $issue_certificate->comments  }}</td>
-                                        <td>
-                                            <a href="{{ route('api.enrolment.course.certificate.pdf',$issue_certificate->id) }}" class="btn btn-primary">View</a>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-
-                            </div>
-                            @if($issue_certificate == null)
-                            <div class="pageSubTitle mt-3 border p-3">
-                                <div style="float:left">Initial Issue of Certificate</div>
-                                <div style="clear:both;"></div>
-                            </div>
-                            <form action="{{ route('issue.enrolment.certificates') }}" method="post">
-                                @csrf
-                                @method('POST')
-                                <input type="hidden" name="student_id" value="{{$enrollment->student->id}}">
-                                <input type="hidden" name="course_id" value="{{$enrollment->course->id}}">
-                                <input type="hidden" name="enrolment_id" value="{{$enrollment->id}}">
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <label for="">Certificate Name:</label>
-                                    </div>
-                                    <div class="col-10">
-                                        <span id="certificate_number"></span>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <label for="">Certificate Number :</label>
-                                    </div>
-                                    <div class="col-10">
-                                        <span id="certificate_number"></span>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <label for="">Issue Date:</label>
-                                    </div>
-                                    <div class="col-10"> 
-                                        <input type="date" name="issue_date" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <label for="">Template :</label>
-                                    </div>
-                                    {{-- @dd($templates) --}}
-                                    <div class="col-10">
-                                        <select name="template" id="template" class="form-select" onchange="changetemplate(this.value);">
-                                            <option value=""></option>
-                                            @foreach ($templates as $template)
-                                            <option value="{{ $template->id }}">{{ $template->newCertificateName }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <label for="">Delivery Method :</label>
-                                    </div>
-                                    <div class="col-10">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="delivery_method" id="email" value="email">
-                                            <label class="form-check-label" for="inlineRadio1">Email</label>
-                                          </div>
-                                          <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="delivery_method" id="post" value="post" checked>
-                                            <label class="form-check-label" for="inlineRadio2">Post</label>
-                                          </div>
-                                          <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="delivery_method" id="collected" value="collected">
-                                            <label class="form-check-label" for="inlineRadio3">Collected</label>
-                                          </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        <label for="">Include Competency Report :</label>
-                                    </div>
-                                    <div class="col-10">
-                                        <input class="form-check-input" name="include_report" type="checkbox" value="1" id="flexCheckDefault">
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-2">
-                                        Comments :
-                                    </div>
-                                    <div class="col-10">
-                                        <textarea name="comments" id="" cols="30" rows="10" name="comments" class="form-control">
-
-                                        </textarea>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Issue</button>
-                                        <button type="button" class="btn btn-secondary">Issue w/ background</button>
-                                        <button type="button" class="btn btn-secondary">Preview</button>
-                                    </div>
-                                </div>
-                                
-                            </form>
-                            @endif
-                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>  
-    <style>
-        .modal-backdrop {
-            display: none;
-        }
-    </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            .modal-backdrop {
+                display: none;
+            }
+            .border-line {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    padding: 2px;
+}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            // Function to calculate subtotal for each row
+            function calculateSubtotal(element) {
+              var row = $(element).closest('tr');
+              var qty = parseFloat(row.find('input[data-key="qty"]').val()) || 0;
+              var unitPrice = parseFloat(row.find('input[data-key="unit_price"]').val()) || 0;
+              var subtotal = qty * unitPrice;
+              row.find('th[data-key="subtotal"]').text(subtotal.toFixed(2));
+              updateTotalWithoutGST();
+            }
+          
+            // Function to update total without GST (subtotal)
+            function updateTotalWithoutGST() {
+              var totalWithoutGST = 0;
+              $('#table-body tr').each(function() {
+                var subtotal = parseFloat($(this).find('th[data-key="subtotal"]').text()) || 0;
+                totalWithoutGST += subtotal;
+              });
+              $('#subtotal').text('$' + totalWithoutGST.toFixed(2));
+              updateGSTandTotalWithGST(totalWithoutGST);
+            }
+          
+            // Function to update GST and total with GST
+            function updateGSTandTotalWithGST(totalWithoutGST) {
+              var gstRate = 0.10;  // Example 10% GST
+              var gstAmount = totalWithoutGST * gstRate;
+              var totalWithGST = totalWithoutGST + gstAmount;
+              $('#gst').text('$' + gstAmount.toFixed(2));
+              $('#total').text('$' + totalWithGST.toFixed(2));
+              updateBalance();  // Call this to update balance when total changes
+            }
+          
+            // Function to update balance (Total - Paid Amount)
+            function updateBalance() {
+              var totalWithGST = parseFloat($('#total').text().replace('$', '')) || 0;
+              var paidAmount = parseFloat($('#paid').val()) || 0;
+              var balanceDue = totalWithGST - paidAmount;
+              $('#unpaid').text('$' + balanceDue.toFixed(2));
+            }
+          
+            // Add new row functionality
+            $('#AddProduct').click(function() {
+              let newRow = `
+                <tr>
+                  <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
+                  <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
+                  <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
+                  <th>Handle</th>
+                  <th data-key="subtotal" class="subtotal">0.00</th>
+                  <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
+                </tr>
+              `;
+              $('#table-body').append(newRow);
+            });
+          
+            // Remove row functionality
+            $(document).on('click', '.remove-item', function() {
+              $(this).closest('tr').remove();
+              updateTotalWithoutGST();  // Recalculate total after row removal
+            });
+          </script>
+          
+        <script>
+            function switchTab(element) {
+                var $row = $(element).closest('tr');
 
-    <script>
-        function switchTab(element) {
-            var $row = $(element).closest('tr');
+                $row.find('.module_enrolment_date').toggle();
+                $row.find('.module_activity_start').toggle();
+                $row.find('.out_comes').toggle();
+                $row.find('.hour_attandence').toggle();
+                $row.find('.module_note').toggle();
+                $row.find('.module_action').toggle();
+            }
 
-            $row.find('.module_enrolment_date').toggle();
-            $row.find('.module_activity_start').toggle();
-            $row.find('.out_comes').toggle();
-            $row.find('.hour_attandence').toggle();
-            $row.find('.module_note').toggle();
-            $row.find('.module_action').toggle();
-        }
-
-        function showHideText(code,id){
-            console.log(code,id)
-            var newOptions = '';
-            var funding = '';
-            if(code == "Commonwealth specific funding program (13)"){
-                newOptions = `<option value="0" selected=""></option>
+            function showHideText(code, id) {
+                console.log(code, id)
+                var newOptions = '';
+                var funding = '';
+                if (code == "Commonwealth specific funding program (13)") {
+                    newOptions = `<option value="0" selected=""></option>
                 <option value="42" selected="">Adult Migrant English Program</option>
                 <option value="93">Commonwealth funded - VET AMC</option>
                 <option value="92">Dual award - HE AMC </option>
@@ -2688,7 +2084,7 @@
                 <option value="99">Other Commonwealth government funding</option>
                 <option value="22">PaTH - Employability Skills Training</option>
                 <option value="21">Skills for Education and Employment Program</option>`;
-                funding = `<option value="BET">Better Skills Better Care</option>
+                    funding = `<option value="BET">Better Skills Better Care</option>
                 <option value="DEO">DEEWR Funded Programs (Other)</option>
                 <option value="DEV">DEEWR Funded Programs (Vouchers)</option>
                 <option value="IGN">Ignite</option>
@@ -2699,99 +2095,264 @@
                 <option value="DHJ">Productivity Health Job Seeker</option>
                 <option value="SED">Southern Edge Training</option>
                             <option value="TIF">TIFIARRC</option>`;
-                $("#input_funding_identifier_" + id).html(newOptions);
-                $("#fundingStateId_" + id).html(funding);
-            }
-            if(code == "Commonwealth and state general purpose recurrent (11)"){
-                $("#input_funding_identifier_" + id).attr(disabled,'disabled');
-                $("#fundingStateId_" + id).attr(disabled,'disabled');
-            }
-        }
-
-        function chkModeId(value,id){
-            consoel.log(value,id)
-        }
-
-        function changetemplate(id){
-            console.log(id);
-        }
-        
-    </script>
-    <script>
-        // Function to toggle all checkboxes in the table body based on the header checkbox
-        function toggleAllCheckBoxes(checkbox) {
-            var checkboxes = document.getElementsByClassName('coreunits');
-            for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = checkbox.checked;
-            }
-        }
-
-        function toggleAllCheckElective(checkbox) {
-            var checkboxes = document.getElementsByClassName('electiveunits');
-            for (var i = 0; i < checkboxes.length; i++) {
-                checkboxes[i].checked = checkbox.checked;
-            }
-        }
-    </script>
-    <script>
-        function editEnrolmentNote(id, category) {
-            var element = document.getElementById('block_element');
-            var block = document.getElementById('taable_note');
-            element.style.display = 'block';
-            block.style.display = 'none';
-            document.getElementById('note_id').value = id;
-            document.getElementById('note_category_update').value = category;
-            $.ajax({
-                url: "{{ route('api.note.find') }}",
-                type: 'GET',
-                data: {
-                    'id': id,
-                }, // Pass the scheduleId as a query parameter
-                success: function(response) {
-                    console.log(response.note)
-                    document.getElementById('note_update').value = response.note.note;
-
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors here
-                    console.error(error);
+                    $("#input_funding_identifier_" + id).html(newOptions);
+                    $("#fundingStateId_" + id).html(funding);
                 }
+                if (code == "Commonwealth and state general purpose recurrent (11)") {
+                    $("#input_funding_identifier_" + id).attr(disabled, 'disabled');
+                    $("#fundingStateId_" + id).attr(disabled, 'disabled');
+                }
+            }
+
+            function chkModeId(value, id) {
+                consoel.log(value, id)
+            }
+
+            function changetemplate(id) {
+                console.log(id);
+            }
+        </script>
+        <script>
+            // Function to toggle all checkboxes in the table body based on the header checkbox
+            function toggleAllCheckBoxes(checkbox) {
+                var checkboxes = document.getElementsByClassName('coreunits');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = checkbox.checked;
+                }
+            }
+
+            function toggleAllCheckElective(checkbox) {
+                var checkboxes = document.getElementsByClassName('electiveunits');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = checkbox.checked;
+                }
+            }
+        </script>
+        <script>
+            function editEnrolmentNote(id, category) {
+                var element = document.getElementById('block_element');
+                var block = document.getElementById('taable_note');
+                element.style.display = 'block';
+                block.style.display = 'none';
+                document.getElementById('note_id').value = id;
+                document.getElementById('note_category_update').value = category;
+                $.ajax({
+                    url: "{{ route('api.note.find') }}",
+                    type: 'GET',
+                    data: {
+                        'id': id,
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        console.log(response.note)
+                        document.getElementById('note_update').value = response.note.note;
+
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+
+            }
+
+            function closeelement() {
+                var element = document.getElementById('block_element');
+                var block = document.getElementById('taable_note');
+                element.style.display = 'none';
+                block.style.display = 'block';
+            }
+        </script>
+        <script>
+            function loadStudentList() {
+                var searchby = $('#searchByThis').val();
+                var searchvalue = $('#searchValueIs').val();
+                $('#studentList').empty();
+                $.ajax({
+                    url: "{{ route('api.people.find') }}",
+                    type: 'GET',
+                    data: {
+                        'search_filled': searchby,
+                        'searchvalue': searchvalue
+                    }, // Pass the scheduleId as a query parameter
+                    success: function(response) {
+                        response.students.forEach(student => {
+                            var field = student[searchby];
+                            $('#studentList').append(new Option(field + " (id:" + student.id + ")", student
+                                .id));
+                        });
+
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle errors here
+                        console.error(error);
+                    }
+                });
+            }
+        </script>
+        <script>
+            var taxIndex = 3; // Start with the next index
+
+            // Add new row on button click
+            $('#addTax').click(function(e) {
+                e.preventDefault();
+
+                // Create a new row with incremented index for names and IDs
+                var newRow = `
+                    <tr>
+                        <th><input type="text" data-var="name" name="taxes[` + taxIndex + `][name]" id="Tax` +
+                    taxIndex + `Name" value="Tax ` + taxIndex + `" class="form-control"></th>
+                        <td><input class="form-control" data-var="val" type="text" name="taxes[` + taxIndex +
+                    `][value]" id="Tax` + taxIndex + `Value" value="0"></td>
+                        <td>
+                            <button href="#" class="btn btn-danger btn-mini remove-tax">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+                // Append the new row to the table body
+                $('#taxTable tbody').append(newRow);
+
+                // Increment the taxIndex for next row
+                taxIndex++;
             });
 
-        }
+            // Remove row on button click
+            $(document).on('click', '.remove-tax', function(e) {
+                e.preventDefault();
+                $(this).closest('tr').remove();
+            });
+        </script>
+    @stop
 
-        function closeelement() {
-            var element = document.getElementById('block_element');
-            var block = document.getElementById('taable_note');
-            element.style.display = 'none';
-            block.style.display = 'block';
-        }
-    </script>
-    <script>
-        function loadStudentList() {
-            var searchby = $('#searchByThis').val();
-            var searchvalue = $('#searchValueIs').val();
-            $('#studentList').empty();
-            $.ajax({
-                url: "{{ route('api.people.find') }}",
-                type: 'GET',
-                data: {
-                    'search_filled': searchby,
-                    'searchvalue': searchvalue
-                }, // Pass the scheduleId as a query parameter
-                success: function(response) {
-                    response.students.forEach(student => {
-                        var field = student[searchby];
-                        $('#studentList').append(new Option(field + " (id:" + student.id + ")", student
-                            .id));
+    @push('scripts')
+        <script type="text/javascript">
+            var menu = document.querySelector('.edit-mode-wrap');
+            var origOffsetY = menu.offsetTop;
+
+            function scroll() {
+                if (jQuery(window).scrollTop() > 0) {
+                    jQuery('.navbar').addClass('sticky-nav');
+                    jQuery('.toggle-hide').hide();
+                    jQuery('.toggle-show').show();
+
+                } else {
+                    jQuery('.navbar').removeClass('sticky-nav');
+                    jQuery('.toggle-show').hide();
+                    jQuery('.toggle-hide').show();
+                }
+            }
+
+            document.onscroll = scroll;
+            $(document).ready(function() {
+                setTimeout(function() {
+                    invoiceItems.each(function(iitem) {
+                        iitem.calculateSubtotal();
                     });
+                }, 400);
 
-                },
-                error: function(xhr, status, error) {
-                    // Handle errors here
-                    console.error(error);
+
+
+                if (is_pre_filled == 'true') {
+                    setTimeout(function() {
+
+
+                        var tmp1 = localStorage.getItem('last_invoice');
+                        localStorage.clear();
+                        localStorage.setItem('last_invoice', tmp1);
+                        taxes.each(function(iitem) {
+                            taxes.remove(iitem);
+
+                        });
+
+
+                        //taxes.add(new Tax({index:0,name:'Great'}));
+                        //taxes.add(new Tax({index:1,name:'Great 2'}));
+
+
+                        invoiceItems.each(function(iitem) {
+                            invoiceItems.remove(iitem);
+                        });
+
+                        console.log('{"index":0,"name":"GST","val":"10"}');
+                        taxes.add(new Tax({
+                            "index": 0,
+                            "name": "GST",
+                            "val": "10"
+                        }));
+                        var ii = null;
+                        var ii2 = null;
+                        taxes.each(function(iitem) {
+                            if (iitem.attributes.name == 'GST') {
+
+                                ii = iitem;
+                            }
+                            if (iitem.attributes.name == '') {
+
+                                ii2 = iitem;
+                            }
+                        });
+                        invoiceItems.add(new Item({
+                            tax2: ii2,
+                            tax1: ii,
+                            description: 'Product name',
+                            qty: 10,
+                            unit_price: 10
+                        }));
+
+                        invoiceItems.each(function(iitem) {
+                            iitem.calculateSubtotal();
+                        });
+
+                        invoice.calculateTotals();
+                        invoiceAttribes.currency = 'EUR';
+
+
+
+
+                        invoiceItems.each(function(iitem) {
+
+
+                        });
+                    }, 1000);
                 }
+                setTimeout(function() {
+                    $('#notes').attr('placeholder', 'Type your notes here');
+                }, 2000);
+
             });
-        }
-    </script>
-@stop
+
+
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-73809851-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#imageUpload").change(function() {
+                readURL(this);
+            });
+        </script>
+    @endpush

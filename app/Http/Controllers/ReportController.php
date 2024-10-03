@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function activelog(){
+        try {
+            return view('admin.report.activitylog');
+        } catch (\Exception $e) {
+            // Optionally, display an error message or take other actions
+            echo "An error occurred while creating the record: " . $e->getMessage();
+        }
+    }
     public function courseCompletion(){
         try {
             return view('admin.report.coursecompletion');

@@ -681,6 +681,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/event/enrollment/course/avitmiss', [App\Http\Controllers\EnrollmentController::class, 'enrolmentAvimiss'])->name('enrolment.avetmiss.course');
     Route::post('/event/enrollment/course/certificate', [App\Http\Controllers\EnrollmentController::class, 'enrolmentCertificate'])->name('issue.enrolment.certificates');
     Route::post('/event/bulk/enrolment', [App\Http\Controllers\EnrollmentController::class, 'bulk_enrolment'])->name('bulk.enrolment.serch');
+
     // End Event Enrollment 
     // START - Lerner Record 
     Route::get('/people/enrolmentSearch', [App\Http\Controllers\EnrollmentController::class, 'index'])->name('people.enrollment.search');
@@ -718,6 +719,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/company/certificate/documrnt/edit/{id}', [App\Http\Controllers\CompanyController::class, 'documentEdit'])->name('document.upload.edit');
     Route::post('/company/certificate/documrnt/update', [App\Http\Controllers\CompanyController::class, 'document_update'])->name('document.upload.update');
     //Start Competency Report
+
     Route::get('/competencyReport', [App\Http\Controllers\CompanyController::class, 'competencyReport'])->name('company.competency.report');
     Route::post('/competencyReport/edit', [App\Http\Controllers\CompanyController::class, 'competencyReportEdit'])->name('competency.report.background');
     //Start Company Setting //
@@ -750,6 +752,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/company/company', [App\Http\Controllers\ExportController::class, 'company'])->name('company');
   // Report
   //Courser Complation
+  Route::get('/report/active/log', [App\Http\Controllers\ReportController::class, 'activelog'])->name('report.activity.log');
+  Route::post('/report/search/people/', [App\Http\Controllers\ApiController::class, 'search_people_report'])->name('report.activity.search.people');
   Route::get('/report/courseCompletion', [App\Http\Controllers\ReportController::class, 'courseCompletion'])->name('course.complation');
   // COURSE UTILISATION
   Route::get('/report/courseUtilisation', [App\Http\Controllers\ReportController::class, 'courseUtilisation'])->name('course.utilisation');
@@ -797,3 +801,4 @@ Route::post('reset-password', [App\Http\Controllers\ForgotPasswordController::cl
 //course filter
 Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseController::class, 'filter']);
 Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode'); 
+Route::post('/event/invoice/send', [App\Http\Controllers\InvoiceController::class, 'invoice_mail'])->name('admin.invoice.mail.send');
