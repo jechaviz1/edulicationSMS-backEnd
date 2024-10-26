@@ -87,5 +87,8 @@
         "sass": "^1.39.0",
         "semver": "^7.3.8",
         "vinyl-source-stream": "^2.0.0"
+    },
+    "dependencies": {
+        "@yaireo/tagify": "file:"
     }
 }
