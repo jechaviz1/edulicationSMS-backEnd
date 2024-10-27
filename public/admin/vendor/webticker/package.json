@@ -31,8 +31,10 @@
   "bugs": {
     "url": "https://github.com/mazedigital/Web-Ticker/issues"
   },
-  "bundleDependencies": false,
-  "dependencies": {},
+  "bundleDependencies": [],
+  "dependencies": {
+    "webticker": "file:"
+  },
   "deprecated": false,
   "description": "JQuery Web Ticker",
   "devDependencies": {

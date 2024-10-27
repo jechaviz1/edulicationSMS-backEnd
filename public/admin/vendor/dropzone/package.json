@@ -36,5 +36,8 @@
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/meno/dropzone.git"
+  },
+  "dependencies": {
+    "dropzone": "file:"
   }
 }
