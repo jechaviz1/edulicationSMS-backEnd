@@ -803,6 +803,6 @@ Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseCo
 Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode');
 Route::post('/event/invoice/send', [App\Http\Controllers\InvoiceController::class, 'invoice_mail'])->name('admin.invoice.mail.send');
 
-// verify usi
-Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
-Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');
+  // verify usi
+  Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
+  Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');

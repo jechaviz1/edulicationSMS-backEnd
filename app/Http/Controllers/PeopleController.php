@@ -22,7 +22,7 @@ class PeopleController extends Controller
 {
     public function index(Request $request){
         if($request->columns != null){
-           
+
 
         }else{
             $rows = Student::where('is_deleted', '0')->paginate(10);
@@ -101,7 +101,7 @@ class PeopleController extends Controller
          $student->postCode = $request->postcode;
          $student->postalCode_postal = $request->postalCode_postal;
          $student->deliveryBox_postal = $request->deliveryBox_postal;
-         $student->preferredName = $request->preferredName; 
+         $student->preferredName = $request->preferredName;
          $student->role = $request->role;
          $student->fax = $request->faxNumber;
          $student->nameType = $request->nameType;
@@ -166,7 +166,7 @@ class PeopleController extends Controller
     }
 
     public function person_note(Request $request){
-        
+
         $enrolment = new EnrolmentAddNote;
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
@@ -187,7 +187,7 @@ class PeopleController extends Controller
     }
     public function exportPDF($id){
         $enrolment = EnrolmentAddNote::where('student_id',$id)->get();
-    
+
         $pdf = PDF::loadView('admin.enrolment_notes.pdf', ['enrolmentNotes' => $enrolment]);
 
         return $pdf->download('admin.enrolment_notes.pdf');
@@ -227,12 +227,12 @@ class PeopleController extends Controller
                 if($documentName != null){
                     $document = new EnrolmentDocument;
                     $document->student_id = $request->student_id;
-                    $document->document_name = $documentName; 
-                    $file = $request->document_file[$key]; 
+                    $document->document_name = $documentName;
+                    $file = $request->document_file[$key];
                     $filename = 'Document_' . time() . '_' . $file->getClientOriginalName();
                     $document->file_name = $file->getClientOriginalName();
-                    $file->move(public_path('Enrolment_Document'), $filename);  
-                    $fileUrl = 'Enrolment_Document/' . $filename; 
+                    $file->move(public_path('Enrolment_Document'), $filename);
+                    $fileUrl = 'Enrolment_Document/' . $filename;
                     $document->path = $fileUrl;
                     $document->upload_by = auth()->user()->first_name . ' ' .  auth()->user()->last_name;
                     $document->save();
@@ -252,7 +252,7 @@ class PeopleController extends Controller
             'body' => $request->note_email
         ];
         $filePath = public_path($request->document_path); // Path to the attachment file
-    
+
         Mail::to($request->email)->send(new DocumentMail($details, $filePath));
         return redirect()->back()->with('sucess', 'Sucess Record Created');
     }
@@ -278,9 +278,9 @@ class PeopleController extends Controller
             $fileUrl = 'notes/' . $filename;
             $student->profile_image_path = $fileUrl;
         }
-        $student->save();  
+        $student->save();
         return redirect()->back()->with('sucess', 'Sucess Record Created');
-        
+
     }
     public function logo_delete($id){
             $student = User::where('id',$id)->first();
@@ -303,10 +303,10 @@ class PeopleController extends Controller
 
     public function websiteEnrolment(){
         return view('admin.people.websiteEnrolment');
-    } 
+    }
 
     public function avitmiss_check(){
         return view('admin.people.avetmisscheck');
     }
 
-    } 
+    }
