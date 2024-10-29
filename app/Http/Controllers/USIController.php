@@ -16,6 +16,11 @@ class USIController extends Controller
         $this->expired = $this->usiService->hasExpired();
     }
 
+    public function testUSI()
+    {
+        return view('admin.usi_test.usitest');
+    }
+
     public function verifyUSI(Request $request)
     {
         try {

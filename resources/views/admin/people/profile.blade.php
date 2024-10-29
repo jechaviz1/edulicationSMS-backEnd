@@ -19,6 +19,22 @@
             font-size: 15px;
         }
 
+        .icon-rotate:before {
+            /* Add initial state to support older browsers */
+            transform: rotate(0deg);
+            will-change: transform;
+            animation: rotateanimation 2s infinite linear;
+        }
+
+        @keyframes rotateanimation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(359deg);
+            }
+        }
+
         .profile-pic {
             color: transparent;
             transition: all 0.3s ease;
@@ -3734,7 +3750,15 @@
                     $("#chkUSIFirstName").show();
             });
 
+            toastr.options.positionClass = 'toast-bottom-full-width';
+
             $("#btnUSIRefresh").click(function() {
+                verifyUSI(true);
+            });
+
+            function verifyUSI(showMessage)
+            {
+                $("#btnUSIRefresh").addClass("icon-rotate");
                 var sendData = {
                     "usi": "{{ $student->uniqueStudentIdentifier }}",
                     "first_name": "{{ $student->first_name }}",
@@ -3748,19 +3772,15 @@
                 $.ajax({
                     type: 'POST',
                     url: "{{ route('usi.verify') }}",
-                    data: sendData,
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    async: true,
+                    data: JSON.stringify(sendData),
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(response) {
-                        //bi bi-x icon-size-15
-                        //bi bi-check2 icon-point
-                        //chkUSIStatus
-                        //chkUSIFirstName
-                        //chkUSILastName
-                        //chkUSIBirth
-                        //chkUSIBirth
-                        //SingleName
+                        $("#btnUSIRefresh").removeClass("icon-rotate");
                         if($('#showNameType').val() == "2")
                         {
                             $('#chkUSIStatus').attr('class', response['USIStatus'] == 'Valid' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
@@ -3772,19 +3792,22 @@
                             $('#chkUSILastName').attr('class', response['FamilyName'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
                             $('#chkUSIBirth').attr('class', response['DateOfBirth'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
                         }
-                        console.log('Success:', response);
+                        //console.log('Success:', response);
+                        if(showMessage)  toastr["success"]("USI verfication refresh done!");
                     },
                     error: function(xhr, status, error) {
+                        $("#btnUSIRefresh").removeClass("icon-rotate");
                         $('#chkUSIStatus').attr('class', 'bi bi-x icon-size-15');
                         $('#chkUSIFirstName').attr('class', 'bi bi-x icon-size-15');
                         $('#chkUSILastName').attr('class', 'bi bi-x icon-size-15');
                         $('#chkUSIBirth').attr('class', 'bi bi-x icon-size-15');
-                        console.error('Error:', error);
+                        if(showMessage) toastr["error"]("USI Verification Error!");
+                        //console.error('Error:', error);
                     }
                 });
-            });
+            }
 
-            $("#btnUSIRefresh").click();
+            verifyUSI(false);
 
             $("#toggleButton").click(function() {
                 $("#details").toggleClass("visible hidden");
