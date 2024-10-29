@@ -751,43 +751,45 @@ Route::group(['prefix' => 'admin'], function () {
     //Start User Management
     Route::get('/company/company', [App\Http\Controllers\ExportController::class, 'company'])->name('company');
   // Report
-  //Courser Complation
-  Route::get('/report/active/log', [App\Http\Controllers\ReportController::class, 'activelog'])->name('report.activity.log');
-  Route::post('/report/search/people/', [App\Http\Controllers\ApiController::class, 'search_people_report'])->name('report.activity.search.people');
-  Route::get('/report/courseCompletion', [App\Http\Controllers\ReportController::class, 'courseCompletion'])->name('course.complation');
-  // COURSE UTILISATION
-  Route::get('/report/courseUtilisation', [App\Http\Controllers\ReportController::class, 'courseUtilisation'])->name('course.utilisation');
-  //DUPLICATED ENROLMENTS
-  Route::get('/report/duplicateEnrolment', [App\Http\Controllers\ReportController::class, 'duplicateEnrolment'])->name('duplicate.enrolment');
-  // DUPLICATED PERSONS
-  Route::get('/report/duplicatePerson', [App\Http\Controllers\ReportController::class, 'duplicatePerson'])->name('duplicate.person');
-  // Invoices and Payments
-  Route::get('/report/unpaidInvoices', [App\Http\Controllers\ReportController::class, 'unpaidInvoices'])->name('invoice.payment');
-  //  POSSIBLE MATCHES
-  Route::get('/report/possibleMatch', [App\Http\Controllers\ReportController::class, 'possibleMatch'])->name('possible.dublicates');
-  //  SMS USAGE
-  Route::get('/report/smsUsage', [App\Http\Controllers\ReportController::class, 'smsUsage'])->name('sms.usage');
-  // STORAGE DETAILS
-  Route::get('/report/storagedetails', [App\Http\Controllers\ReportController::class, 'storagedetails'])->name('storage.details');
-  // TRAINER COMPETENCIES
-  Route::get('/report/trainerCompetency', [App\Http\Controllers\ReportController::class, 'trainerCompetency'])->name('trainer.competencies');
- // Other Api City
-  Route::get('/api/city/list', [App\Http\Controllers\ApiController::class, 'cityget'])->name('api.city.list');
-  Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');
-  Route::get('/api/edit/default', [App\Http\Controllers\ApiController::class,'default_get'])->name('api.edit.default');
-  Route::post('/api/edit/default/update', [App\Http\Controllers\ApiController::class,'default_update'])->name('api.edit.default.update');
-  Route::get('/api/course/sessios/list', [App\Http\Controllers\ApiController::class,'sessions_course'])->name('api.course.sessions.list');
-  Route::get('/api/course/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_trainer'])->name('api.course.trainer.get');
-  Route::get('/api/course/assessor/list', [App\Http\Controllers\ApiController::class,'sessions_assessor'])->name('api.course.assessor.get');
-  Route::get('/api/course/get/single', [App\Http\Controllers\ApiController::class,'course_single'])->name('api.course.get');
-  Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');
-  Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');
-  Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');
-  Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');
-  Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
-  Route::get('/api/funding/national/find', [App\Http\Controllers\ApiController::class,'funding_find'])->name('avitmiss.funding.find');
+    //Courser Complation
+    Route::get('/report/active/log', [App\Http\Controllers\ReportController::class, 'activelog'])->name('report.activity.log');
+    Route::post('/report/search/people/', [App\Http\Controllers\ApiController::class, 'search_people_report'])->name('report.activity.search.people');
+    Route::get('/report/courseCompletion', [App\Http\Controllers\ReportController::class, 'courseCompletion'])->name('course.complation');
+    // COURSE UTILISATION
+    Route::get('/report/courseUtilisation', [App\Http\Controllers\ReportController::class, 'courseUtilisation'])->name('course.utilisation');
+    //DUPLICATED ENROLMENTS
+    Route::get('/report/duplicateEnrolment', [App\Http\Controllers\ReportController::class, 'duplicateEnrolment'])->name('duplicate.enrolment');
+    // DUPLICATED PERSONS
+    Route::get('/report/duplicatePerson', [App\Http\Controllers\ReportController::class, 'duplicatePerson'])->name('duplicate.person');
+    // Invoices and Payments
+    Route::get('/report/unpaidInvoices', [App\Http\Controllers\ReportController::class, 'unpaidInvoices'])->name('invoice.payment');
+    //  POSSIBLE MATCHES
+    Route::get('/report/possibleMatch', [App\Http\Controllers\ReportController::class, 'possibleMatch'])->name('possible.dublicates');
+    //  SMS USAGE
+    Route::get('/report/smsUsage', [App\Http\Controllers\ReportController::class, 'smsUsage'])->name('sms.usage');
+    // STORAGE DETAILS
+    Route::get('/report/storagedetails', [App\Http\Controllers\ReportController::class, 'storagedetails'])->name('storage.details');
+    // TRAINER COMPETENCIES
+    Route::get('/report/trainerCompetency', [App\Http\Controllers\ReportController::class, 'trainerCompetency'])->name('trainer.competencies');
+  // Other Api City
+    Route::get('/api/city/list', [App\Http\Controllers\ApiController::class, 'cityget'])->name('api.city.list');
+    Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');
+    Route::get('/api/edit/default', [App\Http\Controllers\ApiController::class,'default_get'])->name('api.edit.default');
+    Route::post('/api/edit/default/update', [App\Http\Controllers\ApiController::class,'default_update'])->name('api.edit.default.update');
+    Route::get('/api/course/sessios/list', [App\Http\Controllers\ApiController::class,'sessions_course'])->name('api.course.sessions.list');
+    Route::get('/api/course/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_trainer'])->name('api.course.trainer.get');
+    Route::get('/api/course/assessor/list', [App\Http\Controllers\ApiController::class,'sessions_assessor'])->name('api.course.assessor.get');
+    Route::get('/api/course/get/single', [App\Http\Controllers\ApiController::class,'course_single'])->name('api.course.get');
+    Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');
+    Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');
+    Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');
+    Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');
+    Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
+    Route::get('/api/funding/national/find', [App\Http\Controllers\ApiController::class,'funding_find'])->name('avitmiss.funding.find');
 
-});
+    Route::get('/test-bulk-usi-verify', [App\Http\Controllers\USIController::class,'testUSI'])->name('usi.verification.test');
+
+  });
 });
 
 Route::get('password/reset/{token}', [App\Http\Controllers\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
@@ -803,6 +805,6 @@ Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseCo
 Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode');
 Route::post('/event/invoice/send', [App\Http\Controllers\InvoiceController::class, 'invoice_mail'])->name('admin.invoice.mail.send');
 
-// verify usi
-Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
-Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');
+  // verify usi
+  Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
+  Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');

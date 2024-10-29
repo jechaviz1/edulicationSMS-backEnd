@@ -16,12 +16,16 @@ class USIController extends Controller
         $this->expired = $this->usiService->hasExpired();
     }
 
+    public function testUSI()
+    {
+        return view('admin.usi_test.usitest');
+    }
+
     public function verifyUSI(Request $request)
     {
         try {
             $validatedData = $request->validate([
                 'usi' => 'required|string|size:10',
-                'first_name' => 'required|string|max:40',
                 'family_name' => 'required|string|max:40',
                 'date_of_birth' => 'required|date',
             ]);
@@ -34,7 +38,7 @@ class USIController extends Controller
             }
             $result = $this->usiService->verifyUSI(
                 $validatedData['usi'],
-                $validatedData['first_name'],
+                $request->first_name,
                 $validatedData['family_name'],
                 $validatedData['date_of_birth']
             );
