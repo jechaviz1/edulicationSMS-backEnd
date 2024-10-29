@@ -169,7 +169,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-employee/{id}', [EmployeeController::class, 'editEmployee'])->name('edit-employee');
     Route::post('/update-employee/{id}', [EmployeeController::class, 'updateEmployee'])->name('update-employee');
     Route::get('/delete-employee/{id}', [EmployeeController::class, 'deleteEmployee'])->name('delete-employee');
-    //END - Employee 
+    //END - Employee
     // START - Department
     Route::get('/add-department', [DepartmentController::class, 'addDepartment'])->name('add-department');
     Route::post('/store-department', [DepartmentController::class, 'storeDepartment'])->name('store-department');
@@ -194,7 +194,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-attendance/{id}', [AttendanceController::class, 'editAttendance'])->name('edit-attendance');
     Route::post('/update-attendance/{id}', [AttendanceController::class, 'updateAttendance'])->name('update-attendance');
     Route::get('/delete-attendance/{id}', [AttendanceController::class, 'deleteAttendance'])->name('delete-attendance');
-    //END - Attendance 
+    //END - Attendance
     // START - AttendanceType
     Route::get('/add-attendancetype', [AttendanceTypeController::class, 'addAttendanceType'])->name('add-attendancetype');
     Route::post('/store-attendancetype', [AttendanceTypeController::class, 'storeAttendanceType'])->name('store-attendancetype');
@@ -202,7 +202,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-attendancetype/{id}', [AttendanceTypeController::class, 'editAttendanceType'])->name('edit-attendancetype');
     Route::post('/update-attendancetype/{id}', [AttendanceTypeController::class, 'updateAttendanceType'])->name('update-attendancetype');
     Route::get('/delete-attendancetype/{id}', [AttendanceTypeController::class, 'deleteAttendanceType'])->name('delete-attendancetype');
-    //END - AttendanceType 
+    //END - AttendanceType
     // START - EmployeeCategory
     Route::get('/add-employeecategory', [EmployeeCategoryController::class, 'addEmployeeCategory'])->name('add-employeecategory');
     Route::post('/store-employeecategory', [EmployeeCategoryController::class, 'storeEmployeeCategory'])->name('store-employeecategory');
@@ -210,7 +210,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-employeecategory/{id}', [EmployeeCategoryController::class, 'editEmployeeCategory'])->name('edit-employeecategory');
     Route::post('/update-employeecategory/{id}', [EmployeeCategoryController::class, 'updateEmployeeCategory'])->name('update-employeecategory');
     Route::get('/delete-employeecategory/{id}', [EmployeeCategoryController::class, 'deleteEmployeeCategory'])->name('delete-employeecategory');
-    //END - EmployeeCategory 
+    //END - EmployeeCategory
     // START - LeaveType
     Route::get('/add-leavetype', [LeaveTypeController::class, 'addLeaveType'])->name('add-leavetype');
     Route::post('/store-leavetype', [LeaveTypeController::class, 'storeLeaveType'])->name('store-leavetype');
@@ -218,7 +218,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-leavetype/{id}', [LeaveTypeController::class, 'editLeaveType'])->name('edit-leavetype');
     Route::post('/update-leavetype/{id}', [LeaveTypeController::class, 'updateLeaveType'])->name('update-leavetype');
     Route::get('/delete-leavetype/{id}', [LeaveTypeController::class, 'deleteLeaveType'])->name('delete-leavetype');
-    //END - LeaveType 
+    //END - LeaveType
     // START - StaffLeave
     Route::get('/add-staffleave', [LeaveController::class, 'add'])->name('add-staffleave');
     Route::post('/store-staffleave', [LeaveController::class, 'store'])->name('store-staffleave');
@@ -226,7 +226,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-staffleave/{id}', [LeaveController::class, 'edit'])->name('edit-staffleave');
     Route::post('/update-staffleave/{id}', [LeaveController::class, 'update'])->name('update-staffleave');
     Route::get('/delete-staffleave/{id}', [LeaveController::class, 'delete'])->name('delete-staffleave');
-    //END - StaffLeave 
+    //END - StaffLeave
     // START - LeaveManage
     Route::get('/add-leavemanage', [LeaveManagementController::class, 'add'])->name('add-leavemanage');
     Route::post('/store-leavemanage', [LeaveManagementController::class, 'store'])->name('store-leavemanage');
@@ -235,7 +235,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-leavemanage/{id}', [LeaveManagementController::class, 'update'])->name('update-leavemanage');
     Route::get('/delete-leavemanage/{id}', [LeaveManagementController::class, 'delete'])->name('delete-leavemanage');
     Route::post('/leavemanage-status/{id}', [LeaveManagementController::class, 'status'])->name('leavemanage-status');
-    //END - LeaveManage 
+    //END - LeaveManage
     // START - LeaveRequest
     Route::get('/add-leaverequest', [LeaveRequestController::class, 'addLeaveRequest'])->name('add-leaverequest');
     Route::post('/store-leaverequest', [LeaveRequestController::class, 'storeLeaveRequest'])->name('store-leaverequest');
@@ -245,7 +245,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-leaverequest/{id}', [LeaveRequestController::class, 'deleteLeaveRequest'])->name('delete-leaverequest');
     Route::get('/leaverequest-detail/{id}', [LeaveRequestController::class, 'leaverequestDetail'])->name('leaverequest-detail');
     Route::post('/add-leaverequest-detail', [LeaveRequestController::class, 'AddleaverequestDetail'])->name('add-leaverequest-detail');
-    //END - LeaveRequest 
+    //END - LeaveRequest
     // START - LeaveAllocation
     Route::get('/add-leaveallocation', [LeaveAllocationController::class, 'addLeaveAllocation'])->name('add-leaveallocation');
     Route::post('/store-leaveallocation', [LeaveAllocationController::class, 'storeLeaveAllocation'])->name('store-leaveallocation');
@@ -254,7 +254,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update-leaveallocation/{id}', [LeaveAllocationController::class, 'updateLeaveAllocation'])->name('update-leaveallocation');
     Route::get('/delete-leaveallocation/{id}', [LeaveAllocationController::class, 'deleteLeaveAllocation'])->name('delete-leaveallocation');
     //    Route::get('/leaveallocation-detail/{id}', [LeaveAllocationController::class, 'leaveallocationDetail'])->name('leaveallocation-detail');
-    //END - LeaveAllocation 
+    //END - LeaveAllocation
     // START - Exams
     Route::get('/add-examtypes', [ExamTypeController::class, 'addExamType'])->name('add-examtypes');
     Route::post('/store-examtypes', [ExamTypeController::class, 'storeExamType'])->name('store-examtypes');
@@ -262,7 +262,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-examtype/{id}', [ExamTypeController::class, 'editExamType'])->name('edit-examtype');
     Route::post('/update-examtype/{id}', [ExamTypeController::class, 'updateExamType'])->name('update-examtype');
     Route::get('/delete-examtype/{id}', [ExamTypeController::class, 'deleteExamType'])->name('delete-examtype');
-    //END - Exams 
+    //END - Exams
     // START - Grade
     Route::get('/add-grade', [GradeController::class, 'addGrade'])->name('add-grade');
     Route::post('/store-grade', [GradeController::class, 'storeGrade'])->name('store-grade');
@@ -270,7 +270,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/edit-grade/{id}', [GradeController::class, 'editGrade'])->name('edit-grade');
     Route::post('/update-grade/{id}', [GradeController::class, 'updateGrade'])->name('update-grade');
     Route::get('/delete-grade/{id}', [GradeController::class, 'deleteGrade'])->name('delete-grade');
-    //END - Grade 
+    //END - Grade
     // START - Faculty
     Route::get('/add-faculty', [FacultyController::class, 'addFaculty'])->name('add-faculty');
     Route::post('/store-faculty', [FacultyController::class, 'storeFaculty'])->name('store-faculty');
@@ -440,7 +440,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('fees-student-unpay/{id}', [FeesStudentController::class, 'unpay'])->name('fees-student-unpay');
     Route::post('fees-student-pay', [FeesStudentController::class, 'pay'])->name('fees-student-pay');
     Route::post('fees-student-cancel/{id}', [FeesStudentController::class, 'cancel'])->name('fees-student-cancel');
-    // setting 
+    // setting
     Route::get('/setting', [SettingController::class, 'index'])->name('setting');
     Route::post('/store-setting', [SettingController::class, 'store'])->name('store-setting');
     // START - status Type
@@ -602,7 +602,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
     Route::get('/change-citytown-status/{id}/{status}', [CityTownController::class, 'changestatus'])->name('change-citytown-status');
     // END - City Town
-    // START - Event Courses 
+    // START - Event Courses
     Route::get('/events/courses', [App\Http\Controllers\Event\CourseController::class, 'index'])->name('event.courses');
     Route::post('/events/couser/store', [App\Http\Controllers\Event\CourseController::class, 'store'])->name('event.courses.store');
     Route::get('/events/couser/{id}', [App\Http\Controllers\Event\CourseController::class, 'destroy'])->name('event.courses.destroy');
@@ -619,25 +619,25 @@ Route::group(['prefix' => 'admin'], function () {
     //  Route::get('/edit-city-town/{id}', [CityTownController::class, 'edit'])->name('edit-city-town');
     //  Route::get('/delete-city-town/{id}', [CityTownController::class, 'delete'])->name('delete-city-town');
     //  Route::get('/change-citytown-status/{id}/{status}', [CityTownController::class, 'changestatus'])->name('change-citytown-status');
-    // END - Event Courses 
-    // START - Event calender 
+    // END - Event Courses
+    // START - Event calender
     Route::get('/events/calender', [App\Http\Controllers\CalenderController::class, 'index'])->name('event.calender');
     Route::get('/events/calender/session', [App\Http\Controllers\CalenderController::class, 'index_session'])->name('event.calender.session');
     Route::get('/api/calender/find', [App\Http\Controllers\CalenderController::class, 'find_data'])->name('course.find');
-    // END -  Event calender 
-    // START - Event Room calender 
+    // END -  Event calender
+    // START - Event Room calender
     Route::get('/events/room/calender', [App\Http\Controllers\RoomController::class, 'index'])->name('event.room.calender');
     // END - Room Calender
-    // START - Event Sessions 
+    // START - Event Sessions
     Route::get('/events/sesssions', [App\Http\Controllers\SessionsController::class, 'index'])->name('event.session.index');
     // END - Sessions
-    // START - Event Trainers 
+    // START - Event Trainers
     Route::get('/events/trainers', [App\Http\Controllers\TrainersController::class, 'index'])->name('event.trainers.index');
     // END - Event Trainerscourse-list
-    // START - Event Archive 
+    // START - Event Archive
     Route::get('/events/archieve',[App\Http\Controllers\ArchiveController::class, 'index'])->name('event.archive.index');
     // END - Event Archive
-    // START - People 
+    // START - People
     Route::get('/people/find', [App\Http\Controllers\PeopleController::class, 'index'])->name('people.find.index');
     Route::post('/people/find/column', [App\Http\Controllers\PeopleController::class, 'index'])->name('people.column');
     Route::get('/people/delete/{id}', [App\Http\Controllers\PeopleController::class, 'delete'])->name('people.delete');
@@ -662,13 +662,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/people/website/enquiry/email', [App\Http\Controllers\PeopleController::class, 'websiteEnquiry'])->name('people.website.enquiries');
     Route::get('/people/website/enrolment', [App\Http\Controllers\PeopleController::class, 'websiteEnrolment'])->name('people.website.enrolment');
     Route::get('/people/AVETMISSCheck', [App\Http\Controllers\PeopleController::class, 'avitmiss_check'])->name('people.avitmiss.check');
-    
+
     // END - Event Trainers
-    // START - Lerner Record 
+    // START - Lerner Record
     Route::get('/people/active/learns', [App\Http\Controllers\LearnerRecord::class, 'index'])->name('people.active.learners.index');
     Route::get('/people/enquirySearch', [App\Http\Controllers\LearnerRecord::class, 'enquiry'])->name('people.enquiry.index');
-    // START - People 
-    //Start Event Enrollment 
+    // START - People
+    //Start Event Enrollment
     Route::post('/event/enrollment/course/certificate/issue', [App\Http\Controllers\EnrollmentController::class, 'enrollment_issue'])->name('event.enrollment.issue');
     Route::post('/event/enrollment/course/people/add', [App\Http\Controllers\EnrollmentController::class, 'enrollment_add_people'])->name('event.enrollment.add.people');
     Route::get('/event/enrollment/course/people/update/{id}', [App\Http\Controllers\EnrollmentController::class, 'enrolment_add_people_update'])->name('event.enrollment.people.update');
@@ -682,13 +682,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/event/enrollment/course/certificate', [App\Http\Controllers\EnrollmentController::class, 'enrolmentCertificate'])->name('issue.enrolment.certificates');
     Route::post('/event/bulk/enrolment', [App\Http\Controllers\EnrollmentController::class, 'bulk_enrolment'])->name('bulk.enrolment.serch');
 
-    // End Event Enrollment 
-    // START - Lerner Record 
+    // End Event Enrollment
+    // START - Lerner Record
     Route::get('/people/enrolmentSearch', [App\Http\Controllers\EnrollmentController::class, 'index'])->name('people.enrollment.search');
     Route::get('/people/enquirySearch', [App\Http\Controllers\LearnerRecord::class, 'enquiry'])->name('people.enquiry.index');
-    // START - Bulk Enrolment 
+    // START - Bulk Enrolment
     Route::get('/people/bulkenrolment', [App\Http\Controllers\EnrollmentController::class, 'bulk'])->name('people.bulk.enrolment');
-    // START - People 
+    // START - People
     Route::get('/company/avetmissSetting', [App\Http\Controllers\CompanyController::class, 'avetmisssetting'])->name('company.avetmissSetting');
     Route::post('/widgetFunctions/saveAvetmiss', [App\Http\Controllers\CompanyController::class, 'saveAvetmiss'])->name('company.saveAvetmiss');
     //START - Certificate
@@ -764,28 +764,28 @@ Route::group(['prefix' => 'admin'], function () {
   // Invoices and Payments
   Route::get('/report/unpaidInvoices', [App\Http\Controllers\ReportController::class, 'unpaidInvoices'])->name('invoice.payment');
   //  POSSIBLE MATCHES
-  Route::get('/report/possibleMatch', [App\Http\Controllers\ReportController::class, 'possibleMatch'])->name('possible.dublicates');  
+  Route::get('/report/possibleMatch', [App\Http\Controllers\ReportController::class, 'possibleMatch'])->name('possible.dublicates');
   //  SMS USAGE
-  Route::get('/report/smsUsage', [App\Http\Controllers\ReportController::class, 'smsUsage'])->name('sms.usage');  
+  Route::get('/report/smsUsage', [App\Http\Controllers\ReportController::class, 'smsUsage'])->name('sms.usage');
   // STORAGE DETAILS
-  Route::get('/report/storagedetails', [App\Http\Controllers\ReportController::class, 'storagedetails'])->name('storage.details');  
+  Route::get('/report/storagedetails', [App\Http\Controllers\ReportController::class, 'storagedetails'])->name('storage.details');
   // TRAINER COMPETENCIES
-  Route::get('/report/trainerCompetency', [App\Http\Controllers\ReportController::class, 'trainerCompetency'])->name('trainer.competencies');  
+  Route::get('/report/trainerCompetency', [App\Http\Controllers\ReportController::class, 'trainerCompetency'])->name('trainer.competencies');
  // Other Api City
-  Route::get('/api/city/list', [App\Http\Controllers\ApiController::class, 'cityget'])->name('api.city.list');  
-  Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');  
-  Route::get('/api/edit/default', [App\Http\Controllers\ApiController::class,'default_get'])->name('api.edit.default');  
-  Route::post('/api/edit/default/update', [App\Http\Controllers\ApiController::class,'default_update'])->name('api.edit.default.update');  
-  Route::get('/api/course/sessios/list', [App\Http\Controllers\ApiController::class,'sessions_course'])->name('api.course.sessions.list');  
-  Route::get('/api/course/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_trainer'])->name('api.course.trainer.get');  
-  Route::get('/api/course/assessor/list', [App\Http\Controllers\ApiController::class,'sessions_assessor'])->name('api.course.assessor.get');  
-  Route::get('/api/course/get/single', [App\Http\Controllers\ApiController::class,'course_single'])->name('api.course.get');  
-  Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');  
-  Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');  
-  Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');  
-  Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');  
+  Route::get('/api/city/list', [App\Http\Controllers\ApiController::class, 'cityget'])->name('api.city.list');
+  Route::get('/api/teacher/list', [App\Http\Controllers\ApiController::class, 'teacherget'])->name('api.teacher.list');
+  Route::get('/api/edit/default', [App\Http\Controllers\ApiController::class,'default_get'])->name('api.edit.default');
+  Route::post('/api/edit/default/update', [App\Http\Controllers\ApiController::class,'default_update'])->name('api.edit.default.update');
+  Route::get('/api/course/sessios/list', [App\Http\Controllers\ApiController::class,'sessions_course'])->name('api.course.sessions.list');
+  Route::get('/api/course/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_trainer'])->name('api.course.trainer.get');
+  Route::get('/api/course/assessor/list', [App\Http\Controllers\ApiController::class,'sessions_assessor'])->name('api.course.assessor.get');
+  Route::get('/api/course/get/single', [App\Http\Controllers\ApiController::class,'course_single'])->name('api.course.get');
+  Route::get('/api/course/sessions/trainer/list', [App\Http\Controllers\ApiController::class,'sessions_course_trainer_list'])->name('api.course.trainer.list');
+  Route::get('/api/find/people', [App\Http\Controllers\ApiController::class,'findpeople'])->name('api.people.find');
+  Route::get('/api/note/find', [App\Http\Controllers\ApiController::class,'findnote'])->name('api.note.find');
+  Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');
   Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
-  Route::get('/api/funding/national/find', [App\Http\Controllers\ApiController::class,'funding_find'])->name('avitmiss.funding.find');  
+  Route::get('/api/funding/national/find', [App\Http\Controllers\ApiController::class,'funding_find'])->name('avitmiss.funding.find');
 
 });
 });
@@ -795,10 +795,14 @@ Route::post('password/reset', [App\Http\Controllers\ResetPasswordController::cla
 
 
 Route::get('forget-password', [App\Http\Controllers\ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('forget-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+Route::post('forget-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
 Route::get('reset-password/{token}', [App\Http\Controllers\ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [App\Http\Controllers\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 //course filter
 Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseController::class, 'filter']);
-Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode'); 
+Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode');
 Route::post('/event/invoice/send', [App\Http\Controllers\InvoiceController::class, 'invoice_mail'])->name('admin.invoice.mail.send');
+
+  // verify usi
+  Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
+  Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');

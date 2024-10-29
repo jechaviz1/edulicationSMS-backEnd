@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        App\Providers\USIServiceProvider::class,
 
     ],
 

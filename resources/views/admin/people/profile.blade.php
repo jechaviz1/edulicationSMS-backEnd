@@ -9,6 +9,16 @@
             }
         }
 
+        .icon-point
+        {
+            cursor: pointer;
+        }
+
+        .icon-size-15
+        {
+            font-size: 15px;
+        }
+
         .profile-pic {
             color: transparent;
             transition: all 0.3s ease;
@@ -477,7 +487,46 @@
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        @if ($student->uniqueStudentIdentifier != null)
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label for="">Unique Student Identifier:</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>{{ $student->uniqueStudentIdentifier }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label class="float-left">Name Type For USI Validation</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <select name="showNameType"
+                                                        id="showNameType" class="input_text1 form-control">
+                                                        <option value="1"
+                                                            @if ($student->nameType === 1) selected @endif>Use
+                                                            First Name &amp; Last Name</option>
+                                                        <option value="2"
+                                                            @if ($student->nameType === 2) selected @endif>Use
+                                                            Single Name (Last Name)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3">
+                                                <div class="col-sm-4">
+                                                    <label for="">USI Validaty:</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <i title="USI Status" id="chkUSIStatus"></i>
+                                                    <i class="@if($student->nameType === 2) d-none @endif" title="First Name" id="chkUSIFirstName"></i>
+                                                    <i title="Last Name" id="chkUSILastName"></i>
+                                                    <i title="Date of Birth" id="chkUSIBirth"></i>
+                                                    <i class="bi bi-arrow-clockwise icon-point" title="Refresh" id="btnUSIRefresh"></i>
+                                                </div>
+                                            </div>
+                                        @endif
+                                   </div>
                                     <div class="col-sm-6">
                                         <h6>Postal Address</h6>
                                         @if ($student->isLearner != null)
@@ -1766,7 +1815,7 @@
                                                             <option value="Suriname"
                                                                 @if ($student->country == 'Suriname') selected @endif>
                                                                 Suriname</option>
-                                                            <option value="Swaziland" 
+                                                            <option value="Swaziland"
                                                                 @if ($student->country == 'Swaziland') selected @endif>
                                                                 Swaziland</option>
                                                             <option value="Sweden"
@@ -2007,7 +2056,7 @@
                                                     @csrf
                                                     @method('POST')
                                                     <input type="hidden" name="student_id" value="{{$studentID}}">
-                                                    <tbody id="dataTable"> 
+                                                    <tbody id="dataTable">
                                                         <tr>
                                                             <td>Upload File (Max size of 20MB)<input type="hidden"
                                                                     name="MAX_FILE_SIZE" value="20971520"></td>
@@ -2024,14 +2073,14 @@
                                                                     fdprocessedid="2fsg38">
                                                             </td>
                                                             <td align="center">
-                                                               
+
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <button id="addRowBtn" type="button" class="btn btn-primary ms-2">Add more files</button>
                                                         </tr>
                                                     </tbody>
-                            
+
                                                 </table>
                                             </td>
                                         </tr>
@@ -2099,14 +2148,14 @@
                                     <div style="float:left;padding-left:150px;">
                                         <div style="padding:5px;float:left;font-weight:bold;width:400px;"
                                             align="left">Country of Birth? </div>
-                                            
+
                                         <div style="padding:5px 5px;float:left;vertical-align:bottom">
                                            @if($student->birthCountry == null ) No selection @else {{ $student->Birthcountry->name }}  @endif  </div>
                                         <div style="clear:both;"></div>
                                         <div style="padding:5px;float:left;width:400px;font-weight:bold;">Do you mainly
                                             speak English at home?</div>
                                         <div style="padding:5px 5px;float:left;vertical-align:bottom">
-                                            @if($student->isMainEnglish == null ) No selection @else {{ $student->isMainEnglish }}  @endif 
+                                            @if($student->isMainEnglish == null ) No selection @else {{ $student->isMainEnglish }}  @endif
                                         </div>
                                         <div style="clear:both;height:5px;"></div>
                                         <div style="padding:5px;float:left;font-weight:bold;width:400px;"
@@ -2144,7 +2193,7 @@
                                             name="indigenousStatus" value="4" disabled=""  @if($student->indigenousStatus == "4") checked @endif>
                                             No, Neither Aboriginal nor Torres Strait Islander<br>
                                         </div>
-                                        
+
                                     </div>
                                     <div style="clear:both;height:20px;"></div>
                                     <div style="clear:both;text-align:center">
@@ -2210,7 +2259,7 @@
                                                 Well<br><input type="radio" name="englishProficiency" @if($student->englishProficiency == "3") checked @endif
                                                 value="3">
                                                 Not well<br><input type="radio" name="englishProficiency" @if($student->englishProficiency == "4") checked @endif
-                                                value="4"> 
+                                                value="4">
                                                 Not at all<br>
                                             </div>
                                             <div style="clear:both;height:5px;"></div>
@@ -2223,7 +2272,7 @@
                                                 Yes, Torres Strait Islander<br><input type="radio"
                                                     name="indigenousStatus" value="3"  @if($student->indigenousStatus == "3") checked @endif>
                                                 Yes, Aboriginal AND Torres Strait Islander<br><input type="radio"
-                                                    name="indigenousStatus" value="4"  @if($student->indigenousStatus == "4") checked @endif> 
+                                                    name="indigenousStatus" value="4"  @if($student->indigenousStatus == "4") checked @endif>
                                                 No, Neither Aboriginal nor Torres Strait Islander<br>
                                             </div>
                                         </div>
@@ -2234,7 +2283,7 @@
                                             <button type="button" class="btn btn-primary" style="margin:0px 5px;"
                                                 onclick="unsaved=true;editLanguageAndDiversity(524977, 'view');"
                                                 fdprocessedid="o9gpn" > Cancel</button>
-                                        </div>  
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -3677,6 +3726,66 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            $("#showNameType").change(function() {
+                var nameType = $(this).val();
+                if(nameType == "2")
+                    $("#chkUSIFirstName").hide();
+                else
+                    $("#chkUSIFirstName").show();
+            });
+
+            $("#btnUSIRefresh").click(function() {
+                var sendData = {
+                    "usi": "{{ $student->uniqueStudentIdentifier }}",
+                    "first_name": "{{ $student->first_name }}",
+                    "family_name": "{{  $student->last_name }}",
+                    "date_of_birth": "{{ $student->birth }}"
+                };
+                if($('#showNameType').val() == "2")
+                {
+                    sendData["first_name"] = "";
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('usi.verify') }}",
+                    data: sendData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        //bi bi-x icon-size-15
+                        //bi bi-check2 icon-point
+                        //chkUSIStatus
+                        //chkUSIFirstName
+                        //chkUSILastName
+                        //chkUSIBirth
+                        //chkUSIBirth
+                        //SingleName
+                        if($('#showNameType').val() == "2")
+                        {
+                            $('#chkUSIStatus').attr('class', response['USIStatus'] == 'Valid' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
+                            $('#chkUSILastName').attr('class', response['SingleName'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
+                            $('#chkUSIBirth').attr('class', response['DateOfBirth'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' )
+                        } else {
+                            $('#chkUSIStatus').attr('class', response['USIStatus'] == 'Valid' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
+                            $('#chkUSIFirstName').attr('class', response['FirstName'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
+                            $('#chkUSILastName').attr('class', response['FamilyName'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
+                            $('#chkUSIBirth').attr('class', response['DateOfBirth'] == 'Match' ? 'bi bi-check2 icon-point' : 'bi bi-x icon-size-15' );
+                        }
+                        console.log('Success:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        $('#chkUSIStatus').attr('class', 'bi bi-x icon-size-15');
+                        $('#chkUSIFirstName').attr('class', 'bi bi-x icon-size-15');
+                        $('#chkUSILastName').attr('class', 'bi bi-x icon-size-15');
+                        $('#chkUSIBirth').attr('class', 'bi bi-x icon-size-15');
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            $("#btnUSIRefresh").click();
+
             $("#toggleButton").click(function() {
                 $("#details").toggleClass("visible hidden");
                 $("#details-edit").toggleClass("hidden visible");
@@ -3726,12 +3835,14 @@
                     })
             })()
         });
-        // prfile pic add 
+        // prfile pic add
         var loadFile = function(event) {
             var image = document.getElementById("output");
             image.src = URL.createObjectURL(event.target.files[0]);
             makeAjaxRequest(event.target.files[0]);
         };
+
+
 
         function makeAjaxRequest(data) {
             var formData = new FormData();
@@ -3811,7 +3922,7 @@
             $('#enuiry_notes_1 .enuiry_note').append('Enquiry Notes for ' + item.first_name + ' ' + item.last_name);
             $('#courseList_edit').val(enquiry.course_id);
             var valuesToSelect = enquiry.delevery_method;
-            
+
             var selectElement = document.getElementById('courseTypeList_1');
             for (var i = 0; i < selectElement.options.length; i++) {
             if (valuesToSelect.includes(parseInt(selectElement.options[i].value))) {
@@ -4011,7 +4122,7 @@
                 @method('post')
                 <div class="row">
                     <div class="col-2">
-                      <label for="enuiry_document_email">To</label>  
+                      <label for="enuiry_document_email">To</label>
                     </div>
                     <div class="col-10">
                         <input type="email" name="" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" id="enuiry_document_email" value="{{$student->studentEmail}}" disabled>
@@ -4020,7 +4131,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-2">
-                      <label for="enuiry_document_email">CC</label>  
+                      <label for="enuiry_document_email">CC</label>
                     </div>
                     <div class="col-10">
                         <input type="text" name="email_cc" class="form-control" id="enuiry_document_email" value="{{ $student->studentEmail2 }};{{ $student->studentEmail3 }}">
@@ -4028,7 +4139,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-2">
-                      <label for="enuiry_document_email">Subject</label>  
+                      <label for="enuiry_document_email">Subject</label>
                     </div>
                     <div class="col-10">
                         <input type="text" name="subject" class="form-control" id="enuiry_document_email">
@@ -4036,7 +4147,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-2">
-                      <label for="enuiry_document_email">Note</label>  
+                      <label for="enuiry_document_email">Note</label>
                     </div>
                     <div class="col-10">
                        <textarea name="note_email" class="form-control" id="document_email" cols="30" rows="4"></textarea>
