@@ -1691,40 +1691,42 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table-bordered" id="taxTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Value</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th><input type="text" data-var="name"
-                                                                name="taxes[2][name]" id="Tax2Name" value="Tax 2"
-                                                                class="form-control"></th>
-                                                        <td><input class="form-control" data-var="val" type="text"
-                                                                name="taxes[2][value]" id="Tax2Value" value="0">
-                                                        </td>
-                                                        <td>
-                                                            <button href="#"
-                                                                class="btn btn-danger btn-mini remove-tax">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
+                                            <form action="">
+                                                <table class="table table-bordered" id="taxTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Value</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($tax as $t)
+                                                        <tr>
+                                                            <th><input type="text" data-var="name"
+                                                                    name="taxes[2][name]" id="Tax2Name" value="{{ $t->name}}"
+                                                                    class="form-control"></th>
+                                                            <td><input class="form-control" data-var="val" type="text"
+                                                                    name="taxes[2][value]" id="Tax2Value" value="{{ $t->value}}">
+                                                            </td>
+                                                            <td>
+                                                                <button href="#"
+                                                                    class="btn btn-danger btn-mini remove-tax">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </form>
                                             <button id="addTax" class="btn btn-success"><i
                                                     class="icon-plus-sign icon-white"></i> Add Tax</button>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-primary" id="save-discount">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1741,6 +1743,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
+                                        {{-- @dd($discount) --}}
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-xs-2">
@@ -1749,8 +1752,8 @@
                                                 <div class="col-xs-4">
                                                     <select id="discountType" class="form-control"
                                                         fdprocessedid="e96frk">
-                                                        <option value="percent">Percentage</option>
-                                                        <option value="flat">Fixed Amount</option>
+                                                        <option value="percent" @if($discount->type == "percent") selected @endif>Percentage</option>
+                                                        <option value="flat" @if($discount->type == "flat") selected @endif>Fixed Amount</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1761,15 +1764,14 @@
                                                 <div class="col-xs-4">
                                                     <input type="text" placeholder="Enter Fixed Amount"
                                                         id="flatDiscountInput"
-                                                        class="input-small dim-value form-control"
-                                                        fdprocessedid="ghzik6">
+                                                        class="input-small dim-value form-control" value="{{ $discount->value }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-primary" id="discounts">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1915,14 +1917,14 @@ ABN: [ABN]
                                                 </div>
                                             </div>
                                             <div class="row mt-5">
-                                                <table class="table table-bordered">
+                                                {{-- <table class="table table-bordered">
                                                     <thead>
                                                       <tr>
-                                                        <th><input type="text" style="width: 110px;" value="Description" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Quantity" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Unit price" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Tax" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Amount" readonly></th>
+                                                        <th><input type="text" style="width: 110px;" value="Description"></th>
+                                                        <th><input type="text" style="width: 110px;" value="Quantity"></th>
+                                                        <th><input type="text" style="width: 110px;" value="Unit price"></th>
+                                                        <th><input type="text" style="width: 110px;" value="Tax"></th>
+                                                        <th><input type="text" style="width: 110px;" value="Amount"></th>
                                                         <th></th>
                                                       </tr>
                                                     </thead>
@@ -1971,7 +1973,48 @@ ABN: [ABN]
                                                           <td colspan="2"><span id="unpaid">$0.00</span></td>
                                                         </tr>
                                                       </tfoot>
+                                                  </table> --}}
+                                                  <table class="table table-bordered">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Description</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit price</th>
+                                                        <!-- Placeholder for multiple tax columns -->
+                                                        <th class="tax-columns-placeholder">Tax</th>
+                                                        <th>Amount</th>
+                                                        <th></th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody id="table-body">
+                                                      <tr>
+                                                        <td><textarea data-key="description" class="editable input-block-level">Product name</textarea></td>
+                                                        <td><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></td>
+                                                        <td><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></td>
+                                                        <!-- Dynamic tax columns will go here -->
+                                                        <td data-key="subtotal" class="subtotal">$0.00</td>
+                                                        <td><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></td>
+                                                      </tr>
+                                                    </tbody>
+                                                    <tfoot id="TotalsSection">
+                                                      <tr>
+                                                        <td colspan="3"></td>
+                                                        <td>Total without Tax</td>
+                                                        <td><span id="subtotal">$0.00</span></td>
+                                                      </tr>
+                                                      <!-- Dynamic rows for tax totals -->
+                                                      <tr class="totals-row tax-totals"></tr>
+                                                      <tr>
+                                                        <td colspan="3"></td>
+                                                        <td>Total with Tax</td>
+                                                        <td><span id="total">$0.00</span></td>
+                                                      </tr>
+                                                    </tfoot>
                                                   </table>
+
+
+
+
                                             </div>
                                         </div>
 
@@ -2266,11 +2309,6 @@ ABN: [ABN]
 
                         });
 
-
-                        //taxes.add(new Tax({index:0,name:'Great'}));
-                        //taxes.add(new Tax({index:1,name:'Great 2'}));
-
-
                         invoiceItems.each(function(iitem) {
                             invoiceItems.remove(iitem);
                         });
@@ -2308,12 +2346,7 @@ ABN: [ABN]
                         invoice.calculateTotals();
                         invoiceAttribes.currency = 'EUR';
 
-
-
-
                         invoiceItems.each(function(iitem) {
-
-
                         });
                     }, 1000);
                 }
@@ -2354,5 +2387,77 @@ ABN: [ABN]
             $("#imageUpload").change(function() {
                 readURL(this);
             });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+    $('#save-discount').on('click', function () {
+        // Create an array to store tax data
+        let taxData = [];
+
+        // Loop through each row in the table body
+        $('#taxTable tbody tr').each(function () {
+            let taxName = $(this).find('input[data-var="name"]').val();
+            let taxValue = $(this).find('input[data-var="val"]').val();
+
+            // Store each row's data in an object and push it to the taxData array
+            taxData.push({
+                name: taxName,
+                value: taxValue
+            });
+        });
+       
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$.ajax({
+    url: "{{ route('invoice.discount') }}",
+    method: 'POST',
+    data: { taxes: taxData },
+    success: function(response) {
+        $('#tax').modal('hide'); 
+    },
+    error: function(error) {
+        console.error('Error saving data:', error);
+    }
+});
+
+    });
+});
+
+$(document).ready(function () {
+    $('#discounts').on('click', function () {
+        let discountType = $('#discountType').val();
+        let discountValue = $('#flatDiscountInput').val();
+        
+        // Get CSRF token from meta tag
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        // Prepare data to send
+        let data = {
+            type: discountType,
+            value: discountValue,
+            _token: csrfToken // Include CSRF token
+        };
+
+        // AJAX request to save data
+        $.ajax({
+            url: "{{ route('invoice.discounts') }}", // Replace with your server endpoint
+            method: 'POST',
+            data: data,
+            success: function (response) {
+                console.log('Discount saved successfully:', response);
+                $('#discount').modal('hide'); // Close modal on success
+            },
+            error: function (error) {
+                console.error('Error saving discount:', error);
+            }
+        });
+    });
+});
+
         </script>
     @endpush

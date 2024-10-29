@@ -805,6 +805,16 @@ Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseCo
 Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode');
 Route::post('/event/invoice/send', [App\Http\Controllers\InvoiceController::class, 'invoice_mail'])->name('admin.invoice.mail.send');
 
+<<<<<<< Updated upstream
   // verify usi
   Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
   Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');
+=======
+Route::get('/usi/integration', [App\Http\Controllers\USIController::class, 'USI_get'])->name('usi.verify');
+// verify usi
+Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
+Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');
+
+Route::post('/invoice/taxes', [App\Http\Controllers\InvoiceController::class, 'invoice_discount'])->name('invoice.discount');
+Route::post('/invoice/disccount', [App\Http\Controllers\InvoiceController::class, 'saveDiscount'])->name('invoice.discounts');
+>>>>>>> Stashed changes

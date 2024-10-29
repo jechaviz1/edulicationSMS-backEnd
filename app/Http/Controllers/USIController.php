@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Services\USIService;
 use Illuminate\Http\Request;
-
+use GuzzleHttp\Exception\RequestException;
 class USIController extends Controller
 {
     private $usiService;
     private $expired;
-
+            public function USI_get(){
+                return view('usi_get');
+            }
     public function __construct(USIService $usiService)
     {
         $this->usiService = $usiService;
