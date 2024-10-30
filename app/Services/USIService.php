@@ -36,11 +36,11 @@ class USIService extends SoapHelper
     {
         parent::__construct(); // This calls the constructor of SoapHelper
 
-        $this->dumpPath = storage_path('app/usi');
+        $this->dumpPath = public_path('app/usi');
         $this->atoUrl = config('usi.mode')=='PROD' ? self::VANURL_PROD : self::VANURL_TEST;
         $this->usiUrl = config('usi.mode')=='PROD' ? self::USIRUL_PROD : self::USIRUL_TEST;
         $this->orgCode = config('usi.org_code');
-        $this->auskey = $path = storage_path('app/usi'). '/keystore-usi.xml';
+        $this->auskey = $path = public_path('app/usi'). '/keystore-usi.xml';
         $this->auskey_id = config('usi.id');
         $this->loadAuskey($this->auskey, config('usi.password'), $this->auskey_id);
     }
@@ -640,13 +640,13 @@ class USIService extends SoapHelper
         $descriptorspec = array(
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
             1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-            2 => array("file", storage_path('app/usi')."/key.log", "w") // stderr is a file to write to (ensure the directory exists)
+            2 => array("file", public_path('app/usi')."/key.log", "w") // stderr is a file to write to (ensure the directory exists)
         );
 
-        $cwd = storage_path('app/usi'); // Ensure this directory exists
+        $cwd = public_path('app/usi'); // Ensure this directory exists
         $env = array();
         // Ensure the 'openssl' command can be found, use the full path if necessary
-        $command = $this->getOS() === 'Windows' ? storage_path('app/usi').'/openssl/bin/openssl.exe pkcs7 -print_certs' : 'openssl pkcs7 -print_certs';
+        $command = $this->getOS() === 'Windows' ? public_path('app/usi').'/openssl/bin/openssl.exe pkcs7 -print_certs' : 'openssl pkcs7 -print_certs';
         $process = proc_open($command, $descriptorspec, $pipes, $cwd, $env);
 
         if (is_resource($process)) {
