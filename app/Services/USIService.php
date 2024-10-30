@@ -646,7 +646,7 @@ class USIService extends SoapHelper
         $cwd = storage_path('app/usi'); // Ensure this directory exists
         $env = array();
         // Ensure the 'openssl' command can be found, use the full path if necessary
-        $command = $this->getOS() === 'Windows' ? 'E:\openssl\bin\openssl.exe pkcs7 -print_certs' : 'openssl pkcs7 -print_certs';
+        $command = $this->getOS() === 'Windows' ? storage_path('app/usi').'/openssl/bin/openssl.exe pkcs7 -print_certs' : 'openssl pkcs7 -print_certs';
         $process = proc_open($command, $descriptorspec, $pipes, $cwd, $env);
 
         if (is_resource($process)) {
