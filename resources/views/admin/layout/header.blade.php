@@ -1281,17 +1281,17 @@
                                 <span class="nav-text">Academic</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="faculty-list">Faculties</a></li>
-                                <li><a href="program-list">Programs</a></li>
-                                <li><a href="batch-list">Batches</a></li>
-                                <li><a href="session-list">Sessions</a></li>    
-                                <li><a href="semester-list">Semesters</a></li>
-                                <li><a href="section-list">Sections</a></li>
-                                <li><a href="classroom-list">Class Rooms</a></li>
-                                <li><a href="subject-list">Subjects</a></li>
-                                <li><a href="enrollsubject-list">Enroll Courses</a></li>
-                                <li><a href="classroutine-list">Class Routines</a></li>
-                                <li><a href="coursecategory-list">Course Category</a></li>
+                                <li><a href="{{ route('faculty-list') }}">Faculties</a></li>
+                                <li><a href="{{ route('program-list') }}">Programs</a></li>
+                                <li><a href="{{ route('batch-list') }}">Batches</a></li>
+                                <li><a href="{{ route('session-list') }}">Sessions</a></li>    
+                                <li><a href="{{ route('semester-list') }}">Semesters</a></li>
+                                <li><a href="{{ route('section-list') }}">Sections</a></li>
+                                <li><a href="{{ route('classroom-list') }}">Class Rooms</a></li>
+                                <li><a href="{{ route('subject-list') }}">Subjects</a></li>
+                                <li><a href="{{ route('enrollsubject-list') }}">Enroll Courses</a></li>
+                                <li><a href="{{ route('classroutine-list') }}">Class Routines</a></li>
+                                <li><a href="{{ route('coursecategory-list') }}">Course Category</a></li>
                                 <li><a href="#">Exam Routines</a></li>
                                 <li><a href="#">Teacher Routines</a></li>
                                  <li>
