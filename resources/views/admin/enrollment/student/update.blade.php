@@ -1917,63 +1917,6 @@ ABN: [ABN]
                                                 </div>
                                             </div>
                                             <div class="row mt-5">
-                                                {{-- <table class="table table-bordered">
-                                                    <thead>
-                                                      <tr>
-                                                        <th><input type="text" style="width: 110px;" value="Description"></th>
-                                                        <th><input type="text" style="width: 110px;" value="Quantity"></th>
-                                                        <th><input type="text" style="width: 110px;" value="Unit price"></th>
-                                                        <th><input type="text" style="width: 110px;" value="Tax"></th>
-                                                        <th><input type="text" style="width: 110px;" value="Amount"></th>
-                                                        <th></th>
-                                                      </tr>
-                                                    </thead>
-                                                    <tbody id="table-body">
-                                                      <tr>
-                                                        <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
-                                                        <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th>Handle</th>
-                                                        <th data-key="subtotal" class="subtotal">$0.00</th>
-                                                        <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
-                                                      </tr>
-                                                      <tr>
-                                                        <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
-                                                        <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th>Handle</th>
-                                                        <th data-key="subtotal" class="subtotal">$0.00</th>
-                                                        <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
-                                                      </tr>
-                                                    </tbody>
-                                                    <tfoot id="TotalsSection">
-                                                        <tr class="totals-row" id="SubtotalRow" style="display: table-row;">
-                                                          <td class="wide-cell" colspan="3"></td>
-                                                          <td><strong><input type="text" id="label_subtotal" value="Total without GST" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><span id="subtotal">$0.00</span></td>
-                                                        </tr>
-                                                        <tr class="tax-1 totals-row">
-                                                          <td class="wide-cell" colspan="3"></td>
-                                                          <td><strong class="title">GST</strong></td>
-                                                          <td colspan="2"><span id="gst">$0.00</span></td>
-                                                        </tr>
-                                                        <tr class="totals-row" id="TotalRow">
-                                                          <td class="wide-cell" colspan="3"><button type="button" id="AddProduct" class="btn btn-small btn-primary"><i class="fa fa-plus"></i> Add Line</button></td>
-                                                          <td><strong><input type="text" id="label_total" value="Total with GST" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><span id="total">$0.00</span></td>
-                                                        </tr>
-                                                        <tr class="totals-row shaped" id="PaidRow">
-                                                          <td class="wide-cell" colspan="3"><a href="#" class="show-row" id="toggle_paid"></a></td>
-                                                          <td><strong><input type="text" id="label_paid" value="Paid Amount" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><input type="number" id="paid" value="0" class="invoice-input" oninput="updateBalance()"></td>
-                                                        </tr>
-                                                        <tr class="totals-row shaped" id="UnpaidRow">
-                                                          <td class="wide-cell" colspan="3"></td>
-                                                          <td><strong><input type="text" id="label_unpaid" value="Balance Due" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><span id="unpaid">$0.00</span></td>
-                                                        </tr>
-                                                      </tfoot>
-                                                  </table> --}}
                                                   <table class="table table-bordered">
                                                     <thead>
                                                       <tr>
@@ -2356,21 +2299,6 @@ ABN: [ABN]
 
             });
 
-
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-            ga('create', 'UA-73809851-1', 'auto');
-            ga('send', 'pageview');
         </script>
         <script>
             function readURL(input) {

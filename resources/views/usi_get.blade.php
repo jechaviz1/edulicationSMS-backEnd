@@ -12,9 +12,9 @@
         @csrf
         @method('post')
         <input type="text" name="usi">
-        <input type="text" name="first_name">
-        <input type="text" name="family_name">
-        <input type="text" name="date_of_birth">
+        <input type="text" name="first_name" value="Maryam">
+        <input type="text" name="family_name" value="Fredrick">
+        <input type="text" name="date_of_birth" value="1966-05-25">
         <button type="submit">submit</button>
     </form>
 </body>

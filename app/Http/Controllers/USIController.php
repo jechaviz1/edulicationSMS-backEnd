@@ -10,6 +10,7 @@ class USIController extends Controller
     private $usiService;
     private $expired;
             public function USI_get(){
+                // dd("hello");
                 return view('usi_get');
             }
     public function __construct(USIService $usiService)

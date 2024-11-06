@@ -3760,10 +3760,10 @@
             {
                 $("#btnUSIRefresh").addClass("icon-rotate");
                 var sendData = {
-                    "usi": "{{ $student->uniqueStudentIdentifier }}",
-                    "first_name": "{{ $student->first_name }}",
-                    "family_name": "{{  $student->last_name }}",
-                    "date_of_birth": "{{ $student->birth }}"
+                    "usi": "BNGH7C75FN",
+                    "first_name": "Maryam",
+                    "family_name": "Fredrick",
+                    "date_of_birth": "1966-05-25"
                 };
                 if($('#showNameType').val() == "2")
                 {

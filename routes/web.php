@@ -786,8 +786,18 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/api/certificate/course/pdf/{id}', [App\Http\Controllers\ApiController::class,'certificatepdf'])->name('api.enrolment.course.certificate.pdf');
     Route::post('/enrolment-notes/pdf', [App\Http\Controllers\ApiController::class, 'exportToPdf'])->name('enrolment.notes.pdf');
     Route::get('/api/funding/national/find', [App\Http\Controllers\ApiController::class,'funding_find'])->name('avitmiss.funding.find');
-
+    Route::get('/invoice/general', [App\Http\Controllers\ApiController::class,'invoice_pdf_user'])->name('invoice-user');
+      //Test USI Integration 
     Route::get('/test-bulk-usi-verify', [App\Http\Controllers\USIController::class,'testUSI'])->name('usi.verification.test');
+      // Contact Person
+    Route::get('/communication/contact', [App\Http\Controllers\CommunicationController::class,'contact'])->name('communication.contact.person');
+    Route::post('/contact/person/create', [App\Http\Controllers\CommunicationController::class, 'contact_person'])->name('add.contact.person');
+    Route::get('/communication/{id}/edit', [App\Http\Controllers\CommunicationController::class, 'edit'])->name('communication.create.edit');
+    Route::put('/contact/{id}', [App\Http\Controllers\CommunicationController::class, 'contact_update'])->name('contact.update');
+    Route::post('/notes/{id}/update', [App\Http\Controllers\CommunicationController::class, 'updateNote'])->name('notes.update');
+    Route::post('/communication/{communicationId}/notes/create-more', [App\Http\Controllers\CommunicationController::class, 'createMore'])->name('contact.notes.create.more');
+    Route::delete('/notes/{id}/delete', [App\Http\Controllers\CommunicationController::class, 'contact_delete'])->name('contact.notes.delete');
+    Route::delete('/communication/contact/{id}/delete', [App\Http\Controllers\CommunicationController::class, 'destroy'])->name('communication.contact.delete');
 
   });
 });
@@ -805,11 +815,6 @@ Route::get('/admin/course_category/filter', [App\Http\Controllers\Event\CourseCo
 Route::post('/user/dark-mode', [App\Http\Controllers\ApiController::class, 'mode'])->name('user.dark.mode');
 Route::post('/event/invoice/send', [App\Http\Controllers\InvoiceController::class, 'invoice_mail'])->name('admin.invoice.mail.send');
 
-<<<<<<< Updated upstream
-  // verify usi
-  Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
-  Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'verifyBulkUSI'])->name('usi.bulk_verify');
-=======
 Route::get('/usi/integration', [App\Http\Controllers\USIController::class, 'USI_get'])->name('usi.verify');
 // verify usi
 Route::post('/usi-verify', [App\Http\Controllers\USIController::class, 'verifyUSI'])->name('usi.verify');
@@ -817,4 +822,4 @@ Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'ver
 
 Route::post('/invoice/taxes', [App\Http\Controllers\InvoiceController::class, 'invoice_discount'])->name('invoice.discount');
 Route::post('/invoice/disccount', [App\Http\Controllers\InvoiceController::class, 'saveDiscount'])->name('invoice.discounts');
->>>>>>> Stashed changes
+
