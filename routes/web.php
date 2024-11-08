@@ -822,4 +822,5 @@ Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'ver
 
 Route::post('/invoice/taxes', [App\Http\Controllers\InvoiceController::class, 'invoice_discount'])->name('invoice.discount');
 Route::post('/invoice/disccount', [App\Http\Controllers\InvoiceController::class, 'saveDiscount'])->name('invoice.discounts');
+Route::post('/invoice/pdf/download', [App\Http\Controllers\InvoiceController::class, 'pdf_download'])->name('invoice.pdf.download');
 

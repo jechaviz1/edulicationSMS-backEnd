@@ -61,4 +61,40 @@ public function saveDiscount(Request $request){
         'message' => 'Discount saved successfully.'
     ], 200);
 }
+public function pdf_download(Request $request){
+        // Validate the incoming request
+        $request->validate([
+            'invoiceData' => 'required|string',
+            'business_name' => 'required|string',
+            'invoice_number' => 'required|string',
+            'invoice_date' => 'required|string',
+            'due_date' => 'required|string',
+            'invoice_logo' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+        ]);
+
+        // Prepare the data to be saved
+        $invoiceData = json_decode($request->invoiceData, true);  // Decode the JSON invoiceData
+
+        // If a logo is uploaded, store it
+        $logoPath = null;
+        if ($request->hasFile('invoice_logo')) {
+            $logoPath = $request->file('invoice_logo')->store('invoices/logos', 'public');
+        }
+
+        // Create a new invoice record
+        $invoice = Invoice::create([
+            'invoice_number' => $request->invoice_number,
+            'business_name' => $request->business_name,
+            'invoice_data' => $invoiceData,
+            'invoice_date' => $request->invoice_date,
+            'due_date' => $request->due_date,
+            'logo_path' => $logoPath,
+        ]);
+
+        // Return a success response
+        return response()->json([
+            'message' => 'Invoice saved successfully.',
+            'invoice' => $invoice,
+        ]);
+}
 }

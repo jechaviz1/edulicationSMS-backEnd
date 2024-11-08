@@ -855,6 +855,14 @@
                                                         <i class="fas fa-moon moon" id="moonIcon"></i> --}}
                                                     </div>
                                                 </div>
+                                                <div>
+                                                    <div id="colorPalettes">
+                                                        <button class="color-palette" style="background-color: #757500;width: 45px;height: 45px;" data-theme="#757500"></button>
+                                                        <button class="color-palette" style="background-color: #0A7029;width: 45px;height: 45px;" data-theme="#0A7029"></button>
+                                                        <button class="color-palette" style="background-color: #DCBAA9;width: 45px;height: 45px;" data-theme="#0A7029"></button>
+                                                        
+                                                    </div>
+                                                </div>
                                                 <a href="{{ route('logout') }}" class="ai-icon">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M7.5 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H7.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1953,7 +1961,44 @@
 });
 </script>
 <script>
+    $(document).ready(function() {
+    // Handle the color palette button clicks
+    $('#colorPalettes .color-palette').on('click', function() {
+        var selectedColor = $(this).data('theme');  // Get the selected color
+        
+        // Change the theme color dynamically
+        $('body').css({
+            'background-color': selectedColor,  // Change the background color
+            'color': getTextColor(selectedColor) // Change the text color based on the selected color
+        });
+    });
+});
+
+// Function to determine appropriate text color based on background color
+function getTextColor(backgroundColor) {
+    // Convert hex to RGB
+    var rgb = hexToRgb(backgroundColor);
+    if (!rgb) return '#000';  // Default text color to black if unable to determine RGB
     
+    // Calculate brightness using the luminance formula
+    var brightness = 0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b;
+    
+    // If brightness is too low, use white text for better contrast
+    return brightness < 128 ? '#fff' : '#000';
+}
+
+// Convert hex color to RGB
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (result) {
+        return {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        };
+    }
+    return null;
+}
 </script>
 @stack('scripts')
     </body>

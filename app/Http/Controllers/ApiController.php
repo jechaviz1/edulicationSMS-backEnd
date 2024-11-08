@@ -12,6 +12,7 @@ use App\Models\Enrolment;
 use App\Models\EnrolmentAddNote;
 use App\Http\Resources\UserResource;
 use App\Models\IssueCertificate;
+use App\Models\ContactComunication;
 use App\Models\FundingState;
 use App\Models\Tax;
 use App\Models\Discount;
@@ -145,9 +146,10 @@ class ApiController extends Controller
     }
 
     public function invoice_pdf_user(){
+        $contacts = ContactComunication::get();
         $user_id = Auth::user()->id;
         $tax = Tax::where('user_id',$user_id)->get();
         $discount = Discount::where('user_id',$user_id)->first();
-        return view('admin.invoice.user',compact('tax','discount'));
+        return view('admin.invoice.user',compact('tax','discount','contacts'));
     }
 }
