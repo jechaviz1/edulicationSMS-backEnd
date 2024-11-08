@@ -1,4 +1,4 @@
- 
+
 <!-- Extends template page-->
 @extends('admin.layout.header')
 
@@ -24,12 +24,14 @@
                             @csrf
                             <div class="row">
                                 <div class="col-xl-6">
-                                    
+
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Course Code <span class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="course_code">Course Code <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Course Code" required name="course_code">
+                                            <input type="text" class="form-control" id="course_code"  placeholder="Course Code" name="course_code" required>
+                                            <div id="bounceMessage" style="display:none;">Checking availability...</div>
+                                            <div id="responseMessage"></div>
                                             <div class="invalid-feedback">
                                                 Please enter a Course Code.
                                             </div>
@@ -37,10 +39,10 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Course Name <span class="text-danger">*</span>
+                                        <label class="col-lg-4 col-form-label" for="name">Course Name <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Title" required name="name">
+                                            <input type="text" class="form-control" id="name"  placeholder="Title" required name="name">
                                             <div class="invalid-feedback">
                                                 Please enter a name.
                                             </div>
@@ -49,7 +51,7 @@
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Course Category <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="course_category">Course Category <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
                                             <select class="default-select wide form-control" name="course_category" id="course_category">
@@ -64,10 +66,10 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Default Course Cost ($) <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="cost">Default Course Cost ($) <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Default Course Cost" name="cost" value="0">
+                                            <input type="text" class="form-control" id="cost"  placeholder="Default Course Cost" name="cost" value="0">
                                             <div class="invalid-feedback">
                                                 Please enter a Course cost.
                                             </div>
@@ -75,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Description <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="description">Description <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
                                             <textarea class="form-txtarea form-control" rows="4" id="description" name="description"></textarea>
@@ -86,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Course Comments <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="comment">Course Comments <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
                                             <textarea class="form-txtarea form-control" rows="4" id="comment" name="comment"></textarea>
@@ -97,15 +99,15 @@
                                         </div>
                                     </div>
 
-                                    
+
                                 </div>
-                                
+
                                 <div class="col-xl-6">
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Follow-up Enquiry <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="follow_enquiry">Follow-up Enquiry <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <select class="default-select wide form-control" name="follow_enquiry" id="follow_enquiry">
+                                            <select class="default-select wide form-control" name="follow_enquiry" id="follow_enquiry" required>
                                                 <option value="">Select</option>
                                                 @foreach( $user as $row )
                                                 <option value="{{ $row->id }}">{{ $row->first_name }} {{$row->last_name}}</option>
@@ -122,25 +124,25 @@
                                         </label>
                                         <div class="col-lg-6 row">
                                             <div class="col-md-12 form-check custom-checkbox">
-												<input type="checkbox" class="form-check-input" id="customCheckBox1" value="Self Paced" name="delivery_method_self">
-												<label class="form-check-label" for="customCheckBox1">Self Paced</label>
+												<input type="checkbox" class="form-check-input" id="delivery_method_self" value="Self Paced" name="delivery_method_self">
+												<label class="form-check-label" for="delivery_method_self">Self Paced</label>
                                             </div>
                                             <div class="col-md-6 form-check custom-checkbox">
-												<input type="checkbox" class="form-check-input" id="customCheckBox1" value="Public Sessions" name="delivery_method_public">
-												<label class="form-check-label" for="customCheckBox1">Public Sessions</label>
+												<input type="checkbox" class="form-check-input" id="delivery_method_public" value="Public Sessions" name="delivery_method_public">
+												<label class="form-check-label" for="delivery_method_public">Public Sessions</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <select class="default-select wide form-control" name="public_session_options" id="follow_enquiry">
+                                                <select class="default-select wide form-control" name="public_session_options" id="public_session_options">
                                                     <option value="Single Session">Single Session</option>
                                                     <option value="Multiple Sessions">Multiple Sessions</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-6 form-check custom-checkbox">
-												<input type="checkbox" class="form-check-input" id="customCheckBox1" value="Private Sessions" name="delivery_method_private">
-												<label class="form-check-label" for="customCheckBox1">Private Sessions</label>
+												<input type="checkbox" class="form-check-input" id="delivery_method_private" value="Private Sessions" name="delivery_method_private">
+												<label class="form-check-label" for="delivery_method_private">Private Sessions</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <select class="default-select wide form-control" name="private_session_options" id="follow_enquiry">
+                                                <select class="default-select wide form-control" name="private_session_options" id="private_session_options">
                                                     <option value="Single Session">Single Session</option>
                                                     <option value="Multiple Sessions">Multiple Sessions</option>
                                                 </select>
@@ -156,11 +158,11 @@
                                         </label>
                                         <div class="col-lg-6 d-flex">
                                             <div class="col-md-2">
-                                              <input type="text" class="form-control" id="validationCustom02"  placeholder="" name="no_of_units">
+                                              <input type="text" class="form-control" id="no_of_units"  placeholder="" name="no_of_units">
                                             </div>
                                             <span style="margin: 11px 5px 0px 5px;"> Including</span>
                                             <div class="col-md-2">
-                                                <input type="text" class="form-control col-md-2" id="validationCustom02"  placeholder="" name="core_unit">
+                                                <input type="text" class="form-control col-md-2" id="core_unit"  placeholder="" name="core_unit">
                                             </div>
                                             <span style="margin: 11px 0px 0px 5px;"> Core Units</span>
                                             <div class="invalid-feedback">
@@ -170,24 +172,24 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Default colour <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="color">Default colour <span class="text-danger"></span>
                                         </label>
                                             <div class="col-lg-6">
-													<input type="text" class="as_colorpicker form-control" value="#7ab2fa" name="color">
+												<input type="text" class="as_colorpicker form-control" value="#7ab2fa" name="color" id="color">
 											</div>
-                                            
+
                                             <div class="invalid-feedback">
                                                 Please enter default color.
                                             </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">Report this course <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="report_this_course">Report this course <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="col-md-6 form-check custom-checkbox">
-												<input type="checkbox" class="form-check-input" id="customCheckBox1" name="report_this_course">
+												<input type="checkbox" class="form-check-input" id="report_this_course" name="report_this_course">
                                             </div>
-                                            
+
                                             <div class="invalid-feedback">
                                                 Please check report this course.
                                             </div>
@@ -195,23 +197,23 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                        <label class="col-lg-4 col-form-label" for="validationCustom02">TGA Package <span class="text-danger"></span>
+                                        <label class="col-lg-4 col-form-label" for="tga_package">TGA Package <span class="text-danger"></span>
                                         </label>
                                         <div class="col-lg-6">
                                             <div class="col-md-6 form-check custom-checkbox">
-												<input type="checkbox" class="form-check-input" id="customCheckBox1" name="tga_package">
+												<input type="checkbox" class="form-check-input" id="tga_package" name="tga_package">
                                             </div>
-                                            
+
                                             <div class="invalid-feedback">
                                                 Please check tga package.
                                             </div>
 
                                         </div>
                                     </div>
-
+                                    <textarea class="d-none" id="unit_data" name="unit_data"></textarea>
                                     <div class="mb-3 row">
                                         <div class="col-lg-8 ms-auto">
-                                            <button type="submit" class="btn btn-primary light">Submit</button>
+                                            <button type="submit" id="btn_submit" class="btn btn-primary light">Submit</button>
                                         </div>
                                     </div>
                                 </div>
@@ -243,14 +245,82 @@
         border: 0 none !important;
         left: -5px;
     }
+    #responseMessage {
+        color: red;
+    }
 </style>
 
 @section('customjs')
- 
- 
-
 
 <script>
+   $(document).ready(function() {
+        // Function to check course code
+        $('#course_code').on('input', function() {
+            this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+        });
+
+        function checkCourseCode() {
+            let courseCode = $('#course_code').val();
+            let unitData = [];
+            $('#responseMessage').text('');
+            $('#btn_submit').prop('disabled', true);
+
+            // Only proceed if the input length is more than 5 characters
+            if (courseCode.length > 5) {
+                $('#bounceMessage').show();
+
+                $.ajax({
+                    url: `/admin/tga-course-details/${courseCode}`,  // Replace with your endpoint URL
+                    method: 'GET',
+                    success: function(res) {
+                        if(res.status)
+                        {
+                            $('#name').val(res?.data?.Title);
+                            $('#description').val(res?.data?.Description);
+                            if (!$('#tga_package').is(':checked')) $('#tga_package').click();
+                            if(res?.data?.Releases?.Release.length === undefined)
+                            {
+                                unitData.push(res?.data?.Releases?.Release);
+                            } else
+                            {
+                                unitData = res?.data?.Releases?.Release;
+                            }
+
+                            let unitCountData = getCountUnits(unitData);
+                            $('#no_of_units').val(unitCountData.totalUnits);
+                            $('#core_unit').val(unitCountData.coreUnits);
+                            $('#unit_data').val(JSON.stringify(unitCountData.curUnits));
+
+                        } else
+                        {
+                            $('#tga_package').prop('checked', false);
+                            $('#name').val('');
+                            $('#description').val('');
+                            $('#no_of_units').val('');
+                            $('#core_unit').val('');
+                            $('#responseMessage').text(res?.msg);
+                        }
+                        $('#btn_submit').prop('disabled', false);
+                        $('#bounceMessage').hide();
+                    },
+                    error: function() {
+                        $('#btn_submit').prop('disabled', false);
+                        $('#bounceMessage').hide();
+                        $('#responseMessage').text('Error checking course code.');
+                    }
+                });
+            } else {
+                $('#btn_submit').prop('disabled', false);
+                $('#bounceMessage').hide();
+            }
+        }
+
+
+        // Apply debounce with a delay of 500ms to the checkCourseCode function
+        $('#course_code').on('input', debounce(checkCourseCode, 500));
+    });
+
+
     (function () {
         'use strict'
 
@@ -302,7 +372,7 @@
 <script type="text/javascript">
 (function($) {
     "use strict"
-    
+
     // Colorpicker
     $(".as_colorpicker").asColorPicker();
     $(".complex-colorpicker").asColorPicker({

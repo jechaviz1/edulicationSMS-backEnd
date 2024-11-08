@@ -1,4 +1,4 @@
- 
+
 <!-- Extends template page-->
 @extends('admin.layout.header')
 
@@ -36,11 +36,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                           
+
+
                         </div>
                         <div class="row">
-                             
+
 
                             <div class="col-xl-4"></div>
 
@@ -62,8 +62,8 @@
 </div>
 
 @section('customjs')
- 
- 
+
+
 
 
 <script>

@@ -17,15 +17,13 @@
                  </div>
                  <div class="card-body">
                      <div class="tab-content">
-                         <div class="tab-pane fade show active" id="DefaultTab" role="tabpanel" aria-labelledby="home-tab">
+                         <div class="tab-pane show active" id="DefaultTab" role="tabpanel" aria-labelledby="home-tab">
                              <div class="card-body pt-0">
                                  <!-- Nav tabs -->
                                  <div class="default-tab">
                                      <ul class="nav nav-tabs" role="tablist" id="myTab">
                                          <li class="nav-item">
-                                             <!--<a class="nav-link active" data-bs-toggle="tab" href="#course_info"><i class="la la-home me-2"></i> Course Info</a>-->
-                                             <a class="nav-link " data-bs-toggle="tab" href="#course_info">Course
-                                                 Info</a>
+                                             <a class="nav-link active" data-bs-toggle="tab" href="#course_info">Course Info</a>
                                          </li>
                                          <li class="nav-item">
                                              <a class="nav-link" data-bs-toggle="tab" href="#avetmiss_code"> Avetmiss
@@ -36,7 +34,7 @@
                                                  Competency</a>
                                          </li>
                                          <li class="nav-item">
-                                             <a class="nav-link active" data-bs-toggle="tab" href="#info_pak">infoPAK</a>
+                                             <a class="nav-link" data-bs-toggle="tab" href="#info_pak">infoPAK</a>
                                          </li>
                                          <li class="nav-item">
                                              <a class="nav-link" data-bs-toggle="tab" href="#modules">Modules</a>
@@ -60,7 +58,7 @@
                                          </li>
                                      </ul>
                                      <div class="tab-content">
-                                         <div class="tab-pane fade " id="course_info" role="tabpanel">
+                                         <div class="tab-pane fade show active" id="course_info" role="tabpanel">
                                              <div class="form-validation">
                                                  <form class="needs-validation mt-4" novalidate method="POST"
                                                      action="{{ route('update-course', $course->id) }}">
@@ -1151,7 +1149,7 @@
                                          </div>
                                          {{-- End Defaults --}}
                                          {{-- Start Trainers --}}
-                                        
+
                                          <div class="tab-pane fade p-4" id="trainers">
                                              <div align="center" id="trainercompetency_2565" class="mt-5">
                                                  <form name="edit_competency_frm" id="edit_competency_frm" method="post"
@@ -1327,7 +1325,7 @@
                                                      <select name="certificate" id="certificate" class="form-control"
                                                          onchange="loadCertificateEmailContent(this.options[this.options.selectedIndex].value);" >
                                                          @foreach ($certificates as $certificate)
-                                                         <option value="{{$certificate->id}}" 
+                                                         <option value="{{$certificate->id}}"
                                                             @if(isset($course->coursecertificateemail) && $course->coursecertificateemail->certificate_id == $certificate->id) selected @endif>
                                                             {{ $certificate->newCertificateName }}
                                                         </option>
@@ -1441,7 +1439,6 @@
              'use strict'
              // Fetch all the forms we want to apply custom Bootstrap validation styles to
              var forms = document.querySelectorAll('.needs-validation');
-
              // Loop over them and prevent submission
              Array.prototype.slice.call(forms)
                  .forEach(function(form) {
@@ -1455,7 +1452,6 @@
                      }, false);
                  })
          })()
-
 
          $('[name=tab]').each(function(i, d) {
              var p = $(this).prop('checked');
@@ -1592,19 +1588,18 @@
      </script>
      <script>
          $('#myTab a').click(function(e) {
-             console.log("hello")
-             e.preventDefault();
-             $(this).tab('active');
-             console.log($(this).tab('active'))
+             //e.preventDefault();
+             //$(this).tab('active');
+             //console.log($(this).tab('active'))
          });
          // store the currently selected tab in the hash value
          $("ul.nav-tabs > li > a").on("shown.bs.tab", function(e) {
-             var id = $(e.target).attr("href").substr(1);
-             window.location.hash = id;
+             //var id = $(e.target).attr("href").substr(1);
+             //window.location.hash = id;
          });
          // on load of the page: switch to the currently selected tab
-         var hash = window.location.hash;
-         $('#myTab a[href="' + hash + '"]').tab('active');
+         //var hash = window.location.hash;
+         //$('#myTab a[href="' + hash + '"]').tab('active');
      </script>
      {{-- //add Defaults --}}
      <script>
@@ -1640,7 +1635,7 @@
             <div class="form-group row mt-3">
                 <label for="" class="col-sm-4 col-form-label">Session End Time</label>
                 <div class="col-sm-8">
-                    <select name='dftendhour' id='dftendhour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftendmin' id='dftendmin' class='form-control' style='width:30%;display:inline'></select> 
+                    <select name='dftendhour' id='dftendhour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftendmin' id='dftendmin' class='form-control' style='width:30%;display:inline'></select>
                     <select style='width:32%;display:inline' id='dftendampm' class='form-control' name='dftendampm'><option value='am'>am</option><option value='pm'>pm</option></select>
                 </div>
             </div>
@@ -1764,11 +1759,11 @@
                 var dftCity = jQuery("#dftCity").val();
                  var dftTrainer = jQuery("#dftTrainer").val();
                  var dftAssessor = jQuery("#dftAssessor").val();
-                 var dftstarthour = jQuery("#dftstarthour").val() 
-                 var dftstartmin = jQuery("#dftstartmin").val() 
+                 var dftstarthour = jQuery("#dftstarthour").val()
+                 var dftstartmin = jQuery("#dftstartmin").val()
                  var dftstartampm = jQuery("#dftstartampm").val();
-                 var dftendhour = jQuery("#dftendhour").val() 
-                 var dftendmin =jQuery("#dftendmin").val() 
+                 var dftendhour = jQuery("#dftendhour").val()
+                 var dftendmin =jQuery("#dftendmin").val()
                  var dftendampm = jQuery("#dftendampm").val();
                  var courseId = "{{ $course->id }}";
                  if (jQuery("#courseCityId").val() != "") {
@@ -1940,7 +1935,7 @@
      </script>
      <script>
          function documentclick(id) {
-             event.preventDefault(); 
+             event.preventDefault();
             console.log(id)
              var image = jQuery("#dftCity").val();
              var fileInput = jQuery("#myFile")[0];
@@ -2031,7 +2026,7 @@
             <div class="form-group row mt-3">
                 <label for="" class="col-sm-4 col-form-label">Session End Time</label>
                 <div class="col-sm-8">
-                    <select name='dftendhour' id='dftendhour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftendmin' id='dftendmin' class='form-control' style='width:30%;display:inline'></select> 
+                    <select name='dftendhour' id='dftendhour' class='form-control' style='width:30%;display:inline'></select><span style=''> : </span><select name='dftendmin' id='dftendmin' class='form-control' style='width:30%;display:inline'></select>
                     <select style='width:32%;display:inline' id='dftendampm' class='form-control' name='dftendampm'><option value='am'>am</option><option value='pm'>pm</option></select>
                 </div>
             </div>
@@ -2155,7 +2150,7 @@
                     // Handle the error case here
                 }
             });
-         
+
         }
 
          function saveeditCourseCity(id) {

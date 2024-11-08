@@ -9,6 +9,13 @@
     <strong>Success!</strong> {{ $message }}
 </div>
 @endif
+@if ($message = Session::get('error'))
+<div class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close"><span><i class="fa-solid fa-xmark"></i></span>
+    </button>
+    <strong>Success!</strong> {{ $message }}
+</div>
+@endif
 <div class="col-xl-12">
     <div class="card dz-card" id="accordion-four">
         <div class="card-header flex-wrap d-flex justify-content-between">
@@ -56,7 +63,7 @@
                                         @if($cate->id ==$row->course_category_id)
                                          {{ $cate->name}}
                                         @endif
-                                        
+
                                         @endforeach
                                     </td>
                                     <td>{{$row->delivery_method}}</td>
@@ -65,7 +72,7 @@
                                         @if($u->id ==$row->follow_up_enquiry)
                                          {{ $u->first_name}} {{$u->last_name}}
                                         @endif
-                                        
+
                                         @endforeach
                                     </td>
                                     <td>
@@ -165,7 +172,7 @@
         padding: 3px 10px;
         border-radius: 6px;
     }
-    
+
     span.custom_active {
         background: #1de9b6;
         color: #fff;

@@ -26,19 +26,74 @@ use App\Models\InfoPakSpecific;
 use App\Models\Template;
 use App\Models\BackgroundTemplate;
 use App\Models\CourseEmailContent;
+use App\Services\TgaService;
+use Carbon\Carbon;
+use DateTime;
+
 class CourseController extends Controller
 {
-    //
+    public function __construct()
+    {
+
+    }
+
     public function list() {
+
+        // $startDate = now()->subDays(30)->format(DateTime::ATOM);
+        // $endDate = now()->format(DateTime::ATOM);
+        // $tgaService = new TgaService;
+        // //SIT50422
+        // dd($tgaService->getCoursesByModifiedDate($startDate, $endDate));
+
         $data = [];
         $data['title'] = 'Course List';
         $data['menu_active_tab'] = 'course-list';
         $data['view'] = 'admin.course';
-            $data['rows'] = Course::orderBy('id', 'desc')->where('created_by', Auth::user()->id)->get();
+        $data['rows'] = Course::where('created_by', Auth::user()->id)->where('is_deleted', '0')->orWhere('is_deleted', NULL)->latest('id')->get();
             $data['course_category'] = CourseCategory::where('is_deleted', '0')->where('created_by', Auth::user()->id)->get();
             $data['user'] = User::where('is_deleted', '0')->where('id', Auth::user()->id)->get();
             // dd($data);
-        return view('admin.course.list')->with($data); 
+        return view('admin.course.list')->with($data);
+    }
+
+    public function getTgaCourseDetails(Request $request, $code) {
+        try {
+            if (request()->ajax())
+            {
+                $code = strtoupper($code);
+
+                $exists = Course::where('code', $code)->where('is_deleted', '0')->exists();
+
+                if ($exists) {
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'Course data have already exist.'
+                    ]);
+                }
+
+                $tgaService = new TgaService;
+                //SIT50422
+                $result = $tgaService->getCourseData($code);
+                if($result)
+                {
+                    return response()->json([
+                        'status' => true,
+                        'data' => $result
+                    ]);
+                } else
+                {
+                    return response()->json([
+                        'status' => false,
+                        'msg' => 'Can not find course details on the TGA database.'
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'msg' => strip_tags($e->getMessage()),
+            ]);
+        }
     }
 
     public function add(Request $request) {
@@ -51,9 +106,10 @@ class CourseController extends Controller
     }
 
     public function store(Request $request) {
-        // Field Validation
         $request->validate([
+            // 'course_code' => 'required|unique:courses,code',
             'course_code' => 'required',
+            'course_category' => 'required',
             'name' => 'required',
         ]);
          // Insert Data
@@ -88,22 +144,22 @@ class CourseController extends Controller
                 else{
                     $delivery[] = '---';
                 }
-                
+
                 if(isset($request->report_this_course)){
                     $reporting_this_course = '1';
                 }
                 else{
                     $reporting_this_course = '0';
                 }
-                
+
                 if(isset($request->tga_package)){
                     $tga_package = '1';
                 }
                 else{
                     $tga_package = '0';
                 }
-               
-            //   dd($request);
+
+                //dd($request->all());
                 $course = new Course;
                 $course->code = $request->course_code;
                 $course->name = $request->name;
@@ -118,17 +174,46 @@ class CourseController extends Controller
                 $course->color = $request->color;
                 $course->reporting_this_course = $reporting_this_course;
                 $course->tga_package = $tga_package;
+                $course->is_deleted = '0';
                 $course->created_by = Auth::user()->id;
                 $course->save();
-                
+
+                // save unit data
+                if($request->unit_data)
+                {
+                    $unitData = json_decode($request->unit_data, true);
+                    $newCourseId = $course->id;
+                    foreach($unitData as $item)
+                    {
+                        $unitCompetencies[] = [
+                            'course_id' => $newCourseId,
+                            'code' => $item['Code'],
+                            'name' => $item['Title'],
+                            'recognition_identifier' => '',
+                            'qualification_category' => '',
+                            'field_of_education' => '',
+                            'nominal_hours' => '0',
+                            'vet' => '1',
+                            'competency_flag' => 'Competency',
+                            'type' => $item['IsEssential'] ? 'core' : 'elective',
+                            'status' => 'A',
+                            'is_deleted' => '0',
+                        ];
+                    }
+                    // Perform bulk insert
+                    UnitCompetency::insert($unitCompetencies);
+                }
                 return redirect()->route('course-list')->with('success', 'Record added successfully.');
             } catch (\Exception $e) {
                // dd($e);
                 return redirect()->route('course-list')->with('failed', 'Record not added.');
             }
         }
-        
+
         public function edit(Request $request, $id) {
+            //$tgaService =  new TgaService;
+        //dd($tgaService->getCourseData("SIT50422"));
+        //dd($tgaService->getCoursesByModifiedDate($startDate, $endDate, 1, 1));
             $data = [];
             $data['title'] = 'Edit Course';
             $data['menu_active_tab'] = 'edit-course';
@@ -142,8 +227,8 @@ class CourseController extends Controller
                     $data['avetmiss_code'] = AvetmissCode::where('course_id', $id)->first();
                     $data['unit_core_active'] = UnitCompetency::where('course_id', $id)->where('type','core')->where('status', 'A')->get();
                     $data['unit_elective_active'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'A')->get();
-                    $data['unit_core_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'core')->where('status', 'A')->get();
-                    $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'A')->get();
+                    $data['unit_core_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'core')->where('status', 'D')->get();
+                    $data['unit_elective_inactive'] = UnitCompetency::where('course_id', $id)->where('type', 'elective')->where('status', 'D')->get();
                     $data['states'] = State::where('is_deleted', '0')->get();
                     $data["modules"] = Module::where('course_id',$course->id)->paginate(8);
                     $data["default_session"] = DefaultSession::where('course_id',$course->id)->paginate(7);
@@ -154,7 +239,7 @@ class CourseController extends Controller
                     // dd($data['email_document']);
                     $data['certificates'] = Template::get();
                     $data['infopak_document'] = InfoPakSpecific::get();
-                    // dd($data);  
+                    // dd($data);
                     return view('admin.course.edit')->with($data);
                 } else {
                     return redirect()->route('course-list')->with('failed', 'Record not found.');
@@ -170,12 +255,12 @@ class CourseController extends Controller
                 'course_code' => 'required',
                 'name' => 'required',
             ]);
-            
+
             $data = $request->input();
             $course = Course::find($id);
-            
+
             if ($course) {
-                
+
                 if(isset($request->delivery_method_self) && isset($request->delivery_method_public) && isset($request->delivery_method_private)){
                     $delivery[] = $request->delivery_method_self;
                     $delivery[] = $request->delivery_method_public.'-'.$request->public_session_options;
@@ -205,14 +290,14 @@ class CourseController extends Controller
                 else{
                     $delivery[] = '---';
                 }
-                
+
                 if(isset($request->report_this_course)){
                     $reporting_this_course = '1';
                 }
                 else{
                     $reporting_this_course = '0';
                 }
-                
+
                 if(isset($request->tga_package)){
                     $tga_package = '1';
                 }
@@ -250,28 +335,29 @@ class CourseController extends Controller
                 $course->tga_package = $tga_package;
                 $course->updated_by = Auth::user()->id;
                 $course->save();
-                
+
                 return redirect()->route('course-list')->with('success', 'Record Updated.');
             } else {
                 return redirect()->route('course-list')->with('failed', 'Record not found.');
             }
         }
     }
-    
+
     public function delete($id) {
         if ($id) {
             $course = Course::find($id);
             if ($course) {
-                
+
                 $course->is_deleted = '1';
                 $course->save();
+                UnitCompetency::where('course_id', $id)->update(['is_deleted' => "1"]);
             }
             return redirect()->route('course-list')->with('success', 'Record deleted.');
         } else {
             return redirect()->route('course-list')->with('failed', 'Record not found.');
         }
     }
-    
+
     public function changestatus($id,$status) {
         if ($id) {
             $course = Course::find($id);
@@ -289,10 +375,10 @@ class CourseController extends Controller
             return redirect()->route('course-list')->with('failed', 'Record not found.');
         }
     }
-    
-    
+
+
         public function avetmisscodestore(Request $request) {
-        
+
         // dd($request);
             $request->validate([
                 'state_course_code' => 'required',
@@ -302,7 +388,7 @@ class CourseController extends Controller
                 'vet_flag' => 'required',
             ]);
 
-            
+
             $id = $request->id;
         //  means no data row found
         if($id == -1){
@@ -321,13 +407,13 @@ class CourseController extends Controller
             $avetmisscode->associated_course_identifier = $request->associated_course_identifier;;
 
             $avetmisscode->save();
-            
+
             return redirect()->route('course-list')->with('success', 'Record Added.');
         }
         else{
-            
+
             $avetmisscode = AvetmissCode::find($id);
-            
+
             $avetmisscode->course_id = $request->course_id;
             $avetmisscode->course_code = $request->course_code;
             $avetmisscode->state_course_code = $request->state_course_code;
@@ -340,12 +426,12 @@ class CourseController extends Controller
             $avetmisscode->field_of_education = $request->field_of_education;;
             $avetmisscode->associated_course_identifier = $request->associated_course_identifier;;
             $avetmisscode->save();
-            
+
             return redirect()->route('course-list')->with('success', 'Record Updated.');
         }
-        
+
     }
-    
+
     public function storeunit(Request $request) {
         // Field Validation
         $request->validate([
@@ -372,20 +458,20 @@ class CourseController extends Controller
                 return redirect()->route('course-list')->with('failed', 'Record not added.');
             }
         }
-        
+
         public function updateunit(Request $request, $id) {
-        
+
         if ($id) {
             $request->validate([
                 'code' => 'required',
                 'nominal_hour' => 'required',
             ]);
-            
+
             $data = $request->input();
             $unit_of_compentency = UnitCompetency::find($id);
-            
+
             if ($unit_of_compentency) {
-                
+
                 $unit_of_compentency->course_id = $request->course_id;
                 $unit_of_compentency->code = $request->code;
                 $unit_of_compentency->name = $request->name;
@@ -395,19 +481,19 @@ class CourseController extends Controller
                 $unit_of_compentency->competency_flag = $request->competency_flag;
 
                 $unit_of_compentency->save();
-                
+
                 return redirect()->route('course-list')->with('success', 'Record Updated.');
             } else {
                 return redirect()->route('course-list')->with('failed', 'Record not found.');
             }
         }
     }
-    
+
     public function deleteunit($id) {
         if ($id) {
             $unit_of_competency = UnitCompetency::find($id);
             if ($unit_of_competency) {
-                
+
                 $unit_of_competency->is_deleted = '1';
                 $unit_of_competency->save();
             }
@@ -416,9 +502,9 @@ class CourseController extends Controller
             return redirect()->route('course-list')->with('failed', 'Record not found.');
         }
     }
-    
+
     public function changeunitstatus($id,$status) {
-        
+
         if ($id) {
             $unit_of_competency = UnitCompetency::find($id);
             if ($unit_of_competency) {
@@ -432,18 +518,18 @@ class CourseController extends Controller
     }
 
     public function module(Request $request){
-        
+
         if($request->moduleId == null){
             $module = new Module;
             $module->course_id  = $request->courseId;
             $module->title  = $request->moduleName;
             $module->save();
-            return response()->json(['response' => "0"]);     
+            return response()->json(['response' => "0"]);
         }else{
             $module  = Module::where('id',$request->moduleId)->first();
             $module->title = $request->moduleName;
             $module->save();
-            return response()->json(['response' => "0"]);  
+            return response()->json(['response' => "0"]);
         }
     }
 
@@ -455,7 +541,7 @@ class CourseController extends Controller
     public function moduleDelete(Request $request){
         $module  = Module::where('id',$request->moduleId)->first();
         $module->delete();
-        return response()->json(['response' => "0"]); 
+        return response()->json(['response' => "0"]);
     }
 
     public function saveCourseCity(Request $request){
@@ -471,7 +557,7 @@ class CourseController extends Controller
                 $default_session->dftendmin = $request->dftendmin;
                 $default_session->dftendampm = $request->dftendampm;
                 $default_session->save();
-                return response()->json(['response' => "0"]); 
+                return response()->json(['response' => "0"]);
     }
     public function courseTrainer(Request $request){
             //    dd($request);
@@ -505,7 +591,7 @@ class CourseController extends Controller
             $courseDocument->document_name = $filename;
             $courseDocument->path = $fileUrl;
             $courseDocument->save();
-            return response()->json(['response' => "0"]); 
+            return response()->json(['response' => "0"]);
         } catch (\Exception $e) {
             // Handle any other exceptions
             return response()->json(['message' => 'An error occurred while uploading the document', 'error' => $e->getMessage()], 500);
@@ -531,7 +617,7 @@ class CourseController extends Controller
         }
         }
         public function emailcontent(Request $request){
-            
+
             $course_email_content = CourseEmailContent::where('course_id',$request->courseId)->first();
             if($course_email_content){
                 $course_email_content->course_id = $request->courseId;
