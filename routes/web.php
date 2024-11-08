@@ -341,12 +341,12 @@ Route::group(['prefix' => 'admin'], function () {
     //END - Classroom
 
     // START - Courses
-    //  Route::get('/add-course', [CourseController::class, 'addCourse'])->name('add-course');
-    //  Route::post('/store-course', [CourseController::class, 'storeCourse'])->name('store-course');
-    //  Route::get('/course-list', [CourseController::class, 'courseList'])->name('course-list');
-    //  Route::get('/edit-course/{id}', [CourseController::class, 'editCourse'])->name('edit-course');
-    //  Route::post('/update-course/{id}', [CourseController::class, 'updateCourse'])->name('update-course');
-    //  Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete-course');
+    // Route::get('/add-course', [CourseController::class, 'addCourse'])->name('add-course');
+    // Route::post('/store-course', [CourseController::class, 'storeCourse'])->name('store-course');
+    // Route::get('/course-list', [CourseController::class, 'courseList'])->name('course-list');
+    // Route::get('/edit-course/{id}', [CourseController::class, 'editCourse'])->name('edit-course');
+    // Route::post('/update-course/{id}', [CourseController::class, 'updateCourse'])->name('update-course');
+    // Route::get('/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('delete-course');
     //END - Courses
     // START - enrollsubject
     Route::get('/add-enrollsubject', [EnrollSubjectController::class, 'addEnrollsubject'])->name('add-enrollsubject');
@@ -576,6 +576,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/course/assessor', [CourseController::class, 'assessor'])->name('course.assessors');
     Route::post('/course/document', [CourseController::class, 'courseDocument'])->name('submit.course.document');
     Route::get('/course/document/{id}', [CourseController::class, 'courseDocumentDelete'])->name('document.course.delete');
+
+    Route::get('/tga-course-details/{code}', [CourseController::class, 'getTgaCourseDetails'])->name('course.tga.details');
+
     //Module
     Route::post('/module/add', [CourseController::class, 'module'])->name('module.add');
     Route::post('/module/edit', [CourseController::class, 'moduleEdit'])->name('module.edit');
@@ -823,4 +826,5 @@ Route::post('/usi-bulk-verify', [App\Http\Controllers\USIController::class, 'ver
 Route::post('/invoice/taxes', [App\Http\Controllers\InvoiceController::class, 'invoice_discount'])->name('invoice.discount');
 Route::post('/invoice/disccount', [App\Http\Controllers\InvoiceController::class, 'saveDiscount'])->name('invoice.discounts');
 Route::post('/invoice/pdf/download', [App\Http\Controllers\InvoiceController::class, 'pdf_download'])->name('invoice.pdf.download');
+
 
