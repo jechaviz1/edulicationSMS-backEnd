@@ -33,7 +33,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Title<span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Title" required name="title" value="{{$fees_receipt->title}}">
+                                            <input type="text" class="form-control" id="validationCustom02"  placeholder="Title" required name="title" value="{{ $fees_receipt->title ?? '' }}">
                                             <div class="invalid-feedback">
                                                 Please enter a title.
                                             </div>
@@ -44,7 +44,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Footer Left Text<span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <textarea class="form-control" name="footer_left" id="footer_left">{{$fees_receipt->footer_left}}</textarea>
+                                            <textarea class="form-control" name="footer_left" id="footer_left">{{ old('footer_left', $fees_receipt->footer_left ?? '') }}</textarea>
                                             <div class="invalid-feedback">
                                                 Please enter footer left.
                                             </div>
@@ -56,7 +56,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Footer Center Text <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <textarea class="form-control" name="footer_center" id="footer_center">{{$fees_receipt->footer_center}}</textarea>
+                                            <textarea class="form-control" name="footer_center" id="footer_center">{{ old('footer_center', $fees_receipt->footer_center ?? '') }}</textarea>
                                             <div class="invalid-feedback">
                                                 Please enter a footer center.
                                             </div>
@@ -67,7 +67,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Footer Right Text <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <textarea class="form-control" name="footer_right" id="footer_right">{{$fees_receipt->footer_right}}</textarea>
+                                            <textarea class="form-control" name="footer_right" id="footer_right">{{ old('footer_right', $fees_receipt->footer_right ?? '') }}</textarea>
                                             <div class="invalid-feedback">
                                                 Please enter a footer right.
                                             </div>
@@ -110,7 +110,7 @@
                                         <label class="col-lg-4 col-form-label" for="validationCustom02">Width <span class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <input type="text" class="form-control" name="width" id="width" value="{{$fees_receipt->width}}">
+                                            <input type="text" class="form-control" name="width" id="width" value="{{ old('width', $fees_receipt->width ?? '') }}">
                                             <div class="invalid-feedback">
                                                 Please enter a width.
                                             </div>

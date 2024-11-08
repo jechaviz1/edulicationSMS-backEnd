@@ -13,7 +13,7 @@ class FeesCategory extends Model {
     ];
 
     use HasFactory;
-    
+     
     public function masters()
     {
         return $this->hasMany(FeesMaster::class, 'category_id', 'id');

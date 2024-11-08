@@ -12,7 +12,10 @@ use App\Models\Enrolment;
 use App\Models\EnrolmentAddNote;
 use App\Http\Resources\UserResource;
 use App\Models\IssueCertificate;
+use App\Models\ContactComunication;
 use App\Models\FundingState;
+use App\Models\Tax;
+use App\Models\Discount;
 use PDF;
 use Svg\Tag\Rect;
 use Illuminate\Support\Facades\Auth;
@@ -140,5 +143,13 @@ class ApiController extends Controller
     })// Select specific columns
     ->get();
        return response()->json(['students' => $students]);
+    }
+
+    public function invoice_pdf_user(){
+        $contacts = ContactComunication::get();
+        $user_id = Auth::user()->id;
+        $tax = Tax::where('user_id',$user_id)->get();
+        $discount = Discount::where('user_id',$user_id)->first();
+        return view('admin.invoice.user',compact('tax','discount','contacts'));
     }
 }

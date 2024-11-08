@@ -15,7 +15,7 @@ use App\Models\Teacher;
 use Exception;
 
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class ClassRoutineController extends Controller
 {
@@ -69,9 +69,7 @@ class ClassRoutineController extends Controller
         $data['faculties'] = Faculty::where('status', '1')->orderBy('title', 'asc')->get();
 
         if(!empty($request->faculty) && !empty($request->program) && !empty($request->session) && !empty($request->semester) && !empty($request->section)){
-        $data['programs'] = Program::where('faculty_id', $faculty)->where('status', '1')->orderBy('
-        00title', 'asc')->get();
-0
+        $data['programs'] = Program::where('faculty_id', $faculty)->where('status', '1')->orderBy('title', 'asc')->get();
         $sessions = Session::where('status', 1);
         $sessions->with('programs')->whereHas('programs', function ($query) use ($program){
             $query->where('program_id', $program);
