@@ -15,10 +15,13 @@ use App\Models\IssueCertificate;
 use App\Models\City;
 use App\Models\Course;
 use App\Models\Template;
+use App\Models\Tax;
+use App\Models\Discount;
 use App\Models\Schedule;
 use Log;
 use PDF;
 use DB;
+use Auth;
 use Carbon\Carbon;
 class EnrollmentController extends Controller
 {
@@ -175,6 +178,9 @@ class EnrollmentController extends Controller
         return redirect()->back()->with('sucess', 'Sucess Record');
     }
     public function enrolment_add_people_update($id){
+        $user_id = Auth::user()->id;
+        $tax = Tax::where('user_id',$user_id)->get();
+        $discount = Discount::where('user_id',$user_id)->first();
         $enrollment = Enrolment::find($id);
         $states = State::get();
         $note_student = StudentNoteCategory::get();
@@ -187,7 +193,7 @@ class EnrollmentController extends Controller
         $data['templates'] = Template::get();
        $enrolmentnote  = EnrolmentAddNote::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->get();
        $data['issue_certificate']  = IssueCertificate::where('student_id', $enrollment->student->id)->where('course_id', $enrollment->course->id)->where('template',$enrollment->id)->first();
-        return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote'))->with($data);
+        return view('admin.enrollment.student.update', compact('enrollment', 'states', 'note_student', 'enrolmentnote','tax','discount'))->with($data);
     }
 
     public function enolmentNoteAdd(Request $request)

@@ -13,7 +13,6 @@
         <meta property="og:image" content="https://w3admin.dexignzone.com/xhtml/social-image.png">
         <meta name="format-detection" content="telephone=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
         <!-- PAGE TITLE HERE -->
         <title>SMS Edulication</title>
         <!-- FAVICONS ICON -->
@@ -831,6 +830,10 @@
                                                     </svg>
                                                     <span class="ms-2">Profile Settings</span>
                                                 </a>
+                                                <a href="{{ route('invoice-user') }}" class="ai-icon">
+                                                    <i class="fa-solid fa-file-invoice me-2"></i>
+                                                    <span class="ms-2">General Invoice</span>
+                                                </a>
                                                 <!--                                                <a href="app-profile-1.html" class="ai-icon ">
                                                                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                                     <path d="M3.33341 3.33301H16.6667C17.5834 3.33301 18.3334 4.08301 18.3334 4.99967V14.9997C18.3334 15.9163 17.5834 16.6663 16.6667 16.6663H3.33341C2.41675 16.6663 1.66675 15.9163 1.66675 14.9997V4.99967C1.66675 4.08301 2.41675 3.33301 3.33341 3.33301Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -850,6 +853,14 @@
                                                     <div class="dz-layout light">
                                                         {{-- <i class="fas fa-sun sun" id="sunIcon"></i>
                                                         <i class="fas fa-moon moon" id="moonIcon"></i> --}}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div id="colorPalettes">
+                                                        <button class="color-palette" style="background-color: #757500;width: 45px;height: 45px;" data-theme="#757500"></button>
+                                                        <button class="color-palette" style="background-color: #0A7029;width: 45px;height: 45px;" data-theme="#0A7029"></button>
+                                                        <button class="color-palette" style="background-color: #DCBAA9;width: 45px;height: 45px;" data-theme="#0A7029"></button>
+                                                        
                                                     </div>
                                                 </div>
                                                 <a href="{{ route('logout') }}" class="ai-icon">
@@ -1275,17 +1286,17 @@
                                 <span class="nav-text">Academic</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="faculty-list">Faculties</a></li>
-                                <li><a href="program-list">Programs</a></li>
-                                <li><a href="batch-list">Batches</a></li>
-                                <li><a href="session-list">Sessions</a></li>    
-                                <li><a href="semester-list">Semesters</a></li>
-                                <li><a href="section-list">Sections</a></li>
-                                <li><a href="classroom-list">Class Rooms</a></li>
-                                <li><a href="subject-list">Subjects</a></li>
-                                <li><a href="enrollsubject-list">Enroll Courses</a></li>
-                                <li><a href="classroutine-list">Class Routines</a></li>
-                                <li><a href="coursecategory-list">Course Category</a></li>
+                                <li><a href="{{ route('faculty-list') }}">Faculties</a></li>
+                                <li><a href="{{ route('program-list') }}">Programs</a></li>
+                                <li><a href="{{ route('batch-list') }}">Batches</a></li>
+                                <li><a href="{{ route('session-list') }}">Sessions</a></li>    
+                                <li><a href="{{ route('semester-list') }}">Semesters</a></li>
+                                <li><a href="{{ route('section-list') }}">Sections</a></li>
+                                <li><a href="{{ route('classroom-list') }}">Class Rooms</a></li>
+                                <li><a href="{{ route('subject-list') }}">Subjects</a></li>
+                                <li><a href="{{ route('enrollsubject-list') }}">Enroll Courses</a></li>
+                                <li><a href="{{ route('classroutine-list') }}">Class Routines</a></li>
+                                <li><a href="{{ route('coursecategory-list') }}">Course Category</a></li>
                                 <li><a href="#">Exam Routines</a></li>
                                 <li><a href="#">Teacher Routines</a></li>
                                  <li>
@@ -1393,7 +1404,22 @@
                                                             <li><a href="{{ URL::route('assignment-list') }}">Assignment</a></li>
                                                         </ul>
                         </li>
-                        
+                        <li>
+                            <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                                <div class="menu-icon">
+                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.007 16.2236H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M16.007 12.0371H8.78699" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M11.5421 7.86035H8.78711" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.1994 2.75C16.1994 2.75 8.52238 2.754 8.51038 2.754C5.75038 2.771 4.04138 4.587 4.04138 7.357V16.553C4.04138 19.337 5.76338 21.16 8.54738 21.16C8.54738 21.16 16.2234 21.157 16.2364 21.157C18.9964 21.14 20.7064 19.323 20.7064 16.553V7.357C20.7064 4.573 18.9834 2.75 16.1994 2.75Z" stroke="#252525" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </div>
+                                <span class="nav-text">Communication</span>
+                            </a>
+                            <ul aria-expanded="false">
+                                <li><a href="{{ URL::route('communication.contact.person') }}">Contact</a></li>
+                                                        </ul>
+                        </li>
                         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
                                 <div class="menu-icon">
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1935,7 +1961,44 @@
 });
 </script>
 <script>
+    $(document).ready(function() {
+    // Handle the color palette button clicks
+    $('#colorPalettes .color-palette').on('click', function() {
+        var selectedColor = $(this).data('theme');  // Get the selected color
+        
+        // Change the theme color dynamically
+        $('body').css({
+            'background-color': selectedColor,  // Change the background color
+            'color': getTextColor(selectedColor) // Change the text color based on the selected color
+        });
+    });
+});
+
+// Function to determine appropriate text color based on background color
+function getTextColor(backgroundColor) {
+    // Convert hex to RGB
+    var rgb = hexToRgb(backgroundColor);
+    if (!rgb) return '#000';  // Default text color to black if unable to determine RGB
     
+    // Calculate brightness using the luminance formula
+    var brightness = 0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b;
+    
+    // If brightness is too low, use white text for better contrast
+    return brightness < 128 ? '#fff' : '#000';
+}
+
+// Convert hex color to RGB
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (result) {
+        return {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        };
+    }
+    return null;
+}
 </script>
 @stack('scripts')
     </body>

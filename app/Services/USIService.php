@@ -5,7 +5,7 @@ use App\Helper\SoapHelper;
 use DateTime;
 use DateTimeZone;
 use DOMDocument;
-
+use Exception;
 use SimpleXMLElement;
 
 class USIService extends SoapHelper
@@ -401,20 +401,20 @@ class USIService extends SoapHelper
         return $body;
     }
 
-    public function loadAuskey($path, $password = '', $id)
-    {
-
-        if (!file_exists($path)) {
-            throw new Exception("AUSKey not found at the path specified in Settings.");
-        }
-
-        $xml = file_get_contents($path);
-        try {
-            $this->setAuskey($xml, $password, $id);
-        } catch (Exception $ex) {
-            throw $ex;
-        }
+    public function loadAuskey($path, $password = '', $id){
+        // dd($path);
+    if (!file_exists($path)) {
+        throw new Exception("AUSKey not found at the path specified in Settings.");
     }
+
+    $xml = file_get_contents($path);
+
+    try {
+        $this->setAuskey($xml, $password, $id);
+    } catch (\Exception $ex) {  // Use \Exception here
+        throw $ex;
+    }
+}
 
     public function setAuskey($xml, $password = '', $id)
     {

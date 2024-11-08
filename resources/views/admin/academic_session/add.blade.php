@@ -40,7 +40,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">Start Date <span class="text-danger">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="validationCustom02" placeholder="" required id="start_date" name="start_date">
+                                        <input type="date" class="form-control" id="validationCustom02" placeholder="" required id="start_date" name="start_date">
                                         <div class="invalid-feedback">
                                             Please enter a date.
                                         </div>
@@ -51,7 +51,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-lg-3 col-form-label" for="validationCustom02">End Date <span class="text-danger">*</span></label>
                                     <div class="col-lg-8">
-                                        <input type="text" class="form-control" id="end_date" placeholder="Your valid End Date" required name="end_date">
+                                        <input type="date" class="form-control" id="end_date" placeholder="Your valid End Date" required name="end_date">
                                         <div class="invalid-feedback">
                                             Please enter a End Date.
                                         </div>

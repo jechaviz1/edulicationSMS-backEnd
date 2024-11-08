@@ -77,13 +77,9 @@
                                                   </div>
                                               </div>
                                           </div>
-
-
                                     <div class="col-xl-3">
                                         <div class="mb-3 row">
-                                    
                                             <label class="row-lg-6 col-form-label" for="session">Session <span class="text-danger">*</span></label>
-
                                               <div class="row-lg-8">
                                                         <select class="form-control session" name="session" id="session" required>
                                                               <option value="">{{ __('select') }}</option>
@@ -101,14 +97,9 @@
                                                 </div>
                                             </div>
                                         </div>
-             
-                            
                                     <div class="col-xl-3">
                                         <div class="mb-3 row">
-                                    
-                                   
                                               <label  class="row-lg-6 col-form-label" for="semester">Semester <span class="text-danger">*</span></label>
-
                                                         <div class="row-lg-8">
                                                                 <select class="form-control semester" name="semester" id="semester" required>
                                                                     <option value="">{{ __('select') }}</option>
@@ -126,7 +117,6 @@
                                                           </div>
                                                 </div>
                                         </div>
-
                                       <div class="col-xl-3">
                                         <div class="mb-3 row">
                                             <label class="row-lg-3 col-form-label" for="subject">Subject
@@ -146,17 +136,11 @@
                                               </div>
                                           </div>
                                       </div>
-                           
-                            
-                                
-																			
 																			<div class="col-lg-2 pt-4">
-																				
 																				<div class="col-lg-8 ms-auto">
 																					<button type="submit" class="btn btn-primary light"><i class="fas fa-search"></i>  Filter</button>
 																				</div>
 																			</div>
-
                                 </div>
 																</form>
 															</div>

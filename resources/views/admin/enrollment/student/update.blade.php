@@ -1691,40 +1691,42 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table-bordered" id="taxTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Value</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th><input type="text" data-var="name"
-                                                                name="taxes[2][name]" id="Tax2Name" value="Tax 2"
-                                                                class="form-control"></th>
-                                                        <td><input class="form-control" data-var="val" type="text"
-                                                                name="taxes[2][value]" id="Tax2Value" value="0">
-                                                        </td>
-                                                        <td>
-                                                            <button href="#"
-                                                                class="btn btn-danger btn-mini remove-tax">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-
+                                            <form action="">
+                                                <table class="table table-bordered" id="taxTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>Value</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($tax as $t)
+                                                        <tr>
+                                                            <th><input type="text" data-var="name"
+                                                                    name="taxes[2][name]" id="Tax2Name" value="{{ $t->name}}"
+                                                                    class="form-control"></th>
+                                                            <td><input class="form-control" data-var="val" type="text"
+                                                                    name="taxes[2][value]" id="Tax2Value" value="{{ $t->value}}">
+                                                            </td>
+                                                            <td>
+                                                                <button href="#"
+                                                                    class="btn btn-danger btn-mini remove-tax">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </form>
                                             <button id="addTax" class="btn btn-success"><i
                                                     class="icon-plus-sign icon-white"></i> Add Tax</button>
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-primary" id="save-discount">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1741,6 +1743,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
+                                        {{-- @dd($discount) --}}
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-xs-2">
@@ -1749,8 +1752,8 @@
                                                 <div class="col-xs-4">
                                                     <select id="discountType" class="form-control"
                                                         fdprocessedid="e96frk">
-                                                        <option value="percent">Percentage</option>
-                                                        <option value="flat">Fixed Amount</option>
+                                                        <option value="percent" @if($discount->type == "percent") selected @endif>Percentage</option>
+                                                        <option value="flat" @if($discount->type == "flat") selected @endif>Fixed Amount</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -1761,15 +1764,14 @@
                                                 <div class="col-xs-4">
                                                     <input type="text" placeholder="Enter Fixed Amount"
                                                         id="flatDiscountInput"
-                                                        class="input-small dim-value form-control"
-                                                        fdprocessedid="ghzik6">
+                                                        class="input-small dim-value form-control" value="{{ $discount->value }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                            <button type="button" class="btn btn-primary" id="discounts">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1915,62 +1917,42 @@ ABN: [ABN]
                                                 </div>
                                             </div>
                                             <div class="row mt-5">
-                                                <table class="table table-bordered">
+                                                  <table class="table table-bordered">
                                                     <thead>
                                                       <tr>
-                                                        <th><input type="text" style="width: 110px;" value="Description" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Quantity" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Unit price" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Tax" readonly></th>
-                                                        <th><input type="text" style="width: 110px;" value="Amount" readonly></th>
+                                                        <th>Description</th>
+                                                        <th>Quantity</th>
+                                                        <th>Unit price</th>
+                                                        <!-- Placeholder for multiple tax columns -->
+                                                        <th class="tax-columns-placeholder">Tax</th>
+                                                        <th>Amount</th>
                                                         <th></th>
                                                       </tr>
                                                     </thead>
                                                     <tbody id="table-body">
                                                       <tr>
-                                                        <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
-                                                        <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th>Handle</th>
-                                                        <th data-key="subtotal" class="subtotal">$0.00</th>
-                                                        <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
-                                                      </tr>
-                                                      <tr>
-                                                        <th><textarea data-key="description" class="editable input-block-level" style="overflow-wrap: break-word; resize: none; height: 40px;">Product name</textarea></th>
-                                                        <th><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></th>
-                                                        <th>Handle</th>
-                                                        <th data-key="subtotal" class="subtotal">$0.00</th>
-                                                        <th><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></th>
+                                                        <td><textarea data-key="description" class="editable input-block-level">Product name</textarea></td>
+                                                        <td><input data-key="qty" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></td>
+                                                        <td><input data-key="unit_price" class="editable input-mini" value="0" oninput="calculateSubtotal(this)"></td>
+                                                        <!-- Dynamic tax columns will go here -->
+                                                        <td data-key="subtotal" class="subtotal">$0.00</td>
+                                                        <td><button class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button></td>
                                                       </tr>
                                                     </tbody>
                                                     <tfoot id="TotalsSection">
-                                                        <tr class="totals-row" id="SubtotalRow" style="display: table-row;">
-                                                          <td class="wide-cell" colspan="3"></td>
-                                                          <td><strong><input type="text" id="label_subtotal" value="Total without GST" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><span id="subtotal">$0.00</span></td>
-                                                        </tr>
-                                                        <tr class="tax-1 totals-row">
-                                                          <td class="wide-cell" colspan="3"></td>
-                                                          <td><strong class="title">GST</strong></td>
-                                                          <td colspan="2"><span id="gst">$0.00</span></td>
-                                                        </tr>
-                                                        <tr class="totals-row" id="TotalRow">
-                                                          <td class="wide-cell" colspan="3"><button type="button" id="AddProduct" class="btn btn-small btn-primary"><i class="fa fa-plus"></i> Add Line</button></td>
-                                                          <td><strong><input type="text" id="label_total" value="Total with GST" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><span id="total">$0.00</span></td>
-                                                        </tr>
-                                                        <tr class="totals-row shaped" id="PaidRow">
-                                                          <td class="wide-cell" colspan="3"><a href="#" class="show-row" id="toggle_paid"></a></td>
-                                                          <td><strong><input type="text" id="label_paid" value="Paid Amount" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><input type="number" id="paid" value="0" class="invoice-input" oninput="updateBalance()"></td>
-                                                        </tr>
-                                                        <tr class="totals-row shaped" id="UnpaidRow">
-                                                          <td class="wide-cell" colspan="3"></td>
-                                                          <td><strong><input type="text" id="label_unpaid" value="Balance Due" class="invoice-input" style="font-weight: bold;"></strong></td>
-                                                          <td colspan="2"><span id="unpaid">$0.00</span></td>
-                                                        </tr>
-                                                      </tfoot>
+                                                      <tr>
+                                                        <td colspan="3"></td>
+                                                        <td>Total without Tax</td>
+                                                        <td><span id="subtotal">$0.00</span></td>
+                                                      </tr>
+                                                      <!-- Dynamic rows for tax totals -->
+                                                      <tr class="totals-row tax-totals"></tr>
+                                                      <tr>
+                                                        <td colspan="3"></td>
+                                                        <td>Total with Tax</td>
+                                                        <td><span id="total">$0.00</span></td>
+                                                      </tr>
+                                                    </tfoot>
                                                   </table>
                                             </div>
                                         </div>
@@ -2266,11 +2248,6 @@ ABN: [ABN]
 
                         });
 
-
-                        //taxes.add(new Tax({index:0,name:'Great'}));
-                        //taxes.add(new Tax({index:1,name:'Great 2'}));
-
-
                         invoiceItems.each(function(iitem) {
                             invoiceItems.remove(iitem);
                         });
@@ -2308,12 +2285,7 @@ ABN: [ABN]
                         invoice.calculateTotals();
                         invoiceAttribes.currency = 'EUR';
 
-
-
-
                         invoiceItems.each(function(iitem) {
-
-
                         });
                     }, 1000);
                 }
@@ -2323,21 +2295,6 @@ ABN: [ABN]
 
             });
 
-
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-            ga('create', 'UA-73809851-1', 'auto');
-            ga('send', 'pageview');
         </script>
         <script>
             function readURL(input) {
@@ -2354,5 +2311,77 @@ ABN: [ABN]
             $("#imageUpload").change(function() {
                 readURL(this);
             });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+    $('#save-discount').on('click', function () {
+        // Create an array to store tax data
+        let taxData = [];
+
+        // Loop through each row in the table body
+        $('#taxTable tbody tr').each(function () {
+            let taxName = $(this).find('input[data-var="name"]').val();
+            let taxValue = $(this).find('input[data-var="val"]').val();
+
+            // Store each row's data in an object and push it to the taxData array
+            taxData.push({
+                name: taxName,
+                value: taxValue
+            });
+        });
+       
+        $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$.ajax({
+    url: "{{ route('invoice.discount') }}",
+    method: 'POST',
+    data: { taxes: taxData },
+    success: function(response) {
+        $('#tax').modal('hide'); 
+    },
+    error: function(error) {
+        console.error('Error saving data:', error);
+    }
+});
+
+    });
+});
+
+$(document).ready(function () {
+    $('#discounts').on('click', function () {
+        let discountType = $('#discountType').val();
+        let discountValue = $('#flatDiscountInput').val();
+        
+        // Get CSRF token from meta tag
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        // Prepare data to send
+        let data = {
+            type: discountType,
+            value: discountValue,
+            _token: csrfToken // Include CSRF token
+        };
+
+        // AJAX request to save data
+        $.ajax({
+            url: "{{ route('invoice.discounts') }}", // Replace with your server endpoint
+            method: 'POST',
+            data: data,
+            success: function (response) {
+                console.log('Discount saved successfully:', response);
+                $('#discount').modal('hide'); // Close modal on success
+            },
+            error: function (error) {
+                console.error('Error saving discount:', error);
+            }
+        });
+    });
+});
+
         </script>
     @endpush

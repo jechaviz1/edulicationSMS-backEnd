@@ -12,7 +12,7 @@ class CompanySettingController extends Controller
 {
 
    public function courseSetting(Request $request){
-    dd($request);
+
       $user_id = Auth::user()->id;
       $data = $request->all();
       $course_settings = CompanySetting::where('name', 'Course Setting')->first();
